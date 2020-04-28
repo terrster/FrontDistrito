@@ -1,0 +1,22 @@
+.Toastify{
+    position: absolute;
+    top: 80px !important;
+    right: 1rem;
+}
+.Toastify__toast-container{
+    width: 380px !important;
+    padding: 0rem 1rem !important;
+}
+.Toastify__toast-body{
+    background-image: url(../assets/img/toast.png) !important;
+    background-repeat: no-repeat !important;
+    /*background-position: 0 25px;*/
+    background-size: auto 50px !important;
+    font-size: 0.9rem !important;
+    padding: 0 0 0 60px;
+    min-height:50px;
+}
+.Toastify__toast{
+    border-radius: 5px !important;
+    padding: 0.5rem 0.5rem 0.75rem 0.5rem;
+}

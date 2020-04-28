@@ -1,0 +1,31 @@
+.tooltip-password>.tooltip-inner {
+	max-width: none;
+	width: inherit;
+}
+
+.btn-register {
+	width: 150px;
+	height: 45px;
+	background: var(--primary-color);
+	border-radius: 25px;
+	border: none !important;
+	color: #ffffff;
+}
+
+.btn-register-success {
+	width: auto;
+	height: 55px;
+	line-height: 55px;
+	text-decoration: none !important;
+	background: var(--primary-color);
+	border-radius: 25px;
+	border: none !important;
+	color: #ffffff;
+	padding: 0 1rem;
+	opacity: 0.8;
+}
+
+.btn-register-success:hover {
+	color: #fff;
+	opacity: 0.95;
+}

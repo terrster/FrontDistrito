@@ -1,0 +1,115 @@
+.header{
+	width: 100%;
+	max-width: 1440px;
+	height: 720px;
+	padding-top: 157px;
+	background-image: url('../assets/img/header-mobile.png');
+	background-size: cover;
+	background-position: inherit;
+	background-repeat: no-repeat;
+}
+
+.vertical-center {
+	margin-left: auto !important;
+	margin-right: auto !important;
+  }
+
+.header-title{
+	text-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
+	line-height: 0.86;
+	letter-spacing: 1.9px;
+}
+
+.carousel-caption{
+	top: 10%;
+}
+
+.carousel-inner, .carousel-indicators{
+	max-height: 720px;
+}
+
+.carousel-indicators{
+	top: 90%;
+}
+
+.header-button{
+	width: 240px !important;
+	height: 56px !important;
+	border-color: none !important;
+	border-radius: 28px;
+	box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.6);
+	border: solid 1px rgba(255, 255, 255, 0.1);
+	background-color: #ffffff;
+	color: var(--primary-color);
+}
+
+.header-button:hover{
+	border: none !important;
+	border-color: none !important;
+	border-radius: 28px;
+	box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.6);
+	background-color: var(--primary-color);
+	color: #ffffff !important;
+	cursor: pointer;
+	
+}
+
+.link-header, .link-header:hover{
+	text-decoration: none !important;
+	width: 240px !important;
+	height: 56px !important;
+}
+
+.link-header:hover{
+	text-decoration: none !important;
+	
+}
+
+.tito-header{
+	z-index: 100;
+	position: relative;
+	margin-top: -555px;
+	width: 247px;
+	height: 550px;
+	object-fit: contain;
+}
+
+.explore-link{
+	position: relative;
+	bottom: -210px;
+	color: #ffffff;
+}
+
+.explore-link:hover{
+	text-decoration: none;
+	color: #ffffff;
+}
+
+.explore-link:visited{
+	color: #ffffff;
+}
+
+/* @media (min-width: 425px){
+	.header-title{
+		font-size: 3.5em !important;
+	}
+}
+
+@media (min-width:320px) and (max-width: 425px){
+	.header-title{
+		font-size: 2.5em !important;
+	}
+} */
+
+@media(max-width: 440px){
+	.carousel-caption h3{
+		font-size: 2em;
+	}
+}
+@media(min-width: 768px){
+	.header{
+		background-image: url('../assets/img/shutterstock-372396547-3-x.png');
+		background-position: center;
+	}
+}
+

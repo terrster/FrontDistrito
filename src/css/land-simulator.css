@@ -1,0 +1,107 @@
+.bg-gray{
+	background: var(--black04);
+}
+
+.bg-white{
+	background: #ffffff;
+}
+
+.white-box{
+	background: #ffffff;
+	width: 100%;
+	max-width: 996px;
+	min-height: 339px;
+	padding-top: 49px;
+	padding-bottom: 49px;
+	text-align: center;
+	border-radius: 4px;
+	box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1);
+	border: solid 1px rgba(0, 0, 0, 0.1);
+}
+
+.simulator-input{
+	width: 100%;
+	max-width: 210px;
+	border-top: none;
+	border-left: none;
+	border-right: none;
+	border-bottom: solid 3px #090841;
+	color: var(--dark-blue);
+}
+.container-buttons{
+	display: flex!important;
+	justify-content: space-evenly!important;
+	align-items: center!important;
+}
+@media (max-width: 600px) {
+	.container-buttons{
+		flex-direction: column;
+		justify-content: center!important;
+		align-items: center!important;
+		margin: 0;
+	}
+	.container-buttons .link {
+		margin: 10px 0!important;
+	}
+	.margin-reduce-buttons{
+		margin: 10px 0!important;
+	}
+}
+.container-buttons .link {
+	justify-content: center;
+	align-items: center;
+	margin: auto;
+}
+.simulator-next-button{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	max-width: 400px;
+	height: 56px;
+	border: none !important;
+	border-radius: 25px !important;
+	box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.4);
+	background: var(--dark-blue) !important;
+	color: #ffffff;
+}
+
+.simulator-next-button:hover{
+	border: none !important;
+}
+
+.simulator-select{
+	border-top: none;
+	border-left: none;
+	border-right: none;
+	border-bottom: 2px solid var(--dark-blue) !important;
+	width: 100%;
+	max-width: 280px;
+	margin-left: 10px;
+	height: 50px;
+}
+
+.propcard{
+	width: 100%;
+	max-width: 280px;
+	padding: 20px;
+	background: #ffffff;
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	border-radius: 5px;
+	box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1);
+}
+
+.simulator-next-button.link{
+	width: 100%;
+	max-width: 230px;
+	height: 56px;
+	border: none !important;
+	border-radius: 25px !important;
+	box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.4);
+	background: var(--dark-blue) !important;
+	color: #ffffff;
+}
+
+.simulator-next-button.link:hover{
+	text-decoration: none;
+}

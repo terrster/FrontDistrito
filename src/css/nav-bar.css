@@ -1,0 +1,130 @@
+.nav-line {
+	border-left: 1px solid var(--black50);
+  }
+  
+  /* NAVBAR */
+  .nav-bar {
+	/* height: 80px; */
+	background: #fff !important;
+  }
+  
+  .nav-btn {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-pack: center !important;
+	-ms-flex-pack: center !important;
+	justify-content: center !important;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	border-radius: 25px;
+	padding-right: 20px;
+	padding-left: 20px;
+	cursor: pointer;
+  }
+  
+  .nav-btn:hover {
+	text-decoration: none;
+	color: var(--primary-color) !important;
+	opacity: 0.95;
+  }
+  
+  .nav-btn.primary {
+	-webkit-box-pack: center !important;
+	-ms-flex-pack: center !important;
+	justify-content: center !important;
+	background: var(--primary-color);
+  }
+  
+  .nav-btn.primary:hover {
+	-webkit-box-pack: center !important;
+	-ms-flex-pack: center !important;
+	justify-content: center !important;
+	background: var(--primary-color);
+	color: #fff !important;
+  }
+  
+  .nav-btn-link {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-pack: left !important;
+	-ms-flex-pack: left !important;
+	justify-content: left !important;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	/* height: 80px; */
+  }
+  
+  .link-header {
+	color: var(--primary-color) !important;
+  }
+  
+  .link-header:hover {
+	text-decoration: none;
+	color: #ffffff !important;
+  }
+  
+  .logout {
+	width: 160px;
+	background: none !important;
+	background-color: none !important;
+	color: var(--black50) !important;
+	font-size: 0.9em !important;
+	padding: 0 !important;
+	border: none !important;
+  }
+  
+  .logout:hover {
+	width: 160px;
+	background: none !important;
+	background-color: none !important;
+	color: var(--primary-color) !important;
+	padding: 0 !important;
+	border: none !important;
+  }
+  
+  /* logo */
+  .nav-logo {
+	width: 115px;
+  }
+  
+  .nav_bar_active{
+	  color: var(--primary-color);
+	  position:relative;
+  }
+  .nav_bar_active::after{
+	content: '';
+	height: 3px;
+	width: 120px;
+	background: var(--primary-color);
+	position: absolute;
+	bottom: 0;
+	margin:auto;
+  }
+  .nav-bar-icon-whatsapp{
+	position:fixed; 
+	bottom: 1rem; 
+	right: 1rem;
+	font-size: 2rem;
+	color: white !important;
+	background: #25D366;
+	height: 3rem;
+	width: 3rem;
+	line-height: 3rem;
+	text-align: center;
+	border-radius: 100%;
+	opacity: 0.8;
+	cursor: pointer;
+	text-decoration: none;
+	box-shadow: 1px 1px 6px 1px rgba(0,0,0,0.3);
+  }
+
+  .nav-bar-icon-whatsapp:hover{
+	  opacity: 1;
+  }
+  .nav-bar-icon-whatsapp > a {
+	color: white !important;
+  }

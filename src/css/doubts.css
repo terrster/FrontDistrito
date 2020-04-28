@@ -1,0 +1,16 @@
+.input-doubt{
+	width: 100%;
+	max-width: 570px;
+	border-radius: 5px;
+	border: 1px solid var(--black24);
+	height: 50px;
+	padding-left: 15px;
+}
+
+.contact-button{
+	border: none !important;
+	width: 150px;
+	height: 58px;
+	background: var(--dark-blue) !important;
+	border-radius: 29px !important;
+}

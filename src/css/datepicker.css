@@ -1,0 +1,12 @@
+.custom-datepicker{
+	width: 100% !important;
+	min-width: 690px !important;
+}
+
+.react-date-picker__wrapper{
+	width: 290px !important;
+	height: 45px;
+	border-radius: 5px;
+	max-width: 690px !important;
+	margin-bottom: 24px;
+}
