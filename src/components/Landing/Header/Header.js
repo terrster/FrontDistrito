@@ -20,15 +20,12 @@ const getVersionImage = () => {
 const Header = props => {
 	const [versionImage, setVersionImage] = useState(getVersionImage());
 	const [indexImage, setIndexImage] = useState(0);
-	const [direction, setDirection] = useState(null);
 	const [currentImage, setCurrentImage] = useState(
 		images[indexImage][versionImage]
 	);
 
 	const handleSelect = (selectedIndex, e) => {
 		setIndexImage(selectedIndex);
-		setDirection(e.direction);
-		setCurrentImage(images[selectedIndex][versionImage]);
 	};
 
 	window.addEventListener('resize', () => setVersionImage(getVersionImage()));
@@ -41,8 +38,7 @@ const Header = props => {
 	return (
 		<div style={{ width: '100%' }}>
 			<Carousel
-        activeIndex={indexImage}
-				direction={direction}
+        		activeIndex={indexImage}
 				onSelect={handleSelect}
 			>
 				<Carousel.Item>
