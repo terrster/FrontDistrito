@@ -1,0 +1,112 @@
+@font-face {
+	font-family: 'coolvetica_rg';
+	src: url('./coolvetica_rg-webfont.woff2') format('woff2'),
+		url('./coolvetica_rg-webfont.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'metropolis_med';
+	src: url("./Metropolis-Medium.woff") format("woff");
+	font-weight: normal;	
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'metropolis_light';
+	src: url("./Metropolis-Light.woff") format("woff");
+	font-weight: normal;	
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'metropolis_blk';
+	src: url("./Metropolis-Black.woff") format("woff");
+	font-weight: normal;	
+	font-style: normal;
+}
+
+@font-face{
+	font-family: 'metropolis_bld';
+	src: url("./Metropolis-Bold.woff") format("woff");
+	font-weight: normal;	
+	font-style: normal;
+}
+
+@font-face{
+	font-family: 'metropolis_thin';
+	src: url("./Metropolis-Thin.woff") format("woff");
+	font-weight: normal;	
+	font-style: normal;
+}
+
+@font-face{
+	font-family: 'metropolis_reg';
+	src: url("./Metropolis-Regular.woff") format("woff");
+	font-weight: normal;	
+	font-style: normal;
+}
+
+@font-face{
+	font-family: 'metropolis_bld';
+	src: url("./Metropolis-Bold.woff") format("woff");
+	font-weight: normal;	
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'brandon_med';
+	src: url("./brandon_med-webfont.woff2") format("woff"),
+		url("./brandon_med-webfont.woff") format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'brandon_light';
+	src: url("./brandon_light-webfont.woff2") format("woff"),
+		url("./brandon_light-webfont.woff") format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'brandon_blk';
+	src: url("./brandon_blk-webfont.woff2") format("woff"),
+		url("./brandon_blk-webfont.woff") format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'brandon_bld';
+	src: url("./brandon_bld-webfont.woff2") format("woff"),
+		url("./brandon_bld-webfont.woff") format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'brandon_thin';
+	src: url("./brandon_thin-webfont.woff2") format("woff"),
+		url("./brandon_thin-webfont.woff") format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'brandon_reg';
+	src: url("./brandon_reg-webfont.woff2") format("woff"),
+		url("./brandon_reg-webfont.woff") format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'lucida_grande';
+	src: url('./lucidagrande-webfont.woff2') format("woff"),
+		url('./lucidagrande-webfont.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
