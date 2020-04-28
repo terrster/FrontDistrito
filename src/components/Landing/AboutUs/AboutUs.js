@@ -1,12 +1,12 @@
 import React from 'react';
-import '../../css/about-us.css';
-import Title from '../Generic/Title';
-import radar from '../../assets/img/aboutus/radar.png';
-import buropng from '../../assets/img/aboutus/buro.png';
-import mifiel from '../../assets/img/aboutus/mifiel.png';
-import prizes from '../../assets/img/logos-pitch-3-x@2x.png';
-import vtxnegocios from '../../assets/img/aboutus/vxtnegocios.png';
-import grantthornton from '../../assets/img/aboutus/grantthornton.png';
+import '../../../css/about-us.css';
+import Title from '../../Generic/Title';
+import radar from '../../../assets/img/aboutus/radar.png';
+import buropng from '../../../assets/img/aboutus/buro.png';
+import mifiel from '../../../assets/img/aboutus/mifiel.png';
+import prizes from '../../../assets/img/logos-pitch-3-x@2x.png';
+import vtxnegocios from '../../../assets/img/aboutus/vxtnegocios.png';
+import grantthornton from '../../../assets/img/aboutus/grantthornton.png';
 
 const AboutUs = props => {
     return(
