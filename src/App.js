@@ -29,6 +29,7 @@ import Landing from './components/Landing/Landing'
 import Footer from './components/Landing/Footer/Footer';
 import Terms from './components/Landing/Terms/Terms';
 import Signup from './components/Signup/Signup';
+import RegistroExitoso from './components/Registro/RegistroExitoso';
 
 // ROUTER & REDUX
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
@@ -64,6 +65,7 @@ class App extends Component {
                 <Route path="/" exact component={Landing} />
                 <Route path="/terminos-y-condiciones" exact component={Terms} />
                 <Route path="/registrate" exact component={Signup} />
+                <Route path="/registroexitoso" exact component={RegistroExitoso} />
               </Switch>
             </div>
             <div className="container-fluid">

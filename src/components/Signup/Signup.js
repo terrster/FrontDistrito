@@ -9,8 +9,8 @@ import { errorManager } from "../Manager/ErrorManager";
 import { variablesManager } from "../Manager/VariablesManager";
 import * as $ from "jquery";
 import "react-toastify/dist/ReactToastify.css";
-import { execToast } from "../../utils/ToastUtils";
-import signupReducer from "../../redux/reducers/signup-reducer";
+/* import { execToast } from "../../utils/ToastUtils"; 
+import signupReducer from "../../redux/reducers/signup-reducer"; */
 import { Link } from "react-router-dom";
 import "../../css/signup.css";
 import registerImage from "../../assets/img/register.png";
