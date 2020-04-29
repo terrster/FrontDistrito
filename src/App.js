@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{ Component } from 'react';
 
 // CSS
 import './App.css';
@@ -24,6 +24,7 @@ import './css/tabs.css'
 import './css/toast.css'
 import './css/type-card.css'
 
+import NavBar from './components/Navbar/Navbar';
 import Landing from './components/Landing/Landing'
 import Footer from './components/Landing/Footer/Footer';
 
@@ -32,20 +33,44 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './redux/store';
 
-function App() {
-  return (
-    <Router>
-      <Provider store={store}>
-        <div>
-          <h1>Front</h1>
+class App extends Component {
+
+  constructor(props){
+    super(props)
+    this.state = {
+      isOpen: false
+    }
+  }
+
+  onCloseBar = () => {
+    this.setState({isOpen: false})
+  }
+
+  onOpenBar = () => {
+    this.setState({isOpen: true})
+  }
+
+  render() {
+    return (
+      <Router>
+        <div className="divContainer d-flex flex-column justify-content-between" style={{height: '100vh'}}>
+          <Provider store={store}>
+            <NavBar type={this.props.navType} url={this.props.navegationurl} isOpen={this.state.isOpen} close={this.onCloseBar} open={this.onOpenBar}/>
+  
+            <div className="flex-grow-1" style={{height: 'auto'}}>
+              <Switch>
+                <Route path="/" exact component={Landing} />
+              </Switch>
+            </div>
+            <div className="container-fluid">
+              <Footer />
+            </div>
+  
+          </Provider>
         </div>
-        <Switch>
-          <Route path="/" exact component={Landing} />
-        </Switch>
-      </Provider>
-      <Footer/>
-    </Router>
-  );
+      </Router>
+    );
+  } 
 }
 
 export default App;
