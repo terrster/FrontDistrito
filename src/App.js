@@ -24,6 +24,8 @@ import './css/tabs.css'
 import './css/toast.css'
 import './css/type-card.css'
 
+import Landing from './components/Landing/Landing'
+
 
 // ROUTER & REDUX
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
@@ -37,6 +39,9 @@ function App() {
         <div>
           <h1>Front</h1>
         </div>
+        <Switch>
+          <Route path="/" exact component={Landing} />
+        </Switch>
       </Provider>
     </Router>
   );
