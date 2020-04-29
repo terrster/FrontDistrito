@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Header from './Header/Header';
-// import LandSimulator from '../Simulator/LandSimulator';
+import LandSimulator from '../Simulator/LandSimulator';
 import AboutUs from './AboutUs/AboutUs';
 import Video from './Video/Video';
 import HowWorks from './HowWorks/HowWorks';
@@ -11,7 +11,7 @@ class Landing extends Component {
         return (
             <div className="">
                 <Header title={"¿Necesitas financiamiento?"} text={"Recibe las mejores ofertas de crédito "} highlighted={"¡En menos de 24 horas!"} buttonText={"Solicitar ahora"} />
-                {/* <LandSimulator /> */}
+                <LandSimulator />
                 <div className="container-fluid">
                     <AboutUs />
                     <Video />
