@@ -8,4 +8,4 @@ const Title = props => {
 	);
 }
 
-export default Title;
+export default Title
