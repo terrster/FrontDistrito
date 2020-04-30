@@ -31,6 +31,7 @@ import Questions from './components/Questions/Questions';
 import Terms from './components/Landing/Terms/Terms';
 import Privacy from './components/Privacy/Privacy';
 import RecoverPassword from './components/RecoverPassword/RecoverPassword';
+import ResetPassword from './components/ResetPassword/ResetPassword';
 
 // ROUTER & REDUX
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
@@ -67,6 +68,7 @@ class App extends Component {
                 <Route path="/preguntas-frecuentes" exact component={Questions} />
                 <Route path="/terminos-y-condiciones" exact component={Terms} />
                 <Route path="/privacidad" exact component={Privacy} />
+                <Route path="/reset-password" exact component={ResetPassword} />
                 <Route path="/recover-password/:hash" exact component={RecoverPassword} />
               </Switch>
             </div>
