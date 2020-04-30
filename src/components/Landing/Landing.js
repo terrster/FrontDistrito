@@ -4,9 +4,10 @@ import LandSimulator from '../Simulator/LandSimulator';
 import AboutUs from './AboutUs/AboutUs';
 import Video from './Video/Video';
 import HowWorks from './HowWorks/HowWorks';
-// import Doubts from './Doubts/Doubts';
+import Doubts from './Doubts/Doubts';
 
 class Landing extends Component {
+
     render(){
         return (
             <div className="">
@@ -16,7 +17,7 @@ class Landing extends Component {
                     <AboutUs />
                     <Video />
                     <HowWorks />
-                    {/* <Doubts change={this.handleChange} data = {this.state.data} send = {this.handleSend} status= {this.state.status}/> */}
+                    <Doubts /> 
                 </div>
             </div>
         );
