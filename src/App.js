@@ -27,8 +27,9 @@ import './css/type-card.css'
 import NavBar from './components/Navbar/Navbar';
 import Landing from './components/Landing/Landing'
 import Footer from './components/Landing/Footer/Footer';
-import Terms from './components/Landing/Terms/Terms';
 import Questions from './components/Questions/Questions';
+import Terms from './components/Landing/Terms/Terms';
+import Privacy from './components/Privacy/Privacy';
 
 // ROUTER & REDUX
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
@@ -62,14 +63,14 @@ class App extends Component {
             <div className="flex-grow-1" style={{height: 'auto'}}>
               <Switch>
                 <Route path="/" exact component={Landing} />
-                <Route path="/terminos-y-condiciones" exact component={Terms} />
                 <Route path="/preguntas-frecuentes" exact component={Questions} />
+                <Route path="/terminos-y-condiciones" exact component={Terms} />
+                <Route path="/privacidad" exact component={Privacy} />
               </Switch>
             </div>
             <div className="container-fluid">
               <Footer />
             </div>
-  
           </Provider>
         </div>
       </Router>
