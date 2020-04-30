@@ -1,20 +1,20 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-/* import gql from "graphql-tag";
-import { Mutation } from "react-apollo"; */
+/* import gql from "graphql-tag"; */
 import Title from "../Generic/Title";
 import SignupForm from "../../forms/SignupForm";
+/* import { Mutation } from "react-apollo";
 import Mutations from "../../utils/Mutations";
-import { errorManager } from "../Manager/ErrorManager";
-import { variablesManager } from "../Manager/VariablesManager";
+import { errorManager } from "../Manager/ErrorManager"; 
+import { variablesManager } from "../Manager/VariablesManager";*/
 import * as $ from "jquery";
-import "react-toastify/dist/ReactToastify.css";
-import { execToast } from "../../utils/ToastUtils";
-import signupReducer from "../../redux/reducers/signup-reducer";
-import { Link } from "react-router-dom";
+/*import "react-toastify/dist/ReactToastify.css";
+ import { execToast } from "../../utils/ToastUtils";
+import signupReducer from "../../redux/reducers/signup-reducer"; 
+import { Link } from "react-router-dom";*/
 import "../../css/signup.css";
 import registerImage from "../../assets/img/register.png";
-import RegistroExitoso from "../../components/Registro/RegistroExitoso";
+/* import RegistroExitoso from "../../components/Registro/RegistroExitoso"; */
 
 /* const LOGIN = gql`
   mutation Login($email: String!, $password: String!) {
@@ -36,7 +36,7 @@ let Signup = props => {
   let onFormSubmit = async (data, Signup, Login) => {
     props.updateLoader(true);
     try {
-      let variables = variablesManager.createSignupVariables(data);
+      let variables = '' /* variablesManager.createSignupVariables(data) */;
       await Signup({ variables });
       props.updateSignupState(true);
       props.updateToast(true);
@@ -50,7 +50,7 @@ let Signup = props => {
       sessionStorage.setItem("nameUser", loginUser.data.signin.user.name);
       props.updateLoader(false)
     } catch (err) {
-      let errors = errorManager.handleError(err);
+      let errors =  0 /* errorManager.handleError(err) */;
       if (errors.length > 0) {
         $("#ymb-dp-signup-email-used").removeClass("d-none");
       }
@@ -64,13 +64,14 @@ let Signup = props => {
     props.updateSignupState(false);
     props.updateToast(true);
   };
+  
   window.scrollTo(0, 0);
 
   if (sessionStorage.getItem("nameUser")) {
     setTimeout(() => {
       window.location = "/home";
     }, 5000)
-    return (<RegistroExitoso />) 
+    /* return (<RegistroExitoso />)  */
   }else {
     return (
       <div className="container mt-30">
@@ -93,23 +94,13 @@ let Signup = props => {
         ) : (
           <div></div>
         )}
-        {/* {!props.statusSingup && (
-          <Mutation mutation={Mutations.CREATE_USER}>
-            {(Signup, data) => (
-              <Mutation mutation={LOGIN}>
-                {(Login, data) => (
-                  <SignupForm onSubmit={e => onFormSubmit(e, Signup, Login)} />
-                )}
-              </Mutation>
-            )}
-          </Mutation>
-        )} */}
+          <SignupForm handleSubmit={e => onFormSubmit(e)} />
       </div>
     );
   }
 };
 
-const mapStateToProps = (state, ownProps) => {
+/* const mapStateToProps = (state, ownProps) => {
   return {
     history: ownProps.history,
     toast: state.app.toast,
@@ -129,6 +120,6 @@ const mapDispatchToProps = dispatch => {
       dispatch({ type: "UPDATE_SIGNPU_STATUS", data: { status } });
     }
   };
-};
+}; */
 
-export default connect(mapStateToProps, mapDispatchToProps)(Signup);
+export default Signup;
