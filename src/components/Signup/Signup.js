@@ -1,46 +1,25 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
-/* import gql from "graphql-tag";
-import { Mutation } from "react-apollo"; */
 import Title from "../Generic/Title";
 import SignupForm from "../../forms/SignupForm";
-import Mutations from "../../utils/Mutations";
-import { errorManager } from "../Manager/ErrorManager";
-import { variablesManager } from "../Manager/VariablesManager";
 import * as $ from "jquery";
-import "react-toastify/dist/ReactToastify.css";
-/* import { execToast } from "../../utils/ToastUtils"; 
-import signupReducer from "../../redux/reducers/signup-reducer"; */
-import { Link } from "react-router-dom";
+/*import "react-toastify/dist/ReactToastify.css";
+ import { execToast } from "../../utils/ToastUtils";
+import signupReducer from "../../redux/reducers/signup-reducer"; 
+import { Link } from "react-router-dom";*/
 import "../../css/signup.css";
 import registerImage from "../../assets/img/register.png";
 import RegistroExitoso from "../../components/Registro/RegistroExitoso";
 
-/* const LOGIN = gql`
-  mutation Login($email: String!, $password: String!) {
-    signin(email: $email, password: $password) {
-      token
-      user {
-        id
-        name
-        email
-        idClient {
-          type
-        }
-      }
-    }
-  }
-`; */
-
 let Signup = props => {
-  let onFormSubmit = async (data, Signup, Login) => {
+/*   let onFormSubmit = async (data,Login,Signup) => {
     props.updateLoader(true);
     try {
-      let variables = variablesManager.createSignupVariables(data);
+      let variables = ''  variablesManager.createSignupVariables(data) ;
       await Signup({ variables });
       props.updateSignupState(true);
       props.updateToast(true);
-      let loginUser = await Login({
+     let loginUser = await Login({
         variables: {
           email: variables.email,
           password: variables.password
@@ -50,7 +29,7 @@ let Signup = props => {
       sessionStorage.setItem("nameUser", loginUser.data.signin.user.name);
       props.updateLoader(false)
     } catch (err) {
-      let errors = errorManager.handleError(err);
+      let errors =  0  errorManager.handleError(err) ;
       if (errors.length > 0) {
         $("#ymb-dp-signup-email-used").removeClass("d-none");
       }
@@ -63,8 +42,11 @@ let Signup = props => {
     props.history.push("/login");
     props.updateSignupState(false);
     props.updateToast(true);
-  };
-  window.scrollTo(0, 0);
+  }; */
+
+  let onFormSubmit = (data) => {
+    sessionStorage.setItem("nameUser", data.name);
+  }
 
   if (sessionStorage.getItem("nameUser")) {
     setTimeout(() => {
@@ -93,23 +75,13 @@ let Signup = props => {
         ) : (
           <div></div>
         )}
-        {/* {!props.statusSingup && (
-          <Mutation mutation={Mutations.CREATE_USER}>
-            {(Signup, data) => (
-              <Mutation mutation={LOGIN}>
-                {(Login, data) => (
-                  <SignupForm onSubmit={e => onFormSubmit(e, Signup, Login)} />
-                )}
-              </Mutation>
-            )}
-          </Mutation>
-        )} */}
+        <SignupForm onSubmit={e => onFormSubmit(e)} />
       </div>
     );
   }
 };
-
-const mapStateToProps = (state, ownProps) => {
+window.scrollTo(0, 0);
+/* const mapStateToProps = (state, ownProps) => {
   return {
     history: ownProps.history,
     toast: state.app.toast,
@@ -129,6 +101,6 @@ const mapDispatchToProps = dispatch => {
       dispatch({ type: "UPDATE_SIGNPU_STATUS", data: { status } });
     }
   };
-};
+}; */
 
-export default connect(mapStateToProps, mapDispatchToProps)(Signup);
+export default Signup;
