@@ -34,6 +34,7 @@ import RecoverPassword from './components/RecoverPassword/RecoverPassword';
 import ResetPassword from './components/ResetPassword/ResetPassword';
 import Signup from './components/Signup/Signup';
 import RegistroExitoso from './components/Registro/RegistroExitoso';
+import Login from './components/Login/Login';
 
 // ROUTER & REDUX
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
@@ -74,6 +75,7 @@ class App extends Component {
                 <Route path="/recover-password/:hash" exact component={RecoverPassword} />
                 <Route path="/registrate" exact component={Signup} />
                 <Route path="/registroexitoso" exact component={RegistroExitoso} />
+                <Route path="/login" exact component={Login} />
               </Switch>
             </div>
             <div className="container-fluid">
