@@ -32,6 +32,7 @@ import Terms from './components/Landing/Terms/Terms';
 import Privacy from './components/Privacy/Privacy';
 import RecoverPassword from './components/RecoverPassword/RecoverPassword';
 import ResetPassword from './components/ResetPassword/ResetPassword';
+import Signup from './components/Signup/Signup';
 
 // ROUTER & REDUX
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
@@ -70,6 +71,7 @@ class App extends Component {
                 <Route path="/privacidad" exact component={Privacy} />
                 <Route path="/reset-password" exact component={ResetPassword} />
                 <Route path="/recover-password/:hash" exact component={RecoverPassword} />
+                <Route path="/registrate" exact component={Signup} />
               </Switch>
             </div>
             <div className="container-fluid">
