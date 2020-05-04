@@ -1,5 +1,5 @@
-import React, { useState} from "react";
-import { Field, reduxForm, formValueSelector } from "redux-form";
+import React, { useState } from "react";
+import { Field, reduxForm, formValueSelector  } from "redux-form";
 import { connect } from "react-redux";
 import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import "../css/signup.css";
@@ -55,7 +55,7 @@ const passwordTooltip = (
   </Tooltip>
 );
 
-let SignupForm = props => {
+let SignupForm = (props) => {
   const { handleSubmit, submitting } = props;
   const submitButtonClass = submitting
     ? "btn-register mt-30 disabled"
@@ -77,6 +77,7 @@ let SignupForm = props => {
           name="name"
           label="Nombre(s)"
         />
+
         <Field
           component={renderField}
           type="text"
@@ -131,7 +132,7 @@ let SignupForm = props => {
         </OverlayTrigger>
         <div className="recaptcha-container">
           <ReCAPTCHA
-            sitekey="6Lfiw8QUAAAAAF2lkEpuGhcRViTQNbvcV102V7tr"
+            sitekey="6LcTuPEUAAAAAF4wO3suJh3zugOr5pO-daAE-Puc"
             onChange={onChange}
           />
         </div>
@@ -171,8 +172,8 @@ SignupForm = connect(state => {
 })(SignupForm);
 
 SignupForm = reduxForm({
-  form: "signupForm", // a unique identifier for this form
-  validate: validateSignup // <--- validation function given to redux-form
+  form: 'signupForm',
+  validate: validateSignup 
 })(SignupForm);
 
 export default SignupForm;

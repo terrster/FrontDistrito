@@ -33,7 +33,7 @@ const renderField = ({ input, label, type, meta: { touched, error, warning } }) 
 				? 	<input className="form-control custom-form-input mt-24" {...input} placeholder={label} type={type}/>
 				: 	<div className="input-group form-group center-flex mt-24">
 						<input className="form-control custom-form-input center-flex-input" {...input} placeholder={label} type={type} name="password" id="password" data-toggle="password"/>
-						<span class="fa fa-eye-slash icon icon-style mt-24" onClick={ShowHide}></span>
+						<span className="fa fa-eye-slash icon icon-style mt-24" onClick={ShowHide}></span>
 					</div>
 					
 		}	

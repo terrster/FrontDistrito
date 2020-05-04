@@ -1,5 +1,5 @@
 import React from "react";
-import { connect } from "react-redux";
+//import { connect } from "react-redux";
 import Title from "../Generic/Title";
 import SignupForm from "../../forms/SignupForm";
 import * as $ from "jquery";
@@ -10,43 +10,52 @@ import { Link } from "react-router-dom";*/
 import "../../css/signup.css";
 import registerImage from "../../assets/img/register.png";
 /* import RegistroExitoso from "../../components/Registro/RegistroExitoso"; */
+import { useDispatch, useSelector } from 'react-redux';
+
+import { singUpAction } from '../../redux/actions/authActions';
 
 let Signup = props => {
-/*   let onFormSubmit = async (data,Login,Signup) => {
-    props.updateLoader(true);
-    try {
-      let variables = ''  variablesManager.createSignupVariables(data) ;
-      await Signup({ variables });
-      props.updateSignupState(true);
-      props.updateToast(true);
-     let loginUser = await Login({
-        variables: {
-          email: variables.email,
-          password: variables.password
-        }
-      });
-      sessionStorage.setItem("token", loginUser.data.signin.token);
-      sessionStorage.setItem("nameUser", loginUser.data.signin.user.name);
-      props.updateLoader(false)
-    } catch (err) {
-      let errors =  0  errorManager.handleError(err) ;
-      if (errors.length > 0) {
-        $("#ymb-dp-signup-email-used").removeClass("d-none");
-      }
-      props.updateToast(true);
-      props.updateLoader(false);
-    }
-  };
+  //  let onFormSubmit = async (data,Login,Signup) => {
+  //   props.updateLoader(true);
+  //   try {
+  //     let variables = ''  variablesManager.createSignupVariables(data) ;
+  //     await Signup({ variables });
+  //     props.updateSignupState(true);
+  //     props.updateToast(true);
+  //    let loginUser = await Login({
+  //       variables: {
+  //         email: variables.email,
+  //         password: variables.password
+  //       }
+  //     });
+  //     sessionStorage.setItem("token", loginUser.data.signin.token);
+  //     sessionStorage.setItem("nameUser", loginUser.data.signin.user.name);
+  //     props.updateLoader(false)
+  //   } catch (err) {
+  //     let errors =  0  errorManager.handleError(err) ;
+  //     if (errors.length > 0) {
+  //       $("#ymb-dp-signup-email-used").removeClass("d-none");
+  //     }
+  //     props.updateToast(true);
+  //     props.updateLoader(false);
+  //   }
+  // };
 
-  let handleToLogin = () => {
-    props.history.push("/login");
-    props.updateSignupState(false);
-    props.updateToast(true);
-  }; */
+  // let handleToLogin = () => {
+  //   props.history.push("/login");
+  //   props.updateSignupState(false);
+  //   props.updateToast(true);
+  // }; 
+
+  const dispatch = useDispatch();
 
   let onFormSubmit = (data) => {
-    sessionStorage.setItem("nameUser", data.name);
+    console.log(data);
+    //sessionStorage.setItem("nameUser", data.name);
+    dispatch( singUpAction(data) );
   }
+
+  //sessionStorage.removeItem("nameUser");
 
   if (sessionStorage.getItem("nameUser")) {
     setTimeout(() => {
@@ -80,7 +89,7 @@ let Signup = props => {
     );
   }
 };
-window.scrollTo(0, 0);
+//window.scrollTo(0, 0);
 /* const mapStateToProps = (state, ownProps) => {
   return {
     history: ownProps.history,
