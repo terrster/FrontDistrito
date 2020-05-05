@@ -9,7 +9,7 @@ import signupReducer from "../../redux/reducers/signup-reducer";
 import { Link } from "react-router-dom";*/
 import "../../css/signup.css";
 import registerImage from "../../assets/img/register.png";
-/* import RegistroExitoso from "../../components/Registro/RegistroExitoso"; */
+//import RegistroExitoso from "../../components/Registro/RegistroExitoso";
 import { useDispatch, useSelector } from 'react-redux';
 
 import { singUpAction } from '../../redux/actions/authActions';
@@ -50,18 +50,16 @@ let Signup = props => {
   const dispatch = useDispatch();
 
   let onFormSubmit = (data) => {
-    console.log(data);
-    //sessionStorage.setItem("nameUser", data.name);
     dispatch( singUpAction(data) );
   }
 
-  //sessionStorage.removeItem("nameUser");
+  //sessionStorage.removeItem("nameUser")
 
   if (sessionStorage.getItem("nameUser")) {
     setTimeout(() => {
       window.location = "/home";
     }, 5000)
-    /* return (<RegistroExitoso />)  */
+    //return (<RegistroExitoso />);
   }else {
     return (
       <div className="container mt-30">

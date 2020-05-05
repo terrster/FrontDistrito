@@ -15,6 +15,6 @@ export default combineReducers({
     modal: modalReducer,
     recoverPassword: recoverPasswordReducer,
     loader: loaderReducer,
-    //form: formReducer, 
+    form: formReducer, 
     resetPasswordStatus: resetPasswordReducer,
 });

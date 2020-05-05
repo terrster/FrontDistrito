@@ -14,6 +14,13 @@ import TagManager from 'react-gtm-module'
 
 
 let RegistroExitoso = (props) => {
+
+	if(sessionStorage.getItem("token")){
+		setTimeout(() => {
+		  window.location = "/home";
+		}, 5000)
+	}
+
 	return (
 		<div className="container mt-30">
 			<Title className="fz56 text-center blue-primary coolvetica fw500" title="Registro Exitoso" />
