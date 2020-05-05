@@ -35,14 +35,17 @@ import ResetPassword from './components/ResetPassword/ResetPassword';
 import Signup from './components/Signup/Signup';
 import RegistroExitoso from './components/Registro/RegistroExitoso';
 import Login from './components/Login/Login';
+import Appliance from './components/Appliance/Appliance'
+import Amount from './components/Appliance/Amount'
+import isAuthenticated from './utils/isAuthenticated'
 
 // ROUTER & REDUX
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './redux/store';
 
 class App extends Component {
-
+  
   constructor(props){
     super(props)
     this.state = {
@@ -59,6 +62,15 @@ class App extends Component {
   }
 
   render() {
+
+    const PrivateRoute = ({component: Component, ...rest}) => (
+      <Route {...rest} render={(props) => (
+        isAuthenticated() === true
+        ? <Component {...props} />
+        : <Redirect to="/" />
+      )} />
+    )
+
     return (
       <Router>
         <div className="divContainer d-flex flex-column justify-content-between" style={{height: '100vh'}}>
@@ -76,6 +88,8 @@ class App extends Component {
                 <Route path="/registrate" exact component={Signup} />
                 <Route path="/registroexitoso" exact component={RegistroExitoso} />
                 <Route path="/login" exact component={Login} />
+                <PrivateRoute exact  path="/solicitud" component={Appliance} />
+                <PrivateRoute exact path="/elige-monto/:idAppliance" component={Amount} />
               </Switch>
             </div>
             <div className="container-fluid">
