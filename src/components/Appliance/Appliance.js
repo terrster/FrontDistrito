@@ -4,10 +4,7 @@ import { Children } from "react";
 import Title from "../Generic/Title";
 import { connect } from "react-redux";
 import React, { Component } from "react";
-import Queries from "../../utils/Queries";
-import Mutations from "../../utils/Mutations";
 import LinkButton from "../Generic/LinkButton";
-/* import { Query, Mutation } from "react-apollo"; */
 import { Button, Modal } from "react-bootstrap";
 import like from "../../assets/img/tito@2x.png";
 import CustomLoader from "../Generic/CustomLoader";
