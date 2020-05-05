@@ -35,11 +35,24 @@ import ResetPassword from './components/ResetPassword/ResetPassword';
 import Signup from './components/Signup/Signup';
 import RegistroExitoso from './components/Registro/RegistroExitoso';
 import Login from './components/Login/Login';
+import Home from './components/Home/Home';
 
 // ROUTER & REDUX
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './redux/store';
+
+// UTILS
+import isAuthenticated from './utils/isAuthenticated'
+
+const PrivateRoute = ({component: Component, ...rest}) => (
+  <Route {...rest} render={(props) => (
+    isAuthenticated() === true
+    ? <Component {...props} />
+    : <Redirect to="/" />
+  )} />
+)
+
 
 class App extends Component {
 
@@ -76,6 +89,7 @@ class App extends Component {
                 <Route path="/registrate" exact component={Signup} />
                 <Route path="/registroexitoso" exact component={RegistroExitoso} />
                 <Route path="/login" exact component={Login} />
+                <PrivateRoute exact path="/home" component={Home} />
               </Switch>
             </div>
             <div className="container-fluid">
