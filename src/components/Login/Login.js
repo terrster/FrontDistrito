@@ -4,29 +4,30 @@ import Title from '../Generic/Title';
 import SigninForm from '../../forms/SigninForm';
 import CustomModal from '../Generic/CustomModal';
 
+import { useDispatch, useSelector } from 'react-redux';
+import { loginAction } from '../../redux/actions/authActions';
+
 let Login = props => {
 
-	let onFormSubmit = async(data, Login) => {
-		/* props.updateLoader(true) */
-		let {email, password} = data
-		try {
-			let loginUser = await Login({ 
-				variables:{
-					email,
-					password
-				}
-			})
-			sessionStorage.setItem('token',loginUser.data.signin.token)
-			sessionStorage.setItem('nameUser',loginUser.data.signin.user.name)
-			props.history.push("/home")
-			/* props.updateLoader(false) */
-			props.updateNav("login")
-		} catch (err) {
-			/* props.updateLoader(false) */
-			/* props.updateModal('err') */
-		}
+	const dispatch = useDispatch();
 
+	let onFormSubmit = (data) => {
+		/* props.updateLoader(true) */
+		dispatch( loginAction(data) );
 	}
+
+	const auth = useSelector(state => state.auth.logged);
+
+	if(auth){
+		props.history.push("/home")
+		/* props.updateLoader(false) */
+		/* props.updateNav("login") */
+	}
+	else{
+		/* props.updateLoader(false) */
+		/* props.updateModal('err') */
+	}
+
 
 	window.scrollTo(0, 0)
 	if(sessionStorage.getItem('nameUser')){

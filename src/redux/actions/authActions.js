@@ -15,7 +15,6 @@ export function singUpAction(request){
         try{
             const {data} = await Axios.post('signin', request);
             if(data.code == 200){
-                sessionStorage.setItem("nameUser", data.user.name);
                 dispatch( registrationSuccess() );
 
                 const credentials = {
@@ -56,6 +55,7 @@ export function loginAction(credentials){
 
         try{
             const {data} = await Axios.post('login', credentials);
+            sessionStorage.setItem('nameUser', data.user.name);
             sessionStorage.setItem("token", data.token);
             dispatch( loginSuccess() );
         }

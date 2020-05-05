@@ -8,6 +8,7 @@ import {
 } from '../types/authTypes';
 
 const initialState = {
+    logged: false,
     loading: false,
     error: null
 };
@@ -24,6 +25,7 @@ export default function(state = initialState, action){
         case LOGIN_SUCCESS:
             return {
                 ...state,
+                logged: true,
                 loading: false
             }
         case REGISTRATION_FAILED:
