@@ -23,7 +23,12 @@ export function singUpAction(request){
                     password: request.password
                 }
 
-                dispatch( singInAction(credentials) );
+                dispatch( loginAction(credentials) );
+
+                setTimeout( () => {
+                    window.location.href = `${process.env.REACT_APP_REDIRECT}/registroexitoso`;
+                }, 5000)
+
             }
         }
         catch(error){
@@ -45,7 +50,7 @@ const registrationFailed = error => ({
     payload: error
 });
 
-export function singInAction(credentials){
+export function loginAction(credentials){
     return async(dispatch) => {
         dispatch( startLogin() );
 
@@ -53,8 +58,6 @@ export function singInAction(credentials){
             const {data} = await Axios.post('login', credentials);
             sessionStorage.setItem("token", data.token);
             dispatch( loginSuccess() );
-
-            window.location.href = `${process.env.REACT_APP_REDIRECT}/registroexitoso`;
         }
         catch(error){
             dispatch( loginFailed('Some error') );
