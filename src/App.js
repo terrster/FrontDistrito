@@ -36,6 +36,7 @@ import Signup from './components/Signup/Signup';
 import RegistroExitoso from './components/Registro/RegistroExitoso';
 import Login from './components/Login/Login';
 import Home from './components/Home/Home';
+import GeneralInfo from './components/Appliance/GeneralInfo';
 
 // ROUTER & REDUX
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
@@ -90,6 +91,7 @@ class App extends Component {
                 <Route path="/registroexitoso" exact component={RegistroExitoso} />
                 <Route path="/login" exact component={Login} />
                 <PrivateRoute exact path="/home" component={Home} />
+                <PrivateRoute exact path="/informacion-general/:idAppliance" component={GeneralInfo} />
               </Switch>
             </div>
             <div className="container-fluid">
