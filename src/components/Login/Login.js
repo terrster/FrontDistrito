@@ -30,7 +30,7 @@ let Login = props => {
 
 
 	window.scrollTo(0, 0)
-	if(sessionStorage.getItem('nameUser')){
+	if(sessionStorage.getItem('user')){
 		window.location="/home";
 	}else{
 		return (

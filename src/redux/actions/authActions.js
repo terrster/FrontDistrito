@@ -55,7 +55,7 @@ export function loginAction(credentials){
 
         try{
             const {data} = await Axios.post('login', credentials);
-            sessionStorage.setItem('nameUser', data.user.name);
+            sessionStorage.setItem('user', JSON.stringify(data.user));
             sessionStorage.setItem("token", data.token);
             dispatch( loginSuccess() );
         }

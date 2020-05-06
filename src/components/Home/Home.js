@@ -81,13 +81,14 @@ const Home = (props) => {
       .catch((err) => console.log(JSON.stringify(err)));
   };
 
+
   return (
     <div className="container mt-72 mb-120">
       {isLoading && <CustomLoader />}
       <div>
         <Title
           className="blackBlue coolvetica fw500 fz32 mb-16"
-          title={`Hola ` + sessionStorage.getItem("nameUser")}
+          title={`Hola ` + JSON.parse(sessionStorage.getItem("user")).name}
         />
         {/* info */}
       </div>
