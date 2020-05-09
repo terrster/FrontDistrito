@@ -1,13 +1,12 @@
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import Title from "../Generic/Title";
-import CustomLoader from "../Generic/CustomLoader";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import Files from "./Files";
 import Credits from "./Credits";
 import Rejected from "./Rejected";
-import { Col, Row } from "react-bootstrap";
+import { Col } from "react-bootstrap";
 
 let client;
 
@@ -118,4 +117,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default Record;
+export default connect(mapStateToProps, mapDispatchToProps)(Record);

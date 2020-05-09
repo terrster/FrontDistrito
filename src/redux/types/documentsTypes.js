@@ -1,0 +1,2 @@
+export const UPDATE_FILES = "UPDATE_FILES";
+export const UPDATE_FILES_ARR = "UPDATE_FILES_ARR";

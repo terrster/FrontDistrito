@@ -14,7 +14,7 @@ export function singUpAction(request){
 
         try{
             const {data} = await Axios.post('signin', request);
-            if(data.code == 200){
+            if(data.code === 200){
                 dispatch( registrationSuccess() );
 
                 const credentials = {
