@@ -38,8 +38,8 @@ import Login from './components/Login/Login';
 import Home from './components/Home/Home';
 import Appliance from './components/Appliance/Appliance'
 import Amount from './components/Appliance/Amount'
-import isAuthenticated from './utils/isAuthenticated'
 import ComercialInfo from './components/Appliance/ComercialInfo';
+import GeneralInfo from './components/Appliance/GeneralInfo';
 
 // ROUTER & REDUX
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
@@ -108,6 +108,7 @@ class App extends Component {
                 <PrivateRoute exact path="/home" component={Home} />
                 <PrivateRoute exact  path="/solicitud" component={Appliance} />
                 <PrivateRoute exact path="/elige-monto/:idAppliance" component={Amount} />
+                <PrivateRoute exact path="/informacion-general/:idAppliance" component={GeneralInfo} />
               </Switch>
             </div>
             <div className="container-fluid">
