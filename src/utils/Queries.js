@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+/* import gql from 'graphql-tag';
 
 const QUERY_APPLIANCE = gql`
 	query getAppliances($clientId: String!) {
@@ -248,3 +248,4 @@ let Queries = {
 };
 
 export default Queries;
+ */

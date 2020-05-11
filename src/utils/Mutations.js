@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+/* import gql from 'graphql-tag'
 
 const CREATE_USER = gql`
 	mutation Signup($name: String!, $lastname: String!, $email: String!, $phone: String!,$password: String!, $access: USERTYPE!){
@@ -665,4 +665,4 @@ let Mutations = {
 	SEND_EMAIL_CONTACT
 }
 
-export default Mutations
+export default Mutations */
