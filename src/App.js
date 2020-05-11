@@ -39,6 +39,7 @@ import Home from './components/Home/Home';
 import Appliance from './components/Appliance/Appliance'
 import Amount from './components/Appliance/Amount'
 import isAuthenticated from './utils/isAuthenticated'
+import ComercialInfo from './components/Appliance/ComercialInfo';
 
 // ROUTER & REDUX
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
@@ -92,6 +93,9 @@ class App extends Component {
   
             <div className="flex-grow-1" style={{height: 'auto'}}>
               <Switch>
+                <PrivateRoute exact  path="/solicitud" component={Appliance} />
+                <PrivateRoute exact path="/elige-monto/:idAppliance" component={Amount} />
+                <PrivateRoute exact path="/datos-comerciales/:idAppliance" component={ComercialInfo} />
                 <Route path="/" exact component={Landing} />
                 <Route path="/preguntas-frecuentes" exact component={Questions} />
                 <Route path="/terminos-y-condiciones" exact component={Terms} />
