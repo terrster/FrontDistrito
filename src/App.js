@@ -24,23 +24,21 @@ import "./css/tabs.css";
 import "./css/toast.css";
 import "./css/type-card.css";
 
-import NavBar from './components/Navbar/Navbar';
-import Landing from './components/Landing/Landing'
-import Footer from './components/Landing/Footer/Footer';
-import Questions from './components/Questions/Questions';
-import Terms from './components/Landing/Terms/Terms';
-import Privacy from './components/Privacy/Privacy';
-import RecoverPassword from './components/RecoverPassword/RecoverPassword';
-import ResetPassword from './components/ResetPassword/ResetPassword';
-import Signup from './components/Signup/Signup';
-import RegistroExitoso from './components/Registro/RegistroExitoso';
-import Login from './components/Login/Login';
-import Home from './components/Home/Home';
-import Appliance from './components/Appliance/Appliance'
-import Amount from './components/Appliance/Amount'
-import ComercialInfo from './components/Appliance/ComercialInfo';
-import GeneralInfo from './components/Appliance/GeneralInfo';
-import Credit from './components/Credit/Credit';
+import NavBar from "./components/Navbar/Navbar";
+import Landing from "./components/Landing/Landing";
+import Footer from "./components/Landing/Footer/Footer";
+import Questions from "./components/Questions/Questions";
+import Terms from "./components/Landing/Terms/Terms";
+import Privacy from "./components/Privacy/Privacy";
+import RecoverPassword from "./components/RecoverPassword/RecoverPassword";
+import ResetPassword from "./components/ResetPassword/ResetPassword";
+import Signup from "./components/Signup/Signup";
+import RegistroExitoso from "./components/Registro/RegistroExitoso";
+import Login from "./components/Login/Login";
+import Home from "./components/Home/Home";
+import GeneralInfo from "./components/Appliance/GeneralInfo";
+import Credit from "./components/Credit/Credit";
+import Record from './components/Record/Record';
 
 // ROUTER & REDUX
 import {
@@ -141,6 +139,12 @@ class App extends Component {
                 <PrivateRoute exact path="/elige-monto/:idAppliance" component={Amount} />
                 <PrivateRoute exact path="/informacion-general/:idAppliance" component={GeneralInfo} />
                 <PrivateRoute exact path="/credito" component={Credit} />
+                <PrivateRoute exact path="/historial" component={Record} />
+                <PrivateRoute
+                  exact
+                  path="/historial/:idAppliance"
+                  component={Record}
+                />
               </Switch>
             </div>
             <div className="container-fluid">
