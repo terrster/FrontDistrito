@@ -37,6 +37,9 @@ import RegistroExitoso from "./components/Registro/RegistroExitoso";
 import Login from "./components/Login/Login";
 import Home from "./components/Home/Home";
 import GeneralInfo from "./components/Appliance/GeneralInfo";
+import ComercialInfo from "./components/Appliance/ComercialInfo";
+import Amount from "./components/Appliance/Amount";
+import Appliance from "./components/Appliance/Appliance";
 import Credit from "./components/Credit/Credit";
 import Record from './components/Record/Record';
 
