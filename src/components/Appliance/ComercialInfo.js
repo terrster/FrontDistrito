@@ -10,7 +10,32 @@ import Steps from './Steps';
 import CustomModal from '../Generic/CustomModal';
 
 class ComercialInfo extends Component {
+	constructor(props) {
+		super(props);
+		this.state = { 
+			modalStatus: false,
+			loading: true,
+			dataApp: null
+		};
+	}
+
+	getData(){
+		// fetch (Peticion a la API para obtener los datos de la solicitud)
+		const dataApp = {
+			getAppliance: null,
+			status: true,
+			idAmount: null, 
+			idComercialInfo: null, 
+			idGeneralInfo: null, 
+			idDocuments: {
+				status: false
+			}, 
+		};
+		this.setState({ loading: false, dataApp });
+	}
+	
 	componentDidMount() {
+		this.getData();
 		if (!this.props.toast) {
 			execToast('second');
 			this.props.updateToast('second');
@@ -85,8 +110,18 @@ class ComercialInfo extends Component {
 
 	render() {
 		let linkt;
-		const { appliance } = this.props;
-
+		/* const { appliance } = this.props; */
+		console.log(this.state);
+		let appliance =  {
+				getAppliance: null,
+				status: true,
+				idAmount: null, 
+				idComercialInfo: null, 
+				idGeneralInfo: null, 
+				idDocuments: {
+					status: false
+				}, 
+		};				
 		if (
 			!appliance.idAmount &&
 			!appliance.idComercialInfo &&
@@ -111,7 +146,7 @@ class ComercialInfo extends Component {
 		} else if (!appliance.idDocuments || !appliance.idDocuments.status) {
 			linkt = `documentos/${this.props.match.params.idAppliance}`;
 		}
-		if (this.props.user === undefined) {
+		if (this.props.user.name === undefined) {
 			this.props.updateUserName(appliance.idClient.idUser.name);
 			this.props.updateUser(appliance.idClient.idUser);
 		}
@@ -220,14 +255,16 @@ class ComercialInfo extends Component {
 	graphql(Mutations.UPDATE_CLIENT_DATA, { name: 'updateClient' })
 )(ComercialInfo); */
 
-/* const mapStateToProps = (state, ownProps) => {
+ const mapStateToProps = (state, ownProps) => {
 	return {
 		history: ownProps.history,
 		modal: state.modal.name,
 		appliance: state.appliance.appliance,
 		applianceAmount: state.appliance.amount,
 		applianceData: state.appliance,
-		user: state.user.user,
+		user: {
+			name: "Prueba"
+		},
 		applianceComercialInfo: state.appliance.comercialInfo,
 		toast: state.app.toast.second,
 		currentAddress: state.currentAddress.currentAddress,
@@ -262,6 +299,6 @@ const mapDispatchToProps = dispatch => {
 			});
 		}
 	};
-}; */
+}; 
 
-export default /* connect(mapStateToProps, mapDispatchToProps)( */ComercialInfo/* ) */;
+export default  connect(mapStateToProps, mapDispatchToProps)(ComercialInfo );

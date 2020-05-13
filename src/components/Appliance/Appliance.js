@@ -14,18 +14,39 @@ class Appliance extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			...this.props,
-			modalStatus: false
+			...this.props, 
+			modalStatus: false,
+			loading: true,
+			dataApp: null
 		};
 	}
 
+	getData(){
+		// fetch (Peticion a la API para obtener los datos de la solicitud)
+		const dataApp = {
+			getAppliance: null,
+			status: true,
+			idAmount: null, 
+			idComercialInfo: null, 
+			idGeneralInfo: null, 
+			idDocuments: {
+				status: false
+			}, 
+		};
+		this.setState({ loading: false, dataApp });
+		
+	}
+
 	componentDidMount() {
+		this.getData();
 		this.props.updateCurrentUrl('credito');
 		window.scrollTo(0, 0);
 	}
 
-	finishAppliance = async (data, Appliance) => {
-		try {
+	finishAppliance = async (data) => {
+		console.log(data)
+		// Petición al backend con data ? 
+		/* try {
 			await Appliance({
 				variables: {
 					idAppliance: this.props.match.params.idAppliance,
@@ -33,25 +54,26 @@ class Appliance extends Component {
 				}
 			});
 			window.location.reload();
-		} catch (err) {}
+		} catch (err) {} */
 	};
 
-	getAppliance = applianceId => (
-		 {/* <Query
-			query={Queries.GET_APPLIANCE}
-			variables={{ applianceId: this.props.match.params.idAppliance }}
-			onCompleted={d => {
-				this.props.updateAppliance(d.getAppliance);
-			}}
-		> 
-			{ */} , ({ loading, err, data }) => {
+	getAppliance = () => {
+				if (this.state.loading) return <CustomLoader />;
 				let linkt;
-				if (loading) return <CustomLoader />;
-				if (err) return null;
-				let appliance = data.getAppliance;
+				console.log(this.state);
+				let appliance =  {
+					getAppliance: null,
+					status: true,
+					idAmount: null, 
+					idComercialInfo: null, 
+					idGeneralInfo: null, 
+					idDocuments: {
+						status: false
+					}, 
+				};
 				if (!appliance) return null;
 				console.log(appliance.status);
-				if (!appliance.status && !sessionStorage.status) {
+				if (!appliance.status || !sessionStorage.status) {
 					if (
 						!appliance.idAmount &&
 						!appliance.idComercialInfo &&
@@ -76,7 +98,7 @@ class Appliance extends Component {
 					} else if (!appliance.idDocuments || !appliance.idDocuments.status) {
 						linkt = `documentos/${this.props.match.params.idAppliance}`;
 					}
-					if (this.props.user === undefined) {
+					if (this.props.user.name === undefined) {
 						this.props.updateUserName(appliance.idClient.idUser.name);
 						this.props.updateUser(appliance.idClient.idUser);
 					}
@@ -170,9 +192,7 @@ class Appliance extends Component {
 						</div>
 					);
 				}
-			}/* }
-		 </Query>  */
-	);
+	};
 
 	handleClose = () => {
 		this.setState({ modalStatus: false });
@@ -182,6 +202,7 @@ class Appliance extends Component {
 	};
 
 	render() {
+		console.log(this.getAppliance())
 		return (
 			<div className="container mt-40 mb-120">
 				{this.props.match.params.idAppliance ? (
@@ -195,11 +216,10 @@ class Appliance extends Component {
 					this.props.appliance.idDocuments !== undefined &&
 					this.props.appliance.idDocuments != null &&
 					this.props.appliance.idDocuments.status && (
-					/*<Mutation mutation={Mutations.UPDATE_APPLIANCE}>*/
+					
                         <div>
-							{(UpdateAppliance, data) => (  
 								<div className="brandonBld mt-72 text-center">
-									{!sessionStorage.status ? (
+									{!sessionStorage.status && (
 										<Button
 											className="appliance-button fz21 bluePrimary "
 											value={true}
@@ -207,8 +227,6 @@ class Appliance extends Component {
 										>
 											Enviar solicitud
 										</Button>
-									) : (
-										<div></div>
 									)}
 									<Modal
 										show={this.state.modalStatus}
@@ -228,7 +246,7 @@ class Appliance extends Component {
 													<Button
 														className="btn-blue-general button-modal "
 														onClick={e =>
-															this.finishAppliance(e, UpdateAppliance)
+															this.finishAppliance(e)
 														}
 													>
 														Enviar
@@ -244,10 +262,10 @@ class Appliance extends Component {
 										</Modal.Body>
 									</Modal>
 								</div>
-                            )}
+                            
                         </div>
-                        /*</Mutation>*/
-					)}
+					)}    
+					
 			</div>
 		);
 	}
@@ -271,8 +289,9 @@ const mapStateToProps = (state, ownProps) => {
 			? state.appliance.generalInfo
 			: null,
 		documents: state.appliance.documents ? state.appliance.documents : null,
-		user: state.user.user,
-		navegationurl: state.navegationReducer.section
+		user: {
+			name: "Pruebas"
+		}
 	};
 };
 

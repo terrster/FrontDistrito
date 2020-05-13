@@ -112,7 +112,7 @@ class App extends Component {
 
             <div className="flex-grow-1" style={{ height: "auto" }}>
               <Switch>
-                <PrivateRoute exact  path="/solicitud" component={Appliance} />
+                <PrivateRoute exact  path="/credito/solicitud/:idAppliance" component={Appliance} />
                 <PrivateRoute exact path="/elige-monto/:idAppliance" component={Amount} />
                 <PrivateRoute exact path="/datos-comerciales/:idAppliance" component={ComercialInfo} />
                 <Route path="/" exact component={Landing} />
