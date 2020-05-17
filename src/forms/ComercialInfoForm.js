@@ -203,16 +203,16 @@ class ComercialInfoConstructForm extends Component {
           <option className="brandonReg" value="">
             ¿Puedes ofrecer una garantía?
           </option>
-          <option className="brandonReg" value="1">
+          <option className="brandonReg" value={true}>
             Sí, garantía inmobiliaria.
           </option>
-          <option className="brandonReg" value="2">
+          <option className="brandonReg" value={true}>
             Sí, activo fijo.
           </option>
-          <option className="brandonReg" value="3">
+          <option className="brandonReg" value={true}>
             Sí, ambos.
           </option>
-          <option className="brandonReg" value="4">
+          <option className="brandonReg" value={false}>
             No.
           </option>
         </Field>

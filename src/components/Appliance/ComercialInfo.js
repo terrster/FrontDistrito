@@ -4,10 +4,12 @@ import React, { Component } from 'react';
 import { execToast } from '../../utils/ToastUtils';
 import ComercialInfoForm from '../../forms/ComercialInfoForm';
 import { variablesManager } from '../Manager/VariablesManager';
+import axios from '../../utils/axios';
 
 // Components
 import Steps from './Steps';
 import CustomModal from '../Generic/CustomModal';
+
 
 class ComercialInfo extends Component {
 	constructor(props) {
@@ -18,32 +20,125 @@ class ComercialInfo extends Component {
 			dataApp: null
 		};
 	}
-
-	getData(){
-		// fetch (Peticion a la API para obtener los datos de la solicitud)
+	
+	componentDidMount() {
 		const dataApp = {
 			getAppliance: null,
 			status: true,
 			idAmount: null, 
-			idComercialInfo: null, 
+			idComercialInfo: "", 
 			idGeneralInfo: null, 
 			idDocuments: {
 				status: false
 			}, 
 		};
 		this.setState({ loading: false, dataApp });
-	}
-	
-	componentDidMount() {
-		this.getData();
 		if (!this.props.toast) {
 			execToast('second');
 			this.props.updateToast('second');
 		}
 		window.scrollTo(0, 0);
 	}
+	
+	getTable = () => {
+		let appliance =  {
+			getAppliance: undefined,
+			status: true,
+			idAmount: null,
+			idComercialInfo: '1', 
+			idGeneralInfo: null, 
+			idDocuments: {
+				status: false
+			}, 
+		};
+		const error= false;
+		if (error) {
+			window.location.reload();
+			return false;
+		}
+		if (this.state.loading) {
+			
+			return false;
+		}
+		if (
+			this.props.applianceComercialInfo &&
+			this.state.dataApp.getAppliance.idComercialInfo === null
+		) {
+			/* refetch().then(_ => {}); */
+			
+			return false;
+		}
+		let currentComercialInfo =
+		appliance.getAppliance === undefined ||
+		appliance.idComercialInfo === null
+				? []
+				: appliance.idComercialInfo;
+		let isUpdate = currentComercialInfo.length === 0 ? false : true;
+		let typeForm = isUpdate ? 'update' : 'create';
+		currentComercialInfo =
+			currentComercialInfo.length === 0
+				? error/* new ComercialInfoEntity()  */
+				:  error/* new ComercialInfoEntity().fromGraphQlObject(
+						currentComercialInfo
+				  ); */
+		if (isUpdate) {
+			let cAddress = currentComercialInfo.address;
+			for (const k in cAddress) {
+				if (k !== 'id') {
+					currentComercialInfo[k] = cAddress[k];
+				}
+			}
+			currentComercialInfo.warranty = currentComercialInfo.warranty
+				? '1'
+				: '0';
+			currentComercialInfo.terminal = currentComercialInfo.terminal
+				? '1'
+				: '0';
+		}else{
+			return (
+			
+				<ComercialInfoForm
+					onSubmit={d => {
+						this.onFormSubmit(d, typeForm, currentComercialInfo);
+					}}
+					data={currentComercialInfo}
+				></ComercialInfoForm>
+			);
+		}
+		
+	}
+
+	async getData(){
+		// fetch (Peticion a la API para obtener los datos de la solicitud)
+		try{
+			const infoPost = await axios.get('api/info/comercial',{
+				headers: {
+					token: sessionStorage.getItem('token')
+				}
+			});
+			console.log("Respuesta del back Get", infoPost);
+		}catch(error){
+			console.log("Error del get",error)
+		}
+
+		
+	}
 
 	onFormSubmit = async (data, typeForm, beforeData) => {
+		console.log(data)
+
+		try{
+			const infoPost = await axios.post('api/info/comercial/store',data,{
+				headers: {
+					token: sessionStorage.getItem('token')
+				}
+			});
+			console.log("Respuesta del back Post", infoPost);
+			console.log("Peticion hecha");
+		}catch(error){
+			console.log("Error del back",error)
+		}
+		this.getData()
 		let p = this.props;
 		let pComercial = p.currentComercialInfo;
 		let { terminal, warranty } = data;
@@ -111,7 +206,6 @@ class ComercialInfo extends Component {
 	render() {
 		let linkt;
 		/* const { appliance } = this.props; */
-		console.log(this.state);
 		let appliance =  {
 				getAppliance: null,
 				status: true,
@@ -187,61 +281,7 @@ class ComercialInfo extends Component {
 					modalName="comercialInfoError"
 					message="Error al subir los archivos. Favor de regresar a la pantalla de inicio y continúa tu solicitud."
 				/>
-				{/* <Query
-					query={Queries.GET_APPLIANCE}
-					variables={{ applianceId: this.props.match.params.idAppliance }}
-				> */}
-					{({ loading, error, data, refetch }) => {
-						if (error) {
-							window.location.reload();
-							return false;
-						}
-						if (loading) {
-							return false;
-						}
-						if (
-							this.props.applianceComercialInfo &&
-							data.getAppliance.idComercialInfo === null
-						) {
-							refetch().then(_ => {});
-						}
-						let currentComercialInfo =
-							data.getAppliance === undefined ||
-							data.getAppliance.idComercialInfo === null
-								? []
-								: data.getAppliance.idComercialInfo;
-						let isUpdate = currentComercialInfo.length === 0 ? false : true;
-						let typeForm = isUpdate ? 'update' : 'create';
-						currentComercialInfo =
-							currentComercialInfo.length === 0
-								? {/* new ComercialInfoEntity() */}
-								: {/* new ComercialInfoEntity().fromGraphQlObject(
-										currentComercialInfo
-								  ); */}
-						if (isUpdate) {
-							let cAddress = currentComercialInfo.address;
-							for (const k in cAddress) {
-								if (k !== 'id') {
-									currentComercialInfo[k] = cAddress[k];
-								}
-							}
-							currentComercialInfo.warranty = currentComercialInfo.warranty
-								? '1'
-								: '0';
-							currentComercialInfo.terminal = currentComercialInfo.terminal
-								? '1'
-								: '0';
-						}
-						return (
-							<ComercialInfoForm
-								onSubmit={d => {
-									this.onFormSubmit(d, typeForm, currentComercialInfo);
-								}}
-								data={currentComercialInfo}
-							></ComercialInfoForm>
-						);
-					}}
-				{/*</Query>*/}
+					{this.getTable()}
 			</div>
 		);
 	}
@@ -266,7 +306,7 @@ class ComercialInfo extends Component {
 			name: "Prueba"
 		},
 		applianceComercialInfo: state.appliance.comercialInfo,
-		toast: state.app.toast.second,
+		/* toast: state.app.toast.second, */
 		currentAddress: state.currentAddress.currentAddress,
 		currentComercialInfo: state.actionForm.comercialInfoForm
 	};
