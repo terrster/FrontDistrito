@@ -1,0 +1,1 @@
+export const UPDATE_ALERT_MSG = "UPDATE_ALERT_MSG";
