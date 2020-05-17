@@ -7,6 +7,7 @@ import CustomLoader from "../Generic/CustomLoader";
 import comercialOptions from "../../models/ComercialInfoModels";
 import { Row, Col } from "react-bootstrap";
 import titoAccount from "../../assets/img/tito-account.png";
+import axios from '../../utils/axios';
 
 const Home = (props) => {
   // Redux state
@@ -36,6 +37,17 @@ const Home = (props) => {
 
   useEffect(() => {
     const getData = async () => {
+		const currentUser = JSON.parse(sessionStorage.getItem("user"));
+		console.log("user");
+		console.log(currentUser);
+		const updatedProfile = {
+			name: currentUser.name,
+			lastName: currentUser.lastName,
+			email: currentUser.email,
+			phone: currentUser.phone
+		}
+		console.log("Updtate profile");
+		console.log(updatedProfile);
       // Realizar peticion al back
       /* 
             let myProfile = data.myProfile
