@@ -15,9 +15,9 @@ export const term = {
 }
 
 export const old = {
-	LESS6: "Menos de 6 meses",
-	ONE: "1 año",
-	TWO: "2 años",
-	THREE: "3 años",
-	PFOUR: "4 años o más"
+	_6: "Menos de 6 meses",
+	1: "1 año",
+	2: "2 años",
+	3: "3 años",
+	4: "4 años o más"
 }

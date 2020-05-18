@@ -101,7 +101,7 @@ const isDisabledType = (currentPersonType, personType) => {
 
 const mapStateToProps = (state, ownProps) => {
 	return {
-		user: state.user.user,
+		user: /* state.user.user */ {name: "Pruebas"}, //Datos de Prueba
 		history: ownProps.history
 	};
 };
