@@ -91,6 +91,18 @@ class Amount extends Component {
 		}
 	}
 	
+	 getData= async ()=>{
+		try{
+			const infoPost = await axios.get('api/amount',{
+				headers:{
+					token: sessionStorage.getItem('token')
+				}
+			});
+			console.log("Respuesta del back en get",infoPost);
+		}catch(error){
+			console.log("Error del back en get",error);
+		}
+	}
 
 	onFormSubmit = async (data, typeForm, beforeData) => {
 		console.log("Data del formulario",data)
@@ -105,6 +117,7 @@ class Amount extends Component {
 			console.log("Error del back en post",error);
 		}
 
+		this.getData()
 		let p = this.props;
 		let pAmount = p.currentAmount;
 		p.updateLoader(true);
