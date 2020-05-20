@@ -41,7 +41,8 @@ import ComercialInfo from "./components/Appliance/ComercialInfo";
 import Amount from "./components/Appliance/Amount";
 import Appliance from "./components/Appliance/Appliance";
 import Credit from "./components/Credit/Credit";
-import Record from './components/Record/Record';
+import Record from "./components/Record/Record";
+import Documents from "./components/Appliance/Documents";
 
 // ROUTER & REDUX
 import {
@@ -147,6 +148,11 @@ class App extends Component {
                   exact
                   path="/historial/:idAppliance"
                   component={Record}
+                />
+                <PrivateRoute
+                  exact
+                  path="/documentos/:idAppliance"
+                  component={Documents}
                 />
               </Switch>
             </div>

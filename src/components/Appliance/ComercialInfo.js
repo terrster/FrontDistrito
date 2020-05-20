@@ -21,7 +21,7 @@ class ComercialInfo extends Component {
 		};
 	}
 	
-	componentDidMount() {
+	async componentDidMount() {
 		const dataApp = {
 			getAppliance: null,
 			status: true,
@@ -37,7 +37,15 @@ class ComercialInfo extends Component {
 			execToast('second');
 			this.props.updateToast('second');
 		}
-		window.scrollTo(0, 0);
+		
+		const res = await axios.get('api/info/comercial', {
+			headers: {
+				token: sessionStorage.getItem("token"),
+			}
+		});
+		console.log("GET TO COMERCIAL INFO");
+		console.log(res);
+		
 	}
 	
 	getTable = () => {
@@ -125,8 +133,6 @@ class ComercialInfo extends Component {
 	}
 
 	onFormSubmit = async (data, typeForm, beforeData) => {
-		console.log(data)
-
 		try{
 			const infoPost = await axios.post('api/info/comercial/store',data,{
 				headers: {
@@ -139,68 +145,6 @@ class ComercialInfo extends Component {
 			console.log("Error del back",error)
 		}
 		this.getData()
-		let p = this.props;
-		let pComercial = p.currentComercialInfo;
-		let { terminal, warranty } = data;
-		p.updateLoader(true);
-		p.changeTypeComercialInfoForm('comercialInfoForm', typeForm, beforeData);
-		window.scrollTo(0, 0);
-		try {
-			let currentAddress = {};
-			let addressId = 0;
-			let comercialInfo = {};
-			let address = {};
-			let updatedAppliance = {};
-			if (pComercial.type === 'update') {
-				//this.props.setSameAddress(address.data.createAddress);
-				//falta que se pueda actualizar la direccion
-				let variables = await variablesManager.createComercialInfoVariables(
-					data,
-					pComercial.datos.address.id
-				);
-				variables.comercialId = pComercial.datos.id;
-				comercialInfo = await p.updateComercialInfo({ variables });
-				updatedAppliance = await p.updateApplianceGraph({
-					variables: {
-						idAppliance: p.match.params.idAppliance,
-						idComercialInfo: comercialInfo.data.updateComercialInfo.id
-					}
-				});
-			} else {
-				address = await p.createNewAddress({
-					variables: variablesManager.createAddressVariables(data)
-				});
-				p.setSameAddress(address.data.createAddress);
-				let variables = await variablesManager.createComercialInfoVariables(
-					data,
-					address.data.createAddress.id
-				);
-				comercialInfo = await p.createNewComercialInfo({ variables });
-
-				updatedAppliance = await p.updateApplianceGraph({
-					variables: {
-						idAppliance: p.match.params.idAppliance,
-						idComercialInfo: comercialInfo.data.createComercialInfo.id
-					}
-				});
-			}
-			p.updateAppliance(updatedAppliance.data.updateAppliance);
-			p.updateApplianceComercialInfo(
-				updatedAppliance.data.updateAppliance.idComercialInfo
-			);
-			p.history.push(
-				`${
-					pComercial.type === 'update'
-						? '/credito/solicitud/'
-						: '/informacion-general/'
-				}${p.match.params.idAppliance}`
-			);
-			this.props.updateLoader(false);
-		} catch (err) {
-			this.props.updateLoader(false);
-			this.props.updateModal('comercialInfoError');
-			window.scrollTo(0, 0);
-		}
 	};
 
 	render() {

@@ -20,55 +20,62 @@ const Home = (props) => {
     idClient: {
       type: "idClient-type",
       idComercialInfo: {
-        comercialName: "comercialName",
-        gyre: "COMERCE",
-        specific: "Specific",
-        rfc: "RFC",
+        comercialName: "",
+        gyre: "",
+        specific: "",
+        rfc: "",
       },
       idDocuments: null,
     },
-    name: "name",
-    lastname: "lastname",
-    email: "email",
-    phone: "phone",
+    name: "",
+    lastname: "",
+    email: "",
+    phone: "",
   });
+  const [user, setUser] = useState(JSON.parse(sessionStorage.getItem("user")));
 
   const [newApplianceID, setNewApplianceID] = useState("idAppliance");
 
   useEffect(() => {
     const getData = async () => {
 		const currentUser = JSON.parse(sessionStorage.getItem("user"));
-		console.log("user");
-		console.log(currentUser);
-		const updatedProfile = {
-			name: currentUser.name,
-			lastName: currentUser.lastName,
-			email: currentUser.email,
-			phone: currentUser.phone
-		}
-		console.log("Updtate profile");
-		console.log(updatedProfile);
-      // Realizar peticion al back
-      /* 
-            let myProfile = data.myProfile
-            this.props.updateUser(myProfile)
-            sessionStorage.setItem('type', myProfile.idClient.type)
-            sessionStorage.setItem('idClient', myProfile.idClient.id);
-            //el indice 0 indica que es la primera apliance
-            let applianceId = null
-            if (myProfile.idClient &&
-                    myProfile.idClient.appliance &&
-                        myProfile.idClient.appliance[0])
-            {
-                applianceId = myProfile.idClient.appliance[0].id
-                console.log("1",myProfile.idClient.appliance[0].status)
-                if (myProfile.idClient.appliance[0].status === true) {
-                    sessionStorage.setItem('status', myProfile.idClient.appliance[0].status);
-                    console.log("2", myProfile.idClient.appliance[0].status)
-                }
-            } 
-
-            let newApplianceID = applianceId */
+		const userRequest = await axios.get('api/user/info', {
+			headers: {
+				token: sessionStorage.getItem("token")
+			}
+		});
+		const comercialInfoRequest = await axios.get('api/info/comercial', {
+			headers: {
+				token: sessionStorage.getItem("token")
+			}
+		});
+		const documentsInfoRequest = await axios.get('api/documents', {
+			headers: {
+				token: sessionStorage.getItem("token")
+			}
+		});
+		console.log(documentsInfoRequest);
+		const user = userRequest.data.user;
+		const idClient = userRequest.data.user.idClient[0]
+		const comercialInfo = comercialInfoRequest.data.info;
+		const newProfile = {
+			...myProfile,
+			email: user.email,
+			name: user.name,
+			lastName: user.lastName,
+			phone: user.phone,
+			idClient: {
+				type: "idClient-type",
+				idComercialInfo: {
+					comercialName: comercialInfo.comercialName,
+					gyre: comercialInfo.gyre,
+					specific: comercialInfo.specific,
+					rfc: comercialInfo.rfc,
+				},
+				idDocuments: null,
+			},
+		};
+		setMyProfile(newProfile);
     };
 
     getData();
@@ -100,7 +107,7 @@ const Home = (props) => {
       <div>
         <Title
           className="blackBlue coolvetica fw500 fz32 mb-16"
-          title={`Hola ` + JSON.parse(sessionStorage.getItem("user")).name}
+          title={`Hola ` + user.name}
         />
         {/* info */}
       </div>
@@ -109,7 +116,7 @@ const Home = (props) => {
           <ApplianceCard
             keyData={"generalData"}
             first={myProfile.idClient.type}
-            second={`${myProfile.name} ${myProfile.lastname}`}
+            second={`${user.name} ${user.lastName}`}
             third={myProfile.email}
             fourth={myProfile.phone}
             applianceId={newApplianceID}
@@ -120,9 +127,7 @@ const Home = (props) => {
             <ApplianceCard
               keyData={"comercialInfo"}
               first={myProfile.idClient.idComercialInfo.comercialName}
-              second={
-                comercialOptions[myProfile.idClient.idComercialInfo.gyre].name
-              }
+              second={myProfile.idClient.idComercialInfo.gyre}
               third={myProfile.idClient.idComercialInfo.specific}
               fourth={myProfile.idClient.idComercialInfo.rfc}
               applianceId={newApplianceID}
@@ -162,80 +167,6 @@ const Home = (props) => {
           />
         </Col>
       </Row>
-      {/*  {
-                (loading && <CustomLoader />)
-                ||
-                (err && 'Error del servicio, intenta de nuevo')
-                ||
-                (data && 
-                    <>
-                    <Row className="d-flex justify-content-center">
-                        <Col lg={6} md={6} sm={12}> 
-                            <ApplianceCard 
-                                keyData={'generalData'} 
-                                first={myProfile.idClient.type} 
-                                second={`${myProfile.name} ${myProfile.lastname}`}
-                                third={myProfile.email}
-                                fourth={myProfile.phone} 
-                                applianceId={newApplianceID}
-                            />
-                        </Col>
-                            <Col lg={6} md={6} sm={12}>
-                                { myProfile.idClient.idComercialInfo !== null && 
-                                    <ApplianceCard 
-                                        keyData={'comercialInfo'} 
-                                        first={myProfile.idClient.idComercialInfo.comercialName} 
-                                        second={comercialOptions[myProfile.idClient.idComercialInfo.gyre].name}
-                                        third={myProfile.idClient.idComercialInfo.specific}
-                                        fourth={myProfile.idClient.idComercialInfo.rfc} 
-                                        applianceId={newApplianceID}
-                                    />
-                                }
-                                { myProfile.idClient.idComercialInfo === null && 
-                                    <ApplianceCard 
-                                        keyData={'comercialInfo'} 
-                                        applianceId={newApplianceID}
-                                    />
-                                }
-                        
-                                </Col>
-                                <Col lg={6} sm={12} md={12}>
-                                { myProfile.idClient.idDocuments !== null && 
-                                    <ApplianceCard 
-                                    keyData={'documents'} 
-                                    first={this.uploadedReady(myProfile.idClient.idDocuments.oficialID[0])} 
-                                    second={this.uploadedReady(myProfile.idClient.idDocuments.proofAddress[0])}
-                                    third={this.uploadedReady(myProfile.idClient.idDocuments.bankStatements[0])}
-                                    fourth={this.uploadedReady(myProfile.idClient.idDocuments.others[0])} 
-                                    applianceId={newApplianceID}
-                                    />
-                                }
-                                {
-                                    !myProfile.idClient.idDocuments && 
-                                    <ApplianceCard 
-                                    keyData={'documents'} 
-                                    applianceId={newApplianceID}
-                                    />
-                                }
-                                </Col>
-                                <Col lg={6} className="text-center mt-2 mt-md-0">
-                                    <img src={titoAccount} className="account-tito-card"/>
-                                </Col>
-                            </Row>
-                            </>
-                        )
-                        if (data.myProfile.idClient.type !== null) {
-                            
-                            return (
-                                <div>
-                                    <Title className="blackBlue coolvetica fw500 fz32 mb-16" title={`Hola `+sessionStorage.getItem('nameUser')} />
-                                    {info}
-                                </div>
-                            )
-                        } else {
-                            return (<SelectType history={this.props.history} />)
-                        } 
-            }		 */}
     </div>
   );
 };
