@@ -53,11 +53,19 @@ const Documents = (props) => {
   const onFormSubmit = async (e, statusClose = false) => {
     e.preventDefault();
     dispatch(updateLoader(true));
-    console.log("Documentos enviados");
     console.log(documents);
-    const { data } = await axios.post('api/upload', documents, {
+    const formData = new FormData();
+    const files = {};
+    for (const typeDoc in documents){
+		documents[typeDoc].forEach(doc => {
+			const file = JSON.stringify(doc);
+			formData.append('files',file);
+		});
+	}
+    const { data } = await axios.post('api/upload', formData, {
       headers:{
-        token: sessionStorage.getItem("token")
+        token: sessionStorage.getItem("token"),
+		'Content-Type': 'multipart/form-data'
       }
     });
     sessionStorage.setItem('user', JSON.stringify(data.user));
