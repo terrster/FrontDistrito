@@ -18,24 +18,14 @@ class Appliance extends Component {
 			...this.props, 
 			modalStatus: false,
 			loading: true,
-			dataApp: null
+			dataApp: null,
+			user: {}
 		};
 	}
 
 	getData(){
-		// fetch (Peticion a la API para obtener los datos de la solicitud)
-		const dataApp = {
-			getAppliance: null,
-			status: true,
-			idAmount: null, 
-			idComercialInfo: null, 
-			idGeneralInfo: null, 
-			idDocuments: {
-				status: false
-			}, 
-		};
-		this.setState({ loading: false, dataApp });
-		
+		const user = JSON.parse(sessionStorage.getItem("user"));
+		this.setState({user, loading: false});		
 	}
 
 	componentDidMount() {
@@ -57,44 +47,34 @@ class Appliance extends Component {
 		} catch (err) {} */
 	};
 
-	getAppliance = async () => {
-				if (this.state.loading) return <CustomLoader />;
-				let linkt;
-				const user = JSON.parse(sessionStorage.getItem('user'));
-				const idUser = user._id;
-				const userRequest = await axios.get(`api/user/${idUser}`, {
-					headers: {
-						token: sessionStorage.getItem("token")
-					}
-				});
-				const myUser = userRequest.data.user;
-				const idClient = myUser.idClient.pop();
-				const appliance = idClient.appliance.pop();
-				const idAmount = appliance.idAmount.pop();
-				const idComercialInfo = appliance.idComercialInfo.pop();
-				const idGeneralInfo = appliance.idGeneralInfo.pop();
-				const idDocuments = appliance.idDocuments.pop();
+	verify = (array) => {
+		
+		return array == false ? false : array.length === 0 ? false : array[array.length - 1];
+	}
+
+	getAppliance =  () => {
+				if (this.state.loading) return <div></div>;
+				 let linkt = "";
+				const user = JSON.parse(sessionStorage.getItem("user"));
+				const idClient = JSON.parse(sessionStorage.getItem("user")).idClient[
+				JSON.parse(sessionStorage.getItem("user")).idClient.length - 1
+				];
+				let appliance = this.verify(idClient.appliance);
+				let idAmount = this.verify(appliance.idAmount);
+				let idGeneralInfo = this.verify(appliance.idGeneralInfo);
+				let idComercialInfo = this.verify(appliance.idComercialInfo);
+				let idDocuments = this.verify(appliance.idDocuments);
 				
-				if (!appliance) return null;
+				if (idAmount == null || !idAmount) {
+					linkt = `elige-monto/${user._id}`;
+				} else if (idComercialInfo == null || !idComercialInfo) {
+					linkt = `datos-comerciales/${user._id}`;
+				} else if (idGeneralInfo == null || !idGeneralInfo) {
+					linkt = `informacion-general/${user._id}`;
+				} else if (!idDocuments || !idDocuments == null) {
+					linkt = `documentos/${user._id}`;
+				}
 				if (!appliance.status || !sessionStorage.status) {
-					if (
-						idAmount == null ||
-						!idAmount 
-					) {
-						linkt = `elige-monto/${user._id}`;
-					} else if (
-						idComercialInfo == null ||
-						!idComercialInfo 
-					) {
-						linkt = `datos-comerciales/${user._id}`;
-					} else if (
-						idGeneralInfo == null ||
-						!idGeneralInfo 
-					) {
-						linkt = `informacion-general/${user._id}`;
-					} else if (!idDocuments || !idDocuments == null) {
-						linkt = `documentos/${user._id}`;
-					}
 					return (
 						<div className="position-relative">
 							<Title
@@ -111,7 +91,6 @@ class Appliance extends Component {
 								</div>
 							</div>
 							<img src={tito} className="apply-caracter-img" alt="tito" />
-							 {/* <div className="step-box text-center position-relative apply-box-mt" > */} 
 							<div className="step-box text-center">
 								<div>
 									<Title
@@ -124,22 +103,7 @@ class Appliance extends Component {
 									</label>
 								</div>
 								<div className="mt-50">
-									<Steps
-										first={
-											idAmount && "amount"
-										}
-										second={
-											idComercialInfo && "comercialInfo"
-										}
-										third={ 
-											idGeneralInfo && "generalInfo"
-										}
-										fourth={
-											idDocuments && "documents"
-										}
-										route={linkt}
-										id={this.props.match.params.idAppliance}
-									/>
+									<Steps />
 								</div>
 								{(!appliance.idDocuments ||
 									(appliance.idDocuments && !appliance.idDocuments.status)) && (

@@ -46,9 +46,9 @@ const Home = (props) => {
 			}
 		});
 		const myUser = userRequest.data.user;
-		const idClient = myUser.idClient.pop();
+		const idClient = myUser.idClient[myUser.idClient.length - 1];
 		if (idClient.idComercialInfo.length > 0){
-				const idComercialInfo = idClient.idComercialInfo.pop()
+				const idComercialInfo = idClient.idComercialInfo[idClient.idComercialInfo.length - 1]
 				const { data } = await axios.get(`api/info-comercial/${idComercialInfo}`, {
 					headers: {
 						token: sessionStorage.getItem("token")

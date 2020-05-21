@@ -3,13 +3,51 @@ import "../../css/progress-tracker.css";
 import "../../css/custom-progress.css";
 import { Link } from "react-router-dom";
 
-const Steps = props => {
+const Steps = (props) => {
+	
+	const verify = (array) => {
+		
+		return array == false ? false : array.length === 0 ? false : array[array.length - 1];
+	}
+	
+  let linkt = "";
+  const user = JSON.parse(sessionStorage.getItem("user"));
+  const idClient = JSON.parse(sessionStorage.getItem("user")).idClient[
+    JSON.parse(sessionStorage.getItem("user")).idClient.length - 1
+  ];
+  let appliance = verify(idClient.appliance);
+  let idAmount = verify(appliance.idAmount);
+  let idGeneralInfo = verify(appliance.idGeneralInfo);
+  let idComercialInfo = verify(appliance.idComercialInfo);
+  let idDocuments = verify(appliance.idDocuments);
+
   let activeClass = {
     amount: { class: "is-complete" },
     comercialInfo: { class: "is-complete" },
     generalInfo: { class: "is-complete" },
-    documents: { class: "is-complete" }
+    documents: { class: "is-complete" },
   };
+
+  if (idAmount == null || !idAmount) {
+    linkt = `elige-monto/${user._id}`;
+  } else if (idComercialInfo == null || !idComercialInfo) {
+    linkt = `datos-comerciales/${user._id}`;
+  } else if (idGeneralInfo == null || !idGeneralInfo) {
+    linkt = `informacion-general/${user._id}`;
+  } else if (!idDocuments || !idDocuments == null) {
+    linkt = `documentos/${user._id}`;
+  }
+
+  const first = idAmount ? "amount" : "";
+
+  const second = idComercialInfo ? "comercialInfo" : "";
+
+  const third = idGeneralInfo ? "generalInfo" : "";
+  const fourth = idDocuments ? "documents" : "";
+
+  const route = linkt;
+  const id = user._id;
+
   return (
     <div className="step-container">
       <ul className="progress-tracker progress-tracker--text progress-tracker--center progress-tracker--spaced">
@@ -29,15 +67,15 @@ const Steps = props => {
 
         <li
           className={
-            props.first
-              ? `progress-step ${activeClass[props.first].class}`
+            first
+              ? `progress-step ${activeClass[first].class}`
               : "progress-step"
           }
         >
-          {props.first !== undefined &&
-          props.first !== null &&
-          props.first !== "" ? (
-            <Link to={`/elige-monto/${props.id}`}>
+          {first !== undefined &&
+          first !== null &&
+          first !== "" ? (
+            <Link to={`/elige-monto/${id}`}>
               <span className="progress-marker custom">
                 <span className="imagen2" style={{ width: "200px" }}></span>
               </span>
@@ -50,10 +88,10 @@ const Steps = props => {
               className="progress-title brandonReg fw500"
               style={{ color: "#4f4f4f" }}
             >
-              {props.first !== undefined &&
-              props.first !== null &&
-              props.first !== "" ? (
-                <Link to={`/elige-monto/${props.id}`} className="form-link">
+              {first !== undefined &&
+              first !== null &&
+              first !== "" ? (
+                <Link to={`/elige-monto/${id}`} className="form-link">
                   Elige tu monto
                 </Link>
               ) : (
@@ -65,15 +103,15 @@ const Steps = props => {
 
         <li
           className={
-            props.second
-              ? `progress-step ${activeClass[props.second].class}`
+            second
+              ? `progress-step ${activeClass[second].class}`
               : `progress-step`
           }
         >
-          {props.second !== undefined &&
-          props.second !== null &&
-          props.second !== "" ? (
-            <Link to={`/datos-comerciales/${props.id}`}>
+          {second !== undefined &&
+          second !== null &&
+          second !== "" ? (
+            <Link to={`/datos-comerciales/${id}`}>
               <span className="progress-marker custom">
                 <span className="imagen3" style={{ width: "200px" }}></span>
               </span>
@@ -86,11 +124,11 @@ const Steps = props => {
               className="progress-title brandonReg fw500"
               style={{ color: "#4f4f4f" }}
             >
-              {props.second !== undefined &&
-              props.second !== null &&
-              props.second !== "" ? (
+              {second !== undefined &&
+              second !== null &&
+              second !== "" ? (
                 <Link
-                  to={`/datos-comerciales/${props.id}`}
+                  to={`/datos-comerciales/${id}`}
                   className="form-link"
                 >
                   Datos comerciales
@@ -109,10 +147,10 @@ const Steps = props => {
               : "progress-step"
           }
         >
-          {props.third !== undefined &&
-          props.third !== null &&
-          props.third !== "" ? (
-            <Link to={`/informacion-general/${props.id}`}>
+          {third !== undefined &&
+          third !== null &&
+          third !== "" ? (
+            <Link to={`/informacion-general/${id}`}>
               <span className="progress-marker custom ">
                 <span className="imagen4" style={{ width: "200px" }}></span>
               </span>
@@ -125,11 +163,11 @@ const Steps = props => {
               className="progress-title brandonReg fw500"
               style={{ color: "#4f4f4f" }}
             >
-              {props.third !== undefined &&
-              props.third !== null &&
-              props.third !== "" ? (
+              {third !== undefined &&
+              third !== null &&
+              third !== "" ? (
                 <Link
-                  to={`/informacion-general/${props.id}`}
+                  to={`/informacion-general/${id}`}
                   className="form-link"
                 >
                   Datos generales
@@ -143,15 +181,15 @@ const Steps = props => {
 
         <li
           className={
-            props.fourth
-              ? `progress-step ${activeClass[props.fourth].class}`
+            fourth
+              ? `progress-step ${activeClass[fourth].class}`
               : "progress-step"
           }
         >
-          {props.fourth !== undefined &&
-          props.fourth !== null &&
-          props.fourth !== "" ? (
-            <Link to={`/documentos/${props.id}`}>
+          {fourth !== undefined &&
+          fourth !== null &&
+          fourth !== "" ? (
+            <Link to={`/documentos/${id}`}>
               <span className="progress-marker custom">
                 <span className="imagen5" style={{ width: "200px" }}></span>
               </span>
@@ -164,10 +202,10 @@ const Steps = props => {
               className="progress-title brandonReg fw500"
               style={{ color: "#4f4f4f" }}
             >
-              {props.fourth !== undefined &&
-              props.fourth !== null &&
-              props.fourth !== "" ? (
-                <Link to={`/documentos/${props.id}`} className="form-link">
+              {fourth !== undefined &&
+              fourth !== null &&
+              fourth !== "" ? (
+                <Link to={`/documentos/${id}`} className="form-link">
                   Documentos
                 </Link>
               ) : (

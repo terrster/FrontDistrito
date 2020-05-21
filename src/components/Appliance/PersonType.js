@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import axios from '../../utils/axios';
 
@@ -20,7 +20,7 @@ const pmRef = React.createRef();
 
 const PersonType = (props) => {
   const [user, setUser] = useState(JSON.parse(sessionStorage.getItem("user"))); 	
-  const [personType, setPersonType] = useState(sessionStorage.getItem("type"));
+  const [personType, setPersonType] = useState("");
 
   const updateClient = async (type) => {
 		const idUser = user._id;
@@ -30,27 +30,35 @@ const PersonType = (props) => {
 			}
 		});
 		const myUser = userRequest.data.user;
-		console.log(myUser);
 		if (myUser.idClient.length > 0){
-			const idClient = myUser.idClient.pop();
+			const idClient = myUser.idClient[myUser.idClient.length - 1];
 			const updateClient = await axios.put(`api/client/${idClient._id}`, { type }, {
 				headers: {
 					token: sessionStorage.getItem("token")
 				}
 			});
-			console.log(updateClient);
 			const newClient = await axios.get(`api/client/${idClient._id}`, {
 				headers: {
 					token: sessionStorage.getItem("token")
 				}
 			});
-			console.log(newClient);
 			sessionStorage.setItem('type', newClient.data.client.type);
 			setPersonType(newClient.data.client.type);	
 		}
   };
 
-	//console.log(personType);
+	useEffect(() => {
+		const getPersonType = async () => {
+			const idClient = user.idClient[user.idClient.length - 1]._id
+			const res = await axios.get(`api/client/${idClient}`, {
+				headers: {
+					token: sessionStorage.getItem("token")
+				}
+			})
+			setPersonType(res.data.client.type);	
+		}
+		getPersonType();
+	}, []);	
 
   const pfDisabledClass = isDisabledType(personType,"PF");
   const rifDisabledClass = isDisabledType(personType,"RIF");

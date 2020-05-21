@@ -11,70 +11,41 @@ import axios from '../../utils/axios';
 const Amount = props => {
 	
 	const [user, setUser] = useState(JSON.parse(sessionStorage.getItem('user')));
-	
 
-	const getSteps = () => {
-		const idClient = false;//user.idClient.pop();				
-		const appliance = false;//idClient.appliance.pop();
-		const idAmount = false;//appliance.idAmount.pop();
-		const idComercialInfo = false;//appliance.idComercialInfo.pop();
-		const idGeneralInfo = false;//appliance.idGeneralInfo.pop();
-		const idDocuments = false;//appliance.idDocuments.pop();
-		let linkt = "";
-		if ( idAmount == null || !idAmount ) {
-			linkt = `elige-monto/${user._id}`;
-		} else if ( idComercialInfo == null || !idComercialInfo ) {
-			linkt = `datos-comerciales/${user._id}`;
-		} else if ( idGeneralInfo == null || !idGeneralInfo ) {
-			linkt = `informacion-general/${user._id}`;
-		} else if (!idDocuments || !idDocuments == null) {
-			linkt = `documentos/${user._id}`;
-		}
-		return ( <Steps first={ idAmount && "amount" }
-					second={ idComercialInfo && "comercialInfo" }
-					third={ idGeneralInfo && "generalInfo" }
-					fourth={ idDocuments && "documents" }
-					route={linkt}
-					id={appliance._id}
-				/> );
-	}
-	
 	const onFormSubmit = async (data) => {
-		console.log(data);
 		const user = JSON.parse(sessionStorage.getItem('user'));
 		const id = user._id;
-		console.log("ID: ",id);
 		try {
 			const infoPost = await axios.post(`api/amount/${id}`,data,{
 				headers:{
 					token: sessionStorage.getItem('token')
 				}
 			});
-			console.log("Respuesta del back en post",infoPost);
 		} catch (error) {
-			console.log("Error del back en post",error);
-		}
-
-		try {
-			const infoGet = await axios.get(`api/amount/${id}`,{
-				headers:{
-					token: sessionStorage.getItem('token')
-				}
-			});
-			console.log("Respuesta del back en get",infoGet);
-		} catch (error) {
-			console.log("Error del back en get",error);
+			console.log("Error de servicio",error);
 		}
 	}
 	
 	useEffect(() => {
 		
+		const getData = async () => {
+			const user = JSON.parse(sessionStorage.getItem("user"));
+			const idClient = user.idClient[user.idClient.length - 1]._id;
+			const res = await axios.get(`api/amount/${idClient}`, {
+				headers:{
+					token: sessionStorage.getItem("token")
+				}
+			});
+			console.log(res);
+		}
+		
+		getData();
 		
 	}, [])
 	
 		return (
 			<div className="container mt-3">
-				{getSteps()}
+				<Steps />
 				<CustomModal
 					modalName="amountError"
 					message="Error al enviar los datos. Favor de intentarlo de nuevo"
