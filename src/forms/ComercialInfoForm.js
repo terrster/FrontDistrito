@@ -45,8 +45,9 @@ class ComercialInfoConstructForm extends Component {
         });
       }
       }
-      } catch (error) {
-        console.log(error.code_error);
+      } 
+      catch (error) {
+        console.log("No hay CP");
       }
   }
 

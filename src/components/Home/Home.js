@@ -15,6 +15,7 @@ const Home = (props) => {
     loader: { isLoading },
   } = useSelector((state) => state);
 
+  const userd = JSON.parse(sessionStorage.getItem("user"));
   // Estado de prueba, mientras se realiza el endpoint
   const [myProfile, setMyProfile] = useState({
     idClient: {
@@ -27,10 +28,10 @@ const Home = (props) => {
       },
       idDocuments: null,
     },
-    name: "",
-    lastname: "",
-    email: "",
-    phone: "",
+    name: userd.name,
+    lastname: userd.lastName,
+    email: userd.email,
+    phone: userd.phone,
   });
   const [user, setUser] = useState(JSON.parse(sessionStorage.getItem("user")));
 
@@ -38,44 +39,37 @@ const Home = (props) => {
 
   useEffect(() => {
     const getData = async () => {
-		const currentUser = JSON.parse(sessionStorage.getItem("user"));
-		const userRequest = await axios.get('api/user/info', {
+		const idUser = user._id;
+		const userRequest = await axios.get(`api/user/${idUser}`, {
 			headers: {
 				token: sessionStorage.getItem("token")
 			}
 		});
-		const comercialInfoRequest = await axios.get('api/info/comercial', {
-			headers: {
-				token: sessionStorage.getItem("token")
-			}
-		});
-		const documentsInfoRequest = await axios.get('api/documents', {
-			headers: {
-				token: sessionStorage.getItem("token")
-			}
-		});
-		console.log(documentsInfoRequest);
-		const user = userRequest.data.user;
-		const idClient = userRequest.data.user.idClient[0]
-		const comercialInfo = comercialInfoRequest.data.info;
-		const newProfile = {
-			...myProfile,
-			email: user.email,
-			name: user.name,
-			lastName: user.lastName,
-			phone: user.phone,
-			idClient: {
-				type: "idClient-type",
-				idComercialInfo: {
-					comercialName: comercialInfo.comercialName,
-					gyre: comercialInfo.gyre,
-					specific: comercialInfo.specific,
-					rfc: comercialInfo.rfc,
-				},
-				idDocuments: null,
-			},
-		};
-		setMyProfile(newProfile);
+		const myUser = userRequest.data.user;
+		const idClient = myUser.idClient.pop();
+		if (idClient.idComercialInfo.length > 0){
+				const idComercialInfo = idClient.idComercialInfo.pop()
+				const { data } = await axios.get(`api/info-comercial/${idComercialInfo}`, {
+					headers: {
+						token: sessionStorage.getItem("token")
+					}
+				});
+				const info = data.comercial;
+				const newProfile = {
+					...myProfile,
+					idClient: {
+						type: "idClient-type",
+						idComercialInfo: {
+							comercialName: info.comercialName,
+							gyre: info.gyre,
+							specific: info.specific,
+							rfc: info.rfc,
+						},
+					idDocuments: null,
+					},
+				};
+				setMyProfile(newProfile);
+		};		
     };
 
     getData();
@@ -99,7 +93,6 @@ const Home = (props) => {
       })
       .catch((err) => console.log(JSON.stringify(err)));
   };
-
 
   return (
     <div className="container mt-72 mb-120">

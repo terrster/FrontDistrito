@@ -19,6 +19,7 @@ import {
 import {
 	changeTypeGeneralInfoForm
 } from '../../redux/actions/formsTypeActions';
+import axios from '../../utils/axios';
 
 const GeneralInfo = () => {
   const dispatch = useDispatch();
@@ -31,18 +32,26 @@ const GeneralInfo = () => {
   const app = useSelector((state) => state.app);
   const currentAddress = useSelector(state => state.currentAddress.address);
   const currentGeneralInfo = useSelector(state => state.actionForm.generalInfoForm);
-  const {
-    app: {
-      toast: { third },
-    },
-  } = useSelector((state) => state);
+  const [user, setUser] = useState(JSON.parse(sessionStorage.getItem("user")));
+  const [initialValues, setInitialValues] = useState({});
   
 
   useEffect(() => {
-    if (!third) {
-      execToast("second");
-      dispatch(updateToast(app, "third"));
-    }
+    const getData = async() => {
+		const idUser = user._id;
+		const { data } = await axios.get(`api/info-general/${idUser}`, {
+			headers: {
+				token: sessionStorage.getItem("token")
+			}
+		});
+		if(data.general){
+			let general = data.general;
+			general.creditCard = data.general.creditCard ? "1" : "0";
+			general.mortgageCredit = data.general.mortgageCredit ? "1" : "0";
+			setInitialValues({ ...data.general, ...data.general.address[0], name: user.name, lastname: user.lastName });
+		}
+	}
+	getData();
 
   }, []);
 
@@ -56,82 +65,40 @@ const GeneralInfo = () => {
     return Promise.all(references);
   };
 
-  const onFormSubmit = async (data) => {
-	/*;
-	let currentGeneralInfo =
-	  data.getAppliance === undefined || data.getAppliance.idGeneralInfo === null
-		? []
-		: data.getAppliance.idGeneralInfo;
-	if (this.props.applianceGeneralInfo) {
-	  currentGeneralInfo = this.props.applianceGeneralInfo;
-	} */
-	let isUpdate = currentGeneralInfo.length === 0 ? false : true;
-	let typeForm = isUpdate ? "update" : "create";
-	console.log(data); 
-	console.log(typeForm);
-	//console.log(beforedata);
-    /* let p = this.props;
-		let pGeneral = this.props.currentGeneralInfo;
-		p.updateLoader(true);
-		let { sameAddress } = data;
-		let newAddress, idReferences, generalInfo;
-		let references = variablesManager.createReferenceVariables(data);
-		let variables = variablesManager.createGeneralInfoVariables(data);
-		p.changeTypeGeneralInfoForm('generalInfoForm', typeForm, beforeData);
-		window.scrollTo(0, 0);
-		try {
-			let newReferences = await this.getReferences(references);
-
-			if (newReferences) {
-				idReferences = newReferences.map(value => {
-					return value.data.createReference.id;
-				});
+  const onFormSubmit = async (dataForm) => {
+	const idUser = user._id;
+	const userRequest = await axios.get(`api/user/${idUser}`, {
+		headers: {
+			token: sessionStorage.getItem("token")
+		}
+	});
+	const myUser = userRequest.data.user;
+	const idClient = myUser.idClient.pop();
+	if (idClient.idGeneralInfo.length > 0){ // Si existe un registro, se actualiza
+		const idGeneralInfo = idClient.idGeneralInfo.pop();
+		const res = await axios.put(`api/info-general/${idGeneralInfo}`, dataForm, {
+			headers: {
+				token: sessionStorage.getItem("token")
 			}
-			if (!sameAddress) {
-				let address = await p.createAddress({
-					variables: variablesManager.createAddressVariables(data)
-				});
-				newAddress = address.data.createAddress.id;
-			} else {
-				let address = await p.createAddress({ variables: p.currentAddress });
-				newAddress = address.data.createAddress.id;
-			}
-
-			if (idReferences && newAddress) {
-				variables.references = [
-					idReferences[0],
-					idReferences[1],
-					idReferences[2]
-				];
-				variables.address = newAddress;
-				if (pGeneral.type === 'update') {
-					variables.generalId = p.currentGeneralInfo.datos.id;
-					generalInfo = await p.updateGeneralInfo({ variables });
-					//Revisar el last4 ya que en update lo regresa como nulo
-					//p.changeTypeGeneralInfoForm('generalInfoForm', 'update', generalInfo.data.updateGeneralInfo);
-				} else {
-					generalInfo = await p.createGeneralInfo({ variables });
-					let updatedAppliance = await p.updateApplianceGraph({
-						variables: {
-							idAppliance: p.match.params.idAppliance,
-							idGeneralInfo: generalInfo.data.createGeneralInfo.id
-						}
-					});
-					p.updateAppliance(updatedAppliance.data.updateAppliance);
-					p.updateApplianceGeneralInfo(generalInfo.data.createGeneralInfo);
-				}
-				p.updateLoader(false);
-				p.history.push(
-					`${
-						pGeneral.type === 'update' ? '/credito/solicitud/' : '/documentos/'
-					}${p.match.params.idAppliance}`
-				);
-			}
-		} catch (err) {
-			this.props.updateModal('generalInfoError');
-			this.props.updateLoader(false);
-			window.scrollTo(0, 0);
-		} */
+		});
+		console.log(res);
+	} else { // En caso de no existir registro, se crea
+	  console.log("POST")
+	}
+	  
+	  /*
+	const { data } = await axios.post(`api/info-general/`, dataForm ,{
+		headers: {
+			token: sessionStorage.getItem("token")
+		}
+	});
+	console.log(data);
+	// Prueba de update
+	
+	const idInfo = JSON.parse(sessionStorage.getItem("user")).idClient[0].idGeneralInfo[0];
+	
+	* * */
+	
   };
 
   // Datos de prueba
@@ -172,7 +139,6 @@ const GeneralInfo = () => {
     dispatch(updateUserName(appliance.idClient.idUser.name));
     dispatch(updateUser(appliance.idClient.idUser));
   } */
-
   return (
     <div className="container mt-3">
       <Steps
@@ -212,6 +178,7 @@ const GeneralInfo = () => {
         onSubmit={(data) => {
           onFormSubmit(data);
         }}
+        initialValues={initialValues}
         data={currentGeneralInfo}
         id={id}
       />

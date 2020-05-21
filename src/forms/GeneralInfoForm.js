@@ -19,17 +19,16 @@ import Info from "../assets/img/Info.png";
 
 let GeneralInfoForm = ({ handleSubmit, creditCard, id }) => {
   const dispatch = useDispatch();
-  const currentAddress = useSelector((state) => state.currentAddress.address);
-  const sameAddress = useSelector((state) => state.form.generalInfoForm.values);
+  const [currentAddress, setCurrentAddress] = useState({});
+  const [sameAddress, setSameAddress] = useState(false);
   const [show, setShow] = useState(true);
-  const handleShow = () => setShow(true);
-
+  const handleShow = () => setShow(true);  
   /**Intentar pasar la direccion por aqui y/o buscar por que no se pasa */
   //let lastAddress = props.currentAddress;
-
+	const user = JSON.parse(sessionStorage.getItem('user'));
   const myProfile = {
-    name: "name",
-    lastname: "lastname",
+    name: user.name,
+    lastname: user.lastName,
   };
 
   return (
@@ -47,7 +46,6 @@ let GeneralInfoForm = ({ handleSubmit, creditCard, id }) => {
               name="name"
               label="Nombre(s)"
               type="text"
-              val={myProfile.name}
               disabled={true}
             />
           </Col>
@@ -55,7 +53,6 @@ let GeneralInfoForm = ({ handleSubmit, creditCard, id }) => {
             <Field
               component={renderFieldFull}
               name="lastname"
-              val={myProfile.lastname}
               label="Apellido paterno"
               disabled={true}
             />

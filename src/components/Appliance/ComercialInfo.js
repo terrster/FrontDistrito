@@ -17,7 +17,8 @@ class ComercialInfo extends Component {
 		this.state = { 
 			modalStatus: false,
 			loading: true,
-			dataApp: null
+			dataApp: null,
+			initialValues: {}
 		};
 	}
 	
@@ -38,13 +39,13 @@ class ComercialInfo extends Component {
 			this.props.updateToast('second');
 		}
 		
-		const res = await axios.get('api/info/comercial', {
+		const { data: {comercial} } = await axios.get(`api/info-comercial/5ec54b2647c5d310409aec1f`, {
 			headers: {
-				token: sessionStorage.getItem("token"),
+				token: sessionStorage.getItem("token")
 			}
 		});
-		console.log("GET TO COMERCIAL INFO");
-		console.log(res);
+		
+		this.setState({ ...comercial });
 		
 	}
 	
@@ -110,6 +111,7 @@ class ComercialInfo extends Component {
 						this.onFormSubmit(d, typeForm, currentComercialInfo);
 					}}
 					data={currentComercialInfo}
+					intialValues={this.state.initialValues}
 				></ComercialInfoForm>
 			);
 		}
@@ -148,6 +150,7 @@ class ComercialInfo extends Component {
 	};
 
 	render() {
+		console.log(this.state.initialValues);
 		let linkt;
 		/* const { appliance } = this.props; */
 		let appliance =  {
