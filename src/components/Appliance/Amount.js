@@ -1,13 +1,74 @@
 import Steps from './Steps';
 import Title from '../Generic/Title';
 import { connect } from 'react-redux';
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import AmountForm from '../../forms/AmountForm';
 import CustomModal from '../Generic/CustomModal';
 import { execToast } from '../../utils/ToastUtils';
 import { variablesManager } from '../Manager/VariablesManager';
 import axios from '../../utils/axios';
 
+const Amount = props => {
+	
+	const [user, setUser] = useState(JSON.parse(sessionStorage.getItem('user')));
+	
+
+	const getSteps = () => {
+		const idClient = user.idClient.pop();				
+		const appliance = idClient.appliance.pop();
+		const idAmount = appliance.idAmount.pop();
+		const idComercialInfo = appliance.idComercialInfo.pop();
+		const idGeneralInfo = appliance.idGeneralInfo.pop();
+		const idDocuments = appliance.idDocuments.pop();
+		let linkt = "";
+		if ( idAmount == null || !idAmount ) {
+			linkt = `elige-monto/${user._id}`;
+		} else if ( idComercialInfo == null || !idComercialInfo ) {
+			linkt = `datos-comerciales/${user._id}`;
+		} else if ( idGeneralInfo == null || !idGeneralInfo ) {
+			linkt = `informacion-general/${user._id}`;
+		} else if (!idDocuments || !idDocuments == null) {
+			linkt = `documentos/${user._id}`;
+		}
+		return ( <Steps first={ idAmount && "amount" }
+					second={ idComercialInfo && "comercialInfo" }
+					third={ idGeneralInfo && "generalInfo" }
+					fourth={ idDocuments && "documents" }
+					route={linkt}
+					id={appliance._id}
+				/> );
+	}
+	
+	const onFormSubmit = async (data) => {
+		console.log(data);
+	}
+	
+	useEffect(() => {
+		
+		
+	}, [])
+	
+		return (
+			<div className="container mt-3">
+				{getSteps()}
+				<CustomModal
+					modalName="amountError"
+					message="Error al enviar los datos. Favor de intentarlo de nuevo"
+				/>
+				<div className="text-center">
+					<Title title="Elige tu monto" className="coolvetica fz42 blackBlue" />
+					<label className="brandonReg gray50 fz20 fw500 mt-2 mb-1">Cuéntanos un poco más sobre el monto que necesitas</label>
+				</div>
+				<AmountForm
+					onSubmit={data => {
+						onFormSubmit(data);
+					}}
+					data={props.currentAmount}
+				></AmountForm>
+			</div>
+		);
+}
+/*
 class Amount extends Component {
 	constructor(props) {
 		super(props);
@@ -39,7 +100,7 @@ class Amount extends Component {
 	};
 
 	getTable = ()=> {
-		/* Datos de Prueba */
+
 		let data = {
 			getAppliance:{
 				idAmount: null, 
@@ -63,7 +124,7 @@ class Amount extends Component {
 			this.props.applianceAmount &&
 			this.state.dataApp.getAppliance.idAmount === null
 		) {
-			/* refetch().then(_ => {}); */
+			// refetch().then(_ => {}); 
 			return false;
 		}
 		let currentAmount =
@@ -75,8 +136,8 @@ class Amount extends Component {
 		let typeForm = isUpdate ? 'update' : 'create';
 		currentAmount =
 			currentAmount.length === 0
-				?  error/* new AmountEntity() */ 
-				: error/* new AmountEntity().fromGraphQlObject(currentAmount); */
+				?  error/* new AmountEntity() 
+				: error/* new AmountEntity().fromGraphQlObject(currentAmount); 
 		if(isUpdate){
 			return false;
 		}else{
@@ -163,7 +224,7 @@ class Amount extends Component {
 	render() {
 		let id = this.props.match.params.idAppliance;
 		let linkt;
-		/* const { appliance } = this.props; */
+		/* const { appliance } = this.props; 
 		let appliance =  {
 			getAppliance: null,
 			status: true,
@@ -203,46 +264,9 @@ class Amount extends Component {
 			this.props.updateUser(appliance.idClient.idUser);
 		}
 
-		return (
-			<div className="container mt-3">
-				<Steps
-					first={
-						(appliance.idAmount ||
-							(this.props.applianceData.amount &&
-								this.props.applianceData.amount !== '')) &&
-						'amount'
-					}
-					second={
-						(appliance.idComercialInfo ||
-							(this.props.applianceData.comercialInfo &&
-								this.props.applianceData.comercialInfo !== '')) &&
-						'comercialInfo'
-					}
-					third={
-						(appliance.idGeneralInfo ||
-							(this.props.applianceData.generalInfo &&
-								this.props.applianceData.generalInfo !== '')) &&
-						'generalInfo'
-					}
-					fourth={
-						appliance.idDocuments && appliance.idDocuments.status && 'documents'
-					}
-					route={linkt}
-					id={this.props.match.params.idAppliance}
-				/>
-				<CustomModal
-					modalName="amountError"
-					message="Error al enviar los datos. Favor de intentarlo de nuevo"
-				/>
-				<div className="text-center">
-					<Title title="Elige tu monto" className="coolvetica fz42 blackBlue" />
-					<label className="brandonReg gray50 fz20 fw500 mt-2 mb-1">Cuéntanos un poco más sobre el monto que necesitas</label>
-				</div>
-					{this.getTable()}
-			</div>
-		);
 	}
 }
+* */
 
 const mapStateToProps = (state, ownProps) => {
 	return {
@@ -251,7 +275,6 @@ const mapStateToProps = (state, ownProps) => {
 		appliance: state.appliance.appliance,
 		applianceAmount: state.appliance.amount,
 		applianceData: state.appliance,
-		user:{name: "Prueba"}, //Dato de prueba
 		/* toast: state.app.toast.first, */
 		currentAmount: state.actionForm.amountForm
 	};

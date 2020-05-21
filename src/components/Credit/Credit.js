@@ -10,9 +10,8 @@ import { updateAppliance } from "../../redux/actions/applianceActions";
 const Credit = (props) => {
   const history = useHistory()
   const appliance = useSelector((state) => state.appliance.appliance);
-  const user = JSON.parse(sessionStorage.getItem("user"));
-  let id = user.idClient[0].appliance[0]._id;
-  
+  const [user, setUser] = useState(JSON.parse(sessionStorage.getItem("user")));
+  const [id, setId] = useState(user._id);
   
   if (!!localStorage.getItem("type"))
 	localStorage.setItem("type", "PF");

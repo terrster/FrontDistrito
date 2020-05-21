@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-/* import { Mutation } from 'react-apollo';
-import Mutations from '../../utils/Mutations'; */
 import { connect } from 'react-redux';
+import axios from '../../utils/axios';
 
 // Components
 import { Col, Row } from 'react-bootstrap';
@@ -20,48 +19,62 @@ const rifRef = React.createRef();
 const pmRef = React.createRef();
 
 const PersonType = (props) => {
+  const [user, setUser] = useState(JSON.parse(sessionStorage.getItem("user"))); 	
+  const [personType, setPersonType] = useState(sessionStorage.getItem("type"));
 
-  const [personType, setPersonType] = useState(sessionStorage.type);
-
-	const updateClient = async (data, UpdateClient) => {
-		let { value } = data.target;
-		try {
-			let updatedClient = await UpdateClient({
-				variables: {
-					type: value
+  const updateClient = async (type) => {
+		const idUser = user._id;
+		const userRequest = await axios.get(`api/user/${idUser}`, {
+			headers: {
+				token: sessionStorage.getItem("token")
+			}
+		});
+		const myUser = userRequest.data.user;
+		console.log(myUser);
+		if (myUser.idClient.length > 0){
+			const idClient = myUser.idClient.pop();
+			const updateClient = await axios.put(`api/client/${idClient._id}`, { type }, {
+				headers: {
+					token: sessionStorage.getItem("token")
 				}
 			});
-      sessionStorage.setItem('type', updatedClient.data.updateClient.type);
-      setPersonType(sessionStorage.type);
-			this.props.history.push('/credito');
-		} catch (err) {}
+			console.log(updateClient);
+			const newClient = await axios.get(`api/client/${idClient._id}`, {
+				headers: {
+					token: sessionStorage.getItem("token")
+				}
+			});
+			console.log(newClient);
+			sessionStorage.setItem('type', newClient.data.client.type);
+			setPersonType(newClient.data.client.type);	
+		}
   };
+
+	console.log(personType);
 
   const pfDisabledClass = isDisabledType(personType,"PF");
   const rifDisabledClass = isDisabledType(personType,"RIF");
   const pfaeDisabledClass = isDisabledType(personType,"PFAE");
   const pmDisabledClass = isDisabledType(personType,"PM");
 
-	return (
-		/* <Mutation mutation={Mutations.UPDATE_CLIENT}> */
+	return (		
 			<div>
-                {(UpdateClient) => (
-                    <Row>
-                        <Col sm={12} lg={3} md={6}>
-                            <TypeCard
-                                text="Negocios sin alta en el SAT"
-                                class={`firstBlue fw500 brandonReg ` + pfDisabledClass}
-                                img={pf}
-                                updateUser={e => updateClient(e, UpdateClient)}
-                                value="PF"
-                                refs={pfRef}
-                            />
+				<Row>
+					<Col sm={12} lg={3} md={6}>
+						<TypeCard
+							text="Negocios sin alta en el SAT"
+							class={`firstBlue fw500 brandonReg ` + pfDisabledClass}
+							img={pf}
+							updateUser={() => updateClient("PF")}
+							value="PF"
+							refs={pfRef}
+						/>
                         </Col>
                         <Col sm={12} lg={3} md={6}>
                             <TypeCard
                                 text="Régimen de incorporación fiscal"
                                 class={`secondBlue fw500 brandonReg ` + rifDisabledClass}
-                                updateUser={e => updateClient(e, UpdateClient)}
+                                updateUser={() => updateClient("RIF")}
                                 img={rif}
                                 value="RIF"
                                 refs={rifRef}
@@ -71,7 +84,7 @@ const PersonType = (props) => {
                             <TypeCard
                                 text="Persona física con actividad empresarial"
                                 class={`thirdBlue fw500 brandonReg ` + pfaeDisabledClass}
-                                updateUser={e => updateClient(e, UpdateClient)}
+                                updateUser={() => updateClient("PFAE")}
                                 img={pfae}
                                 value="PFAE"
                                 refs={pfaeRef}
@@ -83,14 +96,12 @@ const PersonType = (props) => {
                                 class={`fourthBlue fw500 brandonReg ` + pmDisabledClass}
                                 img={pm}
                                 value="PM"
-                                updateUser={e => updateClient(e, UpdateClient)}
+                                updateUser={() => updateClient("PM")}
                                 refs={pmRef}
                             />
                         </Col>
                     </Row>
-			    )}
             </div>
-		/* </Mutation> */
 	);
 };
 

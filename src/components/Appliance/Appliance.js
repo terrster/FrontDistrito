@@ -9,6 +9,7 @@ import { Button, Modal } from "react-bootstrap";
 import like from "../../assets/img/tito@2x.png";
 import CustomLoader from "../Generic/CustomLoader";
 import tito from "../../assets/img/tito-credit.png";
+import axios from '../../utils/axios';
 
 class Appliance extends Component {
 	constructor(props) {
@@ -56,39 +57,43 @@ class Appliance extends Component {
 		} catch (err) {} */
 	};
 
-	getAppliance = () => {
+	getAppliance = async () => {
 				if (this.state.loading) return <CustomLoader />;
 				let linkt;
-				const user = JSON.parse(sessionStorage.getItem("user"));
-				const appliance = user.idClient[0].appliance[0];
-				const idAmount = appliance.idAmount[0];
-				const idComercialInfo = appliance.idComercialInfo[0];
-				const idGeneralInfo = appliance.idGeneralInfo[0];
-				const idDocuments = appliance.idDocuments[0];
+				const user = JSON.parse(sessionStorage.getItem('user'));
+				const idUser = user._id;
+				const userRequest = await axios.get(`api/user/${idUser}`, {
+					headers: {
+						token: sessionStorage.getItem("token")
+					}
+				});
+				const myUser = userRequest.data.user;
+				const idClient = myUser.idClient.pop();
+				const appliance = idClient.appliance.pop();
+				const idAmount = appliance.idAmount.pop();
+				const idComercialInfo = appliance.idComercialInfo.pop();
+				const idGeneralInfo = appliance.idGeneralInfo.pop();
+				const idDocuments = appliance.idDocuments.pop();
 				
 				if (!appliance) return null;
-				console.log(appliance);
 				if (!appliance.status || !sessionStorage.status) {
 					if (
-						!idAmount &&
-						!idComercialInfo &&
-						!idGeneralInfo &&
-						!idDocuments 
+						idAmount == null ||
+						!idAmount 
 					) {
-						linkt = `elige-monto/${idAmount}`;
+						linkt = `elige-monto/${user._id}`;
 					} else if (
-						!idComercialInfo &&
-						!idGeneralInfo &&
-						!idDocuments 
+						idComercialInfo == null ||
+						!idComercialInfo 
 					) {
-						linkt = `datos-comerciales/${idComercialInfo}`;
+						linkt = `datos-comerciales/${user._id}`;
 					} else if (
-						!idGeneralInfo &&
-						!idDocuments 
+						idGeneralInfo == null ||
+						!idGeneralInfo 
 					) {
-						linkt = `informacion-general/${idGeneralInfo}`;
-					} else if (!appliance.idDocuments || !appliance.idDocuments.status) {
-						linkt = `documentos/${idDocuments}`;
+						linkt = `informacion-general/${user._id}`;
+					} else if (!idDocuments || !idDocuments == null) {
+						linkt = `documentos/${user._id}`;
 					}
 					return (
 						<div className="position-relative">

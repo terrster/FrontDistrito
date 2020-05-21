@@ -28,7 +28,7 @@ const NavBar = props => {
 		 		{isAuthenticated() === true && 
 		 		<Navbar.Collapse id="basic-navbar-nav">	
 		 			<Nav className="ml-auto">
-		 				<Link onClick={props.close} to="/credito" className={ (props.url === 'credito') ? classDefault+' nav_bar_active': classDefault}>Mi crédito</Link>
+		 				<Link onClick={props.close} to="/credito/solicitud/:idAppliance" className={ (props.url === 'credito') ? classDefault+' nav_bar_active': classDefault}>Mi crédito</Link>
 		 				<Link onClick={props.close} to="/historial" className={ (props.url === 'historial') ? classDefault+' nav_bar_active': classDefault}>Historial</Link>
 		 				<Nav.Link onClick={props.close} href="/home" className={ (props.url === 'home') ? classDefaultLink+' nav_bar_active': classDefaultLink}>Mi cuenta</Nav.Link>
 		 				<Nav.Link onClick={props.close} href="/" className="brandonMed text-center blackBlue heigth-45"> <Button className="logout fz-12" style={{marginTop: '-5px'}} onClick={() => {
