@@ -53,6 +53,7 @@ const AmountConstructForm = () => {
 				name="yearSales"
 				label="Ej. 500000"
 			/>
+			
 			<strong><span style={{color:'var(--primary-color)', fontSize: '0.7em'}} >Ventas totales en un año</span></strong>
 			<InputLabel label="Antigüedad del negocio" class="mt-18" />
 			<Field component={renderSelectField} type="text" name="old">

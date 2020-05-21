@@ -6,9 +6,31 @@ import AmountForm from '../../forms/AmountForm';
 import CustomModal from '../Generic/CustomModal';
 import { execToast } from '../../utils/ToastUtils';
 import { variablesManager } from '../Manager/VariablesManager';
+import axios from '../../utils/axios';
 
 class Amount extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			modalStatus: false,
+			loading: true,
+			dataApp: null
+		};
+	}
+
 	componentDidMount = async () => {
+		const dataApp = {
+			getAppliance:{
+				idAmount: null, 
+			},
+			status: true,
+			idComercialInfo: null, 
+			idGeneralInfo: null, 
+			idDocuments: {
+				status: false
+			}, 
+		};
+		this.setState({ loading: false, dataApp });
 		if (!this.props.toast) {
 			execToast('register');
 			this.props.updateToast('first');
@@ -16,7 +38,86 @@ class Amount extends Component {
 		window.scrollTo(0, 0);
 	};
 
+	getTable = ()=> {
+		/* Datos de Prueba */
+		let data = {
+			getAppliance:{
+				idAmount: null, 
+			},
+			status: true,
+			idComercialInfo: '1', 
+			idGeneralInfo: null, 
+			idDocuments: {
+				status: false
+			}, 
+		};
+		const error = false;
+		if (error) {
+			window.location.reload();
+			return false;
+		}
+		if (this.state.loading) {
+			return false;
+		}
+		if (
+			this.props.applianceAmount &&
+			this.state.dataApp.getAppliance.idAmount === null
+		) {
+			/* refetch().then(_ => {}); */
+			return false;
+		}
+		let currentAmount =
+		data.getAppliance === undefined ||
+		data.getAppliance.idAmount === null
+				? []
+				: data.getAppliance.idAmount;
+		let isUpdate = currentAmount.length === 0 ? false : true;
+		let typeForm = isUpdate ? 'update' : 'create';
+		currentAmount =
+			currentAmount.length === 0
+				?  error/* new AmountEntity() */ 
+				: error/* new AmountEntity().fromGraphQlObject(currentAmount); */
+		if(isUpdate){
+			return false;
+		}else{
+			return (
+				<AmountForm
+					onSubmit={d => {
+						this.onFormSubmit(d, typeForm, currentAmount);
+					}}
+					data={currentAmount}
+				></AmountForm>
+			);
+		}
+	}
+	
+	 getData= async ()=>{
+		try{
+			const infoPost = await axios.get('api/amount',{
+				headers:{
+					token: sessionStorage.getItem('token')
+				}
+			});
+			console.log("Respuesta del back en get",infoPost);
+		}catch(error){
+			console.log("Error del back en get",error);
+		}
+	}
+
 	onFormSubmit = async (data, typeForm, beforeData) => {
+		console.log("Data del formulario",data)
+		try{
+			const infoPost = await axios.post('api/amount/store',data,{
+				headers:{
+					token: sessionStorage.getItem('token')
+				}
+			});
+			console.log("Respuesta del back en post",infoPost);
+		}catch(error){
+			console.log("Error del back en post",error);
+		}
+
+		this.getData()
 		let p = this.props;
 		let pAmount = p.currentAmount;
 		p.updateLoader(true);
@@ -62,8 +163,17 @@ class Amount extends Component {
 	render() {
 		let id = this.props.match.params.idAppliance;
 		let linkt;
-		const { appliance } = this.props;
-
+		/* const { appliance } = this.props; */
+		let appliance =  {
+			getAppliance: null,
+			status: true,
+			idAmount: null, 
+			idComercialInfo: null, 
+			idGeneralInfo: null, 
+			idDocuments: {
+				status: false
+			}, 
+		};
 		if (
 			!appliance.idAmount &&
 			!appliance.idComercialInfo &&
@@ -88,7 +198,7 @@ class Amount extends Component {
 		} else if (!appliance.idDocuments || !appliance.idDocuments.status) {
 			linkt = `documentos/${this.props.match.params.idAppliance}`;
 		}
-		if (this.props.user === undefined) {
+		if (this.props.user.name === undefined) {
 			this.props.updateUserName(appliance.idClient.idUser.name);
 			this.props.updateUser(appliance.idClient.idUser);
 		}
@@ -126,43 +236,9 @@ class Amount extends Component {
 				/>
 				<div className="text-center">
 					<Title title="Elige tu monto" className="coolvetica fz42 blackBlue" />
-					<label className="brandonReg gray50 fz20 fw500 mt-2 mb-1">Selecciona tu régimen fiscal</label>
+					<label className="brandonReg gray50 fz20 fw500 mt-2 mb-1">Cuéntanos un poco más sobre el monto que necesitas</label>
 				</div>
-				{/* <Query query={Queries.GET_APPLIANCE} variables={{ applianceId: id }}> */}
-					{({ loading, error, data, refetch }) => {
-						if (error) {
-							window.location.reload();
-							return false;
-						}
-						if (loading) {
-							return false;
-						}
-						if (
-							this.props.applianceAmount &&
-							data.getAppliance.idAmount === null
-						) {
-							refetch().then(_ => {});
-						}
-						let currentAmount =
-							data.getAppliance === undefined ||
-							data.getAppliance.idAmount === null
-								? []
-								: data.getAppliance.idAmount;
-						let typeForm = currentAmount.length === 0 ? 'create' : 'update';
-						currentAmount =
-							currentAmount.length === 0
-								? {/* new AmountEntity() */} /*PARA USAR ESTAS FUNCIONES SE USA GRAPHQL */
-								: {/* new AmountEntity().fromGraphQlObject(currentAmount); */}
-						return (
-							<AmountForm
-								onSubmit={d => {
-									this.onFormSubmit(d, typeForm, currentAmount);
-								}}
-								data={currentAmount}
-							/>
-						);
-					}}
-				{/*</Query>*/}
+					{this.getTable()}
 			</div>
 		);
 	}
@@ -175,8 +251,8 @@ const mapStateToProps = (state, ownProps) => {
 		appliance: state.appliance.appliance,
 		applianceAmount: state.appliance.amount,
 		applianceData: state.appliance,
-		user: state.user.user,
-		toast: state.app.toast.first,
+		user:{name: "Prueba"}, //Dato de prueba
+		/* toast: state.app.toast.first, */
 		currentAmount: state.actionForm.amountForm
 	};
 };
