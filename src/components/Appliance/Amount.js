@@ -21,6 +21,7 @@ const Amount = props => {
 					token: sessionStorage.getItem('token')
 				}
 			});
+			console.log(infoPost);
 		} catch (error) {
 			console.log("Error de servicio",error);
 		}
@@ -31,7 +32,8 @@ const Amount = props => {
 		const getData = async () => {
 			const user = JSON.parse(sessionStorage.getItem("user"));
 			const idClient = user.idClient[user.idClient.length - 1]._id;
-			const res = await axios.get(`api/amount/${user._id}`, {
+			console.log(user);
+			const res = await axios.get(`api/amount/5ec703d80a081c2cc9366d7b`, {
 				headers:{
 					token: sessionStorage.getItem("token")
 				}
