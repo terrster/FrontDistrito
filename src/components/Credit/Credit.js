@@ -10,20 +10,16 @@ import { updateAppliance } from "../../redux/actions/applianceActions";
 const Credit = (props) => {
   const history = useHistory()
   const appliance = useSelector((state) => state.appliance.appliance);
-  //const user = useSelector((state) => state.user.user);
-  const user = null;
-  let id =
-    sessionStorage.getItem("applianceId") !== undefined
-      ? sessionStorage.getItem("applianceId")
-      : this.props.match.params.idAppliance;
-  let type = sessionStorage.getItem("type");
-  useEffect(() => {
-    if (user) {
-      if (user.idClient.type != null) {
-        sessionStorage.setItem("type", user.idClient.type);
-      }
-    }
-  }, []);
+  const user = JSON.parse(sessionStorage.getItem("user"));
+  let id = user.idClient[0].appliance[0]._id;
+  
+  
+  if (!!localStorage.getItem("type"))
+	localStorage.setItem("type", "PF");
+  
+  
+  let type = localStorage.getItem("type");
+ 
 
   const apply = () => {
     /* this.props
@@ -68,13 +64,15 @@ const Credit = (props) => {
           ); */
   }
 
+	console.log(user);
+
   return (
     <div className="mt-72 mb-120 container">
       {!id && user ? (
         <div>
           <Title
             className="blackBlue coolvetica fw500 fz32 mb-16"
-            title={`Hola ` + sessionStorage.getItem("nameUser")}
+            title={`Hola ` + user.name}
           />
           <label className="brandonReg gray50 fz20 fw500">
             Conoce el detalle de tu solicitud
@@ -102,23 +100,5 @@ const Credit = (props) => {
     </div>
   );
 };
-/* 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    user: state.user.user,
-    appliance: state.appliance.appliance,
-  };
-};
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    updateUserName: (name) => {
-      dispatch({ type: "UPDATE_NAME", data: { name } });
-    },
-    updateUser: (user) => {
-      dispatch({ type: "UPDATE_USER", data: { user } });
-    },
-  };
-};
- */
 export default Credit;

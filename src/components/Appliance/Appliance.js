@@ -44,7 +44,6 @@ class Appliance extends Component {
 	}
 
 	finishAppliance = async (data) => {
-		console.log(data)
 		// Petición al backend con data ? 
 		/* try {
 			await Appliance({
@@ -60,53 +59,42 @@ class Appliance extends Component {
 	getAppliance = () => {
 				if (this.state.loading) return <CustomLoader />;
 				let linkt;
-				console.log(this.state);
-				let appliance =  {
-					getAppliance: null,
-					status: true,
-					idAmount: null, 
-					idComercialInfo: null, 
-					idGeneralInfo: null, 
-					idDocuments: {
-						status: false
-					}, 
-				};
+				const user = JSON.parse(sessionStorage.getItem("user"));
+				const appliance = user.idClient[0].appliance[0];
+				const idAmount = appliance.idAmount[0];
+				const idComercialInfo = appliance.idComercialInfo[0];
+				const idGeneralInfo = appliance.idGeneralInfo[0];
+				const idDocuments = appliance.idDocuments[0];
+				
 				if (!appliance) return null;
-				console.log(appliance.status);
+				console.log(appliance);
 				if (!appliance.status || !sessionStorage.status) {
 					if (
-						!appliance.idAmount &&
-						!appliance.idComercialInfo &&
-						!appliance.idGeneralInfo &&
-						!appliance.idDocuments &&
-						this.props.applianceData.amount === ''
+						!idAmount &&
+						!idComercialInfo &&
+						!idGeneralInfo &&
+						!idDocuments 
 					) {
-						linkt = `elige-monto/${this.props.match.params.idAppliance}`;
+						linkt = `elige-monto/${idAmount}`;
 					} else if (
-						!appliance.idComercialInfo &&
-						!appliance.idGeneralInfo &&
-						!appliance.idDocuments &&
-						this.props.applianceData.comercialInfo === ''
+						!idComercialInfo &&
+						!idGeneralInfo &&
+						!idDocuments 
 					) {
-						linkt = `datos-comerciales/${this.props.match.params.idAppliance}`;
+						linkt = `datos-comerciales/${idComercialInfo}`;
 					} else if (
-						!appliance.idGeneralInfo &&
-						!appliance.idDocuments &&
-						this.props.applianceData.generalInfo === ''
+						!idGeneralInfo &&
+						!idDocuments 
 					) {
-						linkt = `informacion-general/${this.props.match.params.idAppliance}`;
+						linkt = `informacion-general/${idGeneralInfo}`;
 					} else if (!appliance.idDocuments || !appliance.idDocuments.status) {
-						linkt = `documentos/${this.props.match.params.idAppliance}`;
-					}
-					if (this.props.user.name === undefined) {
-						this.props.updateUserName(appliance.idClient.idUser.name);
-						this.props.updateUser(appliance.idClient.idUser);
+						linkt = `documentos/${idDocuments}`;
 					}
 					return (
 						<div className="position-relative">
 							<Title
 								className="blackBlue coolvetica fw500 fz32 mb-16"
-								title={`Hola ` + sessionStorage.getItem('nameUser')}
+								title={`Hola ` + JSON.parse(sessionStorage.getItem("user")).name}
 							/>
 
 							<div className="row">
@@ -133,27 +121,16 @@ class Appliance extends Component {
 								<div className="mt-50">
 									<Steps
 										first={
-											(appliance.idAmount ||
-												(this.props.applianceData.amount &&
-													this.props.applianceData.amount !== '')) &&
-											'amount'
+											idAmount && "amount"
 										}
 										second={
-											(appliance.idComercialInfo ||
-												(this.props.applianceData.comercialInfo &&
-													this.props.applianceData.comercialInfo !== '')) &&
-											'comercialInfo'
+											idComercialInfo && "comercialInfo"
 										}
-										third={
-											(appliance.idGeneralInfo ||
-												(this.props.applianceData.generalInfo &&
-													this.props.applianceData.generalInfo !== '')) &&
-											'generalInfo'
+										third={ 
+											idGeneralInfo && "generalInfo"
 										}
 										fourth={
-											appliance.idDocuments &&
-											appliance.idDocuments.status &&
-											'documents'
+											idDocuments && "documents"
 										}
 										route={linkt}
 										id={this.props.match.params.idAppliance}
@@ -202,7 +179,6 @@ class Appliance extends Component {
 	};
 
 	render() {
-		console.log(this.getAppliance())
 		return (
 			<div className="container mt-40 mb-120">
 				{this.props.match.params.idAppliance ? (
