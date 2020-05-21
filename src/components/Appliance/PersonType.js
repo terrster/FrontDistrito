@@ -50,7 +50,7 @@ const PersonType = (props) => {
 		}
   };
 
-	console.log(personType);
+	//console.log(personType);
 
   const pfDisabledClass = isDisabledType(personType,"PF");
   const rifDisabledClass = isDisabledType(personType,"RIF");

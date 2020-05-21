@@ -14,12 +14,12 @@ const Amount = props => {
 	
 
 	const getSteps = () => {
-		const idClient = user.idClient.pop();				
-		const appliance = idClient.appliance.pop();
-		const idAmount = appliance.idAmount.pop();
-		const idComercialInfo = appliance.idComercialInfo.pop();
-		const idGeneralInfo = appliance.idGeneralInfo.pop();
-		const idDocuments = appliance.idDocuments.pop();
+		const idClient = false;//user.idClient.pop();				
+		const appliance = false;//idClient.appliance.pop();
+		const idAmount = false;//appliance.idAmount.pop();
+		const idComercialInfo = false;//appliance.idComercialInfo.pop();
+		const idGeneralInfo = false;//appliance.idGeneralInfo.pop();
+		const idDocuments = false;//appliance.idDocuments.pop();
 		let linkt = "";
 		if ( idAmount == null || !idAmount ) {
 			linkt = `elige-monto/${user._id}`;
@@ -41,6 +41,30 @@ const Amount = props => {
 	
 	const onFormSubmit = async (data) => {
 		console.log(data);
+		const user = JSON.parse(sessionStorage.getItem('user'));
+		const id = user._id;
+		console.log("ID: ",id);
+		try {
+			const infoPost = await axios.post(`api/amount/${id}`,data,{
+				headers:{
+					token: sessionStorage.getItem('token')
+				}
+			});
+			console.log("Respuesta del back en post",infoPost);
+		} catch (error) {
+			console.log("Error del back en post",error);
+		}
+
+		try {
+			const infoGet = await axios.get(`api/amount/${id}`,{
+				headers:{
+					token: sessionStorage.getItem('token')
+				}
+			});
+			console.log("Respuesta del back en get",infoGet);
+		} catch (error) {
+			console.log("Error del back en get",error);
+		}
 	}
 	
 	useEffect(() => {
