@@ -48,8 +48,8 @@ class Appliance extends Component {
 	};
 
 	verify = (array) => {
-		
-		return array == false ? false : array.length === 0 ? false : array[array.length - 1];
+		if (typeof array !== "object") return false;
+		return array.length === 0 ? false : array[array.length - 1];
 	}
 
 	getAppliance =  () => {

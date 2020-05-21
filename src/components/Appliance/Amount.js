@@ -31,7 +31,7 @@ const Amount = props => {
 		const getData = async () => {
 			const user = JSON.parse(sessionStorage.getItem("user"));
 			const idClient = user.idClient[user.idClient.length - 1]._id;
-			const res = await axios.get(`api/amount/${idClient}`, {
+			const res = await axios.get(`api/amount/${user._id}`, {
 				headers:{
 					token: sessionStorage.getItem("token")
 				}
