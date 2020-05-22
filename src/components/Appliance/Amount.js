@@ -21,7 +21,7 @@ const Amount = props => {
 		const idClient = user.idClient[user.idClient.length - 1];
 		// Si ya tienen una solicitud, se actualiza
 		if (idClient.appliance.length > 0){
-			const appliance = idClient.appliance[0];
+			const appliance = idClient.appliance[idClient.appliance.length - 1];
 			if (appliance.idAmount.length > 0){
 				const amount = appliance.idAmount[appliance.idAmount.length - 1];
 				const id = amount._id;
@@ -63,7 +63,7 @@ const Amount = props => {
 			const idClient = user.idClient[user.idClient.length - 1];
 			// Si ya tienen una solicitud, se actualiza
 			if (idClient.appliance.length > 0){
-				const appliance = idClient.appliance[0];
+				const appliance = idClient.appliance[idClient.appliance.length - 1];
 				if (appliance.idAmount.length > 0){
 					const amount = appliance.idAmount[appliance.idAmount.length - 1];
 					const id = amount._id;
@@ -94,11 +94,8 @@ const Amount = props => {
 					<label className="brandonReg gray50 fz20 fw500 mt-2 mb-1">Cuéntanos un poco más sobre el monto que necesitas</label>
 				</div>
 				<AmountForm
-					onSubmit={data => {
-						onFormSubmit(data);
-					}}
+					onSubmit={data => onFormSubmit(data)}
 					initialValues={initialValues}
-					data={props.currentAmount}
 				></AmountForm>
 			</div>
 		);

@@ -115,6 +115,7 @@ class App extends Component {
               <Switch>
                 <PrivateRoute exact  path="/credito/solicitud/:idAppliance" component={Appliance} />
                 <PrivateRoute exact path="/elige-monto/:idAppliance" component={Amount} />
+                <PrivateRoute exact path="/datos-comerciales/:idAppliance" component={ComercialInfo} />
                 <PrivateRoute exact path="/informacion-comercial/:idAppliance" component={ComercialInfo} />
                 <Route path="/" exact component={Landing} />
                 <Route

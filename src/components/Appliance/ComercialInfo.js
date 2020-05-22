@@ -1,6 +1,7 @@
+import React, { useState, useEffect } from 'react';
+import { useHistory } from "react-router-dom";
 import Title from '../Generic/Title';
 import { connect } from 'react-redux';
-import React, { useState, useEffect } from 'react';
 import { execToast } from '../../utils/ToastUtils';
 import ComercialInfoForm from '../../forms/ComercialInfoForm';
 import { variablesManager } from '../Manager/VariablesManager';
@@ -15,35 +16,75 @@ const ComercialInfo = (props) => {
 
 	const [user, setUser] = useState(JSON.parse(sessionStorage.getItem('user')));
 	const [initialValues, setInitialValues] = useState({});
-
-	const onFormSubmit = async (data) => {
+	const history = useHistory();
+	
+	const onFormSubmit = async (dataForm) => {
 		const user = JSON.parse(sessionStorage.getItem('user'));
-		console.log(user);
 		const id = user._id;
 		const idClient = user.idClient[user.idClient.length - 1];
-		//--
+		const warranty = (dataForm.warranty === "1" || dataForm.warranty === "2" || dataForm.warranty === "3") ? true : false
+		const data = {
+			...dataForm,
+			warranty
+		}
 		if(idClient.appliance.length > 0){
 			const appliance = idClient.appliance[idClient.appliance.length - 1];
 			if(appliance.idComercialInfo.length > 0){
 				const comercial = appliance.idComercialInfo[appliance.idComercialInfo.length - 1]
-				const id = comercial._id;
-				console.log(id);
-				/* try {
+				const id = comercial._id;				
+				try {
 					const res = await axios.put(`api/info-comercial/${id}`,data,{
 						headers:{
 							token: sessionStorage.getItem('token')
 						}
 					});
-					// Se actualiza el usuario en session storage
 					await sessionStorage.setItem('user', JSON.stringify(res.data.user));
 					// Redireccionar al siguiente formulario
 					history.push(`/informacion-general/${user._id}`);
 				} catch (error) {
 					console.log("Error de servicio",error);
-				} */
+				} 
+			} else {
+				try {
+					const res = await axios.post(`api/info-comercial/${id}`, data);
+					await sessionStorage.setItem('user', JSON.stringify(res.data.user));
+					history.push(`/informacion-general/${user._id}`);
+					
+				} catch (error) {
+					console.log("Error de servicio",error);
+				}	
+			}
+		} 
+	}
+
+	useEffect(() => {
+		
+		window.scrollTo(0, 0);
+		const getData = async () => {
+			const user = JSON.parse(sessionStorage.getItem('user'));
+			const id = user._id;
+			const idClient = user.idClient[user.idClient.length - 1];
+			// Si ya tienen una solicitud, se actualiza
+			if (idClient.appliance.length > 0){
+				const appliance = idClient.appliance[idClient.appliance.length - 1];
+				if (appliance.idComercialInfo.length > 0){
+					const comercial = appliance.idComercialInfo[appliance.idComercialInfo.length - 1];
+					const id = comercial._id;
+					const res = await axios.get(`api/info-comercial/${id}`, {
+						headers:{
+							token: sessionStorage.getItem("token")
+						}
+					});					
+					const address = res.data.comercial.address[res.data.comercial.address.length - 1]
+					const terminal = res.data.comercial.terminal === "0" ? false : true
+					setInitialValues({...res.data.comercial, ...address, zipCode: '', terminal });
+				}
 			}
 		}
-	}
+		
+		getData();
+		
+	}, []);	
 
 	return (
 		<div className="container mt-3">
@@ -59,23 +100,12 @@ const ComercialInfo = (props) => {
 				message="Error al subir los archivos. Favor de regresar a la pantalla de inicio y continúa tu solicitud."
 			/>
 			<ComercialInfoForm
-				/* onSubmit={data => {
-					onFormSubmit(data);
-				}} */
-				data={props.currentComercialInfo}
-				intialValues={initialValues} 
-			></ComercialInfoForm>
+				onSubmit={data => onFormSubmit(data)} 
+				initialValues={initialValues} 
+			/>
 		</div>
 	);
 }
-
-/* ComercialInfo = compose(
-	graphql(Mutations.CREATE_ADDRESS, { name: 'createNewAddress' }),
-	graphql(Mutations.CREATE_COMERCIAL, { name: 'createNewComercialInfo' }),
-	graphql(Mutations.UPDATE_COMERCIAL, { name: 'updateComercialInfo' }),
-	graphql(Mutations.UPDATE_APPLIANCE, { name: 'updateApplianceGraph' }),
-	graphql(Mutations.UPDATE_CLIENT_DATA, { name: 'updateClient' })
-)(ComercialInfo); */
 
  const mapStateToProps = (state, ownProps) => {
 	return {
@@ -84,9 +114,6 @@ const ComercialInfo = (props) => {
 		appliance: state.appliance.appliance,
 		applianceAmount: state.appliance.amount,
 		applianceData: state.appliance,
-		user: {
-			name: "Prueba"
-		},
 		applianceComercialInfo: state.appliance.comercialInfo,
 		/* toast: state.app.toast.second, */
 		currentAddress: state.currentAddress.currentAddress,

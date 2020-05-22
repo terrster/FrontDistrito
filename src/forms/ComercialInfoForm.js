@@ -10,10 +10,12 @@ import { validateComercialInfo } from "../components/Validate/ValidateComercialI
 class ComercialInfoConstructForm extends Component {
   /* CODIGO POSTAL */
   state = {
+	cp: '',
 	colonias: [],
-	error: null
+	error: null,
+	firstLoad: true
   };
-
+  
   getColonias = async codigopostal => {
     if(!codigopostal){
       this.setState({error: "Ingresa el código postal de tu negocio."}) 
@@ -30,21 +32,23 @@ class ComercialInfoConstructForm extends Component {
               }
             )
           ).json();
-      const copycolonias = [];
-      if(Array.isArray(res)){
-        res.map(datos => {
-          copycolonias.push(datos.response.asentamiento);
-          });
-          this.setState({
-          colonias: copycolonias,
-          error: false
-            });
-      }else if(res.error){
-        this.setState({
-          error: res.error_message
-        });
-      }
-      }
+			const copycolonias = [];
+			if(Array.isArray(res)){
+				res.map(datos => {
+				copycolonias.push(datos.response.asentamiento);
+				});
+				this.setState({
+					colonias: copycolonias,
+					error: false,
+					firstLoad: false
+				});	
+			} else if(res.error) {
+					this.setState({
+						error: res.error_message,
+						firstLoad: false
+					});
+			}
+		}
       } 
       catch (error) {
         console.log("No hay CP");
@@ -56,14 +60,9 @@ class ComercialInfoConstructForm extends Component {
     this.getColonias(codigopostal)
   };
 
-  componentDidMount(){
-    const { initialValues : {zipCode} } = this.props;
-    this.getColonias(zipCode)
-  }
-
-
   /* FIN CODIGO POSTAL */
   render() {
+	  
     return (
       <>
         <SubtitleForm subtitle="Sobre tu negocio" className="mb-3" />
@@ -151,7 +150,7 @@ class ComercialInfoConstructForm extends Component {
             <Field
 			className="form-control custom-form-input brandonReg mt-1 mb-0"
               component="select"
-              name="COLONIA"
+              name="town"
               cls="mb-3"
             >
               {this.state.colonias.map((colonia, index) => {
@@ -200,20 +199,20 @@ class ComercialInfoConstructForm extends Component {
             No
           </option>
         </Field>
-        <Field component={renderSelectField} name="warranty" cls="mb-3">
+       <Field component={renderSelectField} name="warranty" cls="mb-3">
           <option className="brandonReg" value="">
             ¿Puedes ofrecer una garantía?
           </option>
-          <option className="brandonReg" value={true}>
+          <option className="brandonReg" value="1">
             Sí, garantía inmobiliaria.
           </option>
-          <option className="brandonReg" value={true}>
+          <option className="brandonReg" value="2">
             Sí, activo fijo.
           </option>
-          <option className="brandonReg" value={true}>
+          <option className="brandonReg" value="3">
             Sí, ambos.
           </option>
-          <option className="brandonReg" value={false}>
+          <option className="brandonReg" value="4">
             No.
           </option>
         </Field>
@@ -232,7 +231,7 @@ class ComercialInfoConstructForm extends Component {
   }
 }
 let ComercialInfoForm = props => {
-  const { handleSubmit } = props;
+  const { handleSubmit } = props;  
   return (
     <div>
       <form
@@ -253,7 +252,6 @@ ComercialInfoForm = reduxForm({
 })(ComercialInfoForm);
 
 ComercialInfoForm = connect((state, props) => ({
-  initialValues: props.data // pull initial values from account reducer
 }))(ComercialInfoForm);
 
 export default ComercialInfoForm;
