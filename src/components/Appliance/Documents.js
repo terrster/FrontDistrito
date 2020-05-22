@@ -50,10 +50,9 @@ const Documents = (props) => {
     onFormSubmit(e);
   };
 
-  const onFormSubmit = async (e) => {
+  const onFormSubmit = async (e, finish) => {
     e.preventDefault();
     dispatch(updateLoader(true));
-    console.log(documents);
     const formData = new FormData();
     for (const typeDoc in documents){
 		documents[typeDoc].forEach(doc => {
@@ -72,6 +71,9 @@ const Documents = (props) => {
 		}
 	} catch(e){
 		console.log(e);
+	}
+	if (finish === true){
+		// Finalizar solicitud, igual a la función de appliance
 	}
     /* try {
 			let ans = await manager.assignFiles(this.props.documents);

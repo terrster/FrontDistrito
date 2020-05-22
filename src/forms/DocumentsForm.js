@@ -478,7 +478,7 @@ let DocumentsForm = (props) => {
             <Button
               type="button"
               onClick={(e) => {
-                handleSubmit(e);
+                handleSubmit(e, true);
               }}
               className="reduce-font mt-50 btn-blue-general ml-2"
             >
