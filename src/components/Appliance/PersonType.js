@@ -42,7 +42,7 @@ const PersonType = (props) => {
 					token: sessionStorage.getItem("token")
 				}
 			});
-			sessionStorage.setItem('type', newClient.data.client.type);
+			sessionStorage.setItem('user', JSON.stringify(updateClient.data.user));
 			setPersonType(newClient.data.client.type);	
 		}
   };

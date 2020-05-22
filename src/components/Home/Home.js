@@ -38,38 +38,40 @@ const Home = (props) => {
   const [newApplianceID, setNewApplianceID] = useState("idAppliance");
 
   useEffect(() => {
-    const getData = async () => {
+    const getData = () => {
 		const idUser = user._id;
-		const userRequest = await axios.get(`api/user/${idUser}`, {
-			headers: {
-				token: sessionStorage.getItem("token")
-			}
-		});
-		const myUser = userRequest.data.user;
-		const idClient = myUser.idClient[myUser.idClient.length - 1];
-		if (idClient.idComercialInfo.length > 0){
-				const idComercialInfo = idClient.idComercialInfo[idClient.idComercialInfo.length - 1]
-				const { data } = await axios.get(`api/info-comercial/${idComercialInfo}`, {
-					headers: {
-						token: sessionStorage.getItem("token")
-					}
-				});
-				const info = data.comercial;
-				const newProfile = {
-					...myProfile,
-					idClient: {
-						type: "idClient-type",
-						idComercialInfo: {
-							comercialName: info.comercialName,
-							gyre: info.gyre,
-							specific: info.specific,
-							rfc: info.rfc,
+		const idClient = user.idClient[user.idClient.length - 1];
+		const type = idClient.hasOwnProperty("type") ? idClient.type : "";
+		if (idClient.appliance.length > 0){
+				const appliance = idClient.appliance[idClient.appliance.length - 1];
+				let idDocuments = null
+				if (appliance.idDocuments.length > 0){
+					idDocuments = appliance.idDocuments[appliance.idDocuments.length - 1];
+				}
+				if (appliance.idComercialInfo.length > 0){
+					const idComercialInfo = appliance.idComercialInfo[appliance.idComercialInfo.length - 1];
+					const info = {} 
+					info.comercialName  = idComercialInfo.hasOwnProperty("comercialName") ? idComercialInfo.comercialName : "";
+					info.gyre  = idComercialInfo.hasOwnProperty("gyre") ? idComercialInfo.gyre : "";
+					info.specific  = idComercialInfo.hasOwnProperty("specific") ? idComercialInfo.specific : "";
+					info.rfc  = idComercialInfo.hasOwnProperty("rfc") ? idComercialInfo.rfc : "";
+					const newProfile = {
+						...myProfile,
+						idClient: {
+							type,
+							idComercialInfo: {
+								comercialName: info.comercialName,
+								gyre: info.gyre,
+								specific: info.specific,
+								rfc: info.rfc,
+							},
+						idDocuments,
 						},
-					idDocuments: null,
-					},
-				};
-				setMyProfile(newProfile);
-		};		
+					};
+					setMyProfile(newProfile);
+				}
+		};
+				
     };
 
     getData();
@@ -120,7 +122,7 @@ const Home = (props) => {
             <ApplianceCard
               keyData={"comercialInfo"}
               first={myProfile.idClient.idComercialInfo.comercialName}
-              second={myProfile.idClient.idComercialInfo.gyre}
+              second={comercialOptions.hasOwnProperty(myProfile.idClient.idComercialInfo.gyre) ? comercialOptions[myProfile.idClient.idComercialInfo.gyre].name : ""}
               third={myProfile.idClient.idComercialInfo.specific}
               fourth={myProfile.idClient.idComercialInfo.rfc}
               applianceId={newApplianceID}

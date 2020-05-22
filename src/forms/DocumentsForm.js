@@ -144,7 +144,12 @@ let DocumentsForm = (props) => {
 
     submitButtom.current.click();
   };
+  const user = JSON.parse(sessionStorage.getItem("user"));
+  const idClient = user.idClient[user.idClient.length - 1];
   let typePerson = "PF"; // sessionStorage.getItem('type');
+  if (idClient.hasOwnProperty("type") && (idClient.type !== null || idClient.type !== undefined)){
+	  typePerson = idClient.type;
+  }
   let docFiles = [];
   /**
    * [Dependiendo la persona le creamos los documentos]
@@ -473,7 +478,7 @@ let DocumentsForm = (props) => {
             <Button
               type="button"
               onClick={(e) => {
-                handleSubmit(e, true);
+                handleSubmit(e);
               }}
               className="reduce-font mt-50 btn-blue-general ml-2"
             >

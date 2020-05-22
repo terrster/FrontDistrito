@@ -53,6 +53,15 @@ export const renderField = ({
 					type={type}
 					maxLength="10"
 				/>
+			) : label === 'Teléfono_Personal' ? (
+				<input
+					className="form-control custom-form-input brandonReg mb-0"
+					value={value}
+					{...input}
+					placeholder={"Ingresa tú número celular"}
+					type={type}
+					maxLength="10"
+				/>
 			) : label === 'CP' ? (
 				<input
 					className="form-control custom-form-input brandonReg mt-1 mb-0"

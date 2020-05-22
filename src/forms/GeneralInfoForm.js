@@ -17,11 +17,13 @@ import { setSameAddress } from "../redux/actions/sameAddressActions";
 import PopUp from "./PopUp";
 import Info from "../assets/img/Info.png";
 
-let GeneralInfoForm = ({ handleSubmit, creditCard, id }) => {
-  const dispatch = useDispatch();
-  const [currentAddress, setCurrentAddress] = useState({});
+let GeneralInfoForm = ({ handleSubmit, creditCard, changeAddress, initialValues, setInitialValues }) => {
+  const dispatch = useDispatch();  
+  const [currentAddress, setCurrentAddress] = useState(
+	{ extNumber: "", intNumber: "", registerDate: "", street: "", town: "", zipCode: "", sameAddress: "" }
+  );
   const [sameAddress, setSameAddress] = useState(false);
-  const [show, setShow] = useState(true);
+  const [showModalGeneral, setShow] = useState(true);
   const handleShow = () => setShow(true);  
   /**Intentar pasar la direccion por aqui y/o buscar por que no se pasa */
   //let lastAddress = props.currentAddress;
@@ -30,6 +32,32 @@ let GeneralInfoForm = ({ handleSubmit, creditCard, id }) => {
     name: user.name,
     lastname: user.lastName,
   };
+
+	const setComercialAddress = (checkboxComercialAddress) => {
+		if (checkboxComercialAddress){
+			const user = JSON.parse(sessionStorage.getItem('user'));
+			const id = user._id;
+			const idClient = user.idClient[user.idClient.length - 1];
+			if (idClient.appliance.length > 0){
+				const appliance = idClient.appliance[idClient.appliance.length - 1];
+				if (appliance.idComercialInfo.length > 0){
+					const comercial = appliance.idComercialInfo[appliance.idComercialInfo.length - 1];
+					const { extNumber, intNumber, registerDate, street, town, zipCode } = comercial.address[comercial.address.length - 1];
+					setCurrentAddress({ extNumber, intNumber, registerDate, street, town, zipCode })				}
+				}
+		}
+		else {
+			const extNumber = "";
+			const intNumber = "";
+			const registerDate = "";
+			const street = "";
+			const town = "";
+			const zipCode = "";
+			const sameAddress = false;
+			setCurrentAddress({ extNumber, intNumber, registerDate, street, town, zipCode, sameAddress })
+		}
+		// dispatch del loader en false -->
+	}	
 
   return (
     <div>
@@ -45,16 +73,16 @@ let GeneralInfoForm = ({ handleSubmit, creditCard, id }) => {
               component={renderFieldFull}
               name="name"
               label="Nombre(s)"
+              onBlur={(event, newValue, previousValue) => setInitialValues({...initialValues, name: newValue})}
               type="text"
-              disabled={true}
             />
           </Col>
           <Col lg={4} md={4} sm={12}>
             <Field
               component={renderFieldFull}
               name="lastname"
+              onBlur={(event, newValue, previousValue) => setInitialValues({...initialValues, lastname: newValue})}
               label="Apellido paterno"
-              disabled={true}
             />
           </Col>
           <Col lg={4} md={4} sm={12}>
@@ -62,6 +90,7 @@ let GeneralInfoForm = ({ handleSubmit, creditCard, id }) => {
               component={renderFieldFull}
               name="secondLastname"
               label="Apellido materno"
+              onBlur={(event, newValue, previousValue) => setInitialValues({...initialValues, secondLastname: newValue})}
             />
           </Col>
         </Row>
@@ -69,6 +98,7 @@ let GeneralInfoForm = ({ handleSubmit, creditCard, id }) => {
         <Field
           component={renderSelectFieldFull}
           name="civilStatus"
+          onBlur={(event, newValue, previousValue) => setInitialValues({...initialValues, civilStatus: newValue})}
           clases="mt-24"
         >
           <option value="">Estado civil...</option>
@@ -83,7 +113,10 @@ let GeneralInfoForm = ({ handleSubmit, creditCard, id }) => {
         <InputLabel label="Fecha de nacimiento" class="mt-18" />
         <Row className="d-flex justify-content-center">
           <Col>
-            <Field component={renderSelectFieldFull} name="day" clases="">
+            
+            <Field component={renderSelectFieldFull} name="day" clases=""
+            onBlur={(event, newValue, previousValue) => setInitialValues({...initialValues, day: newValue})}
+            >
               <option value="">Día</option>
               {Object.keys(helper.days).map((key, index) => (
                 <option value={key} key={index}>
@@ -93,7 +126,9 @@ let GeneralInfoForm = ({ handleSubmit, creditCard, id }) => {
             </Field>
           </Col>
           <Col>
-            <Field component={renderSelectFieldFull} name="month" clases="">
+            <Field component={renderSelectFieldFull} name="month" clases=""
+            onBlur={(event, newValue, previousValue) => setInitialValues({...initialValues, month: newValue})}
+            >
               <option value="">Mes</option>
               {Object.keys(helper.months).map((key, index) => (
                 <option value={key} key={index}>
@@ -103,7 +138,9 @@ let GeneralInfoForm = ({ handleSubmit, creditCard, id }) => {
             </Field>
           </Col>
           <Col>
-            <Field component={renderSelectFieldFull} name="year" clases="">
+            <Field component={renderSelectFieldFull} name="year" clases=""
+            onBlur={(event, newValue, previousValue) => setInitialValues({...initialValues, year: newValue})}
+            >
               <option value="">Año</option>
               {Object.keys(helper.years).map((key, index) => (
                 <option value={key} key={index}>
@@ -136,6 +173,12 @@ let GeneralInfoForm = ({ handleSubmit, creditCard, id }) => {
         <SubtitleForm subtitle="Domicilio particular" className="mb-10 mt-24" />
         <Field
           component={renderFieldFull}
+          onChange={(event, newValue, previousValue, name) => {
+			  // --> dispatch del loader en true
+			  changeAddress(newValue);
+			  setSameAddress(newValue);
+			  setComercialAddress(newValue);
+		  }}
           type="checkbox"
           label="Utilizar los mismos datos que el domicilio comercial"
           name="sameAddress"
@@ -146,8 +189,7 @@ let GeneralInfoForm = ({ handleSubmit, creditCard, id }) => {
               component={renderFieldFull}
               label="Calle"
               name="street"
-              val={!sameAddress ? null : currentAddress.street}
-              disabled={!sameAddress ? false : true}
+              val={!sameAddress ? "" : currentAddress.street}
             />
           </Col>
           <Col lg={6} md={6} sm={12}>
@@ -155,7 +197,7 @@ let GeneralInfoForm = ({ handleSubmit, creditCard, id }) => {
               component={renderFieldFull}
               label="Ext"
               name="extNumber"
-              val={!sameAddress ? null : currentAddress.extNumber}
+              val={!sameAddress ? "" : currentAddress.extNumber}
               disabled={!sameAddress ? false : true}
             />
           </Col>
@@ -165,7 +207,7 @@ let GeneralInfoForm = ({ handleSubmit, creditCard, id }) => {
               component={renderFieldFull}
               label="Int"
               name="intNumber"
-              val={!sameAddress ? null : currentAddress.intNumber}
+              val={!sameAddress ? "" : currentAddress.intNumber}
               disabled={!sameAddress ? false : true}
             />
           </Col>
@@ -175,7 +217,7 @@ let GeneralInfoForm = ({ handleSubmit, creditCard, id }) => {
               component={renderFieldFull}
               label="CP"
               name="zipCode"
-              val={!sameAddress ? null : currentAddress.zipCode}
+              val={!sameAddress ? "" : currentAddress.zipCode}
               disabled={!sameAddress ? false : true}
             />
           </Col>
@@ -185,7 +227,7 @@ let GeneralInfoForm = ({ handleSubmit, creditCard, id }) => {
               component={renderFieldFull}
               label="Colonia"
               name="town"
-              val={!sameAddress ? null : currentAddress.town}
+              val={!sameAddress ? "" : currentAddress.town}
               disabled={!sameAddress ? false : true}
             />
           </Col>
@@ -197,9 +239,8 @@ let GeneralInfoForm = ({ handleSubmit, creditCard, id }) => {
 
             <Field
               component={renderField}
+              label="Teléfono_Personal"
               type="text"
-              label="Teléfono"
-              disabled={true}
               name="phone"
               maxLength={10}
               minLength={10}
@@ -367,7 +408,7 @@ let GeneralInfoForm = ({ handleSubmit, creditCard, id }) => {
           </Button>
         </div>
       </form>
-      <PopUp show={show} setShow={setShow} />
+      <PopUp show={showModalGeneral} setShow={setShow} />
     </div>
   );
 };
@@ -385,15 +426,6 @@ GeneralInfoForm = connect((state, props) => {
   const {
     user: { user },
   } = state;
-  const initialValues = {
-    ...props.data,
-    name: user.name,
-    lastname: user.lastname,
-    phone: user.phone,
-  };
-  return {
-    initialValues,
-  };
 })(GeneralInfoForm);
 
 const selector = formValueSelector("generalInfoForm");

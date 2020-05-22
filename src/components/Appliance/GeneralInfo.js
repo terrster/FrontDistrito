@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import Title from "../Generic/Title";
 import GeneralInfoForm from "../../forms/GeneralInfoForm";
 import { useSelector, useDispatch } from "react-redux";
@@ -23,35 +24,60 @@ import axios from '../../utils/axios';
 
 const GeneralInfo = () => {
   const dispatch = useDispatch();
-  const applianceGeneralInfo = useSelector(
-    (state) => state.appliance.generalInfo
-  );
+  const applianceGeneralInfo = useSelector((state) => state.appliance.generalInfo);
   //const appliance = useSelector((state) => state.appliance.appliance);
   const applianceData = useSelector((state) => state.appliance);
   const modal = useSelector((state) => state.modal);
   const app = useSelector((state) => state.app);
-  const currentAddress = useSelector(state => state.currentAddress.address);
   const currentGeneralInfo = useSelector(state => state.actionForm.generalInfoForm);
+  
   const [user, setUser] = useState(JSON.parse(sessionStorage.getItem("user")));
   const [initialValues, setInitialValues] = useState({});
-  
+  const history = useHistory();
 
   useEffect(() => {
-    const getData = async() => {
-		const idUser = user._id;
-		const { data } = await axios.get(`api/info-general/${idUser}`, {
-			headers: {
-				token: sessionStorage.getItem("token")
+    window.scrollTo(0, 0);
+    setInitialValues({...initialValues, name: user.name, lastname: user.lastName, phone: user.phone });
+	const getData = async () => {
+		const user = JSON.parse(sessionStorage.getItem('user'));
+		const id = user._id;
+		const idClient = user.idClient[user.idClient.length - 1];
+		if (idClient.appliance.length > 0){
+			const appliance = idClient.appliance[idClient.appliance.length - 1];
+			if (appliance.idGeneralInfo.length > 0){
+				const general = appliance.idGeneralInfo[appliance.idGeneralInfo.length - 1];
+				const id = general._id;
+				const res = await axios.get(`api/info-general/${id}`);		
+				const date = res.data.general.birthDate.split('/');
+				const day = date[0];
+				const month = date[1];
+				const year = date[2];
+				const ref1 = res.data.general.contactWith[0];
+				const name1 = ref1.name;
+				const phone1 = ref1.phone;
+				const relative1 = ref1.relative;
+				const ref2 = res.data.general.contactWith[1];
+				const name2 = ref2.name;
+				const phone2 = ref2.phone;
+				const relative2 = ref2.relative;
+				const creditCard = res.data.general.creditCard ? "1" : "0";
+				const mortgageCredit = res.data.general.mortgageCredit ? "1" : "0";
+				const address = res.data.general.address[res.data.general.address.length - 1];
+				const street = address.street;
+				const town = address.town;
+				const zipCode = address.zipCode;
+				const extNumber = address.extNumber;
+				const intNumber = address.intNumber;
+				console.log(res.data.general);			
+				setInitialValues({ 
+					...initialValues, ...res.data.general, day, month, year,
+					name1, name2, phone1, phone2, relative1, relative2,
+					mortgageCredit, creditCard, street, town, zipCode, extNumber, intNumber
+				});
 			}
-		});
-		if(data.general){
-			let general = data.general;
-			general.creditCard = data.general.creditCard ? "1" : "0";
-			general.mortgageCredit = data.general.mortgageCredit ? "1" : "0";
-			setInitialValues({ ...data.general, ...data.general.address[0], name: user.name, lastname: user.lastName });
 		}
 	}
-	getData();
+	getData();	
 
   }, []);
 
@@ -66,106 +92,72 @@ const GeneralInfo = () => {
   };
 
   const onFormSubmit = async (dataForm) => {
-	const idUser = user._id;
-	const userRequest = await axios.get(`api/user/${idUser}`, {
-		headers: {
-			token: sessionStorage.getItem("token")
-		}
-	});
-	const myUser = userRequest.data.user;
-	const idClient = myUser.idClient.pop();
-	if (idClient.idGeneralInfo.length > 0){ // Si existe un registro, se actualiza
-		const idGeneralInfo = idClient.idGeneralInfo.pop();
-		const res = await axios.put(`api/info-general/${idGeneralInfo}`, dataForm, {
-			headers: {
-				token: sessionStorage.getItem("token")
-			}
-		});
-		console.log(res);
-	} else { // En caso de no existir registro, se crea
-	  console.log("POST")
+	const user = JSON.parse(sessionStorage.getItem('user'));
+	const id = user._id;
+	const idClient = user.idClient[user.idClient.length - 1];
+	const data = { 
+		...dataForm,
+		birthDate : new Date(`${dataForm.day}/${dataForm.month}/${dataForm.year}`).toLocaleDateString(),
 	}
-	  
-	  /*
-	const { data } = await axios.post(`api/info-general/`, dataForm ,{
-		headers: {
-			token: sessionStorage.getItem("token")
-		}
-	});
 	console.log(data);
-	// Prueba de update
-	
-	const idInfo = JSON.parse(sessionStorage.getItem("user")).idClient[0].idGeneralInfo[0];
-	
-	* * */
-	
+	if(idClient.appliance.length > 0){
+		const appliance = idClient.appliance[idClient.appliance.length - 1];
+		if(appliance.idGeneralInfo.length > 0){
+			const general = appliance.idGeneralInfo[appliance.idGeneralInfo.length - 1]
+			const id = general._id;				
+			try {
+				const res = await axios.put(`api/info-general/${id}`,data);
+				console.log("UPDATE");
+				console.log(res);
+				await sessionStorage.setItem('user', JSON.stringify(res.data.user));
+				history.push(`/informacion-general/${user._id}`);
+			} catch (error) {
+				console.log("Error de servicio",error);
+			} 
+		} else {
+				try {
+					const res = await axios.post(`api/info-general/${id}`, data);
+					console.log("POST");
+					console.log(res);
+					await sessionStorage.setItem('user', JSON.stringify(res.data.user));
+					history.push(`/documentos/${user._id}`);
+				} catch (error) {
+					console.log("Error de servicio",error);
+				}	
+			}
+		} 		
   };
 
-  // Datos de prueba
-  //let id = this.props.match.params.idAppliance;
-  let id = "12312312312312"; // id de prueba
-  let linkt;
-  let appliance = {
-    idAmount: null,
-    idComercialInfo: null,
-    idGeneralInfo: null,
-    idDocuments: null,
-  }
-  if (
-    !appliance.idAmount &&
-    !appliance.idComercialInfo &&
-    !appliance.idGeneralInfo &&
-    !appliance.idDocuments &&
-    applianceData.amount === ""
-  ) {
-    linkt = `elige-monto/${id}`;
-  } else if (
-    !appliance.idComercialInfo &&
-    !appliance.idGeneralInfo &&
-    !appliance.idDocuments &&
-    applianceData.comercialInfo === ""
-  ) {
-    linkt = `datos-comerciales/${id}`;
-  } else if (
-    !appliance.idGeneralInfo &&
-    !appliance.idDocuments &&
-    applianceData.generalInfo === ""
-  ) {
-    linkt = `informacion-general/${id}`;
-  } else if (!appliance.idDocuments || !appliance.idDocuments.status) {
-    linkt = `documentos/${id}`;
-  }
-  /* if (this.props.user === undefined) {
-    dispatch(updateUserName(appliance.idClient.idUser.name));
-    dispatch(updateUser(appliance.idClient.idUser));
-  } */
+	const setComercialAddress = (checkboxComercialAddress) => {
+		if (checkboxComercialAddress){
+			const user = JSON.parse(sessionStorage.getItem('user'));
+			const id = user._id;
+			const idClient = user.idClient[user.idClient.length - 1];
+			if (idClient.appliance.length > 0){
+				const appliance = idClient.appliance[idClient.appliance.length - 1];
+				if (appliance.idComercialInfo.length > 0){
+					const comercial = appliance.idComercialInfo[appliance.idComercialInfo.length - 1];
+					const { extNumber, intNumber, registerDate, street, town, zipCode } = comercial.address[comercial.address.length - 1];
+					setInitialValues({ ...initialValues, extNumber, intNumber, registerDate, street, town, zipCode, sameAddress: true })				}
+				}
+		}
+		else {
+			const extNumber = "";
+			const intNumber = "";
+			const registerDate = "";
+			const street = "";
+			const town = "";
+			const zipCode = "";
+			const sameAddress = false;
+			setInitialValues({  ...initialValues, extNumber, intNumber, registerDate, street, town, zipCode, sameAddress })
+		}
+		// dispatch del loader en false -->
+	}	
+	
+
   return (
     <div className="container mt-3">
-      <Steps
-        first={
-          (appliance.idAmount ||
-            (applianceData.amount &&
-              applianceData.amount !== "")) &&
-          "amount"
-        }
-        second={
-          (appliance.idComercialInfo ||
-            (applianceData.comercialInfo &&
-              applianceData.comercialInfo !== "")) &&
-          "comercialInfo"
-        }
-        third={
-          (appliance.idGeneralInfo ||
-            (applianceData.generalInfo &&
-             applianceData.generalInfo !== "")) &&
-          "generalInfo"
-        }
-        fourth={
-          appliance.idDocuments && appliance.idDocuments.status && "documents"
-        }
-        route={linkt}
-        id={id}
-      />
+      <Steps />
       <div className="text-center mb-2">
         <Title
           title="Información general"
@@ -178,9 +170,9 @@ const GeneralInfo = () => {
         onSubmit={(data) => {
           onFormSubmit(data);
         }}
+        setInitialValues={setInitialValues}
+        changeAddress={setComercialAddress}
         initialValues={initialValues}
-        data={currentGeneralInfo}
-        id={id}
       />
       <CustomModal
         modalName="generalInfoError"

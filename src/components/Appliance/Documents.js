@@ -29,7 +29,7 @@ const Documents = (props) => {
 
   const [show, setShow] = useState(true);
   const [data, setData] = useState(undefined); // Dato de prueba
-
+  const [user, setUser] = useState(JSON.parse(sessionStorage.getItem("user")));
   const dispatch = useDispatch();
   const app = useSelector(state => state.app)
   const modal = useSelector((state) => state.modal.name);
@@ -50,25 +50,29 @@ const Documents = (props) => {
     onFormSubmit(e);
   };
 
-  const onFormSubmit = async (e, statusClose = false) => {
+  const onFormSubmit = async (e) => {
     e.preventDefault();
     dispatch(updateLoader(true));
     console.log(documents);
     const formData = new FormData();
-    const files = {};
     for (const typeDoc in documents){
 		documents[typeDoc].forEach(doc => {
-			const file = JSON.stringify(doc);
-			formData.append('files',file);
+			console.log(typeDoc);
+			formData.append(typeDoc,doc);
 		});
 	}
-    const { data } = await axios.post('api/upload', formData, {
-      headers:{
-        token: sessionStorage.getItem("token"),
-		'Content-Type': 'multipart/form-data'
-      }
-    });
-    sessionStorage.setItem('user', JSON.stringify(data.user));
+	try {
+		const { data } = await axios.post(`api/documents/${user._id}`, formData, {
+		headers:{
+			'Content-Type': 'multipart/form-data'
+			}	
+		});
+		if(!data.hasOwnProperty("error")){
+			sessionStorage.setItem('user', JSON.stringify(data.user));
+		}
+	} catch(e){
+		console.log(e);
+	}
     /* try {
 			let ans = await manager.assignFiles(this.props.documents);
 			let variables = variablesManager.createDocumentsVariables(ans);
@@ -115,7 +119,7 @@ const Documents = (props) => {
   };
 
   const getDocsMethod = () => {
-    let typePerson = sessionStorage.getItem("type");
+    let typePerson = user.idClient[user.idClient.length - 1].type;
     let docFiles = [];
     /**
      * [Dependiendo la persona le creamos los documentos]
@@ -191,26 +195,21 @@ const Documents = (props) => {
     }
     dispatch(updateDocumentsNames(getDocsMethod()));
     testDocuments();
-
+    /*    
     const getDocuments = async () => {
-      const user = await axios.get('api/user/info', {
-        headers: {
-          token: sessionStorage.getItem("token")
-        }
-      })
-      const idClient = user.data.user.idClient;
-      const idDocuments = idClient[idClient.length - 1].idDocuments[idClient[idClient.length - 1].idDocuments.length - 1];
+		const idClient = user.idClient[user.idClient - 1];
       console.log(idDocuments);
     }
 
-    getDocuments();
+    
+    * */
+    
 
   }, []);
 
   //let appliance = data.getAppliance;
   let currentDocs = [];
   let isCompleteForm = statusdocument;
-  let linkt;
 
   if (appliance !== undefined && appliance.idDocuments !== undefined) {
     currentDocs = appliance.idDocuments;
@@ -227,31 +226,6 @@ const Documents = (props) => {
     }
   }
 
-  if (
-    !appliance.idAmount &&
-    !appliance.idComercialInfo &&
-    !appliance.idGeneralInfo &&
-    !appliance.idDocuments &&
-    applianceData.amount === ""
-  ) {
-    linkt = `elige-monto/${idAppliance}`;
-  } else if (
-    !appliance.idComercialInfo &&
-    !appliance.idGeneralInfo &&
-    !appliance.idDocuments &&
-    applianceData.comercialInfo === ""
-  ) {
-    linkt = `datos-comerciales/${idAppliance}`;
-  } else if (
-    !appliance.idGeneralInfo &&
-    !appliance.idDocuments &&
-    applianceData.generalInfo === ""
-  ) {
-    linkt = `informacion-general/${idAppliance}`;
-  } else if (!appliance.idDocuments || !appliance.idDocuments.status) {
-    linkt = `documentos/${idAppliance}`;
-  }
-  
   return (
     <div className="container mt-3">
       {show && (
@@ -264,23 +238,7 @@ const Documents = (props) => {
           </div>
         </div>
       )}
-      <Steps
-        first={
-          appliance.idAmount ||
-          (applianceData.amount && applianceData.amount !== "")
-        }
-        second={
-          appliance.idComercialInfo ||
-          (applianceData.comercialInfo && applianceData.comercialInfo !== "")
-        }
-        third={
-          appliance.idGeneralInfo ||
-          (applianceData.generalInfo && applianceData.generalInfo !== "")
-        }
-        fourth={appliance.idDocuments && appliance.idDocuments.status}
-        route={linkt}
-        id={idAppliance}
-      />
+      <Steps />
       <div className="text-center mb-3">
         <Title
           title="Sube tus documentos"
