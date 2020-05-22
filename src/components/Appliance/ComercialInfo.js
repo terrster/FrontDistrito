@@ -111,7 +111,7 @@ class ComercialInfo extends Component {
 						this.onFormSubmit(d, typeForm, currentComercialInfo);
 					}}
 					data={currentComercialInfo}
-					intialValues={this.state.initialValues}
+					intialValues={this.state.initialValues !== {} ? this.state.initialValues : null}
 				></ComercialInfoForm>
 			);
 		}
@@ -150,74 +150,9 @@ class ComercialInfo extends Component {
 	};
 
 	render() {
-		console.log(this.state.initialValues);
-		let linkt;
-		/* const { appliance } = this.props; */
-		let appliance =  {
-				getAppliance: null,
-				status: true,
-				idAmount: null, 
-				idComercialInfo: null, 
-				idGeneralInfo: null, 
-				idDocuments: {
-					status: false
-				}, 
-		};				
-		if (
-			!appliance.idAmount &&
-			!appliance.idComercialInfo &&
-			!appliance.idGeneralInfo &&
-			!appliance.idDocuments &&
-			this.props.applianceData.amount === ''
-		) {
-			linkt = `elige-monto/${this.props.match.params.idAppliance}`;
-		} else if (
-			!appliance.idComercialInfo &&
-			!appliance.idGeneralInfo &&
-			!appliance.idDocuments &&
-			this.props.applianceData.comercialInfo === ''
-		) {
-			linkt = `datos-comerciales/${this.props.match.params.idAppliance}`;
-		} else if (
-			!appliance.idGeneralInfo &&
-			!appliance.idDocuments &&
-			this.props.applianceData.generalInfo === ''
-		) {
-			linkt = `informacion-general/${this.props.match.params.idAppliance}`;
-		} else if (!appliance.idDocuments || !appliance.idDocuments.status) {
-			linkt = `documentos/${this.props.match.params.idAppliance}`;
-		}
-		if (this.props.user.name === undefined) {
-			this.props.updateUserName(appliance.idClient.idUser.name);
-			this.props.updateUser(appliance.idClient.idUser);
-		}
 		return (
 			<div className="container mt-3">
-				<Steps
-					first={
-						(appliance.idAmount ||
-							(this.props.applianceData.amount &&
-								this.props.applianceData.amount !== '')) &&
-						'amount'
-					}
-					second={
-						(appliance.idComercialInfo ||
-							(this.props.applianceData.comercialInfo &&
-								this.props.applianceData.comercialInfo !== '')) &&
-						'comercialInfo'
-					}
-					third={
-						(appliance.idGeneralInfo ||
-							(this.props.applianceData.generalInfo &&
-								this.props.applianceData.generalInfo !== '')) &&
-						'generalInfo'
-					}
-					fourth={
-						appliance.idDocuments && appliance.idDocuments.status && 'documents'
-					}
-					route={linkt}
-					id={this.props.match.params.idAppliance}
-				/>
+				<Steps />
 				<div className="text-center mb-2">
 					<Title
 						title="Datos del negocio"

@@ -7,43 +7,80 @@ import CustomModal from '../Generic/CustomModal';
 import { execToast } from '../../utils/ToastUtils';
 import { variablesManager } from '../Manager/VariablesManager';
 import axios from '../../utils/axios';
+import { useHistory } from "react-router-dom";
 
 const Amount = props => {
 	
 	const [user, setUser] = useState(JSON.parse(sessionStorage.getItem('user')));
-
+	const [initialValues, setInitialValues] = useState({});
+	const history = useHistory();
+	
 	const onFormSubmit = async (data) => {
 		const user = JSON.parse(sessionStorage.getItem('user'));
 		const id = user._id;
-		try {
-			const infoPost = await axios.post(`api/amount/${id}`,data,{
-				headers:{
-					token: sessionStorage.getItem('token')
+		const idClient = user.idClient[user.idClient.length - 1];
+		// Si ya tienen una solicitud, se actualiza
+		if (idClient.appliance.length > 0){
+			const appliance = idClient.appliance[0];
+			if (appliance.idAmount.length > 0){
+				const amount = appliance.idAmount[appliance.idAmount.length - 1];
+				const id = amount._id;
+				try {
+					const res = await axios.put(`api/amount/${id}`,data,{
+						headers:{
+							token: sessionStorage.getItem('token')
+						}
+					});
+					// Se actualiza el usuario en session storage
+					await sessionStorage.setItem('user', JSON.stringify(res.data.user));
+					// Redireccionar al siguiente formulario
+					history.push(`/informacion-comercial/${user._id}`);
+				} catch (error) {
+					console.log("Error de servicio",error);
 				}
-			});
-			console.log(infoPost);
-		} catch (error) {
-			console.log("Error de servicio",error);
+			}
+		} else {
+			try {
+				const res = await axios.post(`api/amount/${id}`,data,{
+					headers:{
+						token: sessionStorage.getItem('token')
+					}
+				});
+				await sessionStorage.setItem('user', JSON.stringify(res.data.user));
+				history.push(`/informacion-comercial/${user._id}`);
+				
+			} catch (error) {
+				console.log("Error de servicio",error);
+			}	
 		}
 	}
 	
 	useEffect(() => {
-		
+		window.scrollTo(0, 0);
 		const getData = async () => {
-			const user = JSON.parse(sessionStorage.getItem("user"));
-			const idClient = user.idClient[user.idClient.length - 1]._id;
-			console.log(user);
-			const res = await axios.get(`api/amount/5ec703d80a081c2cc9366d7b`, {
-				headers:{
-					token: sessionStorage.getItem("token")
+			const user = JSON.parse(sessionStorage.getItem('user'));
+			const id = user._id;
+			const idClient = user.idClient[user.idClient.length - 1];
+			// Si ya tienen una solicitud, se actualiza
+			if (idClient.appliance.length > 0){
+				const appliance = idClient.appliance[0];
+				if (appliance.idAmount.length > 0){
+					const amount = appliance.idAmount[appliance.idAmount.length - 1];
+					const id = amount._id;
+					const res = await axios.get(`api/amount/${id}`, {
+						headers:{
+							token: sessionStorage.getItem("token")
+						}
+					});
+					setInitialValues(res.data.amount);
 				}
-			});
-			console.log(res);
+			}
 		}
 		
 		getData();
 		
-	}, [])
+	}, [])	
+	console.log(initialValues);
 	
 		return (
 			<div className="container mt-3">
@@ -60,6 +97,7 @@ const Amount = props => {
 					onSubmit={data => {
 						onFormSubmit(data);
 					}}
+					initialValues={initialValues}
 					data={props.currentAmount}
 				></AmountForm>
 			</div>
@@ -214,7 +252,7 @@ class Amount extends Component {
 		} catch (err) {
 			p.updateModal('amountError');
 			p.updateLoader(false);
-			window.scrollTo(0, 0);
+			
 		}
 	};
 

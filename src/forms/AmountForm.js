@@ -4,17 +4,24 @@ import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import { Field, reduxForm } from 'redux-form';
 import InputLabel from '../components/Generic/InputLabel';
-import { term, old, reason } from '../models/AmountModels';
+import { old, reason } from '../models/AmountModels';
 import PersonType from '../components/Appliance/PersonType';
 import { validateAmount } from '../components/Validate/ValidateAmount';
 import { renderField, renderSelectField } from '../components/Generic/Fields';
 
 const onlyNumbers = (nextValue, previousValue) => /^\d+$/.test(nextValue) || nextValue.length === 0? nextValue : previousValue;
 
-const AmountConstructForm = () => {
+
+let AmountForm = props => {
+	const { handleSubmit } = props;
 	return (
-		<>
-			<PersonType />
+		<div>
+			<form
+				className="ml-auto mr-auto"
+				style={{ maxWidth: '690px' }}
+				onSubmit={handleSubmit}
+			>
+				<PersonType />
 			<InputLabel label="¿Cuánto necesitas?" class="mt-18" />
 			<Field
         		normalize={onlyNumbers}
@@ -73,19 +80,6 @@ const AmountConstructForm = () => {
 					Continuar
 				</Button>
 			</div>
-		</>
-	);
-};
-let AmountForm = props => {
-	const { handleSubmit } = props;
-	return (
-		<div>
-			<form
-				className="ml-auto mr-auto"
-				style={{ maxWidth: '690px' }}
-				onSubmit={handleSubmit}
-			>
-				<AmountConstructForm> </AmountConstructForm>
 			</form>
 		</div>
 	);
@@ -98,7 +92,7 @@ AmountForm = reduxForm({
 })(AmountForm);
 
 AmountForm = connect((state, props) => ({
-	initialValues: props.data // pull initial values from account reducer
+	
 }))(AmountForm);
 
 export default AmountForm;
