@@ -31,8 +31,10 @@ const Amount = props => {
 							token: sessionStorage.getItem('token')
 						}
 					});
-					// Se actualiza el usuario en session storage
-					await sessionStorage.setItem('user', JSON.stringify(res.data.user));
+					console.log(res);
+					if (res.data.hasOwnProperty("user")){
+						await sessionStorage.setItem('user', JSON.stringify(res.data.user));
+					}
 					// Redireccionar al siguiente formulario
 					history.push(`/informacion-comercial/${user._id}`);
 				} catch (error) {
@@ -79,9 +81,7 @@ const Amount = props => {
 		
 		getData();
 		
-	}, [])	
-	console.log(initialValues);
-	
+	}, [])		
 		return (
 			<div className="container mt-3">
 				<Steps />
@@ -253,52 +253,7 @@ class Amount extends Component {
 		}
 	};
 
-	render() {
-		let id = this.props.match.params.idAppliance;
-		let linkt;
-		/* const { appliance } = this.props; 
-		let appliance =  {
-			getAppliance: null,
-			status: true,
-			idAmount: null, 
-			idComercialInfo: null, 
-			idGeneralInfo: null, 
-			idDocuments: {
-				status: false
-			}, 
-		};
-		if (
-			!appliance.idAmount &&
-			!appliance.idComercialInfo &&
-			!appliance.idGeneralInfo &&
-			!appliance.idDocuments &&
-			this.props.applianceData.amount === ''
-		) {
-			linkt = `elige-monto/${this.props.match.params.idAppliance}`;
-		} else if (
-			!appliance.idComercialInfo &&
-			!appliance.idGeneralInfo &&
-			!appliance.idDocuments &&
-			this.props.applianceData.comercialInfo === ''
-		) {
-			linkt = `datos-comerciales/${this.props.match.params.idAppliance}`;
-		} else if (
-			!appliance.idGeneralInfo &&
-			!appliance.idDocuments &&
-			this.props.applianceData.generalInfo === ''
-		) {
-			linkt = `informacion-general/${this.props.match.params.idAppliance}`;
-		} else if (!appliance.idDocuments || !appliance.idDocuments.status) {
-			linkt = `documentos/${this.props.match.params.idAppliance}`;
-		}
-		if (this.props.user.name === undefined) {
-			this.props.updateUserName(appliance.idClient.idUser.name);
-			this.props.updateUser(appliance.idClient.idUser);
-		}
-
-	}
-}
-* */
+*/
 
 const mapStateToProps = (state, ownProps) => {
 	return {
@@ -338,10 +293,5 @@ const mapDispatchToProps = dispatch => {
 	};
 };
 
-/* Amount = compose(
-	graphql(Mutations.CREATE_AMOUNT, { name: 'createAmount' }),
-	graphql(Mutations.UPDATE_AMOUNT, { name: 'updateAmount' }),
-	graphql(Mutations.UPDATE_APPLIANCE, { name: 'updateApplianceGraph' })
-)(Amount); */
 
 export default connect(mapStateToProps, mapDispatchToProps)(Amount);

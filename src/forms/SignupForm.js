@@ -81,7 +81,7 @@ let SignupForm = (props) => {
         <Field
           component={renderField}
           type="text"
-          name="lastname"
+          name="lastName"
           label="Apellido"
         />
         <Field

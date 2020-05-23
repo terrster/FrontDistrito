@@ -191,6 +191,7 @@ const Documents = (props) => {
   };
 
   useEffect(() => {
+	  window.scrollTo(0, 0);
     if (!toast) {
       execToast("documents");
       dispatch(updateToast(app, "docs"));

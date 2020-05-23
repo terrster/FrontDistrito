@@ -190,6 +190,7 @@ let GeneralInfoForm = ({ handleSubmit, creditCard, changeAddress, initialValues,
               label="Calle"
               name="street"
               val={!sameAddress ? "" : currentAddress.street}
+              disabled={!sameAddress ? false : true}
             />
           </Col>
           <Col lg={6} md={6} sm={12}>

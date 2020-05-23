@@ -68,7 +68,6 @@ const GeneralInfo = () => {
 				const zipCode = address.zipCode;
 				const extNumber = address.extNumber;
 				const intNumber = address.intNumber;
-				console.log(res.data.general);			
 				setInitialValues({ 
 					...initialValues, ...res.data.general, day, month, year,
 					name1, name2, phone1, phone2, relative1, relative2,
@@ -99,7 +98,6 @@ const GeneralInfo = () => {
 		...dataForm,
 		birthDate : new Date(`${dataForm.day}/${dataForm.month}/${dataForm.year}`).toLocaleDateString(),
 	}
-	console.log(data);
 	if(idClient.appliance.length > 0){
 		const appliance = idClient.appliance[idClient.appliance.length - 1];
 		if(appliance.idGeneralInfo.length > 0){
@@ -107,10 +105,8 @@ const GeneralInfo = () => {
 			const id = general._id;				
 			try {
 				const res = await axios.put(`api/info-general/${id}`,data);
-				console.log("UPDATE");
-				console.log(res);
 				await sessionStorage.setItem('user', JSON.stringify(res.data.user));
-				history.push(`/informacion-general/${user._id}`);
+				history.push(`/documentos/${user._id}`);
 			} catch (error) {
 				console.log("Error de servicio",error);
 			} 

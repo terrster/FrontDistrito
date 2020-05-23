@@ -39,7 +39,6 @@ const ComercialInfo = (props) => {
 						}
 					});
 					await sessionStorage.setItem('user', JSON.stringify(res.data.user));
-					// Redireccionar al siguiente formulario
 					history.push(`/informacion-general/${user._id}`);
 				} catch (error) {
 					console.log("Error de servicio",error);
@@ -76,7 +75,7 @@ const ComercialInfo = (props) => {
 						}
 					});					
 					const address = res.data.comercial.address[res.data.comercial.address.length - 1]
-					const terminal = res.data.comercial.terminal === "0" ? false : true
+					const terminal = res.data.comercial.terminal ? "1" : "0"
 					setInitialValues({...res.data.comercial, ...address, zipCode: '', terminal });
 				}
 			}
