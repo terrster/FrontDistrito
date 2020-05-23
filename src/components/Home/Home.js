@@ -17,12 +17,12 @@ const Home = (props) => {
   const {
     loader: { isLoading },
   } = useSelector((state) => state);
-
+	const dispatch = useDispatch();
   const userd = JSON.parse(sessionStorage.getItem("user"));
   // Estado de prueba, mientras se realiza el endpoint
   const [myProfile, setMyProfile] = useState({
     idClient: {
-      type: "idClient-type",
+      type: "",
       idComercialInfo: {
         comercialName: "",
         gyre: "",
@@ -38,15 +38,30 @@ const Home = (props) => {
   });
   const [user, setUser] = useState(JSON.parse(sessionStorage.getItem("user")));
 
-  const [newApplianceID, setNewApplianceID] = useState("idAppliance");
-
+  const [newApplianceID, setNewApplianceID] = useState( user._id );
+  
   useEffect(() => {
-	updateLoader(true);
+	dispatch (updateLoader(true));
     const getData = () => {
 		const idUser = user._id;
 		const idClient = user.idClient[user.idClient.length - 1];
 		const type = idClient.hasOwnProperty("type") ? idClient.type : "";
+		let newProfile = {
+			...myProfile,
+			idClient: {
+				type,
+				idComercialInfo: {
+					comercialName: "",
+					gyre: "",
+					specific: "",
+					rfc: "",
+				},
+				idDocuments: null,
+			},
+		};
 		if (idClient.appliance.length > 0){
+			
+			
 				const appliance = idClient.appliance[idClient.appliance.length - 1];
 				let idDocuments = null
 				if (appliance.idDocuments.length > 0){
@@ -59,7 +74,7 @@ const Home = (props) => {
 					info.gyre  = idComercialInfo.hasOwnProperty("gyre") ? idComercialInfo.gyre : "";
 					info.specific  = idComercialInfo.hasOwnProperty("specific") ? idComercialInfo.specific : "";
 					info.rfc  = idComercialInfo.hasOwnProperty("rfc") ? idComercialInfo.rfc : "";
-					const newProfile = {
+					let newProfile = {
 						...myProfile,
 						idClient: {
 							type,
@@ -69,16 +84,16 @@ const Home = (props) => {
 								specific: info.specific,
 								rfc: info.rfc,
 							},
-						idDocuments,
+							idDocuments: null
 						},
-					};
-					setMyProfile(newProfile);
+					}
 				}
 		};
-		updateLoader(false);
+		setMyProfile(newProfile);
     };
 
     getData();
+    dispatch (updateLoader(false));
   }, []);
 
   const uploadedReady = (arr) => {
@@ -152,6 +167,7 @@ const Home = (props) => {
               )}
               fourth={uploadedReady(myProfile.idClient.idDocuments.others[0])}
               applianceId={newApplianceID}
+              
             />
           )}
           {!myProfile.idClient.idDocuments && (

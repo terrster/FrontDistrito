@@ -17,6 +17,7 @@ let Login = props => {
 		/* props.updateLoader(true) */
 		dispatch ( updateLoader(true));
 		dispatch( loginAction(data) );
+		dispatch ( updateLoader(false));
 	}
 
 	const auth = useSelector(state => state.auth.logged);
