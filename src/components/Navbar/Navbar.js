@@ -36,7 +36,7 @@ const NavBar = props => {
 		 					window.location.reload()
 		 				}}>Cerrar sesión</Button></Nav.Link>
 		 			</Nav>
-					<div className="nav-bar-icon-whatsapp">
+					<div className="nav-bar-icon-whatsapp" style={{ zIndex: "2001" }}>
 						<a href="https://api.whatsapp.com/send?phone=525526954055&text=Hola%2c%20%c2%bfpodr%c3%adan%20ayudarme%3f&source=&data=" target="_blank" rel="noopener noreferrer"><i className="fab fa-whatsapp"></i></a>
 					</div>
 		 		</Navbar.Collapse>
