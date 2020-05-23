@@ -33,6 +33,7 @@ const renderField = ({ input, label, type, meta: { touched, error, warning } }) 
 				? 	<input className="form-control custom-form-input mt-24" {...input} placeholder={label} type={type}/>
 				: 	<div className="input-group form-group center-flex mt-24">
 						<input className="form-control custom-form-input center-flex-input" {...input} placeholder={label} type={type} name="password" id="password" data-toggle="password"/>
+						<div style={{height: '10px', width: '100vw'}}> </div>
 						<span className="fa fa-eye-slash icon icon-style mt-24" onClick={ShowHide}></span>
 					</div>
 					
@@ -54,8 +55,10 @@ let SigninForm = props => {
 		<div className="container">
 			<form onSubmit={handleSubmit} className="mr-auto ml-auto" style={{maxWidth : '690px'}}>
 				<Field component={renderField} type="email" name="email" label="Correo electrónico"/>
+				<div style={{height: '8px', width: '100vw'}}> </div>
 				<Field component={renderField} type="password" name="password" label="Contraseña"/>
-				<div className="mt-3 mb-1 text-center">
+				<div style={{height: '10px', width: '100vw'}}> </div>
+				<div className="mb-1 text-center">
 					<Link to="/reset-password" className="fw500 fz12 blue-primary">¿Olvidaste tu Contraseña?</Link>
 				</div>
 				<div className="text-center">

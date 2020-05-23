@@ -32,6 +32,7 @@ let DocumentsForm = (props) => {
   const [validFiles, setValidFiles] = useState([]);
 
   let fileHandler = async (component, key, e) => {
+    dispatch (updateLoader(true));
     let value;
     let limitSize = 1000000; // 1 MB
     let filesNotUploaded = { names: [], keys: [] };
@@ -48,7 +49,6 @@ let DocumentsForm = (props) => {
           )
         );
       } else {
-        dispatch(updateLoader(true));
         console.log("Value: File handler");
         console.log(value);
         const api = "https://api.ocr.space/parse/image";
@@ -96,8 +96,6 @@ let DocumentsForm = (props) => {
       }
     }
 
-    dispatch(updateLoader(false));
-
     for (let j = 0; j < filesNotUploaded.keys.length; j++) {
       value.splice(filesNotUploaded.keys[j] - j, 1);
     }
@@ -108,6 +106,7 @@ let DocumentsForm = (props) => {
         dispatch(props.updateAlertMsg(false, ""));
       }, 10000);
     }
+    dispatch(updateLoader(false));
   };
 
   let statusDocs = (status) => {

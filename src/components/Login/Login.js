@@ -3,9 +3,11 @@ import { connect } from 'react-redux';
 import Title from '../Generic/Title';
 import SigninForm from '../../forms/SigninForm';
 import CustomModal from '../Generic/CustomModal';
+import Loader from '../Loader/Loader';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { loginAction } from '../../redux/actions/authActions';
+import { updateLoader } from '../../redux/actions/loaderActions';
 
 let Login = props => {
 
@@ -13,6 +15,7 @@ let Login = props => {
 
 	let onFormSubmit = (data) => {
 		/* props.updateLoader(true) */
+		dispatch ( updateLoader(true));
 		dispatch( loginAction(data) );
 	}
 
@@ -35,6 +38,7 @@ let Login = props => {
 	}else{
 		return (
 			<div>
+				<Loader />
 				<CustomModal
 					modalName="err"
 					message="Correo y/o contraseña incorrectos"

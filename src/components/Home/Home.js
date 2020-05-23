@@ -4,10 +4,13 @@ import Title from "../Generic/Title";
 import "../../css/account.css";
 import ApplianceCard from "../Generic/ApplianceCard";
 import CustomLoader from "../Generic/CustomLoader";
+import Loader from '../Loader/Loader';
 import comercialOptions from "../../models/ComercialInfoModels";
 import { Row, Col } from "react-bootstrap";
 import titoAccount from "../../assets/img/tito-account.png";
 import axios from '../../utils/axios';
+import { updateLoader } from '../../redux/actions/loaderActions';
+
 
 const Home = (props) => {
   // Redux state
@@ -38,6 +41,7 @@ const Home = (props) => {
   const [newApplianceID, setNewApplianceID] = useState("idAppliance");
 
   useEffect(() => {
+	updateLoader(true);
     const getData = () => {
 		const idUser = user._id;
 		const idClient = user.idClient[user.idClient.length - 1];
@@ -71,7 +75,7 @@ const Home = (props) => {
 					setMyProfile(newProfile);
 				}
 		};
-				
+		updateLoader(false);
     };
 
     getData();
@@ -98,7 +102,7 @@ const Home = (props) => {
 
   return (
     <div className="container mt-72 mb-120">
-      {isLoading && <CustomLoader />}
+      {isLoading && <Loader />}
       <div>
         <Title
           className="blackBlue coolvetica fw500 fz32 mb-16"

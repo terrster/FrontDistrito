@@ -16,14 +16,16 @@ import CustomLoader from "../components/Generic/CustomLoader";
 import { setSameAddress } from "../redux/actions/sameAddressActions";
 import PopUp from "./PopUp";
 import Info from "../assets/img/Info.png";
+import { updateLoader } from '../redux/actions/loaderActions';
 
-let GeneralInfoForm = ({ handleSubmit, creditCard, changeAddress, initialValues, setInitialValues }) => {
+let GeneralInfoForm = ({ handleSubmit,  changeAddress, initialValues, setInitialValues }) => {
   const dispatch = useDispatch();  
   const [currentAddress, setCurrentAddress] = useState(
 	{ extNumber: "", intNumber: "", registerDate: "", street: "", town: "", zipCode: "", sameAddress: "" }
   );
   const [sameAddress, setSameAddress] = useState(false);
   const [showModalGeneral, setShow] = useState(true);
+  const [creditCard, setCreditCard] = useState("");
   const handleShow = () => setShow(true);  
   /**Intentar pasar la direccion por aqui y/o buscar por que no se pasa */
   //let lastAddress = props.currentAddress;
@@ -34,6 +36,7 @@ let GeneralInfoForm = ({ handleSubmit, creditCard, changeAddress, initialValues,
   };
 
 	const setComercialAddress = (checkboxComercialAddress) => {
+		dispatch( updateLoader(true) );
 		if (checkboxComercialAddress){
 			const user = JSON.parse(sessionStorage.getItem('user'));
 			const id = user._id;
@@ -56,7 +59,7 @@ let GeneralInfoForm = ({ handleSubmit, creditCard, changeAddress, initialValues,
 			const sameAddress = false;
 			setCurrentAddress({ extNumber, intNumber, registerDate, street, town, zipCode, sameAddress })
 		}
-		// dispatch del loader en false -->
+		dispatch( updateLoader(false) );
 	}	
 
   return (
@@ -174,7 +177,7 @@ let GeneralInfoForm = ({ handleSubmit, creditCard, changeAddress, initialValues,
         <Field
           component={renderFieldFull}
           onChange={(event, newValue, previousValue, name) => {
-			  // --> dispatch del loader en true
+			  dispatch( updateLoader(true) );
 			  changeAddress(newValue);
 			  setSameAddress(newValue);
 			  setComercialAddress(newValue);
@@ -375,6 +378,7 @@ let GeneralInfoForm = ({ handleSubmit, creditCard, changeAddress, initialValues,
               component={renderSelectFieldFull}
               name="creditCard"
               clases="mt-10"
+              onChange={(e) => setCreditCard(e.target.value)}
             >
               <option value="">Selecciona...</option>
               <option value="1">Sí</option>
@@ -382,7 +386,7 @@ let GeneralInfoForm = ({ handleSubmit, creditCard, changeAddress, initialValues,
             </Field>
           </Col>
         </Row>
-        {creditCard === "1" && (
+        {(creditCard === "1" || initialValues.creditCard === "1" ) && (
           <div>
             <Field
               component={renderFieldFull}

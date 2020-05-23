@@ -17,11 +17,11 @@ class ComercialInfoConstructForm extends Component {
   };
   
   getColonias = async codigopostal => {
-    if(!codigopostal){
+    /*if(!codigopostal){
       this.setState({error: "Ingresa el código postal de tu negocio."}) 
     } else if (!/^[0-9]\d{4,5}/.test(codigopostal)|| (codigopostal.length > 5 || codigopostal.length < 5)){
       this.setState({error: "Ingresa un código postal válido"})
-    }
+    }*/
       try {
         if (codigopostal.length === 5) {
           const res = await (
@@ -48,6 +48,8 @@ class ComercialInfoConstructForm extends Component {
 						firstLoad: false
 					});
 			}
+		} else {
+			this.setState({ colonias: [] });
 		}
       } 
       catch (error) {
@@ -57,7 +59,7 @@ class ComercialInfoConstructForm extends Component {
 
   handleChangeCodigoPostal = async e => {
   	const codigopostal = e.target.value;
-    this.getColonias(codigopostal)
+    this.getColonias(codigopostal);
   };
 
   /* FIN CODIGO POSTAL */
@@ -234,13 +236,9 @@ let ComercialInfoForm = props => {
   const { handleSubmit } = props;  
   return (
     <div>
-      <form
-        className="ml-auto mr-auto"
-        style={{ maxWidth: "690px" }}
-        onSubmit={handleSubmit}
-      >
+		<form className="ml-auto mr-auto" style={{ maxWidth: "690px" }} onSubmit={handleSubmit}>
         <ComercialInfoConstructForm initialValues={props.initialValues}></ComercialInfoConstructForm>
-      </form>
+        </form>
     </div>
   );
 };

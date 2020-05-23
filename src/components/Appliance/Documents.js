@@ -21,7 +21,8 @@ import {
 import { updateAllDocs, updateDocuments } from "../../redux/actions/documentsActions";
 import { updateAlert } from '../../redux/actions/alertActions';
 import { updateAppliance } from '../../redux/actions/applianceActions';
-import axios from '../../utils/axios'
+import axios from '../../utils/axios';
+import Loader from "../Loader/Loader";
 
 const Documents = (props) => {
 
@@ -75,6 +76,7 @@ const Documents = (props) => {
 	if (finish === true){
 		// Finalizar solicitud, igual a la función de appliance
 	}
+	dispatch(updateLoader(false));
     /* try {
 			let ans = await manager.assignFiles(this.props.documents);
 			let variables = variablesManager.createDocumentsVariables(ans);
@@ -231,6 +233,7 @@ const Documents = (props) => {
 
   return (
     <div className="container mt-3">
+     <Loader />
       {show && (
         <div className="modal-comparative">
           <div className="modal-comparative--content">

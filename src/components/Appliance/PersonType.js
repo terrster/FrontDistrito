@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import axios from '../../utils/axios';
 
 // Components
@@ -12,6 +12,8 @@ import pfae from '../../assets/img/persona-f-sica-cn-actividad-empresarial@2x.pn
 import pm from '../../assets/img/persona-moral@2x.png';
 import rif from '../../assets/img/rif@2x.png';
 
+import { updateLoader } from '../../redux/actions/loaderActions';
+
 // Refs
 const pfRef = React.createRef();
 const pfaeRef = React.createRef();
@@ -19,17 +21,14 @@ const rifRef = React.createRef();
 const pmRef = React.createRef();
 
 const PersonType = (props) => {
+  const dispatch = useDispatch();
   const [user, setUser] = useState(JSON.parse(sessionStorage.getItem("user"))); 	
   const [personType, setPersonType] = useState("");
-
+	
   const updateClient = async (type) => {
+		dispatch( updateLoader(true) );
 		const idUser = user._id;
-		const userRequest = await axios.get(`api/user/${idUser}`, {
-			headers: {
-				token: sessionStorage.getItem("token")
-			}
-		});
-		const myUser = userRequest.data.user;
+		const myUser = user;
 		if (myUser.idClient.length > 0){
 			const idClient = myUser.idClient[myUser.idClient.length - 1];
 			const updateClient = await axios.put(`api/client/${idClient._id}`, { type }, {
@@ -45,9 +44,11 @@ const PersonType = (props) => {
 			sessionStorage.setItem('user', JSON.stringify(updateClient.data.user));
 			setPersonType(newClient.data.client.type);	
 		}
+		dispatch( updateLoader(false) );
   };
 
 	useEffect(() => {
+		dispatch( updateLoader(true) );
 		const getPersonType = async () => {
 			const idClient = user.idClient[user.idClient.length - 1]._id
 			const res = await axios.get(`api/client/${idClient}`, {
@@ -56,6 +57,7 @@ const PersonType = (props) => {
 				}
 			})
 			setPersonType(res.data.client.type);	
+			//dispatch( updateLoader(false) );
 		}
 		getPersonType();
 	}, []);	
@@ -66,7 +68,7 @@ const PersonType = (props) => {
   const pmDisabledClass = isDisabledType(personType,"PM");
 
 	return (		
-			<div>
+			<div>				
 				<Row>
 					<Col sm={12} lg={3} md={6}>
 						<TypeCard
@@ -118,19 +120,4 @@ const isDisabledType = (currentPersonType, personType) => {
   return currentPersonType === personType ? "" : "card-disabled";
 };  
 
-const mapStateToProps = (state, ownProps) => {
-	return {
-		user: /* state.user.user */ {name: "Pruebas"}, //Datos de Prueba
-		history: ownProps.history
-	};
-};
-
-const mapDispatchToProps = dispatch => {
-	return {
-		updateUser: user => {
-			dispatch({ type: 'UPDATE_USER', data: { user } });
-		}
-	};
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(PersonType);
+export default PersonType;

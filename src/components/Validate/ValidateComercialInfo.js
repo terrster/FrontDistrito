@@ -13,7 +13,12 @@ function validDay(day, month) {
 
 export const validateComercialInfo = values => {
 	let errors = {};
-
+	if (!values.zipCode){
+		errors.zipCode = "Ingresar código postal"
+	}
+	if (!values.town){
+		errors.town = "Seleccione una colonia"
+	}
 	if (!values.comercialName) {
 		errors.comercialName = 'Ingresa el nombre de tu negocio';
 	}

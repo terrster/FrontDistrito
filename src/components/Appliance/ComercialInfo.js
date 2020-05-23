@@ -1,4 +1,5 @@
-import React, { useState, useEffect,useSelector } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from "react-router-dom";
 import Title from '../Generic/Title';
 import { connect } from 'react-redux';
@@ -10,13 +11,13 @@ import axios from '../../utils/axios';
 // Components
 import Steps from './Steps';
 import CustomModal from '../Generic/CustomModal';
-import CustomLoader from "../Generic/CustomLoader";
+import Loader from "../Loader/Loader";
+import { updateLoader } from '../../redux/actions/loaderActions';
 
 const ComercialInfo = (props) => {
+	const dispatch = useDispatch();
 	// Redux state
-	const {
-		loader: { isLoading },
-	  } = useSelector((state) => state);
+	const { loader: { isLoading } } = useSelector((state) => state);
 
 
 	const [user, setUser] = useState(JSON.parse(sessionStorage.getItem('user')));
@@ -24,6 +25,7 @@ const ComercialInfo = (props) => {
 	const history = useHistory();
 	
 	const onFormSubmit = async (dataForm) => {
+		dispatch( updateLoader(true) );
 		const user = JSON.parse(sessionStorage.getItem('user'));
 		const id = user._id;
 		const idClient = user.idClient[user.idClient.length - 1];
@@ -59,12 +61,14 @@ const ComercialInfo = (props) => {
 				}	
 			}
 		} 
+		dispatch( updateLoader(false) );
 	}
 
 	useEffect(() => {
 		
 		window.scrollTo(0, 0);
 		const getData = async () => {
+			dispatch( updateLoader(true) );
 			const user = JSON.parse(sessionStorage.getItem('user'));
 			const id = user._id;
 			const idClient = user.idClient[user.idClient.length - 1];
@@ -84,6 +88,7 @@ const ComercialInfo = (props) => {
 					setInitialValues({...res.data.comercial, ...address, zipCode: '', terminal });
 				}
 			}
+			dispatch( updateLoader(false) );
 		}
 		
 		getData();
@@ -92,7 +97,7 @@ const ComercialInfo = (props) => {
 
 	return (
 		<div className="container mt-3">
-			{isLoading && <CustomLoader />}
+			<Loader />
 			<Steps />
 			<div className="text-center mb-2">
 				<Title

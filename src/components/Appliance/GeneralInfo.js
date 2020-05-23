@@ -21,6 +21,7 @@ import {
 	changeTypeGeneralInfoForm
 } from '../../redux/actions/formsTypeActions';
 import axios from '../../utils/axios';
+import Loader from "../Loader/Loader";
 
 const GeneralInfo = () => {
   const dispatch = useDispatch();
@@ -38,6 +39,7 @@ const GeneralInfo = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     setInitialValues({...initialValues, name: user.name, lastname: user.lastName, phone: user.phone });
+    dispatch( updateLoader(true));
 	const getData = async () => {
 		const user = JSON.parse(sessionStorage.getItem('user'));
 		const id = user._id;
@@ -75,22 +77,15 @@ const GeneralInfo = () => {
 				});
 			}
 		}
+		dispatch( updateLoader(false));
 	}
 	getData();	
 
   }, []);
 
-  const getReferences = async (refArr) => {
-    let references = refArr.map(async (value) => {
-      const data = await this.props.createReference({
-        variables: value,
-      });
-      return data;
-    });
-    return Promise.all(references);
-  };
 
   const onFormSubmit = async (dataForm) => {
+	dispatch( updateLoader(true));
 	const user = JSON.parse(sessionStorage.getItem('user'));
 	const id = user._id;
 	const idClient = user.idClient[user.idClient.length - 1];
@@ -121,10 +116,12 @@ const GeneralInfo = () => {
 					console.log("Error de servicio",error);
 				}	
 			}
-		} 		
+		} 	
+	dispatch( updateLoader(false));		
   };
 
 	const setComercialAddress = (checkboxComercialAddress) => {
+		dispatch( updateLoader(true));		
 		if (checkboxComercialAddress){
 			const user = JSON.parse(sessionStorage.getItem('user'));
 			const id = user._id;
@@ -147,12 +144,13 @@ const GeneralInfo = () => {
 			const sameAddress = false;
 			setInitialValues({  ...initialValues, extNumber, intNumber, registerDate, street, town, zipCode, sameAddress })
 		}
-		// dispatch del loader en false -->
+		dispatch( updateLoader(false));		
 	}	
 	
 
   return (
     <div className="container mt-3">
+      <Loader />
       <Steps />
       <div className="text-center mb-2">
         <Title
