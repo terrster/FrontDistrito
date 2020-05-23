@@ -55,9 +55,7 @@ let SigninForm = props => {
 		<div className="container">
 			<form onSubmit={handleSubmit} className="mr-auto ml-auto" style={{maxWidth : '690px'}}>
 				<Field component={renderField} type="email" name="email" label="Correo electrónico"/>
-				<div style={{height: '8px', width: '100vw'}}> </div>
 				<Field component={renderField} type="password" name="password" label="Contraseña"/>
-				<div style={{height: '10px', width: '100vw'}}> </div>
 				<div className="mb-1 text-center">
 					<Link to="/reset-password" className="fw500 fz12 blue-primary">¿Olvidaste tu Contraseña?</Link>
 				</div>

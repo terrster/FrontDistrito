@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { connect } from 'react-redux';
 import Title from '../Generic/Title';
 import SigninForm from '../../forms/SigninForm';
 import CustomModal from '../Generic/CustomModal';
 import Loader from '../Loader/Loader';
+import Alert from 'react-bootstrap/Alert'
 
 import { useDispatch, useSelector } from 'react-redux';
 import { loginAction } from '../../redux/actions/authActions';
@@ -12,12 +13,15 @@ import { updateLoader } from '../../redux/actions/loaderActions';
 let Login = props => {
 
 	const dispatch = useDispatch();
+	const [intento, setIntento] = useState(false);
+	const [visible, setVisible] = useState(false);
 
 	let onFormSubmit = (data) => {
 		/* props.updateLoader(true) */
 		dispatch ( updateLoader(true));
 		dispatch( loginAction(data) );
 		dispatch ( updateLoader(false));
+		setIntento(true);
 	}
 
 	const auth = useSelector(state => state.auth.logged);
@@ -27,7 +31,9 @@ let Login = props => {
 		/* props.updateLoader(false) */
 		/* props.updateNav("login") */
 	}
-	else{
+	else if (intento && !auth && !sessionStorage.getItem('user')){
+		setVisible(true);
+		setIntento(false);
 		/* props.updateLoader(false) */
 		/* props.updateModal('err') */
 	}
@@ -49,7 +55,6 @@ let Login = props => {
 					<div className="mt-30 brandonReg fw300 fz20 text-center mb-30">
 						<label className="gray50">Ingresa tu correo y contraseña para comenzar</label>
 					</div>
-					
 						<SigninForm onSubmit={(e) => onFormSubmit(e,Login)} />
 				</div>
 			</div>
