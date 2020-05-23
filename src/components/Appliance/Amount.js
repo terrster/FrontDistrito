@@ -43,8 +43,7 @@ const Amount = props => {
 					if (res.data.hasOwnProperty("user")){
 						sessionStorage.setItem('user', JSON.stringify(res.data.user));
 					}
-					// Redireccionar al siguiente formulario
-					history.push(`/informacion-comercial/${user._id}`);
+					window.location.href = `/informacion-comercial/${user._id}`;
 				} catch (error) {
 					console.log("Error de servicio",error);
 				}
@@ -59,7 +58,7 @@ const Amount = props => {
 				if (res.data.hasOwnProperty("user")){
 						sessionStorage.setItem('user', JSON.stringify(res.data.user));
 				}
-				history.push(`/informacion-comercial/${user._id}`);
+				window.location.href = `/informacion-comercial/${user._id}`;
 				
 			} catch (error) {
 				console.log("Error de servicio",error);

@@ -100,7 +100,7 @@ const GeneralInfo = () => {
 			try {
 				const res = await axios.put(`api/info-general/${id}`,data);
 				sessionStorage.setItem('user', JSON.stringify(res.data.user));
-				history.push(`/documentos/${user._id}`);
+				window.location.href = `/documentos/${user._id}`;
 			} catch (error) {
 				console.log("Error de servicio",error);
 			} 
@@ -110,7 +110,7 @@ const GeneralInfo = () => {
 					console.log("POST");
 					console.log(res);
 					sessionStorage.setItem('user', JSON.stringify(res.data.user));
-					history.push(`/documentos/${user._id}`);
+					window.location.href = `/documentos/${user._id}`;
 				} catch (error) {
 					console.log("Error de servicio",error);
 				}	

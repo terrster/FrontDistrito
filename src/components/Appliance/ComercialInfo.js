@@ -46,7 +46,7 @@ const ComercialInfo = (props) => {
 						}
 					});
 					sessionStorage.setItem('user', JSON.stringify(res.data.user));
-					history.push(`/informacion-general/${user._id}`);
+					window.location.href = `/informacion-general/${user._id}`;
 				} catch (error) {
 					console.log("Error de servicio",error);
 				} 
@@ -54,8 +54,7 @@ const ComercialInfo = (props) => {
 				try {
 					const res = await axios.post(`api/info-comercial/${id}`, data);
 					sessionStorage.setItem('user', JSON.stringify(res.data.user));
-					history.push(`/informacion-general/${user._id}`);
-					
+					window.location.href = `/informacion-general/${user._id}`;
 				} catch (error) {
 					console.log("Error de servicio",error);
 				}	
