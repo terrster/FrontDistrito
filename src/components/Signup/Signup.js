@@ -11,6 +11,8 @@ import "../../css/signup.css";
 import registerImage from "../../assets/img/register.png";
 //import RegistroExitoso from "../../components/Registro/RegistroExitoso";
 import { useDispatch, useSelector } from 'react-redux';
+import Loader from "../Loader/Loader";
+import { updateLoader } from '../../redux/actions/loaderActions';
 
 import { singUpAction } from '../../redux/actions/authActions';
 
@@ -50,7 +52,9 @@ let Signup = props => {
   const dispatch = useDispatch();
 
   let onFormSubmit = (data) => {
+	  dispatch( updateLoader(true));
     dispatch( singUpAction(data) );
+    dispatch (updateLoader(false));
   }
 
   //sessionStorage.removeItem("nameUser")
@@ -63,6 +67,7 @@ let Signup = props => {
   }else {
     return (
       <div className="container mt-30">
+        <Loader />
         {!props.statusSingup ? (
           <>
             <Title

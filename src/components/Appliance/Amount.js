@@ -41,7 +41,7 @@ const Amount = props => {
 					});
 					console.log(res);
 					if (res.data.hasOwnProperty("user")){
-						await sessionStorage.setItem('user', JSON.stringify(res.data.user));
+						sessionStorage.setItem('user', JSON.stringify(res.data.user));
 					}
 					// Redireccionar al siguiente formulario
 					history.push(`/informacion-comercial/${user._id}`);
@@ -56,7 +56,9 @@ const Amount = props => {
 						token: sessionStorage.getItem('token')
 					}
 				});
-				await sessionStorage.setItem('user', JSON.stringify(res.data.user));
+				if (res.data.hasOwnProperty("user")){
+						sessionStorage.setItem('user', JSON.stringify(res.data.user));
+				}
 				history.push(`/informacion-comercial/${user._id}`);
 				
 			} catch (error) {
@@ -68,7 +70,7 @@ const Amount = props => {
 	
 	useEffect(() => {
 		window.scrollTo(0, 0);
-		const activeLoader = () => dispatch (updateLoader(true)) ;
+		dispatch (updateLoader(true)) ;
 		const getData = async () => {
 			const user = JSON.parse(sessionStorage.getItem('user'));
 			const id = user._id;
@@ -84,15 +86,12 @@ const Amount = props => {
 							token: sessionStorage.getItem("token")
 						}
 					});
-					dispatch ( updateLoader(false));
 					setInitialValues(res.data.amount);
 				}
 			}
-			updateLoader(false);
 		}
-		
 		getData();
-		
+		dispatch (updateLoader(false)) ;
 	}, [])		
 		return (
 			<div className="container mt-3">

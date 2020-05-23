@@ -1,5 +1,5 @@
-import React from 'react';
-import { connect } from 'react-redux'
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux'
 import Title from '../Generic/Title';
 import SignupForm from '../../forms/SignupForm';
 /* import { Mutation } from 'react-apollo'
@@ -11,18 +11,26 @@ import * as $ from 'jquery';
 import '../../css/signup.css';
 import registerImage from '../../assets/img/register.png'
 import TagManager from 'react-gtm-module'
-
+import Loader from "../Loader/Loader";
+import { updateLoader } from '../../redux/actions/loaderActions';
 
 let RegistroExitoso = (props) => {
+
+	const dispatch = useDispatch();
 
 	if(sessionStorage.getItem("token")){
 		setTimeout(() => {
 		  window.location = "/home";
 		}, 5000)
 	}
+	
+	useEffect(() => {
+		dispatch ( updateLoader(false));
+	},[]) 
 
 	return (
 		<div className="container mt-30">
+			<Loader />
 			<Title className="fz56 text-center blue-primary coolvetica fw500" title="Registro Exitoso" />
 			<div className="mt-30 brandonReg fw300 fz20 text-center mb-30">
 				<label className="gray50">Será redireccionado a la página principal por favor espere...</label>
