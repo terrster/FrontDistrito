@@ -1,16 +1,21 @@
 import Steps from './Steps';
 import Title from '../Generic/Title';
 import { connect } from 'react-redux';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useSelector } from 'react';
 import AmountForm from '../../forms/AmountForm';
 import CustomModal from '../Generic/CustomModal';
 import { execToast } from '../../utils/ToastUtils';
 import { variablesManager } from '../Manager/VariablesManager';
 import axios from '../../utils/axios';
 import { useHistory } from "react-router-dom";
+import CustomLoader from "../Generic/CustomLoader";
 
 const Amount = props => {
-	
+	// Redux state
+	const {
+		loader: { isLoading },
+	  } = useSelector((state) => state);
+
 	const [user, setUser] = useState(JSON.parse(sessionStorage.getItem('user')));
 	const [initialValues, setInitialValues] = useState({});
 	const history = useHistory();
@@ -84,6 +89,7 @@ const Amount = props => {
 	}, [])		
 		return (
 			<div className="container mt-3">
+				{isLoading && <CustomLoader />}
 				<Steps />
 				<CustomModal
 					modalName="amountError"

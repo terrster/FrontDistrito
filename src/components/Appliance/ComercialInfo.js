@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useSelector } from 'react';
 import { useHistory } from "react-router-dom";
 import Title from '../Generic/Title';
 import { connect } from 'react-redux';
@@ -10,9 +10,14 @@ import axios from '../../utils/axios';
 // Components
 import Steps from './Steps';
 import CustomModal from '../Generic/CustomModal';
-
+import CustomLoader from "../Generic/CustomLoader";
 
 const ComercialInfo = (props) => {
+	// Redux state
+	const {
+		loader: { isLoading },
+	  } = useSelector((state) => state);
+
 
 	const [user, setUser] = useState(JSON.parse(sessionStorage.getItem('user')));
 	const [initialValues, setInitialValues] = useState({});
@@ -87,6 +92,7 @@ const ComercialInfo = (props) => {
 
 	return (
 		<div className="container mt-3">
+			{isLoading && <CustomLoader />}
 			<Steps />
 			<div className="text-center mb-2">
 				<Title
@@ -106,7 +112,7 @@ const ComercialInfo = (props) => {
 	);
 }
 
- const mapStateToProps = (state, ownProps) => {
+ /* const mapStateToProps = (state, ownProps) => {
 	return {
 		history: ownProps.history,
 		modal: state.modal.name,
@@ -114,7 +120,7 @@ const ComercialInfo = (props) => {
 		applianceAmount: state.appliance.amount,
 		applianceData: state.appliance,
 		applianceComercialInfo: state.appliance.comercialInfo,
-		/* toast: state.app.toast.second, */
+		toast: state.app.toast.second, 
 		currentAddress: state.currentAddress.currentAddress,
 		currentComercialInfo: state.actionForm.comercialInfoForm
 	};
@@ -147,6 +153,6 @@ const mapDispatchToProps = dispatch => {
 			});
 		}
 	};
-}; 
+}; */ 
 
-export default  connect(mapStateToProps, mapDispatchToProps)(ComercialInfo );
+export default  /* connect(mapStateToProps, mapDispatchToProps)( */ComercialInfo;  //)
