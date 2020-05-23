@@ -45,7 +45,7 @@ const ComercialInfo = (props) => {
 							token: sessionStorage.getItem('token')
 						}
 					});
-					await sessionStorage.setItem('user', JSON.stringify(res.data.user));
+					sessionStorage.setItem('user', JSON.stringify(res.data.user));
 					history.push(`/informacion-general/${user._id}`);
 				} catch (error) {
 					console.log("Error de servicio",error);
@@ -53,7 +53,7 @@ const ComercialInfo = (props) => {
 			} else {
 				try {
 					const res = await axios.post(`api/info-comercial/${id}`, data);
-					await sessionStorage.setItem('user', JSON.stringify(res.data.user));
+					sessionStorage.setItem('user', JSON.stringify(res.data.user));
 					history.push(`/informacion-general/${user._id}`);
 					
 				} catch (error) {

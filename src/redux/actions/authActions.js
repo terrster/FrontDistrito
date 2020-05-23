@@ -55,9 +55,11 @@ export function loginAction(credentials){
 
         try{
             const {data} = await Axios.post('login', credentials);
-            sessionStorage.setItem('user', JSON.stringify(data.user));
-            sessionStorage.setItem("token", data.token);
-            dispatch( loginSuccess() );
+            if(data.code === 200){
+				sessionStorage.setItem('user', JSON.stringify(data.user));
+				sessionStorage.setItem("token", data.token);
+				dispatch( loginSuccess() );
+			}
         }
         catch(error){
             dispatch( loginFailed('Some error') );

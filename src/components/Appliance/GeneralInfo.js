@@ -77,10 +77,9 @@ const GeneralInfo = () => {
 				});
 			}
 		}
-		dispatch( updateLoader(false));
 	}
 	getData();	
-
+	dispatch( updateLoader(false));
   }, []);
 
 
@@ -100,7 +99,7 @@ const GeneralInfo = () => {
 			const id = general._id;				
 			try {
 				const res = await axios.put(`api/info-general/${id}`,data);
-				await sessionStorage.setItem('user', JSON.stringify(res.data.user));
+				sessionStorage.setItem('user', JSON.stringify(res.data.user));
 				history.push(`/documentos/${user._id}`);
 			} catch (error) {
 				console.log("Error de servicio",error);
@@ -110,7 +109,7 @@ const GeneralInfo = () => {
 					const res = await axios.post(`api/info-general/${id}`, data);
 					console.log("POST");
 					console.log(res);
-					await sessionStorage.setItem('user', JSON.stringify(res.data.user));
+					sessionStorage.setItem('user', JSON.stringify(res.data.user));
 					history.push(`/documentos/${user._id}`);
 				} catch (error) {
 					console.log("Error de servicio",error);

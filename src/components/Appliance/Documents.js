@@ -6,6 +6,7 @@ import CustomModal from "../Generic/CustomModal";
 import DocumentsForm from "../../forms/DocumentsForm";
 import { execToast } from "../../utils/ToastUtils";
 import { Alert, Button } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
 
 // Components
 import Steps from "./Steps";
@@ -27,7 +28,7 @@ import Loader from "../Loader/Loader";
 const Documents = (props) => {
 
   const { idAppliance } = useParams();
-
+const history = useHistory();
   const [show, setShow] = useState(true);
   const [data, setData] = useState(undefined); // Dato de prueba
   const [user, setUser] = useState(JSON.parse(sessionStorage.getItem("user")));
@@ -70,6 +71,8 @@ const Documents = (props) => {
 		if(!data.hasOwnProperty("error")){
 			sessionStorage.setItem('user', JSON.stringify(data.user));
 		}
+		history.push('/credito/solicitud/'+user._id)
+		
 	} catch(e){
 		console.log(e);
 	}
