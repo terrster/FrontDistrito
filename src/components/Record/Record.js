@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { connect } from "react-redux";
+import React, { useState, useEffect } from "react";
+import {useDispatch,useSelector } from "react-redux";
 import Title from "../Generic/Title";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
@@ -7,15 +7,31 @@ import Files from "./Files";
 import Credits from "./Credits";
 import Rejected from "./Rejected";
 import { Col } from "react-bootstrap";
+import { updateLoader } from '../../redux/actions/loaderActions';
+import CustomLoader from '../Generic/CustomLoader';
 
 let client;
 
 const Record = (props) => {
+
+  const {
+    loader: { isLoading },
+  } = useSelector((state) => state);
+  const dispatch = useDispatch();
+
+  useEffect(() => { 
+    dispatch (updateLoader(true));
+    console.log(isLoading)
+    setTimeout(() => {
+      dispatch (updateLoader(false));
+   }, 2000)
+  },[])
+  
+  
   const getAppliances = (idClient) => {
     // Hacer peticion con el idClient y obtener las solicitudes, guardandolas en una variable llamada data
     const data = undefined;
     if (data !== undefined && data.myAppliances.length !== 0) {
-      this.props.updateLoader(false);
       return (
         <Tabs>
           <TabList className="coolvetica ulist">
@@ -42,8 +58,6 @@ const Record = (props) => {
         </Tabs>
       );
     } else {
-      this.props.updateLoader(false);
-
       return (
         <div className="text-center mt-120">
           <Title title="Aún no tienes una solicitud con nosotros" />
@@ -57,6 +71,8 @@ const Record = (props) => {
 		  proposals: []
 	  }
   }
+   
+   
   //let id = (sessionStorage.getItem('applianceId') !==  undefined) ? sessionStorage.getItem('applianceId') :this.props.match.params.idAppliance;
   let id =
     sessionStorage.getItem("idClient") !== undefined
@@ -64,6 +80,8 @@ const Record = (props) => {
       : null;
   //Se coloca el componente de forma provisional ya que la mutation no funciona
   const [user, setUser] = useState(JSON.parse(sessionStorage.getItem("user")));
+  if(isLoading)
+    return <CustomLoader/>
   return (
     <div className="container mt-40 mb-120">
       <Title
@@ -94,13 +112,15 @@ const Record = (props) => {
           <Title title="Aún no tienes una solicitud con nosotros" />
         </div>
       )}
+      
     </div>
+    
   );
 };
 
-const mapStateToProps = (state, ownProps) => {
+/* const mapStateToProps = (state, ownProps) => {
   return {
-    user: { name: "Prueba"}/* state.user.user */};
+    user: { name: "Prueba"} state.user.user };
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -115,6 +135,6 @@ const mapDispatchToProps = (dispatch) => {
       dispatch({ type: "UPDATE_CURRENT_SECTION", data: { section } });
     },
   };
-};
+}; */
 
-export default connect(mapStateToProps, mapDispatchToProps)(Record);
+export default /* connect(mapStateToProps, mapDispatchToProps)( */Record;
