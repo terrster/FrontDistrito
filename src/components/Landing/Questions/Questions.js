@@ -1,5 +1,5 @@
 import React from 'react';
-import Title from '../Generic/Title';
+import Title from '../../Generic/Title';
 import Question from './Question';
 
 
