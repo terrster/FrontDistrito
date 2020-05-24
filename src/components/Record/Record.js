@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import Title from "../Generic/Title";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
@@ -63,11 +63,12 @@ const Record = (props) => {
       ? sessionStorage.getItem("idClient")
       : null;
   //Se coloca el componente de forma provisional ya que la mutation no funciona
+  const [user, setUser] = useState(JSON.parse(sessionStorage.getItem("user")));
   return (
     <div className="container mt-40 mb-120">
       <Title
         className="blackBlue coolvetica fw500 fz32 mb-16"
-        title={`Hola ` + sessionStorage.getItem("nameUser")}
+        title={`Hola ` + user.name/* sessionStorage.getItem("nameUser") */} //Mientras se obtienen los datos
       />
       <Tabs>
         <TabList className="coolvetica ulist">
@@ -99,8 +100,7 @@ const Record = (props) => {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    user: state.user.user,
-  };
+    user: { name: "Prueba"}/* state.user.user */};
 };
 
 const mapDispatchToProps = (dispatch) => {
