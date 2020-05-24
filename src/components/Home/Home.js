@@ -60,7 +60,6 @@ const Home = (props) => {
 		};
 		if (idClient.appliance.length > 0){
 			
-			
 				const appliance = idClient.appliance[idClient.appliance.length - 1];
 				let idDocuments = null
 				if (appliance.idDocuments.length > 0){
@@ -73,7 +72,7 @@ const Home = (props) => {
 					info.gyre  = idComercialInfo.hasOwnProperty("gyre") ? idComercialInfo.gyre : "";
 					info.specific  = idComercialInfo.hasOwnProperty("specific") ? idComercialInfo.specific : "";
 					info.rfc  = idComercialInfo.hasOwnProperty("rfc") ? idComercialInfo.rfc : "";
-					let newProfile = {
+					newProfile = {
 						...myProfile,
 						idClient: {
 							type,

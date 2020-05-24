@@ -13,7 +13,8 @@ class ComercialInfoConstructForm extends Component {
 	cp: '',
 	colonias: [],
 	error: null,
-	firstLoad: true
+	firstLoad: true,
+	changeCP: false
   };
   
   getColonias = async codigopostal => {
@@ -60,6 +61,7 @@ class ComercialInfoConstructForm extends Component {
   handleChangeCodigoPostal = async e => {
   	const codigopostal = e.target.value;
     this.getColonias(codigopostal);
+    this.setState({ changeCP: true });
   };
 
   /* FIN CODIGO POSTAL */
@@ -155,7 +157,7 @@ class ComercialInfoConstructForm extends Component {
               name="town"
               cls="mb-3"
             >
-              {this.props.initialValues.colonias != null ? 
+              {this.props.initialValues.colonias != null && !this.state.changeCP? 
 				  this.props.initialValues.colonias.map((colonia, index) => {
 					  return (
 						<option value={colonia} key={colonia + index}>
