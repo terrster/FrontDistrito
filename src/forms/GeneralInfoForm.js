@@ -17,7 +17,7 @@ import { setSameAddress } from "../redux/actions/sameAddressActions";
 import PopUp from "./PopUp";
 import Info from "../assets/img/Info.png";
 import { updateLoader } from '../redux/actions/loaderActions';
-
+import axiosBase from 'axios';
 let GeneralInfoForm = ({ handleSubmit,  changeAddress, initialValues, setInitialValues }) => {
   const dispatch = useDispatch();  
   const [currentAddress, setCurrentAddress] = useState(
@@ -26,6 +26,8 @@ let GeneralInfoForm = ({ handleSubmit,  changeAddress, initialValues, setInitial
   const [sameAddress, setSameAddress] = useState(false);
   const [showModalGeneral, setShow] = useState(true);
   const [creditCard, setCreditCard] = useState("");
+  const [colonias, setColonias] = useState([]);
+  const [changeCP, setChangeCP] = useState(false);
   const handleShow = () => setShow(true);  
   /**Intentar pasar la direccion por aqui y/o buscar por que no se pasa */
   //let lastAddress = props.currentAddress;
@@ -61,6 +63,19 @@ let GeneralInfoForm = ({ handleSubmit,  changeAddress, initialValues, setInitial
 		}
 		dispatch( updateLoader(false) );
 	}	
+	
+	const setColoniasR = async(zipCode) => {
+		let coloniasr = [];
+		const coloniasRequest = await axiosBase.get(`https://api-sepomex.hckdrk.mx/query/info_cp/${zipCode}`);              
+		if(Array.isArray(coloniasRequest.data)){
+			coloniasRequest.data.map(datos => {
+			coloniasr.push(datos.response.asentamiento);
+			});
+		} else if(coloniasRequest.error) {
+			coloniasr = [];
+		}
+		setColonias(coloniasr);
+	}
   return (
     <div>
       <form
@@ -218,19 +233,43 @@ let GeneralInfoForm = ({ handleSubmit,  changeAddress, initialValues, setInitial
               component={renderFieldFull}
               label="CP"
               name="zipCode"
+              onChange={(event, newValue, previousValue, name) => {
+				  setChangeCP(true)
+				  if (newValue.length === 5){
+					  setColoniasR(newValue);
+				  } else {
+					  setColoniasR([]);
+				  }
+			  }}
               val={!sameAddress ? "" : currentAddress.zipCode}
               disabled={!sameAddress ? false : true}
             />
           </Col>
 
           <Col lg={6} md={6} sm={12}>
-            <Field
-              component={renderFieldFull}
-              label="Colonia"
-              name="town"
-              val={!sameAddress ? "" : currentAddress.town}
-              disabled={!sameAddress ? false : true}
-            />
+			  <Field
+				  className="form-control custom-form-input brandonReg mt-24 mb-0"
+				  component="select"
+				  name="town"
+				  cls="mb-3 mt-24"
+				  value={!sameAddress ? "" : currentAddress.town}
+				  disabled={!sameAddress ? false : true}
+				>
+				  {initialValues.colonias != null && !changeCP ? 
+					  initialValues.colonias.map((colonia, index) => {
+						  return (
+							<option value={colonia} key={colonia + index}>
+								{colonia}
+							</option>
+					  )})
+					  : colonias.map((colonia, index) => {
+						return (
+							<option value={colonia} key={colonia + index}>
+								{colonia}
+							</option>
+						);
+					  })}
+				</Field>
           </Col>
 
           <Col lg={12} md={12} sm={12}>

@@ -97,7 +97,7 @@ const ComercialInfo = (props) => {
 						coloniasRequest.data.map(datos => {
 							colonias.push(datos.response.asentamiento);
 						});
-					} else if(res.error) {
+					} else if(coloniasRequest.error) {
 						colonias = null;
 					}
 					setInitialValues({...res.data.comercial, ...address, terminal, colonias });

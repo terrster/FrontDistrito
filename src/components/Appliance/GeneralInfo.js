@@ -21,6 +21,7 @@ import {
 	changeTypeGeneralInfoForm
 } from '../../redux/actions/formsTypeActions';
 import axios from '../../utils/axios';
+import axiosBase from 'axios';
 import Loader from "../Loader/Loader";
 import { ToastContainer } from "react-toastify";
 
@@ -76,10 +77,20 @@ const GeneralInfo = () => {
 				const zipCode = address.zipCode;
 				const extNumber = address.extNumber;
 				const intNumber = address.intNumber;
+				let colonias = [];
+				const coloniasRequest = await axiosBase.get(`https://api-sepomex.hckdrk.mx/query/info_cp/${zipCode}`);              
+				if(Array.isArray(coloniasRequest.data)){
+					coloniasRequest.data.map(datos => {
+						colonias.push(datos.response.asentamiento);
+					});
+				} else if(coloniasRequest.error) {
+					colonias = null;
+				}
 				setInitialValues({ 
 					...initialValues, ...res.data.general, day, month, year,
 					name1, name2, phone1, phone2, relative1, relative2,
-					mortgageCredit, creditCard, street, town, zipCode, extNumber, intNumber
+					mortgageCredit, creditCard, street, town, zipCode, extNumber, intNumber,
+					colonias
 				});
 			}
 		}
