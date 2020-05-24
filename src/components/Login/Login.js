@@ -17,10 +17,8 @@ let Login = props => {
 	const [visible, setVisible] = useState(false);
 
 	let onFormSubmit = (data) => {
-		/* props.updateLoader(true) */
 		dispatch ( updateLoader(true));
 		dispatch( loginAction(data) );
-		dispatch ( updateLoader(false));
 		setIntento(true);
 	}
 

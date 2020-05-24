@@ -24,6 +24,7 @@ import { updateAlert } from '../../redux/actions/alertActions';
 import { updateAppliance } from '../../redux/actions/applianceActions';
 import axios from '../../utils/axios';
 import Loader from "../Loader/Loader";
+import { ToastContainer } from "react-toastify";
 
 const Documents = (props) => {
 
@@ -39,7 +40,7 @@ const history = useHistory();
   const applianceAmount = useSelector((state) => state.appliance.amount);
   const applianceData = useSelector((state) => state.appliance);
   //const user = useSelector(state => state.user.user);
-  const toast = useSelector((state) => state.app.toast.docs);
+  const toast = useSelector((state) => state.app.toast);
   const documents = useSelector((state) => state.documents);
   const alert = useSelector((state) => state.alert);
   const statusdocument = useSelector((state) => state.docsStatus);
@@ -55,6 +56,10 @@ const history = useHistory();
   const onFormSubmit = async (e, finish) => {
     e.preventDefault();
     dispatch(updateLoader(true));
+    if (!toast.documents){
+		execToast("documents");
+		dispatch( updateToast(toast,"documents"));
+	}
     const formData = new FormData();
     for (const typeDoc in documents){
 		documents[typeDoc].forEach(doc => {
@@ -236,6 +241,7 @@ const history = useHistory();
 
   return (
     <div className="container mt-3">
+     <ToastContainer />
      <Loader />
       {show && (
         <div className="modal-comparative">

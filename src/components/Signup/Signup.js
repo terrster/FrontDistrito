@@ -1,22 +1,22 @@
 import React from "react";
-//import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Title from "../Generic/Title";
 import SignupForm from "../../forms/SignupForm";
 import * as $ from "jquery";
-/*import "react-toastify/dist/ReactToastify.css";
+import "react-toastify/dist/ReactToastify.css";
  import { execToast } from "../../utils/ToastUtils";
-import signupReducer from "../../redux/reducers/signup-reducer"; 
-import { Link } from "react-router-dom";*/
+//import signupReducer from "../../redux/reducers/signup-reducer"; 
+import { Link } from "react-router-dom";
 import "../../css/signup.css";
 import registerImage from "../../assets/img/register.png";
 //import RegistroExitoso from "../../components/Registro/RegistroExitoso";
-import { useDispatch, useSelector } from 'react-redux';
 import Loader from "../Loader/Loader";
 import { updateLoader } from '../../redux/actions/loaderActions';
-
 import { singUpAction } from '../../redux/actions/authActions';
+import { updateToast } from '../../redux/actions/appActions';
 
 let Signup = props => {
+	const toast = useSelector(state => state.app.toast);
   //  let onFormSubmit = async (data,Login,Signup) => {
   //   props.updateLoader(true);
   //   try {
@@ -52,7 +52,8 @@ let Signup = props => {
   const dispatch = useDispatch();
 
   let onFormSubmit = (data) => {
-	  dispatch( updateLoader(true));
+	dispatch ( updateToast(toast, "register") );
+	dispatch( updateLoader(true) );
     dispatch( singUpAction(data) );
     dispatch (updateLoader(false));
   }

@@ -26,7 +26,7 @@ export function singUpAction(request){
 
                 setTimeout( () => {
                     window.location.href = `${process.env.REACT_APP_REDIRECT}/registroexitoso`;
-                }, 5000)
+                }, 2000)
 
             }
         }

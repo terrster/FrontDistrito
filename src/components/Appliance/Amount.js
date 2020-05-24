@@ -1,8 +1,7 @@
 import Steps from './Steps';
 import Title from '../Generic/Title';
-import { connect, useDispatch } from 'react-redux';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
 import AmountForm from '../../forms/AmountForm';
 import CustomModal from '../Generic/CustomModal';
 import { execToast } from '../../utils/ToastUtils';
@@ -11,12 +10,16 @@ import axios from '../../utils/axios';
 import { useHistory } from "react-router-dom";
 import Loader from "../Loader/Loader";
 import { updateLoader } from '../../redux/actions/loaderActions';
+import { updateToast } from '../../redux/actions/appActions';
+import { ToastContainer } from "react-toastify";
+
 
 const Amount = props => {
 	// Redux state
 	const {
 		loader: { isLoading },
 	  } = useSelector((state) => state);
+	const toast = useSelector(state => state.app.toast);
     const dispatch = useDispatch();
 	const [user, setUser] = useState(JSON.parse(sessionStorage.getItem('user')));
 	const [initialValues, setInitialValues] = useState({});
@@ -89,6 +92,10 @@ const Amount = props => {
 				}
 			}
 		}
+		if (!toast.first) {
+			execToast('first');
+			dispatch( updateToast(toast,'first') );
+		}
 		getData();
 		dispatch (updateLoader(false)) ;
 	}, [])		
@@ -96,6 +103,7 @@ const Amount = props => {
 			<div className="container mt-3">
 				<Loader />
 				<Steps />
+				<ToastContainer />
 				<CustomModal
 					modalName="amountError"
 					message="Error al enviar los datos. Favor de intentarlo de nuevo"

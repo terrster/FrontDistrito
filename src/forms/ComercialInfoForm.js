@@ -155,13 +155,20 @@ class ComercialInfoConstructForm extends Component {
               name="town"
               cls="mb-3"
             >
-              {this.state.colonias.map((colonia, index) => {
-                return (
-                  <option value={colonia} key={colonia + index}>
-                    {colonia}
-                  </option>
-                );
-              })}
+              {this.props.initialValues.colonias != null ? 
+				  this.props.initialValues.colonias.map((colonia, index) => {
+					  return (
+						<option value={colonia} key={colonia + index}>
+							{colonia}
+						</option>
+				  )})
+				  : this.state.colonias.map((colonia, index) => {
+					return (
+						<option value={colonia} key={colonia + index}>
+							{colonia}
+						</option>
+					);
+				  })}
             </Field>
           </Col>
 

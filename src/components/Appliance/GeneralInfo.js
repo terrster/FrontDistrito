@@ -22,6 +22,7 @@ import {
 } from '../../redux/actions/formsTypeActions';
 import axios from '../../utils/axios';
 import Loader from "../Loader/Loader";
+import { ToastContainer } from "react-toastify";
 
 const GeneralInfo = () => {
   const dispatch = useDispatch();
@@ -30,6 +31,7 @@ const GeneralInfo = () => {
   const applianceData = useSelector((state) => state.appliance);
   const modal = useSelector((state) => state.modal);
   const app = useSelector((state) => state.app);
+  const toast = useSelector((state) => state.app.toast);
   const currentGeneralInfo = useSelector(state => state.actionForm.generalInfoForm);
   
   const [user, setUser] = useState(JSON.parse(sessionStorage.getItem("user")));
@@ -38,6 +40,10 @@ const GeneralInfo = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    if(!toast.third){
+		execToast('third');
+		dispatch( updateToast(toast, 'third') )
+	}
     setInitialValues({...initialValues, name: user.name, lastname: user.lastName, phone: user.phone });
     dispatch( updateLoader(true));
 	const getData = async () => {
@@ -151,6 +157,7 @@ const GeneralInfo = () => {
     <div className="container mt-3">
       <Loader />
       <Steps />
+      <ToastContainer />
       <div className="text-center mb-2">
         <Title
           title="Información general"

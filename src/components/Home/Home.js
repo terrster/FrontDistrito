@@ -3,8 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Title from "../Generic/Title";
 import "../../css/account.css";
 import ApplianceCard from "../Generic/ApplianceCard";
-import CustomLoader from "../Generic/CustomLoader";
-import Loader from '../Loader/Loader';
+import CustomLoader from '../Generic/CustomLoader';
 import comercialOptions from "../../models/ComercialInfoModels";
 import { Row, Col } from "react-bootstrap";
 import titoAccount from "../../assets/img/tito-account.png";
@@ -93,7 +92,9 @@ const Home = (props) => {
     };
 
     getData();
-    dispatch (updateLoader(false));
+    setTimeout(() => {
+		 dispatch (updateLoader(false));
+	}, 2000)
   }, []);
 
   const uploadedReady = (arr) => {
@@ -115,9 +116,11 @@ const Home = (props) => {
       .catch((err) => console.log(JSON.stringify(err)));
   };
 
+  if (isLoading)
+		return <CustomLoader />
+
   return (
     <div className="container mt-72 mb-120">
-      {isLoading && <Loader />}
       <div>
         <Title
           className="blackBlue coolvetica fw500 fz32 mb-16"

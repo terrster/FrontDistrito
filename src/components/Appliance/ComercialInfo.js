@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { execToast } from '../../utils/ToastUtils';
 import ComercialInfoForm from '../../forms/ComercialInfoForm';
 import { variablesManager } from '../Manager/VariablesManager';
+import axiosBase from 'axios';
 import axios from '../../utils/axios';
 
 // Components
@@ -13,11 +14,14 @@ import Steps from './Steps';
 import CustomModal from '../Generic/CustomModal';
 import Loader from "../Loader/Loader";
 import { updateLoader } from '../../redux/actions/loaderActions';
+import { ToastContainer } from "react-toastify";
+import { updateToast } from '../../redux/actions/appActions';
 
 const ComercialInfo = (props) => {
 	const dispatch = useDispatch();
 	// Redux state
 	const { loader: { isLoading } } = useSelector((state) => state);
+	const toast = useSelector((state) => state.app.toast);
 
 
 	const [user, setUser] = useState(JSON.parse(sessionStorage.getItem('user')));
@@ -64,7 +68,10 @@ const ComercialInfo = (props) => {
 	}
 
 	useEffect(() => {
-		
+		if (!toast.second) {
+			execToast('second');
+			dispatch(updateToast(toast, 'second'));
+		}
 		window.scrollTo(0, 0);
 		const getData = async () => {
 			dispatch( updateLoader(true) );
@@ -83,8 +90,17 @@ const ComercialInfo = (props) => {
 						}
 					});					
 					const address = res.data.comercial.address[res.data.comercial.address.length - 1]
-					const terminal = res.data.comercial.terminal ? "1" : "0"
-					setInitialValues({...res.data.comercial, ...address, zipCode: '', terminal });
+					const terminal = res.data.comercial.terminal ? "1" : "0";
+					let colonias = [];
+					const coloniasRequest = await axiosBase.get(`https://api-sepomex.hckdrk.mx/query/info_cp/${address.zipCode}`);              
+					if(Array.isArray(coloniasRequest.data)){
+						coloniasRequest.data.map(datos => {
+							colonias.push(datos.response.asentamiento);
+						});
+					} else if(res.error) {
+						colonias = null;
+					}
+					setInitialValues({...res.data.comercial, ...address, terminal, colonias });
 				}
 			}
 			dispatch( updateLoader(false) );
@@ -98,6 +114,7 @@ const ComercialInfo = (props) => {
 		<div className="container mt-3">
 			<Loader />
 			<Steps />
+			<ToastContainer />
 			<div className="text-center mb-2">
 				<Title
 					title="Datos del negocio"

@@ -104,11 +104,7 @@ class App extends Component {
         >
           <Provider store={store}>
             <NavBar
-              type={this.props.navType}
               url={this.props.navegationurl}
-              isOpen={this.state.isOpen}
-              close={this.onCloseBar}
-              open={this.onOpenBar}
             />
 
             <div className="flex-grow-1" style={{ height: "auto" }}>
