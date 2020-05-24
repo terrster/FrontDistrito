@@ -192,7 +192,7 @@ class ComercialInfoConstructForm extends Component {
         />
         <Field component={renderSelectField} name="terminal" cls="mb-3">
           <option className="brandonReg" value="">
-            Terminal para cobrar con tarjeta (TPV)
+            ¿Vendes tu producto o servicio a Estados Unidos?
           </option>
           <option className="brandonReg" value="1">
             Sí
