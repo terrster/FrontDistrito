@@ -112,19 +112,19 @@ export const validateGeneralInfo = values => {
 
 	if (!values.sameAddress) {
 		if (!values.street) {
-			errors.street = 'Ingresa la calle de tu negocio';
+			errors.street = 'Ingresa la calle de tu domicilio';
 		}
 
 		if (!values.extNumber) {
-			errors.extNumber = 'Ingresa el número exterior de tu negocio';
+			errors.extNumber = 'Ingresa el número exterior de tu domicilio';
 		}
 
 		if (!values.town) {
-			errors.town = 'Ingresa la colonia donde se ubica tu negocio';
+			errors.town = 'Ingresa la colonia donde se ubica tu domicilio';
 		}
 
 		if (!values.phone) {
-			errors.phone = 'Ingresa el teléfono de tu negocio';
+			errors.phone = 'Ingresa el teléfono de tu domicilio';
 		} else if (
 			!/^[0-9]\d+$/.test(values.phone) ||
 			values.phone.length > 10 || values.phone.length < 10
@@ -133,7 +133,7 @@ export const validateGeneralInfo = values => {
 		}
 
 		if (!values.zipCode) {
-			errors.zipCode = 'Ingresa el código postal de tu negocio';
+			errors.zipCode = 'Ingresar código postal';
 		} else if (
 			!/^[0-9]\d{4,5}/.test(values.zipCode) ||
 			values.zipCode.length > 5 || values.zipCode.length < 5
