@@ -61,7 +61,6 @@ let GeneralInfoForm = ({ handleSubmit,  changeAddress, initialValues, setInitial
 		}
 		dispatch( updateLoader(false) );
 	}	
-
   return (
     <div>
       <form
@@ -159,7 +158,7 @@ let GeneralInfoForm = ({ handleSubmit,  changeAddress, initialValues, setInitial
           </Col>
         </Row>
 
-        {sessionStorage.type === "PM" ? (
+        {user.idClient[user.idClient.length - 1].type === "PM" ? (
           <Row>
             <Col lg={12} md={12} sm={12}>
               <Field
@@ -252,7 +251,7 @@ let GeneralInfoForm = ({ handleSubmit,  changeAddress, initialValues, setInitial
           </Col>
         </Row>
 
-        {sessionStorage.type !== "PF" ? (
+        {user.idClient[user.idClient.length - 1].type !== "PF" ? (
           <div>
             <div>
               <SubtitleForm
