@@ -30,7 +30,11 @@ class Appliance extends Component {
 
 	componentDidMount() {
 		this.getData();
+		this.props.updateLoader(true);
 		this.props.updateCurrentUrl('credito');
+		setTimeout(() => {
+			this.props.updateLoader(false);
+		}, 2000);
 		window.scrollTo(0, 0);
 	}
 
@@ -148,6 +152,8 @@ class Appliance extends Component {
 	};
 
 	render() {
+		if (this.props.isLoading)
+			return <CustomLoader />
 		return (
 			<div className="container mt-40 mb-120">
 				{this.props.match.params.idAppliance ? (
@@ -236,7 +242,8 @@ const mapStateToProps = (state, ownProps) => {
 		documents: state.appliance.documents ? state.appliance.documents : null,
 		user: {
 			name: "Pruebas"
-		}
+		},
+		isLoading: state.loader.isLoading
 	};
 };
 
@@ -247,6 +254,9 @@ const mapDispatchToProps = dispatch => {
 		},
 		updateAmountAppliance: amount => {
 			dispatch({ type: 'UPDATE_AMOUNT_APPLIANCE', data: { amount } });
+		},
+		updateLoader: loader => {
+				dispatch({type: 'UPDATE_LOADER', payload: loader})
 		},
 		updateComercialInfo: comercialInfo => {
 			dispatch({ type: 'UPDATE_COMERCIAL', data: { comercialInfo } });

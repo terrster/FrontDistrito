@@ -409,7 +409,7 @@ let GeneralInfoForm = ({ handleSubmit,  changeAddress, initialValues, setInitial
           </Button>
         </div>
       </form>
-      <PopUp show={showModalGeneral} setShow={setShow} />
+      {user.idClient[user.idClient.length - 1].type !== "PF" && <PopUp show={showModalGeneral} setShow={setShow} />}
     </div>
   );
 };
