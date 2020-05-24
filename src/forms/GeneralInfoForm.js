@@ -158,7 +158,7 @@ let GeneralInfoForm = ({ handleSubmit,  changeAddress, initialValues, setInitial
           </Col>
         </Row>
 
-        {user.idClient[user.idClient.length - 1].type === "PM" ? (
+        {user.idClient[user.idClient.length - 1].type === "PM" && (
           <Row>
             <Col lg={12} md={12} sm={12}>
               <Field
@@ -168,8 +168,6 @@ let GeneralInfoForm = ({ handleSubmit,  changeAddress, initialValues, setInitial
               />
             </Col>
           </Row>
-        ) : (
-          <div></div>
         )}
 
         <SubtitleForm subtitle="Domicilio particular" className="mb-10 mt-24" />
@@ -251,14 +249,14 @@ let GeneralInfoForm = ({ handleSubmit,  changeAddress, initialValues, setInitial
           </Col>
         </Row>
 
-        {user.idClient[user.idClient.length - 1].type !== "PF" ? (
+        {user.idClient[user.idClient.length - 1].type !== "PF" && (
           <div>
             <div>
               <SubtitleForm
                 subtitle="Clave CIEC (Opcional)"
-                className="mb-10 mt-30"
+                className="mt-30"
               />
-              <div onClick={handleShow} style={{ cursor: "pointer" }}>
+              <div onClick={handleShow} style={{ cursor: "pointer", width: '0', height: '0' }}>
                 <img
                   src={Info}
                   alt="More Info"
@@ -267,14 +265,13 @@ let GeneralInfoForm = ({ handleSubmit,  changeAddress, initialValues, setInitial
                 />
               </div>
             </div>
-            <div className="fz18 gray50 brandonReg mb-30">
+            <Field component={renderFieldFull} label="CIEC" name="ciec" />
+            <div className="fz18 gray50 brandonReg mb-30 mt-2">
               No es obligatorio pero podrá agilizar tu solicitud de crédito a la
               mitad del tiempo. Se ingresará por única ocasión para descargar la
               información necesaria.
             </div>
           </div>
-        ) : (
-          <div></div>
         )}
 
         <SubtitleForm subtitle="Referencias" className="mt-30" />
