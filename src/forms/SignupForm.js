@@ -57,7 +57,7 @@ const passwordTooltip = (
 );
 
 let SignupForm = (props) => {
-  const { handleSubmit, submitting, errorEmail } = props;
+  const { handleSubmit, submitting, errorEmail, setErrorEmail } = props;
   const submitButtonClass = submitting
     ? "btn-register mt-30 disabled"
     : "btn-register mt-30";
@@ -88,6 +88,9 @@ let SignupForm = (props) => {
         <Field
           component={renderField}
           type="email"
+          onChange={ (event, newValue, previousValue, name) => {
+			  setErrorEmail("");
+	      }}
           name="email"
           label="Correo electrónico"
           errorEmail={errorEmail}

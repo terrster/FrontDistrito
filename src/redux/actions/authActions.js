@@ -8,27 +8,28 @@ import {
 } from '../types/authTypes';
 import Axios from '../../utils/axios';
 
-export function singUpAction(request){
+export function singUpAction(data){
     return async(dispatch) => {
         dispatch( startRegistration() );
 
         try{
-            const {data} = await Axios.post('signin', request);
-            if(data.code === 200){
-                dispatch( registrationSuccess() );
+			dispatch( registrationSuccess() );
+			
+            const credentials = {
+				email: data.email,
+				password: data.password
+			}
+		
+			const loginRequest = await Axios.post('login', credentials);
+			
+			if (loginRequest.data.code === 200){
+				dispatch( loginAction(loginRequest.data) );
+			}
+			
+			setTimeout( () => {
+				window.location.href = `${process.env.REACT_APP_REDIRECT}/registroexitoso`;
+			}, 100)
 
-                const credentials = {
-                    email: request.email,
-                    password: request.password
-                }
-
-                dispatch( loginAction(credentials) );
-
-                setTimeout( () => {
-                    window.location.href = `${process.env.REACT_APP_REDIRECT}/registroexitoso`;
-                }, 2000)
-
-            }
         }
         catch(error){
             dispatch( registrationFailed('Some error') );
@@ -49,18 +50,15 @@ const registrationFailed = error => ({
     payload: error
 });
 
-export function loginAction(credentials){
+export function loginAction(data){
     return async(dispatch) => {
         dispatch( startLogin() );
 
         try{
-            const {data} = await Axios.post('login', credentials);
-            console.log(data);
-            if(data.code === 200){
-				sessionStorage.setItem('user', JSON.stringify(data.user));
-				sessionStorage.setItem("token", data.token);
-				dispatch( loginSuccess() );
-			}
+			sessionStorage.setItem('user', JSON.stringify(data.user));
+			sessionStorage.setItem("token", data.token);
+			dispatch( loginSuccess() );
+
         }
         catch(error){
 			console.log(error);

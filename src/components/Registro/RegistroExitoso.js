@@ -19,9 +19,10 @@ let RegistroExitoso = (props) => {
 	const dispatch = useDispatch();
 
 	if(sessionStorage.getItem("token")){
+		const user = JSON.parse(sessionStorage.getItem("user"));
 		setTimeout(() => {
-		  window.location = "/home";
-		}, 5000)
+		  window.location = `/elige-monto/${user._id}`;
+		}, 4000)
 	}
 	
 	useEffect(() => {

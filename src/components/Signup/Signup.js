@@ -60,6 +60,7 @@ let Signup = props => {
 	if (res.data.code === 500){
 		setErrorEmail(res.data.msg)
 	} else {
+		setErrorEmail("");
 		dispatch( singUpAction(data) );
 	}
 	dispatch (updateLoader(false));
@@ -95,7 +96,7 @@ let Signup = props => {
         ) : (
           <div></div>
         )}
-        <SignupForm onSubmit={e => onFormSubmit(e)} errorEmail={errorEmail} />
+        <SignupForm onSubmit={e => onFormSubmit(e)} errorEmail={errorEmail} setErrorEmail={setErrorEmail}/>
       </div>
     );
   }

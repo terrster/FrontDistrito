@@ -5,7 +5,7 @@ import SigninForm from '../../forms/SigninForm';
 import CustomModal from '../Generic/CustomModal';
 import Loader from '../Loader/Loader';
 import Alert from 'react-bootstrap/Alert'
-
+import axios from '../../utils/axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginAction } from '../../redux/actions/authActions';
 import { updateLoader } from '../../redux/actions/loaderActions';
@@ -13,13 +13,17 @@ import { updateLoader } from '../../redux/actions/loaderActions';
 let Login = props => {
 
 	const dispatch = useDispatch();
-	const [intento, setIntento] = useState(false);
 	const [visible, setVisible] = useState(false);
 
-	let onFormSubmit = (data) => {
+	let onFormSubmit = async (data) => {
 		dispatch ( updateLoader(true));
-		dispatch( loginAction(data) );
-		setIntento(true);
+		const loginRequest = await axios.post('login', data);
+		if (loginRequest.data.code === 200){
+			dispatch( loginAction(loginRequest.data) );
+		} else {
+			setVisible(true);	
+		}
+		dispatch ( updateLoader(false));
 	}
 
 	const auth = useSelector(state => state.auth.logged);
@@ -29,16 +33,6 @@ let Login = props => {
 		/* props.updateLoader(false) */
 		/* props.updateNav("login") */
 	}
-	else if (intento && !auth && !sessionStorage.getItem('user')){
-		setTimeout(() => {
-			dispatch ( updateLoader(false));
-			setVisible(true);
-			setIntento(false);
-		}, 2000)
-		/* props.updateLoader(false) */
-		/* props.updateModal('err') */
-	}
-
 
 	window.scrollTo(0, 0)
 	if(sessionStorage.getItem('user')){
@@ -53,6 +47,7 @@ let Login = props => {
 				/>
 				<div className="container mt-30 mb-30 d-flex flex-column align-items-center justify-content-center" style={{height : '600px'}}>
 					<Title className="fz56 text-center blue-primary coolvetica fw500" title="Inicia sesión" />
+					{ visible && <p>Error al loguear</p>}
 					<div className="mt-30 brandonReg fw300 fz20 text-center mb-30">
 						<label className="gray50">Ingresa tu correo y contraseña para comenzar</label>
 					</div>
