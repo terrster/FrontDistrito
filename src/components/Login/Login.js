@@ -30,9 +30,11 @@ let Login = props => {
 		/* props.updateNav("login") */
 	}
 	else if (intento && !auth && !sessionStorage.getItem('user')){
-		dispatch ( updateLoader(false));
-		setVisible(true);
-		setIntento(false);
+		setTimeout(() => {
+			dispatch ( updateLoader(false));
+			setVisible(true);
+			setIntento(false);
+		}, 2000)
 		/* props.updateLoader(false) */
 		/* props.updateModal('err') */
 	}

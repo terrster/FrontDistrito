@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Title from "../Generic/Title";
 import SignupForm from "../../forms/SignupForm";
@@ -14,9 +14,11 @@ import Loader from "../Loader/Loader";
 import { updateLoader } from '../../redux/actions/loaderActions';
 import { singUpAction } from '../../redux/actions/authActions';
 import { updateToast } from '../../redux/actions/appActions';
+import axios from '../../utils/axios';
 
 let Signup = props => {
 	const toast = useSelector(state => state.app.toast);
+	const [errorEmail, setErrorEmail] = useState("");
   //  let onFormSubmit = async (data,Login,Signup) => {
   //   props.updateLoader(true);
   //   try {
@@ -51,11 +53,16 @@ let Signup = props => {
 
   const dispatch = useDispatch();
 
-  let onFormSubmit = (data) => {
+  let onFormSubmit = async (data) => {
 	dispatch ( updateToast(toast, "register") );
 	dispatch( updateLoader(true) );
-    dispatch( singUpAction(data) );
-    dispatch (updateLoader(false));
+	const res = await axios.post('signin', data);
+	if (res.data.code === 500){
+		setErrorEmail(res.data.msg)
+	} else {
+		dispatch( singUpAction(data) );
+	}
+	dispatch (updateLoader(false));
   }
 
   //sessionStorage.removeItem("nameUser")
@@ -88,7 +95,7 @@ let Signup = props => {
         ) : (
           <div></div>
         )}
-        <SignupForm onSubmit={e => onFormSubmit(e)} />
+        <SignupForm onSubmit={e => onFormSubmit(e)} errorEmail={errorEmail} />
       </div>
     );
   }

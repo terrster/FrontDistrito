@@ -34,8 +34,8 @@ const FileInput = ({
 					return (
 						(value !== undefined) ?
 						((value.name === undefined ) ? 
-							<Chip fileName={value.split('%24%24')[1]} delete={deleteFile} docName={value} index={index} key={index}/>: 
-							<Chip fileName={value.name} delete={deleteFile} docName={nombre} index={index} key={index}/>)
+							<Chip fileName={nombre} delete={deleteFile} docName={nombre} index={index} key={index}/>: 
+							<Chip fileName={nombre} delete={deleteFile} docName={nombre} index={index} key={index}/>)
 						:<></>
 					);
 				}  )

@@ -59,11 +59,11 @@ const Home = (props) => {
 			},
 		};
 		if (idClient.appliance.length > 0){
-			
 				const appliance = idClient.appliance[idClient.appliance.length - 1];
 				let idDocuments = null
 				if (appliance.idDocuments.length > 0){
 					idDocuments = appliance.idDocuments[appliance.idDocuments.length - 1];
+					console.log(idDocuments);
 				}
 				if (appliance.idComercialInfo.length > 0){
 					const idComercialInfo = appliance.idComercialInfo[appliance.idComercialInfo.length - 1];
@@ -82,7 +82,7 @@ const Home = (props) => {
 								specific: info.specific,
 								rfc: info.rfc,
 							},
-							idDocuments: null
+							idDocuments
 						},
 					}
 				}

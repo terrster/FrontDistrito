@@ -153,6 +153,7 @@ let DocumentsForm = (props) => {
   /**
    * [Dependiendo la persona le creamos los documentos]
    */
+   
   switch (typePerson) {
     case "PF":
       docFiles = [
@@ -432,6 +433,7 @@ let DocumentsForm = (props) => {
     <div>
       <form className="ml-auto mr-auto" style={{ maxWidth: "690px" }}>
         {docFiles.map((d, i) => {
+			console.log(docFiles);
           return (
             <div key={`div-file-input-${i}`}>
               <FileInput

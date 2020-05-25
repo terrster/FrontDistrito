@@ -33,6 +33,7 @@ const history = useHistory();
   const [show, setShow] = useState(true);
   const [data, setData] = useState(undefined); // Dato de prueba
   const [user, setUser] = useState(JSON.parse(sessionStorage.getItem("user")));
+  const [initialValues, setInitialValues] = useState({});
   const dispatch = useDispatch();
   const app = useSelector(state => state.app)
   const modal = useSelector((state) => state.modal.name);
@@ -206,6 +207,26 @@ const history = useHistory();
       execToast("documents");
       dispatch(updateToast(app, "docs"));
     }
+    
+    const idUser = user._id;
+	const idClient = user.idClient[user.idClient.length - 1];
+    if (idClient.appliance.length > 0){
+		const appliance = idClient.appliance[idClient.appliance.length - 1];
+		if (appliance.idDocuments.length > 0){
+			const { 
+				acomplishOpinion, bankStatements, constitutiveAct, 
+				cventerprise, facturacion, financialStatements, 
+				lastDeclarations, oficialID, otherActs, others, 
+				proofAddress, proofAddressMainFounders, 
+				rfc } = appliance.idDocuments[appliance.idDocuments.length - 1];
+				
+			setInitialValues({ acomplishOpinion, bankStatements, constitutiveAct, 
+				cventerprise, facturacion, financialStatements, 
+				lastDeclarations, oficialID, otherActs, others, 
+				proofAddress, proofAddressMainFounders, 
+				rfc });
+		}
+	}
     dispatch(updateDocumentsNames(getDocsMethod()));
     testDocuments();
     /*    
@@ -283,7 +304,7 @@ const history = useHistory();
       />
       <DocumentsForm
         docSelection={sessionStorage.getItem("type")}
-        docs={documents}
+        docs={initialValues}
         updateAllDocs={updateAllDocs}
         updateDocs={updateDocuments}
         testDocs={testDocuments}
@@ -293,6 +314,7 @@ const history = useHistory();
         currentDocuments={currentDocs}
         statusDocs={isCompleteForm}
         statusComplete={appliance.status}
+        initialValues={initialValues}
       />
     </div>
   );

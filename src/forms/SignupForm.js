@@ -12,7 +12,8 @@ const renderField = ({
   type,
   maxLength,
   minLength,
-  meta: { touched, error, warning }
+  meta: { touched, error, warning },
+  errorEmail
 }) => (
   <div>
     {label !== "Teléfono" ? (
@@ -38,7 +39,7 @@ const renderField = ({
         />
       </div>
     )}
-
+	{type === "email" && <span> <small className="error">{errorEmail}</small> </span>}
     {touched &&
       ((error && (
         <span>
@@ -56,7 +57,7 @@ const passwordTooltip = (
 );
 
 let SignupForm = (props) => {
-  const { handleSubmit, submitting } = props;
+  const { handleSubmit, submitting, errorEmail } = props;
   const submitButtonClass = submitting
     ? "btn-register mt-30 disabled"
     : "btn-register mt-30";
@@ -89,12 +90,13 @@ let SignupForm = (props) => {
           type="email"
           name="email"
           label="Correo electrónico"
+          errorEmail={errorEmail}
         />
         <Field
           component={renderField}
           type="email"
           name="email_confirm"
-          label="Confirmar correo electrónico"
+          label="Confirmar correo electrónico"          
         />
         <span>
           <small id="ymb-dp-signup-email-confirm" className="d-none error">

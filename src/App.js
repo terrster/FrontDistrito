@@ -43,6 +43,7 @@ import Appliance from "./components/Appliance/Appliance";
 import Credit from "./components/Credit/Credit";
 import Record from "./components/Record/Record";
 import Documents from "./components/Appliance/Documents";
+import Loader from './components/Loader/Loader';
 
 // ROUTER & REDUX
 import {
@@ -71,21 +72,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
 );
 
 class App extends Component {
-  
-  constructor(props){
-    super(props)
-    this.state = {
-      isOpen: false,
-    };
-  }
-
-  onCloseBar = () => {
-    this.setState({ isOpen: false });
-  };
-
-  onOpenBar = () => {
-    this.setState({ isOpen: true });
-  };
+ 
 
   render() {
     const PrivateRoute = ({component: Component, ...rest}) => (
@@ -106,7 +93,6 @@ class App extends Component {
             <NavBar
               url={this.props.navegationurl}
             />
-
             <div className="flex-grow-1" style={{ height: "auto" }}>
               <Switch>
                 <PrivateRoute exact  path="/credito/solicitud/:idAppliance" component={Appliance} />
