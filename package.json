@@ -35,8 +35,9 @@
   },
   "scripts": {
     "start": "env-cmd -f .env.localhost react-scripts start",
-    "build": "react-scripts build",
-    "start:local": "env-cmd -f .env.localhost react-scripts start"
+    "start:local": "env-cmd -f .env.localhost react-scripts start",
+    "build": "env-cmd -f .env.development react-scripts build",
+    "build:production": "env-cmd -f .env.production react-scripts build"
   },
   "eslintConfig": {
     "extends": "react-app"
