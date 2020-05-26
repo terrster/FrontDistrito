@@ -21,6 +21,10 @@ let defineContent = (data) => {
 }
 
 const ApplianceCard = props => {
+	
+	const user = JSON.parse(sessionStorage.getItem("user"));
+	const idClient = user.idClient[user.idClient.length - 1];
+
 	return(
 		<div className="wht-card-box mb-24">
 			<Title className="blackBlue coolvetica fw500 mb-16 fz24" title={cardsElem[props.keyData].title}/>
@@ -51,7 +55,7 @@ const ApplianceCard = props => {
 						{(props.fourth) ? `${props.fourth}` : 'No especificado'}
 					</Col>
 					<Col sm={12} className="info-label brandonReg text-truncate text-right">
-							<Link to={`/${cardsElem[props.keyData].nameSection}/${props.applianceId}`} className="h5" style={{color: '#000000', cursor: 'pointer'}}>
+							<Link to={idClient.appliance.length > 0 ? `/${cardsElem[props.keyData].nameSection}/${props.applianceId}` : `/elige-monto/${user._id}`} className="h5" style={{color: '#000000', cursor: 'pointer'}}>
 								{cardsElem[props.keyData].five}
 							</Link>
 					</Col>
