@@ -90,7 +90,7 @@ let GeneralInfoForm = ({ handleSubmit,  changeAddress, initialValues, setInitial
               component={renderFieldFull}
               name="name"
               label="Nombre(s)"
-              onBlur={(event, newValue, previousValue) => setInitialValues({...initialValues, name: newValue})}
+              onChange={(event, newValue, previousValue) => setInitialValues({...initialValues, name: newValue})}
               type="text"
             />
           </Col>
@@ -98,7 +98,7 @@ let GeneralInfoForm = ({ handleSubmit,  changeAddress, initialValues, setInitial
             <Field
               component={renderFieldFull}
               name="lastname"
-              onBlur={(event, newValue, previousValue) => setInitialValues({...initialValues, lastname: newValue})}
+              onChange={(event, newValue, previousValue) => setInitialValues({...initialValues, lastname: newValue})}
               label="Apellido paterno"
             />
           </Col>
@@ -107,7 +107,7 @@ let GeneralInfoForm = ({ handleSubmit,  changeAddress, initialValues, setInitial
               component={renderFieldFull}
               name="secondLastname"
               label="Apellido materno"
-              onBlur={(event, newValue, previousValue) => setInitialValues({...initialValues, secondLastname: newValue})}
+              onChange={(event, newValue, previousValue) => setInitialValues({...initialValues, secondLastname: newValue})}
             />
           </Col>
         </Row>
@@ -115,7 +115,7 @@ let GeneralInfoForm = ({ handleSubmit,  changeAddress, initialValues, setInitial
         <Field
           component={renderSelectFieldFull}
           name="civilStatus"
-          onBlur={(event, newValue, previousValue) => setInitialValues({...initialValues, civilStatus: newValue})}
+          onChange={(event, newValue, previousValue) => setInitialValues({...initialValues, civilStatus: newValue})}
           clases="mt-24"
         >
           <option value="">Estado civil...</option>
@@ -132,7 +132,7 @@ let GeneralInfoForm = ({ handleSubmit,  changeAddress, initialValues, setInitial
           <Col>
             
             <Field component={renderSelectFieldFull} name="day" clases=""
-            onBlur={(event, newValue, previousValue) => setInitialValues({...initialValues, day: newValue})}
+            onChange={(event, newValue, previousValue) => setInitialValues({...initialValues, day: newValue})}
             >
               <option value="">Día</option>
               {Object.keys(helper.days).map((key, index) => (
@@ -144,7 +144,7 @@ let GeneralInfoForm = ({ handleSubmit,  changeAddress, initialValues, setInitial
           </Col>
           <Col>
             <Field component={renderSelectFieldFull} name="month" clases=""
-            onBlur={(event, newValue, previousValue) => setInitialValues({...initialValues, month: newValue})}
+            onChange={(event, newValue, previousValue) => setInitialValues({...initialValues, month: newValue})}
             >
               <option value="">Mes</option>
               {Object.keys(helper.months).map((key, index) => (
@@ -156,7 +156,7 @@ let GeneralInfoForm = ({ handleSubmit,  changeAddress, initialValues, setInitial
           </Col>
           <Col>
             <Field component={renderSelectFieldFull} name="year" clases=""
-            onBlur={(event, newValue, previousValue) => setInitialValues({...initialValues, year: newValue})}
+            onChange={(event, newValue, previousValue) => setInitialValues({...initialValues, year: newValue})}
             >
               <option value="">Año</option>
               {Object.keys(helper.years).map((key, index) => (
@@ -180,6 +180,7 @@ let GeneralInfoForm = ({ handleSubmit,  changeAddress, initialValues, setInitial
                 component={renderFieldFull}
                 name="rfcPerson"
                 label="RFC de la persona"
+                onChange={(event, newValue, previousValue) => setInitialValues({...initialValues, rfcPerson: newValue})}
               />
             </Col>
           </Row>
@@ -252,10 +253,10 @@ let GeneralInfoForm = ({ handleSubmit,  changeAddress, initialValues, setInitial
 				  component="select"
 				  name="town"
 				  cls="mb-3 mt-24"
-				  value={!sameAddress ? "" : currentAddress.town}
+				  value={!sameAddress ? '' : currentAddress.town}
 				  disabled={!sameAddress ? false : true}
 				>
-				  {initialValues.colonias != null && !changeCP ? 
+          {initialValues.colonias != null && !changeCP ?
 					  initialValues.colonias.map((colonia, index) => {
 						  return (
 							<option value={colonia} key={colonia + index}>
@@ -282,6 +283,7 @@ let GeneralInfoForm = ({ handleSubmit,  changeAddress, initialValues, setInitial
               label="Teléfono_Personal"
               type="text"
               name="phone"
+              onChange={(event, newValue, previousValue) => setInitialValues({...initialValues, phone: newValue})}
               maxLength={10}
               minLength={10}
             />
@@ -304,7 +306,9 @@ let GeneralInfoForm = ({ handleSubmit,  changeAddress, initialValues, setInitial
                 />
               </div>
             </div>
-            <Field component={renderFieldFull} label="CIEC" name="ciec" />
+            <Field component={renderFieldFull} label="CIEC" name="ciec" 
+              onChange={(event, newValue, previousValue) => setInitialValues({...initialValues, ciec: newValue})}
+            />
             <div className="fz18 gray50 brandonReg mb-30 mt-2">
               No es obligatorio pero podrá agilizar tu solicitud de crédito a la
               mitad del tiempo. Se ingresará por única ocasión para descargar la
@@ -319,7 +323,9 @@ let GeneralInfoForm = ({ handleSubmit,  changeAddress, initialValues, setInitial
         </label>
         <Row className="d-flex justify-content-center align-items-center">
           <Col lg={4} md={4} sm={12}>
-            <Field component={renderFieldFull} label="Nombre" name="name1" />
+            <Field component={renderFieldFull} label="Nombre" name="name1" 
+              onChange={(event, newValue, previousValue) => setInitialValues({...initialValues, name1: newValue})}
+            />
           </Col>
           <Col lg={4} md={4} sm={12}>
             <Field
@@ -329,6 +335,7 @@ let GeneralInfoForm = ({ handleSubmit,  changeAddress, initialValues, setInitial
               label="Teléfono"
               maxLength={10}
               minLength={10}
+              onChange={(event, newValue, previousValue) => setInitialValues({...initialValues, phone1: newValue})}
             />
           </Col>
           <Col lg={4} md={4} sm={12}>
@@ -336,6 +343,7 @@ let GeneralInfoForm = ({ handleSubmit,  changeAddress, initialValues, setInitial
               component={renderSelectFieldFull}
               name="relative1"
               clases="mt-24"
+              onChange={(event, newValue, previousValue) => setInitialValues({...initialValues,relative1: newValue})}
             >
               <option value="">Parentesco</option>
               {Object.keys(generalInfoOptions.realtiveOptions).map(
@@ -348,7 +356,9 @@ let GeneralInfoForm = ({ handleSubmit,  changeAddress, initialValues, setInitial
             </Field>
           </Col>
           <Col lg={4} md={4} sm={12}>
-            <Field component={renderFieldFull} label="Nombre" name="name2" />
+            <Field component={renderFieldFull} label="Nombre" name="name2" 
+              onChange={(event, newValue, previousValue) => setInitialValues({...initialValues, name2: newValue})}
+            />
           </Col>
           <Col lg={4} md={4} sm={12}>
             <Field
@@ -358,6 +368,7 @@ let GeneralInfoForm = ({ handleSubmit,  changeAddress, initialValues, setInitial
               label="Teléfono"
               maxLength={10}
               minLength={10}
+              onChange={(event, newValue, previousValue) => setInitialValues({...initialValues, phone2: newValue})}
             />
           </Col>
           <Col lg={4} md={4} sm={12}>
@@ -365,6 +376,7 @@ let GeneralInfoForm = ({ handleSubmit,  changeAddress, initialValues, setInitial
               component={renderSelectFieldFull}
               name="relative2"
               clases="mt-24"
+              onChange={(event, newValue, previousValue) => setInitialValues({...initialValues, relative2: newValue})}
             >
               <option value="">Parentesco</option>
               {Object.keys(generalInfoOptions.realtiveOptions).map(
@@ -386,6 +398,7 @@ let GeneralInfoForm = ({ handleSubmit,  changeAddress, initialValues, setInitial
               component={renderSelectFieldFull}
               name="mortgageCredit"
               clases="mt-10"
+              onChange={(event, newValue, previousValue) => setInitialValues({...initialValues, mortgageCredit: newValue})}
             >
               <option value="">Selecciona...</option>
               <option value="1">Sí</option>
@@ -399,6 +412,7 @@ let GeneralInfoForm = ({ handleSubmit,  changeAddress, initialValues, setInitial
               component={renderSelectFieldFull}
               name="carCredit"
               clases="mt-10"
+              onChange={(event, newValue, previousValue) => setInitialValues({...initialValues, cardCredit: newValue})}
             >
               <option value="">Selecciona...</option>
               <option value="YES">Sí</option>
@@ -414,6 +428,7 @@ let GeneralInfoForm = ({ handleSubmit,  changeAddress, initialValues, setInitial
               name="creditCard"
               clases="mt-10"
               onChange={(e) => setCreditCard(e.target.value)}
+              onChange={(event, newValue, previousValue) => setInitialValues({...initialValues, creditCard: newValue})}
             >
               <option value="">Selecciona...</option>
               <option value="1">Sí</option>
@@ -427,6 +442,7 @@ let GeneralInfoForm = ({ handleSubmit,  changeAddress, initialValues, setInitial
               component={renderFieldFull}
               name="last4"
               maxLength="4"
+              onChange={(event, newValue, previousValue) => setInitialValues({...initialValues, last4: newValue})}
               label="Últimos 4 dígitos de tu tarjeta de crédito"
             />
           </div>
@@ -438,6 +454,7 @@ let GeneralInfoForm = ({ handleSubmit,  changeAddress, initialValues, setInitial
             type="checkbox"
             label="Autorizo a Distrito Pyme S.A de C.V. a consultar mis antecedentes crediticios por única ocasión antes las Sociedades de Información Crediticia que estime conveniente, declarando que conozco la naturaleza, alcance y uso que Distrito Pyme S.A de C.V. hará de tal información."
             name="tyc"
+            onChange={(event, newValue, previousValue) => setInitialValues({...initialValues, tyc: newValue})}
             big={true}
           />
         </div>
