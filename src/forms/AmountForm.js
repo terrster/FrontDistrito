@@ -22,6 +22,7 @@ let AmountForm = props => {
 				onSubmit={handleSubmit}
 			>
 				<PersonType />
+			<label className="brandonReg gray50 fz20 fw500 mt-2 mb-1 text-center">Pasa el cursor sobre un recuadro para más información y da clic para seleccionar uno</label>
 			<InputLabel label="¿Cuánto necesitas?" class="mt-18" />
 			<Field
         		normalize={onlyNumbers}
