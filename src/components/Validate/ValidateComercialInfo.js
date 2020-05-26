@@ -13,6 +13,10 @@ function validDay(day, month) {
 
 export const validateComercialInfo = values => {
 	let errors = {};
+	const user = JSON.parse(sessionStorage.getItem("user"));
+	const idClient = user.idClient[user.idClient.length - 1];
+	const type = idClient.type;
+	
 	if (!values.zipCode){
 		errors.zipCode = "Ingresar código postal"
 	}
@@ -37,7 +41,7 @@ export const validateComercialInfo = values => {
 	if (!values.rfc) {
 		errors.rfc = 'Ingresa el RFC de tu negocio';
 	} else {
-		if (sessionStorage.type === 'PF') {
+		if (type === 'PF') {
 			const day = values.rfc.substring(8, 10);
 			const month = values.rfc.substring(6, 8);
 			if (!validDay(day, month)) {
@@ -45,7 +49,7 @@ export const validateComercialInfo = values => {
 			} else if (!RFCPF.test(values.rfc)) {
 				errors.rfc = 'Ingresa un RFC válido';
 			}
-		} else if (sessionStorage.type === 'PM') {
+		} else if (type === 'PM') {
 			const day = values.rfc.substring(7, 9);
 			const month = values.rfc.substring(5, 7);
 			if (!validDay(day, month)) {
