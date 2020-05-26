@@ -14,7 +14,8 @@ class ComercialInfoConstructForm extends Component {
 	colonias: [],
 	error: null,
 	firstLoad: true,
-	changeCP: false
+	changeCP: false,
+	touched: false,
   };
   
   getColonias = async codigopostal => {
@@ -154,6 +155,9 @@ class ComercialInfoConstructForm extends Component {
             <Field
 			className="form-control custom-form-input brandonReg mt-1 mb-0"
               component="select"
+              onChange={() => this.setState({ touched: true })}
+              value={!this.state.touched && this.props.initialValues.colonias != null && !this.state.changeCP 
+				  ? this.props.initialValues.colonias[0] : this.state.colonias[0]}
               name="town"
               cls="mb-3"
             >

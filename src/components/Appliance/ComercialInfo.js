@@ -49,15 +49,24 @@ const ComercialInfo = (props) => {
 							token: sessionStorage.getItem('token')
 						}
 					});
-					sessionStorage.setItem('user', JSON.stringify(res.data.user));
+					if (res.data.hasOwnProperty("user")){
+						sessionStorage.setItem('user', JSON.stringify(res.data.user));
+					}
 					window.location.href = `/informacion-general/${user._id}`;
 				} catch (error) {
 					console.log("Error de servicio",error);
 				} 
 			} else {
 				try {
-					const res = await axios.post(`api/info-comercial/${id}`, data);
-					sessionStorage.setItem('user', JSON.stringify(res.data.user));
+					const res = await axios.post(`api/info-comercial/${id}`, data,{
+						headers:{
+							token: sessionStorage.getItem('token')
+						}
+					});
+					console.log(res);
+					if (res.data.hasOwnProperty("user")){
+						sessionStorage.setItem('user', JSON.stringify(res.data.user));
+					}
 					window.location.href = `/informacion-general/${user._id}`;
 				} catch (error) {
 					console.log("Error de servicio",error);

@@ -42,7 +42,6 @@ const Amount = props => {
 							token: sessionStorage.getItem('token')
 						}
 					});
-					console.log(res);
 					if (res.data.hasOwnProperty("user")){
 						sessionStorage.setItem('user', JSON.stringify(res.data.user));
 					}

@@ -60,7 +60,7 @@ let Signup = props => {
 	if (res.data.code === 500){
 		setErrorEmail(res.data.msg)
 	} else {
-		setErrorEmail("");
+		setErrorEmail("")
 		dispatch( singUpAction(data) );
 	}
 	dispatch (updateLoader(false));
