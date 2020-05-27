@@ -10,64 +10,66 @@ import { validateComercialInfo } from "../components/Validate/ValidateComercialI
 class ComercialInfoConstructForm extends Component {
   /* CODIGO POSTAL */
   state = {
-	cp: '',
-	colonias: [],
-	error: null,
-	firstLoad: true,
-  changeCP: false,
-  touched: false
+    cp: '',
+    colonias: [],
+    error: null,
+    firstLoad: true,
+    changeCP: false,
+    touched: false,
+    onlyNumbers: (nextValue, previousValue) => /^\d+$/.test(nextValue) || nextValue.length === 0 ? nextValue : previousValue
   };
-  
+
   getColonias = async codigopostal => {
     /*if(!codigopostal){
       this.setState({error: "Ingresa el código postal de tu negocio."}) 
     } else if (!/^[0-9]\d{4,5}/.test(codigopostal)|| (codigopostal.length > 5 || codigopostal.length < 5)){
       this.setState({error: "Ingresa un código postal válido"})
     }*/
-      try {
-        if (codigopostal.length === 5) {
-          const res = await (
-            await fetch(
-              `https://api-sepomex.hckdrk.mx/query/info_cp/${codigopostal}`,
-              {
-                method: "GET"
-              }
-            )
-          ).json();
-			const copycolonias = [];
-			if(Array.isArray(res)){
-				res.map(datos => {
-				copycolonias.push(datos.response.asentamiento);
-				});
-				this.setState({
-					colonias: copycolonias,
-					error: false,
-					firstLoad: false
-				});	
-			} else if(res.error) {
-					this.setState({
-						error: res.error_message,
-						firstLoad: false
-					});
-			}
-		} else {
-			this.setState({ colonias: [] });
-		}
-      } 
-      catch (error) {
-        console.log("No hay CP");
+    try {
+      if (codigopostal.length === 5) {
+        const res = await (
+          await fetch(
+            `https://api-sepomex.hckdrk.mx/query/info_cp/${codigopostal}`,
+            {
+              method: "GET"
+            }
+          )
+        ).json();
+        const copycolonias = [];
+        if (Array.isArray(res)) {
+          res.map(datos => {
+            copycolonias.push(datos.response.asentamiento);
+          });
+          this.setState({
+            colonias: copycolonias,
+            error: false,
+            firstLoad: false
+          });
+        } else if (res.error) {
+          this.setState({
+            error: res.error_message,
+            firstLoad: false
+          });
+        }
+      } else {
+        this.setState({ colonias: [] });
       }
+    }
+    catch (error) {
+      console.log("No hay CP");
+    }
   }
 
   handleChangeCodigoPostal = async e => {
-  	const codigopostal = e.target.value;
+    const codigopostal = e.target.value;
     this.getColonias(codigopostal);
     this.setState({ changeCP: true });
   };
 
   /* FIN CODIGO POSTAL */
+
   render() {
-	  
+
     return (
       <>
         <SubtitleForm subtitle="Sobre tu negocio" className="mb-3" />
@@ -95,8 +97,8 @@ class ComercialInfoConstructForm extends Component {
             label="Razón social"
           />
         ) : (
-          <div></div>
-        )}
+            <div></div>
+          )}
 
         <Field
           component={renderField}
@@ -147,33 +149,35 @@ class ComercialInfoConstructForm extends Component {
               onChange={this.handleChangeCodigoPostal}
               label="CP"
               name="zipCode"
-			/>
-			{this.state.error && <span className="mb-3"><small className="error">{this.state.error}</small></span>}
+              normalize={this.state.onlyNumbers}
+            />
+            {this.state.error && <span className="mb-3"><small className="error">{this.state.error}</small></span>}
           </Col>
 
           <Col lg={6} md={6} sm={12}>
             <Field
-			        className="form-control custom-form-input brandonReg mt-1 mb-0"
+              className="form-control custom-form-input brandonReg mt-1 mb-0"
               component="select"
-              onChange={() => this.setState({touched: true})}
+              onChange={() => this.setState({ touched: true })}
               value={!this.state.touched && this.props.initialValues.colonias != null && !this.state.changeCP ? this.props.initialValues.colonias[0] : this.state.colonias[0]}
               name="town"
               cls="mb-3"
             >
-              {this.props.initialValues.colonias != null && !this.state.changeCP? 
-				  this.props.initialValues.colonias.map((colonia, index) => {
-					  return (
-						<option value={colonia} key={colonia + index}>
-							{colonia}
-						</option>
-				  )})
-				  : this.state.colonias.map((colonia, index) => {
-					return (
-						<option value={colonia} key={colonia + index}>
-							{colonia}
-						</option>
-					);
-				  })}
+              {this.props.initialValues.colonias != null && !this.state.changeCP ?
+                this.props.initialValues.colonias.map((colonia, index) => {
+                  return (
+                    <option value={colonia} key={colonia + index}>
+                      {colonia}
+                    </option>
+                  )
+                })
+                : this.state.colonias.map((colonia, index) => {
+                  return (
+                    <option value={colonia} key={colonia + index}>
+                      {colonia}
+                    </option>
+                  );
+                })}
             </Field>
           </Col>
 
@@ -186,6 +190,7 @@ class ComercialInfoConstructForm extends Component {
               label="Teléfono"
               name="phone"
               cls="mb-3"
+              normalize={this.state.onlyNumbers}
             />
           </Col>
         </Row>
@@ -213,7 +218,7 @@ class ComercialInfoConstructForm extends Component {
             No
           </option>
         </Field>
-       <Field component={renderSelectField} name="warranty" cls="mb-3">
+        <Field component={renderSelectField} name="warranty" cls="mb-3">
           <option className="brandonReg" value="">
             ¿Puedes ofrecer una garantía?
           </option>
@@ -245,12 +250,12 @@ class ComercialInfoConstructForm extends Component {
   }
 }
 let ComercialInfoForm = props => {
-  const { handleSubmit } = props;  
+  const { handleSubmit } = props;
   return (
     <div>
-		<form className="ml-auto mr-auto" style={{ maxWidth: "690px" }} onSubmit={handleSubmit}>
+      <form className="ml-auto mr-auto" style={{ maxWidth: "690px" }} onSubmit={handleSubmit}>
         <ComercialInfoConstructForm initialValues={props.initialValues}></ComercialInfoConstructForm>
-        </form>
+      </form>
     </div>
   );
 };
