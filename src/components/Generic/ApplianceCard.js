@@ -55,7 +55,7 @@ const ApplianceCard = props => {
 						{(props.fourth) ? `${props.fourth}` : 'No especificado'}
 					</Col>
 					<Col sm={12} className="info-label brandonReg text-truncate text-right">
-							<Link to={idClient.appliance.length > 0 ? `/${cardsElem[props.keyData].nameSection}/${props.applianceId}` : `/elige-monto/${user._id}`} className="h5" style={{color: '#000000', cursor: 'pointer'}}>
+							<Link to={(idClient.appliance.length > 0 || idClient.type == null) ? `/${cardsElem[props.keyData].nameSection}/${props.applianceId}` : `/elige-monto/${user._id}`} className="h5" style={{color: '#000000', cursor: 'pointer'}}>
 								{cardsElem[props.keyData].five}
 							</Link>
 					</Col>
