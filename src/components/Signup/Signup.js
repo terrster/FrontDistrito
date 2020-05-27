@@ -15,6 +15,8 @@ import { updateLoader } from '../../redux/actions/loaderActions';
 import { singUpAction } from '../../redux/actions/authActions';
 import { updateToast } from '../../redux/actions/appActions';
 import axios from '../../utils/axios';
+import StepSignup from "../Appliance/StepSignup";
+
 
 let Signup = props => {
 	const toast = useSelector(state => state.app.toast);
@@ -84,14 +86,11 @@ let Signup = props => {
               title="¡Bienvenido a Distrito Pyme!"
             />
             <div className="mt-30 brandonReg fw300 fz20 text-center mb-30">
-              <label className="gray50">Bienvenido a la</label>
-              <label className="blue-primary">&nbsp;#ComunidadDeCrédito</label>
-              <label className="gray50">&nbsp;más grande de México</label>
-              <br />
-              <label className="gray50">
-                &nbsp;que ayuda a empresas mexicanas a continuar creciendo
-              </label>
+              <p className="gray50">Te ayudamos a crecer tu negocio <label className="blue-primary">&nbsp;#ComunidadDeCrédito&nbsp;</label></p>
             </div>
+            <div className="mt-50">
+							<StepSignup/>
+						</div>
           </>
         ) : (
           <div></div>
