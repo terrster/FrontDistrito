@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 const cardsElem = {
 	generalData : { title: 'Datos generales', first: 'Tipo de persona', second: 'Nombre', third : 'Correo electrónico', fourth : 'Teléfono', five: 'Editar', 'nameSection': 'informacion-general'},
-	comercialInfo : { title: 'Datos comerciales', first: 'Nombre comercial', second: 'Giro', third : 'Actividad específica', fourth : 'RFC', five: 'Editar', 'nameSection': 'datos-comerciales' },
+	comercialInfo : { title: 'Datos del negocio', first: 'Nombre comercial', second: 'Giro', third : 'Actividad específica', fourth : 'RFC', five: 'Editar', 'nameSection': 'datos-comerciales' },
 	documents : {title: 'Documentos', first: 'Identificación oficial', second: 'Comprobante de domicilio', third : 'Estados de cuenta', fourth : 'Fotos u otros', five: 'Editar', 'nameSection': 'documentos'}
 }
 

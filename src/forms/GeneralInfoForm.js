@@ -253,10 +253,10 @@ let GeneralInfoForm = ({ handleSubmit,  changeAddress, initialValues, setInitial
 				  component="select"
 				  name="town"
 				  cls="mb-3 mt-24"
-				  value={!sameAddress ? "" : currentAddress.town}
+				  value={!sameAddress ? '' : currentAddress.town}
 				  disabled={!sameAddress ? false : true}
 				>
-				  {initialValues.colonias != null && !changeCP ? 
+          {initialValues.colonias != null && !changeCP ?
 					  initialValues.colonias.map((colonia, index) => {
 						  return (
 							<option value={colonia} key={colonia + index}>
@@ -307,7 +307,7 @@ let GeneralInfoForm = ({ handleSubmit,  changeAddress, initialValues, setInitial
               </div>
             </div>
             <Field component={renderFieldFull} label="CIEC" name="ciec" 
-            onChange={(event, newValue, previousValue) => setInitialValues({...initialValues, ciec: newValue})}
+              onChange={(event, newValue, previousValue) => setInitialValues({...initialValues, ciec: newValue})}
             />
             <div className="fz18 gray50 brandonReg mb-30 mt-2">
               No es obligatorio pero podrá agilizar tu solicitud de crédito a la
@@ -324,7 +324,7 @@ let GeneralInfoForm = ({ handleSubmit,  changeAddress, initialValues, setInitial
         <Row className="d-flex justify-content-center align-items-center">
           <Col lg={4} md={4} sm={12}>
             <Field component={renderFieldFull} label="Nombre" name="name1" 
-				onChange={(event, newValue, previousValue) => setInitialValues({...initialValues, name1: newValue})}
+              onChange={(event, newValue, previousValue) => setInitialValues({...initialValues, name1: newValue})}
             />
           </Col>
           <Col lg={4} md={4} sm={12}>
@@ -343,7 +343,7 @@ let GeneralInfoForm = ({ handleSubmit,  changeAddress, initialValues, setInitial
               component={renderSelectFieldFull}
               name="relative1"
               clases="mt-24"
-              onChange={(event, newValue, previousValue) => setInitialValues({...initialValues, relative1: newValue})}
+              onChange={(event, newValue, previousValue) => setInitialValues({...initialValues,relative1: newValue})}
             >
               <option value="">Parentesco</option>
               {Object.keys(generalInfoOptions.realtiveOptions).map(
@@ -357,7 +357,7 @@ let GeneralInfoForm = ({ handleSubmit,  changeAddress, initialValues, setInitial
           </Col>
           <Col lg={4} md={4} sm={12}>
             <Field component={renderFieldFull} label="Nombre" name="name2" 
-            onChange={(event, newValue, previousValue) => setInitialValues({...initialValues, name2: newValue})}
+              onChange={(event, newValue, previousValue) => setInitialValues({...initialValues, name2: newValue})}
             />
           </Col>
           <Col lg={4} md={4} sm={12}>
@@ -412,7 +412,7 @@ let GeneralInfoForm = ({ handleSubmit,  changeAddress, initialValues, setInitial
               component={renderSelectFieldFull}
               name="carCredit"
               clases="mt-10"
-              onChange={(event, newValue, previousValue) => setInitialValues({...initialValues, carCredit: newValue})}
+              onChange={(event, newValue, previousValue) => setInitialValues({...initialValues, cardCredit: newValue})}
             >
               <option value="">Selecciona...</option>
               <option value="YES">Sí</option>

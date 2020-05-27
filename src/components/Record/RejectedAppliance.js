@@ -53,7 +53,7 @@ const RejectedAppliance = (props) => {
         />
         <DropdownRow
           name="comercial"
-          title="Datos comerciales"
+          title="Datos del negocio"
           component={<TableComercial props={appliance.idComercialInfo} />}
         />
         <DropdownRow
