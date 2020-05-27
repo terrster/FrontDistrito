@@ -64,7 +64,7 @@ let SignupForm = (props) => {
     : "btn-register mt-30";
   const [button, setButton] = useState(true);
   const onChange = value => {setButton(!value)};
-  const onlyLirycs = (nextValue, previousValue="") => /^([a-zA-Z ñáéíóú]{0,60})$/i.test(nextValue) || previousValue.length === 0 ? nextValue : previousValue;
+  const onlyLirycs = (nextValue, previousValue="") => /^([a-z ñáéíóú]{0,60})$/i.test(nextValue) || previousValue.length === 0 ? nextValue : previousValue;
   const onlyNumbers = (nextValue, previousValue) => /^\d+$/.test(nextValue) || nextValue.length === 0? nextValue : previousValue;
   return (
     <div className="container">
