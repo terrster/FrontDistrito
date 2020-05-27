@@ -136,32 +136,34 @@ const GeneralInfo = () => {
 	dispatch( updateLoader(false));		
   };
 
-	const setComercialAddress = (checkboxComercialAddress) => {
-		dispatch( updateLoader(true));		
-		if (checkboxComercialAddress){
-			const user = JSON.parse(sessionStorage.getItem('user'));
-			const id = user._id;
-			const idClient = user.idClient[user.idClient.length - 1];
-			if (idClient.appliance.length > 0){
-				const appliance = idClient.appliance[idClient.appliance.length - 1];
-				if (appliance.idComercialInfo.length > 0){
-					const comercial = appliance.idComercialInfo[appliance.idComercialInfo.length - 1];
-					const { extNumber, intNumber, registerDate, street, town, zipCode } = comercial.address[comercial.address.length - 1];
-					setInitialValues({ ...initialValues, extNumber, intNumber, registerDate, street, town, zipCode, sameAddress: true })				}
-				}
-		}
-		else {
-			const extNumber = "";
-			const intNumber = "";
-			const registerDate = "";
-			const street = "";
-			const town = "";
-			const zipCode = "";
-			const sameAddress = false;
-			setInitialValues({  ...initialValues, extNumber, intNumber, registerDate, street, town, zipCode, sameAddress })
-		}
-		dispatch( updateLoader(false));		
-	}	
+  const setComercialAddress = async (checkboxComercialAddress) => {
+	dispatch( updateLoader(true));		
+	if (checkboxComercialAddress){
+		const user = JSON.parse(sessionStorage.getItem('user'));
+		const id = user._id;
+		const idClient = user.idClient[user.idClient.length - 1];
+		if (idClient.appliance.length > 0){
+			const appliance = idClient.appliance[idClient.appliance.length - 1];
+			if (appliance.idComercialInfo.length > 0){
+				const comercial = appliance.idComercialInfo[appliance.idComercialInfo.length - 1];
+				const { extNumber, intNumber, registerDate, street, town, zipCode } = comercial.address[comercial.address.length - 1];
+				let colonias = [town];
+				setInitialValues({ ...initialValues, colonias, extNumber, intNumber, registerDate, street, town, zipCode, sameAddress: true })				}
+			}
+	}
+	else {
+		const extNumber = "";
+		const intNumber = "";
+		const registerDate = "";
+		const street = "";
+		const town = "";
+		const zipCode = "";
+		const sameAddress = false;
+		const colonias = [];
+		setInitialValues({  ...initialValues, colonias, extNumber, intNumber, registerDate, street, town, zipCode, sameAddress })
+	}
+	dispatch( updateLoader(false));		
+}	
 	
 
   return (
