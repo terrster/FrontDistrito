@@ -13,6 +13,10 @@
 	--blackNav : #3d3d3d;
 }
 
+.react-responsive-modal-modal{
+	top: 30%;
+}
+
 .modal-dialog{
 	display: flex;
 	justify-content: center;
