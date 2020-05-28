@@ -77,7 +77,7 @@ let GeneralInfoForm = ({ handleSubmit, changeAddress, initialValues, setInitialV
     }
     setColonias(coloniasr);
   }
-  const onlyLirycs = (nextValue, previousValue = "") => /^([a-zA-Z ñáéíóú]{0,60})$/i.test(nextValue) || previousValue.length === 0 ? nextValue : previousValue;
+  const onlyLirycs = (nextValue, previousValue) => /^([a-z ñáéíóú]{0,60})$/i.test(nextValue) ? nextValue : previousValue;
   const onlyNumbers = (nextValue, previousValue) => /^\d+$/.test(nextValue) || nextValue.length === 0? nextValue : previousValue;
   return (
     <div>
@@ -213,6 +213,7 @@ let GeneralInfoForm = ({ handleSubmit, changeAddress, initialValues, setInitialV
               name="street"
               val={!sameAddress ? "" : currentAddress.street}
               disabled={!sameAddress ? false : true}
+              normalize={onlyLirycs}
             />
           </Col>
           <Col lg={6} md={6} sm={12}>
@@ -222,6 +223,7 @@ let GeneralInfoForm = ({ handleSubmit, changeAddress, initialValues, setInitialV
               name="extNumber"
               val={!sameAddress ? "" : currentAddress.extNumber}
               disabled={!sameAddress ? false : true}
+              normalize={onlyNumbers}
             />
           </Col>
 
@@ -232,6 +234,7 @@ let GeneralInfoForm = ({ handleSubmit, changeAddress, initialValues, setInitialV
               name="intNumber"
               val={!sameAddress ? "" : currentAddress.intNumber}
               disabled={!sameAddress ? false : true}
+              normalize={onlyNumbers}
             />
           </Col>
 
@@ -334,6 +337,7 @@ let GeneralInfoForm = ({ handleSubmit, changeAddress, initialValues, setInitialV
           <Col lg={4} md={4} sm={12}>
             <Field component={renderFieldFull} label="Nombre" name="name1"
               onChange={(event, newValue, previousValue) => setInitialValues({ ...initialValues, name1: newValue })}
+              normalize={onlyLirycs}
             />
           </Col>
           <Col lg={4} md={4} sm={12}>
@@ -368,6 +372,7 @@ let GeneralInfoForm = ({ handleSubmit, changeAddress, initialValues, setInitialV
           <Col lg={4} md={4} sm={12}>
             <Field component={renderFieldFull} label="Nombre" name="name2"
               onChange={(event, newValue, previousValue) => setInitialValues({ ...initialValues, name2: newValue })}
+              normalize={onlyLirycs}
             />
           </Col>
           <Col lg={4} md={4} sm={12}>

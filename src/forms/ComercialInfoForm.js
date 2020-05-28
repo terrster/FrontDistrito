@@ -69,7 +69,8 @@ class ComercialInfoConstructForm extends Component {
   /* FIN CODIGO POSTAL */
 
   render() {
-
+    const onlyLirycs = (nextValue, previousValue) => /^([a-z ñáéíóú]{0,60})$/i.test(nextValue) ? nextValue : previousValue;
+    const onlyNumbers = (nextValue, previousValue) => /^\d+$/.test(nextValue) || nextValue.length === 0? nextValue : previousValue;
     return (
       <>
         <SubtitleForm subtitle="Sobre tu negocio" className="mb-3" />
@@ -79,6 +80,7 @@ class ComercialInfoConstructForm extends Component {
           cls="mb-3"
           name="comercialName"
           label="Nombre comercial"
+          normalize={onlyLirycs}
         />
         <Field component={renderSelectField} name="gyre" cls="mb-3">
           <option value="">Giro...</option>
@@ -95,6 +97,7 @@ class ComercialInfoConstructForm extends Component {
             cls="mb-3"
             name="businessName"
             label="Razón social"
+            normalize={onlyLirycs}
           />
         ) : (
             <div></div>
@@ -105,6 +108,7 @@ class ComercialInfoConstructForm extends Component {
           label="Actividad específica"
           name="specific"
           cls="mb-3"
+          normalize={onlyLirycs}
         />
         <Field
           component={renderField}
@@ -123,6 +127,7 @@ class ComercialInfoConstructForm extends Component {
               label="Calle"
               name="street"
               cls="mb-3"
+              normalize={onlyLirycs}
             />
           </Col>
           <Col lg={6} md={6} sm={12}>
@@ -131,6 +136,7 @@ class ComercialInfoConstructForm extends Component {
               label="Ext"
               name="extNumber"
               cls="mb-3"
+              normalize={onlyNumbers}
             />
           </Col>
 
@@ -140,6 +146,7 @@ class ComercialInfoConstructForm extends Component {
               label="Int"
               name="intNumber"
               cls="mb-3"
+              normalize={onlyNumbers}
             />
           </Col>
           {/*codigo postal */}
@@ -149,7 +156,7 @@ class ComercialInfoConstructForm extends Component {
               onChange={this.handleChangeCodigoPostal}
               label="CP"
               name="zipCode"
-              normalize={this.state.onlyNumbers}
+              normalize={onlyNumbers}
             />
             {this.state.error && <span className="mb-3"><small className="error">{this.state.error}</small></span>}
           </Col>
