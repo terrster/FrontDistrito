@@ -9,8 +9,8 @@ import PersonType from '../components/Appliance/PersonType';
 import { validateAmount } from '../components/Validate/ValidateAmount';
 import { renderField, renderSelectField } from '../components/Generic/Fields';
 
-const onlyNumbers = (nextValue, previousValue) => /^\d+$/.test(nextValue) || nextValue.length === 0? nextValue : previousValue;
-
+const onlyNumbers = (nextValue, previousValue) => /^[+]?([0-9]+(?:[\,.][0-9]*)?|\,.[0-9]+)$/.test(nextValue) || nextValue.length === 0? nextValue : previousValue;
+/* ^[0-9]+([,.][0-9]+)?$ */
 
 let AmountForm = props => {
 	const { handleSubmit } = props;

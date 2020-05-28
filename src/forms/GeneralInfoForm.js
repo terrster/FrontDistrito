@@ -18,64 +18,67 @@ import PopUp from "./PopUp";
 import Info from "../assets/img/Info.png";
 import { updateLoader } from '../redux/actions/loaderActions';
 import axiosBase from 'axios';
-let GeneralInfoForm = ({ handleSubmit,  changeAddress, initialValues, setInitialValues }) => {
-  const dispatch = useDispatch();  
+let GeneralInfoForm = ({ handleSubmit, changeAddress, initialValues, setInitialValues }) => {
+  const dispatch = useDispatch();
   const [currentAddress, setCurrentAddress] = useState(
-	{ extNumber: "", intNumber: "", registerDate: "", street: "", town: "", zipCode: "", sameAddress: "" }
+    { extNumber: "", intNumber: "", registerDate: "", street: "", town: "", zipCode: "", sameAddress: "" }
   );
   const [sameAddress, setSameAddress] = useState(false);
   const [showModalGeneral, setShow] = useState(true);
   const [creditCard, setCreditCard] = useState("");
   const [colonias, setColonias] = useState([]);
   const [changeCP, setChangeCP] = useState(false);
-  const handleShow = () => setShow(true);  
+  const handleShow = () => setShow(true);
   /**Intentar pasar la direccion por aqui y/o buscar por que no se pasa */
   //let lastAddress = props.currentAddress;
-	const user = JSON.parse(sessionStorage.getItem('user'));
+  const user = JSON.parse(sessionStorage.getItem('user'));
   const myProfile = {
     name: user.name,
     lastname: user.lastName,
   };
 
-	const setComercialAddress = (checkboxComercialAddress) => {
-		dispatch( updateLoader(true) );
-		if (checkboxComercialAddress){
-			const user = JSON.parse(sessionStorage.getItem('user'));
-			const id = user._id;
-			const idClient = user.idClient[user.idClient.length - 1];
-			if (idClient.appliance.length > 0){
-				const appliance = idClient.appliance[idClient.appliance.length - 1];
-				if (appliance.idComercialInfo.length > 0){
-					const comercial = appliance.idComercialInfo[appliance.idComercialInfo.length - 1];
-					const { extNumber, intNumber, registerDate, street, town, zipCode } = comercial.address[comercial.address.length - 1];
-					setCurrentAddress({ extNumber, intNumber, registerDate, street, town, zipCode })				}
-				}
-		}
-		else {
-			const extNumber = "";
-			const intNumber = "";
-			const registerDate = "";
-			const street = "";
-			const town = "";
-			const zipCode = "";
-			const sameAddress = false;
-			setCurrentAddress({ extNumber, intNumber, registerDate, street, town, zipCode, sameAddress })
-		}
-		dispatch( updateLoader(false) );
-	}	
-	
-	const setColoniasR = async(zipCode) => {
-		let coloniasr = [];
-		const coloniasRequest = await axiosBase.get(`https://api-sepomex.hckdrk.mx/query/info_cp/${zipCode}`);              
-		if(Array.isArray(coloniasRequest.data)){
-			coloniasRequest.data.map(datos => {
-			coloniasr.push(datos.response.asentamiento);
-			});
-		} else if(coloniasRequest.error) {
-			coloniasr = [];
-		}
-		setColonias(coloniasr);
-	}
+  const setComercialAddress = (checkboxComercialAddress) => {
+    dispatch(updateLoader(true));
+    if (checkboxComercialAddress) {
+      const user = JSON.parse(sessionStorage.getItem('user'));
+      const id = user._id;
+      const idClient = user.idClient[user.idClient.length - 1];
+      if (idClient.appliance.length > 0) {
+        const appliance = idClient.appliance[idClient.appliance.length - 1];
+        if (appliance.idComercialInfo.length > 0) {
+          const comercial = appliance.idComercialInfo[appliance.idComercialInfo.length - 1];
+          const { extNumber, intNumber, registerDate, street, town, zipCode } = comercial.address[comercial.address.length - 1];
+          setCurrentAddress({ extNumber, intNumber, registerDate, street, town, zipCode })
+        }
+      }
+    }
+    else {
+      const extNumber = "";
+      const intNumber = "";
+      const registerDate = "";
+      const street = "";
+      const town = "";
+      const zipCode = "";
+      const sameAddress = false;
+      setCurrentAddress({ extNumber, intNumber, registerDate, street, town, zipCode, sameAddress })
+    }
+    dispatch(updateLoader(false));
+  }
+
+  const setColoniasR = async (zipCode) => {
+    let coloniasr = [];
+    const coloniasRequest = await axiosBase.get(`https://api-sepomex.hckdrk.mx/query/info_cp/${zipCode}`);
+    if (Array.isArray(coloniasRequest.data)) {
+      coloniasRequest.data.map(datos => {
+        coloniasr.push(datos.response.asentamiento);
+      });
+    } else if (coloniasRequest.error) {
+      coloniasr = [];
+    }
+    setColonias(coloniasr);
+  }
+  const onlyLirycs = (nextValue, previousValue = "") => /^([a-zA-Z ñáéíóú]{0,60})$/i.test(nextValue) || previousValue.length === 0 ? nextValue : previousValue;
+  const onlyNumbers = (nextValue, previousValue) => /^\d+$/.test(nextValue) || nextValue.length === 0? nextValue : previousValue;
   return (
     <div>
       <form
@@ -90,16 +93,18 @@ let GeneralInfoForm = ({ handleSubmit,  changeAddress, initialValues, setInitial
               component={renderFieldFull}
               name="name"
               label="Nombre(s)"
-              onChange={(event, newValue, previousValue) => setInitialValues({...initialValues, name: newValue})}
+              onChange={(event, newValue, previousValue) => setInitialValues({ ...initialValues, name: newValue })}
               type="text"
+              normalize={onlyLirycs}
             />
           </Col>
           <Col lg={4} md={4} sm={12}>
             <Field
               component={renderFieldFull}
               name="lastname"
-              onChange={(event, newValue, previousValue) => setInitialValues({...initialValues, lastname: newValue})}
+              onChange={(event, newValue, previousValue) => setInitialValues({ ...initialValues, lastname: newValue })}
               label="Apellido paterno"
+              normalize={onlyLirycs}
             />
           </Col>
           <Col lg={4} md={4} sm={12}>
@@ -107,7 +112,8 @@ let GeneralInfoForm = ({ handleSubmit,  changeAddress, initialValues, setInitial
               component={renderFieldFull}
               name="secondLastname"
               label="Apellido materno"
-              onChange={(event, newValue, previousValue) => setInitialValues({...initialValues, secondLastname: newValue})}
+              onChange={(event, newValue, previousValue) => setInitialValues({ ...initialValues, secondLastname: newValue })}
+              normalize={onlyLirycs}
             />
           </Col>
         </Row>
@@ -115,7 +121,7 @@ let GeneralInfoForm = ({ handleSubmit,  changeAddress, initialValues, setInitial
         <Field
           component={renderSelectFieldFull}
           name="civilStatus"
-          onChange={(event, newValue, previousValue) => setInitialValues({...initialValues, civilStatus: newValue})}
+          onChange={(event, newValue, previousValue) => setInitialValues({ ...initialValues, civilStatus: newValue })}
           clases="mt-24"
         >
           <option value="">Estado civil...</option>
@@ -130,9 +136,9 @@ let GeneralInfoForm = ({ handleSubmit,  changeAddress, initialValues, setInitial
         <InputLabel label="Fecha de nacimiento" class="mt-18" />
         <Row className="d-flex justify-content-center">
           <Col>
-            
+
             <Field component={renderSelectFieldFull} name="day" clases=""
-            onChange={(event, newValue, previousValue) => setInitialValues({...initialValues, day: newValue})}
+              onChange={(event, newValue, previousValue) => setInitialValues({ ...initialValues, day: newValue })}
             >
               <option value="">Día</option>
               {Object.keys(helper.days).map((key, index) => (
@@ -144,7 +150,7 @@ let GeneralInfoForm = ({ handleSubmit,  changeAddress, initialValues, setInitial
           </Col>
           <Col>
             <Field component={renderSelectFieldFull} name="month" clases=""
-            onChange={(event, newValue, previousValue) => setInitialValues({...initialValues, month: newValue})}
+              onChange={(event, newValue, previousValue) => setInitialValues({ ...initialValues, month: newValue })}
             >
               <option value="">Mes</option>
               {Object.keys(helper.months).map((key, index) => (
@@ -156,7 +162,7 @@ let GeneralInfoForm = ({ handleSubmit,  changeAddress, initialValues, setInitial
           </Col>
           <Col>
             <Field component={renderSelectFieldFull} name="year" clases=""
-            onChange={(event, newValue, previousValue) => setInitialValues({...initialValues, year: newValue})}
+              onChange={(event, newValue, previousValue) => setInitialValues({ ...initialValues, year: newValue })}
             >
               <option value="">Año</option>
               {Object.keys(helper.years).map((key, index) => (
@@ -180,7 +186,7 @@ let GeneralInfoForm = ({ handleSubmit,  changeAddress, initialValues, setInitial
                 component={renderFieldFull}
                 name="rfcPerson"
                 label="RFC de la persona"
-                onChange={(event, newValue, previousValue) => setInitialValues({...initialValues, rfcPerson: newValue})}
+                onChange={(event, newValue, previousValue) => setInitialValues({ ...initialValues, rfcPerson: newValue })}
               />
             </Col>
           </Row>
@@ -190,11 +196,11 @@ let GeneralInfoForm = ({ handleSubmit,  changeAddress, initialValues, setInitial
         <Field
           component={renderFieldFull}
           onChange={(event, newValue, previousValue, name) => {
-			  dispatch( updateLoader(true) );
-			  changeAddress(newValue);
-			  setSameAddress(newValue);
-			  setComercialAddress(newValue);
-		  }}
+            dispatch(updateLoader(true));
+            changeAddress(newValue);
+            setSameAddress(newValue);
+            setComercialAddress(newValue);
+          }}
           type="checkbox"
           label="Utilizar los mismos datos que el domicilio comercial"
           name="sameAddress"
@@ -235,42 +241,44 @@ let GeneralInfoForm = ({ handleSubmit,  changeAddress, initialValues, setInitial
               label="CP"
               name="zipCode"
               onChange={(event, newValue, previousValue, name) => {
-				  setChangeCP(true)
-				  if (newValue.length === 5){
-					  setColoniasR(newValue);
-				  } else {
-					  setColoniasR([]);
-				  }
-			  }}
+                setChangeCP(true)
+                if (newValue.length === 5) {
+                  setColoniasR(newValue);
+                } else {
+                  setColoniasR([]);
+                }
+              }}
               val={!sameAddress ? "" : currentAddress.zipCode}
               disabled={!sameAddress ? false : true}
+              normalize={onlyNumbers}
             />
           </Col>
 
           <Col lg={6} md={6} sm={12}>
-			  <Field
-				  className="form-control custom-form-input brandonReg mt-24 mb-0"
-				  component="select"
-				  name="town"
-				  cls="mb-3 mt-24"
-				  value={!sameAddress ? '' : currentAddress.town}
-				  disabled={!sameAddress ? false : true}
-				>
-          {initialValues.colonias != null && !changeCP ?
-					  initialValues.colonias.map((colonia, index) => {
-						  return (
-							<option value={colonia} key={colonia + index}>
-								{colonia}
-							</option>
-					  )})
-					  : colonias.map((colonia, index) => {
-						return (
-							<option value={colonia} key={colonia + index}>
-								{colonia}
-							</option>
-						);
-					  })}
-				</Field>
+            <Field
+              className="form-control custom-form-input brandonReg mt-24 mb-0"
+              component="select"
+              name="town"
+              cls="mb-3 mt-24"
+              value={!sameAddress ? '' : currentAddress.town}
+              disabled={!sameAddress ? false : true}
+            >
+              {initialValues.colonias != null && !changeCP ?
+                initialValues.colonias.map((colonia, index) => {
+                  return (
+                    <option value={colonia} key={colonia + index}>
+                      {colonia}
+                    </option>
+                  )
+                })
+                : colonias.map((colonia, index) => {
+                  return (
+                    <option value={colonia} key={colonia + index}>
+                      {colonia}
+                    </option>
+                  );
+                })}
+            </Field>
           </Col>
 
           <Col lg={12} md={12} sm={12}>
@@ -283,9 +291,10 @@ let GeneralInfoForm = ({ handleSubmit,  changeAddress, initialValues, setInitial
               label="Teléfono_Personal"
               type="text"
               name="phone"
-              onChange={(event, newValue, previousValue) => setInitialValues({...initialValues, phone: newValue})}
+              onChange={(event, newValue, previousValue) => setInitialValues({ ...initialValues, phone: newValue })}
               maxLength={10}
               minLength={10}
+              normalize={onlyNumbers}
             />
           </Col>
         </Row>
@@ -306,8 +315,8 @@ let GeneralInfoForm = ({ handleSubmit,  changeAddress, initialValues, setInitial
                 />
               </div>
             </div>
-            <Field component={renderFieldFull} label="CIEC" name="ciec" 
-              onChange={(event, newValue, previousValue) => setInitialValues({...initialValues, ciec: newValue})}
+            <Field component={renderFieldFull} label="CIEC" name="ciec"
+              onChange={(event, newValue, previousValue) => setInitialValues({ ...initialValues, ciec: newValue })}
             />
             <div className="fz18 gray50 brandonReg mb-30 mt-2">
               No es obligatorio pero podrá agilizar tu solicitud de crédito a la
@@ -323,8 +332,8 @@ let GeneralInfoForm = ({ handleSubmit,  changeAddress, initialValues, setInitial
         </label>
         <Row className="d-flex justify-content-center align-items-center">
           <Col lg={4} md={4} sm={12}>
-            <Field component={renderFieldFull} label="Nombre" name="name1" 
-              onChange={(event, newValue, previousValue) => setInitialValues({...initialValues, name1: newValue})}
+            <Field component={renderFieldFull} label="Nombre" name="name1"
+              onChange={(event, newValue, previousValue) => setInitialValues({ ...initialValues, name1: newValue })}
             />
           </Col>
           <Col lg={4} md={4} sm={12}>
@@ -335,7 +344,8 @@ let GeneralInfoForm = ({ handleSubmit,  changeAddress, initialValues, setInitial
               label="Teléfono"
               maxLength={10}
               minLength={10}
-              onChange={(event, newValue, previousValue) => setInitialValues({...initialValues, phone1: newValue})}
+              onChange={(event, newValue, previousValue) => setInitialValues({ ...initialValues, phone1: newValue })}
+              normalize={onlyNumbers}
             />
           </Col>
           <Col lg={4} md={4} sm={12}>
@@ -343,7 +353,7 @@ let GeneralInfoForm = ({ handleSubmit,  changeAddress, initialValues, setInitial
               component={renderSelectFieldFull}
               name="relative1"
               clases="mt-24"
-              onChange={(event, newValue, previousValue) => setInitialValues({...initialValues,relative1: newValue})}
+              onChange={(event, newValue, previousValue) => setInitialValues({ ...initialValues, relative1: newValue })}
             >
               <option value="">Parentesco</option>
               {Object.keys(generalInfoOptions.realtiveOptions).map(
@@ -356,8 +366,8 @@ let GeneralInfoForm = ({ handleSubmit,  changeAddress, initialValues, setInitial
             </Field>
           </Col>
           <Col lg={4} md={4} sm={12}>
-            <Field component={renderFieldFull} label="Nombre" name="name2" 
-              onChange={(event, newValue, previousValue) => setInitialValues({...initialValues, name2: newValue})}
+            <Field component={renderFieldFull} label="Nombre" name="name2"
+              onChange={(event, newValue, previousValue) => setInitialValues({ ...initialValues, name2: newValue })}
             />
           </Col>
           <Col lg={4} md={4} sm={12}>
@@ -368,7 +378,8 @@ let GeneralInfoForm = ({ handleSubmit,  changeAddress, initialValues, setInitial
               label="Teléfono"
               maxLength={10}
               minLength={10}
-              onChange={(event, newValue, previousValue) => setInitialValues({...initialValues, phone2: newValue})}
+              onChange={(event, newValue, previousValue) => setInitialValues({ ...initialValues, phone2: newValue })}
+              normalize={onlyNumbers}
             />
           </Col>
           <Col lg={4} md={4} sm={12}>
@@ -376,7 +387,7 @@ let GeneralInfoForm = ({ handleSubmit,  changeAddress, initialValues, setInitial
               component={renderSelectFieldFull}
               name="relative2"
               clases="mt-24"
-              onChange={(event, newValue, previousValue) => setInitialValues({...initialValues, relative2: newValue})}
+              onChange={(event, newValue, previousValue) => setInitialValues({ ...initialValues, relative2: newValue })}
             >
               <option value="">Parentesco</option>
               {Object.keys(generalInfoOptions.realtiveOptions).map(
@@ -398,7 +409,7 @@ let GeneralInfoForm = ({ handleSubmit,  changeAddress, initialValues, setInitial
               component={renderSelectFieldFull}
               name="mortgageCredit"
               clases="mt-10"
-              onChange={(event, newValue, previousValue) => setInitialValues({...initialValues, mortgageCredit: newValue})}
+              onChange={(event, newValue, previousValue) => setInitialValues({ ...initialValues, mortgageCredit: newValue })}
             >
               <option value="">Selecciona...</option>
               <option value="1">Sí</option>
@@ -412,7 +423,7 @@ let GeneralInfoForm = ({ handleSubmit,  changeAddress, initialValues, setInitial
               component={renderSelectFieldFull}
               name="carCredit"
               clases="mt-10"
-              onChange={(event, newValue, previousValue) => setInitialValues({...initialValues, cardCredit: newValue})}
+              onChange={(event, newValue, previousValue) => setInitialValues({ ...initialValues, cardCredit: newValue })}
             >
               <option value="">Selecciona...</option>
               <option value="YES">Sí</option>
@@ -428,7 +439,7 @@ let GeneralInfoForm = ({ handleSubmit,  changeAddress, initialValues, setInitial
               name="creditCard"
               clases="mt-10"
               onChange={(e) => setCreditCard(e.target.value)}
-              onChange={(event, newValue, previousValue) => setInitialValues({...initialValues, creditCard: newValue})}
+              onChange={(event, newValue, previousValue) => setInitialValues({ ...initialValues, creditCard: newValue })}
             >
               <option value="">Selecciona...</option>
               <option value="1">Sí</option>
@@ -436,13 +447,13 @@ let GeneralInfoForm = ({ handleSubmit,  changeAddress, initialValues, setInitial
             </Field>
           </Col>
         </Row>
-        {(creditCard === "1" || initialValues.creditCard === "1" ) && (
+        {(creditCard === "1" || initialValues.creditCard === "1") && (
           <div>
             <Field
               component={renderFieldFull}
               name="last4"
               maxLength="4"
-              onChange={(event, newValue, previousValue) => setInitialValues({...initialValues, last4: newValue})}
+              onChange={(event, newValue, previousValue) => setInitialValues({ ...initialValues, last4: newValue })}
               label="Últimos 4 dígitos de tu tarjeta de crédito"
             />
           </div>
@@ -454,7 +465,7 @@ let GeneralInfoForm = ({ handleSubmit,  changeAddress, initialValues, setInitial
             type="checkbox"
             label="Autorizo a Distrito Pyme S.A de C.V. a consultar mis antecedentes crediticios por única ocasión antes las Sociedades de Información Crediticia que estime conveniente, declarando que conozco la naturaleza, alcance y uso que Distrito Pyme S.A de C.V. hará de tal información."
             name="tyc"
-            onChange={(event, newValue, previousValue) => setInitialValues({...initialValues, tyc: newValue})}
+            onChange={(event, newValue, previousValue) => setInitialValues({ ...initialValues, tyc: newValue })}
             big={true}
           />
         </div>

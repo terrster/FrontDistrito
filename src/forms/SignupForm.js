@@ -6,6 +6,7 @@ import "../css/signup.css";
 import { validateSignup } from "../components/Validate/ValidateSignup";
 import ReCAPTCHA from "react-google-recaptcha";
 
+
 const renderField = ({
   input,
   label,
@@ -62,9 +63,9 @@ let SignupForm = (props) => {
     ? "btn-register mt-30 disabled"
     : "btn-register mt-30";
   const [button, setButton] = useState(true);
-
-  const onChange = value => setButton(!value);
-
+  const onChange = value => {setButton(!value)};
+  const onlyLirycs = (nextValue, previousValue="") => /^([a-z ñáéíóú]{0,60})$/i.test(nextValue) || previousValue.length === 0 ? nextValue : previousValue;
+  const onlyNumbers = (nextValue, previousValue) => /^\d+$/.test(nextValue) || nextValue.length === 0? nextValue : previousValue;
   return (
     <div className="container">
       <form
@@ -77,6 +78,7 @@ let SignupForm = (props) => {
           type="text"
           name="name"
           label="Nombre(s)"
+          normalize={onlyLirycs}
         />
 
         <Field
@@ -84,6 +86,7 @@ let SignupForm = (props) => {
           type="text"
           name="lastName"
           label="Apellido"
+          normalize={onlyLirycs}
         />
         <Field
           component={renderField}
@@ -121,6 +124,7 @@ let SignupForm = (props) => {
             name="phone"
             label="Teléfono"
             maxLength={10}
+            normalize={onlyNumbers}
           />
         </div>
         <OverlayTrigger
