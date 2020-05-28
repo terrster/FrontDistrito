@@ -3,6 +3,7 @@ import React, { Component } from "react";
 // CSS
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import 'react-responsive-modal/styles.css';
 import "./css/about-us.css";
 import "./css/account.css";
 import "./css/apply.css";

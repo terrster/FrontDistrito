@@ -2,18 +2,19 @@ import React, {useState} from 'react';
 import { connect } from 'react-redux';
 import Title from '../Generic/Title';
 import SigninForm from '../../forms/SigninForm';
-import CustomModal from '../Generic/CustomModal';
 import Loader from '../Loader/Loader';
 import Alert from 'react-bootstrap/Alert'
 import axios from '../../utils/axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginAction } from '../../redux/actions/authActions';
 import { updateLoader } from '../../redux/actions/loaderActions';
+import { Modal } from 'react-responsive-modal';
+import { Row, Button, Col } from 'react-bootstrap';
 
 let Login = props => {
 
 	const dispatch = useDispatch();
-	const [visible, setVisible] = useState(false);
+	const [open, setOpen] = useState(false);
 
 	let onFormSubmit = async (data) => {
 		dispatch ( updateLoader(true));
@@ -21,7 +22,7 @@ let Login = props => {
 		if (loginRequest.data.code === 200){
 			dispatch( loginAction(loginRequest.data) );
 		} else {
-			setVisible(true);	
+			setOpen(true);	
 		}
 		dispatch ( updateLoader(false));
 	}
@@ -41,13 +42,22 @@ let Login = props => {
 		return (
 			<div>
 				<Loader />
-				<CustomModal
-					modalName="err"
-					message="Correo y/o contraseña incorrectos"
-				/>
+				<Modal onClose={() => setOpen(false)} open={open} style={{ padding: '30px 40px!important', width: 'auto!important' }}>
+					<Row className="d-flex justify-content-center">
+						<Col lg={6} sm={12} md={12} className="text-center">
+							<div className="brandonReg fz29 blueDark fw400">
+								Correo y/o contraseña incorrectos
+							</div> 
+						</Col>
+					</Row>
+					<div className="text-center mt-30">
+						<Button className="btn-blue-general ml-auto mr-auto" onClick={() => setOpen(false)}>
+							Aceptar
+						</Button>
+					</div>
+				</Modal>
 				<div className="container mt-30 mb-30 d-flex flex-column align-items-center justify-content-center" style={{height : '600px'}}>
 					<Title className="fz56 text-center blue-primary coolvetica fw500" title="Inicia sesión" />
-					{ visible && <p>Error al loguear</p>}
 					<div className="mt-30 brandonReg fw300 fz20 text-center mb-30">
 						<label className="gray50">Ingresa tu correo y contraseña para comenzar</label>
 					</div>
