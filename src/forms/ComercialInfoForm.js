@@ -10,7 +10,6 @@ import Info from "../assets/img/Info.png";
 import PopUp from "./PopUp";
 
 class ComercialInfoConstructForm extends Component {
-  /* CODIGO POSTAL */
   state = {
 	cp: '',
 	colonias: [],
@@ -22,11 +21,6 @@ class ComercialInfoConstructForm extends Component {
   };
   
   getColonias = async codigopostal => {
-    /*if(!codigopostal){
-      this.setState({error: "Ingresa el código postal de tu negocio."}) 
-    } else if (!/^[0-9]\d{4,5}/.test(codigopostal)|| (codigopostal.length > 5 || codigopostal.length < 5)){
-      this.setState({error: "Ingresa un código postal válido"})
-    }*/
       try {
         if (codigopostal.length === 5) {
           const res = await (
@@ -83,7 +77,7 @@ class ComercialInfoConstructForm extends Component {
       <>
         {
 			idClient.type !== "PF" && 
-			(ciec == "" || ciec == null) && 
+			(ciec == "" || ciec == null) &&
 			<PopUp show={this.state.show} setShow={(value) => this.setState({show: value})} />
 		}
         <SubtitleForm subtitle="Sobre tu negocio" className="mb-3" />

@@ -446,31 +446,4 @@ GeneralInfoForm = reduxForm({
   enableReinitialize: true,
 })(GeneralInfoForm);
 
-/* 
-
-
-GeneralInfoForm = connect((state, props) => {
-  const {
-    user: { user },
-  } = state;
-})(GeneralInfoForm);
-
-const selector = formValueSelector("generalInfoForm");
-
-GeneralInfoForm = connect((state) => {
-  const sameAddress = selector(state, "sameAddress");
-  const creditCard = selector(state, "creditCard");
-  return {
-    sameAddress,
-    creditCard,
-  };
-})(GeneralInfoForm);
-
-const mapStateToProps = (state, ownProps) => {
-  return {
-    currentAddress: state.currentAddress.address,
-    user: state.user.user,
-  };
-};
- */
 export default GeneralInfoForm;
