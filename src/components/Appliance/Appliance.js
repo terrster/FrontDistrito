@@ -58,7 +58,7 @@ class Appliance extends Component {
 
 	getAppliance =  () => {
 				if (this.state.loading) return <div></div>;
-				 let linkt = "";
+				let linkt = "";
 				const user = JSON.parse(sessionStorage.getItem("user"));
 				const idClient = JSON.parse(sessionStorage.getItem("user")).idClient[
 				JSON.parse(sessionStorage.getItem("user")).idClient.length - 1
@@ -78,7 +78,7 @@ class Appliance extends Component {
 				} else if (!idDocuments || !idDocuments == null) {
 					linkt = `documentos/${user._id}`;
 				}
-				if (!appliance.status || !sessionStorage.status) {
+				if (!appliance.status) {
 					return (
 						<div className="position-relative">
 							<Title

@@ -31,11 +31,17 @@ const FileInput = ({
 				</FileDrop>
 				{
 				files && files.map( (value, index) => {
+					let name = ""
+					if (value.name == undefined){
+						name = value.split('-')[6];
+					} else {
+						name = value.name	
+					}
 					return (
 						(value !== undefined) ?
 						((value.name === undefined ) ? 
-							<Chip fileName={nombre} delete={deleteFile} docName={nombre} index={index} key={index}/>: 
-							<Chip fileName={nombre} delete={deleteFile} docName={nombre} index={index} key={index}/>)
+							<Chip fileName={name} delete={deleteFile} docName={value} index={index} key={index}/>: 
+							<Chip fileName={value.name} delete={deleteFile} docName={nombre} index={index} key={index}/>)
 						:<></>
 					);
 				}  )

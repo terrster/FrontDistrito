@@ -7,6 +7,18 @@ import '../../css/nav-bar.css'
 
 const NavBar = props => {
 	const [isOpen, setIsOpen] = useState(false);
+	let user = null;
+	let idClient = null;
+	let finishAppliance = false;
+	let appliance = null;
+	if (isAuthenticated()){
+		user = JSON.parse(sessionStorage.getItem("user"));
+		idClient = user.idClient[user.idClient.length - 1];
+		if (idClient.appliance.length > 0){
+			appliance = idClient.appliance[idClient.appliance.length - 1];
+			finishAppliance = appliance.status;
+		}
+	}
 	const close = () => setIsOpen(false);
 	let classDefault = "brandonMed text-center fz16 gray50 heigth-45 nav-btn ";
 	let classDefaultLink = "brandonMed text-center fz16 gray50 heigth-45 nav-btn d-flex";
@@ -30,7 +42,14 @@ const NavBar = props => {
 		 		{isAuthenticated() === true && 
 		 		<Navbar.Collapse id="basic-navbar-nav">	
 		 			<Nav className="ml-auto">
-		 				<Link onClick={close} to="/credito/solicitud/:idAppliance" className={ (props.url === 'credito') ? classDefault+' nav_bar_active': classDefault}>Mi crédito</Link>
+						{  
+							finishAppliance && 
+							<Link onClick={close} to={`/credito/solicitud/${appliance._id}`} className={ (props.url === 'credito') ? classDefault+' nav_bar_active': classDefault}>Mi crédito</Link>
+						}
+						{
+							!finishAppliance && 
+							<Link onClick={close} to="/credito/" className={ (props.url === 'credito') ? classDefault+' nav_bar_active': classDefault}>Mi crédito</Link>
+						}
 		 				<Link onClick={close} to="/historial" className={ (props.url === 'historial') ? classDefault+' nav_bar_active': classDefault}>Historial</Link>
 		 				<Nav.Link onClick={close} href="/home" className={ (props.url === 'home') ? classDefaultLink+' nav_bar_active': classDefaultLink}>Mi cuenta</Nav.Link>
 		 				<Nav.Link onClick={close} href="/" className="brandonMed text-center blackBlue heigth-45"> <Button className="logout fz-12" style={{marginTop: '-5px'}} onClick={() => {
@@ -43,7 +62,6 @@ const NavBar = props => {
 					</div>
 		 		</Navbar.Collapse>
 		 		}
-				
 		 </Navbar>
 		</div>
 	)

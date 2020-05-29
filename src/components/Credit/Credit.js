@@ -4,22 +4,32 @@ import { useDispatch, useSelector } from "react-redux";
 import { Button } from "react-bootstrap";
 import CustomLoader from "../Generic/CustomLoader";
 import Title from "../Generic/Title";
+import LinkButton from "../Generic/LinkButton";
 import { updateLoader } from "../../redux/actions/loaderActions";
 import { updateAppliance } from "../../redux/actions/applianceActions";
+import tito from "../../assets/img/tito-credit.png";
+import Steps from "../Appliance/Steps";
+import like from "../../assets/img/tito@2x.png";
+
+const getType = (user) => {
+	const idClient = user.idClient[user.idClient.length - 1];
+	let type = null;
+	if (idClient.hasOwnProperty("type")){
+		type = idClient.type;
+	}
+	return type;
+} 
 
 const Credit = (props) => {
   const history = useHistory()
   const appliance = useSelector((state) => state.appliance.appliance);
+  const statusDocuments = useSelector((state) => state.docsStatus);
   const [user, setUser] = useState(JSON.parse(sessionStorage.getItem("user")));
   const [id, setId] = useState(user._id);
-  
-  if (!!localStorage.getItem("type"))
-	localStorage.setItem("type", "PF");
-  
-  
-  let type = localStorage.getItem("type");
+  const type = getType(user);
  
-
+  console.log(statusDocuments);
+ 
   const apply = () => {
     /* this.props
       .newEmptyAppliance({
@@ -36,6 +46,54 @@ const Credit = (props) => {
       .catch((err) => console.log(JSON.stringify(err))); */
   };
 
+  const verify = (array) => {
+		if (typeof array !== "object") return false;
+		return array.length === 0 ? false : array[array.length - 1];
+	}
+
+  const getAppliance = () => {
+	let linkt = "";
+	const idClient = user.idClient[ user.idClient.length - 1 ];
+	let appliance = verify(idClient.appliance);
+	let idAmount = verify(appliance.idAmount);
+	let idGeneralInfo = verify(appliance.idGeneralInfo);
+	let idComercialInfo = verify(appliance.idComercialInfo);
+	let idDocuments = verify(appliance.idDocuments);
+	if (idAmount == null || !idAmount) {
+		linkt = `elige-monto/${user._id}`;
+	} else if (idComercialInfo == null || !idComercialInfo) {
+		linkt = `datos-comerciales/${user._id}`;
+	} else if (idGeneralInfo == null || !idGeneralInfo) {
+		linkt = `informacion-general/${user._id}`;
+	} else if (!idDocuments || !idDocuments == null || !statusDocuments.status) {
+		linkt = `documentos/${user._id}`;
+	}
+		return (
+			<div className="position-relative">
+				<img src={tito} className="apply-caracter-img" alt="tito" />
+				<div className="step-box text-center">
+				<div>
+					<Title
+						className="blackBlue coolvetica fw600 fz42 mb-16"
+						title="Completa tu solicitud"
+					/>
+					<label className="brandonReg gray50 fz20 fw500">
+						Completa el 100% de tu formulario y empieza a recibir las
+						mejores opciones de crédito en menos de 48 hrs.
+					</label>
+				</div>
+				<div className="mt-50">
+					<Steps />
+				</div>
+				{(!appliance.idDocuments ||
+					(appliance.idDocuments && !appliance.idDocuments.status)) && (
+						<LinkButton link={linkt} />
+				)}
+				</div>
+			</div> );
+	};
+
+/*
   const getAppliances = (idClient) => {
     return <h1>No hay solicitudes</h1>
     /*dispatch(updateLoader(true));
@@ -60,14 +118,16 @@ const Credit = (props) => {
                 SOLICITAR{" "}
               </Button>
             </div>
-          ); */
+          
   }
-
-	console.log(user);
+*/
+  
+  if (type === null){
+	  window.location.href = `/elige-monto/${user._id}`;
+  }
 
   return (
     <div className="mt-72 mb-120 container">
-      {!id && user ? (
         <div>
           <Title
             className="blackBlue coolvetica fw500 fz32 mb-16"
@@ -76,26 +136,8 @@ const Credit = (props) => {
           <label className="brandonReg gray50 fz20 fw500">
             Conoce el detalle de tu solicitud
           </label>
-          {type !== null && typeof type === "string" && type !== "null"
-            ? getAppliances(user.idClient.id)
-            : (window.location.href = `/home`)}
-        </div>
-      ) : (
-        <div
-          className="text-center brandonReg fz32"
-          style={{ marginTop: "200px", marginBottom: "200px" }}
-        >
-          {id !== undefined &&
-          id !== null &&
-          type !== null &&
-          typeof type == "string" &&
-          type !== "null"
-            ? history.push(`/credito/solicitud/` + id)
-            : (window.location.href = `/home`)}
-          Regresa a <i>"Mi cuenta"</i> para que podamos cargar todas las
-          solicitudes de tu perfil.
-        </div>
-      )}
+          {getAppliance()}
+		</div>	
     </div>
   );
 };

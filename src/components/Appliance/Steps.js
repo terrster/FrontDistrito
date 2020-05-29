@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from 'react-redux';
 import "../../css/progress-tracker.css";
 import "../../css/custom-progress.css";
 import { Link } from "react-router-dom";
@@ -20,6 +21,7 @@ const Steps = (props) => {
   let idGeneralInfo = verify(appliance.idGeneralInfo);
   let idComercialInfo = verify(appliance.idComercialInfo);
   let idDocuments = verify(appliance.idDocuments);
+  const statusDocuments = useSelector((state) => state.docsStatus);
 
   let activeClass = {
     amount: { class: "is-complete" },
@@ -34,16 +36,14 @@ const Steps = (props) => {
     linkt = `datos-comerciales/${user._id}`;
   } else if (idGeneralInfo == null || !idGeneralInfo) {
     linkt = `informacion-general/${user._id}`;
-  } else if (!idDocuments || !idDocuments == null) {
+  } else if ((!idDocuments || !idDocuments == null) && !statusDocuments.status) {
     linkt = `documentos/${user._id}`;
   }
 
   const first = idAmount ? "amount" : "";
-
   const second = idComercialInfo ? "comercialInfo" : "";
-
   const third = idGeneralInfo ? "generalInfo" : "";
-  const fourth = idDocuments ? "documents" : "";
+  const fourth = idDocuments && statusDocuments.status ? "documents" : "";
 
   const route = linkt;
   const id = user._id;
@@ -67,7 +67,7 @@ const Steps = (props) => {
 
         <li
           className={
-            first
+            first && activeClass[first].hasOwnProperty("class") 
               ? `progress-step ${activeClass[first].class}`
               : "progress-step"
           }
@@ -103,7 +103,7 @@ const Steps = (props) => {
 
         <li
           className={
-            second
+            second && activeClass[second].hasOwnProperty("class") 
               ? `progress-step ${activeClass[second].class}`
               : `progress-step`
           }
@@ -142,8 +142,8 @@ const Steps = (props) => {
 
         <li
           className={
-            props.third
-              ? `progress-step ${activeClass[props.third].class}`
+            third && activeClass[third].hasOwnProperty("class") 
+              ? `progress-step ${activeClass[third].class}`
               : "progress-step"
           }
         >
@@ -181,7 +181,7 @@ const Steps = (props) => {
 
         <li
           className={
-            fourth
+            fourth && activeClass[fourth].hasOwnProperty("class") 
               ? `progress-step ${activeClass[fourth].class}`
               : "progress-step"
           }

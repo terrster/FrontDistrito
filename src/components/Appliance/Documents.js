@@ -64,8 +64,7 @@ const history = useHistory();
 	}
     const formData = new FormData();
     for (const typeDoc in documents){
-		documents[typeDoc].forEach(doc => {
-			console.log(typeDoc);
+		documents[typeDoc].forEach(doc => {			
 			formData.append(typeDoc,doc);
 		});
 	}
@@ -89,31 +88,34 @@ const history = useHistory();
 			}
 			for (const key in currentDocuments){
 				const files = currentDocuments[key];
-				if (files.length > 1){
+				if (files.length > 0){
 					update = true
 					break;
 				}
 			};
 			if (!update){
+				console.log("POST");
 				const { data } = await axios.post(`api/documents/${user._id}`, formData, {
 					headers:{
 					'Content-Type': 'multipart/form-data'
 					}	
 				});
+				console.log(data);
 				if(!data.hasOwnProperty("error")){
 					sessionStorage.setItem('user', JSON.stringify(data.user));
 				}
 			} else {
+				console.log("UPDATE");
 				const { data } = await axios.put(`api/documents/${user._id}`, formData, {
 					headers:{
 					'Content-Type': 'multipart/form-data'
 					}	
 				});
+				console.log(data);
 				if(!data.hasOwnProperty("error")){
 					sessionStorage.setItem('user', JSON.stringify(data.user));
 				}
 			}
-			history.push('/credito/solicitud/'+user._id)
 		}
 		
 	} catch(e){
@@ -121,6 +123,7 @@ const history = useHistory();
 	}
 	if (finish === true){
 		// Finalizar solicitud, igual a la función de appliance
+		history.push('/credito/solicitud/'+user._id)
 	}
 	dispatch(updateLoader(false));
   };
@@ -205,7 +208,6 @@ const history = useHistory();
     const idUser = user._id;
 	const idClient = user.idClient[user.idClient.length - 1];
     if (idClient.appliance.length > 0){
-		console.log("UPDATE DOCUMENTS ON DOCUMENTS");
 		const appliance = idClient.appliance[idClient.appliance.length - 1];
 		if (appliance.idDocuments.length > 0){
 			const { 

@@ -31,6 +31,7 @@ let DocumentsForm = (props) => {
 
   const { handleSubmit } = props;
   const [validFiles, setValidFiles] = useState([]); 
+  const [errorFiles, setErrorFiles] = useState([]);
   const [currentDocuments, setCurrentDocuments] = useState({});
   const [show, setShow] = useState(true);	
  
@@ -75,21 +76,14 @@ let DocumentsForm = (props) => {
               data: { OCRExitCode, ParsedResults },
             } = res;
             const { ParsedText, FileParseExitCode } = ParsedResults[0];
-            if (
-              OCRExitCode === 1 &&
-              FileParseExitCode === 1
-            ) {
+            if ( OCRExitCode === 1 && FileParseExitCode === 1 && ParsedText.length > 50) {
               setValidFiles([...validFiles, true]);
+              setFileToKey(key, value);
             } else {
-              setValidFiles([...validFiles, false]);
               filesNotUploaded.names.push(value[i].name);
               filesNotUploaded.keys.push(i);
-              dispatch(
-                props.updateAlertMsg(
-                  true,
-                  `${filesNotUploaded.names.toString()} - La calidad del documento/imagen no es suficiente`
-                )
-              );
+              deleteChip(i,key);
+              dispatch( props.updateAlertMsg( true, `${filesNotUploaded.names.toString()} - La calidad del documento/imagen no es suficiente`));
             }
           }
         } catch (error) {
@@ -101,12 +95,10 @@ let DocumentsForm = (props) => {
     for (let j = 0; j < filesNotUploaded.keys.length; j++) {
       value.splice(filesNotUploaded.keys[j] - j, 1);
     }
-
-    setFileToKey(key, value);
     if (filesNotUploaded.names.length > 0) {
       setTimeout(() => {
         dispatch(props.updateAlertMsg(false, ""));
-      }, 10000);
+      }, 25000);
     }
     dispatch(updateLoader(false));
   };
@@ -124,7 +116,6 @@ let DocumentsForm = (props) => {
     let arr = [];
     if (key.includes("https")) {
       let arrInt = props.docs;
-
       for (const k in arrInt) {
         if (arrInt[k].length > 0 && arrInt[k].indexOf(key) !== -1) {
           arr = arrInt[k];
@@ -137,7 +128,7 @@ let DocumentsForm = (props) => {
       arr.splice(index, 1);
     }
     props.testDocs();
-    dispatch(props.updateAllDocs(arr));
+    dispatch(props.updateAllDocs(arr, key));
   };
 
   let empty = () => {
@@ -152,11 +143,7 @@ let DocumentsForm = (props) => {
   const comercialInfo = appliance.idComercialInfo[appliance.idComercialInfo.length - 1];
   const ciec = comercialInfo.ciec;
   
-  let docFiles = [];
-  /**
-   * [Dependiendo la persona le creamos los documentos]
-   */
-   
+  let docFiles = [];  
   switch (typePerson) {
     case "PF":
       docFiles = [
@@ -430,7 +417,6 @@ let DocumentsForm = (props) => {
       break;
   }
   let currDocs = props.currentDocuments;
-  const [errorFiles, setErrorFiles] = useState([]);
   
   return (
     <div>
