@@ -56,6 +56,7 @@ const history = useHistory();
 
   const onFormSubmit = async (e, finish) => {
     e.preventDefault();
+    window.scrollTo(0, 0);
     dispatch(updateLoader(true));
     if (!toast.documents){
 		execToast("documents");
@@ -69,15 +70,51 @@ const history = useHistory();
 		});
 	}
 	try {
-		const { data } = await axios.post(`api/documents/${user._id}`, formData, {
-		headers:{
-			'Content-Type': 'multipart/form-data'
-			}	
-		});
-		if(!data.hasOwnProperty("error")){
-			sessionStorage.setItem('user', JSON.stringify(data.user));
+		const idClient = user.idClient[user.idClient.length - 1];
+		if (idClient.appliance.length > 0){
+			let update = false;
+			const appliance = idClient.appliance[idClient.appliance.length - 1];
+			const { 
+				acomplishOpinion, bankStatements, constitutiveAct, 
+				cventerprise, facturacion, financialStatements, 
+				lastDeclarations, oficialID, otherActs, others, 
+				proofAddress, proofAddressMainFounders, 
+				rfc } = appliance.idDocuments[appliance.idDocuments.length - 1];
+			const currentDocuments = {
+				acomplishOpinion, bankStatements, constitutiveAct, 
+				cventerprise, facturacion, financialStatements, 
+				lastDeclarations, oficialID, otherActs, others, 
+				proofAddress, proofAddressMainFounders, 
+				rfc
+			}
+			for (const key in currentDocuments){
+				const files = currentDocuments[key];
+				if (files.length > 1){
+					update = true
+					break;
+				}
+			};
+			if (!update){
+				const { data } = await axios.post(`api/documents/${user._id}`, formData, {
+					headers:{
+					'Content-Type': 'multipart/form-data'
+					}	
+				});
+				if(!data.hasOwnProperty("error")){
+					sessionStorage.setItem('user', JSON.stringify(data.user));
+				}
+			} else {
+				const { data } = await axios.put(`api/documents/${user._id}`, formData, {
+					headers:{
+					'Content-Type': 'multipart/form-data'
+					}	
+				});
+				if(!data.hasOwnProperty("error")){
+					sessionStorage.setItem('user', JSON.stringify(data.user));
+				}
+			}
+			history.push('/credito/solicitud/'+user._id)
 		}
-		history.push('/credito/solicitud/'+user._id)
 		
 	} catch(e){
 		console.log(e);
@@ -86,49 +123,6 @@ const history = useHistory();
 		// Finalizar solicitud, igual a la función de appliance
 	}
 	dispatch(updateLoader(false));
-    /* try {
-			let ans = await manager.assignFiles(this.props.documents);
-			let variables = variablesManager.createDocumentsVariables(ans);
-
-			variables.status =
-				this.props.statusdocument.status && statusClose ? true : false;
-
-			
-			// Revisar si hay que actualizar o crear documentos
-			
-
-			let newDocs = {};
-			let idDocument;
-			if (this.props.statusdocument.isUpdate) {
-				variables.documentId = this.props.statusdocument.id;
-				newDocs = await this.props.updateDocumentsGraph({
-					variables
-				});
-				idDocument = newDocs.data.updateDocuments.id;
-			} else {
-				newDocs = await this.props.createDocuments({
-					variables
-				});
-				idDocument = newDocs.data.createDocuments.id;
-			}
-
-			let updatedAppliance = await this.props.updateApplianceGraph({
-				variables: {
-					idDocuments: idDocument,
-					idAppliance: this.props.match.params.idAppliance
-				}
-			});
-			this.props.updateAppliance(updatedAppliance.data.updateAppliance);
-			this.props.updateLoader(false);
-			this.props.history.push(
-				`/credito/solicitud/${this.props.match.params.idAppliance}`
-			);
-			window.location.reload();
-		} catch (err) {
-			this.props.updateModal('documentsError');
-			this.props.updateLoader(false);
-			window.scrollTo(0, 0);
-		} */
   };
 
   const getDocsMethod = () => {
@@ -219,13 +213,24 @@ const history = useHistory();
 				lastDeclarations, oficialID, otherActs, others, 
 				proofAddress, proofAddressMainFounders, 
 				rfc } = appliance.idDocuments[appliance.idDocuments.length - 1];
-				
+			const currentDocuments = {
+				acomplishOpinion, bankStatements, constitutiveAct, 
+				cventerprise, facturacion, financialStatements, 
+				lastDeclarations, oficialID, otherActs, others, 
+				proofAddress, proofAddressMainFounders, 
+				rfc
+			}
+			for (const key in currentDocuments){
+				const files = currentDocuments[key];
+				dispatch(updateAllDocs(files, key));
+			};
+		}
+			/*
 			setInitialValues({ acomplishOpinion, bankStatements, constitutiveAct, 
 				cventerprise, facturacion, financialStatements, 
 				lastDeclarations, oficialID, otherActs, others, 
 				proofAddress, proofAddressMainFounders, 
-				rfc });
-		}
+				rfc });*/
 	}
     dispatch(updateDocumentsNames(getDocsMethod()));
     testDocuments();
@@ -304,7 +309,7 @@ const history = useHistory();
       />
       <DocumentsForm
         docSelection={sessionStorage.getItem("type")}
-        docs={initialValues}
+        docs={documents}
         updateAllDocs={updateAllDocs}
         updateDocs={updateDocuments}
         testDocs={testDocuments}
@@ -314,7 +319,7 @@ const history = useHistory();
         currentDocuments={currentDocs}
         statusDocs={isCompleteForm}
         statusComplete={appliance.status}
-        initialValues={initialValues}
+        setInitialValues={setInitialValues}
       />
     </div>
   );
