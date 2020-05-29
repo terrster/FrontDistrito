@@ -10,8 +10,14 @@ import { validateComercialInfo } from "../components/Validate/ValidateComercialI
 class ComercialInfoConstructForm extends Component {
   /* CODIGO POSTAL */
   state = {
-    cp: '',
+    cp: [],
     colonias: [],
+    state: [],
+    municipality: [],
+    valueInitialState: '',
+    valueInitialMunicipality: 'Alvaro Obregon',
+    valueInitialCp: '01000',
+    valueInitialColonia: 'San Angel',
     error: null,
     firstLoad: true,
     changeCP: false,
@@ -19,12 +25,79 @@ class ComercialInfoConstructForm extends Component {
     onlyNumbers: (nextValue, previousValue) => /^\d+$/.test(nextValue) || nextValue.length === 0 ? nextValue : previousValue
   };
 
+  getState = async () => {
+    try {
+      await fetch('https://api-sepomex.hckdrk.mx/query/get_estados')
+        .then(response => { return response.json(); })
+        .then(myState => { 
+          const copyState = [];
+          if(Array.isArray(myState.response.estado)){
+            myState.response.estado.map(estados => {
+              copyState.push(estados);
+            });
+            this.setState({
+              state: copyState,
+              error: false,
+              firstLoad: false
+            })
+          }else{
+            console.log("El dato solicitado no es un array");
+          }
+         });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  getMunicipio = async (estado)=>{
+    try {
+      await fetch(`https://api-sepomex.hckdrk.mx/query/get_municipio_por_estado/${estado}`)
+        .then(response => { return response.json(); })
+        .then( myMunicipio => {
+          const copyMunicipios = [];
+          if( Array.isArray(myMunicipio.response.municipios)){
+            myMunicipio.response.municipios.map(municipio => {
+              copyMunicipios.push(municipio);
+            });
+            this.setState({
+              municipality: copyMunicipios,
+              error: false,
+              firstLoad: false
+            })
+          }else{
+            console.log("El dato solicitado no es un array");
+          }
+        })
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  getCodigoPostal = async (municipio)  => {
+    try {
+      await fetch(`https://api-sepomex.hckdrk.mx/query/get_cp_por_municipio/${municipio}`)
+              .then(response => { return response.json()})
+              .then(mycp => {
+                 const copycp = [];
+                if(Array.isArray(mycp.response.cp)){
+                  mycp.response.cp.map(cp => {
+                    copycp.push(cp);
+                  });
+                  this.setState({
+                    cp: copycp,
+                    error: false,
+                    firstLoad: false
+                  })
+                }else{
+                  console.log("El dato solicitado no es una array");
+                } 
+              })
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   getColonias = async codigopostal => {
-    /*if(!codigopostal){
-      this.setState({error: "Ingresa el código postal de tu negocio."}) 
-    } else if (!/^[0-9]\d{4,5}/.test(codigopostal)|| (codigopostal.length > 5 || codigopostal.length < 5)){
-      this.setState({error: "Ingresa un código postal válido"})
-    }*/
     try {
       if (codigopostal.length === 5) {
         const res = await (
@@ -60,13 +133,28 @@ class ComercialInfoConstructForm extends Component {
     }
   }
 
-  handleChangeCodigoPostal = async e => {
-    const codigopostal = e.target.value;
-    this.getColonias(codigopostal);
-    this.setState({ changeCP: true });
+  handleChangeMunicipio = async e => {
+    const estado = e.target.value;
+    this.getMunicipio(estado);
+    this.setState({ valueInitialState: e.target.value, changeMP: true });
   };
 
-  /* FIN CODIGO POSTAL */
+  handleChangeCp = async e => {
+    const municipio = e.target.value;
+    this.getCodigoPostal(municipio);
+    this.setState({valueInitialCp: e.target.value})
+  }
+  handleChangeColonia = async e => {
+      const codigopostal = e.target.value;
+      this.getColonias(codigopostal);
+      this.setState({ valueInitialColonia: e.target.value, changeCP: true });
+  };
+
+  componentWillMount(){
+    this.getState();
+    this.getMunicipio();
+    this.getCodigoPostal();
+  }
 
   render() {
     const onlyLirycs = (nextValue, previousValue) => /^([a-z ñáéíóú]{0,60})$/i.test(nextValue) ? nextValue : previousValue;
@@ -149,16 +237,68 @@ class ComercialInfoConstructForm extends Component {
               normalize={onlyNumbers}
             />
           </Col>
-          {/*codigo postal */}
+
           <Col lg={6} md={6} sm={12}>
             <Field
-              component={renderField}
-              onChange={this.handleChangeCodigoPostal}
-              label="CP"
+              className="form-control custom-form-input brandonReg mt-1 mb-0"
+              component="select"
+              onChange={this.handleChangeMunicipio}
+              name="state"
+              value={this.state.state[0]}
+            >
+              <option disabled selected>Selecciona un Estado</option>
+              {
+                this.state.state.map((state, index) => {
+                  return (
+                    <option value={state} key={state + index} >
+                      {state}
+                    </option>
+                  )
+                })
+              }
+            </Field>
+          </Col>
+          
+          <Col lg={6} md={6} sm={12}>
+            <Field
+              className="form-control custom-form-input brandonReg mt-1 mb-3"
+              component="select"
+              onChange={this.handleChangeCp}
+              name="municipality"
+              value={this.state.valueInitialMunicipality}
+            >
+              <option disabled selected>Selecciona un Municipio</option>
+              {
+                this.state.municipality.map((municipality, index) => {
+                  return (
+                    <option value={municipality} key={municipality + index}>
+                      {municipality}
+                    </option>
+                  )
+                })
+              }
+            </Field>
+          </Col>
+
+          <Col lg={6} md={6} sm={12}>
+            <Field
+              className="form-control custom-form-input brandonReg mt-1 mb-0"
+              component="select"
+              onChange={this.handleChangeColonia}
               name="zipCode"
-              normalize={onlyNumbers}
-            />
-            {this.state.error && <span className="mb-3"><small className="error">{this.state.error}</small></span>}
+              value={this.state.valueInitialCp}
+            >
+              <option disabled selected>Selecciona un Códio Postal</option>
+              {
+                this.state.cp.map((cp, index) => {
+                  return (
+                    <option value={cp} key={cp + index}>
+                      {cp}
+                    </option>
+                  )
+                })
+              }
+            </Field>
           </Col>
 
           <Col lg={6} md={6} sm={12}>
@@ -166,10 +306,11 @@ class ComercialInfoConstructForm extends Component {
               className="form-control custom-form-input brandonReg mt-1 mb-0"
               component="select"
               onChange={() => this.setState({ touched: true })}
-              value={!this.state.touched && this.props.initialValues.colonias != null && !this.state.changeCP ? this.props.initialValues.colonias[0] : this.state.colonias[0]}
               name="town"
               cls="mb-3"
-            >
+              value={this.state.valueInitialColonia}
+             >
+              <option disabled selected>Selecciona una Colonia</option>
               {this.props.initialValues.colonias != null && !this.state.changeCP ?
                 this.props.initialValues.colonias.map((colonia, index) => {
                   return (
@@ -188,8 +329,20 @@ class ComercialInfoConstructForm extends Component {
             </Field>
           </Col>
 
+          {/*codigo postal 
+          <Col lg={6} md={6} sm={12}>
+            <Field
+              component={renderField}
+              onChange={this.handleChangeCodigoPostal}
+              label="CP"
+              name="zipCode"
+              normalize={onlyNumbers}
+            />
+            {this.state.error && <span className="mb-3"><small className="error">{this.state.error}</small></span>}
+          </Col>*/}
+
           <Col lg={12} md={12} sm={12}>
-            <label className="label-style">
+            <label className="label-style mt-3">
               El número telefónico debe tener 10 dígitos
             </label>
             <Field
