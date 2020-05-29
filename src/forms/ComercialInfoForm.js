@@ -137,12 +137,33 @@ class ComercialInfoConstructForm extends Component {
     const estado = e.target.value;
     this.getMunicipio(estado);
     this.setState({ valueInitialState: e.target.value, changeMP: true });
+    const changeMunicipality = () => {
+		this.getMunicipio(this.state.state[0]);
+	}
+    changeMunicipality();
+    const changeCodigoPostal = () => {
+		this.getCodigoPostal(this.state.municipality[0]);
+		this.setState({changeCP: true});
+	}
+	changeCodigoPostal();
+	const changeColonias = () => {
+		console.log(this.state.cp);
+		this.getColonias(this.state.cp[0]);
+	}
+	changeColonias();
   };
 
   handleChangeCp = async e => {
     const municipio = e.target.value;
-    this.getCodigoPostal(municipio);
-    this.setState({valueInitialCp: e.target.value})
+    const changeCP = () => {
+		this.getCodigoPostal(municipio);
+	}
+    changeCP();
+    const changeColonias = () => {
+		this.getColonias(this.state.cp[0]);
+	}
+	changeColonias();
+    this.setState({valueInitialCp: e.target.value, changeCP: true})
   }
   handleChangeColonia = async e => {
       const codigopostal = e.target.value;
@@ -150,10 +171,25 @@ class ComercialInfoConstructForm extends Component {
       this.setState({ valueInitialColonia: e.target.value, changeCP: true });
   };
 
-  componentWillMount(){
-    this.getState();
-    this.getMunicipio();
-    this.getCodigoPostal();
+  componentDidMount(){
+	this.getState();
+	const user = JSON.parse(sessionStorage.getItem("user"));
+	const idClient = user.idClient[user.idClient.length - 1];
+	if (idClient.appliance.length > 0){
+		const appliance = idClient.appliance[idClient.appliance.length - 1];
+		const idComercialInfo = appliance.idComercialInfo[appliance.idComercialInfo.length - 1];
+		if (idComercialInfo.address.length > 0){
+			const address = idComercialInfo.address[idComercialInfo.address.length - 1];
+			if (address.hasOwnProperty("state")){
+				const stateUser = address.state;
+				this.getMunicipio(stateUser);	
+			}
+			if (address.hasOwnProperty("municipality")){
+				const municipality = address.municipality;
+				this.getCodigoPostal(municipality);
+			}
+		}
+	}
   }
 
   render() {
@@ -244,9 +280,8 @@ class ComercialInfoConstructForm extends Component {
               component="select"
               onChange={this.handleChangeMunicipio}
               name="state"
-              value={this.state.state[0]}
             >
-              <option disabled selected>Selecciona un Estado</option>
+              <option value="" disabled selected>Selecciona un Estado</option>
               {
                 this.state.state.map((state, index) => {
                   return (
@@ -267,7 +302,7 @@ class ComercialInfoConstructForm extends Component {
               name="municipality"
               value={this.state.valueInitialMunicipality}
             >
-              <option disabled selected>Selecciona un Municipio</option>
+              <option  value="" disabled selected>Selecciona un Municipio</option>
               {
                 this.state.municipality.map((municipality, index) => {
                   return (
@@ -288,7 +323,7 @@ class ComercialInfoConstructForm extends Component {
               name="zipCode"
               value={this.state.valueInitialCp}
             >
-              <option disabled selected>Selecciona un Códio Postal</option>
+              <option value="" disabled selected>Selecciona un Códio Postal</option>
               {
                 this.state.cp.map((cp, index) => {
                   return (
@@ -310,7 +345,7 @@ class ComercialInfoConstructForm extends Component {
               cls="mb-3"
               value={this.state.valueInitialColonia}
              >
-              <option disabled selected>Selecciona una Colonia</option>
+              <option value="" disabled selected>Selecciona una Colonia</option>
               {this.props.initialValues.colonias != null && !this.state.changeCP ?
                 this.props.initialValues.colonias.map((colonia, index) => {
                   return (
