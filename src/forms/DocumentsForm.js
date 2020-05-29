@@ -5,6 +5,7 @@ import { Button } from "react-bootstrap";
 import axios from "axios";
 import "../css/dnd.css";
 import { array } from "prop-types";
+import PopUp from "./PopUp";
 
 // Components
 import FileInput from "../components/Generic/FileInput";
@@ -29,7 +30,10 @@ let DocumentsForm = (props) => {
   const proofAddressMainFounders = React.createRef();
 
   const { handleSubmit } = props;
-  const [validFiles, setValidFiles] = useState([]);
+  const [validFiles, setValidFiles] = useState([]); 
+  const [currentDocuments, setCurrentDocuments] = useState({});
+	
+ 
 
   let fileHandler = async (component, key, e) => {
     dispatch (updateLoader(true));
@@ -49,8 +53,6 @@ let DocumentsForm = (props) => {
           )
         );
       } else {
-        console.log("Value: File handler");
-        console.log(value);
         const api = "https://api.ocr.space/parse/image";
         const formData = new FormData();
         formData.append("file", value[0]);
@@ -429,11 +431,19 @@ let DocumentsForm = (props) => {
   let currDocs = props.currentDocuments;
   const [errorFiles, setErrorFiles] = useState([]);
 
+/*
+ *  Datos para después agregar el POPUP que redireccione
+	const user = JSON.parse(sessionStorage.getItem("user"));
+	const idClient = user.idClient[user.idClient.length - 1];
+	const appliance = idClient.appliance[idClient.appliance.length - 1];
+	const comercialInfo = appliance.idComercialInfo[appliance.idComercialInfo.length - 1];
+	const ciec = comercialInfo.ciec;
+*/
+
   return (
     <div>
       <form className="ml-auto mr-auto" style={{ maxWidth: "690px" }}>
         {docFiles.map((d, i) => {
-			console.log(docFiles);
           return (
             <div key={`div-file-input-${i}`}>
               <FileInput

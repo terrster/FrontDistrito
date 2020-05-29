@@ -14,8 +14,6 @@ import {
 } from "../components/Generic/Fields";
 import CustomLoader from "../components/Generic/CustomLoader";
 import { setSameAddress } from "../redux/actions/sameAddressActions";
-import PopUp from "./PopUp";
-import Info from "../assets/img/Info.png";
 import { updateLoader } from '../redux/actions/loaderActions';
 import axiosBase from 'axios';
 let GeneralInfoForm = ({ handleSubmit,  changeAddress, initialValues, setInitialValues }) => {
@@ -290,33 +288,6 @@ let GeneralInfoForm = ({ handleSubmit,  changeAddress, initialValues, setInitial
           </Col>
         </Row>
 
-        {user.idClient[user.idClient.length - 1].type !== "PF" && (
-          <div>
-            <div>
-              <SubtitleForm
-                subtitle="Clave CIEC (Opcional)"
-                className="mt-30"
-              />
-              <div onClick={handleShow} style={{ cursor: "pointer", width: '0', height: '0' }}>
-                <img
-                  src={Info}
-                  alt="More Info"
-                  title="More Info"
-                  className="positionInfo"
-                />
-              </div>
-            </div>
-            <Field component={renderFieldFull} label="CIEC" name="ciec" 
-              onChange={(event, newValue, previousValue) => setInitialValues({...initialValues, ciec: newValue})}
-            />
-            <div className="fz18 gray50 brandonReg mb-30 mt-2">
-              No es obligatorio pero podrá agilizar tu solicitud de crédito a la
-              mitad del tiempo. Se ingresará por única ocasión para descargar la
-              información necesaria.
-            </div>
-          </div>
-        )}
-
         <SubtitleForm subtitle="Referencias" className="mt-30" />
         <label className="label-style">
           El número telefónico debe tener 10 dígitos
@@ -465,7 +436,6 @@ let GeneralInfoForm = ({ handleSubmit,  changeAddress, initialValues, setInitial
           </Button>
         </div>
       </form>
-      {user.idClient[user.idClient.length - 1].type !== "PF" && <PopUp show={showModalGeneral} setShow={setShow} />}
     </div>
   );
 };

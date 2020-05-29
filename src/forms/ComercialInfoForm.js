@@ -4,8 +4,10 @@ import { Field, reduxForm } from "redux-form";
 import { Row, Col, Button } from "react-bootstrap";
 import comercialOptions from "../models/ComercialInfoModels";
 import SubtitleForm from "../components/Generic/SubtitleForm";
-import { renderField, renderSelectField } from "../components/Generic/Fields";
+import { renderField, renderSelectField, renderFieldFull, } from "../components/Generic/Fields";
 import { validateComercialInfo } from "../components/Validate/ValidateComercialInfo";
+import Info from "../assets/img/Info.png";
+import PopUp from "./PopUp";
 
 class ComercialInfoConstructForm extends Component {
   /* CODIGO POSTAL */
@@ -14,8 +16,9 @@ class ComercialInfoConstructForm extends Component {
 	colonias: [],
 	error: null,
 	firstLoad: true,
-  changeCP: false,
-  touched: false
+    changeCP: false,
+    touched: false,
+    show: true
   };
   
   getColonias = async codigopostal => {
@@ -59,6 +62,8 @@ class ComercialInfoConstructForm extends Component {
       }
   }
 
+  handleShow = () => this.setState({show: true});  
+
   handleChangeCodigoPostal = async e => {
   	const codigopostal = e.target.value;
     this.getColonias(codigopostal);
@@ -68,8 +73,19 @@ class ComercialInfoConstructForm extends Component {
   /* FIN CODIGO POSTAL */
   render() {
 	  
+	  const user = JSON.parse(sessionStorage.getItem("user"));
+	  const idClient = user.idClient[user.idClient.length - 1];
+	  const appliance = idClient.appliance[idClient.appliance.length - 1];
+	  const comercialInfo = appliance.idComercialInfo[appliance.idComercialInfo.length - 1];
+	  const ciec = comercialInfo.ciec;
+	  
     return (
       <>
+        {
+			idClient.type !== "PF" && 
+			(ciec == "" || ciec == null) && 
+			<PopUp show={this.state.show} setShow={(value) => this.setState({show: value})} />
+		}
         <SubtitleForm subtitle="Sobre tu negocio" className="mb-3" />
         <Field
           component={renderField}
@@ -189,6 +205,33 @@ class ComercialInfoConstructForm extends Component {
             />
           </Col>
         </Row>
+        
+        {user.idClient[user.idClient.length - 1].type !== "PF" && (
+          <div>
+            <div>
+              <SubtitleForm
+                subtitle="Clave CIEC (Opcional)"
+                className="mt-30"
+              />
+              <div onClick={() => this.handleShow()} style={{ cursor: "pointer", width: '0', height: '0' }}>
+                <img
+                  src={Info}
+                  alt="More Info"
+                  title="More Info"
+                  className="positionInfo"
+                />
+              </div>
+            </div>
+            <Field component={renderFieldFull} label="CIEC" name="ciec" />
+            <div className="fz18 gray50 brandonReg mb-30 mt-2">
+              No es obligatorio pero podrá agilizar tu solicitud de crédito a la
+              mitad del tiempo. Se ingresará por única ocasión para descargar la
+              información necesaria.
+            </div>
+          </div>
+        )}
+        
+        
         <SubtitleForm subtitle="¿Cuentas con alguno?" className="mt-11 mb-3" />
         <Field
           component={renderField}

@@ -179,6 +179,7 @@ const GeneralInfo = () => {
         today={new Date()}
         changeDate={updateDate}
         onSubmit={(data) => {
+			window.scroll(0, 0);
           onFormSubmit(data);
         }}
         setInitialValues={setInitialValues}
