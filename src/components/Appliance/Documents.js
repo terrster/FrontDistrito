@@ -70,15 +70,51 @@ const history = useHistory();
 		});
 	}
 	try {
-		const { data } = await axios.post(`api/documents/${user._id}`, formData, {
-		headers:{
-			'Content-Type': 'multipart/form-data'
-			}	
-		});
-		if(!data.hasOwnProperty("error")){
-			sessionStorage.setItem('user', JSON.stringify(data.user));
+		const idClient = user.idClient[user.idClient.length - 1];
+		if (idClient.appliance.length > 0){
+			let update = false;
+			const appliance = idClient.appliance[idClient.appliance.length - 1];
+			const { 
+				acomplishOpinion, bankStatements, constitutiveAct, 
+				cventerprise, facturacion, financialStatements, 
+				lastDeclarations, oficialID, otherActs, others, 
+				proofAddress, proofAddressMainFounders, 
+				rfc } = appliance.idDocuments[appliance.idDocuments.length - 1];
+			const currentDocuments = {
+				acomplishOpinion, bankStatements, constitutiveAct, 
+				cventerprise, facturacion, financialStatements, 
+				lastDeclarations, oficialID, otherActs, others, 
+				proofAddress, proofAddressMainFounders, 
+				rfc
+			}
+			for (const key in currentDocuments){
+				const files = currentDocuments[key];
+				if (files.length > 1){
+					update = true
+					break;
+				}
+			};
+			if (!update){
+				const { data } = await axios.post(`api/documents/${user._id}`, formData, {
+					headers:{
+					'Content-Type': 'multipart/form-data'
+					}	
+				});
+				if(!data.hasOwnProperty("error")){
+					sessionStorage.setItem('user', JSON.stringify(data.user));
+				}
+			} else {
+				const { data } = await axios.put(`api/documents/${user._id}`, formData, {
+					headers:{
+					'Content-Type': 'multipart/form-data'
+					}	
+				});
+				if(!data.hasOwnProperty("error")){
+					sessionStorage.setItem('user', JSON.stringify(data.user));
+				}
+			}
+			history.push('/credito/solicitud/'+user._id)
 		}
-		history.push('/credito/solicitud/'+user._id)
 		
 	} catch(e){
 		console.log(e);
@@ -169,7 +205,6 @@ const history = useHistory();
     const idUser = user._id;
 	const idClient = user.idClient[user.idClient.length - 1];
     if (idClient.appliance.length > 0){
-		console.log("UPDATE DOCUMENTS ON DOCUMENTS");
 		const appliance = idClient.appliance[idClient.appliance.length - 1];
 		if (appliance.idDocuments.length > 0){
 			const { 
