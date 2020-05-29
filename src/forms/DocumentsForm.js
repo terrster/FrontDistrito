@@ -32,7 +32,7 @@ let DocumentsForm = (props) => {
   const { handleSubmit } = props;
   const [validFiles, setValidFiles] = useState([]); 
   const [currentDocuments, setCurrentDocuments] = useState({});
-	
+  const [show, setShow] = useState(true);	
  
 
   let fileHandler = async (component, key, e) => {
@@ -147,10 +147,11 @@ let DocumentsForm = (props) => {
   };
   const user = JSON.parse(sessionStorage.getItem("user"));
   const idClient = user.idClient[user.idClient.length - 1];
-  let typePerson = "PF"; // sessionStorage.getItem('type');
-  if (idClient.hasOwnProperty("type") && (idClient.type !== null || idClient.type !== undefined)){
-	  typePerson = idClient.type;
-  }
+  const typePerson = idClient.type;
+  const appliance = idClient.appliance[idClient.appliance.length - 1];
+  const comercialInfo = appliance.idComercialInfo[appliance.idComercialInfo.length - 1];
+  const ciec = comercialInfo.ciec;
+  
   let docFiles = [];
   /**
    * [Dependiendo la persona le creamos los documentos]
@@ -430,18 +431,14 @@ let DocumentsForm = (props) => {
   }
   let currDocs = props.currentDocuments;
   const [errorFiles, setErrorFiles] = useState([]);
-
-/*
- *  Datos para después agregar el POPUP que redireccione
-	const user = JSON.parse(sessionStorage.getItem("user"));
-	const idClient = user.idClient[user.idClient.length - 1];
-	const appliance = idClient.appliance[idClient.appliance.length - 1];
-	const comercialInfo = appliance.idComercialInfo[appliance.idComercialInfo.length - 1];
-	const ciec = comercialInfo.ciec;
-*/
-
+  
   return (
     <div>
+		{
+			idClient.type !== "PF" && 
+			(ciec == "" || ciec == null) &&
+			<PopUp show={show} setShow={(value) => setShow(value)} isDocuments={true}/>
+		}
       <form className="ml-auto mr-auto" style={{ maxWidth: "690px" }}>
         {docFiles.map((d, i) => {
           return (

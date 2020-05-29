@@ -26,6 +26,7 @@ const Amount = props => {
 	const history = useHistory();
 	
 	const onFormSubmit = async (data) => {
+		window.scrollTo(0, 0);
 		dispatch( updateLoader(true) );
 		const user = JSON.parse(sessionStorage.getItem('user'));
 		const id = user._id;

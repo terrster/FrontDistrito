@@ -145,11 +145,5 @@ export const validateGeneralInfo = values => {
 		errors.tyc = 'Debes aceptar para avanzar';
 	}
 
-	if (!values.ciec) {
-		errors.ciec = '';
-	} else if (!/^[a-zA-Z0-9]+$/.test(values.ciec) || values.ciec.length < 8) {
-		errors.ciec = 'Ingresa un CIEC valido';
-	}
-
 	return errors;
 };

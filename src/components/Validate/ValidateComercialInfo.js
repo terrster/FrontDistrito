@@ -96,6 +96,13 @@ export const validateComercialInfo = values => {
 	if (!values.terminal) {
 		errors.terminal = 'Selecciona una opción';
 	}
+	
+	if (!values.ciec) {
+		errors.ciec = '';
+	} else if (!/^[a-zA-Z0-9]+$/.test(values.ciec) || values.ciec.length < 8) {
+		errors.ciec = 'Ingresa un CIEC valido';
+	}
+	
 
 	return errors;
 };

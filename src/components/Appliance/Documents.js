@@ -205,6 +205,7 @@ const history = useHistory();
     const idUser = user._id;
 	const idClient = user.idClient[user.idClient.length - 1];
     if (idClient.appliance.length > 0){
+		console.log("UPDATE DOCUMENTS ON DOCUMENTS");
 		const appliance = idClient.appliance[idClient.appliance.length - 1];
 		if (appliance.idDocuments.length > 0){
 			const { 
