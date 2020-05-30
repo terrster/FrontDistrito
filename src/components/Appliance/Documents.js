@@ -105,8 +105,10 @@ const history = useHistory();
 					sessionStorage.setItem('user', JSON.stringify(data.user));
 				}
 			} else {
+				const idDocuments = appliance.idDocuments[appliance.idDocuments.length - 1];
 				console.log("UPDATE");
-				const { data } = await axios.put(`api/documents/${user._id}`, formData, {
+				console.log(idDocuments._id);
+				const { data } = await axios.put(`api/documents/${idDocuments._id}`, formData, {
 					headers:{
 					'Content-Type': 'multipart/form-data'
 					}	
