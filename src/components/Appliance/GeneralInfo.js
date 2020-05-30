@@ -73,6 +73,8 @@ const GeneralInfo = () => {
 				const mortgageCredit = res.data.general.mortgageCredit ? "1" : "0";
 				const address = res.data.general.address[res.data.general.address.length - 1];
 				const street = address.street;
+				const state = address.state;
+				const municipality = address.municipality;
 				const town = address.town;
 				const zipCode = address.zipCode;
 				const extNumber = address.extNumber;
@@ -90,7 +92,7 @@ const GeneralInfo = () => {
 					...initialValues, ...res.data.general, day, month, year,
 					name1, name2, phone1, phone2, relative1, relative2,
 					mortgageCredit, creditCard, street, town, zipCode, extNumber, intNumber,
-					colonias
+					colonias, state, municipality
 				});
 			}
 		}
@@ -101,6 +103,7 @@ const GeneralInfo = () => {
 
 
   const onFormSubmit = async (dataForm) => {
+	  console.log(dataForm);
 	dispatch( updateLoader(true));
 	const user = JSON.parse(sessionStorage.getItem('user'));
 	const id = user._id;
@@ -146,19 +149,39 @@ const GeneralInfo = () => {
 				const appliance = idClient.appliance[idClient.appliance.length - 1];
 				if (appliance.idComercialInfo.length > 0){
 					const comercial = appliance.idComercialInfo[appliance.idComercialInfo.length - 1];
-					const { extNumber, intNumber, registerDate, street, town, zipCode } = comercial.address[comercial.address.length - 1];
-					setInitialValues({ ...initialValues, extNumber, intNumber, registerDate, street, town, zipCode, sameAddress: true })				}
+					const { 
+						extNumber, intNumber, registerDate, street, town, zipCode,
+						state, municipality 
+					} = comercial.address[comercial.address.length - 1];
+					setInitialValues({ ...initialValues, state, municipality, extNumber, intNumber, registerDate, street, town, zipCode, sameAddress: true })				}
 				}
 		}
 		else {
-			const extNumber = "";
-			const intNumber = "";
-			const registerDate = "";
-			const street = "";
-			const town = "";
-			const zipCode = "";
 			const sameAddress = false;
-			setInitialValues({  ...initialValues, extNumber, intNumber, registerDate, street, town, zipCode, sameAddress })
+			let extNumber = "";
+			let intNumber = "";
+			let street = "";
+			let town = "";
+			let zipCode = "";
+			let state = "";
+			let municipality = "";
+			let user = JSON.parse(sessionStorage.getItem("user"));
+			let idClient = user.idClient[user.idClient.length - 1];
+			if (idClient.appliance.length > 0){
+				const appliance = idClient.appliance[idClient.appliance.length - 1];
+				const idGeneralInfo = appliance.idGeneralInfo[appliance.idGeneralInfo.length - 1];
+				if (idGeneralInfo.address.length > 0){
+					const address = idGeneralInfo.address[idGeneralInfo.address.length - 1];
+					extNumber = address.extNumber;
+					intNumber = address.intNumber;					
+					street = address.street;
+					town = address.town;
+					zipCode = address.zipCode;
+					state = address.state;
+					municipality = address.municipality;
+				}
+			}
+			setInitialValues({  ...initialValues, state, municipality, extNumber, intNumber, street, town, zipCode, sameAddress })
 		}
 		dispatch( updateLoader(false));		
 	}	

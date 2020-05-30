@@ -43,7 +43,7 @@ let GeneralInfoForm = ({ handleSubmit, changeAddress, initialValues, setInitialV
     lastname: user.lastName,
   };
 
-  const setComercialAddress = (checkboxComercialAddress) => {
+  const setComercialAddress = async (checkboxComercialAddress) => {
     dispatch(updateLoader(true));
     if (checkboxComercialAddress) {
       const user = JSON.parse(sessionStorage.getItem('user'));
@@ -53,22 +53,53 @@ let GeneralInfoForm = ({ handleSubmit, changeAddress, initialValues, setInitialV
         const appliance = idClient.appliance[idClient.appliance.length - 1];
         if (appliance.idComercialInfo.length > 0) {
           const comercial = appliance.idComercialInfo[appliance.idComercialInfo.length - 1];
-          const { extNumber, intNumber, registerDate, street, town, zipCode } = comercial.address[comercial.address.length - 1];
-          setCurrentAddress({ extNumber, intNumber, registerDate, street, town, zipCode })
+          const { extNumber, intNumber, registerDate, street, town, zipCode, municipality, state } = comercial.address[comercial.address.length - 1];
+          const changeMunicipios = async () => {
+			  await setMunicipios(state);
+		  }
+          await changeMunicipios();
+          const changeCP = async () => {
+			  await setCodigoPostal(municipality);
+		  }
+		  await changeCP();
+		  const changeColonias = async () => {
+			  await setColoniasR(zipCode);
+		  } 
+          await changeColonias();
+          setCurrentAddress({ extNumber, intNumber, registerDate, street, town, zipCode, municipality, state  })
         }
       }
     }
     else {
-      const extNumber = "";
-      const intNumber = "";
-      const registerDate = "";
-      const street = "";
-      const town = "";
-      const zipCode = "";
-      const sameAddress = false;
-      setCurrentAddress({ extNumber, intNumber, registerDate, street, town, zipCode, sameAddress })
+			const sameAddress = false;
+			let extNumber = "";
+			let intNumber = "";
+			let street = "";
+			let town = "";
+			let zipCode = "";
+			let state = "";
+			let municipality = "";
+			let user = JSON.parse(sessionStorage.getItem("user"));
+			let idClient = user.idClient[user.idClient.length - 1];
+			if (idClient.appliance.length > 0){
+				const appliance = idClient.appliance[idClient.appliance.length - 1];
+				const idGeneralInfo = appliance.idGeneralInfo[appliance.idGeneralInfo.length - 1];
+				if (idGeneralInfo.address.length > 0){
+					const address = idGeneralInfo.address[idGeneralInfo.address.length - 1];
+					extNumber = address.extNumber;
+					intNumber = address.intNumber;					
+					street = address.street;
+					town = address.town;
+					zipCode = address.zipCode;
+					state = address.state;
+					municipality = address.municipality;
+				}
+			}
+      setCurrentAddress({ extNumber, intNumber, street, town, zipCode, sameAddress, state, municipality })
     }
-    dispatch(updateLoader(false));
+    setTimeout(() => {
+		dispatch(updateLoader(false));
+	}, 1000)
   }
   
   const setEstados = async () => {
@@ -100,7 +131,6 @@ let GeneralInfoForm = ({ handleSubmit, changeAddress, initialValues, setInitialV
   const setCodigoPostal = async (municipio) => {
     let cpr = [];
     const codigoPostalRequest = await axiosBase.get(`https://api-sepomex.hckdrk.mx/query/get_cp_por_municipio/${municipio}`);
-    console.log("Los codigos: ",codigoPostalRequest.data.response);
     if (Array.isArray(codigoPostalRequest.data.response.cp)) {
       codigoPostalRequest.data.response.cp.map(codigopostal => {
         cpr.push(codigopostal);
@@ -123,10 +153,11 @@ let GeneralInfoForm = ({ handleSubmit, changeAddress, initialValues, setInitialV
     }
     setColonias(coloniasr);
   }
-
+  
   const handleChangeMunicipio = async e => {
     const estado = e.target.value;
     setMunicipios(estado);
+    setInitialValues({ ...initialValues, state: estado })
   };
 
 
@@ -135,19 +166,53 @@ let GeneralInfoForm = ({ handleSubmit, changeAddress, initialValues, setInitialV
     const changeCP = () => {
       setCodigoPostal(municipio);
     }
+    setInitialValues({ ...initialValues, municipality: municipio })
     changeCP();
   }
 
   const handleChangeColonia = async e => {
     const codigopostal = e.target.value;
     setColoniasR(codigopostal);
+    setInitialValues({ ...initialValues, zipCode: codigopostal })
   };
 
+ const getInitialValues = () => {
+	 setEstados();
+		const user = JSON.parse(sessionStorage.getItem("user"));
+		const idClient = user.idClient[user.idClient.length - 1];
+		if (idClient.appliance.length > 0){
+			const appliance = idClient.appliance[idClient.appliance.length - 1];
+			const idGeneralInfo = appliance.idGeneralInfo[appliance.idGeneralInfo.length - 1];
+			if (idGeneralInfo.address.length > 0){
+				const address = idGeneralInfo.address[idGeneralInfo.address.length - 1];
+				if (address.hasOwnProperty("state")){
+					if (address.state != null){
+						const stateUser = address.state;
+						setMunicipios(stateUser);	
+					}
+				}
+				if (address.hasOwnProperty("municipality")){
+					if (address.municipality != null){
+						const municipality = address.municipality;
+						setCodigoPostal(municipality);	
+					}
+				}
+				if (address.hasOwnProperty("zipCode")){
+					if (address.zipCode != null){
+						setColoniasR(address.zipCode)
+					}
+				}
+			}
+		}
+ }
 
-  useEffect(()=>{
-  }) 
+
+	useEffect(()=>{
+			getInitialValues();
+	}, []) 
   const onlyLirycs = (nextValue, previousValue) => /^([a-z ñáéíóú]{0,60})$/i.test(nextValue) ? nextValue : previousValue;
   const onlyNumbers = (nextValue, previousValue) => /^\d+$/.test(nextValue) || nextValue.length === 0? nextValue : previousValue;
+  
   return (
     <div>
       <form
@@ -268,7 +333,8 @@ let GeneralInfoForm = ({ handleSubmit, changeAddress, initialValues, setInitialV
             dispatch(updateLoader(true));
             changeAddress(newValue);
             setSameAddress(newValue);
-            setComercialAddress(newValue);
+            //setComercialAddress(newValue);
+            
           }}
           type="checkbox"
           label="Utilizar los mismos datos que el domicilio comercial"
@@ -313,8 +379,8 @@ let GeneralInfoForm = ({ handleSubmit, changeAddress, initialValues, setInitialV
               component="select"
               name="state"
               cls="mb-3 mt-24"
+              disabled={!sameAddress ? false : true}
               onChange={handleChangeMunicipio}
-              value={state[0]}
             >
               <option value="" selected disabled>Selecciona un Estado</option>
               {
@@ -335,8 +401,8 @@ let GeneralInfoForm = ({ handleSubmit, changeAddress, initialValues, setInitialV
               component="select"
               name="municipality"
               cls="mb-3 mt-24"
+              disabled={!sameAddress ? false : true}
               onChange={handleChangeCp}
-              value={municipality[0]}
             >
               <option value="" selected disabled>Selecciona un Municipio</option>
               {
@@ -356,9 +422,9 @@ let GeneralInfoForm = ({ handleSubmit, changeAddress, initialValues, setInitialV
               className="form-control custom-form-input brandonReg mt-24 mb-0"
               component="select"
               name="zipCode"
+              disabled={!sameAddress ? false : true}
               cls="mb-3 mt-24"
               onChange={handleChangeColonia}
-              value={cp[0]}
             >
               <option value="" selected disabled>Selecciona un Código Postal</option>
               {
@@ -396,8 +462,8 @@ let GeneralInfoForm = ({ handleSubmit, changeAddress, initialValues, setInitialV
               className="form-control custom-form-input brandonReg mt-24 mb-0"
               component="select"
               name="town"
+              disabled={!sameAddress ? false : true}
               cls="mb-3 mt-24"
-              value={colonias[0]}
             > 
             <option value="" selected disabled>Selecciona una colonia</option>
               {
@@ -571,8 +637,10 @@ let GeneralInfoForm = ({ handleSubmit, changeAddress, initialValues, setInitialV
               component={renderSelectFieldFull}
               name="creditCard"
               clases="mt-10"
-              onChange={(e) => setCreditCard(e.target.value)}
-              onChange={(event, newValue, previousValue) => setInitialValues({ ...initialValues, creditCard: newValue })}
+              onChange={(event, newValue, previousValue) => {
+				  setInitialValues({ ...initialValues, creditCard: newValue })
+				  setCreditCard(newValue)
+			  }}
             >
               <option value="">Selecciona...</option>
               <option value="1">Sí</option>
