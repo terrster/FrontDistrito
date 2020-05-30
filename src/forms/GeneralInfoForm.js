@@ -28,7 +28,13 @@ let GeneralInfoForm = ({ handleSubmit, changeAddress, initialValues, setInitialV
   const [creditCard, setCreditCard] = useState("");
   const [colonias, setColonias] = useState([]);
   const [changeCP, setChangeCP] = useState(false);
+  const [state,setState] = useState([]);
+  const [municipality,setMunicipality] = useState([]);
+  const [cp,setCp] = useState([]);
+//  const [changeCP, setChangeCP] = useState(false);
   const handleShow = () => setShow(true);
+
+  
   /**Intentar pasar la direccion por aqui y/o buscar por que no se pasa */
   //let lastAddress = props.currentAddress;
   const user = JSON.parse(sessionStorage.getItem('user'));
@@ -64,6 +70,46 @@ let GeneralInfoForm = ({ handleSubmit, changeAddress, initialValues, setInitialV
     }
     dispatch(updateLoader(false));
   }
+  
+  const setEstados = async () => {
+    let estadosr = [];
+    const estadosRequest = await axiosBase.get('https://api-sepomex.hckdrk.mx/query/get_estados');
+    if (Array.isArray(estadosRequest.data.response.estado)) {
+      estadosRequest.data.response.estado.map(datos => {
+        estadosr.push(datos);
+      });
+    } else if (estadosRequest.error) {
+      estadosr = [];
+    }
+    setState(estadosr);
+  }
+
+  const setMunicipios = async (estado) => {
+    let municipiosr = [];
+    const municipiosRequest = await axiosBase.get(`https://api-sepomex.hckdrk.mx/query/get_municipio_por_estado/${estado}`);
+    if (Array.isArray(municipiosRequest.data.response.municipios)) {
+      municipiosRequest.data.response.municipios.map(municipio => {
+        municipiosr.push(municipio);
+      });
+    } else if (municipiosRequest.error) {
+      municipiosr = [];
+    }
+    setMunicipality(municipiosr); 
+  }
+
+  const setCodigoPostal = async (municipio) => {
+    let cpr = [];
+    const codigoPostalRequest = await axiosBase.get(`https://api-sepomex.hckdrk.mx/query/get_cp_por_municipio/${municipio}`);
+    console.log("Los codigos: ",codigoPostalRequest.data.response);
+    if (Array.isArray(codigoPostalRequest.data.response.cp)) {
+      codigoPostalRequest.data.response.cp.map(codigopostal => {
+        cpr.push(codigopostal);
+      });
+    } else if (codigoPostalRequest.error) {
+      cpr = [];
+    }
+    setCp(cpr);
+  }
 
   const setColoniasR = async (zipCode) => {
     let coloniasr = [];
@@ -77,6 +123,29 @@ let GeneralInfoForm = ({ handleSubmit, changeAddress, initialValues, setInitialV
     }
     setColonias(coloniasr);
   }
+
+  const handleChangeMunicipio = async e => {
+    const estado = e.target.value;
+    setMunicipios(estado);
+  };
+
+
+  const handleChangeCp = async e => {
+    const municipio = e.target.value;
+    const changeCP = () => {
+      setCodigoPostal(municipio);
+    }
+    changeCP();
+  }
+
+  const handleChangeColonia = async e => {
+    const codigopostal = e.target.value;
+    setColoniasR(codigopostal);
+  };
+
+
+  useEffect(()=>{
+  }) 
   const onlyLirycs = (nextValue, previousValue) => /^([a-z ñáéíóú]{0,60})$/i.test(nextValue) ? nextValue : previousValue;
   const onlyNumbers = (nextValue, previousValue) => /^\d+$/.test(nextValue) || nextValue.length === 0? nextValue : previousValue;
   return (
@@ -238,7 +307,72 @@ let GeneralInfoForm = ({ handleSubmit, changeAddress, initialValues, setInitialV
             />
           </Col>
 
+           <Col lg={6} md={6} sm={12}>
+            <Field
+              className="form-control custom-form-input brandonReg mt-24 mb-0"
+              component="select"
+              name="state"
+              cls="mb-3 mt-24"
+              onChange={handleChangeMunicipio}
+              value={state[0]}
+            >
+              <option value="" selected disabled>Selecciona un Estado</option>
+              {
+                state.map((state, index) => {
+                  return (
+                    <option value={state} key={state + index}>
+                      {state}
+                    </option>
+                  )
+                })
+              }
+            </Field>
+          </Col>
+
           <Col lg={6} md={6} sm={12}>
+            <Field
+              className="form-control custom-form-input brandonReg mt-24 mb-0"
+              component="select"
+              name="municipality"
+              cls="mb-3 mt-24"
+              onChange={handleChangeCp}
+              value={municipality[0]}
+            >
+              <option value="" selected disabled>Selecciona un Municipio</option>
+              {
+                municipality.map((municipality, index) => {
+                  return (
+                    <option value={municipality} key={municipality + index}>
+                      {municipality}
+                    </option>
+                  )
+                })
+              }
+            </Field>
+          </Col>
+
+          <Col lg={6} md={6} sm={12}>
+            <Field
+              className="form-control custom-form-input brandonReg mt-24 mb-0"
+              component="select"
+              name="zipCode"
+              cls="mb-3 mt-24"
+              onChange={handleChangeColonia}
+              value={cp[0]}
+            >
+              <option value="" selected disabled>Selecciona un Código Postal</option>
+              {
+                cp.map((cp, index) => {
+                  return (
+                    <option value={cp} key={cp + index}>
+                      {cp}
+                    </option>
+                  )
+                })
+              }
+            </Field>
+          </Col>
+          {/* <Col lg={6} md={6} sm={12}>
             <Field
               component={renderFieldFull}
               label="CP"
@@ -255,7 +389,7 @@ let GeneralInfoForm = ({ handleSubmit, changeAddress, initialValues, setInitialV
               disabled={!sameAddress ? false : true}
               normalize={onlyNumbers}
             />
-          </Col>
+          </Col> */}
 
           <Col lg={6} md={6} sm={12}>
             <Field
@@ -263,24 +397,18 @@ let GeneralInfoForm = ({ handleSubmit, changeAddress, initialValues, setInitialV
               component="select"
               name="town"
               cls="mb-3 mt-24"
-              value={!sameAddress ? '' : currentAddress.town}
-              disabled={!sameAddress ? false : true}
-            >
-              {initialValues.colonias != null && !changeCP ?
-                initialValues.colonias.map((colonia, index) => {
+              value={colonias[0]}
+            > 
+            <option value="" selected disabled>Selecciona una colonia</option>
+              {
+              colonias.map((colonia, index) => {
                   return (
                     <option value={colonia} key={colonia + index}>
                       {colonia}
                     </option>
                   )
                 })
-                : colonias.map((colonia, index) => {
-                  return (
-                    <option value={colonia} key={colonia + index}>
-                      {colonia}
-                    </option>
-                  );
-                })}
+                }
             </Field>
           </Col>
 
