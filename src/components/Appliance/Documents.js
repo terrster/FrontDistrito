@@ -101,7 +101,7 @@ const history = useHistory();
 					}	
 				});
 				console.log(data);
-				if(!data.hasOwnProperty("error")){
+				if(!data.hasOwnProperty("error") && data.msg != "Sin archivos"){
 					sessionStorage.setItem('user', JSON.stringify(data.user));
 				}
 			} else {
@@ -114,7 +114,7 @@ const history = useHistory();
 					}	
 				});
 				console.log(data);
-				if(!data.hasOwnProperty("error")){
+				if(!data.hasOwnProperty("error") && data.msg != "Sin archivos"){
 					sessionStorage.setItem('user', JSON.stringify(data.user));
 				}
 			}
