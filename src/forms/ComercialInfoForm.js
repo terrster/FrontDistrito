@@ -7,6 +7,8 @@ import SubtitleForm from "../components/Generic/SubtitleForm";
 import { renderField, renderSelectField } from "../components/Generic/Fields";
 import { validateComercialInfo } from "../components/Validate/ValidateComercialInfo";
 
+
+
 class ComercialInfoConstructForm extends Component {
   /* CODIGO POSTAL */
   state = {
@@ -22,10 +24,8 @@ class ComercialInfoConstructForm extends Component {
     firstLoad: true,
     changeCP: false,
     touched: false,
-    onlyNumbers: (nextValue, previousValue) =>
-      /^\d+$/.test(nextValue) || nextValue.length === 0
-        ? nextValue
-        : previousValue,
+    onlyNumbers: (nextValue, previousValue) => /^\d+$/.test(nextValue) || nextValue.length === 0 ? nextValue : previousValue,
+    typePerson: JSON.parse(sessionStorage.getItem("user")).idClient[0].type
   };
 
   getState = async () => {
@@ -183,23 +183,21 @@ class ComercialInfoConstructForm extends Component {
     this.setState({ valueInitialColonia: e.target.value, changeCP: true });
   };
 
-  componentDidMount() {
+  componentDidMount(){
     this.getState();
     const user = JSON.parse(sessionStorage.getItem("user"));
     const idClient = user.idClient[user.idClient.length - 1];
-    if (idClient.appliance.length > 0) {
+    if (idClient.appliance.length > 0){
       const appliance = idClient.appliance[idClient.appliance.length - 1];
-      if (appliance.idComercialInfo.length > 0) {
-        const idComercialInfo =
-          appliance.idComercialInfo[appliance.idComercialInfo.length - 1];
-        if (idComercialInfo.address.length > 0) {
-          const address =
-            idComercialInfo.address[idComercialInfo.address.length - 1];
-          if (address.hasOwnProperty("state")) {
+      if (appliance.idComercialInfo.length > 0){
+        const idComercialInfo = appliance.idComercialInfo[appliance.idComercialInfo.length - 1];
+        if (idComercialInfo.address.length > 0){
+          const address = idComercialInfo.address[idComercialInfo.address.length - 1];
+          if (address.hasOwnProperty("state")){
             const stateUser = address.state;
-            this.getMunicipio(stateUser);
+            this.getMunicipio(stateUser);	
           }
-          if (address.hasOwnProperty("municipality")) {
+          if (address.hasOwnProperty("municipality")){
             const municipality = address.municipality;
             this.getCodigoPostal(municipality);
           }
@@ -234,7 +232,8 @@ class ComercialInfoConstructForm extends Component {
             </option>
           ))}
         </Field>
-        {sessionStorage.type === "PM" ? (
+
+        {this.state.typePerson === "PM" ? (
           <Field
             component={renderField}
             type="text"
@@ -245,7 +244,7 @@ class ComercialInfoConstructForm extends Component {
           />
         ) : (
           <div></div>
-        )}
+          )}
 
         <Field
           component={renderField}
