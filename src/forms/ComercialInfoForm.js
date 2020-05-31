@@ -14,189 +14,207 @@ class ComercialInfoConstructForm extends Component {
     colonias: [],
     state: [],
     municipality: [],
-    valueInitialState: '',
-    valueInitialMunicipality: 'Alvaro Obregon',
-    valueInitialCp: '01000',
-    valueInitialColonia: 'San Angel',
+    valueInitialState: "",
+    valueInitialMunicipality: "Alvaro Obregon",
+    valueInitialCp: "01000",
+    valueInitialColonia: "San Angel",
     error: null,
     firstLoad: true,
     changeCP: false,
     touched: false,
-    onlyNumbers: (nextValue, previousValue) => /^\d+$/.test(nextValue) || nextValue.length === 0 ? nextValue : previousValue
+    onlyNumbers: (nextValue, previousValue) =>
+      /^\d+$/.test(nextValue) || nextValue.length === 0
+        ? nextValue
+        : previousValue,
   };
 
   getState = async () => {
     try {
-      await fetch('https://api-sepomex.hckdrk.mx/query/get_estados')
-        .then(response => { return response.json(); })
-        .then(myState => { 
+      await fetch("https://api-sepomex.hckdrk.mx/query/get_estados")
+        .then((response) => {
+          return response.json();
+        })
+        .then((myState) => {
           const copyState = [];
-          if(Array.isArray(myState.response.estado)){
-            myState.response.estado.map(estados => {
+          if (Array.isArray(myState.response.estado)) {
+            myState.response.estado.map((estados) => {
               copyState.push(estados);
             });
             this.setState({
               state: copyState,
               error: false,
-              firstLoad: false
-            })
-          }else{
+              firstLoad: false,
+            });
+          } else {
             console.log("El dato solicitado no es un array");
           }
-         });
+        });
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
-  getMunicipio = async (estado)=>{
+  getMunicipio = async (estado) => {
     try {
-      await fetch(`https://api-sepomex.hckdrk.mx/query/get_municipio_por_estado/${estado}`)
-        .then(response => { return response.json(); })
-        .then( myMunicipio => {
+      await fetch(
+        `https://api-sepomex.hckdrk.mx/query/get_municipio_por_estado/${estado}`
+      )
+        .then((response) => {
+          return response.json();
+        })
+        .then((myMunicipio) => {
           const copyMunicipios = [];
-          if( Array.isArray(myMunicipio.response.municipios)){
-            myMunicipio.response.municipios.map(municipio => {
+          if (Array.isArray(myMunicipio.response.municipios)) {
+            myMunicipio.response.municipios.map((municipio) => {
               copyMunicipios.push(municipio);
             });
             this.setState({
               municipality: copyMunicipios,
               error: false,
-              firstLoad: false
-            })
-          }else{
+              firstLoad: false,
+            });
+          } else {
             console.log("El dato solicitado no es un array");
           }
-        })
+        });
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
-  getCodigoPostal = async (municipio)  => {
+  getCodigoPostal = async (municipio) => {
     try {
-      await fetch(`https://api-sepomex.hckdrk.mx/query/get_cp_por_municipio/${municipio}`)
-              .then(response => { return response.json()})
-              .then(mycp => {
-                 const copycp = [];
-                if(Array.isArray(mycp.response.cp)){
-                  mycp.response.cp.map(cp => {
-                    copycp.push(cp);
-                  });
-                  this.setState({
-                    cp: copycp,
-                    error: false,
-                    firstLoad: false
-                  })
-                }else{
-                  console.log("El dato solicitado no es una array");
-                } 
-              })
+      await fetch(
+        `https://api-sepomex.hckdrk.mx/query/get_cp_por_municipio/${municipio}`
+      )
+        .then((response) => {
+          return response.json();
+        })
+        .then((mycp) => {
+          const copycp = [];
+          if (Array.isArray(mycp.response.cp)) {
+            mycp.response.cp.map((cp) => {
+              copycp.push(cp);
+            });
+            this.setState({
+              cp: copycp,
+              error: false,
+              firstLoad: false,
+            });
+          } else {
+            console.log("El dato solicitado no es una array");
+          }
+        });
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
-  getColonias = async codigopostal => {
+  getColonias = async (codigopostal) => {
     try {
       if (codigopostal.length === 5) {
         const res = await (
           await fetch(
             `https://api-sepomex.hckdrk.mx/query/info_cp/${codigopostal}`,
             {
-              method: "GET"
+              method: "GET",
             }
           )
         ).json();
         const copycolonias = [];
         if (Array.isArray(res)) {
-          res.map(datos => {
+          res.map((datos) => {
             copycolonias.push(datos.response.asentamiento);
           });
           this.setState({
             colonias: copycolonias,
             error: false,
-            firstLoad: false
+            firstLoad: false,
           });
         } else if (res.error) {
           this.setState({
             error: res.error_message,
-            firstLoad: false
+            firstLoad: false,
           });
         }
       } else {
         this.setState({ colonias: [] });
       }
-    }
-    catch (error) {
+    } catch (error) {
       console.log("No hay CP");
     }
-  }
+  };
 
-  handleChangeMunicipio = async e => {
+  handleChangeMunicipio = async (e) => {
     const estado = e.target.value;
     this.getMunicipio(estado);
     this.setState({ valueInitialState: e.target.value, changeMP: true });
     const changeMunicipality = () => {
-		this.getMunicipio(this.state.state[0]);
-	}
+      this.getMunicipio(this.state.state[0]);
+    };
     changeMunicipality();
     const changeCodigoPostal = () => {
-		this.getCodigoPostal(this.state.municipality[0]);
-		this.setState({changeCP: true});
-	}
-	changeCodigoPostal();
-	const changeColonias = () => {
-		console.log(this.state.cp);
-		this.getColonias(this.state.cp[0]);
-	}
-	changeColonias();
+      this.getCodigoPostal(this.state.municipality[0]);
+      this.setState({ changeCP: true });
+    };
+    changeCodigoPostal();
+    const changeColonias = () => {
+      console.log(this.state.cp);
+      this.getColonias(this.state.cp[0]);
+    };
+    changeColonias();
   };
 
-  handleChangeCp = async e => {
+  handleChangeCp = async (e) => {
     const municipio = e.target.value;
     const changeCP = () => {
-		this.getCodigoPostal(municipio);
-	}
+      this.getCodigoPostal(municipio);
+    };
     changeCP();
     const changeColonias = () => {
-		this.getColonias(this.state.cp[0]);
-	}
-	changeColonias();
-    this.setState({valueInitialCp: e.target.value, changeCP: true})
-  }
-  handleChangeColonia = async e => {
-      const codigopostal = e.target.value;
-      this.getColonias(codigopostal);
-      this.setState({ valueInitialColonia: e.target.value, changeCP: true });
+      this.getColonias(this.state.cp[0]);
+    };
+    changeColonias();
+    this.setState({ valueInitialCp: e.target.value, changeCP: true });
+  };
+  handleChangeColonia = async (e) => {
+    const codigopostal = e.target.value;
+    this.getColonias(codigopostal);
+    this.setState({ valueInitialColonia: e.target.value, changeCP: true });
   };
 
-  componentDidMount(){
-	this.getState();
-	const user = JSON.parse(sessionStorage.getItem("user"));
-	const idClient = user.idClient[user.idClient.length - 1];
-	if (idClient.appliance.length > 0){
-		const appliance = idClient.appliance[idClient.appliance.length - 1];
-		if (appliance.idComercialInfo.length > 0){
-			const idComercialInfo = appliance.idComercialInfo[appliance.idComercialInfo.length - 1];
-			if (idComercialInfo.address.length > 0){
-				const address = idComercialInfo.address[idComercialInfo.address.length - 1];
-				if (address.hasOwnProperty("state")){
-					const stateUser = address.state;
-					this.getMunicipio(stateUser);	
-				}
-				if (address.hasOwnProperty("municipality")){
-					const municipality = address.municipality;
-					this.getCodigoPostal(municipality);
-				}
-			}
-		}
-	}
+  componentDidMount() {
+    this.getState();
+    const user = JSON.parse(sessionStorage.getItem("user"));
+    const idClient = user.idClient[user.idClient.length - 1];
+    if (idClient.appliance.length > 0) {
+      const appliance = idClient.appliance[idClient.appliance.length - 1];
+      if (appliance.idComercialInfo.length > 0) {
+        const idComercialInfo =
+          appliance.idComercialInfo[appliance.idComercialInfo.length - 1];
+        if (idComercialInfo.address.length > 0) {
+          const address =
+            idComercialInfo.address[idComercialInfo.address.length - 1];
+          if (address.hasOwnProperty("state")) {
+            const stateUser = address.state;
+            this.getMunicipio(stateUser);
+          }
+          if (address.hasOwnProperty("municipality")) {
+            const municipality = address.municipality;
+            this.getCodigoPostal(municipality);
+          }
+        }
+      }
+    }
   }
 
   render() {
-    const onlyLirycs = (nextValue, previousValue) => /^([a-z ñáéíóú]{0,60})$/i.test(nextValue) ? nextValue : previousValue;
-    const onlyNumbers = (nextValue, previousValue) => /^\d+$/.test(nextValue) || nextValue.length === 0? nextValue : previousValue;
+    const onlyLirycs = (nextValue, previousValue) =>
+      /^([a-z ñáéíóú]{0,60})$/i.test(nextValue) ? nextValue : previousValue;
+    const onlyNumbers = (nextValue, previousValue) =>
+      /^\d+$/.test(nextValue) || nextValue.length === 0
+        ? nextValue
+        : previousValue;
     return (
       <>
         <SubtitleForm subtitle="Sobre tu negocio" className="mb-3" />
@@ -226,8 +244,8 @@ class ComercialInfoConstructForm extends Component {
             normalize={onlyLirycs}
           />
         ) : (
-            <div></div>
-          )}
+          <div></div>
+        )}
 
         <Field
           component={renderField}
@@ -283,19 +301,19 @@ class ComercialInfoConstructForm extends Component {
               onChange={this.handleChangeMunicipio}
               name="state"
             >
-              <option value="" disabled selected>Selecciona un Estado</option>
-              {
-                this.state.state.map((state, index) => {
-                  return (
-                    <option value={state} key={state + index} >
-                      {state}
-                    </option>
-                  )
-                })
-              }
+              <option value="" disabled selected>
+                Selecciona un Estado
+              </option>
+              {this.state.state.map((state, index) => {
+                return (
+                  <option value={state} key={state + index}>
+                    {state}
+                  </option>
+                );
+              })}
             </Field>
           </Col>
-          
+
           <Col lg={6} md={6} sm={12}>
             <Field
               className="form-control custom-form-input brandonReg mt-1 mb-3"
@@ -304,16 +322,16 @@ class ComercialInfoConstructForm extends Component {
               name="municipality"
               value={this.state.valueInitialMunicipality}
             >
-              <option  value="" disabled selected>Selecciona un Municipio</option>
-              {
-                this.state.municipality.map((municipality, index) => {
-                  return (
-                    <option value={municipality} key={municipality + index}>
-                      {municipality}
-                    </option>
-                  )
-                })
-              }
+              <option value="" disabled selected>
+                Selecciona un Municipio
+              </option>
+              {this.state.municipality.map((municipality, index) => {
+                return (
+                  <option value={municipality} key={municipality + index}>
+                    {municipality}
+                  </option>
+                );
+              })}
             </Field>
           </Col>
 
@@ -325,16 +343,16 @@ class ComercialInfoConstructForm extends Component {
               name="zipCode"
               value={this.state.valueInitialCp}
             >
-              <option value="" disabled selected>Selecciona un Códio Postal</option>
-              {
-                this.state.cp.map((cp, index) => {
-                  return (
-                    <option value={cp} key={cp + index}>
-                      {cp}
-                    </option>
-                  )
-                })
-              }
+              <option value="" disabled selected>
+                Selecciona un Códio Postal
+              </option>
+              {this.state.cp.map((cp, index) => {
+                return (
+                  <option value={cp} key={cp + index}>
+                    {cp}
+                  </option>
+                );
+              })}
             </Field>
           </Col>
 
@@ -346,23 +364,25 @@ class ComercialInfoConstructForm extends Component {
               name="town"
               cls="mb-3"
               value={this.state.valueInitialColonia}
-             >
-              <option value="" disabled selected>Selecciona una Colonia</option>
-              {this.props.initialValues.colonias != null && !this.state.changeCP ?
-                this.props.initialValues.colonias.map((colonia, index) => {
-                  return (
-                    <option value={colonia} key={colonia + index}>
-                      {colonia}
-                    </option>
-                  )
-                })
+            >
+              <option value="" disabled selected>
+                Selecciona una Colonia
+              </option>
+              {this.props.initialValues.colonias != null && !this.state.changeCP
+                ? this.props.initialValues.colonias.map((colonia, index) => {
+                    return (
+                      <option value={colonia} key={colonia + index}>
+                        {colonia}
+                      </option>
+                    );
+                  })
                 : this.state.colonias.map((colonia, index) => {
-                  return (
-                    <option value={colonia} key={colonia + index}>
-                      {colonia}
-                    </option>
-                  );
-                })}
+                    return (
+                      <option value={colonia} key={colonia + index}>
+                        {colonia}
+                      </option>
+                    );
+                  })}
             </Field>
           </Col>
 
@@ -446,12 +466,18 @@ class ComercialInfoConstructForm extends Component {
     );
   }
 }
-let ComercialInfoForm = props => {
+let ComercialInfoForm = (props) => {
   const { handleSubmit } = props;
   return (
     <div>
-      <form className="ml-auto mr-auto" style={{ maxWidth: "690px" }} onSubmit={handleSubmit}>
-        <ComercialInfoConstructForm initialValues={props.initialValues}></ComercialInfoConstructForm>
+      <form
+        className="ml-auto mr-auto"
+        style={{ maxWidth: "690px" }}
+        onSubmit={handleSubmit}
+      >
+        <ComercialInfoConstructForm
+          initialValues={props.initialValues}
+        ></ComercialInfoConstructForm>
       </form>
     </div>
   );
@@ -460,10 +486,9 @@ let ComercialInfoForm = props => {
 ComercialInfoForm = reduxForm({
   form: "comercialInfoForm", // a unique identifier for this form
   validate: validateComercialInfo, // <--- validation function given to redux-form
-  enableReinitialize: true
+  enableReinitialize: true,
 })(ComercialInfoForm);
 
-ComercialInfoForm = connect((state, props) => ({
-}))(ComercialInfoForm);
+ComercialInfoForm = connect((state, props) => ({}))(ComercialInfoForm);
 
 export default ComercialInfoForm;
