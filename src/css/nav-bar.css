@@ -25,7 +25,8 @@
   }
   
   .nav-btn:hover {
-	text-decoration: none;
+	text-decoration: 2px underline;
+	text-decoration-color: #0095FF;
 	color: var(--primary-color) !important;
 	opacity: 0.95;
   }

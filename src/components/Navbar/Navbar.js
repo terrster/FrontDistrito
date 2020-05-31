@@ -4,7 +4,7 @@ import { Link, NavLink } from 'react-router-dom'
 import isAuthenticated from '../../utils/isAuthenticated'
 import logo  from '../../assets/img/logo-dp-3-x@2x.png'
 import '../../css/nav-bar.css'
-
+import Whatsapp from '../../assets/img/redes_sociales/whatsapp.png';
 const NavBar = props => {
 	const [isOpen, setIsOpen] = useState(false);
 	let user = null;
@@ -29,13 +29,13 @@ const NavBar = props => {
 		 		<Navbar.Toggle aria-controls="responsive-navbar-nav" onClick={() => setIsOpen(!isOpen)}/>
 		 		{isAuthenticated() === false && 
 		 			<Navbar.Collapse>
-		 				<Nav className="ml-auto">
-		 					<Nav.Link  onClick={close} href="/#simulador" id="ymb-dp-nav-simulator" className="brandonMed text-center fz16 blackNav nav-btn heigth-45 solicita-butto">Simulador</Nav.Link>
-		 					<Nav.Link  onClick={close} href="/#about" id="ymb-dp-nav-about" className="brandonMed text-center fz16 blackNav nav-btn heigth-45 solicita-butto">Nosotros</Nav.Link>
-		 					<Nav.Link  onClick={close} href="/#howWorks" id="ymb-dp-nav-howWorks" className="brandonMed text-center fz16 blackNav nav-btn heigth-45 solicita-butto">¿Cómo funciona?</Nav.Link>
-		 					<Nav.Link  onClick={close} href="https://distritopyme.com.mx/" id="ymb-dp-nav-howWorks" target="_blank" className="brandonMed text-center fz16 blackNav nav-btn heigth-45 solicita-butto">Blog</Nav.Link>
-		 					<Nav.Link  onClick={close} as={NavLink} to="/login" id="ymb-dp-nav-register" className="brandonMed text-center fz16 blackNav nav-btn heigth-45 solicita-butto">Inicia sesión</Nav.Link>
-		 					<Nav.Link onClick={close} as={NavLink} to="/registrate" id="ymb-dp-nav-login" className="brandonMed text-center fz16 white nav-btn primary heigth-45 w-360 ml-auto mr-auto solicita-button">Solicita tu crédito</Nav.Link>
+		 				<Nav className="ml-auto ">
+		 					<Nav.Link  onClick={close} href="/#simulador" id="ymb-dp-nav-simulator" className="brandonMed text-center fz16 blackNav nav-btn heigth-45 solicita-butto" style={{ fontFamily: "MetropolisRegular"}}>Simulador</Nav.Link>
+		 					<Nav.Link  onClick={close} href="/#about" id="ymb-dp-nav-about" className="brandonMed text-center fz16 blackNav nav-btn heigth-45 solicita-butto" style={{ fontFamily: "MetropolisRegular" }}>Nosotros</Nav.Link>
+		 					<Nav.Link  onClick={close} href="/#howWorks" id="ymb-dp-nav-howWorks" className="brandonMed text-center fz16 blackNav nav-btn heigth-45 solicita-butto" style={{ fontFamily: "MetropolisRegular" }}>¿Cómo funciona?</Nav.Link>
+		 					<Nav.Link  onClick={close} href="https://distritopyme.com.mx/" id="ymb-dp-nav-howWorks" target="_blank" className="brandonMed text-center fz16 blackNav nav-btn heigth-45 solicita-butto" style={{ fontFamily: "MetropolisRegular" }}>Blog</Nav.Link>
+		 					<Nav.Link  onClick={close} as={NavLink} to="/login" id="ymb-dp-nav-register" className="brandonMed text-center fz16 blackNav nav-btn heigth-45 solicita-butto" style={{ fontFamily: "MetropolisRegular" }}>Inicia sesión</Nav.Link>
+		 					<Nav.Link onClick={close} as={NavLink} to="/registrate" id="ymb-dp-nav-login" className="brandonMed text-center fz16 white nav-btn primary heigth-45 w-360 ml-auto mr-auto solicita-button" style={{ fontFamily: "MetropolisRegular" , textDecoration: "none"}}>Solicita tu crédito</Nav.Link>
 		 				</Nav>
 		 			</Navbar.Collapse>
 		 		}
@@ -58,7 +58,7 @@ const NavBar = props => {
 		 				}}>Cerrar sesión</Button></Nav.Link>
 		 			</Nav>
 					<div className="nav-bar-icon-whatsapp" style={{ zIndex: "10001" }}>
-						<a href="https://api.whatsapp.com/send?phone=525526954055&text=Hola%2c%20%c2%bfpodr%c3%adan%20ayudarme%3f&source=&data=" target="_blank" rel="noopener noreferrer"><i className="fab fa-whatsapp"></i></a>
+						<a href="https://api.whatsapp.com/send?phone=525526954055&text=Hola%2c%20%c2%bfpodr%c3%adan%20ayudarme%3f&source=&data=" target="_blank" rel="noopener noreferrer"><i><img src={Whatsapp} alt="Whatsapp Distrito Pyme" className="nav-bar-icon-whatsapp"/></i></a>
 					</div>
 		 		</Navbar.Collapse>
 		 		}
