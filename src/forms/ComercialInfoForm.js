@@ -177,16 +177,18 @@ class ComercialInfoConstructForm extends Component {
 	const idClient = user.idClient[user.idClient.length - 1];
 	if (idClient.appliance.length > 0){
 		const appliance = idClient.appliance[idClient.appliance.length - 1];
-		const idComercialInfo = appliance.idComercialInfo[appliance.idComercialInfo.length - 1];
-		if (idComercialInfo.address.length > 0){
-			const address = idComercialInfo.address[idComercialInfo.address.length - 1];
-			if (address.hasOwnProperty("state")){
-				const stateUser = address.state;
-				this.getMunicipio(stateUser);	
-			}
-			if (address.hasOwnProperty("municipality")){
-				const municipality = address.municipality;
-				this.getCodigoPostal(municipality);
+		if (appliance.idComercialInfo.length > 0){
+			const idComercialInfo = appliance.idComercialInfo[appliance.idComercialInfo.length - 1];
+			if (idComercialInfo.address.length > 0){
+				const address = idComercialInfo.address[idComercialInfo.address.length - 1];
+				if (address.hasOwnProperty("state")){
+					const stateUser = address.state;
+					this.getMunicipio(stateUser);	
+				}
+				if (address.hasOwnProperty("municipality")){
+					const municipality = address.municipality;
+					this.getCodigoPostal(municipality);
+				}
 			}
 		}
 	}

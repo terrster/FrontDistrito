@@ -21,7 +21,10 @@ const Steps = (props) => {
   let idGeneralInfo = verify(appliance.idGeneralInfo);
   let idComercialInfo = verify(appliance.idComercialInfo);
   let idDocuments = verify(appliance.idDocuments);
-  const statusDocuments = useSelector((state) => state.docsStatus);
+  let statusDocuments = { status: false };
+  if (idDocuments){
+	  statusDocuments.status = idDocuments.status;
+  }
 
   let activeClass = {
     amount: { class: "is-complete" },

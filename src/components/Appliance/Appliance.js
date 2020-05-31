@@ -25,7 +25,12 @@ class Appliance extends Component {
 
 	getData(){
 		const user = JSON.parse(sessionStorage.getItem("user"));
-		this.setState({user, loading: false});		
+		const idClient = user.idClient[user.idClient.length - 1];
+		if (idClient.appliance.length > 0) {
+			const appliance = idClient.appliance[0];
+			this.setState({appliance});
+		}
+		this.setState({user, idClient, loading: false});		
 	}
 
 	componentDidMount() {
@@ -77,46 +82,7 @@ class Appliance extends Component {
 					linkt = `informacion-general/${user._id}`;
 				} else if (!idDocuments || !idDocuments == null) {
 					linkt = `documentos/${user._id}`;
-				}
-				if (!appliance.status) {
-					return (
-						<div className="position-relative">
-							<Title
-								className="blackBlue coolvetica fw500 fz32 mb-16"
-								title={`Hola ` + JSON.parse(sessionStorage.getItem("user")).name}
-							/>
-
-							<div className="row">
-								<div className="col-12 col-md-8 col-xl-10">
-									<label className="brandonReg gray50 fz20 fw500 text-center text-md-left">
-										Bienvenido a DistritoPyme, la &nbsp;#ComunidadDeCrédito
-										&nbsp;más grande de México.
-									</label>
-								</div>
-							</div>
-							<img src={tito} className="apply-caracter-img" alt="tito" />
-							<div className="step-box text-center">
-								<div>
-									<Title
-										className="blackBlue coolvetica fw600 fz42 mb-16"
-										title="Completa tu solicitud"
-									/>
-									<label className="brandonReg gray50 fz20 fw500">
-										Completa el 100% de tu formulario y empieza a recibir las
-										mejores opciones de crédito en menos de 48 hrs.
-									</label>
-								</div>
-								<div className="mt-50">
-									<Steps />
-								</div>
-								{(!appliance.idDocuments ||
-									(appliance.idDocuments && !appliance.idDocuments.status)) && (
-									<LinkButton link={linkt} />
-								)}
-							</div>
-						</div>
-					);
-				} else {
+				} 
 					return (
 						<div className="text-center mt-45">
 							<img src={like} style={{ width: '204px' }} alt="Tito" />
@@ -141,7 +107,6 @@ class Appliance extends Component {
 							</div>
 						</div>
 					);
-				}
 	};
 
 	handleClose = () => {
@@ -162,11 +127,11 @@ class Appliance extends Component {
 					<div>No se pudo obtener el ID de solicitud</div>
 				)}
 
-				{this.props.appliance !== undefined &&
-					!this.props.appliance.status &&
-					this.props.appliance.idDocuments !== undefined &&
-					this.props.appliance.idDocuments != null &&
-					this.props.appliance.idDocuments.status && (
+				{this.state.appliance !== undefined &&
+					!this.state.appliance.status &&
+					this.state.appliance.idDocuments !== undefined &&
+					this.state.appliance.idDocuments != null &&
+					this.state.appliance.idDocuments.status && (
 					
                         <div>
 								<div className="brandonBld mt-72 text-center">

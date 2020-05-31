@@ -123,9 +123,17 @@ const history = useHistory();
 	} catch(e){
 		console.log(e);
 	}
-	if (finish === true){
+	const idClient = user.idClient[user.idClient.length - 1];
+	if (finish === true && idClient.appliance.length > 0){
 		// Finalizar solicitud, igual a la función de appliance
-		history.push('/credito/solicitud/'+user._id)
+		const appliance = idClient.appliance[idClient.appliance.length - 1];
+		const applianceRequest = await axios.put(`api/appliance/${appliance._id}`, { status: true });
+		if(!applianceRequest.data.hasOwnProperty("error")){
+					sessionStorage.setItem('user', JSON.stringify(applianceRequest.data.user));
+		}
+		history.push('/credito/solicitud/'+appliance._id);
+	} else {
+		history.push('/credito');
 	}
 	dispatch(updateLoader(false));
   };

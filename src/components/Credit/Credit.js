@@ -10,6 +10,7 @@ import { updateAppliance } from "../../redux/actions/applianceActions";
 import tito from "../../assets/img/tito-credit.png";
 import Steps from "../Appliance/Steps";
 import like from "../../assets/img/tito@2x.png";
+import axios from '../../utils/axios';
 
 const getType = (user) => {
 	const idClient = user.idClient[user.idClient.length - 1];
@@ -22,13 +23,10 @@ const getType = (user) => {
 
 const Credit = (props) => {
   const history = useHistory()
-  const appliance = useSelector((state) => state.appliance.appliance);
-  const statusDocuments = useSelector((state) => state.docsStatus);
+  const appliance = useSelector((state) => state.appliance.appliance);  
   const [user, setUser] = useState(JSON.parse(sessionStorage.getItem("user")));
   const [id, setId] = useState(user._id);
   const type = getType(user);
- 
-  console.log(statusDocuments);
  
   const apply = () => {
     /* this.props
@@ -51,6 +49,17 @@ const Credit = (props) => {
 		return array.length === 0 ? false : array[array.length - 1];
 	}
 
+  const updateAppliance = async () => {
+	  const idClient = user.idClient[0];
+	  if (idClient.appliance.length > 0){
+		const appliance = idClient.appliance[idClient.appliance.length - 1];
+		const applianceRequest = await axios.put(`api/appliance/${appliance._id}`, { status: true });
+		if(!applianceRequest.data.hasOwnProperty("error")){
+			sessionStorage.setItem('user', JSON.stringify(applianceRequest.data.user));
+		}  
+	  }
+  }
+
   const getAppliance = () => {
 	let linkt = "";
 	const idClient = user.idClient[ user.idClient.length - 1 ];
@@ -59,6 +68,10 @@ const Credit = (props) => {
 	let idGeneralInfo = verify(appliance.idGeneralInfo);
 	let idComercialInfo = verify(appliance.idComercialInfo);
 	let idDocuments = verify(appliance.idDocuments);
+	let statusDocuments = { status: false }
+	if (idDocuments){
+		statusDocuments.status = idDocuments.status;
+	}
 	if (idAmount == null || !idAmount) {
 		linkt = `elige-monto/${user._id}`;
 	} else if (idComercialInfo == null || !idComercialInfo) {
@@ -67,6 +80,9 @@ const Credit = (props) => {
 		linkt = `informacion-general/${user._id}`;
 	} else if (!idDocuments || !idDocuments == null || !statusDocuments.status) {
 		linkt = `documentos/${user._id}`;
+	} else {
+		updateAppliance();
+		linkt = `credito/solicitud/${appliance._id}`;
 	}
 		return (
 			<div className="position-relative">
