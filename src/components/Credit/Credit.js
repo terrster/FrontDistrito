@@ -138,10 +138,6 @@ const Credit = (props) => {
   }
 */
   
-  if (type === null){
-	  window.location.href = `/elige-monto/${user._id}`;
-  }
-
   return (
     <div className="mt-72 mb-120 container">
         <div>

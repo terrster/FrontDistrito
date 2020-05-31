@@ -46,99 +46,7 @@ const history = useHistory();
   const alert = useSelector((state) => state.alert);
   const statusdocument = useSelector((state) => state.docsStatus);
 
-  const onFormSubmitClose = async (e) => {
-    onFormSubmit(e, true);
-  };
-
-  const onFormSubmitContinue = (e) => {
-    onFormSubmit(e);
-  };
-
-  const onFormSubmit = async (e, finish) => {
-    e.preventDefault();
-    window.scrollTo(0, 0);
-    dispatch(updateLoader(true));
-    if (!toast.documents){
-		execToast("documents");
-		dispatch( updateToast(toast,"documents"));
-	}
-    const formData = new FormData();
-    for (const typeDoc in documents){
-		documents[typeDoc].forEach(doc => {			
-			formData.append(typeDoc,doc);
-		});
-	}
-	try {
-		const idClient = user.idClient[user.idClient.length - 1];
-		if (idClient.appliance.length > 0){
-			let update = false;
-			const appliance = idClient.appliance[idClient.appliance.length - 1];
-			const { 
-				acomplishOpinion, bankStatements, constitutiveAct, 
-				cventerprise, facturacion, financialStatements, 
-				lastDeclarations, oficialID, otherActs, others, 
-				proofAddress, proofAddressMainFounders, 
-				rfc } = appliance.idDocuments[appliance.idDocuments.length - 1];
-			const currentDocuments = {
-				acomplishOpinion, bankStatements, constitutiveAct, 
-				cventerprise, facturacion, financialStatements, 
-				lastDeclarations, oficialID, otherActs, others, 
-				proofAddress, proofAddressMainFounders, 
-				rfc
-			}
-			for (const key in currentDocuments){
-				const files = currentDocuments[key];
-				if (files.length > 0){
-					update = true
-					break;
-				}
-			};
-			if (!update){
-				console.log("POST");
-				const { data } = await axios.post(`api/documents/${user._id}`, formData, {
-					headers:{
-					'Content-Type': 'multipart/form-data'
-					}	
-				});
-				console.log(data);
-				if(!data.hasOwnProperty("error") && data.msg != "Sin archivos"){
-					sessionStorage.setItem('user', JSON.stringify(data.user));
-				}
-			} else {
-				const idDocuments = appliance.idDocuments[appliance.idDocuments.length - 1];
-				console.log("UPDATE");
-				console.log(idDocuments._id);
-				const { data } = await axios.put(`api/documents/${idDocuments._id}`, formData, {
-					headers:{
-					'Content-Type': 'multipart/form-data'
-					}	
-				});
-				console.log(data);
-				if(!data.hasOwnProperty("error") && data.msg != "Sin archivos"){
-					sessionStorage.setItem('user', JSON.stringify(data.user));
-				}
-			}
-		}
-		
-	} catch(e){
-		console.log(e);
-	}
-	const idClient = user.idClient[user.idClient.length - 1];
-	if (finish === true && idClient.appliance.length > 0){
-		// Finalizar solicitud, igual a la función de appliance
-		const appliance = idClient.appliance[idClient.appliance.length - 1];
-		const applianceRequest = await axios.put(`api/appliance/${appliance._id}`, { status: true });
-		if(!applianceRequest.data.hasOwnProperty("error")){
-					sessionStorage.setItem('user', JSON.stringify(applianceRequest.data.user));
-		}
-		history.push('/credito/solicitud/'+appliance._id);
-	} else {
-		history.push('/credito');
-	}
-	dispatch(updateLoader(false));
-  };
-
-  const getDocsMethod = () => {
+const getDocsMethod = () => {
     let typePerson = user.idClient[user.idClient.length - 1].type;
     let docFiles = [];
     /**
@@ -187,6 +95,77 @@ const history = useHistory();
         break;
     }
     return docFiles;
+  };
+
+  const onFormSubmitClose = async (e) => {
+    onFormSubmit(e, true);
+  };
+
+  const onFormSubmitContinue = (e) => {
+    onFormSubmit(e);
+  };
+
+  const onFormSubmit = async (e, finish) => {
+    e.preventDefault();
+    window.scrollTo(0, 0);
+    dispatch(updateLoader(true));
+    if (!toast.documents){
+		execToast("documents");
+		dispatch( updateToast(toast,"documents"));
+	}
+    const formData = new FormData();
+    for (const typeDoc in documents){
+		documents[typeDoc].forEach(doc => {			
+			formData.append(typeDoc,doc);
+		});
+	}
+	try {
+		const idClient = user.idClient[user.idClient.length - 1];
+		if (idClient.appliance.length > 0){
+			let update = false;
+			const appliance = idClient.appliance[idClient.appliance.length - 1];
+			if (appliance.idDocuments.length > 0){
+				update = true;
+			}
+			if (!update){
+				const { data } = await axios.post(`api/documents/${user._id}`, formData, {
+					headers:{
+					'Content-Type': 'multipart/form-data'
+					}	
+				});
+				if(!data.hasOwnProperty("error") && data.msg != "Sin archivos"){
+					sessionStorage.setItem('user', JSON.stringify(data.user));
+				}
+			} else {
+				const idDocuments = appliance.idDocuments[appliance.idDocuments.length - 1];
+				const { data } = await axios.put(`api/documents/${idDocuments._id}`, formData, {
+					headers:{
+					'Content-Type': 'multipart/form-data'
+					}	
+				});
+				console.log(data);
+				if(!data.hasOwnProperty("error") && data.msg != "Sin archivos"){
+					sessionStorage.setItem('user', JSON.stringify(data.user));
+				}
+			}
+		}
+		
+	} catch(e){
+		console.log(e);
+	}
+	const idClient = user.idClient[user.idClient.length - 1];
+	if (finish === true && idClient.appliance.length > 0){
+		// Finalizar solicitud, igual a la función de appliance
+		const appliance = idClient.appliance[idClient.appliance.length - 1];
+		const applianceRequest = await axios.put(`api/appliance/${appliance._id}`, { status: true });
+		if(!applianceRequest.data.hasOwnProperty("error")){
+					sessionStorage.setItem('user', JSON.stringify(applianceRequest.data.user));
+		}
+		history.push('/credito/solicitud/'+appliance._id);
+	} else {
+		history.push('/credito');
+	}
+	dispatch(updateLoader(false));
   };
 
   const testDocumentsMethod = (array) => {

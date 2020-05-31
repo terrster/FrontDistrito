@@ -169,16 +169,18 @@ const GeneralInfo = () => {
 			let idClient = user.idClient[user.idClient.length - 1];
 			if (idClient.appliance.length > 0){
 				const appliance = idClient.appliance[idClient.appliance.length - 1];
-				const idGeneralInfo = appliance.idGeneralInfo[appliance.idGeneralInfo.length - 1];
-				if (idGeneralInfo.address.length > 0){
-					const address = idGeneralInfo.address[idGeneralInfo.address.length - 1];
-					extNumber = address.extNumber;
-					intNumber = address.intNumber;					
-					street = address.street;
-					town = address.town;
-					zipCode = address.zipCode;
-					state = address.state;
-					municipality = address.municipality;
+				if (appliance.idGeneralInfo.length > 0){
+					const idGeneralInfo = appliance.idGeneralInfo[appliance.idGeneralInfo.length - 1];
+					if (idGeneralInfo.address.length > 0){
+						const address = idGeneralInfo.address[idGeneralInfo.address.length - 1];
+						extNumber = address.extNumber;
+						intNumber = address.intNumber;					
+						street = address.street;
+						town = address.town;
+						zipCode = address.zipCode;
+						state = address.state;
+						municipality = address.municipality;
+					}
 				}
 			}
 			setInitialValues({  ...initialValues, state, municipality, extNumber, intNumber, street, town, zipCode, sameAddress })

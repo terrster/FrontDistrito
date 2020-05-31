@@ -109,19 +109,20 @@ let GeneralInfoForm = ({
       let idClient = user.idClient[user.idClient.length - 1];
       if (idClient.appliance.length > 0) {
         const appliance = idClient.appliance[idClient.appliance.length - 1];
-        const idGeneralInfo =
-          appliance.idGeneralInfo[appliance.idGeneralInfo.length - 1];
-        if (idGeneralInfo.address.length > 0) {
-          const address =
-            idGeneralInfo.address[idGeneralInfo.address.length - 1];
-          extNumber = address.extNumber;
-          intNumber = address.intNumber;
-          street = address.street;
-          town = address.town;
-          zipCode = address.zipCode;
-          state = address.state;
-          municipality = address.municipality;
-        }
+        if (appliance.idGeneralInfo.length > 0){
+			const idGeneralInfo = appliance.idGeneralInfo[appliance.idGeneralInfo.length - 1];
+			if (idGeneralInfo.address.length > 0) {
+			  const address =
+				idGeneralInfo.address[idGeneralInfo.address.length - 1];
+			  extNumber = address.extNumber;
+			  intNumber = address.intNumber;
+			  street = address.street;
+			  town = address.town;
+			  zipCode = address.zipCode;
+			  state = address.state;
+			  municipality = address.municipality;
+			}
+		}
       }
       setCurrentAddress({
         extNumber,
@@ -225,29 +226,30 @@ let GeneralInfoForm = ({
     const user = JSON.parse(sessionStorage.getItem("user"));
     const idClient = user.idClient[user.idClient.length - 1];
     if (idClient.appliance.length > 0) {
-      const appliance = idClient.appliance[idClient.appliance.length - 1];
-      const idGeneralInfo =
-        appliance.idGeneralInfo[appliance.idGeneralInfo.length - 1];
-      if (idGeneralInfo.address.length > 0) {
-        const address = idGeneralInfo.address[idGeneralInfo.address.length - 1];
-        if (address.hasOwnProperty("state")) {
-          if (address.state != null) {
-            const stateUser = address.state;
-            setMunicipios(stateUser);
-          }
-        }
-        if (address.hasOwnProperty("municipality")) {
-          if (address.municipality != null) {
-            const municipality = address.municipality;
-            setCodigoPostal(municipality);
-          }
-        }
-        if (address.hasOwnProperty("zipCode")) {
-          if (address.zipCode != null) {
-            setColoniasR(address.zipCode);
-          }
-        }
-      }
+		const appliance = idClient.appliance[idClient.appliance.length - 1];
+		  if (appliance.idGeneralInfo.length > 0){
+			  const idGeneralInfo = appliance.idGeneralInfo[appliance.idGeneralInfo.length - 1];
+			  if (idGeneralInfo.address.length > 0) {
+				const address = idGeneralInfo.address[idGeneralInfo.address.length - 1];
+				if (address.hasOwnProperty("state")) {
+				  if (address.state != null) {
+					const stateUser = address.state;
+					setMunicipios(stateUser);
+				  }
+				}
+				if (address.hasOwnProperty("municipality")) {
+				  if (address.municipality != null) {
+					const municipality = address.municipality;
+					setCodigoPostal(municipality);
+				  }
+				}
+				if (address.hasOwnProperty("zipCode")) {
+				  if (address.zipCode != null) {
+					setColoniasR(address.zipCode);
+				  }
+				}
+			}
+		}
     }
   };
 
@@ -405,7 +407,7 @@ let GeneralInfoForm = ({
             dispatch(updateLoader(true));
             changeAddress(newValue);
             setSameAddress(newValue);
-            //setComercialAddress(newValue);
+            setComercialAddress(newValue);
           }}
           type="checkbox"
           label="Utilizar los mismos datos que el domicilio comercial"
@@ -419,6 +421,9 @@ let GeneralInfoForm = ({
               name="street"
               val={!sameAddress ? "" : currentAddress.street}
               disabled={!sameAddress ? false : true}
+              onChange={(event, newValue, previousValue) =>
+                  setInitialValues({ ...initialValues, street: newValue })
+               }
               normalize={onlyLirycs}
             />
           </Col>
@@ -430,6 +435,9 @@ let GeneralInfoForm = ({
               val={!sameAddress ? "" : currentAddress.extNumber}
               disabled={!sameAddress ? false : true}
               normalize={onlyNumbers}
+              onChange={(event, newValue, previousValue) =>
+                  setInitialValues({ ...initialValues, extNumber: newValue })
+               }
             />
           </Col>
 
@@ -441,6 +449,9 @@ let GeneralInfoForm = ({
               val={!sameAddress ? "" : currentAddress.intNumber}
               disabled={!sameAddress ? false : true}
               normalize={onlyNumbers}
+              onChange={(event, newValue, previousValue) =>
+                  setInitialValues({ ...initialValues, intNumber: newValue })
+               }
             />
           </Col>
 
@@ -535,6 +546,9 @@ let GeneralInfoForm = ({
               name="town"
               disabled={!sameAddress ? false : true}
               cls="mb-3 mt-24"
+              onChange={(event, newValue, previousValue) =>
+                  setInitialValues({ ...initialValues, town: newValue })
+               }
             >
               <option value="" selected disabled>
                 Selecciona una colonia
@@ -688,7 +702,7 @@ let GeneralInfoForm = ({
               name="carCredit"
               clases="mt-10"
               onChange={(event, newValue, previousValue) =>
-                setInitialValues({ ...initialValues, cardCredit: newValue })
+                setInitialValues({ ...initialValues, carCredit: newValue })
               }
             >
               <option value="">Selecciona...</option>
