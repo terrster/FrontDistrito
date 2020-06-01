@@ -110,7 +110,7 @@ const Amount = props => {
 				/>
 				<div className="text-center">
 					<Title title="Elige tu monto" className="coolvetica fz42 blackBlue" />
-					<label className="brandonReg gray50 fz20 fw500 mt-2 mb-1">Cuéntanos un poco más sobre el monto que necesitas</label>
+					
 				</div>
 				<AmountForm
 					onSubmit={data => onFormSubmit(data)}
