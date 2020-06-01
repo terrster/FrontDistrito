@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { Navbar, Nav, Button } from 'react-bootstrap'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useHistory } from 'react-router-dom'
 import isAuthenticated from '../../utils/isAuthenticated'
 import logo  from '../../assets/img/logo-dp-3-x@2x.png'
 import '../../css/nav-bar.css'
 import Whatsapp from '../../assets/img/redes_sociales/whatsapp.png';
 const NavBar = props => {
 	const [isOpen, setIsOpen] = useState(false);
+	const history = useHistory();
 	const close = () => setIsOpen(false);
-	let classDefault = "brandonMed text-center fz16 gray50 heigth-45 nav-btn ";
+	let classDefault = "brandonMed text-center fz16 gray50 heigth-45 nav-btn d-flex hvr-underline-from-left";
 	let classDefaultLink = "brandonMed text-center fz16 gray50 heigth-45 nav-btn d-flex";
 	return (
 		<div className="pos-f-t">
@@ -18,11 +19,11 @@ const NavBar = props => {
 		 		{isAuthenticated() === false && 
 		 			<Navbar.Collapse>
 		 				<Nav className="ml-auto ">
-		 					<Nav.Link  onClick={close} href="/#simulador" id="ymb-dp-nav-simulator" className="brandonMed text-center fz16 blackNav nav-btn heigth-45 solicita-butto" style={{ fontFamily: "MetropolisRegular"}}>Simulador</Nav.Link>
-		 					<Nav.Link  onClick={close} href="/#about" id="ymb-dp-nav-about" className="brandonMed text-center fz16 blackNav nav-btn heigth-45 solicita-butto" style={{ fontFamily: "MetropolisRegular" }}>Nosotros</Nav.Link>
-		 					<Nav.Link  onClick={close} href="/#howWorks" id="ymb-dp-nav-howWorks" className="brandonMed text-center fz16 blackNav nav-btn heigth-45 solicita-butto" style={{ fontFamily: "MetropolisRegular" }}>¿Cómo funciona?</Nav.Link>
-		 					<Nav.Link  onClick={close} href="https://distritopyme.com.mx/" id="ymb-dp-nav-howWorks" target="_blank" className="brandonMed text-center fz16 blackNav nav-btn heigth-45 solicita-butto" style={{ fontFamily: "MetropolisRegular" }}>Blog</Nav.Link>
-		 					<Nav.Link  onClick={close} as={NavLink} to="/login" id="ymb-dp-nav-register" className="brandonMed text-center fz16 blackNav nav-btn heigth-45 solicita-butto" style={{ fontFamily: "MetropolisRegular" }}>Inicia sesión</Nav.Link>
+		 					<Nav.Link  onClick={close} href="/#simulador" id="ymb-dp-nav-simulator" className="hvr-underline-from-left brandonMed text-center fz16 blackNav nav-btn heigth-45 solicita-butto" style={{ fontFamily: "MetropolisRegular"}}>Simulador</Nav.Link>
+		 					<Nav.Link  onClick={close} href="/#about" id="ymb-dp-nav-about" className="hvr-underline-from-left brandonMed text-center fz16 blackNav nav-btn heigth-45 solicita-butto" style={{ fontFamily: "MetropolisRegular" }}>Nosotros</Nav.Link>
+		 					<Nav.Link  onClick={close} href="/#howWorks" id="ymb-dp-nav-howWorks" className="hvr-underline-from-left brandonMed text-center fz16 blackNav nav-btn heigth-45 solicita-butto" style={{ fontFamily: "MetropolisRegular" }}>¿Cómo funciona?</Nav.Link>
+		 					<Nav.Link  onClick={close} href="https://distritopyme.com.mx/" id="ymb-dp-nav-howWorks" target="_blank" className="hvr-underline-from-left brandonMed text-center fz16 blackNav nav-btn heigth-45 solicita-butto" style={{ fontFamily: "MetropolisRegular" }}>Blog</Nav.Link>
+		 					<Nav.Link  onClick={close} as={NavLink} to="/login" id="ymb-dp-nav-register" className="hvr-underline-from-left brandonMed text-center fz16 blackNav nav-btn heigth-45 solicita-butto" style={{ fontFamily: "MetropolisRegular" }}>Inicia sesión</Nav.Link>
 		 					<Nav.Link onClick={close} as={NavLink} to="/registrate" id="ymb-dp-nav-login" className="brandonMed text-center fz16 white nav-btn primary heigth-45 w-360 ml-auto mr-auto solicita-button" style={{ fontFamily: "MetropolisRegular" , textDecoration: "none"}}>Solicita tu crédito</Nav.Link>
 		 				</Nav>
 		 			</Navbar.Collapse>
@@ -30,10 +31,10 @@ const NavBar = props => {
 		 		{isAuthenticated() === true && 
 		 		<Navbar.Collapse id="basic-navbar-nav">	
 		 			<Nav className="ml-auto">
-		 				<Link onClick={close} to="/credito/solicitud/:idAppliance" className={ (props.url === 'credito') ? classDefault+' nav_bar_active': classDefault}>Mi crédito</Link>
-		 				<Link onClick={close} to="/historial" className={ (props.url === 'historial') ? classDefault+' nav_bar_active': classDefault}>Historial</Link>
-		 				<Nav.Link onClick={close} href="/home" className={ (props.url === 'home') ? classDefaultLink+' nav_bar_active': classDefaultLink}>Mi cuenta</Nav.Link>
-		 				<Nav.Link onClick={close} href="/" className="brandonMed text-center blackBlue heigth-45"> <Button className="logout fz-12" style={{marginTop: '-5px'}} onClick={() => {
+		 				<Link onClick={close} to="/credito/solicitud/:idAppliance" className={ (history.location.pathname === '/credito') ? classDefaultLink +' nav_bar_active': classDefault}>Mi crédito</Link>
+		 				<Link onClick={close} to="/historial" className={ (history.location.pathname === '/historial') ? classDefaultLink+' nav_bar_active': classDefault}>Historial</Link>
+		 				<Nav.Link onClick={close} href="/home" className={ (history.location.pathname === '/home') ? classDefaultLink+' nav_bar_active': classDefault}>Mi cuenta</Nav.Link>
+		 				<Nav.Link onClick={close} href="/" className="hvr-underline-from-left brandonMed text-center blackBlue heigth-45"> <Button className="logout fz-12" style={{marginTop: '-5px'}} onClick={() => {
 							sessionStorage.clear();
 		 					window.location.reload()
 		 				}}>Cerrar sesión</Button></Nav.Link>

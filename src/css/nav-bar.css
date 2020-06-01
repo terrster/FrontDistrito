@@ -9,6 +9,7 @@
   }
   
   .nav-btn {
+	text-decoration: none !important;
 	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
@@ -25,11 +26,46 @@
   }
   
   .nav-btn:hover {
-	text-decoration: 3px underline;
-	text-decoration-color: linear-gradient(to right, rgba(0,149,255,1), rgba(109,255,255,1));/*NO DETECTA EL DEGRADADO Y TOMA EL COLOR DE TEXTO POR DEFAULT*/
 	color: var(--primary-color) !important;
 	opacity: 0.95;
   }
+  
+  .hvr-underline-from-left {
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px transparent;
+    position: relative;
+    overflow: hidden;
+}
+  
+  
+  
+  .hvr-underline-from-left::before{
+	content: "";
+    position: absolute;
+    z-index: -1;
+    left: 0;
+    right: 100%;
+    bottom: 0;
+    background: linear-gradient(to left, #31c4f0, #1b53c5);
+    height: 4px;
+    -webkit-transition-property: right;
+    transition-property: right;
+    -webkit-transition-duration: .3s;
+    transition-duration: .3s;
+    -webkit-transition-timing-function: ease-out;
+    transition-timing-function: ease-out;
+  }
+	
+  
+  
+	.hvr-underline-from-left:active::before,.hvr-underline-from-left:focus::before,.hvr-underline-from-left:hover::before
+	{
+		right:0
+	}
+  
   
   .nav-btn.primary {
 	-webkit-box-pack: center !important;
