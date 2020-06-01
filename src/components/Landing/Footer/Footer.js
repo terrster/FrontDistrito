@@ -3,7 +3,7 @@ import '../../../css/footer.css';
 
 import logo from '../../../assets/img/logo_dp/extras-03.png';
 import face from '../../../assets/img/redes_sociales/Facebook.png';
-//import mail from '../../../assets/img/redes_sociales/Mail.png';FALTA EL ICONO
+import mail from '../../../assets/img/redes_sociales/mail.png';
 import twitter from '../../../assets/img/redes_sociales/Twitter.png';
 import linked from '../../../assets/img/redes_sociales/Linkedin.png';
 import instagram from '../../../assets/img/redes_sociales/Instagram.png';
@@ -49,7 +49,7 @@ const Footer = props => {
             <a href="https://mx.linkedin.com/company/distritopyme" target="blank"><img src={linked} alt="LinkedIn Distrito Pyme" className="footer-icon" /></a>
             <a href="https://instagram.com/distritopyme?igshid=sacp808q14u5" target="blank"><img src={instagram} alt="Instagram Distrito Pyme" className="footer-icon" /></a>
             <a href="https://www.youtube.com/channel/UCU1Qfe1nw7O4N-V16HFt0GQ" target="blank"><img src={youtube} alt="Youtube Distrito Pyme" className="footer-icon" /></a>
-            {/* <a href="mailto:contacto@distritopyme.com"><img src={mail} alt="Mail Distrito Pyme" className="footer-icon" /> </a> */}
+            <a href="mailto:contacto@distritopyme.com"><img src={mail} alt="Mail Distrito Pyme" className="footer-icon" /></a>
             {/* <a href="https://api.whatsapp.com/send?phone=525526954055&text=Hola%2c%20%c2%bfpodr%c3%adan%20ayudarme%3f&source=&data=" target="blank"><img src={Whatsapp} alt="Whatsapp Distrito Pyme" className="footer-icon" /> </a> */}
             
         </div>
