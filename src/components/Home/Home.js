@@ -63,7 +63,6 @@ const Home = (props) => {
 				let idDocuments = null
 				if (appliance.idDocuments.length > 0){
 					idDocuments = appliance.idDocuments[appliance.idDocuments.length - 1];
-					console.log(idDocuments);
 				}
 				if (appliance.idComercialInfo.length > 0){
 					const idComercialInfo = appliance.idComercialInfo[appliance.idComercialInfo.length - 1];

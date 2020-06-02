@@ -12,6 +12,8 @@ import Loader from "../Loader/Loader";
 import { updateLoader } from '../../redux/actions/loaderActions';
 import { updateToast } from '../../redux/actions/appActions';
 import { ToastContainer } from "react-toastify";
+import { Modal } from 'react-responsive-modal';
+import { Row, Button, Col } from 'react-bootstrap';
 
 
 const Amount = props => {
@@ -24,8 +26,12 @@ const Amount = props => {
 	const [user, setUser] = useState(JSON.parse(sessionStorage.getItem('user')));
 	const [initialValues, setInitialValues] = useState({});
 	const history = useHistory();
+	var typePerson;
 	
 	const onFormSubmit = async (data) => {
+		if(!JSON.parse(sessionStorage.getItem('user')).idClient[0].type){
+			return 0;
+		}
 		window.scrollTo(0, 0);
 		dispatch( updateLoader(true) );
 		const user = JSON.parse(sessionStorage.getItem('user'));
@@ -88,8 +94,20 @@ const Amount = props => {
 							token: sessionStorage.getItem("token")
 						}
 					});
+					
+					if(JSON.parse(sessionStorage.getItem('user')).idClient[0].type){
+						res.data.amount.push({
+							personType: JSON.parse(sessionStorage.getItem('user')).idClient[0].type
+						});
+					}
 					setInitialValues(res.data.amount);
 				}
+			}
+
+			if(JSON.parse(sessionStorage.getItem('user')).idClient[0].type){
+				setInitialValues({
+					personType: JSON.parse(sessionStorage.getItem('user')).idClient[0].type
+				});
 			}
 		}
 		if (!toast.first) {
@@ -109,12 +127,12 @@ const Amount = props => {
 					message="Error al enviar los datos. Favor de intentarlo de nuevo"
 				/>
 				<div className="text-center">
-					<Title title="Elige tu monto" className="coolvetica fz42 blackBlue" />
-					
+					<Title title="Elige tu tipo de negocio" className="coolvetica fz42 blackBlue" />	
 				</div>
 				<AmountForm
 					onSubmit={data => onFormSubmit(data)}
 					initialValues={initialValues}
+					typePerson={typePerson}
 				></AmountForm>
 			</div>
 		);

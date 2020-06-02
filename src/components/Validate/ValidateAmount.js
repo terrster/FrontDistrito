@@ -1,5 +1,8 @@
 export const validateAmount = values => {
     let errors = {};
+    if(!values.personType){
+      errors.personType = "Elige un tipo de persona";
+    }
     if (!values.howMuch) {
       errors.howMuch = "Ingresa la cantidad que necesitas";
     } else if (values.howMuch < 25000) {

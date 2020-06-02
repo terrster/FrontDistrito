@@ -36,11 +36,13 @@ const PersonType = (props) => {
 					token: sessionStorage.getItem("token")
 				}
 			});
+			props.onSelectPerson(type);
 			const newClient = await axios.get(`api/client/${idClient._id}`, {
 				headers: {
 					token: sessionStorage.getItem("token")
 				}
 			});
+			
 			sessionStorage.setItem('user', JSON.stringify(updateClient.data.user));
 			setPersonType(newClient.data.client.type);	
 		}

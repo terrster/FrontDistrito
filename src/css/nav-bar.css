@@ -18,10 +18,13 @@
 	-webkit-box-align: center;
 	-ms-flex-align: center;
 	align-items: center;
-	border-radius: 25px;
 	padding-right: 20px;
 	padding-left: 20px;
 	cursor: pointer;
+  }
+
+  .nav-btn-rad{
+	border-radius: 25px;
   }
   
   .nav-btn:hover {
@@ -39,8 +42,6 @@
     overflow: hidden;
 }
   
-  
-  
   .hvr-underline-from-left::before{
 	content: "";
     position: absolute;
@@ -48,7 +49,7 @@
     left: 0;
     right: 100%;
     bottom: 0;
-    background: linear-gradient(to left, #31c4f0, #1b53c5);
+    background: linear-gradient(to right, #0095FF, #6DFFFF);
     height: 4px;
     -webkit-transition-property: right;
     transition-property: right;
@@ -128,10 +129,22 @@
   }
   
   .nav_bar_active{
-	  color: var(--primary-color);
-	  position:relative;
+	  /* color: var(--primary-color);
+	  position:relative; */
+	  text-align:center;
+  	padding-bottom:5px;
+  	background: /* gradient can be an image */
+    linear-gradient(
+      to right, 
+      #0095FF, 
+      #6DFFFF
+    )
+    left 
+    bottom
+    no-repeat; 
+  	background-size:100% 5px ;
   }
-  .nav_bar_active::after{
+  /* .nav_bar_active::after{
 	content: '';
 	height: 3px;
 	width: 120px;
@@ -139,7 +152,7 @@
 	position: absolute;
 	bottom: 0;
 	margin:auto;
-  }
+  } */
   .nav-bar-icon-whatsapp{
 	position:fixed; 
 	bottom: 1rem; 

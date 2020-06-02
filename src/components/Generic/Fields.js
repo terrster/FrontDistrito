@@ -71,6 +71,15 @@ export const renderField = ({
 					type={type}
 					maxLength="5"
 				/>
+			) : label === 'secret' ? (
+				<input
+					className="form-control custom-form-input brandonReg mt-1 mb-0 d-none"
+					{...input}
+					value={ value || input.value}
+					placeholder={label}
+					type={type}
+					maxLength="5"
+				/>
 			) : (
 				<input
 					className="form-control custom-form-input brandonReg mt-1 mb-0"

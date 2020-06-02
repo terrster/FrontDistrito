@@ -1,4 +1,5 @@
 import React from 'react';
+import Title from '../components/Generic/Title';
 import '../css/general.css';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
@@ -14,6 +15,9 @@ const onlyNumbers = (nextValue, previousValue) => /^[+]?([0-9]+(?:[\,.][0-9]*)?|
 
 let AmountForm = props => {
 	const { handleSubmit } = props;
+	const selectedPerson = (type) => {
+		props.change('personType', type);
+	}
 	return (
 		<div>
 			<form
@@ -22,7 +26,11 @@ let AmountForm = props => {
 				onSubmit={handleSubmit}
 			>
 				<label className="brandonReg gray50 fz20 fw500 mt-2 mb-1 text-center">Pasa el cursor sobre un recuadro para más información y da clic para seleccionar uno</label>
-				<PersonType />
+				<PersonType onSelectPerson={selectedPerson}/>
+				<Field component={renderField} type="text" name="personType" label="secret"></Field>
+				<div className="text-center">
+					<Title title="Elige tu monto" className="coolvetica fz42 blackBlue" />	
+				</div>
 				<label className="brandonReg gray50 fz20 fw500 mt-2 mb-1 text-center">Cuéntanos un poco más sobre el monto que necesitas</label>
 			<InputLabel label="¿Cuánto necesitas?" class="mt-18" />
 			<Field
