@@ -39,7 +39,8 @@ let DocumentsForm = (props) => {
   let fileHandler = async (component, key, e) => {
     dispatch (updateLoader(true));
     let value;
-    let limitSize = 1000000; // 1 MB
+    let limitSize = 10000000; // 10 MB
+    
     let filesNotUploaded = { names: [], keys: [] };
     value = component === "drag" ? e : e.target.files;
     value = Array.from(value);
@@ -50,46 +51,10 @@ let DocumentsForm = (props) => {
         dispatch(
           props.updateAlertMsg(
             true,
-            `${filesNotUploaded.names.toString()} - El peso de la imágen debe ser menor o igual a 1MB`
+            `${filesNotUploaded.names.toString()} - El peso de la imágen debe ser menor o igual a 10 MB`
           )
         );
-      } else {
-        const api = "https://api.ocr.space/parse/image";
-        const formData = new FormData();
-        formData.append("file", value[0]);
-        formData.append("language", "spa");
-        formData.append("isOverlayRequired", false);
-        formData.append("iscreatesearchablepdf", false);
-        formData.append("issearchablepdfhidetextlayer", false);
-        const config = {
-          headers: {
-            "content-type": "multipart/form-data",
-            apikey: "891950076088957",
-          },
-        };
-        try {
-          const res = await axios.post(api, formData, config);
-          if (!!res.data.ErrorMessage) {
-            console.log(res.data.ErrorMessage[0]);
-          } else {
-            const {
-              data: { OCRExitCode, ParsedResults },
-            } = res;
-            const { ParsedText, FileParseExitCode } = ParsedResults[0];
-            if ( OCRExitCode === 1 && FileParseExitCode === 1 && ParsedText.length > 50) {
-              setValidFiles([...validFiles, true]);
-              setFileToKey(key, value);
-            } else {
-              filesNotUploaded.names.push(value[i].name);
-              filesNotUploaded.keys.push(i);
-              deleteChip(i,key);
-              dispatch( props.updateAlertMsg( true, `${filesNotUploaded.names.toString()} - La calidad del documento/imagen no es suficiente`));
-            }
-          }
-        } catch (error) {
-          console.error(error);
-        }
-      }
+      } 
     }
 
     for (let j = 0; j < filesNotUploaded.keys.length; j++) {

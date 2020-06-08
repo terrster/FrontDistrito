@@ -280,7 +280,7 @@ const getDocsMethod = () => {
         <div className="brandonReg fz16 mt-3 mailto-content">
           Procura que la calidad sea óptima y legible en formato: <br></br>
           PNG, JPG, ZIP, PDF y/o FOTO en buena calidad según sea el caso (Peso
-          máximo de 1MB por archivo). <br></br>
+          máximo de 10MB por archivo). <br></br>
           Si lo prefieres, también puedes enviarnos tu documentación a{" "}
           <a href="mailto:documentos@distritopyme.com">
             documentos@distritopyme.com
