@@ -173,10 +173,10 @@ const Steps = (props) => {
                   to={`/informacion-general/${id}`}
                   className="form-link"
                 >
-                  Datos generales
+                  Datos personales
                 </Link>
               ) : (
-                <label className="form-link">Datos generales</label>
+                <label className="form-link">Datos personales</label>
               )}
             </h5>
           </span>

@@ -196,7 +196,7 @@ const GeneralInfo = () => {
       <ToastContainer />
       <div className="text-center mb-2">
         <Title
-          title="Información general"
+          title="Datos personales"
           className="coolvetica fz42 blackBlue"
         />
       </div>

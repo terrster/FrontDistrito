@@ -410,7 +410,7 @@ let GeneralInfoForm = ({
             setComercialAddress(newValue);
           }}
           type="checkbox"
-          label="Utilizar los mismos datos que el domicilio comercial"
+          label="Utilizar los mismos datos que el domicilio del negocio"
           name="sameAddress"
         />
         <Row className="d-flex justify-content-center">

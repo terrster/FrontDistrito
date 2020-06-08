@@ -109,6 +109,7 @@ const Amount = props => {
 					personType: JSON.parse(sessionStorage.getItem('user')).idClient[0].type
 				});
 			}
+
 		}
 		if (!toast.first) {
 			execToast('first');
