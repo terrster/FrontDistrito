@@ -94,14 +94,9 @@ const Amount = props => {
 							token: sessionStorage.getItem("token")
 						}
 					});
-					
-					if(JSON.parse(sessionStorage.getItem('user')).idClient[0].type){
-						res.data.amount.push({
-							personType: JSON.parse(sessionStorage.getItem('user')).idClient[0].type
-						});
-					}
 					setInitialValues(res.data.amount);
 				}
+
 			}
 
 			if(JSON.parse(sessionStorage.getItem('user')).idClient[0].type){
