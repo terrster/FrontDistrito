@@ -434,7 +434,6 @@ let GeneralInfoForm = ({
               name="extNumber"
               val={!sameAddress ? "" : currentAddress.extNumber}
               disabled={!sameAddress ? false : true}
-              normalize={onlyNumbers}
               onChange={(event, newValue, previousValue) =>
                   setInitialValues({ ...initialValues, extNumber: newValue })
                }
@@ -448,7 +447,6 @@ let GeneralInfoForm = ({
               name="intNumber"
               val={!sameAddress ? "" : currentAddress.intNumber}
               disabled={!sameAddress ? false : true}
-              normalize={onlyNumbers}
               onChange={(event, newValue, previousValue) =>
                   setInitialValues({ ...initialValues, intNumber: newValue })
                }

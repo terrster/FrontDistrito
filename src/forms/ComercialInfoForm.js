@@ -279,7 +279,6 @@ class ComercialInfoConstructForm extends Component {
               label="Ext"
               name="extNumber"
               cls="mb-3"
-              normalize={onlyNumbers}
             />
           </Col>
 
@@ -289,7 +288,6 @@ class ComercialInfoConstructForm extends Component {
               label="Int"
               name="intNumber"
               cls="mb-3"
-              normalize={onlyNumbers}
             />
           </Col>
 
