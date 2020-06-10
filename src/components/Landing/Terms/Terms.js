@@ -8,7 +8,7 @@ const Terms = props => {
 			<div className="text-center mt-120">
 				<Title title="Términos y condiciones" className="coolvetica fz48 blackBlue" />
 			</div>
-			<div className="brandonLight fz20 text-justify">
+			<div className="metropolisReg fz20 text-justify">
 			Este contrato describe los términos y condiciones generales (en adelante únicamente "TÉRMINOS Y CONDICIONES") aplicables al uso de los contenidos, productos y servicios ofrecidos a través del sitio <strong>www.distritopyme.com</strong> (en adelante, "SITIO WEB"), del cual es titular <strong>Distrito Pyme S.A. de C.V.</strong> (en adelante, "DISTRITOPYME") quien tiene su domicilio establecido en el Estado de México.
 			Cualquier persona que desee acceder o hacer uso del sitio o los servicios que en él se ofrecen, podrá hacerlo sujetándose a los presentes TÉRMINOS Y CONDICIONES, así como a políticas y principios incorporados al presente documento. En todo caso, cualquier persona que no acepte los presentes términos y condiciones, deberá abstenerse de utilizar el SITIO WEB y/o adquirir los productos y servicios que en su caso sean ofrecidos.
 

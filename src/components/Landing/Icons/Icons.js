@@ -8,8 +8,8 @@ const Icons = props => {
 				</div>
 			</div>
 			
-			<div className="text-center">
-				<div className="brandonReg mxw-160 fz21 blackBlue ml-auto mr-auto">
+			<div className="text-justify">
+				<div className="metropolisReg mxw-160 fz21 blackBlue ml-auto mr-auto">
 					{props.text}
 				</div>
 			</div>

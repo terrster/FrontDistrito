@@ -11,7 +11,7 @@ const HowWorks = props => {
 	return(
 		<div id="howWorks" className="pt-4 text-center ml-auto mr-auto">
 			<Title title="Requisitos básicos" className="coolvetica blackBlue fw500 mb-1 fz42" />
-			<Title title="Fácil, rápido y sin papeleos" className="brandonLight fz32 blackBlue fw300 ls-01" />
+			<Title title="Fácil, rápido y sin papeleos" className="metropolisReg fz32 blackBlue fw300 ls-01" />
 				<Row className="justify-content-center mt-3">
 					<Col lg={3}>
 						<Icons img={REQUISITOS_BÁSICOS_01} alt="Simulador" width="100px" text="Ingresos mínimos de $20,000 pesos mensuales (comprobables)" />

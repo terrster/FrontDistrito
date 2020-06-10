@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Carousel } from 'react-bootstrap';
 
+import "../../../css/header.css";
 import firstImage from '../../../assets/img/carousel/carrusel-01.jpg';
 import secondImage from '../../../assets/img/carousel/carrusel-02.jpg';
 import firstImageMobie from '../../../assets/img/carousel/mobile-carrusel-01.jpg';
@@ -54,11 +55,11 @@ const Header = props => {
                                     ¿Necesitas financiamiento?
 								</h3>
 								<div
-									className="brandonReg white fz24 lh133"
+									className="metropolisReg white fz24 lh133"
 									style={{ letterSpacing: 0.8 }}
 								>
 									<p>Recibe las mejores ofertas de crédito</p>
-									<p className="brandonBlk ">¡En menos de 24 horas!</p>
+									<p className="metropolisMed ">¡En menos de 24 horas!</p>
 								</div>
 							</div>
 							<Link
@@ -71,7 +72,7 @@ const Header = props => {
 										: '/registrate'
 								}
 							>
-								<div className="brandonBld mt-72 text-center">
+								<div className="coolvetica mt-72 text-center">
 									<Button className="header-button fz24 bluePrimary">
                                         Solicitar ahora
 									</Button>
@@ -91,11 +92,11 @@ const Header = props => {
                             ¿Necesitas financiamiento?
 						</h3>
 						<div
-							className="brandonReg white fz24 lh133"
+							className="metropolisReg white fz24 lh133"
 							style={{ letterSpacing: '0.8' }}
 						>
 							<p>Recibe las mejores ofertas de crédito</p>
-							<p className="brandonBlk ">¡En menos de 24 horas!</p>
+							<p className="metropolisMed ">¡En menos de 24 horas!</p>
 							<Link
 								to={
 									sessionStorage.getItem('applianceId') !== null
@@ -106,7 +107,7 @@ const Header = props => {
 										: '/registrate'
 								}
 							>
-								<div className="brandonBld mt-72 text-center">
+								<div className="coolvetica mt-72 text-center">
 									<Button className="header-button fz24 bluePrimary">
                                         Solicitar ahora
 									</Button>

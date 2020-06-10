@@ -9,7 +9,7 @@ import {
 	updateAmount,
 	updateCont,
 	updateStep
-} from '../../redux/actions/simulatorActions'
+} from '../../redux/actions/simulatorActions';
 
 const Begin = props => {
 
@@ -43,7 +43,7 @@ const Begin = props => {
 				className="blackBlue ls-11 lh-15 fz32 coolvetica mb-24"
 				title="¿Cuánto dinero necesitas?"
 			/>
-			<div className="fz29 brandonReg blackBlue fw500 lh-15 ls-11">
+			<div className="fz29 metropolisReg blackBlue fw500 lh-15 ls-11">
 				Necesito{' '}
 				<CurrencyInput
 					className="simulator-input"

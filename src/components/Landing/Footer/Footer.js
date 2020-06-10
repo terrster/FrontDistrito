@@ -15,35 +15,35 @@ const Footer = props => {
     <div className="row d-flex justify-content-center footer-bg">
         <div className="col-xs-12 col-lg-3 text-center text-lg-left mb-1 mb-lg-0" >
             <img src={logo} alt="Distrito Pyme" className="nav-logo mb-1 mb-lg-0"/>
-                <div className="brandonReg fw300 fz16 gray600"  >
+                <div className="metropolisReg fw300 fz16 gray600"  >
                     Distrito Pyme&copy; Av. Javier Barrios Sierra 540, Santa Fe, Ciudad de México 01210, México.
                 </div>
         </div>
         <div className="col-5 col-lg-3">
-            <div className=" brandonReg fw500 fz24" style={{ fontFamily: "MetropolisMedium" }}>Menú</div>
+            <div className="metropolisMed fw500 fz24">Menú</div>
             <div>
-                <a href="/#simulador" className="brandonReg black-link fw300 fz18" style={{ fontFamily: "MetropolisRegular" }}>Simulador</a>
+                <a href="/#simulador" className="metropolisReg black-link fw300 fz18">Simulador</a>
             </div>
             <div>
-                <a href="/#about" className="brandonReg black-link fw300 fz18" style={{ fontFamily: "MetropolisRegular" }}>Conócenos</a>
+                <a href="/#about" className="metropolisReg black-link fw300 fz18">Conócenos</a>
             </div>
             <div>
-                <a href="/#howWorks" className="brandonReg black-link fw300 fz18" style={{ fontFamily: "MetropolisRegular" }}>¿Cómo funciona?</a>
+                <a href="/#howWorks" className="metropolisReg black-link fw300 fz18">¿Cómo funciona?</a>
             </div>
             <div>
-                <a href="https://distritopyme.com.mx/" target='_blank' rel="noopener noreferrer" className="brandonReg black-link fw300 fz18" style={{ fontFamily: "MetropolisRegular" }}>Blog</a>
+                <a href="https://distritopyme.com.mx/" target='_blank' rel="noopener noreferrer" className="metropolisReg black-link fw300 fz18">Blog</a>
             </div>
         </div>
         <div className="col-7 col-lg-3" >
-            <div className="brandonReg fw500 fz24" style={{ fontFamily: "MetropolisMedium" }}>Soporte</div>
-            <div className="brandonReg fw300 fz18" style={{ fontFamily: "MetropolisRegular" }}><a href="/preguntas-frecuentes" className="footer-link" target="blank">Preguntas frecuentes</a></div>
-            <div className="brandonReg fw300 fz18" style={{ fontFamily: "MetropolisRegular" }}><a href="/terminos-y-condiciones" className="footer-link" target="blank">Términos y condiciones</a></div>
-            <div className="brandonReg fw300 fz18" style={{ fontFamily: "MetropolisRegular" }}><a href="/privacidad" className="footer-link" target="blank">Aviso de privacidad</a></div>
-            <div className="brandonReg fw300 fz18" style={{ fontFamily: "MetropolisRegular" }}><a className="footer-link" href="mailto:contacto@distritopyme.com">Trabaja en Distrito Pyme</a></div>
+            <div className="metropolisMed fw500 fz24">Soporte</div>
+            <div className="metropolisReg fw300 fz18"><a href="/preguntas-frecuentes" className="footer-link" target="blank">Preguntas frecuentes</a></div>
+            <div className="metropolisReg fw300 fz18"><a href="/terminos-y-condiciones" className="footer-link" target="blank">Términos y condiciones</a></div>
+            <div className="metropolisReg fw300 fz18"><a href="/privacidad" className="footer-link" target="blank">Aviso de privacidad</a></div>
+            <div className="metropolisReg fw300 fz18"><a className="footer-link" href="mailto:contacto@distritopyme.com">Trabaja en Distrito Pyme</a></div>
         </div>
         <div className="col-12 col-lg-3">
-            <div className="brandonReg fw500 fz24" style={{ fontFamily: "MetropolisMedium" }}>Contacto</div>
-            <div className="brandonReg fw300 fz18 mb-1" style={{ fontFamily: "MetropolisRegular" }}>(55) 8661-9486</div>
+            <div className="metropolisMed fw500 fz24">Contacto</div>
+            <div className="metropolisReg fw300 fz18 mb-1">(55) 8661-9486</div>
             <a href="https://www.facebook.com/distritopyme" target="blank"><img src={face} alt="Facebook Distrito Pyme" className="footer-icon" /></a>
             <a href="https://twitter.com/DistritoPymeMx" target="blank"><img src={twitter} alt="Twitter Distrito Pyme" className="footer-icon" /></a>
             <a href="https://mx.linkedin.com/company/distritopyme" target="blank"><img src={linked} alt="LinkedIn Distrito Pyme" className="footer-icon" /></a>

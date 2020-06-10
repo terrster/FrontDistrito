@@ -7,7 +7,7 @@ const Question = props => {
 			<div className="coolvetica blackBlue fz22">
 				{props.question}
 			</div>
-			<div className="text-justify brandonLight fz20" style={{letterSpacing: '0.1px'}}>
+			<div className="text-justify metropolisReg fz20" style={{letterSpacing: '0.1px'}}>
 				{props.text}
 			</div>
 		</div>

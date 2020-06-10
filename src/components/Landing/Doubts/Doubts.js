@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Title from '../../Generic/Title'
 import { Button, Row, Col} from 'react-bootstrap';
 
+import "../../../css/doubts.css";
 import titoLupa from '../../../assets/img/tito-lupa@2x.png'
 
 const Doubts = () => {

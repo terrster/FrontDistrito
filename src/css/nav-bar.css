@@ -5,6 +5,8 @@
   /* NAVBAR */
   .nav-bar {
 	background: #fff !important;
+	padding-top: 24px !important;
+	padding-bottom: 24px !important;
   }
   
   .nav-btn {
