@@ -65,7 +65,7 @@ const Doubts = () => {
 					<Col lg={7} className="d-flex justify-content-center">
 						<form className="" style={{maxWidth : '560px', minWidth: '100%'}}>
 							<div className="form-group">
-								<input type="text" id="name" name="name" placeholder="Nombre completo" className="coolvetica fz20 mb24 input-doubt mb-2 mx-auto" onChange={handleChange}/>
+								<input type="text" id="name" name="name" placeholder="Nombre completo" className="metropolisReg fz20 mb24 input-doubt mb-2 mx-auto" onChange={handleChange}/>
 								{
 									!data.name.isValid && data.name.value &&
 									<div className="error text-left ml-2">Ingresa un nombre mayor a 5 caracteres</div>
@@ -73,7 +73,7 @@ const Doubts = () => {
 								
 							</div>
 							<div className="form-group">
-								<input type="text" id="email" name="email" placeholder="Correo electrónico" className="coolvetica fz20 input-doubt" onChange={handleChange}/>
+								<input type="text" id="email" name="email" placeholder="Correo electrónico" className="metropolisReg fz20 input-doubt" onChange={handleChange}/>
 								{
 									!data.email.isValid && data.email.value &&
 									<div className="error text-left ml-2">Ingrese un correo electrónico valido</div>
@@ -87,7 +87,7 @@ const Doubts = () => {
 								</div>
 								:
 								<div className="form-group text-center text-lg-right">
-									<Button className=" contact-button brandonReg fw500 white fz16 mt-24 mb-5 mb-lg-0" disabled={(data.email.isValid && data.name.isValid) ? false : true} onClick={handleSend}>¡Contáctenme!</Button>
+									<Button className="contact-button coolvetica fw500 white fz16 mt-24 mb-5 mb-lg-0" disabled={(data.email.isValid && data.name.isValid) ? false : true} onClick={handleSend}>¡Contáctenme!</Button>
 								</div>
 							}
 						</form>
