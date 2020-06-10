@@ -4,9 +4,12 @@ import { Field, reduxForm } from "redux-form";
 import { Row, Col, Button } from "react-bootstrap";
 import comercialOptions from "../models/ComercialInfoModels";
 import SubtitleForm from "../components/Generic/SubtitleForm";
-import { renderField, renderSelectField } from "../components/Generic/Fields";
+import { renderField, renderSelectField, renderFieldFull } from "../components/Generic/Fields";
 import { validateComercialInfo } from "../components/Validate/ValidateComercialInfo";
 
+// CIEC
+import PopUp from "./PopUp";
+import Info from "../assets/img/Info.png";
 
 
 class ComercialInfoConstructForm extends Component {
@@ -25,8 +28,20 @@ class ComercialInfoConstructForm extends Component {
     changeCP: false,
     touched: false,
     onlyNumbers: (nextValue, previousValue) => /^\d+$/.test(nextValue) || nextValue.length === 0 ? nextValue : previousValue,
-    typePerson: JSON.parse(sessionStorage.getItem("user")).idClient[0].type
+    showModal: true
   };
+
+  handleShow = () => {
+	  this.setState((state, props) => ({
+		  showModal: !state.showModal
+	  }))
+  }
+  
+  handleShowModal = (show) => {
+	  this.setState({
+		  showModal: show
+	  })
+  }
 
   getState = async () => {
     try {
@@ -213,6 +228,7 @@ class ComercialInfoConstructForm extends Component {
       /^\d+$/.test(nextValue) || nextValue.length === 0
         ? nextValue
         : previousValue;
+    const user = JSON.parse(sessionStorage.getItem("user"));
     return (
       <>
         <SubtitleForm subtitle="Sobre tu negocio" className="mb-3" />
@@ -383,17 +399,34 @@ class ComercialInfoConstructForm extends Component {
             </Field>
           </Col>
 
-          {/*codigo postal 
-          <Col lg={6} md={6} sm={12}>
-            <Field
-              component={renderField}
-              onChange={this.handleChangeCodigoPostal}
-              label="CP"
-              name="zipCode"
-              normalize={onlyNumbers}
-            />
-            {this.state.error && <span className="mb-3"><small className="error">{this.state.error}</small></span>}
-          </Col>*/}
+
+		  {user.idClient[user.idClient.length - 1].type !== "PF" && (
+			<>
+				<Col lg={12} md={12} sm={12}>
+					<SubtitleForm
+						subtitle="Clave CIEC (Opcional)"
+						className="mt-30"
+					/>
+					<div onClick={() => this.handleShow()} style={{ cursor: "pointer", width: '0', height: '0' }}>
+						<img
+							src={Info}
+							alt="More Info"
+							title="More Info"
+							className="positionInfo"
+						/>
+					</div>
+					<Field component={renderFieldFull} label="CIEC" name="ciec" />
+					<div className="fz18 gray50 brandonReg mb-30 mt-2">
+						No es obligatorio pero podrá agilizar tu solicitud de crédito a la
+						mitad del tiempo. Se ingresará por única ocasión para descargar la
+						información necesaria.
+					</div>
+				</Col>
+				<PopUp show={this.state.showModal} setShow={(show) => this.handleShowModal(show)} /> 
+			</>
+        )}
+
+
 
           <Col lg={12} md={12} sm={12}>
             <label className="label-style mt-3">
