@@ -197,7 +197,7 @@ const GeneralInfo = () => {
       <div className="text-center mb-2">
         <Title
           title="Datos personales"
-          className="coolvetica fz42 blackBlue"
+          className="title-dp fz42"
         />
       </div>
       <GeneralInfoForm

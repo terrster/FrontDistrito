@@ -6,7 +6,7 @@ import ApplianceCard from "../Generic/ApplianceCard";
 import CustomLoader from '../Generic/CustomLoader';
 import comercialOptions from "../../models/ComercialInfoModels";
 import { Row, Col } from "react-bootstrap";
-import titoAccount from "../../assets/img/tito-account.png";
+import titoAccount from "../../assets/img/POSES TITO-14-01.png";
 import axios from '../../utils/axios';
 import { updateLoader } from '../../redux/actions/loaderActions';
 
@@ -121,7 +121,7 @@ const Home = (props) => {
     <div className="container mt-72 mb-120">
       <div>
         <Title
-          className="blackBlue coolvetica fw500 fz32 mb-16"
+          className="title-dp fw500 fz32 mb-16"
           title={`Hola ` + user.name}
         />
         {/* info */}

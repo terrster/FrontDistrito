@@ -146,7 +146,7 @@ export const renderFieldFull = ({
 			{type !== 'checkbox' &&
 				(val ? (
 					<input
-						className="form-control custom-form-input brandonReg mt-24 "
+						className="form-control custom-form-input text-dp mt-24 "
 						{...input}
 						value={val ? val : ''}
 						placeholder={label}
@@ -156,7 +156,7 @@ export const renderFieldFull = ({
 					/>
 				) : label === 'CP' ? (
 					<input
-						className="form-control custom-form-input brandonReg mt-24 "
+						className="form-control custom-form-input text-dp mt-24 "
 						{...input}
 						placeholder={label}
 						type={type}
@@ -165,7 +165,7 @@ export const renderFieldFull = ({
 					/>
 				) : label === 'CIEC' ? (
 					<input
-						className="form-control custom-form-input brandonReg mt-24 "
+						className="form-control custom-form-input text-dp mt-24 "
 						{...input}
 						id={label}
 						placeholder={label}
@@ -178,7 +178,7 @@ export const renderFieldFull = ({
 					<input className="diplay-none" />
 				) : (
 					<input
-						className="form-control custom-form-input brandonReg mt-24"
+						className="form-control custom-form-input text-dp mt-24"
 						{...input}
 						placeholder={label}
 						type={type}
@@ -201,7 +201,7 @@ export const renderFieldFull = ({
 							{...input}
 						/>
 					)}
-					<label className="fz16 gray50 brandonReg ml-2">{label}</label>
+					<label className="fz16 text-dp gray50 text-dp ml-2">{label}</label>
 				</div>
 			)}
 		</div>
@@ -229,7 +229,7 @@ export const renderSelectFieldFull = ({
 		<div className="input-container">
 			<select
 				{...input}
-				className={`form-control custom-form-input brandonReg ${clases}`}
+				className={`form-control custom-form-input text-dp ${clases}`}
 			>
 				{children}
 			</select>

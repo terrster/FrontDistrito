@@ -73,13 +73,13 @@ const Proposals = () => {
 				{
 					(sessionStorage.getItem('token') && sessionStorage.getItem('token') !== '') ?
 					<div className="container-buttons">
-						<Link className="coolvetica simulator-next-button link fz18 white" to="/home">Solicitar ahora</Link>
-						<Link className="coolvetica simulator-next-button link fz18 white" to="/" onClick={changeStep} >Nueva simulación</Link>
+						<Link className="btn-blue-general mt-45 fz24 link-blue-general" to="/home">Solicitar ahora</Link>
+						<Link className="btn-blue-general mt-45 fz24 link-blue-general" to="/" onClick={changeStep} >Nueva simulación</Link>
 					</div>
 					:
 					<div className="container-buttons">
-						<Link className="coolvetica simulator-next-button link fz18 white" to="/registrate">Solicitar ahora</Link>
-						<Link className="coolvetica simulator-next-button link fz18 white" to="/" onClick={changeStep} >Nueva simulación</Link>
+						<Link className="btn-blue-general mt-45 fz24 link-blue-general" to="/registrate">Solicitar ahora</Link>
+						<Link className="btn-blue-general mt-45 fz24 link-blue-general" to="/" onClick={changeStep} >Nueva simulación</Link>
 					</div>
 				}
 				

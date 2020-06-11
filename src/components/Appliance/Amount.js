@@ -123,7 +123,7 @@ const Amount = props => {
 					message="Error al enviar los datos. Favor de intentarlo de nuevo"
 				/>
 				<div className="text-center">
-					<Title title="Elige tu tipo de negocio" className="coolvetica fz42 blackBlue" />	
+					<Title title="Elige tu tipo de negocio" className="title-dp fz42" />	
 				</div>
 				<AmountForm
 					onSubmit={data => onFormSubmit(data)}

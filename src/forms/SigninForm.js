@@ -30,9 +30,9 @@ const renderField = ({ input, label, type, meta: { touched, error, warning } }) 
     <div>
       <div className="input-container form-group">
 	  	{ (type === 'email') 
-				? 	<input className="form-control custom-form-input mt-24" {...input} placeholder={label} type={type}/>
+				? 	<input className="form-control custom-form-input text-dp mt-24" {...input} placeholder={label} type={type}/>
 				: 	<div className="input-group form-group center-flex mt-24">
-						<input className="form-control custom-form-input center-flex-input" {...input} placeholder={label} type={type} name="password" id="password" data-toggle="password"/>
+						<input className="form-control custom-form-input text-dp center-flex-input" {...input} placeholder={label} type={type} name="password" id="password" data-toggle="password"/>
 						<div style={{height: '10px', width: '100vw'}}> </div>
 						<span className="fa fa-eye-slash icon icon-style mt-24" onClick={ShowHide}></span>
 					</div>
@@ -49,7 +49,7 @@ const renderField = ({ input, label, type, meta: { touched, error, warning } }) 
 let SigninForm = props => {
 
 	const { handleSubmit, submitting} = props
- 	const submitButtonClass = (submitting) ? "btn-register mt-30 disabled" : "btn-register mt-30"
+ 	const submitButtonClass = (submitting) ? "btn-blue-general mt-30 disabled" : "btn-blue-general mt-30"
 
 	return (
 		<div className="container">

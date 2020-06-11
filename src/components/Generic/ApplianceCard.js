@@ -27,34 +27,34 @@ const ApplianceCard = props => {
 
 	return(
 		<div className="wht-card-box mb-24">
-			<Title className="blackBlue coolvetica fw500 mb-16 fz24" title={cardsElem[props.keyData].title}/>
+			<Title className="title-dp fw500 mb-16 fz24" title={cardsElem[props.keyData].title}/>
 				<Row className="d-flex justify-content-left text-wrap">
-					<Col lg={6} md={6} sm={12} className="info-label brandonReg text-truncate">
+					<Col lg={6} md={6} sm={12} className="info-label metropolisReg text-truncate">
 						{cardsElem[props.keyData].first}
 					</Col>
-					<Col lg={6} md={6} sm={12} className="info-request brandonLight text-truncate">
+					<Col lg={6} md={6} sm={12} className="info-request metropolisLight text-truncate">
 						{ (props.first) ?  defineContent(props.first) : 'No especificado'}
 					</Col>
-					<Col lg={6} md={6} sm={12} className="info-label brandonReg text-truncate">
+					<Col lg={6} md={6} sm={12} className="info-label metropolisReg text-truncate">
 						{cardsElem[props.keyData].second}
 					</Col>
-					<Col lg={6} md={6} sm={12} className="info-request brandonLight text-truncate">
+					<Col lg={6} md={6} sm={12} className="info-request metropolisLight text-truncate">
 						{(props.second) ? `${props.second}` : 'No especificado'}
 					</Col>
-					<Col lg={6} md={6} sm={12} className="info-label brandonReg text-truncate">
+					<Col lg={6} md={6} sm={12} className="info-label metropolisReg text-truncate">
 						{cardsElem[props.keyData].third}
 					</Col>
-					<Col lg={6} md={6} sm={12} className="info-request brandonLight text-truncate">
+					<Col lg={6} md={6} sm={12} className="info-request metropolisLight text-truncate">
 						{(props.third) ? `${props.third}` : 'No especificado'}
 
 					</Col>
-					<Col lg={6} md={6} sm={12} className="info-label brandonReg text-truncate">
+					<Col lg={6} md={6} sm={12} className="info-label metropolisReg text-truncate">
 						{cardsElem[props.keyData].fourth}
 					</Col>
-					<Col lg={6} md={6} sm={12} className="info-request brandonLight text-truncate">
+					<Col lg={6} md={6} sm={12} className="info-request metropolisLight text-truncate">
 						{(props.fourth) ? `${props.fourth}` : 'No especificado'}
 					</Col>
-					<Col sm={12} className="info-label brandonReg text-truncate text-right">
+					<Col sm={12} className="info-label metropolisReg text-truncate text-right">
 							<Link to={(idClient.appliance.length > 0 || idClient.type == null) ? `/${cardsElem[props.keyData].nameSection}/${props.applianceId}` : `/elige-monto/${user._id}`} className="h5" style={{color: '#000000', cursor: 'pointer'}}>
 								{cardsElem[props.keyData].five}
 							</Link>

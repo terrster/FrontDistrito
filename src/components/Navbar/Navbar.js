@@ -21,8 +21,8 @@ const NavBar = props => {
 	}
 	const history = useHistory();
 	const close = () => setIsOpen(false);
-	let classDefault = "text-center fz16 gray50 heigth-45 nav-btn d-flex hvr-underline-from-left";
-	let classDefaultLink = "text-center fz16 gray50 heigth-45 nav-btn d-flex";
+	let classDefault = "hvr-underline-from-left  text-center fz16 blackNav nav-btn heigth-45 solicita-butto metropolisReg";
+	let classDefaultLink = "text-center coolvetica fz16 gray50 heigth-45 nav-btn d-flex";
 
 	return (
 		<div className="pos-f-t">
@@ -37,7 +37,7 @@ const NavBar = props => {
 		 					<Nav.Link  onClick={close} href="/#howWorks" id="ymb-dp-nav-howWorks" className="hvr-underline-from-left  text-center fz16 blackNav nav-btn heigth-45 solicita-butto metropolisReg">¿Cómo funciona?</Nav.Link>
 		 					<Nav.Link  onClick={close} href="https://distritopyme.com.mx/" id="ymb-dp-nav-howWorks" target="_blank" className="hvr-underline-from-left  text-center fz16 blackNav nav-btn heigth-45 solicita-butto metropolisReg">Blog</Nav.Link>
 		 					<Nav.Link  onClick={close} as={NavLink} to="/login" id="ymb-dp-nav-register" className="hvr-underline-from-left  text-center fz16 blackNav nav-btn heigth-45 solicita-butto metropolisReg">Inicia sesión</Nav.Link>
-		 					<Nav.Link  onClick={close} as={NavLink} to="/registrate" id="ymb-dp-nav-login" className=" text-center fz16 white nav-btn nav-btn-rad primary heigth-45 w-360 ml-auto mr-auto solicita-button coolvetica" style={{textDecoration: "none"}}>Solicita tu crédito</Nav.Link>
+		 					<Nav.Link  onClick={close} as={NavLink} to="/registrate" id="ymb-dp-nav-login" className="text-center fz16 white nav-btn nav-btn-rad primary heigth-45 w-360 ml-auto mr-auto solicita-button coolvetica" style={{textDecoration: "none"}}>Solicita tu crédito</Nav.Link>
 		 				</Nav>
 		 			</Navbar.Collapse>
 		 		}
@@ -54,7 +54,7 @@ const NavBar = props => {
 						}
 		 				<Link onClick={close} to="/historial" className={ (props.url === 'historial') ? classDefault+' nav_bar_active': classDefault}>Historial</Link>
 		 				<Link onClick={close} to="/home" className={ (props.url === 'home') ? classDefault+' nav_bar_active': classDefault}>Mi cuenta</Link>
-		 				<Nav.Link onClick={close} href="/" className="text-center blackBlue heigth-45 metropolisReg"> <Button className="logout fz-12" style={{marginTop: '-5px'}} onClick={() => {
+		 				<Nav.Link onClick={close} href="/" className="text-center blackBlue heigth-45 metropolisReg"> <Button className="logout fz-12" onClick={() => {
 							sessionStorage.clear();
 		 					window.location.reload()
 		 				}}>Cerrar sesión</Button></Nav.Link>

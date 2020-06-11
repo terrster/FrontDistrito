@@ -6,8 +6,8 @@ const LinkButton = props => {
 	return(
 		<div className="mt-45">
 			<Link to={`/${props.link}`}>
-				<div className="brandonBld mt-45 text-center">
-					<Button className="appliance-button fz21 bluePrimary">
+				<div className="mt-45">
+					<Button className="btn-blue-general fz21">
 						Completar
 					</Button>
 				</div>

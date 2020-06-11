@@ -57,8 +57,8 @@ let Login = props => {
 					</div>
 				</Modal>
 				<div className="container mt-30 mb-30 d-flex flex-column align-items-center justify-content-center" style={{height : '600px'}}>
-					<Title className="fz56 text-center blue-primary coolvetica fw500" title="Inicia sesión" />
-					<div className="mt-30 brandonReg fw300 fz20 text-center mb-30">
+					<Title className="title-dp fz56 fw500" title="Inicia sesión" />
+					<div className="mt-30 subtitle-dp fw300 fz20 mb-30">
 						<label className="gray50">Ingresa tu correo y contraseña para comenzar</label>
 					</div>
 						<SigninForm onSubmit={(e) => onFormSubmit(e,Login)} />

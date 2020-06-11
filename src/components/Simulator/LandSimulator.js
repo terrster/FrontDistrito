@@ -22,10 +22,10 @@ const LandSimulator = () => {
 	return (
 		<div id="simulador" className={`${step < 2 ? 'bg-gray' : 'bg-gray'} pt-4 pb-2 mb-3 text-center ml-auto mr-auto plr-20 center-items`} style={{maxWidth : '1440px'}}>
 			{ (step <= 2) 
-				? <Title className="coolvetica fz42 coolvetica mb-18 fw500" title="Cotiza tu crédito"/>
+				? <Title className="title-dp fz42 mb-18 fw500" title="Cotiza tu crédito"/>
 				: <div>
-					<Title className="blackBlue fz38 coolvetica mb-18 fw500" title="¡Enhorabuena!"/>				
-					<Title className="blackBlue fz32 coolvetica mb-18 fw500" title="Hemos encontrado 4 ofertas de crédito para tu negocio"/>
+					<Title className="title-dp fz38 mb-18 fw500" title="¡Enhorabuena!"/>				
+					<Title className="subtitle-dp fz32 mb-18 fw500" title="Hemos encontrado 4 ofertas de crédito para tu negocio"/>
 				</div>
 			}
 			{	step === 0 && <Begin />	}

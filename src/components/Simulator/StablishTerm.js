@@ -29,8 +29,8 @@ const StablishTerm = () => {
  
 	return(
 		<div className="mr-auto ml-auto white-box mb-5 center-buttons">
-			<Title className="blackBlue ls-11 lh-15 fz32 coolvetica mb-24" title="¿En cuánto tiempo quieres pagarlo?" />
-			<div className="fz29 metropolisReg blackBlue fw500 lh-15 ls-11">
+			<Title className="title-dp ls-11 lh-15 fz32 mb-24" title="¿En cuánto tiempo quieres pagarlo?" />
+			<div className="fz29 text-dp fw500 lh-15 ls-11">
 				Quiero pagarlo en 
 				<select className="simulator-select metropolisReg" value={term} onChange={selectTerm} style={{height:'40px', fontSize:'1rem', cursor:'pointer'}}>
 					<option value="0" style={{cursor: 'pointer'}} defaultValue>Elige...</option>
@@ -42,7 +42,7 @@ const StablishTerm = () => {
 					<option value="48" style={{cursor: 'pointer'}}>48 meses</option>
 				</select>
 			</div>
-			<Button className="coolvetica simulator-next-button mt-45 fz24 white medium-bottom" disabled={(term !== 0) ? false : true} onClick={changeStep}>Siguiente</Button>
+			<Button className="btn-blue-general mt-45 fz24" disabled={(term !== 0) ? false : true} onClick={changeStep}>Siguiente</Button>
 		</div>
 	)
 }

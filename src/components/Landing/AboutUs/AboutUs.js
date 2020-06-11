@@ -11,8 +11,8 @@ import grantthornton from '../../../assets/img/aboutus/grantthornton.png';
 const AboutUs = props => {
     return(
         <div id="about" className="pt-0 text-center">
-            <Title title="Nosotros" className="coolvetica fz42 blackBlue fw500 mb-1"/>
-            <div className="gray50 coolvetica fw300 mb-2 fz29" style={{letterSpacing : '0.1px'}}>
+            <Title title="Nosotros" className="title-dp fz42 fw500 mb-1"/>
+            <div className="subtitle-dp fw300 mb-2 fz29" style={{letterSpacing : '0.1px'}}>
                 La #ComunidadDeCrédito más grande de México
             </div>
             <div className="container-logos">

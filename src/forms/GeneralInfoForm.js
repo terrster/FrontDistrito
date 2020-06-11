@@ -270,7 +270,7 @@ let GeneralInfoForm = ({
         style={{ maxWidth: "690px" }}
         onSubmit={handleSubmit}
       >
-        <SubtitleForm subtitle="Sobre ti" className="" />
+        <SubtitleForm subtitle="Sobre ti" className="subtitle-dp" />
         <Row className="d-flex justify-content-center">
           <Col lg={4} md={4} sm={12}>
             <Field
@@ -400,7 +400,7 @@ let GeneralInfoForm = ({
           </Row>
         )}
 
-        <SubtitleForm subtitle="Domicilio particular" className="mb-10 mt-24" />
+        <SubtitleForm subtitle="Domicilio particular" className="subtitle-dp mb-10 mt-24" />
         <Field
           component={renderFieldFull}
           onChange={(event, newValue, previousValue, name) => {
@@ -580,7 +580,7 @@ let GeneralInfoForm = ({
             />
           </Col>
         </Row>
-        <SubtitleForm subtitle="Referencias" className="mt-30" />
+        <SubtitleForm subtitle="Referencias" className="subtitle-dp mt-30" />
         <label className="label-style">
           El número telefónico debe tener 10 dígitos
         </label>
@@ -675,7 +675,7 @@ let GeneralInfoForm = ({
           </Col>
         </Row>
 
-        <SubtitleForm subtitle="¿Cuentas con alguno?" className="mt-30 mb-18" />
+        <SubtitleForm subtitle="¿Cuentas con alguno?" className="subtitle-dp mt-30 mb-18" />
         <Row>
           <Col>
             <InputLabel label="Crédito hipotecario" class="mt-18" />

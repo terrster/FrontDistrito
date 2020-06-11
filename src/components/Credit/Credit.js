@@ -90,10 +90,10 @@ const Credit = (props) => {
 				<div className="step-box text-center">
 				<div>
 					<Title
-						className="blackBlue coolvetica fw600 fz42 mb-16"
+						className="title-dp fw600 fz42 mb-16"
 						title="Completa tu solicitud"
 					/>
-					<label className="brandonReg gray50 fz20 fw500">
+					<label className="subtitle-dp fz20 fw500">
 						Completa el 100% de tu formulario y empieza a recibir las
 						mejores opciones de crédito en menos de 48 hrs.
 					</label>
@@ -142,10 +142,10 @@ const Credit = (props) => {
     <div className="mt-72 mb-120 container">
         <div>
           <Title
-            className="blackBlue coolvetica fw500 fz32 mb-16"
+            className="title-dp fw500 fz32 mb-16"
             title={`Hola ` + user.name}
           />
-          <label className="brandonReg gray50 fz20 fw500">
+          <label className="subtitle-dp fz20 fw500">
             Conoce el detalle de tu solicitud
           </label>
           {getAppliance()}

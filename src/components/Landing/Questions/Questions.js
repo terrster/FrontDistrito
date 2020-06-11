@@ -7,7 +7,7 @@ const Questions = props => {
 	return (
 		<div className="container mb-120">
 			<div className="text-center mt-120">
-				<Title title="Preguntas frecuentes" className="coolvetica fz48 blackBlue" />
+				<Title title="Preguntas frecuentes" className="title-dp fz48" />
 			</div>
 
 			<Question

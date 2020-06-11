@@ -25,24 +25,25 @@ let AmountForm = props => {
 				style={{ maxWidth: '690px' }}
 				onSubmit={handleSubmit}
 			>
-				<label className="brandonReg gray50 fz20 fw500 mt-2 mb-1 text-center">Pasa el cursor sobre un recuadro para más información y da clic para seleccionar uno</label>
+				<label className="text-dp gray50 fz20 fw500 mt-2 mb-1 text-center">Pasa el cursor sobre un recuadro para más información y da clic para seleccionar uno</label>
 				<PersonType onSelectPerson={selectedPerson}/>
 				<Field component={renderField} type="text" name="personType" label="secret"></Field>
 				<div className="text-center">
-					<Title title="Elige tu monto" className="coolvetica fz42 blackBlue" />	
+					<Title title="Elige tu monto" className="title-dp fz42" />	
 				</div>
-				<label className="brandonReg gray50 fz20 fw500 mt-2 mb-1 text-center">Cuéntanos un poco más sobre el monto que necesitas</label>
+				<div className="text-center"><label className="text-dp gray50 fz20 fw500 mt-2 mb-1">Cuéntanos un poco más sobre el monto que necesitas</label></div>
 			<InputLabel label="¿Cuánto necesitas?" class="mt-18" />
 			<Field
         		normalize={onlyNumbers}
 				component={renderField}
 				type="text"
 				name="howMuch"
-				label="Ej. 500000"
+				label="Ej. 500000" 
+				cls="text-dp"
 			/>
 
 			<InputLabel label="¿En cuánto tiempo quieres pagarlo?" class="mt-18" />
-			<Field component={renderSelectField} name="term">
+			<Field component={renderSelectField} name="term" cls="text-dp">
 				<option value="">Elige...</option>
 				<option value="3">3 meses</option>
 				<option value="6">6 meses</option>
@@ -53,7 +54,7 @@ let AmountForm = props => {
 			</Field>
 
 			<InputLabel label="¿Para qué lo necesitas?" class="mt-18" />
-			<Field component={renderSelectField} type="text" name="whyNeed">
+			<Field component={renderSelectField} type="text" name="whyNeed" cls="text-dp">
 				<option value="">Elige...</option>
 				{Object.keys(reason).map((value, i) => (
 					<option value={value} key={i}>
@@ -69,11 +70,12 @@ let AmountForm = props => {
 				type="text"
 				name="yearSales"
 				label="Ej. 500000"
+				cls="text-dp"
 			/>
 			
 			<strong><span style={{color:'var(--primary-color)', fontSize: '0.7em'}} >Ventas totales en un año</span></strong>
 			<InputLabel label="Antigüedad del negocio" class="mt-18" />
-			<Field component={renderSelectField} type="text" name="old">
+			<Field component={renderSelectField} type="text" name="old" cls="text-dp">
 				<option value="">Elige...</option>
 				{Object.keys(old).map((value, i) => (
 					<option value={value} key={i}>

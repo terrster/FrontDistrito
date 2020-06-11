@@ -55,8 +55,8 @@ const Doubts = () => {
 
 	return (
 		<div className="text-center" style={{marginBottom : '-10px'}}>
-			<Title className="coolvetica fw500 fz38 blackBlue pt-3" title="¿Dudas?"/>
-			<Title className="coolvetica fw500 fz38 mb-18 blackBlue" title="Déjanos tus datos"/>
+			<Title className="title-dp fw500 fz38 pt-3" title="¿Dudas?"/>
+			<Title className="title-dp fw500 fz38 mb-18" title="Déjanos tus datos"/>
 			<div className="mr-auto ml-auto" style={{maxWidth : '1200px'}}>
 				<Row className="justify-content-center">
 					<Col lg={2}>

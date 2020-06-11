@@ -5,7 +5,7 @@ const Paragraph = props => {
 		<div className="mt-2">
 			{
 				props.title && 
-				<div dangerouslySetInnerHTML={{ __html: "<br>" + props.title }} className="coolvetica fz22">
+				<div dangerouslySetInnerHTML={{ __html: "<br>" + props.title }} className="subtitle-dp fz22">
 					{/* {props.title} */}
 				</div>
 			}
@@ -13,7 +13,7 @@ const Paragraph = props => {
 
 			{
 				props.texts.map((value, index) => 
-					<div dangerouslySetInnerHTML={{ __html: value }} className="text-justify metropolisReg fz20" style={{letterSpacing: '0.1px'}}>
+					<div dangerouslySetInnerHTML={{ __html: value }} className="text-dp text-justify fz20" style={{letterSpacing: '0.1px'}}>
 						{/* {value} */}
 					</div>
 				)

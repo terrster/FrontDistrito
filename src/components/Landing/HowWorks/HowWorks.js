@@ -3,15 +3,15 @@ import Title from '../../Generic/Title';
 import { Row, Col} from 'react-bootstrap';
 import Icons from '../Icons/Icons';
 
-import REQUISITOS_BÁSICOS_01 from '../../../assets/img/REQUISITOS_BÁSICOS_01.png';
-import REQUISITOS_BÁSICOS_02 from '../../../assets/img/REQUISITOS_BÁSICOS_02.png';
-import REQUISITOS_BÁSICOS_03 from '../../../assets/img/REQUISITOS_BÁSICOS_03.png';
+import REQUISITOS_BÁSICOS_01 from '../../../assets/img/REQUISITOS BÁSICOS-01.png';
+import REQUISITOS_BÁSICOS_02 from '../../../assets/img/REQUISITOS BÁSICOS-02.png';
+import REQUISITOS_BÁSICOS_03 from '../../../assets/img/REQUISITOS BÁSICOS-03.png';
 
 const HowWorks = props => {
 	return(
 		<div id="howWorks" className="pt-4 text-center ml-auto mr-auto">
-			<Title title="Requisitos básicos" className="coolvetica blackBlue fw500 mb-1 fz42" />
-			<Title title="Fácil, rápido y sin papeleos" className="metropolisReg fz32 blackBlue fw300 ls-01" />
+			<Title title="Requisitos básicos" className="title-dp fw500 mb-1 fz42" />
+			<Title title="Fácil, rápido y sin papeleos" className="subtitle-dp fz32 fw300 ls-01" />
 				<Row className="justify-content-center mt-3">
 					<Col lg={3}>
 						<Icons img={REQUISITOS_BÁSICOS_01} alt="Simulador" width="100px" text="Ingresos mínimos de $20,000 pesos mensuales (comprobables)" />

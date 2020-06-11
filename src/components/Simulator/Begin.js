@@ -40,10 +40,10 @@ const Begin = props => {
 	return (
 		<div className="center-buttons">
 			<Title
-				className="blackBlue ls-11 lh-15 fz32 coolvetica mb-24"
+				className="title-dp ls-11 lh-15 fz32 mb-24"
 				title="¿Cuánto dinero necesitas?"
 			/>
-			<div className="fz29 metropolisReg blackBlue fw500 lh-15 ls-11">
+			<div className="fz29 text-dp fw500 lh-15 ls-11">
 				Necesito{' '}
 				<CurrencyInput
 					className="simulator-input"
@@ -55,7 +55,7 @@ const Begin = props => {
 				para mi negocio
 			</div>
 			<Button
-				className="coolvetica simulator-next-button mt-45 fz24 white medium-bottom"
+				className="btn-blue-general mt-45 fz24"
 				onClick={changeStep}
 			>
 				Siguiente

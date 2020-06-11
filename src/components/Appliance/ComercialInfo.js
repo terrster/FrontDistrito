@@ -118,7 +118,7 @@ const ComercialInfo = (props) => {
 			<div className="text-center mb-2">
 				<Title
 					title="Datos del negocio"
-					className="coolvetica fz42 blackBlue"
+					className="title-dp fz42"
 				/>
 			</div>
 			<CustomModal

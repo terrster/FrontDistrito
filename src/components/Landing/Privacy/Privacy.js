@@ -6,7 +6,7 @@ const Privacy = props => {
 	return (
 		<div className="container mb-120">
 			<div className="text-center mt-120">
-				<Title title="Aviso de privacidad" className="coolvetica fz48 blackBlue" />
+				<Title title="Aviso de privacidad" className="title-dp fz48" />
 			</div>
 			
 			<Paragraph 

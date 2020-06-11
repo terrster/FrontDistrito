@@ -231,16 +231,16 @@ class ComercialInfoConstructForm extends Component {
     const user = JSON.parse(sessionStorage.getItem("user"));
     return (
       <>
-        <SubtitleForm subtitle="Sobre tu negocio" className="mb-3" />
+        <SubtitleForm subtitle="Sobre tu negocio" className="subtitle-dp mb-3" />
         <Field
           component={renderField}
           type="text"
-          cls="mb-3"
+          cls="mb-3 text-dp"
           name="comercialName"
           label="Nombre comercial"
           normalize={onlyLirycs}
         />
-        <Field component={renderSelectField} name="gyre" cls="mb-3">
+        <Field component={renderSelectField} name="gyre" cls="mb-3 text-dp">
           <option value="">Giro...</option>
           {Object.keys(comercialOptions).map((value, key) => (
             <option value={`${value}`} key={key}>
@@ -253,7 +253,7 @@ class ComercialInfoConstructForm extends Component {
           <Field
             component={renderField}
             type="text"
-            cls="mb-3"
+            cls="mb-3 text-dp"
             name="businessName"
             label="Razón social"
             normalize={onlyLirycs}
@@ -266,18 +266,18 @@ class ComercialInfoConstructForm extends Component {
           component={renderField}
           label="Actividad específica"
           name="specific"
-          cls="mb-3"
+          cls="mb-3 text-dp"
           normalize={onlyLirycs}
         />
         <Field
           component={renderField}
           label="RFC"
           name="rfc"
-          cls="mb-3"
+          cls="mb-3 text-dp"
           maxLength={12}
           minLength={12}
         />
-        <SubtitleForm subtitle="Domicilio del negocio" className="mt-11 mb-3" />
+        <SubtitleForm subtitle="Domicilio del negocio" className="subtitle-dp mt-11 mb-3" />
 
         <Row className="d-flex justify-content-center">
           <Col lg={12} md={12} sm={12}>
@@ -285,7 +285,7 @@ class ComercialInfoConstructForm extends Component {
               component={renderField}
               label="Calle"
               name="street"
-              cls="mb-3"
+              cls="mb-3 text-dp"
               normalize={onlyLirycs}
             />
           </Col>
@@ -294,7 +294,7 @@ class ComercialInfoConstructForm extends Component {
               component={renderField}
               label="Ext"
               name="extNumber"
-              cls="mb-3"
+              cls="mb-3 text-dp"
             />
           </Col>
 
@@ -303,13 +303,13 @@ class ComercialInfoConstructForm extends Component {
               component={renderField}
               label="Int"
               name="intNumber"
-              cls="mb-3"
+              cls="mb-3 text-dp"
             />
           </Col>
 
           <Col lg={6} md={6} sm={12}>
             <Field
-              className="form-control custom-form-input brandonReg mt-1 mb-0"
+              className="form-control custom-form-input text-dp mt-1 mb-0"
               component="select"
               onChange={this.handleChangeMunicipio}
               name="state"
@@ -329,7 +329,7 @@ class ComercialInfoConstructForm extends Component {
 
           <Col lg={6} md={6} sm={12}>
             <Field
-              className="form-control custom-form-input brandonReg mt-1 mb-3"
+              className="form-control custom-form-input text-dp mt-1 mb-3"
               component="select"
               onChange={this.handleChangeCp}
               name="municipality"
@@ -350,7 +350,7 @@ class ComercialInfoConstructForm extends Component {
 
           <Col lg={6} md={6} sm={12}>
             <Field
-              className="form-control custom-form-input brandonReg mt-1 mb-0"
+              className="form-control custom-form-input text-dp mt-1 mb-0"
               component="select"
               onChange={this.handleChangeColonia}
               name="zipCode"
@@ -371,7 +371,7 @@ class ComercialInfoConstructForm extends Component {
 
           <Col lg={6} md={6} sm={12}>
             <Field
-              className="form-control custom-form-input brandonReg mt-1 mb-0"
+              className="form-control custom-form-input text-dp mt-1 mb-0"
               component="select"
               onChange={() => this.setState({ touched: true })}
               name="town"
@@ -405,7 +405,7 @@ class ComercialInfoConstructForm extends Component {
 				<Col lg={12} md={12} sm={12}>
 					<SubtitleForm
 						subtitle="Clave CIEC (Opcional)"
-						className="mt-30"
+						className="subtitle-dp mt-30"
 					/>
 					<div onClick={() => this.handleShow()} style={{ cursor: "pointer", width: '0', height: '0' }}>
 						<img
@@ -416,7 +416,7 @@ class ComercialInfoConstructForm extends Component {
 						/>
 					</div>
 					<Field component={renderFieldFull} label="CIEC" name="ciec" />
-					<div className="fz18 gray50 brandonReg mb-30 mt-2">
+					<div className="fz18 gray50 text-dp mb-30 mt-2">
 						No es obligatorio pero podrá agilizar tu solicitud de crédito a la
 						mitad del tiempo. Se ingresará por única ocasión para descargar la
 						información necesaria.
@@ -436,25 +436,25 @@ class ComercialInfoConstructForm extends Component {
               component={renderField}
               label="Teléfono"
               name="phone"
-              cls="mb-3"
+              cls="mb-3 text-dp"
               normalize={this.state.onlyNumbers}
             />
           </Col>
         </Row>
-        <SubtitleForm subtitle="¿Cuentas con alguno?" className="mt-11 mb-3" />
+        <SubtitleForm subtitle="¿Cuentas con alguno?" className="subtitle-dp mt-11 mb-3" />
         <Field
           component={renderField}
           label="Copia y pega el link de tu Sitio Web (opcional)"
           name="webSite"
-          cls="mb-3"
+          cls="mb-3 text-dp"
         />
         <Field
           component={renderField}
           label="Copia y pega el link de tu Facebook (opcional)"
           name="facebook"
-          cls="mb-3"
+          cls="mb-3 text-dp"
         />
-        <Field component={renderSelectField} name="terminal" cls="mb-3">
+        <Field component={renderSelectField} name="terminal" cls="mb-3 text-dp">
           <option className="brandonReg" value="">
             ¿Vendes tu producto o servicio a Estados Unidos?
           </option>
@@ -465,7 +465,7 @@ class ComercialInfoConstructForm extends Component {
             No
           </option>
         </Field>
-        <Field component={renderSelectField} name="warranty" cls="mb-3">
+        <Field component={renderSelectField} name="warranty" cls="mb-3 text-dp">
           <option className="brandonReg" value="">
             ¿Puedes ofrecer una garantía?
           </option>
