@@ -20,7 +20,7 @@ const renderField = ({
     {label !== "Teléfono" ? (
       <div className="input-container">
         <input
-          className="form-control custom-form-input  mt-24"
+          className="form-control custom-form-input text-dp mt-24"
           {...input}
           placeholder={label}
           type={type}
@@ -31,7 +31,7 @@ const renderField = ({
     ) : (
       <div className="input-container">
         <input
-          className="form-control custom-form-input"
+          className="form-control custom-form-input text-dp"
           {...input}
           placeholder={label}
           type={type}
