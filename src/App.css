@@ -75,8 +75,9 @@
 
 .icon-style{
   margin: 0!important;
-  margin-bottom: 6px !important;
-  color: rgba(0, 0, 0, .5);
+  margin-bottom: 7px !important;
+  /* color: rgba(0, 0, 0, .5); */
+  color: #023E95 !important;
   cursor: pointer!important;
   position: relative!important;
   left: 46%!important;

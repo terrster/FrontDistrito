@@ -60,8 +60,8 @@ const passwordTooltip = (
 let SignupForm = (props) => {
   const { handleSubmit, submitting, errorEmail, setErrorEmail } = props;
   const submitButtonClass = submitting
-    ? "btn-register mt-30 disabled"
-    : "btn-register mt-30";
+    ? "btn-blue-general mt-30 disabled"
+    : "btn-blue-general mt-30";
   const [button, setButton] = useState(true);
   const onChange = value => {setButton(!value)};
   const onlyLirycs = (nextValue, previousValue) => /^([a-z ñáéíóú]{0,60})$/i.test(nextValue) ? nextValue : previousValue;

@@ -45,7 +45,7 @@ let Login = props => {
 				<Modal onClose={() => setOpen(false)} open={open} style={{ padding: '30px 40px!important', width: 'auto!important' }}>
 					<Row className="d-flex justify-content-center">
 						<Col lg={6} sm={12} md={12} className="text-center">
-							<div className="brandonReg fz29 blueDark fw400">
+							<div className="metropolisReg fz29 blueDark fw400">
 								Correo y/o contraseña incorrectos
 							</div> 
 						</Col>
