@@ -231,7 +231,7 @@ class ComercialInfoConstructForm extends Component {
     const user = JSON.parse(sessionStorage.getItem("user"));
     return (
       <>
-        <SubtitleForm subtitle="Sobre tu negocio" className="subtitle-dp mb-3" />
+        <SubtitleForm subtitle="Sobre tu negocio" className="subtitle-dp text-form-dp  mb-3" />
         <Field
           component={renderField}
           type="text"
@@ -277,7 +277,7 @@ class ComercialInfoConstructForm extends Component {
           maxLength={12}
           minLength={12}
         />
-        <SubtitleForm subtitle="Domicilio del negocio" className="subtitle-dp mt-11 mb-3" />
+        <SubtitleForm subtitle="Domicilio del negocio" className="subtitle-dp text-form-dp  mt-11 mb-3" />
 
         <Row className="d-flex justify-content-center">
           <Col lg={12} md={12} sm={12}>
@@ -405,7 +405,7 @@ class ComercialInfoConstructForm extends Component {
 				<Col lg={12} md={12} sm={12}>
 					<SubtitleForm
 						subtitle="Clave CIEC (Opcional)"
-						className="subtitle-dp mt-30"
+						className="subtitle-dp text-form-dp  mt-30"
 					/>
 					<div onClick={() => this.handleShow()} style={{ cursor: "pointer", width: '0', height: '0' }}>
 						<img
@@ -441,7 +441,7 @@ class ComercialInfoConstructForm extends Component {
             />
           </Col>
         </Row>
-        <SubtitleForm subtitle="¿Cuentas con alguno?" className="subtitle-dp mt-11 mb-3" />
+        <SubtitleForm subtitle="¿Cuentas con alguno?" className="subtitle-dp text-form-dp mt-11 mb-3" />
         <Field
           component={renderField}
           label="Copia y pega el link de tu Sitio Web (opcional)"

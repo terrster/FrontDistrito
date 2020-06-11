@@ -201,7 +201,7 @@ export const renderFieldFull = ({
 							{...input}
 						/>
 					)}
-					<label className="fz16 text-dp gray50 text-dp ml-2">{label}</label>
+					<label className="fz16 text-dp text-msg-dp ml-2">{label}</label>
 				</div>
 			)}
 		</div>

@@ -347,6 +347,9 @@
 	color: #FFFFFF;
 }
 
+.text-form-dp { color: #333333 !important; }
+
+.text-msg-dp { color: #023E95 !important; }
 /* 
 @media (min-width: 320px) and (max-width: 425px){
 	body{
