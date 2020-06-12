@@ -26,9 +26,11 @@ const ComercialInfo = (props) => {
 
 	const [user, setUser] = useState(JSON.parse(sessionStorage.getItem('user')));
 	const [initialValues, setInitialValues] = useState({});
+	const [municipality, setMunicipality] = useState('');
+	const [state, changeState] = useState('');
 	const history = useHistory();
-	
-	const onFormSubmit = async (dataForm) => {
+
+	const onFormSubmit = async (dataForm) => {		
 		dispatch( updateLoader(true) );
 		const user = JSON.parse(sessionStorage.getItem('user'));
 		const id = user._id;
@@ -36,6 +38,8 @@ const ComercialInfo = (props) => {
 		const warranty = (dataForm.warranty === "1" || dataForm.warranty === "2" || dataForm.warranty === "3") ? true : false
 		const data = {
 			...dataForm,
+			municipality,
+			state,
 			warranty
 		}
 		if(idClient.appliance.length > 0){
@@ -126,6 +130,10 @@ const ComercialInfo = (props) => {
 				message="Error al subir los archivos. Favor de regresar a la pantalla de inicio y continúa tu solicitud."
 			/>
 			<ComercialInfoForm
+				state={state}
+				changeState={changeState}
+				municipality={municipality}
+				setMunicipality={setMunicipality}
 				onSubmit={data => onFormSubmit(data)} 
 				initialValues={initialValues} 
 			/>

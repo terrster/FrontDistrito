@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Field, reduxForm, formValueSelector } from "redux-form";
+import { Field, reduxForm } from "redux-form";
 import SubtitleForm from "../components/Generic/SubtitleForm";
 import { Row, Col, Button } from "react-bootstrap";
 import generalInfoOptions from "../models/GeneralInfoModels";
 import InputLabel from "../components/Generic/InputLabel";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import helper from "../models/DateModels";
 import { validateGeneralInfo } from "../components/Validate/ValidateGeneralInfo";
 import {
@@ -12,8 +12,6 @@ import {
   renderSelectFieldFull,
   renderField,
 } from "../components/Generic/Fields";
-import CustomLoader from "../components/Generic/CustomLoader";
-import { setSameAddress } from "../redux/actions/sameAddressActions";
 import { updateLoader } from "../redux/actions/loaderActions";
 import axiosBase from "axios";
 let GeneralInfoForm = ({
@@ -35,27 +33,25 @@ let GeneralInfoForm = ({
   const [sameAddress, setSameAddress] = useState(false);
   const [showModalGeneral, setShow] = useState(true);
   const [creditCard, setCreditCard] = useState("");
-  const [colonias, setColonias] = useState([]);
+
   const [changeCP, setChangeCP] = useState(false);
-  const [state, setState] = useState([]);
-  const [municipality, setMunicipality] = useState([]);
-  const [cp, setCp] = useState([]);
-  //  const [changeCP, setChangeCP] = useState(false);
+
+  const [cp, setCp] = useState("");
+  const [cpError, setCpError] = useState("No se encuentra el código postal");
+  const [colonias, setColonias] = useState([]);
+  const [state, setState] = useState("");
+  const [municipality, setMunicipality] = useState("");
+
   const handleShow = () => setShow(true);
 
   /**Intentar pasar la direccion por aqui y/o buscar por que no se pasa */
   //let lastAddress = props.currentAddress;
   const user = JSON.parse(sessionStorage.getItem("user"));
-  const myProfile = {
-    name: user.name,
-    lastname: user.lastName,
-  };
 
   const setComercialAddress = async (checkboxComercialAddress) => {
     dispatch(updateLoader(true));
     if (checkboxComercialAddress) {
       const user = JSON.parse(sessionStorage.getItem("user"));
-      const id = user._id;
       const idClient = user.idClient[user.idClient.length - 1];
       if (idClient.appliance.length > 0) {
         const appliance = idClient.appliance[idClient.appliance.length - 1];
@@ -72,18 +68,27 @@ let GeneralInfoForm = ({
             municipality,
             state,
           } = comercial.address[comercial.address.length - 1];
-          const changeMunicipios = async () => {
-            await setMunicipios(state);
-          };
-          await changeMunicipios();
-          const changeCP = async () => {
-            await setCodigoPostal(municipality);
-          };
-          await changeCP();
-          const changeColonias = async () => {
-            await setColoniasR(zipCode);
-          };
-          await changeColonias();
+          
+          try {
+            const res = await (
+              await fetch(
+                `https://api-sepomex.hckdrk.mx/query/info_cp/${zipCode}`,
+                { method: "GET" }
+              )
+            ).json();
+            if (Array.isArray(res)) {
+              const colonias = res.map((datos) => datos.response.asentamiento);
+              setColonias(colonias);
+            } else if (res.error) {
+              setCpError("Error");
+            }
+          } catch (error) {
+            console.log("No hay CP");
+          }
+
+
+          setState(state);
+          setMunicipality(state);
           setCurrentAddress({
             extNumber,
             intNumber,
@@ -109,21 +114,23 @@ let GeneralInfoForm = ({
       let idClient = user.idClient[user.idClient.length - 1];
       if (idClient.appliance.length > 0) {
         const appliance = idClient.appliance[idClient.appliance.length - 1];
-        if (appliance.idGeneralInfo.length > 0){
-			const idGeneralInfo = appliance.idGeneralInfo[appliance.idGeneralInfo.length - 1];
-			if (idGeneralInfo.address.length > 0) {
-			  const address =
-				idGeneralInfo.address[idGeneralInfo.address.length - 1];
-			  extNumber = address.extNumber;
-			  intNumber = address.intNumber;
-			  street = address.street;
-			  town = address.town;
-			  zipCode = address.zipCode;
-			  state = address.state;
-			  municipality = address.municipality;
-			}
-		}
+        if (appliance.idGeneralInfo.length > 0) {
+          const idGeneralInfo =
+            appliance.idGeneralInfo[appliance.idGeneralInfo.length - 1];
+          if (idGeneralInfo.address.length > 0) {
+            const address =
+              idGeneralInfo.address[idGeneralInfo.address.length - 1];
+            extNumber = address.extNumber;
+            intNumber = address.intNumber;
+            street = address.street;
+            town = address.town;
+            zipCode = address.zipCode;
+            state = address.state;
+            municipality = address.municipality;
+          }
+        }
       }
+      setState(state);
       setCurrentAddress({
         extNumber,
         intNumber,
@@ -140,122 +147,109 @@ let GeneralInfoForm = ({
     }, 1000);
   };
 
-  const setEstados = async () => {
-    let estadosr = [];
-    const estadosRequest = await axiosBase.get(
-      "https://api-sepomex.hckdrk.mx/query/get_estados"
-    );
-    if (Array.isArray(estadosRequest.data.response.estado)) {
-      estadosRequest.data.response.estado.map((datos) => {
-        estadosr.push(datos);
+  const getAddress = async (zipCode) => {
+    if (zipCode.length === 5) {
+      console.log(zipCode);
+      try {
+        const res = await (
+          await fetch(
+            `https://api-sepomex.hckdrk.mx/query/info_cp/${zipCode}`,
+            { method: "GET" }
+          )
+        ).json();
+        if (Array.isArray(res)) {
+          const { estado, municipio } = res[0].response;
+          const colonias = res.map((datos) => datos.response.asentamiento);
+          setColonias(colonias);
+          setState(estado);
+          setMunicipality(municipio);
+          setInitialValues({
+            ...initialValues,
+            zipCode,
+            municipality: municipio,
+            state: estado,
+            colonias,
+          });
+        } else if (res.error) {
+          setCpError("Error");
+        }
+      } catch (error) {
+        console.log("No hay CP");
+      }
+    } else {
+      setInitialValues({
+        ...initialValues,
+        zipCode,
+        state: "",
+        municipality: "",
+        colonias: [],
       });
-    } else if (estadosRequest.error) {
-      estadosr = [];
     }
-    setState(estadosr);
+    dispatch(updateLoader(false));
   };
 
-  const setMunicipios = async (estado) => {
-    let municipiosr = [];
-    const municipiosRequest = await axiosBase.get(
-      `https://api-sepomex.hckdrk.mx/query/get_municipio_por_estado/${estado}`
-    );
-    if (Array.isArray(municipiosRequest.data.response.municipios)) {
-      municipiosRequest.data.response.municipios.map((municipio) => {
-        municipiosr.push(municipio);
-      });
-    } else if (municipiosRequest.error) {
-      municipiosr = [];
+  const getColonias = async (zipCode) => {
+    dispatch(updateLoader(true));
+    if (zipCode.length === 5) {
+      try {
+        const res = await (
+          await fetch(
+            `https://api-sepomex.hckdrk.mx/query/info_cp/${zipCode}`,
+            { method: "GET" }
+          )
+        ).json();
+        if (Array.isArray(res)) {
+          const colonias = res.map((datos) => datos.response.asentamiento);
+          setColonias(colonias);
+          setInitialValues({ ...initialValues, colonias });
+        } else if (res.error) {
+          setCpError("Error");
+        }
+      } catch (error) {
+        console.log("No hay CP");
+      }
     }
-    setMunicipality(municipiosr);
-  };
-
-  const setCodigoPostal = async (municipio) => {
-    let cpr = [];
-    const codigoPostalRequest = await axiosBase.get(
-      `https://api-sepomex.hckdrk.mx/query/get_cp_por_municipio/${municipio}`
-    );
-    if (Array.isArray(codigoPostalRequest.data.response.cp)) {
-      codigoPostalRequest.data.response.cp.map((codigopostal) => {
-        cpr.push(codigopostal);
-      });
-    } else if (codigoPostalRequest.error) {
-      cpr = [];
-    }
-    setCp(cpr);
-  };
-
-  const setColoniasR = async (zipCode) => {
-    let coloniasr = [];
-    const coloniasRequest = await axiosBase.get(
-      `https://api-sepomex.hckdrk.mx/query/info_cp/${zipCode}`
-    );
-    if (Array.isArray(coloniasRequest.data)) {
-      coloniasRequest.data.map((datos) => {
-        coloniasr.push(datos.response.asentamiento);
-      });
-    } else if (coloniasRequest.error) {
-      coloniasr = [];
-    }
-    setColonias(coloniasr);
-  };
-
-  const handleChangeMunicipio = async (e) => {
-    const estado = e.target.value;
-    setMunicipios(estado);
-    setInitialValues({ ...initialValues, state: estado });
-  };
-
-  const handleChangeCp = async (e) => {
-    const municipio = e.target.value;
-    const changeCP = () => {
-      setCodigoPostal(municipio);
-    };
-    setInitialValues({ ...initialValues, municipality: municipio });
-    changeCP();
-  };
-
-  const handleChangeColonia = async (e) => {
-    const codigopostal = e.target.value;
-    setColoniasR(codigopostal);
-    setInitialValues({ ...initialValues, zipCode: codigopostal });
+    dispatch(updateLoader(false));
   };
 
   const getInitialValues = () => {
-    setEstados();
     const user = JSON.parse(sessionStorage.getItem("user"));
     const idClient = user.idClient[user.idClient.length - 1];
     if (idClient.appliance.length > 0) {
-		const appliance = idClient.appliance[idClient.appliance.length - 1];
-		  if (appliance.idGeneralInfo.length > 0){
-			  const idGeneralInfo = appliance.idGeneralInfo[appliance.idGeneralInfo.length - 1];
-			  if (idGeneralInfo.address.length > 0) {
-				const address = idGeneralInfo.address[idGeneralInfo.address.length - 1];
-				if (address.hasOwnProperty("state")) {
-				  if (address.state != null) {
-					const stateUser = address.state;
-					setMunicipios(stateUser);
-				  }
-				}
-				if (address.hasOwnProperty("municipality")) {
-				  if (address.municipality != null) {
-					const municipality = address.municipality;
-					setCodigoPostal(municipality);
-				  }
-				}
-				if (address.hasOwnProperty("zipCode")) {
-				  if (address.zipCode != null) {
-					setColoniasR(address.zipCode);
-				  }
-				}
-			}
-		}
+      const appliance = idClient.appliance[idClient.appliance.length - 1];
+      if (appliance.idGeneralInfo.length > 0) {
+        const idGeneralInfo =
+          appliance.idGeneralInfo[appliance.idGeneralInfo.length - 1];
+        if (idGeneralInfo.address.length > 0) {
+          const address =
+            idGeneralInfo.address[idGeneralInfo.address.length - 1];
+          if (address.hasOwnProperty("state")) {
+            if (address.state != null) {
+              const { state } = address;
+              setState(state);
+            }
+          }
+          if (address.hasOwnProperty("municipality")) {
+            if (address.municipality != null) {
+              const { municipality } = address;
+              setMunicipality(municipality);
+            }
+          }
+          if (address.hasOwnProperty("zipCode")) {
+            if (address.zipCode != null) {
+              setCp(address.zipCode);
+              getColonias(address.zipCode);
+            }
+          }
+        }
+      }
     }
   };
 
   useEffect(() => {
     getInitialValues();
   }, []);
+
   const onlyLirycs = (nextValue, previousValue) =>
     /^([a-z ñáéíóú]{0,60})$/i.test(nextValue) ? nextValue : previousValue;
   const onlyNumbers = (nextValue, previousValue) =>
@@ -270,7 +264,10 @@ let GeneralInfoForm = ({
         style={{ maxWidth: "690px" }}
         onSubmit={handleSubmit}
       >
-        <SubtitleForm subtitle="Sobre ti" className="subtitle-dp text-form-dp" />
+        <SubtitleForm
+          subtitle="Sobre ti"
+          className="subtitle-dp text-form-dp"
+        />
         <Row className="d-flex justify-content-center">
           <Col lg={4} md={4} sm={12}>
             <Field
@@ -400,7 +397,10 @@ let GeneralInfoForm = ({
           </Row>
         )}
 
-        <SubtitleForm subtitle="Domicilio particular" className="subtitle-dp text-form-dp mb-10 mt-24" />
+        <SubtitleForm
+          subtitle="Domicilio particular"
+          className="subtitle-dp text-form-dp mb-10 mt-24"
+        />
         <Field
           component={renderFieldFull}
           onChange={(event, newValue, previousValue, name) => {
@@ -422,8 +422,8 @@ let GeneralInfoForm = ({
               val={!sameAddress ? "" : currentAddress.street}
               disabled={!sameAddress ? false : true}
               onChange={(event, newValue, previousValue) =>
-                  setInitialValues({ ...initialValues, street: newValue })
-               }
+                setInitialValues({ ...initialValues, street: newValue })
+              }
               normalize={onlyLirycs}
             />
           </Col>
@@ -435,8 +435,8 @@ let GeneralInfoForm = ({
               val={!sameAddress ? "" : currentAddress.extNumber}
               disabled={!sameAddress ? false : true}
               onChange={(event, newValue, previousValue) =>
-                  setInitialValues({ ...initialValues, extNumber: newValue })
-               }
+                setInitialValues({ ...initialValues, extNumber: newValue })
+              }
             />
           </Col>
 
@@ -448,105 +448,39 @@ let GeneralInfoForm = ({
               val={!sameAddress ? "" : currentAddress.intNumber}
               disabled={!sameAddress ? false : true}
               onChange={(event, newValue, previousValue) =>
-                  setInitialValues({ ...initialValues, intNumber: newValue })
-               }
+                setInitialValues({ ...initialValues, intNumber: newValue })
+              }
             />
           </Col>
-
           <Col lg={6} md={6} sm={12}>
-            <Field
-              className="form-control custom-form-input brandonReg mt-24 mb-0"
-              component="select"
-              name="state"
-              cls="mb-3 mt-24"
-              disabled={!sameAddress ? false : true}
-              onChange={handleChangeMunicipio}
-            >
-              <option value="" selected disabled>
-                Selecciona un Estado
-              </option>
-              {state.map((state, index) => {
-                return (
-                  <option value={state} key={state + index}>
-                    {state}
-                  </option>
-                );
-              })}
-            </Field>
-          </Col>
-
-          <Col lg={6} md={6} sm={12}>
-            <Field
-              className="form-control custom-form-input brandonReg mt-24 mb-0"
-              component="select"
-              name="municipality"
-              cls="mb-3 mt-24"
-              disabled={!sameAddress ? false : true}
-              onChange={handleChangeCp}
-            >
-              <option value="" selected disabled>
-                Selecciona un Municipio
-              </option>
-              {municipality.map((municipality, index) => {
-                return (
-                  <option value={municipality} key={municipality + index}>
-                    {municipality}
-                  </option>
-                );
-              })}
-            </Field>
-          </Col>
-
-          <Col lg={6} md={6} sm={12}>
-            <Field
-              className="form-control custom-form-input brandonReg mt-24 mb-0"
-              component="select"
-              name="zipCode"
-              disabled={!sameAddress ? false : true}
-              cls="mb-3 mt-24"
-              onChange={handleChangeColonia}
-            >
-              <option value="" selected disabled>
-                Selecciona un Código Postal
-              </option>
-              {cp.map((cp, index) => {
-                return (
-                  <option value={cp} key={cp + index}>
-                    {cp}
-                  </option>
-                );
-              })}
-            </Field>
-          </Col>
-          {/* <Col lg={6} md={6} sm={12}>
             <Field
               component={renderFieldFull}
               label="CP"
               name="zipCode"
-              onChange={(event, newValue, previousValue, name) => {
-                setChangeCP(true)
-                if (newValue.length === 5) {
-                  setColoniasR(newValue);
-                } else {
-                  setColoniasR([]);
-                }
-              }}
-              val={!sameAddress ? "" : currentAddress.zipCode}
+              val={!sameAddress ? null : currentAddress.zipCode}
               disabled={!sameAddress ? false : true}
-              normalize={onlyNumbers}
+              onChange={(e, newValue, prevValue) => {
+                if (newValue.hasOwnProperty("length")) {
+                  if (newValue.length === 5) {
+                    dispatch(updateLoader(true));
+                  }
+                }
+                getAddress(newValue);
+              }}
             />
-          </Col> */}
+          </Col>
 
           <Col lg={6} md={6} sm={12}>
             <Field
               className="form-control custom-form-input brandonReg mt-24 mb-0"
               component="select"
               name="town"
+              val={!sameAddress ? null : currentAddress.town}
               disabled={!sameAddress ? false : true}
               cls="mb-3 mt-24"
               onChange={(event, newValue, previousValue) =>
-                  setInitialValues({ ...initialValues, town: newValue })
-               }
+                setInitialValues({ ...initialValues, town: newValue })
+              }
             >
               <option value="" selected disabled>
                 Selecciona una colonia
@@ -559,6 +493,30 @@ let GeneralInfoForm = ({
                 );
               })}
             </Field>
+          </Col>
+
+          <Col lg={6} md={6} sm={12}>
+            <Field
+              className="form-control custom-form-input brandonReg mt-24 mb-0"
+              component={renderFieldFull}
+              cls="mb-3 mt-24"
+              label="Estado"
+              name="state"
+              disabled={!sameAddress ? false : true}
+              value={!sameAddress ? "" : currentAddress.state}
+            />
+          </Col>
+
+          <Col lg={6} md={6} sm={12}>
+            <Field
+              className="form-control custom-form-input brandonReg mt-24 mb-0"
+              component={renderFieldFull}
+              name="municipality"
+              cls="mb-3 mt-24"
+              label="Municipio"
+              disabled={!sameAddress ? false : true}
+              value={!sameAddress ? "" : currentAddress.municipality}
+            />
           </Col>
 
           <Col lg={12} md={12} sm={12}>
@@ -580,7 +538,10 @@ let GeneralInfoForm = ({
             />
           </Col>
         </Row>
-        <SubtitleForm subtitle="Referencias" className="subtitle-dp text-form-dp mt-30" />
+        <SubtitleForm
+          subtitle="Referencias"
+          className="subtitle-dp text-form-dp mt-30"
+        />
         <label className="label-style">
           El número telefónico debe tener 10 dígitos
         </label>
@@ -675,7 +636,10 @@ let GeneralInfoForm = ({
           </Col>
         </Row>
 
-        <SubtitleForm subtitle="¿Cuentas con alguno?" className="subtitle-dp text-form-dp mt-30 mb-18" />
+        <SubtitleForm
+          subtitle="¿Cuentas con alguno?"
+          className="subtitle-dp text-form-dp mt-30 mb-18"
+        />
         <Row>
           <Col>
             <InputLabel label="Crédito hipotecario" class="mt-18" />

@@ -84,23 +84,19 @@ const Amount = props => {
 			const id = user._id;
 			const idClient = user.idClient[user.idClient.length - 1];
 			// Si ya tienen una solicitud, se actualiza
+			let amount = {}
 			if (idClient.appliance.length > 0){
 				const appliance = idClient.appliance[idClient.appliance.length - 1];
 				if (appliance.idAmount.length > 0){
-					const amount = appliance.idAmount[appliance.idAmount.length - 1];
-					const id = amount._id;
-					const res = await axios.get(`api/amount/${id}`, {
-						headers:{
-							token: sessionStorage.getItem("token")
-						}
-					});
-					setInitialValues(res.data.amount);
+					amount = appliance.idAmount[appliance.idAmount.length - 1];
+					setInitialValues(amount);
 				}
 
 			}
 
 			if(JSON.parse(sessionStorage.getItem('user')).idClient[0].type){
-				setInitialValues({
+				setInitialValues({					
+					...amount,
 					personType: JSON.parse(sessionStorage.getItem('user')).idClient[0].type
 				});
 			}

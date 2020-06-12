@@ -103,8 +103,4 @@ AmountForm = reduxForm({
 	enableReinitialize: true
 })(AmountForm);
 
-AmountForm = connect((state, props) => ({
-	
-}))(AmountForm);
-
 export default AmountForm;
