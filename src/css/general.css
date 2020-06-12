@@ -271,22 +271,33 @@
 
 /* BUTTONS */
 
-.btn-blue-general{
+.btn-blue-general,
+.btn-blue-documents{
 	font-family: 'coolvetica_rg' !important;
 	font-size: 17px !important;
 	color: #ffffff !important;
 	background-color: #023E95 !important;
 	border-color: #023e95 !important;
 	border-radius: 25px !important;
-	width: 100% !important;
-	max-width: 200px !important;
+	width: 100% !important;	
 	height: 45px !important;
 	text-align: center !important;
+	letter-spacing: 2px;
 }
 
-.btn-blue-general:hover{
+.btn-blue-general{
+	max-width: 200px !important;
+}
+
+.btn-blue-general:hover,
+.btn-blue-documents:hover{
 	opacity: 0.95;
 }
+
+.btn-blue-documents{
+	max-width: 1000px;
+}
+
 
 .link-blue-general{
 	text-decoration: none !important;

@@ -265,7 +265,7 @@ const getDocsMethod = () => {
         <div className="modal-comparative">
           <div className="modal-comparative--content">
             <img src={comparativeImage} className="modal-comparative--image" alt="Comparativo de imagenes en buena calidad" />
-            <Button variant="success" block onClick={() => setShow(false)}>
+            <Button onClick={() => setShow(false)} className="btn-blue-documents" size="lg">
               Entiendo{" "}
             </Button>
           </div>
