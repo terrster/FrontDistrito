@@ -263,6 +263,7 @@ class ComercialInfoConstructForm extends Component {
               label="Estado"
               name="state"
               disabled={true}
+              val={this.props.state}
             />
           </Col>
 
@@ -274,6 +275,7 @@ class ComercialInfoConstructForm extends Component {
               cls="mb-3 mt-24"
               label="Municipio"
               disabled={true}
+              val={this.props.municipality}
             />
           </Col>
 
