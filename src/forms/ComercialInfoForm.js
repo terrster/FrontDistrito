@@ -133,7 +133,7 @@ class ComercialInfoConstructForm extends Component {
       <>
         <SubtitleForm
           subtitle="Sobre tu negocio"
-          className="subtitle-dp text-form-dp  mb-3"
+          className="text-form-dp  mb-3"
         />
         <Field
           component={renderField}
@@ -182,7 +182,7 @@ class ComercialInfoConstructForm extends Component {
         />
         <SubtitleForm
           subtitle="Domicilio del negocio"
-          className="subtitle-dp text-form-dp  mt-11 mb-3"
+          className="text-form-dp  mt-11 mb-3"
         />
 
         <Row className="d-flex justify-content-center">
@@ -284,7 +284,7 @@ class ComercialInfoConstructForm extends Component {
               <Col lg={12} md={12} sm={12}>
                 <SubtitleForm
                   subtitle="Clave CIEC (Opcional)"
-                  className="subtitle-dp text-form-dp  mt-30"
+                  className="text-form-dp  mt-30"
                 />
                 <div
                   onClick={() => this.handleShow()}
@@ -326,7 +326,7 @@ class ComercialInfoConstructForm extends Component {
         </Row>
         <SubtitleForm
           subtitle="¿Cuentas con alguno?"
-          className="subtitle-dp text-form-dp mt-11 mb-3"
+          className="text-form-dp mt-11 mb-3"
         />
         <Field
           component={renderField}

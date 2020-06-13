@@ -540,7 +540,7 @@ let GeneralInfoForm = ({
         </Row>
         <SubtitleForm
           subtitle="Referencias"
-          className="subtitle-dp text-form-dp mt-30"
+          className="text-form-dp mt-30"
         />
         <label className="label-style">
           El número telefónico debe tener 10 dígitos
@@ -638,7 +638,7 @@ let GeneralInfoForm = ({
 
         <SubtitleForm
           subtitle="¿Cuentas con alguno?"
-          className="subtitle-dp text-form-dp mt-30 mb-18"
+          className="text-form-dp mt-30 mb-18"
         />
         <Row>
           <Col>

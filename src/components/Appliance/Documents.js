@@ -275,7 +275,7 @@ const getDocsMethod = () => {
       <div className="text-center mb-3">
         <Title
           title="Sube tus documentos"
-          className="coolvetica fz42 blackBlue"
+          className="title-dp fz42"
         />
         <div className="brandonReg fz16 mt-3 mailto-content">
           Procura que la calidad sea óptima y legible en formato: <br></br>
