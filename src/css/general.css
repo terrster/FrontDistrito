@@ -279,7 +279,8 @@
 /* BUTTONS */
 
 .btn-blue-general,
-.btn-blue-documents{
+.btn-blue-documents,
+.btn-blue-send-documents{
 	font-family: 'coolvetica_rg' !important;
 	font-size: 17px !important;
 	color: #ffffff !important;
@@ -294,6 +295,10 @@
 
 .btn-blue-general{
 	max-width: 200px !important;
+}
+
+.btn-blue-send-documents{
+	max-width: 270px !important;
 }
 
 .btn-blue-general:hover,

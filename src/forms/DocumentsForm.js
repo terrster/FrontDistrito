@@ -445,6 +445,15 @@ let DocumentsForm = (props) => {
             </Button>
           )}
           <Button type="submit" className="d-none" ref={submitButtom} />
+          <Button
+              type="button"
+              onClick={(e) => {
+                handleSubmit(e, true);
+              }}
+              className="fz10 mt-50 btn-blue-send-documents ml-2"
+            >
+              Guardar y Enviar Solicitud
+            </Button>
         </div>
       </form>
     </div>
