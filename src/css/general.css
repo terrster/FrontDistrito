@@ -315,6 +315,19 @@
 	opacity: 0.95;
 }
 
+.btn-blue-secondary{
+	font-family: 'coolvetica_rg' !important;
+	font-size: 17px !important;
+	color: #ffffff !important;
+	background-color: #2A2E59 !important;
+	border-color: #2A2E59 !important;
+	border-radius: 25px !important;
+	width: 100% !important;	
+	height: 45px !important;
+	text-align: center !important;
+	letter-spacing: 2px;
+}
+
 /* MODAL */
 
 .styles_modal__gNwvD{

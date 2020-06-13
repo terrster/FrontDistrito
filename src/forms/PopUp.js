@@ -15,12 +15,12 @@ function Pop_up({show, setShow, isDocuments=false}) {
               <img src={Beneficios} width="100%" height="auto" alt="Informacion sobre ciec"/>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="primary" onClick={handleClose} block>
+            <Button onClick={handleClose} block className="btn-blue-documents">
               Entiendo los Beneficios
             </Button>
             {
 				isDocuments &&
-				<Button variant="info" onClick={() => window.location.href = `/informacion-comercial/${user._id}`} block>
+				<Button onClick={() => window.location.href = `/informacion-comercial/${user._id}`} block className="btn-blue-secondary">
 					Ir a colocar mi CIEC
 				</Button>
 			}
