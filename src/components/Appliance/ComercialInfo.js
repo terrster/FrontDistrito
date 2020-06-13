@@ -104,6 +104,8 @@ const ComercialInfo = (props) => {
 					} else if(coloniasRequest.error) {
 						colonias = null;
 					}
+					setMunicipality(address.municipality);
+					changeState(address.state);
 					setInitialValues({...res.data.comercial, ...address, terminal, colonias });
 				}
 			}
