@@ -138,6 +138,7 @@ export const renderFieldFull = ({
 	maxLength,
 	val,
 	disabled,
+	readOnly,
 	big,
 	meta: { touched, error, warning }
 }) => (
@@ -146,13 +147,14 @@ export const renderFieldFull = ({
 			{type !== 'checkbox' &&
 				(val ? (
 					<input
-						className="form-control custom-form-input text-dp mt-24 "
+						className="form-control custom-form-input text-dp mt-24"
 						{...input}
 						value={val ? val : ''}
 						placeholder={label}
 						type={type}
 						maxLength={maxLength}
 						disabled={disabled ? disabled : false}
+						readOnly={readOnly ? readOnly : false}
 					/>
 				) : label === 'CP' ? (
 					<input
@@ -184,6 +186,7 @@ export const renderFieldFull = ({
 						type={type}
 						maxLength={maxLength}
 						disabled={disabled ? disabled : false}
+						readOnly={readOnly ? readOnly : false}
 					/>
 				))}
 			{type === 'checkbox' && (

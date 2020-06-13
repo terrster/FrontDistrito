@@ -497,24 +497,24 @@ let GeneralInfoForm = ({
 
           <Col lg={6} md={6} sm={12}>
             <Field
-              className="form-control custom-form-input brandonReg mt-24 mb-0"
+              className="form-control custom-form-input mt-24 mb-0"
               component={renderFieldFull}
               cls="mb-3 mt-24"
               label="Estado"
               name="state"
-              disabled={!sameAddress ? false : true}
+              readOnly={true}
               value={!sameAddress ? "" : currentAddress.state}
             />
           </Col>
 
           <Col lg={6} md={6} sm={12}>
             <Field
-              className="form-control custom-form-input brandonReg mt-24 mb-0"
+              className="form-control custom-form-input mt-24 mb-0"
               component={renderFieldFull}
               name="municipality"
               cls="mb-3 mt-24"
               label="Municipio"
-              disabled={!sameAddress ? false : true}
+              readOnly={true}
               value={!sameAddress ? "" : currentAddress.municipality}
             />
           </Col>

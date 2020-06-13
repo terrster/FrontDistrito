@@ -257,24 +257,24 @@ class ComercialInfoConstructForm extends Component {
 
           <Col lg={6} md={6} sm={12}>
             <Field
-              className="form-control custom-form-input brandonReg mt-24 mb-0"
+              className="form-control custom-form-input mt-24 mb-0 input-readonly"
               component={renderFieldFull}
               cls="mb-3 mt-24"
               label="Estado"
               name="state"
-              disabled={true}
+              readOnly={true}
               val={this.props.state}
             />
           </Col>
 
           <Col lg={6} md={6} sm={12}>
             <Field
-              className="form-control custom-form-input brandonReg mt-24 mb-0"
+              className="form-control custom-form-input mt-24 mb-0 input-readonly"
               component={renderFieldFull}
               name="municipality"
               cls="mb-3 mt-24"
               label="Municipio"
-              disabled={true}
+              readOnly={true}
               val={this.props.municipality}
             />
           </Col>
