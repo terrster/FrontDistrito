@@ -33,7 +33,7 @@
 	bottom: 12px;
 	right: -14px;
 	width: 100%;
-	height: 4px;
+	height: 2.5px;
 	-webkit-transition: background-color 0.3s;
 	transition: background-color 0.3s;
 }
@@ -84,12 +84,11 @@
 
 .progress-step .progress-marker {
 	color: #fff;
-	background-color: #b6b6b6;
+	background-color: #D3D3D3 !important;
 }
 
 .progress-step::after {
-
-	background-color: #b6b6b6;
+	background-color: #c2c2c2;
 }
 
 .progress-step .progress-text,
@@ -124,8 +123,8 @@
 }
 
 .progress-tracker--center .progress-step::after {
-	top: -3%;
-	right: -50%;
+	top: 2%;
+	right: -54%;
 }
 
 .progress-tracker--center .progress-marker {
@@ -158,7 +157,7 @@
 }
 
 .progress-tracker--spaced .progress-step::after {
-	width: calc(100% - 48px);
+	width: calc(100% - 33px);
 	margin-right: 24px;
 }
 
@@ -410,7 +409,7 @@
 /**
   * [Progress Text]
   */
-@media (max-width: 776px) {
+@media (max-width: 991px) {
 	.progress-container {
 		display: flex;
 		justify-content: center;
@@ -434,6 +433,11 @@
 		margin-top: 20px;
 	}
 	.progress-tracker--center .progress-step::after {
-		top: -2%;
+		top: 10%;
+		right: -50%;
+	}
+	.progress-marker{
+		left: -9px;
+		top: 10px;
 	}
 }

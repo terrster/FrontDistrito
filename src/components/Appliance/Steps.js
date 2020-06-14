@@ -60,8 +60,8 @@ const Steps = (props) => {
           </span>
           <span className="progress-text">
             <h5
-              className="progress-title brandonReg fw500"
-              style={{ color: "#4f4f4f" }}
+              className="metropolisMed fw500"
+              style={{ color: "#9094A3" }}
             >
               Registro
             </h5>
@@ -88,17 +88,17 @@ const Steps = (props) => {
           )}
           <span className="progress-text">
             <h5
-              className="progress-title brandonReg fw500"
+              className="progress-title metropolisMed fw500"
               style={{ color: "#4f4f4f" }}
             >
               {first !== undefined &&
               first !== null &&
               first !== "" ? (
-                <Link to={`/elige-monto/${id}`} className="form-link">
+                <Link to={`/elige-monto/${id}`} className="form-link step-text-complete">
                   Elige tu monto
                 </Link>
               ) : (
-                <label className="form-link">Elige tu monto</label>
+                <label className="form-link step-text">Elige tu monto</label>
               )}
             </h5>
           </span>
@@ -124,7 +124,7 @@ const Steps = (props) => {
           )}
           <span className="progress-text">
             <h5
-              className="progress-title brandonReg fw500"
+              className="progress-title metropolisMed fw500"
               style={{ color: "#4f4f4f" }}
             >
               {second !== undefined &&
@@ -132,12 +132,12 @@ const Steps = (props) => {
               second !== "" ? (
                 <Link
                   to={`/datos-comerciales/${id}`}
-                  className="form-link"
+                  className="form-link step-text-complete"
                 >
                   Datos del negocio
                 </Link>
               ) : (
-                <label className="form-link">Datos del negocio</label>
+                <label className="form-link step-text">Datos del negocio</label>
               )}
             </h5>
           </span>
@@ -163,7 +163,7 @@ const Steps = (props) => {
           )}
           <span className="progress-text">
             <h5
-              className="progress-title brandonReg fw500"
+              className="progress-title metropolisMed fw500"
               style={{ color: "#4f4f4f" }}
             >
               {third !== undefined &&
@@ -171,12 +171,12 @@ const Steps = (props) => {
               third !== "" ? (
                 <Link
                   to={`/informacion-general/${id}`}
-                  className="form-link"
+                  className="form-link step-text-complete"
                 >
                   Datos personales
                 </Link>
               ) : (
-                <label className="form-link">Datos personales</label>
+                <label className="form-link step-text">Datos personales</label>
               )}
             </h5>
           </span>
@@ -202,17 +202,17 @@ const Steps = (props) => {
           )}
           <span className="progress-text">
             <h5
-              className="progress-title brandonReg fw500"
+              className="progress-title metropolisMed fw500"
               style={{ color: "#4f4f4f" }}
             >
               {fourth !== undefined &&
               fourth !== null &&
               fourth !== "" ? (
-                <Link to={`/documentos/${id}`} className="form-link">
+                <Link to={`/documentos/${id}`} className="form-link step-text-complete">
                   Documentos
                 </Link>
               ) : (
-                <label className="form-link">Documentos</label>
+                <label className="form-link step-text">Documentos</label>
               )}
             </h5>
           </span>
