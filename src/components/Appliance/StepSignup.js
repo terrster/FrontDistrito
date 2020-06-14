@@ -56,7 +56,7 @@ const StepSignup = (props) => {
           <span className="progress-marker custom">
           </span>
           <span className="progress-text">
-            <h5 className="progress-title brandonReg fw500">
+            <h5 className="progress-title metropolisMed fw500 step-text">
               Registro
             </h5>
           </span>
@@ -82,17 +82,17 @@ const StepSignup = (props) => {
           )}
           <span className="progress-text">
             <h5
-              className="progress-title brandonReg fw500"
+              className="progress-title metropolisMed fw500 step-text"
               style={{ color: "#4f4f4f" }}
             >
               {first !== undefined &&
               first !== null &&
               first !== "" ? (
-                <Link className="form-link">
+                <Link className="form-link step-text-complete">
                   Elige tu monto
                 </Link>
               ) : (
-                <label className="form-link">Elige tu monto</label>
+                <label className="form-link step-text">Elige tu monto</label>
               )}
             </h5>
           </span>
@@ -118,17 +118,17 @@ const StepSignup = (props) => {
           )}
           <span className="progress-text">
             <h5
-              className="progress-title brandonReg fw500"
+              className="progress-title metropolisMed fw500 step-text"
               style={{ color: "#4f4f4f" }}
             >
               {second !== undefined &&
               second !== null &&
               second !== "" ? (
-                <Link className="form-link">
+                <Link className="form-link step-text-complete">
                   Datos del negocio
                 </Link>
               ) : (
-                <label className="form-link">Datos del negocio</label>
+                <label className="form-link step-text">Datos del negocio</label>
               )}
             </h5>
           </span>
@@ -154,17 +154,17 @@ const StepSignup = (props) => {
           )}
           <span className="progress-text">
             <h5
-              className="progress-title brandonReg fw500"
+              className="progress-title metropolisMed fw500 step-text"
               style={{ color: "#4f4f4f" }}
             >
               {third !== undefined &&
               third !== null &&
               third !== "" ? (
-                <Link className="form-link">
+                <Link className="form-link step-text-complete">
                   Datos generales
                 </Link>
               ) : (
-                <label className="form-link">Datos generales</label>
+                <label className="form-link step-text">Datos generales</label>
               )}
             </h5>
           </span>
@@ -190,17 +190,17 @@ const StepSignup = (props) => {
           )}
           <span className="progress-text">
             <h5
-              className="progress-title brandonReg fw500"
+              className="progress-title metropolisMed fw500"
               style={{ color: "#4f4f4f" }}
             >
               {fourth !== undefined &&
               fourth !== null &&
               fourth !== "" ? (
-                <Link className="form-link">
+                <Link className="form-link step-text-complete">
                   Documentos
                 </Link>
               ) : (
-                <label className="form-link">Documentos</label>
+                <label className="form-link step-text">Documentos</label>
               )}
             </h5>
           </span>

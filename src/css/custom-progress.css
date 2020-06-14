@@ -3,11 +3,24 @@
 	justify-content: center;
 	align-items:center;
 }
+
+.step-text{
+	color: #D3D3D3 !important;
+}
+
+.step-text-complete{
+	color: #9094A3 !important;
+}
+
+.step-text-complete:hover {
+	color: #343a40 !important;
+} 
+
 .progress-marker.custom{
 	background:none !important;
-	width: 25px !important;
-	height: 25px !important;
-	border: solid 5px #c2c2c2;
+	width: 35px !important;
+	height: 35px !important;
+	border: solid 2px #c2c2c2;
 	margin-top: -13px;
 }
 
@@ -75,7 +88,7 @@
 	height: 50px;
 	left: -12px;
 }
-@media screen and (max-width: 776px){
+@media screen and (max-width: 991px){
 	.imagen,.imagen2,.imagen3,.imagen4,.imagen5{
 		background-image: url("../assets/img/CHECK_01.png");
 		background-size: contain;
@@ -94,5 +107,5 @@
 	.progress-text h5 {
 		font-size: 1rem;
 	}
-	
+
 }
