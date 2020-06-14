@@ -56,10 +56,13 @@ let DocumentsForm = (props) => {
         );
       } 
     }
-
+    
     for (let j = 0; j < filesNotUploaded.keys.length; j++) {
       value.splice(filesNotUploaded.keys[j] - j, 1);
     }
+
+    setFileToKey(key,value)
+
     if (filesNotUploaded.names.length > 0) {
       setTimeout(() => {
         dispatch(props.updateAlertMsg(false, ""));
@@ -444,16 +447,6 @@ let DocumentsForm = (props) => {
               Guardar y Enviar Solicitud
             </Button>
           )}
-          <Button type="submit" className="d-none" ref={submitButtom} />
-          <Button
-              type="button"
-              onClick={(e) => {
-                handleSubmit(e, true);
-              }}
-              className="fz10 mt-50 btn-blue-send-documents ml-2"
-            >
-              Guardar y Enviar Solicitud
-            </Button>
         </div>
       </form>
     </div>

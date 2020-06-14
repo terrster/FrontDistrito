@@ -45,7 +45,11 @@ const GeneralInfo = () => {
 		execToast('third');
 		dispatch( updateToast(toast, 'third') )
 	}
-    setInitialValues({...initialValues, name: user.name, lastname: user.lastName, phone: user.phone });
+	let secondLastname = "";
+	if (user.secondLastName){
+		secondLastname = user.secondLastName;
+	}
+    setInitialValues({...initialValues, name: user.name, lastname: user.lastName, secondLastname, phone: user.phone });
     dispatch( updateLoader(true));
 	const getData = async () => {
 		const user = JSON.parse(sessionStorage.getItem('user'));

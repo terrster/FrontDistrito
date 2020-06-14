@@ -16,9 +16,14 @@ export const validateComercialInfo = values => {
 	const user = JSON.parse(sessionStorage.getItem("user"));
 	const idClient = user.idClient[user.idClient.length - 1];
 	const type = idClient.type;
-	
+
 	if (!values.zipCode){
 		errors.zipCode = "Ingresar código postal"
+	}
+	else{
+		if (values.zipCode.length < 5){
+			errors.zipCode = "Código postal inválido"
+		}
 	}
 	if (!values.town){
 		errors.town = "Seleccione una colonia"
@@ -66,13 +71,6 @@ export const validateComercialInfo = values => {
 
 	if (!values.extNumber) {
 		errors.extNumber = 'Ingresa el número exterior de tu negocio';
-	}
-
-	if (
-		!/^[A-Za-z0-9\s-]+$/g.test(values.intNumber) &&
-		values.intNumber != null
-	) {
-		errors.intNumber = 'Ingresa un número válido';
 	}
 
 	if (!values.town) {

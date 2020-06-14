@@ -9,9 +9,17 @@ import { old, reason } from '../models/AmountModels';
 import PersonType from '../components/Appliance/PersonType';
 import { validateAmount } from '../components/Validate/ValidateAmount';
 import { renderField, renderSelectField } from '../components/Generic/Fields';
+import { createNumberMask  } from 'redux-form-input-masks';
 
 const onlyNumbers = (nextValue, previousValue) => /^[+]?([0-9]+(?:[\,.][0-9]*)?|\,.[0-9]+)$/.test(nextValue) || nextValue.length === 0? nextValue : previousValue;
 /* ^[0-9]+([,.][0-9]+)?$ */
+
+
+const currencyMask = createNumberMask({
+  prefix: 'MX$ ',
+  decimalPlaces: 2
+})
+
 
 let AmountForm = props => {
 	const { handleSubmit } = props;
@@ -40,6 +48,7 @@ let AmountForm = props => {
 				name="howMuch"
 				label="Ej. 500000" 
 				cls="text-dp"
+				{...currencyMask}
 			/>
 
 			<InputLabel label="¿En cuánto tiempo quieres pagarlo?" class="mt-18" />
@@ -71,6 +80,7 @@ let AmountForm = props => {
 				name="yearSales"
 				label="Ej. 500000"
 				cls="text-dp"
+				{...currencyMask}
 			/>
 			
 			<strong><span style={{color:'var(--primary-color)', fontSize: '0.7em'}} >Ventas totales en un año</span></strong>

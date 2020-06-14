@@ -15,7 +15,6 @@ import { ToastContainer } from "react-toastify";
 import { Modal } from 'react-responsive-modal';
 import { Row, Button, Col } from 'react-bootstrap';
 
-
 const Amount = props => {
 	// Redux state
 	const {
@@ -27,7 +26,7 @@ const Amount = props => {
 	const [initialValues, setInitialValues] = useState({});
 	const history = useHistory();
 	var typePerson;
-	
+
 	const onFormSubmit = async (data) => {
 		if(!JSON.parse(sessionStorage.getItem('user')).idClient[0].type){
 			return 0;

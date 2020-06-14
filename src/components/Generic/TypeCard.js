@@ -1,7 +1,14 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
+import { withStyles, makeStyles } from '@material-ui/core/styles';
 import { Tooltip } from '@material-ui/core'
 
+const CustomTooltip = withStyles((theme) => ({
+  tooltip: {
+    backgroundColor: '#E8E8E8',
+    color: '#000000',
+  },
+}))(Tooltip);
 
 const TypeCard = props => {
 	let descriptions = {
@@ -17,7 +24,7 @@ const TypeCard = props => {
 		PM: "ymb-dp-type-pm"
 	}
 	return ( 
-		<Tooltip title={descriptions[props.value]} placement="bottom" style={{fontSize: '14px'}}>
+		<CustomTooltip title={descriptions[props.value]} placement="bottom" style={{fontSize: '14px'}} >
 		<div className="full d-flex align-items-center flex-column justify-content-center mb-3" onClick={() => props.refs.current.click()}>
 			<div value={`${props.value}`} className="wht-bg text-center">
 				<img value={`${props.value}`} className="card-image position-absolute" src={props.img} alt="Información tipo de cliente" style={{marginLeft:'-1rem'}} onClick={props.updateUser}/>
@@ -29,7 +36,7 @@ const TypeCard = props => {
 			</div>
 			<Button type="button" className="mt-2 d-none" id={ids[props.value]} ref={props.refs} onClick={props.updateUser} value={`${props.value}`}></Button>
 		</div>
-		</Tooltip>
+		</CustomTooltip>
 	);
 }
  

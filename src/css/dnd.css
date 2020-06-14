@@ -10,9 +10,17 @@
 	margin-top: 10px;
 }
 
+.file-drop-dragging-over-target{
+	border-radius: 5px;
+	height: 100px;
+	margin-bottom: 30px;
+}
+
+
+.file-drop-dragging-over-target, 
 .dnd:hover{
-	border-color: #80bdff;
-	box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+	border-color: #80bdff !important;
+	box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25) !important;
 }
 
 .clip-image{

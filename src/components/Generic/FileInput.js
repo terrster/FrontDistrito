@@ -20,13 +20,12 @@ const FileInput = ({
 				<input className="d-none" type="file" ref={refs} name={nombre} onChange={ (e)  => fileMethod('input',nombre,e) } multiple/>
 				<FileDrop 
 					onDrop={ e  => fileMethod('drag',nombre,e)} 
-					className="dnd" 
 				>
-					<div>
-						<img src={image} className="clip-image" alt="Clip"/>
-						<label className="drop-content" onClick={(e) => refs.current.click(e)}>
-							Adjunta tu archivo <span className="d-none d-lg-inline">(o arrastra aquí)</span>
-						</label>
+					<div className="dnd">
+					<img src={image} className="clip-image" alt="Clip"/>
+					<label className="drop-content" onClick={(e) => refs.current.click(e)}>
+						Adjunta tu archivo <span className="d-none d-lg-inline">(o arrastra aquí)</span>
+					</label>
 					</div>
 				</FileDrop>
 				{
