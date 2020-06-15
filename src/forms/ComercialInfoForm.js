@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {  useDispatch } from 'react-redux';
+import {  useDispatch, useSelector } from 'react-redux';
 import { Field, reduxForm } from 'redux-form'
 import comercialOptions from '../models/ComercialInfoModels'
 import { Row, Col, Button } from 'react-bootstrap';
@@ -9,14 +9,23 @@ import { renderField, renderSelectField, renderFieldFull } from '../components/G
 import { connect } from 'react-redux';
 import isUndefined from 'lodash/isUndefined';
 import isArray from 'lodash/isArray';
+import { ToastContainer } from "react-toastify";
+import { updateToast } from '../redux/actions/appActions';
+import { execToast } from '../utils/ToastUtils';
 import { updateLoader } from '../redux/actions/loaderActions';
+// CIEC
+import PopUp from "./PopUp";
+import Info from "../assets/img/Info.png";
+
 
 let ComercialInfoForm = props => {
 
   const dispatch = useDispatch();
+  const toast = useSelector((state) => state.app.toast);
 
   const [colonias,setColonias] = useState([]);
   const [currentCP, setCurrentCP] = useState('');
+  const [showModal, setShowModal] = useState(true);
   
   const { handleSubmit  } = props
 
@@ -59,6 +68,11 @@ let ComercialInfoForm = props => {
   }
 
   useEffect(() => {
+    if (!toast.second) {
+      execToast('second');
+      dispatch(updateToast(toast, 'second'));
+    }
+    window.scrollTo(0, 0);
 
     const getData = async () => {
       dispatch( updateLoader(true) );
@@ -106,6 +120,12 @@ let ComercialInfoForm = props => {
 
   },[])
 
+  const user = JSON.parse(sessionStorage.getItem("user"));
+  const { type } = user.idClient[user.idClient.length - 1];  
+
+
+  const onlyNumbers = (nextValue, previousValue) => /^[+]?([0-9]+(?:[\,.][0-9]*)?|\,.[0-9]+)$/.test(nextValue) || nextValue.length === 0? nextValue : previousValue;
+
   return (
     <div>
       <form className="ml-auto mr-auto" style={{maxWidth : '690px'}} onSubmit={handleSubmit}>
@@ -118,7 +138,7 @@ let ComercialInfoForm = props => {
       ) ) }
     </Field>
     {
-      sessionStorage.type === 'PM' 
+      type === 'PM' 
       ? <Field component={renderField} type="text" cls="mb-3" name="businessName" label="Razón social"/>
       : <div></div>
     }
@@ -141,7 +161,7 @@ let ComercialInfoForm = props => {
         </Col>
 
         <Col lg={6} md={6} sm={12}>
-          <Field component={renderField} label="CP" name="zipCode"  cls="mb-3" onChange={handleChange}/>
+          <Field component={renderField} label="CP" normalize={onlyNumbers} name="zipCode"  cls="mb-3" onChange={handleChange}/>
         </Col>
         <Col lg={6} md={6} sm={12}>
           <Field component={renderSelectField} name="town" cls="mb-3">
@@ -165,7 +185,8 @@ let ComercialInfoForm = props => {
               name="state"
               val={props.state}
               disabled={true}
-              cls="mb-3 mt-1"
+              readOnly={true}
+              cls="mb-3 mt-1 form-control custom-form-input mt-24 mb-0 input-readonly"
             />
         </Col>
 
@@ -176,13 +197,48 @@ let ComercialInfoForm = props => {
               name="municipality"
               val={props.municipality}
               disabled={true}
-              cls="mb-3 mt-1"
+              readOnly={true}
+              cls="mb-3 mt-1 form-control custom-form-input mt-24 mb-0 input-readonly"
             />
         </Col>
 
+        {type !== "PF" && (
+            <>
+              <Col lg={12} md={12} sm={12}>
+                <SubtitleForm
+                  subtitle="Clave CIEC (Opcional)"
+                  className="text-form-dp  mt-30"
+                />
+                <div
+                  onClick={() => setShowModal(true)}
+                  style={{ cursor: "pointer", width: "0", height: "0" }}
+                >
+                  <img
+                    src={Info}
+                    alt="More Info"
+                    title="More Info"
+                    className="positionInfo"
+                  />
+                </div>
+                <Field component={renderFieldFull} label="CIEC" name="ciec" />
+                <div className="fz18 gray50 text-dp mb-30 mt-2">
+                  No es obligatorio pero podrá agilizar tu solicitud de crédito
+                  a la mitad del tiempo. Se ingresará por única ocasión para
+                  descargar la información necesaria.
+                </div>
+              </Col>
+              <PopUp
+                show={showModal}
+                setShow={(show) => setShowModal(show)}
+              />
+            </>
+          )}
+
+
+
          <Col lg={12} md={12} sm={12}>
           <label className="label-style">El número telefónico debe tener 10 dígitos</label>
-          <Field component={renderField} label="Teléfono" name="phone" cls="mb-3"/>
+          <Field component={renderField} label="Teléfono" normalize={onlyNumbers} name="phone" cls="mb-3"/>
         </Col>
 
     </Row>
