@@ -18,7 +18,8 @@ const onlyNumbers = (nextValue, previousValue) => /^[+]?([0-9]+(?:[\,.][0-9]*)?|
 
 const currencyMask = createNumberMask({
   prefix: 'MX$ ',
-  decimalPlaces: 2
+  decimalPlaces: 2,  
+  locale: "en-US"
 })
 
 
