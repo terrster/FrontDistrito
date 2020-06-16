@@ -95,7 +95,7 @@ const Credit = (props) => {
 					/>
 					<label className="subtitle-dp fz20 fw500">
 						Completa el 100% de tu formulario y empieza a recibir las
-						mejores opciones de crédito en menos de 48 hrs.
+						mejores opciones de crédito en menos de 24 hrs.
 					</label>
 				</div>
 				<div className="mt-50">
