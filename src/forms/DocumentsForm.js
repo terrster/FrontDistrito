@@ -109,7 +109,7 @@ let DocumentsForm = (props) => {
   const typePerson = idClient.type;
   const appliance = idClient.appliance[idClient.appliance.length - 1];
   const comercialInfo = appliance.idComercialInfo[appliance.idComercialInfo.length - 1];
-  const ciec = comercialInfo.ciec;
+  const ciec = comercialInfo.ciec;  
   
   let docFiles = [];  
   switch (typePerson) {
@@ -386,6 +386,12 @@ let DocumentsForm = (props) => {
   }
   let currDocs = props.currentDocuments;
   
+  const filterDocs = ["oficialID","proofAddress","others"];
+
+  if ( (typePerson === "RIF" || typePerson === "PFAE") && ciec ){
+    docFiles = docFiles.filter(doc => filterDocs.includes(doc.name))
+  }
+
   return (
     <div>
 		{
