@@ -212,10 +212,13 @@ const getDocsMethod = () => {
 				proofAddress, proofAddressMainFounders, 
 				rfc
 			}
+      //let status = testDocumentsMethod(currentDocuments);
+      //dispatch(updateDocumentsStatus(status));
 			for (const key in currentDocuments){
 				const files = currentDocuments[key];
 				dispatch(updateAllDocs(files, key));
 			};
+       testDocuments(currentDocuments);
 		}
 			/*
 			setInitialValues({ acomplishOpinion, bankStatements, constitutiveAct, 
@@ -225,7 +228,7 @@ const getDocsMethod = () => {
 				rfc });*/
 	}
     dispatch(updateDocumentsNames(getDocsMethod()));
-    testDocuments();
+   
     /*    
     const getDocuments = async () => {
 		const idClient = user.idClient[user.idClient - 1];
