@@ -469,3 +469,10 @@
 .arrow-dropdown:hover{
 	cursor: pointer;
 }
+
+.registro-exitoso{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
