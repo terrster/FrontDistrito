@@ -90,13 +90,6 @@ let SignupForm = (props) => {
         />
         <Field
           component={renderField}
-          type="text"
-          name="secondLastName"
-          label="Apellido Materno"
-          normalize={onlyLirycs}
-        />
-        <Field
-          component={renderField}
           type="email"
           onChange={ (event, newValue, previousValue, name) => {
 			  setErrorEmail("");
