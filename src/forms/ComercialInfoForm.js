@@ -243,10 +243,10 @@ let ComercialInfoForm = props => {
 
     </Row>
     <SubtitleForm subtitle="¿Cuentas con alguno?" className="mt-11 mb-3" />
-    <Field component={renderField} label="Sitio web (opcional)" name="webSite" cls="mb-3"/>
-    <Field component={renderField} label="Facebook (opcional)" name="facebook" cls="mb-3"/>
+    <Field component={renderField} label="Copia y pega el link de tu sitio web (opcional)" name="webSite" cls="mb-3"/>
+    <Field component={renderField} label="Copia y pega el link de tu Facebook (opcional)" name="facebook" cls="mb-3"/>
     <Field component={renderSelectField} name="terminal" cls="mb-3">
-      <option className="brandonReg" value="">Terminal para cobrar con tarjeta (TPV)</option>
+      <option className="brandonReg" value="">¿Vendes tu producto o servicio a Estados Unidos?</option>
       <option className="brandonReg" value="1">Sí</option>
       <option className="brandonReg" value="0">No</option>
     </Field>
