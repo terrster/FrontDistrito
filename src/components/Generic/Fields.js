@@ -15,7 +15,7 @@ export const renderField = ({
 		<div className="input-container">
 			{label === 'RFC' && sessionStorage.type === 'PF' ? (
 				<input
-					className="form-control custom-form-input brandonReg mt-1 mb-0"
+					className="form-control custom-form-input text-dp mt-1 mb-0"
 					{...input}
 					value={ value || input.value}
 					placeholder={label}
@@ -25,7 +25,7 @@ export const renderField = ({
 			) : label === 'RFC' &&
 			  (sessionStorage.type === 'RIF' || sessionStorage.type === 'PFAE') ? (
 				<input
-					className="form-control custom-form-input brandonReg mt-1 mb-0"
+					className="form-control custom-form-input text-dp mt-1 mb-0"
 					{...input}
 					value={ value || input.value}
 					placeholder={label}
@@ -36,7 +36,7 @@ export const renderField = ({
 			) : label === 'RFC de tu empresa o negocio' &&
 			  sessionStorage.type === 'PM' ? (
 				<input
-					className="form-control custom-form-input brandonReg mt-1 mb-0"
+					className="form-control custom-form-input text-dp mt-1 mb-0"
 					{...input}
 					value={ value || input.value}
 					placeholder={label}
@@ -46,7 +46,7 @@ export const renderField = ({
 				/>
 			) : label === 'Teléfono' ? (
 				<input
-					className="form-control custom-form-input brandonReg mb-0"
+					className="form-control custom-form-input text-dp mb-0"
 					value={value}
 					{...input}
 					placeholder={label + " de tu negocio"}
@@ -55,7 +55,7 @@ export const renderField = ({
 				/>
 			) : label === 'Teléfono_Personal' ? (
 				<input
-					className="form-control custom-form-input brandonReg mb-0"
+					className="form-control custom-form-input text-dp mb-0"
 					value={value}
 					{...input}
 					placeholder={"Ingresa tú número celular"}
@@ -64,7 +64,7 @@ export const renderField = ({
 				/>
 			) : label === 'CP' ? (
 				<input
-					className="form-control custom-form-input brandonReg mt-1 mb-0"
+					className="form-control custom-form-input text-dp mt-1 mb-0"
 					{...input}
 					value={ value || input.value}
 					placeholder={label}
@@ -73,7 +73,7 @@ export const renderField = ({
 				/>
 			) : label === 'secret' ? (
 				<input
-					className="form-control custom-form-input brandonReg mt-1 mb-0 d-none"
+					className="form-control custom-form-input text-dp mt-1 mb-0 d-none"
 					{...input}
 					value={ value || input.value}
 					placeholder={label}
@@ -82,7 +82,7 @@ export const renderField = ({
 				/>
 			) : (
 				<input
-					className="form-control custom-form-input brandonReg mt-1 mb-0"
+					className="form-control custom-form-input text-dp mt-1 mb-0"
 					{...input}
 					value={value || input.value}
 					placeholder={label}
@@ -114,7 +114,7 @@ export const renderSelectField = ({
 		<div className="input-container">
 			<select
 				{...input}
-				className="form-control custom-form-input brandonReg mt-1"
+				className="form-control custom-form-input text-dp mt-1"
 			>
 				{children}
 			</select>
