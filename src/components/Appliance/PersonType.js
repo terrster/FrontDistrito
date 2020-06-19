@@ -7,10 +7,10 @@ import { Col, Row } from 'react-bootstrap';
 import TypeCard from '../Generic/TypeCard';
 
 // Images
-import pf from '../../assets/img/persona-f-sica@2x.png';
-import pfae from '../../assets/img/persona-f-sica-cn-actividad-empresarial@2x.png';
-import pm from '../../assets/img/persona-moral@2x.png';
-import rif from '../../assets/img/rif@2x.png';
+import pf from '../../assets/img/type_person/fisica.png';
+import pfae from '../../assets/img/type_person/actividad_empresarial.png';
+import pm from '../../assets/img/type_person/moral.png';
+import rif from '../../assets/img/type_person/RIF.png';
 
 import { updateLoader } from '../../redux/actions/loaderActions';
 
@@ -52,13 +52,10 @@ const PersonType = (props) => {
 	useEffect(() => {
 		dispatch( updateLoader(true) );
 		const getPersonType = async () => {
-			const idClient = user.idClient[user.idClient.length - 1]._id
-			const res = await axios.get(`api/client/${idClient}`, {
-				headers: {
-					token: sessionStorage.getItem("token")
-				}
-			})
-			setPersonType(res.data.client.type);	
+			const idClient = user.idClient[user.idClient.length - 1]
+			if (idClient.hasOwnProperty("type")){
+				setPersonType(idClient.type);	
+			}
 			//dispatch( updateLoader(false) );
 		}
 		getPersonType();
@@ -70,9 +67,8 @@ const PersonType = (props) => {
   const pmDisabledClass = isDisabledType(personType,"PM");
 
 	return (		
-			<div>				
-				<Row>
-					<Col sm={12} lg={3} md={6}>
+			<div className="type-person-cards">				
+				
 						<TypeCard
 							text="Negocios sin alta en el SAT"
 							class={`firstBlue fw500 brandonReg ` + pfDisabledClass}
@@ -81,38 +77,34 @@ const PersonType = (props) => {
 							value="PF"
 							refs={pfRef}
 						/>
-                        </Col>
-                        <Col sm={12} lg={3} md={6}>
+                        
                             <TypeCard
-                                text="Régimen de incorporación fiscal"
+                                text="Régimen de Incorporación Fiscal"
                                 class={`secondBlue fw500 brandonReg ` + rifDisabledClass}
                                 updateUser={() => updateClient("RIF")}
                                 img={rif}
                                 value="RIF"
                                 refs={rifRef}
                             />
-                        </Col>
-                        <Col sm={12} lg={3} md={6}>
+                        
                             <TypeCard
-                                text="Persona física con actividad empresarial"
+                                text="Persona física con Actividad Empresarial"
                                 class={`thirdBlue fw500 brandonReg ` + pfaeDisabledClass}
                                 updateUser={() => updateClient("PFAE")}
                                 img={pfae}
                                 value="PFAE"
                                 refs={pfaeRef}
                             />
-                        </Col>
-                        <Col sm={12} lg={3} md={6}>
+                        
                             <TypeCard
-                                text="Persona moral"
+                                text="Persona Moral"
                                 class={`fourthBlue fw500 brandonReg ` + pmDisabledClass}
                                 img={pm}
                                 value="PM"
                                 updateUser={() => updateClient("PM")}
                                 refs={pmRef}
                             />
-                        </Col>
-                    </Row>
+
             </div>
 	);
 };

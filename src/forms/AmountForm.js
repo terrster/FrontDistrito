@@ -10,6 +10,7 @@ import PersonType from '../components/Appliance/PersonType';
 import { validateAmount } from '../components/Validate/ValidateAmount';
 import { renderField, renderSelectField } from '../components/Generic/Fields';
 import { createNumberMask  } from 'redux-form-input-masks';
+import helpImg from '../assets/img/type_person/help.png'
 
 const onlyNumbers = (nextValue, previousValue) => /^[+]?([0-9]+(?:[\,.][0-9]*)?|\,.[0-9]+)$/.test(nextValue) || nextValue.length === 0? nextValue : previousValue;
 /* ^[0-9]+([,.][0-9]+)?$ */
@@ -28,18 +29,18 @@ let AmountForm = props => {
 	}
 	return (
 		<div>
+			<p className="text-dp fz20 fw500 mt-2 mb-1 text-center">Selecciona tu tipo de negocio, si tienes duda presiona <img src={helpImg} width="20px" heigth="30px" /> para saber más.</p>
+			<PersonType onSelectPerson={selectedPerson}/>
+			<Field component={renderField} type="text" name="personType" label="secret"></Field>
 			<form
 				className="ml-auto mr-auto"
 				style={{ maxWidth: '690px' }}
 				onSubmit={handleSubmit}
 			>
-				<label className="text-dp gray50 fz20 fw500 mt-2 mb-1 text-center">Pasa el cursor sobre un recuadro para más información y da clic para seleccionar uno</label>
-				<PersonType onSelectPerson={selectedPerson}/>
-				<Field component={renderField} type="text" name="personType" label="secret"></Field>
 				<div className="text-center">
 					<Title title="Elige tu monto" className="title-dp fz42" />	
 				</div>
-				<div className="text-center"><label className="text-dp gray50 fz20 fw500 mt-2 mb-1">Cuéntanos un poco más sobre el monto que necesitas</label></div>
+				<div className="text-center"><label className="text-dp fz20 fw500 ml-auto mt-2 mb-1">Cuéntanos un poco más sobre el monto que necesitas</label></div>
 			<InputLabel label="¿Cuánto necesitas?" class="mt-18" />
 			<Field
         		normalize={onlyNumbers}
