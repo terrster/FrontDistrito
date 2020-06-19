@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import React, { Component } from "react";
 import LinkButton from "../Generic/LinkButton";
 import { Button, Modal } from "react-bootstrap";
-import like from "../../assets/img/tito@2x.png";
+import solicitudEnviada from "../../assets/img/tito_solicitud_enviada.png";
 import CustomLoader from "../Generic/CustomLoader";
 import tito from "../../assets/img/tito-credit.png";
 import axios from '../../utils/axios';
@@ -85,23 +85,23 @@ class Appliance extends Component {
 				} 
 					return (
 						<div className="text-center mt-45">
-							<img src={like} style={{ width: '204px' }} alt="Tito" />
+							<img src={solicitudEnviada} style={{ width: '250px' }} alt="Tito" className="mb-16"/>
 							<div>
 								<Title
-									className="blackBlue coolvetica fw300 fz42 mb-16"
+									className="title-dp fz32 fw500 mb-16"
 									title="¡Solicitud enviada con éxito!"
 								/>
-								<div className="mt-24 brandonLight fz20">
-									En menos de 24 horas comenzarás a recibir las mejores ofertas{' '}
-									<br />
-									de crédito para tu empresa o negocio.
+								<div className="mt-24 brandonLight fz20 text-dp">
+									En menos de 30 minutos comenzarás a recibir en tu correo 
+									<br /> 
+									las mejores opciones de crédito para tu empresa o negocio.
 								</div>
-								<div className="brandonBld mt-45 text-center">
+								<div className="text-center">
 									<Button
-										className="appliance-button fz21 bluePrimary"
+										className="btn-blue-general mt-30 fz24"
 										onClick={() => this.props.history.push('/home')}
 									>
-										Volver al inicio
+										Ir a mi cuenta
 									</Button>
 								</div>
 							</div>
