@@ -92,7 +92,7 @@ class Appliance extends Component {
 									title="¡Solicitud enviada con éxito!"
 								/>
 								<div className="mt-24 brandonLight fz20">
-									En menos de 48 horas comenzarás a recibir las mejores ofertas{' '}
+									En menos de 24 horas comenzarás a recibir las mejores ofertas{' '}
 									<br />
 									de crédito para tu empresa o negocio.
 								</div>
