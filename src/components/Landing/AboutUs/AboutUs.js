@@ -20,7 +20,7 @@ const AboutUs = props => {
                 <div className="logos"><a href="https://www.burodecredito.com.mx" target="_blank" rel="noopener noreferrer"><img alt="Buro" src={buropng} className="img-about-us"/></a></div>
 				<div className="logos"><a href="http://www.vxtnegocios.mx" target="_blank" rel="noopener noreferrer"><img alt="vtxnegocios" src={vtxnegocios} className="img-about-us"/></a></div>
 				<div className="logos"><a href="https://www.mifiel.com" target="_blank" rel="noopener noreferrer"><img alt="mifiel" src={mifiel} className="img-about-us" style={{height:"33px",maxWidth:"168px"}}/></a></div>
-				<div className="logos"><a href="https://www.radarsantander.com" target="_blank" rel="noopener noreferrer"><img alt="radar" src={radar} className="img-about-us" style={{height:"30px",maxWidth:"168px"}}/></a></div>
+				<div className="logos"><a href="https://www.radarsantander.com" target="_blank" rel="noopener noreferrer"><img alt="radar" src={radar} className="img-about-us" style={{height:"20px",maxWidth:"168px"}}/></a></div>
 				<div className="logos"><a href="https://www.grantthornton.mx" target="_blank" rel="noopener noreferrer"><img alt="Grantthornton" src={grantthornton} className="img-about-us" style={{height:"40px",maxWidth:"180px"}}/></a></div>
             </div>
         </div>

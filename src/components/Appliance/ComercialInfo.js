@@ -30,17 +30,15 @@ const ComercialInfo = (props) => {
 	const history = useHistory();
 
 	const onFormSubmit = async (dataForm) => {
-		console.log(dataForm)		
+		//console.log(dataForm)		
 		dispatch( updateLoader(true) );
 		const user = JSON.parse(sessionStorage.getItem('user'));
 		const id = user._id;
 		const idClient = user.idClient[user.idClient.length - 1];
-		const warranty = (dataForm.warranty === "1" || dataForm.warranty === "2" || dataForm.warranty === "3") ? true : false
 		const data = {
 			...dataForm,
 			state,
-			municipality,
-			warranty
+			municipality
 		}
 		if(idClient.appliance.length > 0){
 			const appliance = idClient.appliance[idClient.appliance.length - 1];

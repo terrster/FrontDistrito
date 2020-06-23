@@ -246,16 +246,16 @@ let ComercialInfoForm = props => {
     <Field component={renderField} label="Copia y pega el link de tu sitio web (opcional)" name="webSite" cls="mb-3"/>
     <Field component={renderField} label="Copia y pega el link de tu Facebook (opcional)" name="facebook" cls="mb-3"/>
     <Field component={renderSelectField} name="terminal" cls="mb-3">
-      <option className="brandonReg" value="">¿Vendes tu producto o servicio a Estados Unidos?</option>
-      <option className="brandonReg" value="1">Sí</option>
-      <option className="brandonReg" value="0">No</option>
+      <option value="">¿Vendes tu producto o servicio a Estados Unidos?</option>
+      <option value="1">Sí</option>
+      <option value="0">No</option>
     </Field>
     <Field component={renderSelectField} name="warranty" cls="mb-3">
-      <option className="brandonReg" value="">¿Puedes ofrecer una garantía?</option>
-      <option className="brandonReg" value="1">Sí, garantía inmobiliaria.</option>
-      <option className="brandonReg" value="2">Sí, activo fijo.</option>
-      <option className="brandonReg" value="3">Sí, ambos.</option>
-      <option className="brandonReg" value="4">No.</option>
+      <option value="">¿Puedes ofrecer una garantía?</option>
+      <option value="1">Sí, garantía inmobiliaria.</option>
+      <option value="2">Sí, activo fijo.</option>
+      <option value="3">Sí, ambos.</option>
+      <option value="4">No.</option>
     </Field>
 
     <div className="text-center" style={{marginBottom : '50px'}}>
