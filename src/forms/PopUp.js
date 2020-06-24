@@ -1,12 +1,38 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { Modal, Button } from 'react-bootstrap';
+import { updateModalCiec, updateRefDocuments } from '../redux/actions/modalCiecActions';
 import Beneficios from '../assets/img/Beneficios.jpg';
-function Pop_up({show, setShow, isDocuments=false}) {
+
+function Pop_up({ isDocuments=false }) {
+  const dispatch = useDispatch(); 
+  const { showModal, refDocuments } = useSelector(state => state.modalCiec);
+
 	const [user, setUser] = useState(JSON.parse(sessionStorage.getItem("user")));
-  const handleClose = () => setShow(false);
-    return (
+  const [load, setLoad] = useState(false);
+
+  const history = useHistory();
+
+  const handleClose = () => dispatch(updateModalCiec(false));
+
+  useEffect(() => {
+
+    const { appliance, type } = user.idClient[user.idClient.length - 1];  
+    const { idComercialInfo } = appliance[appliance.length - 1];
+    const ciec = idComercialInfo[idComercialInfo.length - 1].ciec;
+
+    if (ciec === "" || ciec == null){
+      dispatch(updateModalCiec(true));
+    }
+
+    setLoad(true);
+
+  },[])
+
+    return load && !refDocuments && (
       <>
-        <Modal show={show} centered={true} onHide={handleClose}>
+        <Modal show={showModal} centered={true} onHide={handleClose}>
           {/* Boton Cerrar
           <Modal.Header closeButton>
           </Modal.Header>
@@ -19,11 +45,16 @@ function Pop_up({show, setShow, isDocuments=false}) {
               Entiendo los Beneficios
             </Button>
             {
-				isDocuments &&
-				<Button onClick={() => window.location.href = `/informacion-comercial/${user._id}`} block className="btn-blue-secondary">
-					Ir a colocar mi CIEC
-				</Button>
-			}
+				    isDocuments &&
+				      <Button onClick={() => { 
+                dispatch(updateRefDocuments(true));
+                dispatch(updateModalCiec(false));
+                history.push(`/informacion-comercial/${user._id}`);
+
+              }} block className="btn-blue-secondary">
+					     Ir a colocar mi CIEC
+      				</Button>
+      			}
           </Modal.Footer>
           
         </Modal>

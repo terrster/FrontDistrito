@@ -14,6 +14,7 @@ import Steps from './Steps';
 import CustomModal from '../Generic/CustomModal';
 import Loader from "../Loader/Loader";
 import { updateLoader } from '../../redux/actions/loaderActions';
+import { updateModalCiec, updateRefDocuments } from '../../redux/actions/modalCiecActions';
 import { ToastContainer } from "react-toastify";
 import { updateToast } from '../../redux/actions/appActions';
 
@@ -22,6 +23,7 @@ const ComercialInfo = (props) => {
 	// Redux state
 	const { loader: { isLoading } } = useSelector((state) => state);
 	const toast = useSelector((state) => state.app.toast);
+	const { showModal, refDocuments } = useSelector(state => state.modalCiec);
 
 	const [user, setUser] = useState(JSON.parse(sessionStorage.getItem('user')));
 	const [initialValues, setInitialValues] = useState({});
@@ -30,7 +32,6 @@ const ComercialInfo = (props) => {
 	const history = useHistory();
 
 	const onFormSubmit = async (dataForm) => {
-		console.log(dataForm)		
 		dispatch( updateLoader(true) );
 		const user = JSON.parse(sessionStorage.getItem('user'));
 		const id = user._id;
@@ -54,7 +55,11 @@ const ComercialInfo = (props) => {
 						}
 					});
 					sessionStorage.setItem('user', JSON.stringify(res.data.user));
-					window.location.href = `/informacion-general/${user._id}`;
+					if (!refDocuments){
+						history.push(`/informacion-general/${user._id}`);						
+					} else {
+						history.push(`/documentos/${user._id}`);
+					}
 				} catch (error) {
 					console.log("Error de servicio",error);
 				} 
@@ -62,7 +67,11 @@ const ComercialInfo = (props) => {
 				try {
 					const res = await axios.post(`api/info-comercial/${id}`, data);
 					sessionStorage.setItem('user', JSON.stringify(res.data.user));
-					window.location.href = `/informacion-general/${user._id}`;
+					if (!refDocuments){
+						history.push(`/informacion-general/${user._id}`);	
+					} else {
+						history.push(`/documentos/${user._id}`);
+					}
 				} catch (error) {
 					console.log("Error de servicio",error);
 				}	
@@ -76,7 +85,7 @@ const ComercialInfo = (props) => {
 			execToast('second');
 			dispatch(updateToast(toast, 'second'));
 		}
-		window.scrollTo(0, 0);
+		
 		const getData = async () => {
 			dispatch( updateLoader(true) );
 			const user = JSON.parse(sessionStorage.getItem('user'));
