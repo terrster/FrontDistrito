@@ -19,6 +19,7 @@ import {
   updateDocumentsNames,
   updateDocumentsType,
 } from "../../redux/actions/documentsStatusActions";
+import { updateModalCiec, updateRefDocuments } from '../../redux/actions/modalCiecActions';
 import { updateAllDocs, updateDocuments } from "../../redux/actions/documentsActions";
 import { updateAlert } from '../../redux/actions/alertActions';
 import { updateAppliance } from '../../redux/actions/applianceActions';
@@ -106,13 +107,15 @@ const getDocsMethod = () => {
   };
 
   const onFormSubmit = async (e, finish) => {
+
     e.preventDefault();
     window.scrollTo(0, 0);
+    dispatch(updateRefDocuments(false));
     dispatch(updateLoader(true));
     if (!toast.documents){
-		execToast("documents");
-		dispatch( updateToast(toast,"documents"));
-	}
+		  execToast("documents");
+		  dispatch( updateToast(toast,"documents"));
+    }
     const formData = new FormData();
     for (const typeDoc in documents){
 		documents[typeDoc].forEach(doc => {			

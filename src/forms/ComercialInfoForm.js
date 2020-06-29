@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {  useDispatch, useSelector } from 'react-redux';
 import { Field, reduxForm } from 'redux-form'
 import comercialOptions from '../models/ComercialInfoModels'
@@ -11,23 +11,28 @@ import isUndefined from 'lodash/isUndefined';
 import isArray from 'lodash/isArray';
 import { ToastContainer } from "react-toastify";
 import { updateToast } from '../redux/actions/appActions';
+import { updateModalCiec, updateRefDocuments } from '../redux/actions/modalCiecActions';
 import { execToast } from '../utils/ToastUtils';
 import { updateLoader } from '../redux/actions/loaderActions';
 // CIEC
 import PopUp from "./PopUp";
 import Info from "../assets/img/Info.png";
-
+import scroll from '../utils/scroll';
 
 let ComercialInfoForm = props => {
 
   const dispatch = useDispatch();
   const toast = useSelector((state) => state.app.toast);
+  const { showModal, refDocuments } = useSelector(state => state.modalCiec);
 
   const [colonias,setColonias] = useState([]);
   const [currentCP, setCurrentCP] = useState('');
-  const [showModal, setShowModal] = useState(true);
   
   const { handleSubmit  } = props
+
+  const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop);
+  const ciecRef = useRef(null);
+  const executeScroll = () => scrollToRef(ciecRef);
 
   const handleChange = async (event, id) => {
    
@@ -68,11 +73,11 @@ let ComercialInfoForm = props => {
   }
 
   useEffect(() => {
+
     if (!toast.second) {
       execToast('second');
       dispatch(updateToast(toast, 'second'));
     }
-    window.scrollTo(0, 0);
 
     const getData = async () => {
       dispatch( updateLoader(true) );
@@ -118,11 +123,19 @@ let ComercialInfoForm = props => {
     
     getData();    
 
+
+    if (!refDocuments){
+      window.scrollTo(0, 0);
+    } else {
+      const inputCiec = document.getElementById("CIEC");
+      inputCiec.focus();
+      scroll('btnCiec')
+    }
+
   },[])
 
   const user = JSON.parse(sessionStorage.getItem("user"));
   const { type } = user.idClient[user.idClient.length - 1];  
-
 
   const onlyNumbers = (nextValue, previousValue) => /^[+]?([0-9]+(?:[\,.][0-9]*)?|\,.[0-9]+)$/.test(nextValue) || nextValue.length === 0? nextValue : previousValue;
 
@@ -210,7 +223,11 @@ let ComercialInfoForm = props => {
                   className="text-form-dp  mt-30"
                 />
                 <div
-                  onClick={() => setShowModal(true)}
+                  onClick={() =>  {
+                    updateModalCiec(true) 
+                  }}
+                  id="btnCiec"
+                  ref={ciecRef}
                   style={{ cursor: "pointer", width: "0", height: "0" }}
                 >
                   <img
@@ -227,10 +244,7 @@ let ComercialInfoForm = props => {
                   descargar la información necesaria.
                 </div>
               </Col>
-              <PopUp
-                show={showModal}
-                setShow={(show) => setShowModal(show)}
-              />
+              <PopUp /> 
             </>
           )}
 
@@ -259,9 +273,19 @@ let ComercialInfoForm = props => {
     </Field>
 
     <div className="text-center" style={{marginBottom : '50px'}}>
-      <Button id="ymb-dp-comercial-submit" type="submit" className="mt-50 btn-blue-general">
-        Continuar
-      </Button>
+      {
+        !refDocuments ? 
+        ( 
+          <Button id="ymb-dp-comercial-submit" type="submit" className="mt-50 btn-blue-general">
+            Continuar
+          </Button>
+        ) : (
+          <Button id="ymb-dp-comercial-submit" type="submit" className="mt-50 btn-blue-general btn-blue-send-documents">
+            Guardar e ir a documentos
+          </Button>
+        )
+      }
+      
     </div>  
       </form>
     </div>
