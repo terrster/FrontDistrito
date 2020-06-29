@@ -476,3 +476,7 @@
 	align-items: center;
 	flex-direction: column;
 }
+
+/*Cliengo*/
+#popupIframe, #chatIframe {float:left!important;right:auto!important;}
+#wspIframe {float:right!important;left:auto!important; right: 0px !important;}
