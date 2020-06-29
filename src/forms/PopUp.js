@@ -20,7 +20,10 @@ function Pop_up({ isDocuments=false }) {
 
     const { appliance, type } = user.idClient[user.idClient.length - 1];  
     const { idComercialInfo } = appliance[appliance.length - 1];
-    const ciec = idComercialInfo[idComercialInfo.length - 1].ciec;
+	let ciec = '';
+    if (idComercialInfo.length > 0){
+	 ciec = idComercialInfo[idComercialInfo.length - 1].ciec;
+    }
 
     if (ciec === "" || ciec == null){
       dispatch(updateModalCiec(true));
