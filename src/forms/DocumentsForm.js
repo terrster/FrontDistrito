@@ -10,7 +10,7 @@ import PopUp from "./PopUp";
 // Components
 import FileInput from "../components/Generic/FileInput";
 
-import { updateLoader } from '../redux/actions/loaderActions';
+import { updateLoader } from "../redux/actions/loaderActions";
 
 let DocumentsForm = (props) => {
   const dispatch = useDispatch();
@@ -30,17 +30,16 @@ let DocumentsForm = (props) => {
   const proofAddressMainFounders = React.createRef();
 
   const { handleSubmit } = props;
-  const [validFiles, setValidFiles] = useState([]); 
+  const [validFiles, setValidFiles] = useState([]);
   const [errorFiles, setErrorFiles] = useState([]);
   const [currentDocuments, setCurrentDocuments] = useState({});
-  const [show, setShow] = useState(true);	
- 
+  const [show, setShow] = useState(true);
 
   let fileHandler = async (component, key, e) => {
-    dispatch (updateLoader(true));
+    dispatch(updateLoader(true));
     let value;
     let limitSize = 10000000; // 10 MB
-    
+
     let filesNotUploaded = { names: [], keys: [] };
     value = component === "drag" ? e : e.target.files;
     value = Array.from(value);
@@ -54,14 +53,14 @@ let DocumentsForm = (props) => {
             `${filesNotUploaded.names.toString()} - El peso de la imágen debe ser menor o igual a 10 MB`
           )
         );
-      } 
+      }
     }
-    
+
     for (let j = 0; j < filesNotUploaded.keys.length; j++) {
       value.splice(filesNotUploaded.keys[j] - j, 1);
     }
 
-    setFileToKey(key,value)
+    setFileToKey(key, value);
 
     if (filesNotUploaded.names.length > 0) {
       setTimeout(() => {
@@ -108,10 +107,11 @@ let DocumentsForm = (props) => {
   const idClient = user.idClient[user.idClient.length - 1];
   const typePerson = idClient.type;
   const appliance = idClient.appliance[idClient.appliance.length - 1];
-  const comercialInfo = appliance.idComercialInfo[appliance.idComercialInfo.length - 1];
-  const ciec = comercialInfo.ciec;  
-  
-  let docFiles = [];  
+  const comercialInfo =
+    appliance.idComercialInfo[appliance.idComercialInfo.length - 1];
+  const ciec = comercialInfo.ciec;
+
+  let docFiles = [];
   switch (typePerson) {
     case "PF":
       docFiles = [
@@ -267,80 +267,7 @@ let DocumentsForm = (props) => {
           refs: rfc,
         },
         {
-          title: "Comprobante de domicilio particular y del negocio",
-          subtitle: "(Antigüedad no mayor a 3 meses. Luz, Agua, Gas, Teléfono)",
-          name: "proofAddress",
-          files: props.docs.proofAddress,
-          refs: proofAddress,
-        },
-        {
-          title: "Estados financiero",
-          subtitle:
-            " (Últimos 3 ejercicios completos y parcial del año en curso con relaciones analíticas)",
-          name: "financialStatements",
-          files: props.docs.financialStatements,
-          refs: financialStatements,
-        },
-        {
-          title: "Estados de cuenta bancarios",
-          subtitle:
-            "(Documento completo con todas las hojas que contenga, mínimo 6 meses)",
-          name: "bankStatements",
-          files: props.docs.bankStatements,
-          refs: bankStatements,
-        },
-        {
-          title: "Declaraciones anuales de los dos últimos años",
-          name: "lastDeclarations",
-          files: props.docs.lastDeclarations,
-          refs: lastDeclarations,
-        },
-        {
-          title:
-            "Identificación de representante legal y principales accionistas",
-          name: "oficialID",
-          files: props.docs.oficialID,
-          refs: refOficialId,
-        },
-        {
-          title:
-            "Comprobante de domicilio del negocio y particular del representante legal y principales accionistas",
-          name: "proofAddressMainFounders",
-          files: props.docs.proofAddressMainFounders,
-          refs: proofAddressMainFounders,
-        },
-        {
-          title: "Fotos de tu empresa o negocio u otros",
-          name: "others",
-          files: props.docs.others,
-          refs: others,
-        },
-      ];
-      break;
-    default:
-      docFiles = [
-        {
-          title: "Acta constitutiva, asamblea y poderes",
-          name: "constitutiveAct",
-          files: props.docs.constitutiveAct,
-          refs: constitutiveAct,
-        },
-        {
-          title: "RFC",
-          subtitle: "(Constancia de situación fiscal)",
-          name: "rfc",
-          files: props.docs.rfc,
-          refs: rfc,
-        },
-        {
-          title: "Comprobante de domicilio particular y del negocio",
-          subtitle: "(Antigüedad no mayor a 3 meses. Luz, Agua, Gas, Teléfono)",
-          name: "proofAddress",
-          files: props.docs.proofAddress,
-          refs: proofAddress,
-        },
-        {
-          title: "Estados financiero",
+          title: "Estados financieros",
           subtitle:
             " (Últimos 3 ejercicios completos y parcial del año en curso con relaciones analíticas)",
           name: "financialStatements",
@@ -385,20 +312,25 @@ let DocumentsForm = (props) => {
       break;
   }
   let currDocs = props.currentDocuments;
-  
-  const filterDocs = ["oficialID","proofAddress","others"];
 
-  if ( (typePerson === "RIF" || typePerson === "PFAE") && ciec ){
-    docFiles = docFiles.filter(doc => filterDocs.includes(doc.name))
+  const filterDocs = ["oficialID", "proofAddress", "others", "bankStatements"];
+
+  if ((typePerson === "RIF" || typePerson === "PFAE") && ciec) {
+    docFiles = docFiles.filter((doc) => filterDocs.includes(doc.name));
+  }
+  if (typePerson === "PM" && ciec) {
+    docFiles = docFiles.filter((doc) => doc.name !== "rfc");
   }
 
   return (
     <div>
-		{
-			idClient.type !== "PF" && 
-			(ciec == "" || ciec == null) &&
-			<PopUp show={show} setShow={(value) => setShow(value)} isDocuments={true}/>
-		}
+      {idClient.type !== "PF" && (ciec == "" || ciec == null) && (
+        <PopUp
+          show={show}
+          setShow={(value) => setShow(value)}
+          isDocuments={true}
+        />
+      )}
       <form className="ml-auto mr-auto" style={{ maxWidth: "690px" }}>
         {docFiles.map((d, i) => {
           return (

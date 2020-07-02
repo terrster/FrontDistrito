@@ -1,5 +1,6 @@
 const RFCPF = /^([A-ZÑ\x26]{4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1]))(([-|\s])?([A-Z\d]{3}))?$/;
 const RFCPM = /^([A-ZÑ\x26]{3}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1]))(([-|\s])?([A-Z\d]{3}))?$/;
+const OTHER = /^[A-Z]{4}(\d{6})((\D|\d){3})?$/;
 
 function validDay(day, month) {
 	let valid = true;
@@ -39,10 +40,9 @@ export const validateComercialInfo = values => {
 	}
 
 	if (!values.specific) {
-		errors.specific = 'Escribe el giro específico de tu negocio';
-	} else if (!/^[A-Za-z0-9áéíóú\s]+$/g.test(values.specific)) {
-		errors.specific = 'Ingresa un giro válido';
+		errors.specific = 'Escribe la actividad específica de tu negocio';
 	}
+
 	if (!values.rfc) {
 		errors.rfc = 'Ingresa el RFC de tu negocio';
 	} else {
@@ -62,7 +62,12 @@ export const validateComercialInfo = values => {
 			} else if (!RFCPM.test(values.rfc)) {
 				errors.rfc = 'Ingresa un RFC válido';
 			}
+		} else {
+			if (!OTHER.test(values.rfc)){
+				errors.rfc = 'Ingresa un RFC válido';
+			}
 		}
+		
 	}
 
 	if (!values.street) {
@@ -98,7 +103,7 @@ export const validateComercialInfo = values => {
 	if (!values.ciec) {
 		errors.ciec = '';
 	} else if (!/^[a-zA-Z0-9]+$/.test(values.ciec) || values.ciec.length < 8) {
-		errors.ciec = 'Ingresa un CIEC valido';
+		errors.ciec = 'Ingresa una CIEC válida';
 	}
 	
 
