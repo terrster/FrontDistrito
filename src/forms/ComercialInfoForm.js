@@ -224,7 +224,7 @@ let ComercialInfoForm = props => {
                 />
                 <div
                   onClick={() =>  {
-                    updateModalCiec(true) 
+                    dispatch(updateModalCiec(true))
                   }}
                   id="btnCiec"
                   ref={ciecRef}
