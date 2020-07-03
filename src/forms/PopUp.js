@@ -25,7 +25,7 @@ function Pop_up({ isDocuments=false }) {
 	 ciec = idComercialInfo[idComercialInfo.length - 1].ciec;
     }
 
-    if (ciec === "" || ciec == null){
+    if ((ciec === "" || ciec == null) && !refDocuments ){
       dispatch(updateModalCiec(true));
     }
 
@@ -33,7 +33,7 @@ function Pop_up({ isDocuments=false }) {
 
   },[])
 
-    return load && !refDocuments && (
+    return load && (
       <>
         <Modal show={showModal} centered={true} onHide={handleClose}>
           {/* Boton Cerrar
