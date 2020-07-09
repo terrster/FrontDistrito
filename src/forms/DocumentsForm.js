@@ -3,6 +3,7 @@ import { connect, useDispatch } from "react-redux";
 import clip from "../assets/img/clip-copy-2@3x.png";
 import { Button } from "react-bootstrap";
 import axios from "axios";
+import axiosLocal from '../utils/axios';
 import "../css/dnd.css";
 import { array } from "prop-types";
 import PopUp from "./PopUp";
@@ -79,7 +80,9 @@ let DocumentsForm = (props) => {
     props.testDocs();
   };
 
-  let deleteChip = (index, key) => {
+  let deleteChip = async (index, key, typeDoc) => {
+    // key == url
+    dispatch(updateLoader(true));
     let arr = [];
     if (key.includes("https")) {
       let arrInt = props.docs;
@@ -94,8 +97,27 @@ let DocumentsForm = (props) => {
       arr = props.docs[key];
       arr.splice(index, 1);
     }
+    // Delete file 
+    const user = JSON.parse(sessionStorage.getItem("user"));
+    const idClient = user.idClient[user.idClient.length - 1];
+    if (idClient.appliance.length > 0){
+      const appliance = idClient.appliance[idClient.appliance.length - 1];
+      const idDocuments = appliance.idDocuments[appliance.idDocuments.length - 1];
+      const res = await axiosLocal.delete(`api/documents/${idDocuments._id}`, {
+        data: {
+          url: key,
+          name: typeDoc
+        }
+      })
+      const data = res.data;
+      if(!data.hasOwnProperty("error") && data.msg != "Sin archivos") {
+          sessionStorage.setItem('user', JSON.stringify(data.user));
+      }
+    }
+    
     props.testDocs();
     dispatch(props.updateAllDocs(arr, key));
+    dispatch(updateLoader(false));
   };
 
   let empty = () => {

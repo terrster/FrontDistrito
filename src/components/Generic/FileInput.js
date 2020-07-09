@@ -39,8 +39,8 @@ const FileInput = ({
 					return (
 						(value !== undefined) ?
 						((value.name === undefined ) ? 
-							<Chip fileName={name} delete={deleteFile} docName={value} index={index} key={index}/>: 
-							<Chip fileName={value.name} delete={deleteFile} docName={nombre} index={index} key={index}/>)
+							<Chip fileName={name} typeDoc={nombre} delete={deleteFile} docName={value} index={index} key={index}/>: 
+							<Chip fileName={value.name} typeDoc={nombre} delete={deleteFile} docName={nombre} index={index} key={index}/>)
 						:<></>
 					);
 				}  )

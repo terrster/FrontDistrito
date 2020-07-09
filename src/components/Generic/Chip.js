@@ -27,7 +27,7 @@ class Chip extends Component {
 				<img className="icon" src={clip} style={{width : 96, height : 96}}style={{width : 96, height : 96}}/>
 				{/* <FontAwesomeIcon className="icon" icon="paperclip" style={{width : 96, height : 96}} /> */}
 						<label className="texto-chip">{this.props.fileName}</label>
-				<span className="closebtn" onClick={() => this.props.delete(this.props.index, this.props.docName)} >&times;</span>
+				<span className="closebtn" onClick={() => this.props.delete(this.props.index, this.props.docName, this.props.typeDoc)} >&times;</span>
 			</div>
 		 );
 	}
