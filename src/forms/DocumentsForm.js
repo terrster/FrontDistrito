@@ -114,7 +114,6 @@ let DocumentsForm = (props) => {
           sessionStorage.setItem('user', JSON.stringify(data.user));
       }
     }
-    
     props.testDocs();
     dispatch(props.updateAllDocs(arr, key));
     dispatch(updateLoader(false));
