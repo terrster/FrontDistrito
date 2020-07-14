@@ -335,12 +335,13 @@ let DocumentsForm = (props) => {
   let currDocs = props.currentDocuments;
 
   const filterDocs = ["oficialID", "proofAddress", "others", "bankStatements"];
+  const filterDocsPM = ["constitutiveAct","financialStatements","bankStatements","oficialID", "proofAddressMainFounders", "others"]
 
   if ((typePerson === "RIF" || typePerson === "PFAE") && ciec) {
     docFiles = docFiles.filter((doc) => filterDocs.includes(doc.name));
   }
   if (typePerson === "PM" && ciec) {
-    docFiles = docFiles.filter((doc) => doc.name !== "rfc");
+    docFiles = docFiles.filter((doc) => filterDocsPM.includes(doc.name));
   }
 
   return (

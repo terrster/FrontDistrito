@@ -75,6 +75,7 @@ const ComercialInfo = (props) => {
 				}	
 			}
 		} 
+		dispatch( updateRefDocuments(false) );
 		dispatch( updateLoader(false) );
 	}
 
