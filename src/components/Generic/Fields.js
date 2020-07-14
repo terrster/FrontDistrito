@@ -194,7 +194,7 @@ export const renderFieldFull = ({
 					{big ? (
 						<input
 							type="checkbox"
-							style={{ width: '60px', height: '60px', marginTop: '-15px' }}
+							className="form-checkbox"
 							{...input}
 						/>
 					) : (
