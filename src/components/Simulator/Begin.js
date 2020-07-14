@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Title from '../Generic/Title';
 import { Button } from 'react-bootstrap';
 import CurrencyInput from 'react-currency-input';
@@ -15,8 +15,16 @@ const Begin = props => {
 
 	const dispatch = useDispatch();
 	const { amount, cont } = useSelector(state => state.simulator)
+	const [disabled, setDisabled] = useState(true);
+	const [error, setError] = useState(false);
 
 	let handleChange = (event, maskedvalue, floatvalue) => {
+		if (floatvalue >= 25000){
+			setError(false);
+			setDisabled(false);
+		} else {
+			setError(true)
+		}
 		dispatch (updateAmount(maskedvalue));
 	};
 
@@ -51,11 +59,17 @@ const Begin = props => {
 					onChangeEvent={handleChange}
 					thousandSeparator=","
 					prefix="$"
+					precision="0"
 				/>{' '}
 				para mi negocio
 			</div>
+			{ error && <strong><span style={{color:'var(--primary-color)', fontSize: '0.8em'}} >Debe ingresar una cantidad mayor a 25000</span></strong>
+			}
+			
 			<Button
 				className="btn-blue-general mt-45 fz24"
+				style={{ cursor: "not-allowed "}}
+				disabled={disabled}
 				onClick={changeStep}
 			>
 				Siguiente
