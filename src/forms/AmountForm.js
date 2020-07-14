@@ -1,16 +1,20 @@
-import React from 'react';
-import Title from '../components/Generic/Title';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+
 import '../css/general.css';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import { Field, reduxForm } from 'redux-form';
-import InputLabel from '../components/Generic/InputLabel';
 import { old, reason } from '../models/AmountModels';
+import { createNumberMask  } from 'redux-form-input-masks';
+import scroll from '../utils/scroll';
+import helpImg from '../assets/img/type_person/help.png'
+
+import Title from '../components/Generic/Title';
+import InputLabel from '../components/Generic/InputLabel';
 import PersonType from '../components/Appliance/PersonType';
 import { validateAmount } from '../components/Validate/ValidateAmount';
 import { renderField, renderSelectField } from '../components/Generic/Fields';
-import { createNumberMask  } from 'redux-form-input-masks';
-import helpImg from '../assets/img/type_person/help.png'
 
 const onlyNumbers = (nextValue, previousValue) => /^[+]?([0-9]+(?:[\,.][0-9]*)?|\,.[0-9]+)$/.test(nextValue) || nextValue.length === 0? nextValue : previousValue;
 /* ^[0-9]+([,.][0-9]+)?$ */
@@ -25,10 +29,45 @@ const currencyMask = createNumberMask({
 
 
 let AmountForm = props => {
-	const { handleSubmit } = props;
+	const { handleSubmit, valid } = props
+	const [disabled, setDisabled] = useState(true);
+
 	const selectedPerson = (type) => {
 		props.change('personType', type);
 	}
+
+	const goToError = () => {
+		const personTypeError = document.getElementById("personType-error");
+		const howMuchError = document.getElementById("howMuch-error");
+		const termError = document.getElementById("term-error");
+		const whyNeedError = document.getElementById("whyNeed-error");
+		const yearSalesError = document.getElementById("yearSales-error");
+		const oldError = document.getElementById("old-error");
+		let posY = "";
+		const errors = [personTypeError, howMuchError, termError, whyNeedError, yearSalesError, oldError];
+		for (let x = 0; x < errors.length; x++){
+			if (errors[x] != null){
+				posY = errors[x].offsetTop
+				break;
+			}
+		}
+		if (posY !== ""){
+			if (posY-200 < 0 ){
+				window.scrollTo( 0, 0);
+			} else {
+				window.scrollTo( 0, posY - 200 );
+			}
+		}
+	}
+
+	if (disabled && valid){
+		setDisabled(false);
+	}
+	if (!disabled && !valid){
+		setDisabled(true);
+	}
+
+
 	return (
 		<div>
 			<p className="text-dp fz20 fw500 mt-2 mb-1 text-center">Selecciona tu tipo de negocio, si tienes duda presiona <img src={helpImg} width="20px" heigth="30px" /> para saber más.</p>
@@ -97,13 +136,24 @@ let AmountForm = props => {
 				))}
 			</Field>
 			<div className="text-center" style={{ marginBottom: '50px' }}>
-				<Button
-					type="submit"
-					className="mt-50 btn-blue-general"
-					onClick={() => window.scrollTo()}
-				>
-					Continuar
-				</Button>
+				{
+					!disabled ? (
+						<Button
+							type="submit"
+							className={"mt-50 btn-blue-general"}
+						>
+							Continuar
+						</Button>
+					) : (
+						<Button 
+							type="button"
+							className="mt-50 btn-blue-general btn-gray-general"
+							onClick={() => goToError()}
+						>
+							Continuar
+						</Button>
+					)
+				}
 			</div>
 			</form>
 		</div>
