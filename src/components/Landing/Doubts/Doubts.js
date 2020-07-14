@@ -87,7 +87,7 @@ const Doubts = () => {
 								</div>
 								:
 								<div className="form-group text-center text-lg-right">
-									<Button className="contact-button coolvetica fw500 white fz16 mt-24 mb-5 mb-lg-0" disabled={(data.email.isValid && data.name.isValid) ? false : true} onClick={handleSend}>¡Contáctenme!</Button>
+									<Button className="btn-blue-general fw500 white fz16 mt-24 mb-5 mb-lg-0" disabled={(data.email.isValid && data.name.isValid) ? false : true} onClick={handleSend}>¡Contáctenme!</Button>
 								</div>
 							}
 						</form>

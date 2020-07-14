@@ -266,10 +266,10 @@ let ComercialInfoForm = props => {
     </Field>
     <Field component={renderSelectField} name="warranty" cls="mb-3">
       <option value="">¿Puedes ofrecer una garantía?</option>
-      <option value="1">Sí, garantía inmobiliaria.</option>
-      <option value="2">Sí, activo fijo.</option>
-      <option value="3">Sí, ambos.</option>
-      <option value="4">No.</option>
+      <option value="1">Sí, garantía inmobiliaria</option>
+      <option value="2">Sí, activo fijo</option>
+      <option value="3">Sí, ambos</option>
+      <option value="4">No</option>
     </Field>
 
     <div className="text-center" style={{marginBottom : '50px'}}>

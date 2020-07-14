@@ -709,7 +709,7 @@ let GeneralInfoForm = ({
           <Field
             component={renderFieldFull}
             type="checkbox"
-            label="Autorizo a Distrito Pyme S.A de C.V. a consultar mis antecedentes crediticios por única ocasión antes las Sociedades de Información Crediticia que estime conveniente, declarando que conozco la naturaleza, alcance y uso que Distrito Pyme S.A de C.V. hará de tal información."
+            label="Autorizo a Distrito Pyme S.A de C.V. a consultar mis antecedentes crediticios por única ocasión ante las Sociedades de Información Crediticia que estime conveniente, declarando que conozco la naturaleza, alcance y uso que Distrito Pyme S.A de C.V. hará de tal información."
             name="tyc"
             onChange={(event, newValue, previousValue) =>
               setInitialValues({ ...initialValues, tyc: newValue })
