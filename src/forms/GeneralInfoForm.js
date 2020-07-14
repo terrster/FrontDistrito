@@ -78,6 +78,7 @@ let GeneralInfoForm = ({
             ).json();
             if (Array.isArray(res)) {
               const colonias = res.map((datos) => datos.response.asentamiento);
+              colonias.sort();
               setColonias(colonias);
             } else if (res.error) {
               setCpError("Error");
@@ -160,6 +161,7 @@ let GeneralInfoForm = ({
         if (Array.isArray(res)) {
           const { estado, municipio } = res[0].response;
           const colonias = res.map((datos) => datos.response.asentamiento);
+          colonias.sort();
           setColonias(colonias);
           setState(estado);
           setMunicipality(municipio);
@@ -200,6 +202,7 @@ let GeneralInfoForm = ({
         ).json();
         if (Array.isArray(res)) {
           const colonias = res.map((datos) => datos.response.asentamiento);
+          colonias.sort();
           setColonias(colonias);
           setInitialValues({ ...initialValues, colonias });
         } else if (res.error) {
@@ -256,6 +259,8 @@ let GeneralInfoForm = ({
     /^\d+$/.test(nextValue) || nextValue.length === 0
       ? nextValue
       : previousValue;
+  const upper = value => value && value.toUpperCase()
+
 
   return (
     <div>
@@ -389,6 +394,7 @@ let GeneralInfoForm = ({
                 component={renderFieldFull}
                 name="rfcPerson"
                 label="RFC de la persona"
+                normalize={upper}
                 onChange={(event, newValue, previousValue) =>
                   setInitialValues({ ...initialValues, rfcPerson: newValue })
                 }
