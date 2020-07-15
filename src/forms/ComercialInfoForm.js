@@ -138,6 +138,7 @@ let ComercialInfoForm = props => {
   const { type } = user.idClient[user.idClient.length - 1];  
 
   const onlyNumbers = (nextValue, previousValue) => /^[+]?([0-9]+(?:[\,.][0-9]*)?|\,.[0-9]+)$/.test(nextValue) || nextValue.length === 0? nextValue : previousValue;
+  const upper = value => value && value.toUpperCase()
 
   return (
     <div>
@@ -158,7 +159,7 @@ let ComercialInfoForm = props => {
 
 
     <Field component={renderField} label="Actividad específica" name="specific" cls="mb-3"/>
-    <Field component={renderField} label="RFC" name="rfc"  cls="mb-3"  maxLength={12} minLength={12}/>
+    <Field component={renderField} label="RFC" name="rfc"  cls="mb-3" normalize={upper}  maxLength={12} minLength={12}/>
     <SubtitleForm subtitle="Domicilio del negocio" className="mt-11 mb-3" />
 
     <Row className="d-flex justify-content-center">

@@ -312,6 +312,19 @@
 	opacity: 0.95;
 }
 
+.btn-gray-general{
+	font-family: 'coolvetica_rg' !important;
+	font-size: 17px !important;
+	color: #ffffff !important;
+	background-color: gray !important;
+	border-color: gray !important;
+	border-radius: 25px !important;
+	width: 100% !important;	
+	height: 45px !important;
+	text-align: center !important;
+	letter-spacing: 2px;
+}
+
 .btn-blue-documents{
 	max-width: 1000px;
 }
