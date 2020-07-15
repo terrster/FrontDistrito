@@ -48,7 +48,14 @@ const history = useHistory();
   const statusdocument = useSelector((state) => state.docsStatus);
 
 const getDocsMethod = () => {
-    let typePerson = user.idClient[user.idClient.length - 1].type;
+    const idClient = user.idClient[user.idClient.length - 1];
+    const typePerson = idClient.type;
+    const { appliance } = user.idClient[user.idClient.length - 1];  
+    const { idComercialInfo } = appliance[appliance.length - 1];
+    let ciec = '';
+    if (idComercialInfo.length > 0){
+      ciec = idComercialInfo[idComercialInfo.length - 1].ciec;
+    }
     let docFiles = [];
     /**
      * [Dependiendo la persona le creamos los documentos]
@@ -94,6 +101,13 @@ const getDocsMethod = () => {
         break;
       default:
         break;
+    }
+    if (ciec){
+      if (typePerson === "PM"){
+        docFiles = ["constitutiveAct","financialStatements","bankStatements","oficialID", "proofAddressMainFounders", "others"];
+      } else if ( typePerson === "RIF" || typePerson === "PFAE") {
+        docFiles = ["oficialID", "proofAddress", "others", "bankStatements"];
+      }
     }
     return docFiles;
   };
@@ -173,7 +187,7 @@ const getDocsMethod = () => {
 
   const testDocumentsMethod = (array) => {
     let status = true;
-    let requiredDocs = getDocsMethod();
+    let requiredDocs = getDocsMethod();    
     for (const k in requiredDocs) {
       if (array[requiredDocs[k]].length <= 0) {
         status = false;
