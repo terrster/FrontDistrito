@@ -1,13 +1,10 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
 
 import '../css/general.css';
-import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import { Field, reduxForm } from 'redux-form';
 import { old, reason } from '../models/AmountModels';
 import { createNumberMask  } from 'redux-form-input-masks';
-import scroll from '../utils/scroll';
 import helpImg from '../assets/img/type_person/help.png'
 
 import Title from '../components/Generic/Title';
@@ -29,7 +26,7 @@ const currencyMask = createNumberMask({
 
 
 let AmountForm = props => {
-	const { handleSubmit, valid } = props
+	const { handleSubmit, valid } = props;
 	const [disabled, setDisabled] = useState(true);
 
 	const selectedPerson = (type) => {

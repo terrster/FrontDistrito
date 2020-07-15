@@ -92,8 +92,8 @@ export const renderField = ({
 		</div>
 		{touched &&
 			((error && (
-				<span>
-					<small className="error" id={input.name + "-error"} >{error}</small>
+				<span id={input.name + "-error"}>
+					<small className="error">{error}</small>
 				</span>
 			)) ||
 				(warning && <span id={input.name + "-error"}>{warning}</span>))}
@@ -121,8 +121,8 @@ export const renderSelectField = ({
 		</div>
 		{touched &&
 			((error && (
-				<span>
-					<small className="error"  id={input.name + "-error"}>{error}</small>
+				<span id={input.name + "-error"}>
+					<small className="error">{error}</small>
 				</span>
 			)) ||
 				(warning && <span  id={input.name + "-error"}>{warning}</span>))}
@@ -210,8 +210,8 @@ export const renderFieldFull = ({
 		</div>
 		{touched &&
 			((error && (
-				<span>
-					<small className="error"  id={input.name + "-error"}>{error}</small>
+				<span id={input.name + "-error"}>
+					<small className="error">{error}</small>
 				</span>
 			)) ||
 				(warning && <span  id={input.name + "-error"}>{warning}</span>))}
@@ -239,8 +239,8 @@ export const renderSelectFieldFull = ({
 		</div>
 		{touched &&
 			((error !== 'Debes tener entre 18 y 71 años para poder continuar' ? (
-				<span  id={input.name + "-error"}>
-					<small className="error">{error}</small>
+				<span id={input.name + "-error"}>
+					<small className="error" >{error}</small>
 				</span>
 			) : (
 				<span  id={input.name + "-error"}>

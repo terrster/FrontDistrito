@@ -11,11 +11,14 @@ import {
   renderFieldFull,
   renderSelectFieldFull,
   renderField,
+  renderSelectField,
 } from "../components/Generic/Fields";
 import { updateLoader } from "../redux/actions/loaderActions";
-import axiosBase from "axios";
+import scroll from "../utils/scroll";
+
 let GeneralInfoForm = ({
   handleSubmit,
+  valid,
   changeAddress,
   initialValues,
   setInitialValues,
@@ -31,13 +34,14 @@ let GeneralInfoForm = ({
     sameAddress: "",
   });
   const [sameAddress, setSameAddress] = useState(false);
+  const [disabled, setDisabled] = useState(true);
   const [showModalGeneral, setShow] = useState(true);
   const [creditCard, setCreditCard] = useState("");
 
   const [changeCP, setChangeCP] = useState(false);
 
   const [cp, setCp] = useState("");
-  const [cpError, setCpError] = useState("No se encuentra el código postal");
+  const [cpError, setCpError] = useState(false);
   const [colonias, setColonias] = useState([]);
   const [state, setState] = useState("");
   const [municipality, setMunicipality] = useState("");
@@ -68,7 +72,7 @@ let GeneralInfoForm = ({
             municipality,
             state,
           } = comercial.address[comercial.address.length - 1];
-          
+
           try {
             const res = await (
               await fetch(
@@ -80,14 +84,14 @@ let GeneralInfoForm = ({
               const colonias = res.map((datos) => datos.response.asentamiento);
               colonias.sort();
               setColonias(colonias);
+              setCpError(false);
             } else if (res.error) {
-              setCpError("Error");
+              setCpError(true);
             }
           } catch (error) {
+            setCpError(true);
             console.log("No hay CP");
           }
-
-
           setState(state);
           setMunicipality(state);
           setCurrentAddress({
@@ -172,10 +176,12 @@ let GeneralInfoForm = ({
             state: estado,
             colonias,
           });
+          setCpError(false);
         } else if (res.error) {
-          setCpError("Error");
+          setCpError(true);
         }
       } catch (error) {
+        setCpError(true);
         console.log("No hay CP");
       }
     } else {
@@ -205,10 +211,12 @@ let GeneralInfoForm = ({
           colonias.sort();
           setColonias(colonias);
           setInitialValues({ ...initialValues, colonias });
+          setCpError(false);
         } else if (res.error) {
-          setCpError("Error");
+          setCpError(true);
         }
       } catch (error) {
+        setCpError(true);
         console.log("No hay CP");
       }
     }
@@ -253,14 +261,87 @@ let GeneralInfoForm = ({
     getInitialValues();
   }, []);
 
+  const goToError = () => {
+    const nameError = document.getElementById("name-error");
+    const lastnameError = document.getElementById("lastname-error");
+    const secondLastnameError = document.getElementById("secondLastname-error");
+    const civilStatusError = document.getElementById("civilStatus-error");
+    const dayError = document.getElementById("day-error");
+    const monthError = document.getElementById("month-error");
+    const yearError = document.getElementById("year-error");
+    const edadError = document.getElementById("edad-error");
+    const rfcPersonError = document.getElementById("rfcPerson-error");
+    const streetError = document.getElementById("street-error");
+    const extNumberError = document.getElementById("extNumber-error");
+    const intNumberError = document.getElementById("intNumber-error");
+    const zipCodeError = document.getElementById("zipCode-error");
+    const townError = document.getElementById("town-error");
+    const stateError = document.getElementById("state-error");
+    const municipalityError = document.getElementById("municipality-error");
+    const phoneError = document.getElementById("phone-error");
+    const name1Error = document.getElementById("name1-error");
+    const phone1Error = document.getElementById("phone1-error");
+    const relative1Error = document.getElementById("relative1-error");
+    const name2Error = document.getElementById("name2-error");
+    const phone2Error = document.getElementById("phone2-error");
+    const relative2Error = document.getElementById("relative2-error");
+    const mortgageCreditError = document.getElementById("mortgageCredit-error");
+    const carCreditError = document.getElementById("carCredit-error");
+    const creditCarError = document.getElementById("creditCar-error");
+    const last4Error = document.getElementById("last4-error");
+    const tycError = document.getElementById("tyc-error");
+    const errors = [
+      nameError,
+      lastnameError,
+      secondLastnameError,
+      civilStatusError,
+      dayError,
+      monthError,
+      yearError,
+      edadError,
+      rfcPersonError,
+      streetError,
+      extNumberError,
+      intNumberError,
+      zipCodeError,
+      townError,
+      stateError,
+      municipalityError,
+      phoneError,
+      name1Error,
+      phone1Error,
+      relative1Error,
+      name2Error,
+      phone2Error,
+      relative2Error,
+      mortgageCreditError,
+      carCreditError,
+      creditCarError,
+      last4Error,
+      tycError,
+    ];
+    for (let x = 0; x < errors.length; x++) {
+      if (errors[x] != null) {
+        scroll(errors[x].id);
+        break;
+      }
+    }
+  };
+
+  if (!cpError && disabled && valid) {
+    setDisabled(false);
+  }
+  if ((!disabled && !valid) || (!disabled && cpError)) {
+    setDisabled(true);
+  }
+
   const onlyLirycs = (nextValue, previousValue) =>
     /^([a-z ñáéíóú]{0,60})$/i.test(nextValue) ? nextValue : previousValue;
   const onlyNumbers = (nextValue, previousValue) =>
     /^\d+$/.test(nextValue) || nextValue.length === 0
       ? nextValue
       : previousValue;
-  const upper = value => value && value.toUpperCase()
-
+  const upper = (value) => value && value.toUpperCase();
 
   return (
     <div>
@@ -469,17 +550,27 @@ let GeneralInfoForm = ({
                 if (newValue.hasOwnProperty("length")) {
                   if (newValue.length === 5) {
                     dispatch(updateLoader(true));
+                  } else {
+                    setCpError(false);
+                    setColonias([]);
                   }
                 }
                 getAddress(newValue);
               }}
             />
+            {
+              cpError && (
+              <span id="zipCode-error">
+					      <small className="error">Código postal no encontrado.</small>
+				      </span>
+              )
+            }
           </Col>
 
           <Col lg={6} md={6} sm={12}>
             <Field
               className="form-control custom-form-input brandonReg mt-24 mb-0"
-              component="select"
+              component={renderSelectField}
               name="town"
               val={!sameAddress ? null : currentAddress.town}
               disabled={!sameAddress ? false : true}
@@ -544,10 +635,7 @@ let GeneralInfoForm = ({
             />
           </Col>
         </Row>
-        <SubtitleForm
-          subtitle="Referencias"
-          className="text-form-dp mt-30"
-        />
+        <SubtitleForm subtitle="Referencias" className="text-form-dp mt-30" />
         <label className="label-style">
           El número telefónico debe tener 10 dígitos
         </label>
@@ -725,9 +813,19 @@ let GeneralInfoForm = ({
         </div>
 
         <div className="text-center" style={{ marginBottom: "50px" }}>
-          <Button type="submit" className="mt-50 btn-blue-general">
-            Continuar
-          </Button>
+          {disabled ? (
+            <Button
+              type="button"
+              className="mt-50 btn-blue-general btn-gray-general"
+              onClick={() => goToError()}
+            >
+              Continuar
+            </Button>
+          ) : (
+            <Button type="submit" className="mt-50 btn-blue-general">
+              Continuar
+            </Button>
+          )}
         </div>
       </form>
     </div>
