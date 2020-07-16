@@ -53,7 +53,6 @@ const GeneralInfo = () => {
     dispatch( updateLoader(true));
 	const getData = async () => {
 		const user = JSON.parse(sessionStorage.getItem('user'));
-		const id = user._id;
 		const idClient = user.idClient[user.idClient.length - 1];
 		if (idClient.appliance.length > 0){
 			const appliance = idClient.appliance[idClient.appliance.length - 1];
@@ -147,7 +146,6 @@ const GeneralInfo = () => {
 		dispatch( updateLoader(true));		
 		if (checkboxComercialAddress){
 			const user = JSON.parse(sessionStorage.getItem('user'));
-			const id = user._id;
 			const idClient = user.idClient[user.idClient.length - 1];
 			if (idClient.appliance.length > 0){
 				const appliance = idClient.appliance[idClient.appliance.length - 1];

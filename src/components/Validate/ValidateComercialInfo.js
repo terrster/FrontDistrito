@@ -29,6 +29,12 @@ export const validateComercialInfo = values => {
 	if (!values.town){
 		errors.town = "Seleccione una colonia"
 	}
+	if (!values.state){
+		errors.state = "Ingrese un código postal válido."
+	}
+	if (!values.municipality){
+		errors.municipality = "Ingrese un código postal válido."
+	}
 	if (!values.comercialName) {
 		errors.comercialName = 'Ingresa el nombre de tu negocio';
 	}
