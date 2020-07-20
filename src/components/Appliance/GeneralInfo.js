@@ -17,179 +17,260 @@ import {
   updateAppliance,
   updateApplianceGeneralInfo,
 } from "../../redux/actions/applianceActions";
-import {
-	changeTypeGeneralInfoForm
-} from '../../redux/actions/formsTypeActions';
-import axios from '../../utils/axios';
-import axiosBase from 'axios';
+import { changeTypeGeneralInfoForm } from "../../redux/actions/formsTypeActions";
+import axios from "../../utils/axios";
+import axiosBase from "axios";
 import Loader from "../Loader/Loader";
 import { ToastContainer } from "react-toastify";
 
 const GeneralInfo = () => {
   const dispatch = useDispatch();
-  const applianceGeneralInfo = useSelector((state) => state.appliance.generalInfo);
+  const applianceGeneralInfo = useSelector(
+    (state) => state.appliance.generalInfo
+  );
   //const appliance = useSelector((state) => state.appliance.appliance);
   const applianceData = useSelector((state) => state.appliance);
   const modal = useSelector((state) => state.modal);
   const app = useSelector((state) => state.app);
   const toast = useSelector((state) => state.app.toast);
-  const currentGeneralInfo = useSelector(state => state.actionForm.generalInfoForm);
-  
-  const [user, setUser] = useState(JSON.parse(sessionStorage.getItem("user")));
+  const currentGeneralInfo = useSelector(
+    (state) => state.actionForm.generalInfoForm
+  );
+
   const [initialValues, setInitialValues] = useState({});
   const history = useHistory();
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    if(!toast.third){
-		execToast('third');
-		dispatch( updateToast(toast, 'third') )
-	}
-	let secondLastname = "";
-	if (user.secondLastName){
-		secondLastname = user.secondLastName;
-	}
+    if (!toast.third) {
+      execToast("third");
+      dispatch(updateToast(toast, "third"));
+    }
+    const user = JSON.parse(sessionStorage.getItem("user"));
+    let secondLastname = "";
+    if (user.secondLastName) {
+      secondLastname = user.secondLastName;
+    }
+    dispatch(updateLoader(true));
+    const getData = async () => {
+      try {
+      const user = JSON.parse(sessionStorage.getItem("user"));
+      const idClient = user.idClient;
+      if (idClient.appliance.length > 0) {
+        const appliance = idClient.appliance[idClient.appliance.length - 1];
+        if (appliance.hasOwnProperty("idGeneralInfo")) {
+          const general = appliance.idGeneralInfo;
+          const date = general.birthDate.split("/");
+          const day = date[0];
+          const month = date[1];
+          const year = date[2];
+          const ref1 = general.contactWith[0];
+          const name1 = ref1.name;
+          const phone1 = ref1.phone;
+          const relative1 = ref1.relative;
+          const ref2 = general.contactWith[1];
+          const name2 = ref2.name;
+          const phone2 = ref2.phone;
+          const relative2 = ref2.relative;
+          const creditCard = general.creditCard ? "1" : "0";
+          const mortgageCredit = general.mortgageCredit ? "1" : "0";
+          const address = general.address;
+          const street = address.street;
+          const state = address.state;
+          const municipality = address.municipality;
+          const town = address.town;
+          const zipCode = address.zipCode;
+          const extNumber = address.extNumber;
+          const intNumber = address.intNumber;
+          let colonias = [];
+          try {
+            const coloniasRequest = await axiosBase.get(
+              `https://api-sepomex.hckdrk.mx/query/info_cp/${zipCode}`
+            );
+            if (Array.isArray(coloniasRequest.data)) {
+              coloniasRequest.data.map((datos) => {
+                colonias.push(datos.response.asentamiento);
+              });
+            } else if (coloniasRequest.error) {
+              colonias = null;
+            }
+          } catch (e) {
+            console.log(e);
+          }
+          setInitialValues({
+            ...initialValues,
+            ...general,
+            day,
+            month,
+            year,
+            name1,
+            name2,
+            phone1,
+            phone2,
+            relative1,
+            relative2,
+            mortgageCredit,
+            creditCard,
+            street,
+            town,
+            zipCode,
+            extNumber,
+            intNumber,
+            colonias,
+            state,
+            municipality,
+          });
+        }
+      }
+    } catch (e) {
+      console.log(e);
+    }
+    };
     setInitialValues({...initialValues, name: user.name, lastname: user.lastName, secondLastname, phone: user.phone });
-    dispatch( updateLoader(true));
-	const getData = async () => {
-		const user = JSON.parse(sessionStorage.getItem('user'));
-		const idClient = user.idClient[user.idClient.length - 1];
-		if (idClient.appliance.length > 0){
-			const appliance = idClient.appliance[idClient.appliance.length - 1];
-			if (appliance.idGeneralInfo.length > 0){
-				const general = appliance.idGeneralInfo[appliance.idGeneralInfo.length - 1];
-				const id = general._id;
-				const res = await axios.get(`api/info-general/${id}`);		
-				const date = res.data.general.birthDate.split('/');
-				const day = date[0];
-				const month = date[1];
-				const year = date[2];
-				const ref1 = res.data.general.contactWith[0];
-				const name1 = ref1.name;
-				const phone1 = ref1.phone;
-				const relative1 = ref1.relative;
-				const ref2 = res.data.general.contactWith[1];
-				const name2 = ref2.name;
-				const phone2 = ref2.phone;
-				const relative2 = ref2.relative;
-				const creditCard = res.data.general.creditCard ? "1" : "0";
-				const mortgageCredit = res.data.general.mortgageCredit ? "1" : "0";
-				const address = res.data.general.address[res.data.general.address.length - 1];
-				const street = address.street;
-				const state = address.state;
-				const municipality = address.municipality;
-				const town = address.town;
-				const zipCode = address.zipCode;
-				const extNumber = address.extNumber;
-				const intNumber = address.intNumber;
-				let colonias = [];
-				const coloniasRequest = await axiosBase.get(`https://api-sepomex.hckdrk.mx/query/info_cp/${zipCode}`);              
-				if(Array.isArray(coloniasRequest.data)){
-					coloniasRequest.data.map(datos => {
-						colonias.push(datos.response.asentamiento);
-					});
-				} else if(coloniasRequest.error) {
-					colonias = null;
-				}
-				setInitialValues({ 
-					...initialValues, ...res.data.general, day, month, year,
-					name1, name2, phone1, phone2, relative1, relative2,
-					mortgageCredit, creditCard, street, town, zipCode, extNumber, intNumber,
-					colonias, state, municipality
-				});
-			}
-		}
-	}
-	getData();	
-	dispatch( updateLoader(false));
+    try {
+    getData();
+  } catch (e) {
+    console.log("Get data");
+    console.log(e)
+  }
+    dispatch(updateLoader(false));
   }, []);
 
-
   const onFormSubmit = async (dataForm) => {
-	  console.log(dataForm);
-	dispatch( updateLoader(true));
-	const user = JSON.parse(sessionStorage.getItem('user'));
-	const id = user._id;
-	const idClient = user.idClient[user.idClient.length - 1];
-	const data = { 
-		...dataForm,
-		birthDate : new Date(`${dataForm.day}/${dataForm.month}/${dataForm.year}`).toLocaleDateString(),
-	}
-	if(idClient.appliance.length > 0){
-		const appliance = idClient.appliance[idClient.appliance.length - 1];
-		if(appliance.idGeneralInfo.length > 0){
-			const general = appliance.idGeneralInfo[appliance.idGeneralInfo.length - 1]
-			const id = general._id;				
-			try {
-				const res = await axios.put(`api/info-general/${id}`,data);
-				sessionStorage.setItem('user', JSON.stringify(res.data.user));
-				window.location.href = `/documentos/${user._id}`;
-			} catch (error) {
-				console.log("Error de servicio",error);
-			} 
-		} else {
-				try {
-					const res = await axios.post(`api/info-general/${id}`, data);
-					console.log("POST");
-					console.log(res);
-					sessionStorage.setItem('user', JSON.stringify(res.data.user));
-					window.location.href = `/documentos/${user._id}`;
-				} catch (error) {
-					console.log("Error de servicio",error);
-				}	
-			}
-		} 	
-	dispatch( updateLoader(false));		
+    dispatch(updateLoader(true));
+    const user = JSON.parse(sessionStorage.getItem("user"));
+    const id = user._id;
+    const idClient = user.idClient;
+    let data = {
+      ...dataForm,
+      birthDate: new Date(
+        `${dataForm.day}/${dataForm.month}/${dataForm.year}`
+      ).toLocaleDateString(),
+    };
+    if (idClient.appliance.length > 0) {
+      const appliance = idClient.appliance[idClient.appliance.length - 1];
+      if (dataForm.sameAddress) {
+        if (appliance.hasOwnProperty("idComercialInfo")) {
+          const comercial = appliance.idComercialInfo;
+          const {
+            extNumber,
+            intNumber,
+            registerDate,
+            street,
+            town,
+            zipCode,
+            municipality,
+            state,
+		  } = comercial.address;
+		  data = {
+			  ...data,
+			  extNumber,
+			  intNumber,
+			  registerDate,
+			  street,
+			  town,
+			  zipCode,
+			  municipality,
+			  state,
+		  }
+        }
+      }
+      if (appliance.hasOwnProperty("idGeneralInfo")) {
+        const general = appliance.idGeneralInfo;
+        const id = general._id;
+        try {
+          const res = await axios.put(`api/info-general/${id}`, data);
+          sessionStorage.setItem("user", JSON.stringify(res.data.user));
+          window.location.href = `/documentos/${user._id}`;
+        } catch (error) {
+          console.log("Error de servicio", error);
+        }
+      } else {
+        try {
+          const res = await axios.post(`api/info-general/${id}`, data);
+          sessionStorage.setItem("user", JSON.stringify(res.data.user));
+          window.location.href = `/documentos/${user._id}`;
+        } catch (error) {
+          console.log("Error de servicio", error);
+        }
+      }
+    }
+    dispatch(updateLoader(false));
   };
 
-	const setComercialAddress = (checkboxComercialAddress) => {
-		dispatch( updateLoader(true));		
-		if (checkboxComercialAddress){
-			const user = JSON.parse(sessionStorage.getItem('user'));
-			const idClient = user.idClient[user.idClient.length - 1];
-			if (idClient.appliance.length > 0){
-				const appliance = idClient.appliance[idClient.appliance.length - 1];
-				if (appliance.idComercialInfo.length > 0){
-					const comercial = appliance.idComercialInfo[appliance.idComercialInfo.length - 1];
-					const { 
-						extNumber, intNumber, registerDate, street, town, zipCode,
-						state, municipality 
-					} = comercial.address[comercial.address.length - 1];
-					setInitialValues({ ...initialValues, state, municipality, extNumber, intNumber, registerDate, street, town, zipCode, sameAddress: true })				}
-				}
-		}
-		else {
-			const sameAddress = false;
-			let extNumber = "";
-			let intNumber = "";
-			let street = "";
-			let town = "";
-			let zipCode = "";
-			let state = "";
-			let municipality = "";
-			let user = JSON.parse(sessionStorage.getItem("user"));
-			let idClient = user.idClient[user.idClient.length - 1];
-			if (idClient.appliance.length > 0){
-				const appliance = idClient.appliance[idClient.appliance.length - 1];
-				if (appliance.idGeneralInfo.length > 0){
-					const idGeneralInfo = appliance.idGeneralInfo[appliance.idGeneralInfo.length - 1];
-					if (idGeneralInfo.address.length > 0){
-						const address = idGeneralInfo.address[idGeneralInfo.address.length - 1];
-						extNumber = address.extNumber;
-						intNumber = address.intNumber;					
-						street = address.street;
-						town = address.town;
-						zipCode = address.zipCode;
-						state = address.state;
-						municipality = address.municipality;
-					}
-				}
-			}
-			setInitialValues({  ...initialValues, state, municipality, extNumber, intNumber, street, town, zipCode, sameAddress })
-		}
-		dispatch( updateLoader(false));		
-	}	
-	
+  const setComercialAddress = (checkboxComercialAddress) => {
+    dispatch(updateLoader(true));
+    if (checkboxComercialAddress) {
+      const user = JSON.parse(sessionStorage.getItem("user"));
+      const idClient = user.idClient;
+      if (idClient.appliance.length > 0) {
+        const appliance = idClient.appliance;
+        if (appliance.hasOwnProperty("idComercialInfo")) {
+          const comercial = appliance.idComercialInfo;
+          const {
+            extNumber,
+            intNumber,
+            registerDate,
+            street,
+            town,
+            zipCode,
+            state,
+            municipality,
+          } = comercial.address;
+          setInitialValues({
+            ...initialValues,
+            sameAddress: true,
+            state,
+            municipality,
+            extNumber,
+            intNumber,
+            registerDate,
+            street,
+            town,
+            zipCode,
+          });
+        }
+      }
+    } else {
+      let extNumber = "";
+      let intNumber = "";
+      let street = "";
+      let town = "";
+      let zipCode = "";
+      let state = "";
+      let municipality = "";
+      let user = JSON.parse(sessionStorage.getItem("user"));
+      let idClient = user.idClient;
+      if (idClient.appliance.length > 0) {
+        const appliance = idClient.appliance;
+        if (appliance.hasOwnProperty("idGeneralInfo")) {
+          const idGeneralInfo = appliance.idGeneralInfo;
+          if (idGeneralInfo.hasOwnProperty("address")) {
+            const address = idGeneralInfo.address;
+            extNumber = address.extNumber;
+            intNumber = address.intNumber;
+            street = address.street;
+            town = address.town;
+            zipCode = address.zipCode;
+            state = address.state;
+            municipality = address.municipality;
+          }
+        }
+      }
+      setInitialValues({
+        ...initialValues,
+        sameAddress: false,
+        state,
+        municipality,
+        extNumber,
+        intNumber,
+        street,
+        town,
+        zipCode,
+      });
+    }
+    dispatch(updateLoader(false));
+  };
 
   return (
     <div className="container mt-3">
@@ -197,16 +278,13 @@ const GeneralInfo = () => {
       <Steps />
       <ToastContainer />
       <div className="text-center mb-2">
-        <Title
-          title="Datos personales"
-          className="title-dp fz42"
-        />
+        <Title title="Datos personales" className="title-dp fz42" />
       </div>
       <GeneralInfoForm
         today={new Date()}
         changeDate={updateDate}
         onSubmit={(data) => {
-			window.scroll(0, 0);
+          window.scroll(0, 0);
           onFormSubmit(data);
         }}
         setInitialValues={setInitialValues}

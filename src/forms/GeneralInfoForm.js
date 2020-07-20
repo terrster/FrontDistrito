@@ -56,12 +56,11 @@ let GeneralInfoForm = ({
     dispatch(updateLoader(true));
     if (checkboxComercialAddress) {
       const user = JSON.parse(sessionStorage.getItem("user"));
-      const idClient = user.idClient[user.idClient.length - 1];
+      const idClient = user.idClient;
       if (idClient.appliance.length > 0) {
         const appliance = idClient.appliance[idClient.appliance.length - 1];
-        if (appliance.idComercialInfo.length > 0) {
-          const comercial =
-            appliance.idComercialInfo[appliance.idComercialInfo.length - 1];
+        if (appliance.hasOwnProperty("idComercialInfo")) {
+          const comercial = appliance.idComercialInfo;
           const {
             extNumber,
             intNumber,
@@ -71,7 +70,7 @@ let GeneralInfoForm = ({
             zipCode,
             municipality,
             state,
-          } = comercial.address[comercial.address.length - 1];
+          } = comercial.address;
 
           try {
             const res = await (
@@ -107,6 +106,7 @@ let GeneralInfoForm = ({
         }
       }
     } else {
+      setColonias([]);
       const sameAddress = false;
       let extNumber = "";
       let intNumber = "";
@@ -116,15 +116,13 @@ let GeneralInfoForm = ({
       let state = "";
       let municipality = "";
       let user = JSON.parse(sessionStorage.getItem("user"));
-      let idClient = user.idClient[user.idClient.length - 1];
+      let idClient = user.idClient;
       if (idClient.appliance.length > 0) {
         const appliance = idClient.appliance[idClient.appliance.length - 1];
-        if (appliance.idGeneralInfo.length > 0) {
-          const idGeneralInfo =
-            appliance.idGeneralInfo[appliance.idGeneralInfo.length - 1];
+        if (appliance.hasOwnProperty("idGeneralInfo")) {
+          const idGeneralInfo = appliance.idGeneralInfo;
           if (idGeneralInfo.address.length > 0) {
-            const address =
-              idGeneralInfo.address[idGeneralInfo.address.length - 1];
+            const address = idGeneralInfo.address;
             extNumber = address.extNumber;
             intNumber = address.intNumber;
             street = address.street;
@@ -154,7 +152,6 @@ let GeneralInfoForm = ({
 
   const getAddress = async (zipCode) => {
     if (zipCode.length === 5) {
-      console.log(zipCode);
       try {
         const res = await (
           await fetch(
@@ -225,15 +222,13 @@ let GeneralInfoForm = ({
 
   const getInitialValues = () => {
     const user = JSON.parse(sessionStorage.getItem("user"));
-    const idClient = user.idClient[user.idClient.length - 1];
+    const idClient = user.idClient;
     if (idClient.appliance.length > 0) {
       const appliance = idClient.appliance[idClient.appliance.length - 1];
-      if (appliance.idGeneralInfo.length > 0) {
-        const idGeneralInfo =
-          appliance.idGeneralInfo[appliance.idGeneralInfo.length - 1];
-        if (idGeneralInfo.address.length > 0) {
-          const address =
-            idGeneralInfo.address[idGeneralInfo.address.length - 1];
+      if (appliance.hasOwnProperty("idGeneralInfo")) {
+        const idGeneralInfo = appliance.idGeneralInfo;
+        if (idGeneralInfo.hasOwnProperty("address")) {
+          const address = idGeneralInfo.address;
           if (address.hasOwnProperty("state")) {
             if (address.state != null) {
               const { state } = address;
@@ -468,7 +463,7 @@ let GeneralInfoForm = ({
           </Col>
         </Row>
 
-        {user.idClient[user.idClient.length - 1].type === "PM" && (
+        {user.idClient.type === "PM" && (
           <Row>
             <Col lg={12} md={12} sm={12}>
               <Field
@@ -492,6 +487,7 @@ let GeneralInfoForm = ({
           component={renderFieldFull}
           onChange={(event, newValue, previousValue, name) => {
             dispatch(updateLoader(true));
+            setInitialValues({ ...initialValues, sameAddress: newValue });
             changeAddress(newValue);
             setSameAddress(newValue);
             setComercialAddress(newValue);
@@ -558,13 +554,11 @@ let GeneralInfoForm = ({
                 getAddress(newValue);
               }}
             />
-            {
-              cpError && (
+            {cpError && (
               <span id="zipCode-error">
-					      <small className="error">Código postal no encontrado.</small>
-				      </span>
-              )
-            }
+                <small className="error">Código postal no encontrado.</small>
+              </span>
+            )}
           </Col>
 
           <Col lg={6} md={6} sm={12}>
@@ -572,7 +566,7 @@ let GeneralInfoForm = ({
               className="form-control custom-form-input brandonReg mt-24 mb-0"
               component={renderSelectField}
               name="town"
-              val={!sameAddress ? null : currentAddress.town}
+              val={!sameAddress ? "" : currentAddress.town}
               disabled={!sameAddress ? false : true}
               cls="mb-3 mt-24"
               onChange={(event, newValue, previousValue) =>
@@ -584,7 +578,11 @@ let GeneralInfoForm = ({
               </option>
               {colonias.map((colonia, index) => {
                 return (
-                  <option value={colonia} key={colonia + index}>
+                  <option
+                    value={colonia}
+                    selected={colonia === currentAddress.town ? true : false}
+                    key={colonia + index}
+                  >
                     {colonia}
                   </option>
                 );
@@ -600,7 +598,7 @@ let GeneralInfoForm = ({
               label="Estado"
               name="state"
               readOnly={true}
-              value={!sameAddress ? "" : currentAddress.state}
+              val={!sameAddress ? "" : currentAddress.state}
             />
           </Col>
 
@@ -612,7 +610,7 @@ let GeneralInfoForm = ({
               cls="mb-3 mt-24"
               label="Municipio"
               readOnly={true}
-              value={!sameAddress ? "" : currentAddress.municipality}
+              val={!sameAddress ? "" : currentAddress.municipality}
             />
           </Col>
 

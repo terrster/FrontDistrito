@@ -25,7 +25,7 @@ class Appliance extends Component {
 
 	getData(){
 		const user = JSON.parse(sessionStorage.getItem("user"));
-		const idClient = user.idClient[user.idClient.length - 1];
+		const idClient = user.idClient;
 		if (idClient.appliance.length > 0) {
 			const appliance = idClient.appliance[0];
 			this.setState({appliance});
@@ -56,23 +56,25 @@ class Appliance extends Component {
 		} catch (err) {} */
 	};
 
-	verify = (array) => {
+	verifyAppliance = (array) => {
 		if (typeof array !== "object") return false;
 		return array.length === 0 ? false : array[array.length - 1];
+	}
+
+	verify = (obj, prop) =>  {
+		return obj.hasOwnProperty(prop);
 	}
 
 	getAppliance =  () => {
 				if (this.state.loading) return <div></div>;
 				let linkt = "";
 				const user = JSON.parse(sessionStorage.getItem("user"));
-				const idClient = JSON.parse(sessionStorage.getItem("user")).idClient[
-				JSON.parse(sessionStorage.getItem("user")).idClient.length - 1
-				];
-				let appliance = this.verify(idClient.appliance);
-				let idAmount = this.verify(appliance.idAmount);
-				let idGeneralInfo = this.verify(appliance.idGeneralInfo);
-				let idComercialInfo = this.verify(appliance.idComercialInfo);
-				let idDocuments = this.verify(appliance.idDocuments);
+				const idClient = user.idClient;
+				let appliance = this.verifyAppliance(idClient.appliance);
+				let idAmount = this.verify(appliance, "idAmount");
+				let idGeneralInfo = this.verify(appliance, "idGeneralInfo");
+				let idComercialInfo = this.verify(appliance, "idComercialInfo");
+				let idDocuments = this.verify(appliance, "idDocuments");
 				
 				if (idAmount == null || !idAmount) {
 					linkt = `elige-monto/${user._id}`;

@@ -6,22 +6,26 @@ import { Link } from "react-router-dom";
 
 const Steps = (props) => {
 	
-	const verify = (array) => {
+	const verifyAppliance = (array) => {
 		if (typeof array !== "object") return false;
 		return array.length === 0 ? false : array[array.length - 1];
 	}
-	
+  
+  const verify = (object, property) => {
+		return object.hasOwnProperty(property);
+	}
+  
+  
   let linkt = "";
   const user = JSON.parse(sessionStorage.getItem("user"));
-  const idClient = JSON.parse(sessionStorage.getItem("user")).idClient[
-    JSON.parse(sessionStorage.getItem("user")).idClient.length - 1
-  ];
-  let appliance = verify(idClient.appliance);
-  let idAmount = verify(appliance.idAmount);
-  let idGeneralInfo = verify(appliance.idGeneralInfo);
-  let idComercialInfo = verify(appliance.idComercialInfo);
-  let idDocuments = verify(appliance.idDocuments);
+  const idClient = user.idClient
+  let appliance = verifyAppliance(idClient.appliance);
+  let idAmount = verify(appliance, "idAmount");
+  let idGeneralInfo = verify(appliance, "idGeneralInfo");
+  let idComercialInfo = verify(appliance, "idComercialInfo");
+  let idDocuments = verify(appliance, "idDocuments");
   let statusDocuments = { status: false };
+  
   if (idDocuments){
 	  statusDocuments.status = idDocuments.status;
   }

@@ -27,10 +27,9 @@ const PersonType = (props) => {
 	
   const updateClient = async (type) => {
 		dispatch( updateLoader(true) );
-		const idUser = user._id;
 		const myUser = user;
-		if (myUser.idClient.length > 0){
-			const idClient = myUser.idClient[myUser.idClient.length - 1];
+		if (myUser.hasOwnProperty("idClient")){
+			const idClient = myUser.idClient;
 			const updateClient = await axios.put(`api/client/${idClient._id}`, { type }, {
 				headers: {
 					token: sessionStorage.getItem("token")
@@ -52,7 +51,7 @@ const PersonType = (props) => {
 	useEffect(() => {
 		dispatch( updateLoader(true) );
 		const getPersonType = async () => {
-			const idClient = user.idClient[user.idClient.length - 1]
+			const idClient = user.idClient;
 			if (idClient.hasOwnProperty("type")){
 				setPersonType(idClient.type);	
 			}

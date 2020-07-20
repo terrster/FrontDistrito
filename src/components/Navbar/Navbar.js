@@ -13,7 +13,7 @@ const NavBar = props => {
 	let appliance = null;
 	if (isAuthenticated()){
 		user = JSON.parse(sessionStorage.getItem("user"));
-		idClient = user.idClient[user.idClient.length - 1];
+		idClient = user.idClient;
 		if (idClient.appliance.length > 0){
 			appliance = idClient.appliance[idClient.appliance.length - 1];
 			finishAppliance = appliance.status;

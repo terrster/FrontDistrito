@@ -160,7 +160,7 @@ let AmountForm = props => {
 AmountForm = reduxForm({
 	form: 'amountForm', // a unique identifier for this form
 	validate: validateAmount, // <--- validation function given to redux-form
-	enableReinitialize: true
+	enableReinitialize : true
 })(AmountForm);
 
 export default AmountForm;

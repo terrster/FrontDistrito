@@ -25,7 +25,7 @@ let ComercialInfoForm = (props) => {
   const { showModal, refDocuments } = useSelector((state) => state.modalCiec);
 
   const [colonias, setColonias] = useState([]);
-  const [ zipCodeError, setZipCodeError] = useState(false);
+  const [zipCodeError, setZipCodeError] = useState(false);
   const [disabled, setDisabled] = useState(true);
 
   const { handleSubmit, valid } = props;
@@ -81,14 +81,13 @@ let ComercialInfoForm = (props) => {
     const getData = async () => {
       dispatch(updateLoader(true));
       const user = JSON.parse(sessionStorage.getItem("user"));
-      const idClient = user.idClient[user.idClient.length - 1];
+      const idClient = user.idClient;
       // Si ya tienen una solicitud, se actualiza
       if (idClient.appliance.length > 0) {
         const appliance = idClient.appliance[idClient.appliance.length - 1];
-        if (appliance.idComercialInfo.length > 0) {
-          const comercial =
-            appliance.idComercialInfo[appliance.idComercialInfo.length - 1];
-          const address = comercial.address[comercial.address.length - 1];
+        if (appliance.hasOwnProperty("idComercialInfo")) {
+          const comercial = appliance.idComercialInfo;
+          const address = comercial.address;
           const zipCode = address.zipCode;
           try {
             const res = await (
@@ -111,10 +110,12 @@ let ComercialInfoForm = (props) => {
             const municipio = res[0].response.municipio;
             props.setState(estado);
             props.setMunicipality(municipio);
+            setZipCodeError(false);
           } catch (error) {
             props.setState("");
             props.setMunicipality("");
             setColonias([]);
+            setZipCodeError(true);
           }
         }
       }
@@ -133,7 +134,7 @@ let ComercialInfoForm = (props) => {
   }, []);
 
   const user = JSON.parse(sessionStorage.getItem("user"));
-  const { type } = user.idClient[user.idClient.length - 1];
+  const { type } = user.idClient;
 
   const goToError = () => {
     const comercialNameError = document.getElementById("comercialName-error");
@@ -172,7 +173,7 @@ let ComercialInfoForm = (props) => {
       webSiteError,
       facebookError,
       terminalError,
-      warrantyError
+      warrantyError,
     ];
     for (let x = 0; x < errors.length; x++) {
       if (errors[x] != null) {
@@ -284,13 +285,11 @@ let ComercialInfoForm = (props) => {
               cls="mb-3"
               onChange={handleChange}
             />
-            {
-              zipCodeError && (
+            {zipCodeError && (
               <span id="CP-error">
-					      <small className="error">Código postal no encontrado</small>
-				      </span>
-              )
-            }
+                <small className="error">Código postal no encontrado</small>
+              </span>
+            )}
           </Col>
           <Col lg={6} md={6} sm={12}>
             <Field component={renderSelectField} name="town" cls="mb-3">

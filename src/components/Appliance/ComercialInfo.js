@@ -35,7 +35,7 @@ const ComercialInfo = (props) => {
 		dispatch( updateLoader(true) );
 		const user = JSON.parse(sessionStorage.getItem('user'));
 		const id = user._id;
-		const idClient = user.idClient[user.idClient.length - 1];
+		const idClient = user.idClient;
 		const data = {
 			...dataForm,
 			state,
@@ -43,8 +43,8 @@ const ComercialInfo = (props) => {
 		}
 		if(idClient.appliance.length > 0){
 			const appliance = idClient.appliance[idClient.appliance.length - 1];
-			if(appliance.idComercialInfo.length > 0){
-				const comercial = appliance.idComercialInfo[appliance.idComercialInfo.length - 1]
+			if(appliance.hasOwnProperty("idComercialInfo")){
+				const comercial = appliance.idComercialInfo;
 				const id = comercial._id;				
 				try {
 					const res = await axios.put(`api/info-comercial/${id}`,data,{
@@ -88,14 +88,13 @@ const ComercialInfo = (props) => {
 		const getData = async () => {
 			dispatch( updateLoader(true) );
 			const user = JSON.parse(sessionStorage.getItem('user'));
-			const id = user._id;
-			const idClient = user.idClient[user.idClient.length - 1];
+			const { idClient } = user;
 			// Si ya tienen una solicitud, se actualiza
 			if (idClient.appliance.length > 0){
 				const appliance = idClient.appliance[idClient.appliance.length - 1];
-				if (appliance.idComercialInfo.length > 0){
-					const comercial = appliance.idComercialInfo[appliance.idComercialInfo.length - 1];
-					const address =  comercial.address[comercial.address.length - 1];
+				if (appliance.hasOwnProperty("idComercialInfo")){
+					const comercial = appliance.idComercialInfo;
+					const address =  comercial.address;
 					const terminal = comercial.terminal ? "1" : "0";
 					let colonias = [];
 					try{

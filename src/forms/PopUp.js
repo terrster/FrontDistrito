@@ -18,11 +18,11 @@ function Pop_up({ isDocuments=false }) {
 
   useEffect(() => {
 
-    const { appliance, type } = user.idClient[user.idClient.length - 1];  
-    const { idComercialInfo } = appliance[appliance.length - 1];
-	let ciec = '';
-    if (idComercialInfo.length > 0){
-	 ciec = idComercialInfo[idComercialInfo.length - 1].ciec;
+    const { appliance } = user.idClient;  
+	  let ciec = '';
+    if (appliance.hasOwnProperty("idComercialInfo")){
+      const { idComercialInfo } = appliance[appliance.length - 1];
+	    ciec = idComercialInfo[idComercialInfo.length - 1].ciec;
     }
 
     if ((ciec === "" || ciec == null) && !refDocuments ){

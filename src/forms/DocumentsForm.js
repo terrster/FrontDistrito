@@ -3,7 +3,7 @@ import { connect, useDispatch } from "react-redux";
 import clip from "../assets/img/clip-copy-2@3x.png";
 import { Button } from "react-bootstrap";
 import axios from "axios";
-import axiosLocal from '../utils/axios';
+import axiosLocal from "../utils/axios";
 import "../css/dnd.css";
 import { array } from "prop-types";
 import PopUp from "./PopUp";
@@ -97,21 +97,21 @@ let DocumentsForm = (props) => {
       arr = props.docs[key];
       arr.splice(index, 1);
     }
-    // Delete file 
+    // Delete file
     const user = JSON.parse(sessionStorage.getItem("user"));
-    const idClient = user.idClient[user.idClient.length - 1];
-    if (idClient.appliance.length > 0){
+    const idClient = user.idClient;
+    if (idClient.appliance.length > 0) {
       const appliance = idClient.appliance[idClient.appliance.length - 1];
-      const idDocuments = appliance.idDocuments[appliance.idDocuments.length - 1];
+      const idDocuments = appliance.idDocuments;
       const res = await axiosLocal.delete(`api/documents/${idDocuments._id}`, {
         data: {
           url: key,
-          name: typeDoc
-        }
-      })
+          name: typeDoc,
+        },
+      });
       const data = res.data;
-      if(!data.hasOwnProperty("error") && data.msg != "Sin archivos") {
-          sessionStorage.setItem('user', JSON.stringify(data.user));
+      if (!data.hasOwnProperty("error") && data.msg !== "Sin archivos") {
+        sessionStorage.setItem("user", JSON.stringify(data.user));
       }
     }
     props.testDocs();
@@ -125,11 +125,10 @@ let DocumentsForm = (props) => {
     submitButtom.current.click();
   };
   const user = JSON.parse(sessionStorage.getItem("user"));
-  const idClient = user.idClient[user.idClient.length - 1];
+  const idClient = user.idClient;
   const typePerson = idClient.type;
   const appliance = idClient.appliance[idClient.appliance.length - 1];
-  const comercialInfo =
-    appliance.idComercialInfo[appliance.idComercialInfo.length - 1];
+  const comercialInfo = appliance.idComercialInfo;
   const ciec = comercialInfo.ciec;
 
   let docFiles = [];
@@ -272,7 +271,7 @@ let DocumentsForm = (props) => {
         },
       ];
       break;
-    case "PM":
+    default:
       docFiles = [
         {
           title: "Acta constitutiva, asamblea y poderes",
@@ -335,7 +334,14 @@ let DocumentsForm = (props) => {
   let currDocs = props.currentDocuments;
 
   const filterDocs = ["oficialID", "proofAddress", "others", "bankStatements"];
-  const filterDocsPM = ["constitutiveAct","financialStatements","bankStatements","oficialID", "proofAddressMainFounders", "others"]
+  const filterDocsPM = [
+    "constitutiveAct",
+    "financialStatements",
+    "bankStatements",
+    "oficialID",
+    "proofAddressMainFounders",
+    "others",
+  ];
 
   if ((typePerson === "RIF" || typePerson === "PFAE") && ciec) {
     docFiles = docFiles.filter((doc) => filterDocs.includes(doc.name));

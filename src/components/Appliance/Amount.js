@@ -28,19 +28,19 @@ const Amount = props => {
 	var typePerson;
 
 	const onFormSubmit = async (data) => {
-		if(!JSON.parse(sessionStorage.getItem('user')).idClient[0].type){
+		if(!JSON.parse(sessionStorage.getItem('user')).idClient.type){
 			return 0;
 		}
 		window.scrollTo(0, 0);
 		dispatch( updateLoader(true) );
 		const user = JSON.parse(sessionStorage.getItem('user'));
 		const id = user._id;
-		const idClient = user.idClient[user.idClient.length - 1];
+		const idClient = user.idClient;
 		// Si ya tienen una solicitud, se actualiza
 		if (idClient.appliance.length > 0){
 			const appliance = idClient.appliance[idClient.appliance.length - 1];
-			if (appliance.idAmount.length > 0){
-				const amount = appliance.idAmount[appliance.idAmount.length - 1];
+			if (appliance.hasOwnProperty("idAmount")){
+				const amount = appliance.idAmount;
 				const id = amount._id;
 				try {
 					const res = await axios.put(`api/amount/${id}`,data,{
@@ -80,23 +80,22 @@ const Amount = props => {
 		dispatch (updateLoader(true)) ;
 		const getData = async () => {
 			const user = JSON.parse(sessionStorage.getItem('user'));
-			const id = user._id;
-			const idClient = user.idClient[user.idClient.length - 1];
+			const idClient = user.idClient;
 			// Si ya tienen una solicitud, se actualiza
 			let amount = {}
 			if (idClient.appliance.length > 0){
 				const appliance = idClient.appliance[idClient.appliance.length - 1];
-				if (appliance.idAmount.length > 0){
-					amount = appliance.idAmount[appliance.idAmount.length - 1];
+				if (appliance.hasOwnProperty("idAmount")){
+					amount = appliance.idAmount;
 					setInitialValues(amount);
 				}
 
 			}
 
-			if(JSON.parse(sessionStorage.getItem('user')).idClient[0].type){
+			if(user.idClient.type){
 				setInitialValues({					
 					...amount,
-					personType: JSON.parse(sessionStorage.getItem('user')).idClient[0].type
+					personType: user.idClient.type
 				});
 			}
 

@@ -43,7 +43,7 @@ const Home = (props) => {
 	dispatch (updateLoader(true));
     const getData = () => {
 		const idUser = user._id;
-		const idClient = user.idClient[user.idClient.length - 1];
+		const idClient = user.idClient;
 		const type = idClient.hasOwnProperty("type") ? idClient.type : "";
 		let newProfile = {
 			...myProfile,
@@ -61,11 +61,11 @@ const Home = (props) => {
 		if (idClient.appliance.length > 0){
 				const appliance = idClient.appliance[idClient.appliance.length - 1];
 				let idDocuments = null
-				if (appliance.idDocuments.length > 0){
-					idDocuments = appliance.idDocuments[appliance.idDocuments.length - 1];
+				if (appliance.hasOwnProperty("idDocuments")){
+					idDocuments = appliance.idDocuments;
 				}
-				if (appliance.idComercialInfo.length > 0){
-					const idComercialInfo = appliance.idComercialInfo[appliance.idComercialInfo.length - 1];
+				if (appliance.hasOwnProperty("idComercialInfo")){
+					const idComercialInfo = appliance.idComercialInfo;
 					const info = {} 
 					info.comercialName  = idComercialInfo.hasOwnProperty("comercialName") ? idComercialInfo.comercialName : "";
 					info.gyre  = idComercialInfo.hasOwnProperty("gyre") ? idComercialInfo.gyre : "";

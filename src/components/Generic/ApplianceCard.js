@@ -23,7 +23,7 @@ let defineContent = (data) => {
 const ApplianceCard = props => {
 	
 	const user = JSON.parse(sessionStorage.getItem("user"));
-	const idClient = user.idClient[user.idClient.length - 1];
+	const idClient = user.idClient;
 
 	return(
 		<div className="wht-card-box mb-24">

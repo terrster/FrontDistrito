@@ -48,13 +48,13 @@ const history = useHistory();
   const statusdocument = useSelector((state) => state.docsStatus);
 
 const getDocsMethod = () => {
-    const idClient = user.idClient[user.idClient.length - 1];
+    const idClient = user.idClient;
     const typePerson = idClient.type;
-    const { appliance } = user.idClient[user.idClient.length - 1];  
-    const { idComercialInfo } = appliance[appliance.length - 1];
+    const { appliance } = idClient;  
     let ciec = '';
-    if (idComercialInfo.length > 0){
-      ciec = idComercialInfo[idComercialInfo.length - 1].ciec;
+    if (appliance.hasOwnProperty("idComercialInfo")) {
+      const { idComercialInfo } = appliance[appliance.length - 1];
+      ciec = idComercialInfo.ciec;
     }
     let docFiles = [];
     /**
@@ -137,11 +137,11 @@ const getDocsMethod = () => {
 		});
 	}
 	try {
-		const idClient = user.idClient[user.idClient.length - 1];
+		const idClient = user.idClient;
 		if (idClient.appliance.length > 0){
 			let update = false;
 			const appliance = idClient.appliance[idClient.appliance.length - 1];
-			if (appliance.idDocuments.length > 0){
+			if (appliance.hasOwnProperty("idDocuments")){
 				update = true;
 			}
 			if (!update){
@@ -150,17 +150,16 @@ const getDocsMethod = () => {
 					'Content-Type': 'multipart/form-data'
 					}	
 				});
-				if(!data.hasOwnProperty("error") && data.msg != "Sin archivos"){
+				if(!data.hasOwnProperty("error") && data.msg !== "Sin archivos"){
 					sessionStorage.setItem('user', JSON.stringify(data.user));
 				}
 			} else {
-				const idDocuments = appliance.idDocuments[appliance.idDocuments.length - 1];
+				const idDocuments = appliance.idDocuments;
 				const { data } = await axios.put(`api/documents/${idDocuments._id}`, formData, {
 					headers:{
 					'Content-Type': 'multipart/form-data'
 					}	
 				});
-				console.log(data);
 				if(!data.hasOwnProperty("error") && data.msg != "Sin archivos"){
 					sessionStorage.setItem('user', JSON.stringify(data.user));
 				}
@@ -170,7 +169,7 @@ const getDocsMethod = () => {
 	} catch(e){
 		console.log(e);
 	}
-	const idClient = user.idClient[user.idClient.length - 1];
+	const idClient = user.idClient;
 	if (finish === true && idClient.appliance.length > 0){
 		// Finalizar solicitud, igual a la función de appliance
 		const appliance = idClient.appliance[idClient.appliance.length - 1];
@@ -209,19 +208,17 @@ const getDocsMethod = () => {
     if (!toast) {
       execToast("documents");
       dispatch(updateToast(app, "docs"));
-    }
-    
-    const idUser = user._id;
-	const idClient = user.idClient[user.idClient.length - 1];
+    }    
+	  const idClient = user.idClient;
     if (idClient.appliance.length > 0){
 		const appliance = idClient.appliance[idClient.appliance.length - 1];
-		if (appliance.idDocuments.length > 0){
+		if (appliance.hasOwnProperty("idDocuments")){
 			const { 
 				acomplishOpinion, bankStatements, constitutiveAct, 
 				cventerprise, facturacion, financialStatements, 
 				lastDeclarations, oficialID, otherActs, others, 
 				proofAddress, proofAddressMainFounders, 
-				rfc } = appliance.idDocuments[appliance.idDocuments.length - 1];
+				rfc } = appliance.idDocuments;
 			const currentDocuments = {
 				acomplishOpinion, bankStatements, constitutiveAct, 
 				cventerprise, facturacion, financialStatements, 
