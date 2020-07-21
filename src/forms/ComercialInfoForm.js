@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Field, reduxForm } from "redux-form";
 import comercialOptions from "../models/ComercialInfoModels";
 import { Row, Col, Button } from "react-bootstrap";
+import InputLabel from '../components/Generic/InputLabel';
 import SubtitleForm from "../components/Generic/SubtitleForm";
 import { validateComercialInfo } from "../components/Validate/ValidateComercialInfo";
 import {
@@ -212,8 +213,9 @@ let ComercialInfoForm = (props) => {
           name="comercialName"
           label="Nombre comercial"
         />
+        <InputLabel label="Giro" class="mt-18" />
         <Field component={renderSelectField} name="gyre" cls="mb-3">
-          <option value="">Giro...</option>
+          <option value="">Seleccionar</option>
           {Object.keys(comercialOptions).map((value, key) => (
             <option value={`${value}`} key={key}>
               {comercialOptions[value].name}
@@ -389,15 +391,17 @@ let ComercialInfoForm = (props) => {
           name="facebook"
           cls="mb-3"
         />
+        <InputLabel label="¿Vendes tu producto o servicio a Estados Unidos?" class="mt-18" />
         <Field component={renderSelectField} name="terminal" cls="mb-3">
           <option value="">
-            ¿Vendes tu producto o servicio a Estados Unidos?
+            Seleccionar
           </option>
           <option value="1">Sí</option>
           <option value="0">No</option>
         </Field>
+        <InputLabel label="¿Puedes ofrecer una garantía?" class="mt-18" />
         <Field component={renderSelectField} name="warranty" cls="mb-3">
-          <option value="">¿Puedes ofrecer una garantía?</option>
+          <option value="">Seleccionar</option>
           <option value="1">Sí, garantía inmobiliaria</option>
           <option value="2">Sí, activo fijo</option>
           <option value="3">Sí, ambos</option>
