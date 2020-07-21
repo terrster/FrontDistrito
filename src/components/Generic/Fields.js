@@ -89,13 +89,12 @@ export const renderField = ({
           />
         )}
       </div>
-      {touched &&
-        ((error && (
-          <span id={input.name + "-error"}>
-            <small className="error">{error}</small>
-          </span>
-        )) ||
-          (warning && <span id={input.name + "-error"}>{warning}</span>))}
+      {((touched || error) && (
+        <span id={input.name + "-error"}>
+          <small className="error">{error}</small>
+        </span>
+      )) ||
+        (warning && <span id={input.name + "-error"}>{warning}</span>)}
     </div>
   );
 };
@@ -116,8 +115,8 @@ export const renderSelectField = ({
       <div className="input-container">
         <select
           {...input}
-		  disabled={disabled}
-		  value={val}
+          disabled={disabled}
+          value={val}
           className="form-control custom-form-input text-dp mt-1"
         >
           {children}
@@ -135,13 +134,12 @@ export const renderSelectField = ({
       </div>
     )}
 
-    {touched &&
-      ((error && (
-        <span id={input.name + "-error"}>
-          <small className="error">{error}</small>
-        </span>
-      )) ||
-        (warning && <span id={input.name + "-error"}>{warning}</span>))}
+    {((touched || error) && (
+      <span id={input.name + "-error"}>
+        <small className="error">{error}</small>
+      </span>
+    )) ||
+      (warning && <span id={input.name + "-error"}>{warning}</span>)}
   </div>
 );
 
@@ -220,13 +218,12 @@ export const renderFieldFull = ({
         </div>
       )}
     </div>
-    {touched &&
-      ((error && (
-        <span id={input.name + "-error"}>
-          <small className="error">{error}</small>
-        </span>
-      )) ||
-        (warning && <span id={input.name + "-error"}>{warning}</span>))}
+    {((touched || error) && (
+      <span id={input.name + "-error"}>
+        <small className="error">{error}</small>
+      </span>
+    )) ||
+      (warning && <span id={input.name + "-error"}>{warning}</span>)}
   </div>
 );
 
@@ -249,16 +246,18 @@ export const renderSelectFieldFull = ({
         {children}
       </select>
     </div>
-    {touched &&
-      ((error !== "Debes tener entre 18 y 71 años para poder continuar" ? (
-        <span id={input.name + "-error"}>
-          <small className="error">{error}</small>
-        </span>
-      ) : (
+    {(touched || error) !==
+    "Debes tener entre 18 y 71 años para poder continuar" ? (
+      <span id={input.name + "-error"}>
+        <small className="error">{error}</small>
+      </span>
+    ) : (
+      (
         <span id={input.name + "-error"}>
           <small className="error extend-error">{error}</small>
         </span>
-      )) ||
-        (warning && <span>{warning}</span>))}
+      ) ||
+      (warning && <span>{warning}</span>)
+    )}
   </div>
 );
