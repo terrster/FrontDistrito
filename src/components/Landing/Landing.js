@@ -13,10 +13,10 @@ class Landing extends Component {
             <div className="">
                 <Header title={"¿Necesitas financiamiento?"} text={"Recibe las mejores ofertas de crédito "} highlighted={"¡En menos de 24 horas!"} buttonText={"Solicitar ahora"} />
                 <LandSimulator />
-                <div className="container-fluid">
-                    <AboutUs />
-                    <Video />
+                <div className="container-fluid">               
                     <HowWorks />
+                    <Video />
+                    <AboutUs />      
                     <Doubts /> 
                 </div>
             </div>
