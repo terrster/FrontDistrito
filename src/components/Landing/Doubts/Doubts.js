@@ -15,9 +15,6 @@ const Doubts = () => {
 
 	const handleSend = async() => {
 
-		console.log("Enviar email con estos datos:")
-		console.log(data)
-
 		/* let contactEmail = await this.props.sendEmailContact({variables: {
 			from:this.state.data.email.value,
 			to: "contacto@distritopyme.com",

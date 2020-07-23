@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 // CSS
 import "./App.css";
-import 'react-responsive-modal/styles.css';
+import "react-responsive-modal/styles.css";
 import "./css/account.css";
 import "./css/apply.css";
 import "./css/Chip.css";
@@ -41,7 +41,7 @@ import Appliance from "./components/Appliance/Appliance";
 import Credit from "./components/Credit/Credit";
 import Record from "./components/Record/Record";
 import Documents from "./components/Appliance/Documents";
-import Loader from './components/Loader/Loader';
+import Loader from "./components/Loader/Loader";
 
 // ROUTER & REDUX
 import {
@@ -70,15 +70,19 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
 );
 
 class App extends Component {
- 
   render() {
-    const PrivateRoute = ({component: Component, ...rest}) => (
-      <Route {...rest} render={(props) => (
-        isAuthenticated() === true
-        ? <Component {...props} />
-        : <Redirect to="/" />
-      )} />
-    )
+    const PrivateRoute = ({ component: Component, ...rest }) => (
+      <Route
+        {...rest}
+        render={(props) =>
+          isAuthenticated() === true ? (
+            <Component {...props} />
+          ) : (
+            <Redirect to="/" />
+          )
+        }
+      />
+    );
 
     return (
       <Router>
@@ -87,15 +91,29 @@ class App extends Component {
           style={{ height: "100vh" }}
         >
           <Provider store={store}>
-            <NavBar
-              url={this.props.navegationurl}
-            />
+            <NavBar url={this.props.navegationurl} />
             <div className="flex-grow-1" style={{ height: "auto" }}>
               <Switch>
-                <PrivateRoute exact  path="/credito/solicitud/:idAppliance" component={Appliance} />
-                <PrivateRoute exact path="/elige-monto/:idAppliance" component={Amount} />
-                <PrivateRoute exact path="/datos-comerciales/:idAppliance" component={ComercialInfo} />
-                <PrivateRoute exact path="/informacion-comercial/:idAppliance" component={ComercialInfo} />
+                <PrivateRoute
+                  exact
+                  path="/credito/solicitud/:idAppliance"
+                  component={Appliance}
+                />
+                <PrivateRoute
+                  exact
+                  path="/elige-monto/:idAppliance"
+                  component={Amount}
+                />
+                <PrivateRoute
+                  exact
+                  path="/datos-comerciales/:idAppliance"
+                  component={ComercialInfo}
+                />
+                <PrivateRoute
+                  exact
+                  path="/informacion-comercial/:idAppliance"
+                  component={ComercialInfo}
+                />
                 <Route path="/" exact component={Landing} />
                 <Route
                   path="/preguntas-frecuentes"
@@ -118,9 +136,17 @@ class App extends Component {
                 />
                 <Route path="/login" exact component={Login} />
                 <PrivateRoute exact path="/home" component={Home} />
-                <PrivateRoute exact  path="/solicitud" component={Appliance} />
-                <PrivateRoute exact path="/elige-monto/:idAppliance" component={Amount} />
-                <PrivateRoute exact path="/informacion-general/:idAppliance" component={GeneralInfo} />
+                <PrivateRoute exact path="/solicitud" component={Appliance} />
+                <PrivateRoute
+                  exact
+                  path="/elige-monto/:idAppliance"
+                  component={Amount}
+                />
+                <PrivateRoute
+                  exact
+                  path="/informacion-general/:idAppliance"
+                  component={GeneralInfo}
+                />
                 <PrivateRoute exact path="/credito" component={Credit} />
                 <PrivateRoute exact path="/historial" component={Record} />
                 <PrivateRoute

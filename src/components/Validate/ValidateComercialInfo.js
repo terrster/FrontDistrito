@@ -107,7 +107,5 @@ export const validateComercialInfo = (values) => {
     }
   }
 
-  console.log(errors);
-
   return errors;
 };

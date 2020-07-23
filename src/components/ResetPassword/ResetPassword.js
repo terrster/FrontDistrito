@@ -22,7 +22,6 @@ class ResetPassword extends Component {
   }
 
   onFormSubmit = async (data) => {
-    console.log(data);
     /* this.props.updateLoader(true)
 		let {email} = data
 		try {

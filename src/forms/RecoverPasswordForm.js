@@ -19,8 +19,8 @@ const RecoverPasswordForm = (props) => {
     e.preventDefault();
     dispatch(updateLoader(true));
     //let hash = props.match.params.hash;
-    console.log(password);
-    console.log(passwordConfirm);
+    //console.log(password);
+    //console.log(passwordConfirm);
     try {
       /* let d = await RecoverPassword({variables: {password:pass, hash}});
 		  let status = d.data.createPassword.status;

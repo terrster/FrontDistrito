@@ -1,23 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
 import Title from "../Generic/Title";
 import GeneralInfoForm from "../../forms/GeneralInfoForm";
 import { useSelector, useDispatch } from "react-redux";
 import CustomModal from "../Generic/CustomModal";
 import { execToast } from "../../utils/ToastUtils";
-import GeneralInfoEntity from "../../entity/generalInfo";
 
 // Components
 import Steps from "./Steps";
 
 import { updateToast, updateDate } from "../../redux/actions/appActions";
 import { updateLoader } from "../../redux/actions/loaderActions";
-import { updateModal } from "../../redux/actions/modalActions";
-import {
-  updateAppliance,
-  updateApplianceGeneralInfo,
-} from "../../redux/actions/applianceActions";
-import { changeTypeGeneralInfoForm } from "../../redux/actions/formsTypeActions";
 import axios from "../../utils/axios";
 import axiosBase from "axios";
 import Loader from "../Loader/Loader";
@@ -25,20 +17,8 @@ import { ToastContainer } from "react-toastify";
 
 const GeneralInfo = () => {
   const dispatch = useDispatch();
-  const applianceGeneralInfo = useSelector(
-    (state) => state.appliance.generalInfo
-  );
-  //const appliance = useSelector((state) => state.appliance.appliance);
-  const applianceData = useSelector((state) => state.appliance);
-  const modal = useSelector((state) => state.modal);
-  const app = useSelector((state) => state.app);
   const toast = useSelector((state) => state.app.toast);
-  const currentGeneralInfo = useSelector(
-    (state) => state.actionForm.generalInfoForm
-  );
-
   const [initialValues, setInitialValues] = useState({});
-  const history = useHistory();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -130,7 +110,6 @@ const GeneralInfo = () => {
     try {
     getData();
   } catch (e) {
-    console.log("Get data");
     console.log(e)
   }
     dispatch(updateLoader(false));
@@ -298,15 +277,5 @@ const GeneralInfo = () => {
     </div>
   );
 };
-
-/*
-
-const mapStateToProps = (state, ownProps) => {
-	return {
-		state: state,
-		user : state.user.user,	
-	};
-};
-*/
 
 export default GeneralInfo;

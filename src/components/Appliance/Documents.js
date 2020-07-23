@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import Title from "../Generic/Title";
 import CustomModal from "../Generic/CustomModal";
@@ -10,7 +9,7 @@ import { useHistory } from "react-router-dom";
 
 // Components
 import Steps from "./Steps";
-import comparativeImage from "../../assets/img/comparativapopup-01.jpg";
+import DocumentsModal from './DocumentsModal';
 
 import { updateLoader } from "../../redux/actions/loaderActions";
 import { updateToast } from "../../redux/actions/appActions";
@@ -19,20 +18,17 @@ import {
   updateDocumentsNames,
   updateDocumentsType,
 } from "../../redux/actions/documentsStatusActions";
-import { updateModalCiec, updateRefDocuments } from '../../redux/actions/modalCiecActions';
+import { updateRefDocuments } from '../../redux/actions/modalCiecActions';
 import { updateAllDocs, updateDocuments } from "../../redux/actions/documentsActions";
 import { updateAlert } from '../../redux/actions/alertActions';
-import { updateAppliance } from '../../redux/actions/applianceActions';
 import axios from '../../utils/axios';
 import Loader from "../Loader/Loader";
 import { ToastContainer } from "react-toastify";
 
 const Documents = (props) => {
 
-  const { idAppliance } = useParams();
-const history = useHistory();
+  const history = useHistory();
   const [show, setShow] = useState(true);
-  const [data, setData] = useState(undefined); // Dato de prueba
   const [user, setUser] = useState(JSON.parse(sessionStorage.getItem("user")));
   const [initialValues, setInitialValues] = useState({});
   const dispatch = useDispatch();
@@ -40,7 +36,6 @@ const history = useHistory();
   const modal = useSelector((state) => state.modal.name);
   const appliance = useSelector((state) => state.appliance.appliance);
   const applianceAmount = useSelector((state) => state.appliance.amount);
-  const applianceData = useSelector((state) => state.appliance);
   //const user = useSelector(state => state.user.user);
   const toast = useSelector((state) => state.app.toast);
   const documents = useSelector((state) => state.documents);
@@ -110,14 +105,6 @@ const getDocsMethod = () => {
       }
     }
     return docFiles;
-  };
-
-  const onFormSubmitClose = async (e) => {
-    onFormSubmit(e, true);
-  };
-
-  const onFormSubmitContinue = (e) => {
-    onFormSubmit(e);
   };
 
   const onFormSubmit = async (e, finish) => {
@@ -234,28 +221,12 @@ const getDocsMethod = () => {
 			};
        testDocuments(currentDocuments);
 		}
-			/*
-			setInitialValues({ acomplishOpinion, bankStatements, constitutiveAct, 
-				cventerprise, facturacion, financialStatements, 
-				lastDeclarations, oficialID, otherActs, others, 
-				proofAddress, proofAddressMainFounders, 
-				rfc });*/
 	}
     dispatch(updateDocumentsNames(getDocsMethod()));
-   
-    /*    
-    const getDocuments = async () => {
-		const idClient = user.idClient[user.idClient - 1];
-      console.log(idDocuments);
-    }
-
-    
-    * */
     
 
   }, []);
 
-  //let appliance = data.getAppliance;
   let currentDocs = [];
   let isCompleteForm = statusdocument;
 
@@ -278,16 +249,7 @@ const getDocsMethod = () => {
     <div className="container mt-3">
      <ToastContainer />
      <Loader />
-      {show && (
-        <div className="modal-comparative">
-          <div className="modal-comparative--content">
-            <img src={comparativeImage} className="modal-comparative--image" alt="Comparativo de imagenes en buena calidad" />
-            <Button onClick={() => setShow(false)} className="btn-blue-documents" size="lg">
-              Entiendo{" "}
-            </Button>
-          </div>
-        </div>
-      )}
+      <DocumentsModal />
       <Steps />
       <div className="text-center mb-3">
         <Title
