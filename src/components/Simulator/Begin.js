@@ -68,7 +68,7 @@ const Begin = props => {
 			
 			<Button
 				className="btn-blue-general mt-45 fz24"
-				style={{ cursor: "not-allowed "}}
+				style={{ cursor: error ? "not-allowed" : "pointer"}}
 				disabled={disabled}
 				onClick={changeStep}
 			>
