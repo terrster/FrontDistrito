@@ -2,13 +2,6 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk'
 import reducer from './reducers';
 
-if(process.env.NODE_ENV === 'localhost'){
-
-}
-else{
-
-}
-
 const store = createStore(
     reducer,
     compose( applyMiddleware(thunk),
