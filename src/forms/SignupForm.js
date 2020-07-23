@@ -84,7 +84,7 @@ let SignupForm = (props) => {
         <Field
           component={renderField}
           type="text"
-          name="lastName"
+          name="lastname"
           label="Apellido Paterno"
           normalize={onlyLirycs}
         />

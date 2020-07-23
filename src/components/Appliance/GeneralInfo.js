@@ -126,7 +126,7 @@ const GeneralInfo = () => {
       console.log(e);
     }
     };
-    setInitialValues({...initialValues, name: user.name, lastname: user.lastName, secondLastname, phone: user.phone });
+    setInitialValues({...initialValues, name: user.name, lastname: user.lastname, secondLastname, phone: user.phone });
     try {
     getData();
   } catch (e) {
