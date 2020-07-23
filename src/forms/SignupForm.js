@@ -5,7 +5,7 @@ import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import "../css/signup.css";
 import { validateSignup } from "../components/Validate/ValidateSignup";
 import ReCAPTCHA from "react-google-recaptcha";
-
+import scroll from "../utils/scroll";
 
 const renderField = ({
   input,
@@ -40,11 +40,11 @@ const renderField = ({
         />
       </div>
     )}
-	{type === "email" && <span> <small className="error">{errorEmail}</small> </span>}
+	{type === "email" && <span> <small className="error" id={input.name + "-error"}>{errorEmail}</small> </span>}
     {touched &&
       ((error && (
         <span>
-          <small className="error">{error}</small>
+          <small className="error" id={input.name + "-error"} >{error}</small>
         </span>
       )) ||
         (warning && <span>{warning}</span>))}
@@ -58,14 +58,38 @@ const passwordTooltip = (
 );
 
 let SignupForm = (props) => {
-  const { handleSubmit, submitting, errorEmail, setErrorEmail } = props;
-  const submitButtonClass = submitting
-    ? "btn-blue-general mt-30 disabled"
-    : "btn-blue-general mt-30";
+  const { handleSubmit, submitting, errorEmail, setErrorEmail, valid } = props;
+
   const [button, setButton] = useState(true);
+  const [disabled, setDisabled] = useState(true);
+
   const onChange = value => {setButton(!value)};
   const onlyLirycs = (nextValue, previousValue) => /^([a-z ñáéíóú]{0,60})$/i.test(nextValue) ? nextValue : previousValue;
   const onlyNumbers = (nextValue, previousValue) => /^\d+$/.test(nextValue) || nextValue.length === 0? nextValue : previousValue;
+
+  const goToError = () => {
+		const nameError = document.getElementById("name-error");
+		const lastnameError = document.getElementById("lastname-error");
+		const emailError = document.getElementById("email-error");
+		const emailConfirmError = document.getElementById("email_confirm-error");
+		const phoneError = document.getElementById("phone-error");
+		const passwordError = document.getElementById("password-error");
+		const errors = [nameError, lastnameError, emailError, emailConfirmError, phoneError, passwordError];
+		for (let x = 0; x < errors.length; x++) {
+      if (errors[x] != null) {
+        scroll(errors[x].id);
+        break;
+      }
+    }
+	}
+
+  if (disabled && valid){
+		setDisabled(false);
+	}
+	if (!disabled && !valid){
+		setDisabled(true);
+	}
+
   return (
     <div className="container">
       <form
@@ -162,9 +186,24 @@ let SignupForm = (props) => {
           </label>
         </div>
         <div className="text-center mb-5">
-          <Button type="submit" className={submitButtonClass} disabled={button}>
-            CONTINUAR
-          </Button>
+        {
+					!disabled && !button ? (
+						<Button
+							type="submit"
+							className={"mt-50 btn-blue-general"}
+						>
+							Continuar
+						</Button>
+					) : (
+						<Button 
+							type="button"
+							className="mt-50 btn-blue-general btn-gray-general"
+							onClick={() => goToError()}
+						>
+							Continuar
+						</Button>
+					)
+				}
         </div>
       </form>
     </div>

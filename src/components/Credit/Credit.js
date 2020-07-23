@@ -28,22 +28,6 @@ const Credit = (props) => {
   const [id, setId] = useState(user._id);
   const type = getType(user);
 
-  const apply = () => {
-    /* this.props
-      .newEmptyAppliance({
-        variables: {
-          idClient: this.props.user.idClient.id,
-        },
-      })
-      .then((data) => {
-        let newAppliance = data.data.createEmptyAppliance;
-        this.props.updateAppliance(newAppliance);
-        this.props.history.push(`/credito/solicitud/${newAppliance.id}`);
-        sessionStorage.setItem("applianceId", newAppliance.id);
-      })
-      .catch((err) => console.log(JSON.stringify(err))); */
-  };
-
   const verifyAppliance = (array) => {
     if (typeof array !== "object") return false;
     return array.length === 0 ? false : array[array.length - 1];

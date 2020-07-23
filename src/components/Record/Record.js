@@ -21,7 +21,6 @@ const Record = (props) => {
 
   useEffect(() => { 
     dispatch (updateLoader(true));
-    console.log(isLoading)
     setTimeout(() => {
       dispatch (updateLoader(false));
    }, 2000)

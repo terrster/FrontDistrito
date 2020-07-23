@@ -34,7 +34,7 @@ let RegistroExitoso = (props) => {
 			<Loader />
 			<img src={registerImage} alt="registerimage" style={{ width: '250px' }}/>
 			<Title className="title-dp fz42 mb-18 fw500" title="Registro Exitoso" />
-			<p className="text-dp">Bienvenido a la #ComunidadDeCrédito más grande de México.</p>
+			<p className="text-dp text-center">Bienvenido a la #ComunidadDeCrédito más grande de México.</p>
 			<p className="text-dp">¡Es hora de iniciar tu solicitud!</p>
 			<p className="text-dp text-center mb-50">Te recomendamos tener a la mano INE, Comprobante de Domicilio y Estados de <br /> Cuenta bancarios para poder aprobar tu crédito en 15 minutos</p>
 		</div>
