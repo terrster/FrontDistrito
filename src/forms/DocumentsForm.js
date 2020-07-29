@@ -389,9 +389,7 @@ let DocumentsForm = (props) => {
           className="d-flex align-items-center justify-content-end"
           style={{ marginBottom: "50px" }}
         >
-          {props.statusComplete === true ? (
-            <div></div>
-          ) : (
+          {!props.statusComplete && !props.statusDocs.status && (
             <Button
               type="button"
               onClick={async (e) => {

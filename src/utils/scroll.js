@@ -23,7 +23,6 @@ function elmYPosition(eID) {
 export default function smoothScroll(eID) {
   var startY = currentYPosition();
   var stopY = elmYPosition(eID) - 200;
-  console.log(stopY);
   var distance = stopY > startY ? stopY - startY : startY - stopY;
   if (distance < 100) {
       // eslint-disable-next-line no-restricted-globals
