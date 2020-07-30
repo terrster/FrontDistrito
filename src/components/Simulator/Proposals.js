@@ -39,7 +39,7 @@ const Proposals = () => {
 		    if(x === 0){
 		        capital.push(amountFloat);
             } else {
-		        capital.push(amountFloat - payments[x]);
+		        capital.push(capital[x-1] - payments[x]);
 		    }    
 		}
 				
@@ -70,6 +70,9 @@ const Proposals = () => {
 				)}
 			</Row>
 			<div className="mt-45 mb-5 margin-reduce-buttons">
+				<div className="text-dp">
+					*La tasa autorizada dependerá del proceso de evaluación de las correspondientes áreas de crédito. Montos antes de IVA. Simulación para fines informativos, no representa obligación alguna por parte de Distrito Pyme para el otorgamiento del crédito.
+				</div>
 				{
 					(sessionStorage.getItem('token') && sessionStorage.getItem('token') !== '') ?
 					<div className="container-buttons">
@@ -82,7 +85,6 @@ const Proposals = () => {
 						<Link className="btn-blue-general mt-45 fz24 link-blue-general" to="/" onClick={changeStep} >Nueva simulación</Link>
 					</div>
 				}
-				
 			</div>
 		</div>
 	)

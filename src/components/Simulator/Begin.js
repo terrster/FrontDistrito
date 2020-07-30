@@ -32,7 +32,7 @@ const Begin = props => {
 		let amountCopy = amount; 
 		let ans;
 		if (typeof amountCopy === 'string') {
-			amountCopy = amountCopy.substring(1, amountCopy.length - 1);
+			amountCopy = amountCopy.substring(1, amountCopy.length);
 			while (amountCopy.toString().indexOf(',') !== -1)
 				amountCopy = amountCopy.toString().replace(',', '');
 			ans = parseFloat(amountCopy);
