@@ -32,6 +32,7 @@ let ComercialInfoForm = (props) => {
   const [bankFields, setBankFields] = useState([]); // Campos de los bancos que el usuario ya ha seleccionado
   const [zipCodeError, setZipCodeError] = useState(false);
   const [disabled, setDisabled] = useState(true);
+  const [forceRender, setForceRender] = useState(true);
 
   const {
     handleSubmit,
@@ -45,7 +46,8 @@ let ComercialInfoForm = (props) => {
 
   const handleChangeBank = async (idBank, i) => {
     const { data } = await axios.get(`api/finerio/bank/${idBank}/fields`);
-    let newFiledsBank = bankFields;
+    console.log(data)
+    let newFieldsBank = bankFields;
     if (idBank === 1) {
       const tokenField = {
         friendlyName: "Token",
@@ -54,11 +56,12 @@ let ComercialInfoForm = (props) => {
         position: data.length + 1,
       };
       const newFields = [...data, tokenField];
-      newFiledsBank[i] = newFields;
+      newFieldsBank[i] = newFields;
     } else {
-      newFiledsBank[i] = data;
+      newFieldsBank[i] = data;
     }
-    setBankFields(newFiledsBank);
+    setForceRender(!forceRender);
+    setBankFields(newFieldsBank);
     dispatch(updateLoader(false));
   };
 
@@ -241,7 +244,6 @@ let ComercialInfoForm = (props) => {
       ? nextValue
       : previousValue;
   const upper = (value) => value && value.toUpperCase();
-
   return (
     <div>
       <form
@@ -467,7 +469,7 @@ let ComercialInfoForm = (props) => {
         {bankFields
           .filter((fields, indexField) => indexField === 0)
           .map((fields, indexField) =>
-            fields.map((field) => {
+            fields.map((field) => {              
               return (
                 <Field
                   key={field.name + 0}
@@ -545,7 +547,9 @@ let ComercialInfoForm = (props) => {
                 </Col>
               </Row>
               {bankFields
-                .filter((fields, indexField) => indexField === indexBank)
+                .filter((fields, indexField) => {
+                  return indexField === indexBank
+                })
                 .map((fields, indexField) =>
                   fields.map((field) => {
                     return (
