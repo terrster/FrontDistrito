@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Field, reduxForm } from "redux-form";
 import comercialOptions from "../models/ComercialInfoModels";
 import { Row, Col, Button } from "react-bootstrap";
-import InputLabel from '../components/Generic/InputLabel';
+import InputLabel from "../components/Generic/InputLabel";
 import SubtitleForm from "../components/Generic/SubtitleForm";
 import { validateComercialInfo } from "../components/Validate/ValidateComercialInfo";
 import {
@@ -19,6 +19,8 @@ import { updateLoader } from "../redux/actions/loaderActions";
 import PopUp from "./PopUp";
 import Info from "../assets/img/Info.png";
 import scroll from "../utils/scroll";
+import axios from "../utils/axios";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 let ComercialInfoForm = (props) => {
   const dispatch = useDispatch();
@@ -26,11 +28,49 @@ let ComercialInfoForm = (props) => {
   const { showModal, refDocuments } = useSelector((state) => state.modalCiec);
 
   const [colonias, setColonias] = useState([]);
+  const [banksOptions, setBanksOptions] = useState([]); // Bancos que se obtienen de la api
+  const [bankFields, setBankFields] = useState([]); // Campos de los bancos que el usuario ya ha seleccionado
   const [zipCodeError, setZipCodeError] = useState(false);
   const [disabled, setDisabled] = useState(true);
+  const [forceRender, setForceRender] = useState(true);
 
-  const { handleSubmit, valid } = props;
+  const {
+    handleSubmit,
+    valid,
+    banks,
+    setBanks,
+    isRegistredInFinerio,
+    getCustomer,
+  } = props;
   const ciecRef = useRef(null);
+
+  const handleChangeBank = async (idBank, i) => {
+    const { data } = await axios.get(`api/finerio/bank/${idBank}/fields`);
+    console.log(data)
+    let newFieldsBank = bankFields;
+    if (idBank === 1) {
+      const tokenField = {
+        friendlyName: "Token",
+        name: "securityCode",
+        type: "TEXT",
+        position: data.length + 1,
+      };
+      const newFields = [...data, tokenField];
+      newFieldsBank[i] = newFields;
+    } else {
+      newFieldsBank[i] = data;
+    }
+    setForceRender(!forceRender);
+    setBankFields(newFieldsBank);
+    dispatch(updateLoader(false));
+  };
+
+  const deleteBank = async (indexBank) => {
+    const copyBanks = banks;
+    const newBanks = copyBanks.splice(indexBank, indexBank);
+    // MANDAR ID A LA API
+    setBanks(newBanks);
+  };
 
   const handleChange = async (event, id) => {
     const zipCode = event.target.value;
@@ -125,6 +165,13 @@ let ComercialInfoForm = (props) => {
 
     getData();
 
+    const getBanks = async () => {
+      const { data } = await axios.get("api/finerio/banks");
+      setBanksOptions(data);
+    };
+
+    getBanks();
+
     if (!refDocuments) {
       window.scrollTo(0, 0);
     } else {
@@ -197,7 +244,6 @@ let ComercialInfoForm = (props) => {
       ? nextValue
       : previousValue;
   const upper = (value) => value && value.toUpperCase();
-
   return (
     <div>
       <form
@@ -233,7 +279,6 @@ let ComercialInfoForm = (props) => {
         ) : (
           <div></div>
         )}
-
         <Field
           component={renderField}
           label="Actividad específica"
@@ -249,8 +294,17 @@ let ComercialInfoForm = (props) => {
           maxLength={12}
           minLength={12}
         />
+        <label className="label-style">
+          El número telefónico debe tener 10 dígitos
+        </label>
+        <Field
+          component={renderField}
+          label="Teléfono"
+          normalize={onlyNumbers}
+          name="phone"
+          cls="mb-3"
+        />
         <SubtitleForm subtitle="Domicilio del negocio" className="mt-11 mb-3" />
-
         <Row className="d-flex justify-content-center">
           <Col lg={12} md={12} sm={12}>
             <Field
@@ -364,20 +418,220 @@ let ComercialInfoForm = (props) => {
               <PopUp />
             </>
           )}
-
-          <Col lg={12} md={12} sm={12}>
-            <label className="label-style">
-              El número telefónico debe tener 10 dígitos
-            </label>
+        </Row>
+        <SubtitleForm subtitle="Datos Bancarios" className="mt-11 mb-3" />
+        <Row>
+          <Col lg={10} md={10} sm={10}>
             <Field
-              component={renderField}
-              label="Teléfono"
-              normalize={onlyNumbers}
-              name="phone"
+              key={"firstBank"}
+              component={renderSelectField}
+              name={"banks" + 0}
+              required={true}
               cls="mb-3"
-            />
+              onChange={(e, newValue) => {
+                dispatch(updateLoader(true));
+                const currBank = banksOptions.filter(
+                  (bank) => bank.name === newValue
+                );
+                const copyBanks = banks;
+                copyBanks[0] = {
+                  ...currBank[0],
+                  idArray: 0,
+                };
+                setBanks(copyBanks);
+                if (currBank.length > 0) {
+                  const idBank = currBank[0].id;
+                  handleChangeBank(idBank, 0);
+                }
+              }}
+            >
+              <option value="" disabled>
+                Bancos
+              </option>
+              {banksOptions.map((bank, index) => {
+                return (
+                  <option value={bank.name} key={bank.name + index}>
+                    {bank.name}
+                  </option>
+                );
+              })}
+            </Field>
+          </Col>
+          <Col lg={2} md={2} sm={2}>
+            <Button
+              className="btn-blue-general"
+              onClick={() => deleteBank(0)}
+            >
+              <DeleteIcon />
+            </Button>
           </Col>
         </Row>
+        {bankFields
+          .filter((fields, indexField) => indexField === 0)
+          .map((fields, indexField) =>
+            fields.map((field) => {              
+              return (
+                <Field
+                  key={field.name + 0}
+                  component={renderField}
+                  label={field.friendlyName}
+                  type={field.type}
+                  name={field.name + 0}
+                  required={true}
+                  onChange={(e, newValue) => {
+                    const copyBanks = banks;
+                    const currentBank = banks[0];
+                    const { name } = field;
+                    const addCurrentBank = {
+                      ...currentBank,
+                    };
+                    addCurrentBank[name] = newValue;
+                    copyBanks[0] = addCurrentBank;
+                    setBanks(copyBanks);
+                  }}
+                  cls="mb-3"
+                />
+              );
+            })
+          )}
+        {banks.map((bank, indexBank) => {
+          if (indexBank === 0){
+            return null
+          }
+          return (
+            <>
+              <Row>
+                <Col lg={10} md={10} sm={10}>
+                  <Field
+                    key={indexBank}
+                    component={renderSelectField}
+                    name={"banks" + indexBank}
+                    required={true}
+                    cls="mb-3"
+                    onChange={(e, newValue) => {
+                      dispatch(updateLoader(true));
+                      const currBank = banksOptions.filter(
+                        (bank) => bank.name === newValue
+                      );
+                      const copyBanks = banks;
+                      copyBanks[indexBank] = {
+                        ...currBank[0],
+                        idArray: indexBank,
+                      };
+                      setBanks(copyBanks);
+                      if (currBank.length > 0) {
+                        const idBank = currBank[0].id;
+                        handleChangeBank(idBank, indexBank);
+                      }
+                    }}
+                  >
+                    <option value="" disabled>
+                      Bancos
+                    </option>
+                    {banksOptions.map((bank, index) => {
+                      return (
+                        <option value={bank.name} key={bank.name + index}>
+                          {bank.name}
+                        </option>
+                      );
+                    })}
+                  </Field>
+                </Col>
+                <Col lg={2} md={2} sm={2}>
+                  <Button
+                    className="btn-blue-general"
+                    onClick={() => deleteBank(indexBank)}
+                  >
+                    <DeleteIcon />
+                  </Button>
+                </Col>
+              </Row>
+              {bankFields
+                .filter((fields, indexField) => {
+                  return indexField === indexBank
+                })
+                .map((fields, indexField) =>
+                  fields.map((field) => {
+                    return (
+                      <Field
+                        key={field.name + indexBank}
+                        component={renderField}
+                        label={field.friendlyName}
+                        type={field.type}
+                        name={field.name + indexBank}
+                        required={true}
+                        onChange={(e, newValue) => {
+                          const copyBanks = banks;
+                          const currentBank = banks[indexBank];
+                          const { name } = field;
+                          const addCurrentBank = {
+                            ...currentBank,
+                          };
+                          addCurrentBank[name] = newValue;
+                          copyBanks[indexBank] = addCurrentBank;
+                          setBanks(copyBanks);
+                        }}
+                        cls="mb-3"
+                      />
+                    );
+                  })
+                )}
+            </>
+          );
+        })}
+        <Button
+          type="button"
+          className={"mt-10 btn-blue-general"}
+          onClick={() => {
+            const newBank = {
+              code: null,
+              id: null,
+              idArray: null,
+              name: null,
+              status: null,
+            };
+            setBanks([...banks, newBank]);
+          }}
+        >
+          Agregar Banco
+        </Button>
+        {/* <Field
+          component={renderSelectField}
+          name="banks"
+          cls="mb-3"
+          onChange={(e, newValue) => {
+            dispatch(updateLoader(true));
+            const currBank = banksOptions.filter(
+              (bank) => bank.name === newValue
+            );
+            if (currBank.length > 0) {
+              const idBank = currBank[0].id;
+              handleChangeBank(idBank);
+            }
+          }}
+        >
+          <option value="" disabled>
+            Bancos
+          </option>
+          {banksOptions.map((bank, index) => {
+            return (
+              <option value={bank.name} key={bank.name + index}>
+                {bank.name}
+              </option>
+            );
+          })}
+        </Field>
+        {bankFields.map((field) => {
+          return (
+            <Field
+              component={renderField}
+              label={field.friendlyName}
+              type={field.type}
+              name={field.name}
+              cls="mb-3"
+            />
+          );
+        })} */}
         <SubtitleForm subtitle="¿Cuentas con alguno?" className="mt-11 mb-3" />
         <Field
           component={renderField}
@@ -391,11 +645,12 @@ let ComercialInfoForm = (props) => {
           name="facebook"
           cls="mb-3"
         />
-        <InputLabel label="¿Vendes tu producto o servicio a Estados Unidos?" class="mt-18" />
+        <InputLabel
+          label="¿Vendes tu producto o servicio a Estados Unidos?"
+          class="mt-18"
+        />
         <Field component={renderSelectField} name="terminal" cls="mb-3">
-          <option value="">
-            Seleccionar
-          </option>
+          <option value="">Seleccionar</option>
           <option value="1">Sí</option>
           <option value="0">No</option>
         </Field>
@@ -407,7 +662,6 @@ let ComercialInfoForm = (props) => {
           <option value="3">Sí, ambos</option>
           <option value="4">No</option>
         </Field>
-
         <div className="text-center" style={{ marginBottom: "50px" }}>
           {refDocuments && !disabled && (
             <Button
