@@ -44,9 +44,8 @@ let ComercialInfoForm = (props) => {
   } = props;
   const ciecRef = useRef(null);
 
-  const handleChangeBank = async (idBank, i) => {
+  const handleChangeBank = async (idBank, i) => {console.log(idBank)
     const { data } = await axios.get(`api/finerio/bank/${idBank}/fields`);
-    console.log(data)
     let newFieldsBank = bankFields;
     if (idBank === 1) {
       const tokenField = {
@@ -428,10 +427,10 @@ let ComercialInfoForm = (props) => {
               name={"banks" + 0}
               required={true}
               cls="mb-3"
-              onChange={(e, newValue) => {
+              onChange={(e, newValue) => {console.log(e);console.log(newValue);
                 dispatch(updateLoader(true));
                 const currBank = banksOptions.filter(
-                  (bank) => bank.name === newValue
+                  (bank) => bank.id == newValue
                 );
                 const copyBanks = banks;
                 copyBanks[0] = {
@@ -450,7 +449,7 @@ let ComercialInfoForm = (props) => {
               </option>
               {banksOptions.map((bank, index) => {
                 return (
-                  <option value={bank.name} key={bank.name + index}>
+                  <option value={bank.id} key={bank.name + index}>
                     {bank.name}
                   </option>
                 );
@@ -511,7 +510,7 @@ let ComercialInfoForm = (props) => {
                     onChange={(e, newValue) => {
                       dispatch(updateLoader(true));
                       const currBank = banksOptions.filter(
-                        (bank) => bank.name === newValue
+                        (bank) => bank.id === newValue
                       );
                       const copyBanks = banks;
                       copyBanks[indexBank] = {
@@ -530,7 +529,7 @@ let ComercialInfoForm = (props) => {
                     </option>
                     {banksOptions.map((bank, index) => {
                       return (
-                        <option value={bank.name} key={bank.name + index}>
+                        <option value={bank.id} key={bank.name + index}>
                           {bank.name}
                         </option>
                       );
@@ -581,7 +580,7 @@ let ComercialInfoForm = (props) => {
         })}
         <Button
           type="button"
-          className={"mt-10 btn-blue-general"}
+          className={"mt-11 btn-blue-general"}
           onClick={() => {
             const newBank = {
               code: null,
@@ -591,6 +590,7 @@ let ComercialInfoForm = (props) => {
               status: null,
             };
             setBanks([...banks, newBank]);
+            console.log(banks)
           }}
         >
           Agregar Banco
