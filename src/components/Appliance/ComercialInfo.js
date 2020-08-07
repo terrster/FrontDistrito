@@ -119,6 +119,7 @@ const ComercialInfo = (props) => {
       ...dataForm,
       state,
       municipality,
+      banks
       //idFinerio,
     };
     if (idClient.appliance.length > 0) {

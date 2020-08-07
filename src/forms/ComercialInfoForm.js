@@ -44,7 +44,7 @@ let ComercialInfoForm = (props) => {
   } = props;
   const ciecRef = useRef(null);
 
-  const handleChangeBank = async (idBank, i) => {console.log(idBank)
+  const handleChangeBank = async (idBank, i) => {
     const { data } = await axios.get(`api/finerio/bank/${idBank}/fields`);
     let newFieldsBank = bankFields;
     if (idBank === 1) {
@@ -422,12 +422,12 @@ let ComercialInfoForm = (props) => {
         <Row>
           <Col lg={10} md={10} sm={10}>
             <Field
-              key={"firstBank"}
+              key={0}
               component={renderSelectField}
               name={"banks" + 0}
               required={true}
               cls="mb-3"
-              onChange={(e, newValue) => {console.log(e);console.log(newValue);
+              onChange={(e, newValue) => {
                 dispatch(updateLoader(true));
                 const currBank = banksOptions.filter(
                   (bank) => bank.id == newValue
@@ -498,7 +498,7 @@ let ComercialInfoForm = (props) => {
             return null
           }
           return (
-            <>
+            <div key={indexBank}>
               <Row>
                 <Col lg={10} md={10} sm={10}>
                   <Field
@@ -510,7 +510,7 @@ let ComercialInfoForm = (props) => {
                     onChange={(e, newValue) => {
                       dispatch(updateLoader(true));
                       const currBank = banksOptions.filter(
-                        (bank) => bank.id === newValue
+                        (bank) => bank.id == newValue
                       );
                       const copyBanks = banks;
                       copyBanks[indexBank] = {
@@ -575,7 +575,7 @@ let ComercialInfoForm = (props) => {
                     );
                   })
                 )}
-            </>
+            </div>
           );
         })}
         <Button
@@ -585,12 +585,11 @@ let ComercialInfoForm = (props) => {
             const newBank = {
               code: null,
               id: null,
-              idArray: null,
+              idArray: banks.length ? banks[banks.length - 1].idArray + 1 : 1,
               name: null,
               status: null,
             };
             setBanks([...banks, newBank]);
-            console.log(banks)
           }}
         >
           Agregar Banco
