@@ -47,9 +47,8 @@ const getDocsMethod = () => {
     const typePerson = idClient.type;
     const { appliance } = idClient;  
     let ciec = '';
-    if (appliance.hasOwnProperty("idComercialInfo")) {
-      const { idComercialInfo } = appliance[appliance.length - 1];
-      ciec = idComercialInfo.ciec;
+    if (appliance[0].idComercialInfo) {
+      ciec = appliance[0].idComercialInfo.ciec;
     }
     let docFiles = [];
     /**
