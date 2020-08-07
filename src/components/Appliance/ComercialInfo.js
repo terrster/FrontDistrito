@@ -189,7 +189,17 @@ const ComercialInfo = (props) => {
             } else if (coloniasRequest.error) {
               colonias = [];
             }
-            setInitialValues({ ...comercial, ...address, terminal, colonias });
+
+            let bankFields = [];
+            banks.map((bank, indexBank) => {
+              bankFields[0] = {
+                ...bankFields[0],
+                ['banks'+indexBank] : bank.idBank,
+                ['username'+indexBank] : bank.username 
+              };
+            });
+            
+            setInitialValues({ ...comercial, ...address, terminal, colonias, ...bankFields[0] });
           } catch (error) {
             setInitialValues({ ...comercial, ...address, terminal, colonias });
           }

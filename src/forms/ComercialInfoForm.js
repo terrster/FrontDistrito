@@ -33,6 +33,7 @@ let ComercialInfoForm = (props) => {
   const [zipCodeError, setZipCodeError] = useState(false);
   const [disabled, setDisabled] = useState(true);
   const [forceRender, setForceRender] = useState(true);
+  const [idFinerio, setIdFinerio] = useState('');
 
   const {
     handleSubmit,
@@ -125,6 +126,11 @@ let ComercialInfoForm = (props) => {
       // Si ya tienen una solicitud, se actualiza
       if (idClient.appliance.length > 0) {
         const appliance = idClient.appliance[idClient.appliance.length - 1];
+
+        if(appliance.hasOwnProperty("idFinerio")){
+          setIdFinerio(appliance.idFinerio.idFinerio);//Obtener id de Finerio
+        }
+
         if (appliance.hasOwnProperty("idComercialInfo")) {
           const comercial = appliance.idComercialInfo;
           const address = comercial.address;
@@ -179,6 +185,32 @@ let ComercialInfoForm = (props) => {
       scroll("CIEC");
     }
   }, []);
+
+  useEffect(() => {
+    if(JSON.parse(sessionStorage.getItem("user")).idClient.appliance[0].idFinerio){
+      const appliance = JSON.parse(sessionStorage.getItem("user")).idClient.appliance[0];
+
+      appliance.idFinerio.credentials.map((credential, indexBank) => {
+        let idBank = credential.idBank;
+        const currBank = banksOptions.filter(
+          (bank) => bank.id == idBank
+        );
+        
+        const copyBanks = banks;
+        copyBanks[indexBank] = {
+          ...currBank[0],
+          idArray: indexBank,
+          idBank: credential.idBank,
+          idCredential: credential.id,
+          username: credential.username
+        };
+
+        setBanks(copyBanks);
+        handleChangeBank(idBank, indexBank);
+        document.getElementsByName('username0').value = "prueba"
+      });
+    }
+  }, [banksOptions])
 
   const user = JSON.parse(sessionStorage.getItem("user"));
   const { type } = user.idClient;
@@ -418,219 +450,188 @@ let ComercialInfoForm = (props) => {
             </>
           )}
         </Row>
-        <SubtitleForm subtitle="Datos Bancarios" className="mt-11 mb-3" />
-        <Row>
-          <Col lg={10} md={10} sm={10}>
-            <Field
-              key={0}
-              component={renderSelectField}
-              name={"banks" + 0}
-              required={true}
-              cls="mb-3"
-              onChange={(e, newValue) => {
-                dispatch(updateLoader(true));
-                const currBank = banksOptions.filter(
-                  (bank) => bank.id == newValue
-                );
-                const copyBanks = banks;
-                copyBanks[0] = {
-                  ...currBank[0],
-                  idArray: 0,
-                };
-                setBanks(copyBanks);
-                if (currBank.length > 0) {
-                  const idBank = currBank[0].id;
-                  handleChangeBank(idBank, 0);
-                }
-              }}
-            >
-              <option value="" disabled>
-                Bancos
-              </option>
-              {banksOptions.map((bank, index) => {
-                return (
-                  <option value={bank.id} key={bank.name + index}>
-                    {bank.name}
-                  </option>
-                );
-              })}
-            </Field>
-          </Col>
-          <Col lg={2} md={2} sm={2}>
-            <Button
-              className="btn-blue-general"
-              onClick={() => deleteBank(0)}
-            >
-              <DeleteIcon />
-            </Button>
-          </Col>
-        </Row>
-        {bankFields
-          .filter((fields, indexField) => indexField === 0)
-          .map((fields, indexField) =>
-            fields.map((field) => {              
-              return (
-                <Field
-                  key={field.name + 0}
-                  component={renderField}
-                  label={field.friendlyName}
-                  type={field.type}
-                  name={field.name + 0}
-                  required={true}
-                  onChange={(e, newValue) => {
-                    const copyBanks = banks;
-                    const currentBank = banks[0];
-                    const { name } = field;
-                    const addCurrentBank = {
-                      ...currentBank,
-                    };
-                    addCurrentBank[name] = newValue;
-                    copyBanks[0] = addCurrentBank;
-                    setBanks(copyBanks);
-                  }}
-                  cls="mb-3"
-                />
-              );
-            })
-          )}
-        {banks.map((bank, indexBank) => {
-          if (indexBank === 0){
-            return null
-          }
-          return (
-            <div key={indexBank}>
-              <Row>
-                <Col lg={10} md={10} sm={10}>
-                  <Field
-                    key={indexBank}
-                    component={renderSelectField}
-                    name={"banks" + indexBank}
-                    required={true}
-                    cls="mb-3"
-                    onChange={(e, newValue) => {
-                      dispatch(updateLoader(true));
-                      const currBank = banksOptions.filter(
-                        (bank) => bank.id == newValue
-                      );
-                      const copyBanks = banks;
-                      copyBanks[indexBank] = {
-                        ...currBank[0],
-                        idArray: indexBank,
-                      };
-                      setBanks(copyBanks);
-                      if (currBank.length > 0) {
-                        const idBank = currBank[0].id;
-                        handleChangeBank(idBank, indexBank);
-                      }
-                    }}
-                  >
-                    <option value="" disabled>
-                      Bancos
+        {type !== "PM" && (
+          <>
+          <SubtitleForm subtitle="Datos Bancarios" className="mt-11 mb-3" />
+          <Row>
+            <Col lg={10} md={10} sm={10}>
+              <Field
+                key={0}
+                component={renderSelectField}
+                name={"banks" + 0}
+                required={true}
+                cls="mb-3"
+                onChange={(e, newValue) => {
+                  dispatch(updateLoader(true));
+                  const currBank = banksOptions.filter(
+                    (bank) => bank.id == newValue
+                  );
+                  const copyBanks = banks;
+                  copyBanks[0] = {
+                    ...currBank[0],
+                    idArray: 0,
+                  };
+                  setBanks(copyBanks);
+                  if (currBank.length > 0) {
+                    const idBank = currBank[0].id;
+                    handleChangeBank(idBank, 0);
+                  }
+                }}
+              >
+                <option value="" disabled>
+                  Bancos
+                </option>
+                {banksOptions.map((bank, index) => {
+                  return (
+                    <option value={bank.id} key={bank.name + index}>
+                      {bank.name}
                     </option>
-                    {banksOptions.map((bank, index) => {
-                      return (
-                        <option value={bank.id} key={bank.name + index}>
-                          {bank.name}
-                        </option>
-                      );
-                    })}
-                  </Field>
-                </Col>
-                <Col lg={2} md={2} sm={2}>
-                  <Button
-                    className="btn-blue-general"
-                    onClick={() => deleteBank(indexBank)}
-                  >
-                    <DeleteIcon />
-                  </Button>
-                </Col>
-              </Row>
-              {bankFields
-                .filter((fields, indexField) => {
-                  return indexField === indexBank
-                })
-                .map((fields, indexField) =>
-                  fields.map((field) => {
-                    return (
-                      <Field
-                        key={field.name + indexBank}
-                        component={renderField}
-                        label={field.friendlyName}
-                        type={field.type}
-                        name={field.name + indexBank}
-                        required={true}
-                        onChange={(e, newValue) => {
-                          const copyBanks = banks;
-                          const currentBank = banks[indexBank];
-                          const { name } = field;
-                          const addCurrentBank = {
-                            ...currentBank,
-                          };
-                          addCurrentBank[name] = newValue;
-                          copyBanks[indexBank] = addCurrentBank;
-                          setBanks(copyBanks);
-                        }}
-                        cls="mb-3"
-                      />
-                    );
-                  })
-                )}
-            </div>
-          );
-        })}
-        <Button
-          type="button"
-          className={"mt-11 btn-blue-general"}
-          onClick={() => {
-            const newBank = {
-              code: null,
-              id: null,
-              idArray: banks.length ? banks[banks.length - 1].idArray + 1 : 1,
-              name: null,
-              status: null,
-            };
-            setBanks([...banks, newBank]);
-          }}
-        >
-          Agregar Banco
-        </Button>
-        {/* <Field
-          component={renderSelectField}
-          name="banks"
-          cls="mb-3"
-          onChange={(e, newValue) => {
-            dispatch(updateLoader(true));
-            const currBank = banksOptions.filter(
-              (bank) => bank.name === newValue
-            );
-            if (currBank.length > 0) {
-              const idBank = currBank[0].id;
-              handleChangeBank(idBank);
+                  );
+                })}
+              </Field>
+            </Col>
+            <Col lg={2} md={2} sm={2}>
+              <Button
+                className="btn-blue-general"
+                onClick={() => deleteBank(0)}
+              >
+                <DeleteIcon />
+              </Button>
+            </Col>
+          </Row>
+          {bankFields
+            .filter((fields, indexField) => indexField === 0)
+            .map((fields, indexField) =>
+              fields.map((field) => {              
+                return (
+                  <Field
+                    key={field.name + 0}
+                    component={renderField}
+                    label={field.friendlyName}
+                    type={field.type}
+                    name={field.name + 0}
+                    value={"123"}
+                    required={true}
+                    onChange={(e, newValue) => {
+                      const copyBanks = banks;
+                      const currentBank = banks[0];
+                      const { name } = field;
+                      const addCurrentBank = {
+                        ...currentBank,
+                      };
+                      addCurrentBank[name] = newValue;
+                      copyBanks[0] = addCurrentBank;
+                      setBanks(copyBanks);
+                    }}
+                    cls="mb-3"
+                  />
+                );
+              })
+            )}
+          {banks.map((bank, indexBank) => {
+            if (indexBank === 0){
+              return null
             }
-          }}
-        >
-          <option value="" disabled>
-            Bancos
-          </option>
-          {banksOptions.map((bank, index) => {
             return (
-              <option value={bank.name} key={bank.name + index}>
-                {bank.name}
-              </option>
+              <div key={indexBank}>
+                <Row>
+                  <Col lg={10} md={10} sm={10}>
+                    <Field
+                      key={indexBank}
+                      component={renderSelectField}
+                      name={"banks" + indexBank}
+                      required={true}
+                      cls="mb-3"
+                      onChange={(e, newValue) => {
+                        dispatch(updateLoader(true));
+                        const currBank = banksOptions.filter(
+                          (bank) => bank.id == newValue
+                        );
+                        const copyBanks = banks;
+                        copyBanks[indexBank] = {
+                          ...currBank[0],
+                          idArray: indexBank,
+                        };
+                        setBanks(copyBanks);
+                        if (currBank.length > 0) {
+                          const idBank = currBank[0].id;
+                          handleChangeBank(idBank, indexBank);
+                        }
+                      }}
+                    >
+                      <option value="" disabled>
+                        Bancos
+                      </option>
+                      {banksOptions.map((bank, index) => {
+                        return (
+                          <option value={bank.id} key={bank.name + index}>
+                            {bank.name}
+                          </option>
+                        );
+                      })}
+                    </Field>
+                  </Col>
+                  <Col lg={2} md={2} sm={2}>
+                    <Button
+                      className="btn-blue-general"
+                      onClick={() => deleteBank(indexBank)}
+                    >
+                      <DeleteIcon />
+                    </Button>
+                  </Col>
+                </Row>
+                {bankFields
+                  .filter((fields, indexField) => {
+                    return indexField === indexBank
+                  })
+                  .map((fields, indexField) =>
+                    fields.map((field) => {
+                      return (
+                        <Field
+                          key={field.name + indexBank}
+                          component={renderField}
+                          label={field.friendlyName}
+                          type={field.type}
+                          name={field.name + indexBank}
+                          required={true}
+                          onChange={(e, newValue) => {
+                            const copyBanks = banks;
+                            const currentBank = banks[indexBank];
+                            const { name } = field;
+                            const addCurrentBank = {
+                              ...currentBank,
+                            };
+                            addCurrentBank[name] = newValue;
+                            copyBanks[indexBank] = addCurrentBank;
+                            setBanks(copyBanks);
+                          }}
+                          cls="mb-3"
+                        />
+                      );
+                    })
+                  )}
+              </div>
             );
           })}
-        </Field>
-        {bankFields.map((field) => {
-          return (
-            <Field
-              component={renderField}
-              label={field.friendlyName}
-              type={field.type}
-              name={field.name}
-              cls="mb-3"
-            />
-          );
-        })} */}
+          <Button
+            type="button"
+            className={"mt-11 btn-blue-general"}
+            onClick={() => {
+              const newBank = {
+                code: null,
+                id: null,
+                idArray: banks.length ? banks[banks.length - 1].idArray + 1 : 1,
+                name: null,
+                status: null,
+              };
+              setBanks([...banks, newBank]);
+            }}
+          >
+            Agregar Banco
+          </Button>
+          </>
+        )}
+
         <SubtitleForm subtitle="¿Cuentas con alguno?" className="mt-11 mb-3" />
         <Field
           component={renderField}
