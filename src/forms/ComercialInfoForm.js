@@ -78,7 +78,9 @@ let ComercialInfoForm = (props) => {
     props.change('banks'+indexBank, '');
     props.change('username'+indexBank, '');
 
-    let AuxBankFields = bankFields.filter(b => b === indexBank );
+    let AuxBankFields = [...bankFields];
+    AuxBankFields.splice(indexBank, 1);
+
     setBankFields(AuxBankFields);
 
     dispatch(updateLoader(false));
