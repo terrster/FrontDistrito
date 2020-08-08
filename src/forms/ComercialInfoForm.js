@@ -66,10 +66,22 @@ let ComercialInfoForm = (props) => {
   };
 
   const deleteBank = async (indexBank) => {
+    dispatch(updateLoader(true));
+
+    if(Array.isArray(banks) && banks.length >= 0 && banks[indexBank] != null  && banks[indexBank].hasOwnProperty("idCredential")){
+      const { data } = await axios.delete(`api/finerio/credentials/${banks[indexBank].idCredential}`);
+      sessionStorage.setItem("user", JSON.stringify(data.user));
+    }
     const copyBanks = banks;
     const newBanks = copyBanks.splice(indexBank, indexBank);
-    // MANDAR ID A LA API
     setBanks(newBanks);
+    props.change('banks'+indexBank, '');
+    props.change('username'+indexBank, '');
+
+    let AuxBankFields = bankFields.filter(b => b === indexBank );
+    setBankFields(AuxBankFields);
+
+    dispatch(updateLoader(false));
   };
 
   const handleChange = async (event, id) => {
@@ -207,7 +219,6 @@ let ComercialInfoForm = (props) => {
 
         setBanks(copyBanks);
         handleChangeBank(idBank, indexBank);
-        document.getElementsByName('username0').value = "prueba"
       });
     }
   }, [banksOptions])

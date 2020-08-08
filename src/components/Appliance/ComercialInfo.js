@@ -120,7 +120,6 @@ const ComercialInfo = (props) => {
       state,
       municipality,
       banks
-      //idFinerio,
     };
     if (idClient.appliance.length > 0) {
       const appliance = idClient.appliance[idClient.appliance.length - 1];
