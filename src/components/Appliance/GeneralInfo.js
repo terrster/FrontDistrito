@@ -37,7 +37,7 @@ const GeneralInfo = () => {
       const user = JSON.parse(sessionStorage.getItem("user"));
       const idClient = user.idClient;
       if (idClient.appliance.length > 0) {
-        const appliance = idClient.appliance[idClient.appliance.length - 1];
+        const appliance = idClient.appliance[0]; 
         if (appliance.hasOwnProperty("idGeneralInfo")) {
           const general = appliance.idGeneralInfo;
           const date = general.birthDate.split("/");
@@ -102,11 +102,13 @@ const GeneralInfo = () => {
           });
         }
       }
+      else{
+        setInitialValues({...initialValues, name: user.name, lastname: user.lastname, secondLastname, phone: user.phone });
+      }
     } catch (e) {
       console.log(e);
     }
     };
-    setInitialValues({...initialValues, name: user.name, lastname: user.lastname, secondLastname, phone: user.phone });
     try {
     getData();
   } catch (e) {

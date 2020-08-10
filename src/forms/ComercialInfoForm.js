@@ -298,6 +298,8 @@ let ComercialInfoForm = (props) => {
     setDisabled(true);
   }
 
+  const LirycsNumbersDotComa = (nextValue, previousValue) =>
+   /^([a-z ñáéíóú0-9,.]{0,45})$/i.test(nextValue) ? nextValue : previousValue;
   const onlyNumbers = (nextValue, previousValue) =>
     /^[+]?([0-9]+(?:[,.][0-9]*)?|,.[0-9]+)$/.test(nextValue) ||
     nextValue.length === 0
@@ -372,6 +374,7 @@ let ComercialInfoForm = (props) => {
               label="Calle"
               name="street"
               cls="mb-3"
+              normalize={LirycsNumbersDotComa}
             />
           </Col>
           <Col lg={6} md={6} sm={12}>

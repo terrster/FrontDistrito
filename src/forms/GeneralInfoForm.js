@@ -207,7 +207,7 @@ let GeneralInfoForm = ({
           const colonias = res.map((datos) => datos.response.asentamiento);
           colonias.sort();
           setColonias(colonias);
-          setInitialValues({ ...initialValues, colonias });
+          //setInitialValues({ ...initialValues, colonias });
           setCpError(false);
         } else if (res.error) {
           setCpError(true);
@@ -336,6 +336,8 @@ let GeneralInfoForm = ({
     /^\d+$/.test(nextValue) || nextValue.length === 0
       ? nextValue
       : previousValue;
+  const LirycsNumbersDotComa = (nextValue, previousValue) =>
+   /^([a-z ñáéíóú0-9,.]{0,45})$/i.test(nextValue) ? nextValue : previousValue;
   const upper = (value) => value && value.toUpperCase();
 
   return (
@@ -507,7 +509,7 @@ let GeneralInfoForm = ({
               onChange={(event, newValue, previousValue) =>
                 setInitialValues({ ...initialValues, street: newValue })
               }
-              normalize={onlyLirycs}
+              normalize={LirycsNumbersDotComa}
             />
           </Col>
           <Col lg={6} md={6} sm={12}>
