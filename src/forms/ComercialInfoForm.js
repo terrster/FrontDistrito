@@ -72,15 +72,16 @@ let ComercialInfoForm = (props) => {
       const { data } = await axios.delete(`api/finerio/credentials/${banks[indexBank].idCredential}`);
       sessionStorage.setItem("user", JSON.stringify(data.user));
     }
-    const copyBanks = banks;
-    const newBanks = copyBanks.splice(indexBank, indexBank);
-    setBanks(newBanks);
+    let copyBanks = [...banks];
+    copyBanks.splice(indexBank, 1);
+    setBanks(copyBanks);
+
     props.change('banks'+indexBank, '');
     props.change('username'+indexBank, '');
+    props.change('securityCode'+indexBank, '');
 
     let AuxBankFields = [...bankFields];
     AuxBankFields.splice(indexBank, 1);
-
     setBankFields(AuxBankFields);
 
     dispatch(updateLoader(false));
@@ -247,6 +248,14 @@ let ComercialInfoForm = (props) => {
     const facebookError = document.getElementById("facebook-error");
     const terminalError = document.getElementById("terminal-error");
     const warrantyError = document.getElementById("warranty-error");
+
+    let banksErrors = [];
+    for(let i=0; i<=10; i++){
+      banksErrors.push(document.getElementById("username"+i+"-error"));
+      banksErrors.push(document.getElementById("password"+i+"-error"));
+      banksErrors.push(document.getElementById("securityCode"+i+"-error"));
+    }
+
     const errors = [
       comercialNameError,
       gyreError,
@@ -270,6 +279,13 @@ let ComercialInfoForm = (props) => {
     for (let x = 0; x < errors.length; x++) {
       if (errors[x] != null) {
         scroll(errors[x].id);
+        break;
+      }
+    }
+
+    for (let x = 0; x < banksErrors.length; x++) {
+      if (banksErrors[x] != null) {
+        scroll(banksErrors[x].id);
         break;
       }
     }
@@ -629,15 +645,18 @@ let ComercialInfoForm = (props) => {
           <Button
             type="button"
             className={"mt-11 btn-blue-general"}
+            disabled={banks.length < 10 ? false : true}
             onClick={() => {
-              const newBank = {
-                code: null,
-                id: null,
-                idArray: banks.length ? banks[banks.length - 1].idArray + 1 : 1,
-                name: null,
-                status: null,
-              };
-              setBanks([...banks, newBank]);
+              if(banks.length < 10){
+                const newBank = {
+                  code: null,
+                  id: null,
+                  idArray: banks.length ? banks[banks.length - 1].idArray + 1 : 1,
+                  name: null,
+                  status: null,
+                };
+                setBanks([...banks, newBank]);
+              }
             }}
           >
             Agregar Banco
