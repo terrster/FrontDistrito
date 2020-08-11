@@ -16,7 +16,7 @@ import { singUpAction } from '../../redux/actions/authActions';
 import { updateToast } from '../../redux/actions/appActions';
 import axios from '../../utils/axios';
 import StepSignup from "../Appliance/StepSignup";
-
+import publicIp from "public-ip";
 
 let Signup = props => {
 	const toast = useSelector(state => state.app.toast);
@@ -57,7 +57,10 @@ let Signup = props => {
 
   let onFormSubmit = async (data) => {
 	dispatch ( updateToast(toast, "register") );
-	dispatch( updateLoader(true) );
+  dispatch( updateLoader(true) );
+  let ipV4 = await publicIp.v4();
+  data.ipV4 = ipV4;
+
 	const res = await axios.post('signin', data);
 	if (res.data.code === 500){
 		setErrorEmail(res.data.msg)
@@ -67,8 +70,6 @@ let Signup = props => {
 	}
 	dispatch (updateLoader(false));
   }
-
-  //sessionStorage.removeItem("nameUser")
 
   if (sessionStorage.getItem("nameUser")) {
     setTimeout(() => {
