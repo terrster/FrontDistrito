@@ -27,7 +27,7 @@ const renderField = ({ input, label, type, meta: { touched, error, warning } }) 
 let ResetPasswordForm = props => {
 
 	const { handleSubmit, submitting} = props
- 	const submitButtonClass = (submitting) ? "btn-register mt-30 disabled" : "btn-register mt-30"
+ 	const submitButtonClass = (submitting) ? "btn-blue-general mt-30 disabled" : "btn-blue-general mt-30"
 
 	return (
 		<div className="container">

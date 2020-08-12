@@ -6,6 +6,7 @@ import {
 
 const initialState = {
 	name: '',
+	message: '',
 	error: '',
 	loading: false
 }
@@ -21,7 +22,8 @@ const modalReducer = ( state = initialState, action) => {
 			return {
 				...state,
 				loading: false,
-				name: action.payload
+				name: action.payload.name,
+				message: action.payload.message
 			}
 		case UPDATE_MODAL_ERROR:
 			return {

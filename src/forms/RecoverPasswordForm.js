@@ -56,8 +56,8 @@ const RecoverPasswordForm = (props) => {
   }, [password, passwordConfirm, touchPassword, touchPasswordConfirm]);
 
   const submitButtonClass = submitting
-    ? "btn-register mt-30 disabled"
-    : "btn-register mt-30";
+    ? "btn-blue-general mt-30 disabled"
+    : "btn-blue-general mt-30";
     
   return (
     <div className="container">
