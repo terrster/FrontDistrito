@@ -1,20 +1,27 @@
 import React from 'react';
 import Modal from 'react-responsive-modal'
 import { Row, Button, Col } from 'react-bootstrap';
-import { connect } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux';
 
-const CustomModal = props => {
+import {
+	updateModal
+  } from '../../redux/actions/modalActions';
+
+const CustomModal = () => {
+
+	const modal = useSelector(state => state.modal);
+	const dispatch = useDispatch();
 
 	let closeModal = () => {
-		props.updateModal('')
+		dispatch( updateModal('') );
 	}
 
 	return (
-		<Modal onClose={closeModal} open={ props.modal === `${props.modalName}` } style={{ padding: '30px 40px!important', width: 'auto!important' }}>
+		<Modal onClose={closeModal} open={`${modal.name}` } style={{ padding: '30px 40px!important', width: 'auto!important' }}>
 			<Row className="d-flex justify-content-center">
 				<Col lg={6} sm={12} md={12} className="text-center">
-					<div className="brandonReg fz29 blueDark fw400">
-						{props.message}
+					<div className="metropolisReg mt-3 fz29 fw400">
+						{modal.message}
 					</div> 
 				</Col>
 			</Row>
