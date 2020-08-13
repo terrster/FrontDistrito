@@ -40,7 +40,7 @@ let RecoverPassword = props => {
 					<div className="mt-0 metropolisReg fw300 fz20 text-center mb-2">
 						<label className="gray50">Ingresa una nueva contraseña</label>
 					</div>
-					<RecoverPasswordForm />
+					<RecoverPasswordForm hash={props.match.params.hash}/>
 					</>
 					:<div className="mt-0 metropolisReg fw300 fz20 text-center mb-2 py-5">
 						<label className="gray50">El hash de recuperación es inválido, por favor genere uno nuevo haciendo clic <a href="/reset-password">aquí</a></label>

@@ -13,9 +13,9 @@ import {
 import {
   updateModal
 } from '../../redux/actions/modalActions'
-import {
-  updateResetPassword
-} from '../../redux/actions/resetPasswordActions'
+// import {
+//   updateResetPassword
+// } from '../../redux/actions/resetPasswordActions'
 
 
 const ResetPassword = (props) => {
@@ -42,23 +42,10 @@ const ResetPassword = (props) => {
         dispatch( updateModal('reset_password', 'Hash de recuperación vencido, se le generará otro. Verifique su correo electrónico.') );
       }
 
-      if(validateHash.data.code == 404 && data.code == 200){
+      if(data.code == 200){
         dispatch( updateModal('reset_password', 'Hash de recuperación creado exitosamente. verifique su correo electrónico.') );
       }
     }
-    /* this.props.updateLoader(true)
-		let {email} = data
-		try {
-			let d = await ResetPassword({variables: {email}});
-			let status = d.data.resetPassword.status;
-			let text = 'Enviamos un correo electrónico a la siguiente direccion '+email+', Haz click en el enlace que aparece en el correo para restablecer tu contraseña. Si no ves el correo electrónico en tu bandeja de entrada, revisa tu carpeta de spam.';
-			if(!status) text = 'El correo '+email+' no existe en nuestro sistema.';
-			this.props.updateResetPassword(status, text);
-            this.props.updateLoader(false)
-		} catch (err) {
-			this.props.updateLoader(false)
-			this.props.updateModal('err')
-    } */
     dispatch( updateLoader(false) );
   };
   window.scrollTo(0, 0);

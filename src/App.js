@@ -42,6 +42,7 @@ import Credit from "./components/Credit/Credit";
 import Record from "./components/Record/Record";
 import Documents from "./components/Appliance/Documents";
 import Loader from "./components/Loader/Loader";
+import Brokers from "./components/Brokers/Brokers";
 
 // ROUTER & REDUX
 import {
@@ -135,6 +136,7 @@ class App extends Component {
                   component={RegistroExitoso}
                 />
                 <Route path="/login" exact component={Login} />
+                <Route path="/brokers" exact component={Brokers}/>
                 <PrivateRoute exact path="/home" component={Home} />
                 <PrivateRoute exact path="/solicitud" component={Appliance} />
                 <PrivateRoute

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-
 import { updateLoader } from "../redux/actions/loaderActions";
 import { updateModal } from "../redux/actions/modalActions";
+import axios from "../utils/axios";
 
 const RecoverPasswordForm = (props) => {
   const dispatch = useDispatch();
@@ -14,23 +14,27 @@ const RecoverPasswordForm = (props) => {
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [passwordConfirmError, setPasswordConfirmError] = useState("");
   const [touchPasswordConfirm, setTouchPasswordConfirm] = useState(false);
+  const hash = props.hash;
 
   const onFormSubmit = async (e) => {
     e.preventDefault();
     dispatch(updateLoader(true));
-    //let hash = props.match.params.hash;
-    //console.log(password);
-    //console.log(passwordConfirm);
+    
     try {
-      /* let d = await RecoverPassword({variables: {password:pass, hash}});
-		  let status = d.data.createPassword.status;
-		  let text = (!status) ? 'Url invalida no se puede actualizar tu contraseña.': 'Tu contraseña se ha restablecido Correctamente, seras reedirigido a login';
-		  if(status) setTimeout(() => {props.history.push('/login')}, 2000); 
-      props.updateRecoverPassword(status, text); */
+      let {data} = await axios.post("/reset_password/" + hash, {password});
+
+      if(data.code == 200){
+        dispatch( updateModal('reset_password', 'Tu contraseña se ha cambiado exitosamente, serás reedirigido a login.') );
+        setTimeout(() => { window.location.href = `${process.env.REACT_APP_REDIRECT}/login`; }, 2000);
+      }
+      else{
+        dispatch( updateModal('reset_password', 'Ha ocurrido un error al cambiar la contraseña, intentelo de nuevo.') );
+      }
+
       dispatch(updateLoader(false));
     } catch (err) {
       dispatch(updateLoader(false));
-      dispatch(updateModal("err"));
+      dispatch( updateModal('reset_password', 'Ha ocurrido un error al cambiar la contraseña, intentelo de nuevo.') );
     }
   };
 
