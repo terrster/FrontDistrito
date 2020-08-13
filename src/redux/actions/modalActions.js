@@ -4,11 +4,12 @@ import {
     UPDATE_MODAL_ERROR
 } from '../types/modalTypes';
 
-export function updateModal(name){
+export function updateModal(name, message){
     return (dispatch) => {
         dispatch( modal() );
+
         try {
-            dispatch ( modalSuccess(name) )
+            dispatch ( modalSuccess({name, message}) )
         } catch (e) {
             dispatch ( modalError("Error al mostrar el mensaje. Intentelo otra vez."))
         }
@@ -19,9 +20,9 @@ const modal = () => ({
     type: UPDATE_MODAL
 });
 
-const modalSuccess = (name) => ({
+const modalSuccess = (data) => ({
     type: UPDATE_MODAL_SUCCESS,
-    payload: name
+    payload: data
 });
 
 const modalError = (error) => ({
