@@ -26,93 +26,11 @@ const ComercialInfo = (props) => {
   const [initialValues, setInitialValues] = useState({});
   const [municipality, setMunicipality] = useState("");
   const [state, setState] = useState("");
-  const [idFinerio, setIdFinerio] = useState("");
   const history = useHistory();
-
-  // const isRegistredInFinerio = async (email) => {
-  //   const {
-  //     data: { data },
-  //   } = await axios.get("api/finerio/customers");
-  //   let isRegistred = false;
-  //   data.forEach((user) => {
-  //     if (user.name === email) {
-  //       isRegistred = true;
-  //     }
-  //   });
-  //   return isRegistred;
-  // };
-
-  // const getCustomer = async (email) => {
-  //   const {
-  //     data: { data },
-  //   } = await axios.get("api/finerio/customers");
-  //   let currentCustomer = {};
-  //   data.forEach((user) => {
-  //     if (user.name === email) {
-  //       currentCustomer = user;
-  //     }
-  //   });
-  //   return currentCustomer;
-  // };
-
-  // const storeCredentials = async (customerId, email) => {
-  //   banks.forEach(async (bank) => {
-  //     let securityCode = "";
-  //     if (bank.hasOwnProperty("securityCode")) {
-  //       securityCode = bank.securityCode;
-  //     }
-  //     const data = {
-  //       customerId,
-  //       bankId: bank.id,
-  //       username: email,
-  //       password: bank.password,
-  //       securityCode,
-  //     };
-  //     const storeRequest = await axios.post("api/finerio/credentials", data);
-  //     if (storeRequest.data.msg === "Finerio: La credencial ya existe.") {
-  //       const getCredentials = await axios.get(
-  //         `api/finerio/credentials/customer/${customerId}`
-  //       );        
-  //       const dataCredentials = getCredentials.data.data;
-  //       const credentialId = dataCredentials[0].id;
-  //       const updateData = await axios.put(
-  //         `api/finerio/credentials/${credentialId}`,
-  //         data
-  //       );
-  //       return updateData.data.msg;
-  //     } else {
-  //       return storeRequest.data.msg;
-  //     }
-  //   });
-  // };
-
-  // const submitFinerioData = async () => {
-  //   const { email } = JSON.parse(sessionStorage.getItem("user"));
-  //   const isRegistred = await isRegistredInFinerio(email);
-  //   let customer = {};
-  //   if (!isRegistred) {
-  //     const {
-  //       data: { data },
-  //     } = await axios.post("api/finerio/customers", { name: email });
-  //     const { dateCreated, id, name } = data;
-  //     customer = {
-  //       dateCreated,
-  //       id,
-  //       name,
-  //     };
-  //   } else {
-  //     const customerdb = await getCustomer(email);
-  //     customer = customerdb;
-  //   }
-  //   const customerId = customer.id;
-  //   setIdFinerio(customerId);
-  //   await storeCredentials(customerId, email);
-  // };
 
   const onFormSubmit = async (dataForm) => {
     dispatch(updateLoader(true));
     const user = JSON.parse(sessionStorage.getItem("user"));
-    //submitFinerioData();
     const id = user._id;
     const idClient = user.idClient;
     const data = {
@@ -205,24 +123,7 @@ const ComercialInfo = (props) => {
         }
       }
       const { email } = JSON.parse(sessionStorage.getItem("user"));
-      // const isRegistred = await isRegistredInFinerio(email);
-      // let customer = {};
-      // if (!isRegistred) {
-      //   const {
-      //     data: { data },
-      //   } = await axios.post("api/finerio/customers", { name: email });
-      //   const { dateCreated, id, name } = data;
-      //   customer = {
-      //     dateCreated,
-      //     id,
-      //     name,
-      //   };
-      // } else {
-      //   const customerdb = await getCustomer(email);
-      //   customer = customerdb;
-      // }
-      // const customerId = customer.id;
-      // await axios.get(`api/finerio/credentials/customer/${customerId}`);
+
       dispatch(updateLoader(false));
     };
 
@@ -250,8 +151,6 @@ const ComercialInfo = (props) => {
         municipality={municipality}
         banks={banks}
         setBanks={setBanks}
-        //isRegistredInFinerio={isRegistredInFinerio}
-        //getCustomer={getCustomer}
       ></ComercialInfoForm>
     </div>
   );
