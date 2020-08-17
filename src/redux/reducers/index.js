@@ -15,6 +15,7 @@ import documentsReducer from './documents-reducer';
 import alertReducer from './alert-reducer';
 import docsStatusReducer from './docs-status-reducer';
 import modalCiecReducer from './modalCiec-reducer';
+import modalBanksReducer from './modalBanksReducer';
 
 export default combineReducers({
     alert: alertReducer,
@@ -32,5 +33,6 @@ export default combineReducers({
     loader: loaderReducer,
     form: formReducer, 
     resetPasswordStatus: resetPasswordReducer,
-    modalCiec: modalCiecReducer
+    modalCiec: modalCiecReducer,
+    modalBanks: modalBanksReducer
 });

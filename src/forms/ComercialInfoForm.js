@@ -13,14 +13,17 @@ import {
 } from "../components/Generic/Fields";
 import { updateToast } from "../redux/actions/appActions";
 import { updateModalCiec } from "../redux/actions/modalCiecActions";
+import { updateModalBanks } from "../redux/actions/modalBanksActions";
 import { execToast } from "../utils/ToastUtils";
 import { updateLoader } from "../redux/actions/loaderActions";
 // CIEC
 import PopUp from "./PopUp";
-import Info from "../assets/img/Info.png";
+import PopUpBanks from "./PopUpBanks";
+import Info from "../assets/img/info-01.png";
+import Delete from "../assets/img/basura-01.png";
 import scroll from "../utils/scroll";
 import axios from "../utils/axios";
-import DeleteIcon from "@material-ui/icons/Delete";
+// import DeleteIcon from "@material-ui/icons/Delete";
 
 let ComercialInfoForm = (props) => {
   const dispatch = useDispatch();
@@ -40,8 +43,6 @@ let ComercialInfoForm = (props) => {
     valid,
     banks,
     setBanks,
-    isRegistredInFinerio,
-    getCustomer,
   } = props;
   const ciecRef = useRef(null);
 
@@ -466,8 +467,8 @@ let ComercialInfoForm = (props) => {
                 >
                   <img
                     src={Info}
-                    alt="More Info"
-                    title="More Info"
+                    alt="Datos CIEC info"
+                    title="Información de CIEC"
                     className="positionInfo"
                   />
                 </div>
@@ -485,6 +486,19 @@ let ComercialInfoForm = (props) => {
         {type !== "PM" && (
           <>
           <SubtitleForm subtitle="Datos Bancarios" className="mt-11 mb-3" />
+          <div
+            onClick={() => {
+              dispatch(updateModalBanks(true));
+            }}
+            style={{ cursor: "pointer", width: "0", height: "0" }}
+          >
+            <img
+              src={Info}
+              alt="Datos bancarios info"
+              title="Información de datos bancarios"
+              className="bankInfo"
+            />
+          </div>
           <Row>
             <Col lg={10} md={10} sm={10}>
               <Field
@@ -522,12 +536,25 @@ let ComercialInfoForm = (props) => {
                 })}
               </Field>
             </Col>
-            <Col lg={2} md={2} sm={2}>
+            {/* <Col lg={2} md={2} sm={2}>
               <Button
                 className="btn-blue-general"
                 onClick={() => deleteBank(0)}
               >
                 <DeleteIcon />
+              </Button>
+            </Col> */}
+            <Col lg={2} md={2} sm={2}>
+              <Button
+                className="btn btn-bank-del"
+                onClick={() => deleteBank(0)}
+              >
+                <img
+                  src={Delete}
+                  alt="Datos bancarios delete"
+                  title="Eliminar banco"
+                  className="bankDel"
+                />
               </Button>
             </Col>
           </Row>
@@ -603,12 +630,25 @@ let ComercialInfoForm = (props) => {
                       })}
                     </Field>
                   </Col>
-                  <Col lg={2} md={2} sm={2}>
+                  {/* <Col lg={2} md={2} sm={2}>
                     <Button
                       className="btn-blue-general"
                       onClick={() => deleteBank(indexBank)}
                     >
                       <DeleteIcon />
+                    </Button>
+                  </Col> */}
+                  <Col lg={2} md={2} sm={2}>
+                    <Button
+                      className="btn btn-bank-del"
+                      onClick={() => deleteBank(indexBank)}
+                    >
+                      <img
+                        src={Delete}
+                        alt="Datos bancarios delete"
+                        title="Eliminar banco"
+                        className="bankDel"
+                      />
                     </Button>
                   </Col>
                 </Row>
@@ -645,9 +685,14 @@ let ComercialInfoForm = (props) => {
               </div>
             );
           })}
+          <div className="fz18 gray50 text-dp mb-30 mt-2">
+            No es obligatorio pero podrá agilizar tu solicitud de crédito
+            a la mitad del tiempo. Se ingresará por única ocasión para
+            descargar la información necesaria.
+          </div>
           <Button
             type="button"
-            className={"mt-11 btn-blue-general"}
+            className={"btn-blue-general btn-add-bank"}
             disabled={banks.length < 10 ? false : true}
             onClick={() => {
               if(banks.length < 10){
@@ -662,8 +707,9 @@ let ComercialInfoForm = (props) => {
               }
             }}
           >
-            Agregar Banco
+            Agregar otro banco
           </Button>
+          <PopUpBanks />
           </>
         )}
 
