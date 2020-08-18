@@ -113,3 +113,14 @@
 	}
 }
 
+.btn-web{
+	position: absolute;
+	margin-top: 460px !important;
+	margin-left: 215px !important;
+}
+
+.btn-web-mov{
+	position: absolute;
+	margin-top: 360px !important;
+	margin-left: -105px !important;
+}
