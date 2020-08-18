@@ -96,7 +96,7 @@ const Header = props => {
 					/>
 					<Carousel.Caption>
 						<Button className={versionImage == 0 ? styleWEB : styleWEBM} onClick={() => goToForm()}>
-							Registrate
+							Regístrate
 						</Button>
 					</Carousel.Caption>
 					{/* <Carousel.Caption>
