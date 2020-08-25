@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 import { Button, Carousel } from 'react-bootstrap';
 
 import "../../../css/header.css";
-import firstImage from '../../../assets/img/carousel-tmp/WEB.png';
+import firstImage from '../../../assets/img/carousel/carrusel-01.jpg';
 import secondImage from '../../../assets/img/carousel/carrusel-02.jpg';
-import firstImageMobie from '../../../assets/img/carousel-tmp/WEB MOVIL-02.jpg';
+import firstImageMobie from '../../../assets/img/carousel/mobile-carrusel-01.jpg';
 import secondImageMobie from '../../../assets/img/carousel/mobile-carrusel-02.jpg';
 // images[numImage][NormalImage, Mobile Image]
 const images = [
@@ -94,12 +94,12 @@ const Header = props => {
 						src={images[1][versionImage]}
 						alt="Second slide"
 					/>
-					<Carousel.Caption>
+					{/* <Carousel.Caption>
 						<Button className={versionImage == 0 ? styleWEB : styleWEBM} onClick={() => goToForm()}>
 							Regístrate
 						</Button>
-					</Carousel.Caption>
-					{/* <Carousel.Caption>
+					</Carousel.Caption> */}
+					<Carousel.Caption>
 						<h3 className="coolvetica fz48 white mb-34 header-title">
                             ¿Necesitas financiamiento?
 						</h3>
@@ -126,7 +126,7 @@ const Header = props => {
 								</div>
 							</Link>
 						</div>
-					</Carousel.Caption> */}
+					</Carousel.Caption>
 				</Carousel.Item>
 			</Carousel>
 		</div>
