@@ -31,6 +31,7 @@ import Privacy from "./components/Landing/Privacy/Privacy";
 import RecoverPassword from "./components/RecoverPassword/RecoverPassword";
 import ResetPassword from "./components/ResetPassword/ResetPassword";
 import Signup from "./components/Signup/Signup";
+import SignupBrokers from "./components/Brokers/SignupBrokers";
 import RegistroExitoso from "./components/Registro/RegistroExitoso";
 import Login from "./components/Login/Login";
 import Home from "./components/Home/Home";
@@ -130,6 +131,7 @@ class App extends Component {
                   component={RecoverPassword}
                 />
                 <Route path="/registrate" exact component={Signup} />
+                <Route path="/solicitudBrokers" exact component={SignupBrokers} />
                 <Route
                   path="/registroexitoso"
                   exact

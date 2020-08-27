@@ -53,5 +53,9 @@ export const validateSignup = values => {
     errors.email = "Correo ya registrado";
   }
 
+  if(!values.brokercode){
+    errors.brokercode = "Ingresa tú código broker";
+  }
+
   return errors;
 };
