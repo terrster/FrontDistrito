@@ -14,7 +14,8 @@ const renderField = ({
   maxLength,
   minLength,
   meta: { touched, error, warning },
-  errorEmail
+  errorEmail,
+  errorBroker
 }) => (
   <div>
     {label !== "Teléfono" ? (
@@ -41,6 +42,7 @@ const renderField = ({
       </div>
     )}
 	{type === "email" && <span> <small className="error" id={input.name + "-error"}>{errorEmail}</small> </span>}
+  {type === "text" && errorBroker != '' && <span> <small className="error" id={input.name + "-error"}>{errorBroker}</small> </span>}
     {touched &&
       ((error && (
         <span>
@@ -58,7 +60,7 @@ const passwordTooltip = (
 );
 
 let SignupForm = (props) => {
-  const { handleSubmit, submitting, errorEmail, setErrorEmail, valid } = props;
+  const { handleSubmit, submitting, errorEmail, setErrorEmail, errorBroker, setErrorBroker, valid } = props;
 
   const [button, setButton] = useState(true);
   const [disabled, setDisabled] = useState(true);
@@ -117,8 +119,8 @@ let SignupForm = (props) => {
           component={renderField}
           type="email"
           onChange={ (event, newValue, previousValue, name) => {
-			  setErrorEmail("");
-	      }}
+            setErrorEmail("");
+          }}
           name="email"
           label="Correo electrónico"
           errorEmail={errorEmail}
@@ -169,6 +171,10 @@ let SignupForm = (props) => {
           type="text"
           name="brokercode"
           label="Código brokers"
+          onChange={ (event, newValue, previousValue, name) => {
+            setErrorBroker("");
+          }}
+          errorBroker={errorBroker}
         />
         <div className="recaptcha-container">
           <ReCAPTCHA

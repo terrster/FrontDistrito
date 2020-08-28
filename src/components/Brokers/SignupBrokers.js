@@ -18,7 +18,8 @@ import publicIp from "public-ip";
 
 let SignupBrokers = props => {
 	const toast = useSelector(state => state.app.toast);
-	const [errorEmail, setErrorEmail] = useState("");
+  const [errorEmail, setErrorEmail] = useState("");
+  const [errorBroker, setErrorBroker] = useState("");
 
   const dispatch = useDispatch();
 
@@ -29,10 +30,14 @@ let SignupBrokers = props => {
     data.ipV4 = ipV4;
 
     const res = await axios.post('signin', data);
-    if (res.data.code === 500){
+    if(res.data.code === 403){
+      setErrorBroker(res.data.msg)
+    }
+    else if (res.data.code === 500){
       setErrorEmail(res.data.msg)
     } else {
       setErrorEmail("")
+      setErrorBroker("")
       dispatch( singUpAction(data) );
     }
     dispatch (updateLoader(false));
@@ -64,7 +69,7 @@ let SignupBrokers = props => {
         ) : (
           <div></div>
         )}
-        <SignupFormBrokers onSubmit={e => onFormSubmit(e)} errorEmail={errorEmail} setErrorEmail={setErrorEmail}/>
+        <SignupFormBrokers onSubmit={e => onFormSubmit(e)} errorEmail={errorEmail} setErrorEmail={setErrorEmail} errorBroker={errorBroker} setErrorBroker={setErrorBroker}/>
       </div>
     );
   }
