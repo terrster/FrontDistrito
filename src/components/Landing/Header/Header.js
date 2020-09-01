@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { Button, Carousel } from 'react-bootstrap';
 
 import "../../../css/header.css";
 import firstImage from '../../../assets/img/carousel/carrusel-01.jpg';
-import secondImage from '../../../assets/img/carousel/carrusel-02.jpg';
+import secondImage from '../../../assets/img/carousel/BROKER.png';
 import firstImageMobie from '../../../assets/img/carousel/mobile-carrusel-01.jpg';
-import secondImageMobie from '../../../assets/img/carousel/mobile-carrusel-02.jpg';
+import secondImageMobie from '../../../assets/img/carousel/BROKERMOVIL.jpg';
 // images[numImage][NormalImage, Mobile Image]
 const images = [
-	[secondImage, secondImageMobie],
 	[firstImage, firstImageMobie],
+	[secondImage, secondImageMobie],
 ];
 
 const getVersionImage = () => {
@@ -39,9 +39,9 @@ const Header = props => {
 	const styleWEB = 'header-button fz24 bluePrimary btn-web';
 	const styleWEBM = 'header-button fz24 bluePrimary btn-web-mov';
 
-	const goToForm = () => {
-		window.location = "https://share.hsforms.com/1NexTiVEwSeSyCS2kvQT-WA2y96v";
-	}
+	// const goToForm = () => {
+	// 	window.location = "https://share.hsforms.com/1NexTiVEwSeSyCS2kvQT-WA2y96v";
+	// }
 
 	return (
 		<div style={{ width: '100%' }}>
@@ -94,12 +94,14 @@ const Header = props => {
 						src={images[1][versionImage]}
 						alt="Second slide"
 					/>
-					{/* <Carousel.Caption>
-						<Button className={versionImage == 0 ? styleWEB : styleWEBM} onClick={() => goToForm()}>
-							Regístrate
-						</Button>
-					</Carousel.Caption> */}
 					<Carousel.Caption>
+						<NavLink to="/solicitudBrokers">
+							<Button className={versionImage == 0 ? styleWEB : styleWEBM}>
+								Regístrate
+							</Button>
+						</NavLink>
+					</Carousel.Caption>
+					{/* <Carousel.Caption>
 						<h3 className="coolvetica fz48 white mb-34 header-title">
                             ¿Necesitas financiamiento?
 						</h3>
@@ -126,7 +128,7 @@ const Header = props => {
 								</div>
 							</Link>
 						</div>
-					</Carousel.Caption>
+					</Carousel.Caption> */}
 				</Carousel.Item>
 			</Carousel>
 		</div>
