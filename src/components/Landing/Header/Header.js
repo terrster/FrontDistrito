@@ -95,11 +95,13 @@ const Header = props => {
 						alt="Second slide"
 					/>
 					<Carousel.Caption>
+						<div className="coolvetica">
 						<NavLink to="/brokers">
 							<Button className={versionImage == 0 ? styleWEB : styleWEBM}>
 								Conoce Más
 							</Button>
 						</NavLink>
+						</div>
 					</Carousel.Caption>
 					{/* <Carousel.Caption>
 						<h3 className="coolvetica fz48 white mb-34 header-title">
