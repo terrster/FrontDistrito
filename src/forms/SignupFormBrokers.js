@@ -168,7 +168,7 @@ let SignupForm = (props) => {
           />
         </OverlayTrigger>
         <Row>
-          <Col lg={9} md={9} sm={9}>
+          <Col lg={8} md={8} sm={8}>
             <Field
               component={renderField}
               type="text"
@@ -181,7 +181,7 @@ let SignupForm = (props) => {
               normalize={onlyNumbers}
             />
           </Col>
-          <Col lg={3} md={3} sm={3}>
+          <Col lg={4} md={4} sm={4}>
             <NavLink to="/registrate">
               <Button type="button" className={"btn-blue-brokers"}>
                 No eres Broker, clic aquí
