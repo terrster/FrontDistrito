@@ -3,9 +3,9 @@ import { Link, NavLink } from 'react-router-dom';
 import { Button, Carousel } from 'react-bootstrap';
 
 import "../../../css/header.css";
-import firstImage from '../../../assets/img/carousel/carrusel-01.jpg';
+import firstImage from '../../../assets/img/carousel/carrusel-02.jpg';
 import secondImage from '../../../assets/img/carousel/BROKER.png';
-import firstImageMobie from '../../../assets/img/carousel/mobile-carrusel-01.jpg';
+import firstImageMobie from '../../../assets/img/carousel/mobile-carrusel-02.jpg';
 import secondImageMobie from '../../../assets/img/carousel/BROKERMOVIL.jpg';
 // images[numImage][NormalImage, Mobile Image]
 const images = [
@@ -95,9 +95,9 @@ const Header = props => {
 						alt="Second slide"
 					/>
 					<Carousel.Caption>
-						<NavLink to="/solicitudBrokers">
+						<NavLink to="/brokers">
 							<Button className={versionImage == 0 ? styleWEB : styleWEBM}>
-								Regístrate
+								Conoce Más
 							</Button>
 						</NavLink>
 					</Carousel.Caption>
