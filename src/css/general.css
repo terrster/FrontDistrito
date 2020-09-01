@@ -326,6 +326,20 @@
 	max-width: 200px !important;
 }
 
+.btn-blue-brokers{
+	font-family: 'coolvetica_rg' !important;
+	font-size: 12px !important;
+	color: #ffffff !important;
+	background-color: #023E95 !important;
+	border-color: #023e95 !important;
+	/* border-radius: 25px !important; */
+	width: 100% !important;	
+	height: 45px !important;
+	text-align: center !important;
+	letter-spacing: 2px;
+	margin-top: 22px;
+}
+
 .btn-add-bank{
 	width: 200px !important;
 	font-size: 15px !important;

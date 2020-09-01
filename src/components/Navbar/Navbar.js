@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Navbar, Nav, Button } from 'react-bootstrap'
-import { Link, NavLink, useHistory } from 'react-router-dom'
+import { Link, NavLink, useHistory, useLocation } from 'react-router-dom'
 import isAuthenticated from '../../utils/isAuthenticated'
 import logo  from '../../assets/img/logo-dp-3-x@2x.png'
 import '../../css/nav-bar.css'
@@ -20,6 +20,7 @@ const NavBar = props => {
 		}
 	}
 	const history = useHistory();
+	const location = useLocation();console.log(location.pathname)
 	const close = () => setIsOpen(false);
 	let classDefault = "hvr-underline-from-left  text-center fz16 blackNav nav-btn heigth-45 solicita-butto metropolisReg";
 	let classDefaultLink = "text-center coolvetica fz16 gray50 heigth-45 nav-btn d-flex";
@@ -36,8 +37,12 @@ const NavBar = props => {
 							<Nav.Link  onClick={close} href="/#howWorks" id="ymb-dp-nav-howWorks" className="hvr-underline-from-left  text-center fz16 blackNav nav-btn heigth-45 solicita-butto metropolisReg">¿Cómo funciona?</Nav.Link>
 							<Nav.Link  onClick={close} href="/#about" id="ymb-dp-nav-about" className="hvr-underline-from-left  text-center fz16 blackNav nav-btn heigth-45 solicita-butto metropolisReg">Nosotros</Nav.Link>
 		 					<Nav.Link  onClick={close} href="https://distritopyme.com.mx/" id="ymb-dp-nav-howWorks" target="_blank" className="hvr-underline-from-left  text-center fz16 blackNav nav-btn heigth-45 solicita-butto metropolisReg">Blog</Nav.Link>
-		 					<Nav.Link  onClick={close} as={NavLink} to="/login" id="ymb-dp-nav-register" className="hvr-underline-from-left  text-center fz16 blackNav nav-btn heigth-45 solicita-butto metropolisReg">Inicia sesión</Nav.Link>
-		 					<Nav.Link  onClick={close} as={NavLink} to="/registrate" id="ymb-dp-nav-login" className="text-center fz16 white nav-btn nav-btn-rad primary heigth-45 w-360 ml-auto mr-auto solicita-button coolvetica" style={{textDecoration: "none"}}>Solicita tu crédito</Nav.Link>
+							{location.pathname != '/solicitudBrokers' && 
+								<>
+									<Nav.Link  onClick={close} as={NavLink} to="/login" id="ymb-dp-nav-register" className="hvr-underline-from-left  text-center fz16 blackNav nav-btn heigth-45 solicita-butto metropolisReg">Inicia sesión</Nav.Link>
+									<Nav.Link  onClick={close} as={NavLink} to="/registrate" id="ymb-dp-nav-login" className="text-center fz16 white nav-btn nav-btn-rad primary heigth-45 w-360 ml-auto mr-auto solicita-button coolvetica" style={{textDecoration: "none"}}>Solicita tu crédito</Nav.Link>
+								</>
+							}
 		 				</Nav>
 		 			</Navbar.Collapse>
 		 		}

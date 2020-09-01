@@ -56,15 +56,18 @@ let SignupBrokers = props => {
         {!props.statusSingup ? (
           <>
             <Title
-              className="fz56 text-center blue-primary coolvetica fw500"
+              className="fz56 text-center title-dp fw500"
               title="¡Bienvenido a Distrito Pyme!"
             />
-            <div className="mt-30 brandonReg fw300 fz20 text-center mb-30">
+            <div className="mt-30 text-dp fw300 fz20 text-center mb-30">
               <p className="gray50">Te ayudamos a crecer tu negocio <label className="blue-primary">&nbsp;#ComunidadDeCrédito&nbsp;</label></p>
             </div>
             <div className="mt-50">
 							<StepSignup/>
 						</div>
+            <div className="mt-30 text-dp fw300 fz20 text-center mb-30">
+              <p className="gray50">Recuerda realizar el registro con la información del Principal Accionista y/o Representante Legal</p>
+            </div>
           </>
         ) : (
           <div></div>

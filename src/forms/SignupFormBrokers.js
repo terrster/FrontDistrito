@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Field, reduxForm, formValueSelector  } from "redux-form";
 import { connect } from "react-redux";
-import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
+import { Button, OverlayTrigger, Tooltip, Row, Col } from "react-bootstrap";
+import { NavLink } from 'react-router-dom';
 import "../css/signup.css";
 import { validateSignup } from "../components/Validate/ValidateSignup";
 import ReCAPTCHA from "react-google-recaptcha";
@@ -166,23 +167,36 @@ let SignupForm = (props) => {
             label="Crea una contraseña"
           />
         </OverlayTrigger>
-        <Field
-          component={renderField}
-          type="text"
-          name="brokercode"
-          label="Código brokers"
-          onChange={ (event, newValue, previousValue, name) => {
-            setErrorBroker("");
-          }}
-          errorBroker={errorBroker}
-        />
+        <Row>
+          <Col lg={9} md={9} sm={9}>
+            <Field
+              component={renderField}
+              type="text"
+              name="brokercode"
+              label="Código brokers"
+              onChange={ (event, newValue, previousValue, name) => {
+                setErrorBroker("");
+              }}
+              errorBroker={errorBroker}
+              normalize={onlyNumbers}
+            />
+          </Col>
+          <Col lg={3} md={3} sm={3}>
+            <NavLink to="/registrate">
+              <Button type="button" className={"btn-blue-brokers"}>
+                No eres Broker, clic aquí
+              </Button>
+            </NavLink>
+          </Col>
+        </Row>
+        
         <div className="recaptcha-container">
           <ReCAPTCHA
             sitekey="6LcTuPEUAAAAAF4wO3suJh3zugOr5pO-daAE-Puc"
             onChange={onChange}
           />
         </div>
-        <div className="mt-30 brandonReg fw300 fz20 text-center mb-10">
+        <div className="mt-30 text-dp fw300 fz20 text-center mb-10">
           <label className="fz15">
             Al continuar estás aceptando nuestros{" "}
             <a
