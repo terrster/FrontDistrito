@@ -687,7 +687,7 @@ let ComercialInfoForm = (props) => {
           })}
           <div className="fz18 gray50 text-dp mb-30 mt-2">
             Esta información no es obligatoria, pero podrá agilizar tu solicitud de crédito a la mitad del tiempo. 
-            Se ingresará por única ocasión para descargar solo tus movimientos banacrios.
+            Se ingresará por única ocasión para descargar solo tus movimientos bancarios.
           </div>
           <Button
             type="button"
