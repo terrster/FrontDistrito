@@ -169,7 +169,7 @@ let SignupForm = (props) => {
             onChange={onChange}
           />
         </div>
-        <div className="mt-30 brandonReg fw300 fz20 text-center mb-10">
+        <div className="mt-30 text-dp fw300 fz20 text-center mb-10">
           <label className="fz15">
             Al continuar estás aceptando nuestros{" "}
             <a

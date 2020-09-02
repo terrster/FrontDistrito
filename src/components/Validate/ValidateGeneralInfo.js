@@ -121,9 +121,19 @@ export const validateGeneralInfo = (values) => {
     if (!values.street) {
       errors.street = "Ingresa la calle de tu domicilio";
     }
+    else if(values.street.length > 40){
+      errors.street = "Ingresa solamente la calle de tu domicilio";
+    }
 
     if (!values.extNumber) {
       errors.extNumber = "Ingresa el número exterior de tu domicilio";
+    }
+    else if(!/^[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*$/.test(values.extNumber)){
+      errors.extNumber = "Ingresa un número exterior valido";
+    }
+
+    if(values.intNumber != '' && !/^[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*$/.test(values.intNumber)){
+      errors.intNumber = "Ingresa un número interior valido";
     }
 
     if (!values.town) {

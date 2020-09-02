@@ -72,13 +72,35 @@ export const validateComercialInfo = (values) => {
   if (!values.street) {
     errors.street = "Ingresa la calle de tu negocio";
   }
+  else if(values.street.length > 40){
+    errors.street = "Ingresa solamente la calle de tu negocio";
+  }
 
   if (!values.extNumber) {
     errors.extNumber = "Ingresa el número exterior de tu negocio";
   }
+  else if(!/^[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*$/.test(values.extNumber)){
+    errors.extNumber = "Ingresa un número exterior valido";
+  }
+
+  if(values.intNumber != '' && !/^[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*$/.test(values.intNumber)){
+    errors.intNumber = "Ingresa un número interior valido";
+  }
 
   if (!values.town) {
     errors.town = "Ingresa la colonia donde se ubica tu negocio";
+  }
+
+  for(let i=0; i<=10; i++){
+    if(!values['username'+i]){
+      errors['username'+i] = "Ingresa el usuario/número de tarjeta o cuenta de tu banco";
+    }
+    if(!values['password'+i]){
+      errors['password'+i] = "Ingresa la contraseña de tu banco";
+    }
+    if(!values['securityCode'+i]){
+      errors['securityCode'+i] = "Ingresa el token/clave de seguridad de tu banco";
+    }
   }
 
   if (!values.phone) {
