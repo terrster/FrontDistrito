@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Field, reduxForm, formValueSelector  } from "redux-form";
+import { Field, reduxForm, formValueSelector } from "redux-form";
 import { connect } from "react-redux";
 import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import "../css/signup.css";
@@ -65,7 +65,7 @@ let SignupForm = (props) => {
 
   const onChange = value => {setButton(!value)};
   const onlyLirycs = (nextValue, previousValue) => /^([a-z ñáéíóú]{0,60})$/i.test(nextValue) ? nextValue : previousValue;
-  const onlyNumbers = (nextValue, previousValue) => /^\d+$/.test(nextValue) || nextValue.length === 0? nextValue : previousValue;
+  const onlyNumbers = (nextValue, previousValue) => /^\d+$/.test(nextValue) || nextValue.length === 0 ? nextValue : previousValue;
 
   const goToError = () => {
 		const nameError = document.getElementById("name-error");
@@ -88,8 +88,8 @@ let SignupForm = (props) => {
 	}
 	if (!disabled && !valid){
 		setDisabled(true);
-	}
-
+  }
+  
   return (
     <div className="container">
       <form
@@ -103,6 +103,10 @@ let SignupForm = (props) => {
           name="name"
           label="Nombre(s)"
           normalize={onlyLirycs}
+          noUpdateOnChange
+          noUpdateOnBlur
+          onChange={e = e.preventDefault()}
+          onBlur={ e => {e.preventDefault(); props.change("name", "newFormValue")}}
         />
 
         <Field
@@ -221,7 +225,8 @@ SignupForm = connect(state => {
 
 SignupForm = reduxForm({
   form: 'signupForm',
-  validate: validateSignup 
+  validate: validateSignup, 
+  enableReinitialize: true
 })(SignupForm);
 
 export default SignupForm;

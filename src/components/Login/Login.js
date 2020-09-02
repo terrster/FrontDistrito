@@ -30,14 +30,14 @@ let Login = props => {
 	const auth = useSelector(state => state.auth.logged);
 
 	if(auth){
-		props.history.push("/home")
+		props.history.push("/credito")
 		/* props.updateLoader(false) */
 		/* props.updateNav("login") */
 	}
 
 	window.scrollTo(0, 0)
 	if(sessionStorage.getItem('user')){
-		window.location="/home";
+		window.location="/credito";
 	}else{
 		return (
 			<div>
