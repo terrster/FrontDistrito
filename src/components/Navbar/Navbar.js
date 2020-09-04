@@ -37,7 +37,7 @@ const NavBar = props => {
 							<Nav.Link  onClick={close} href="/#howWorks" id="ymb-dp-nav-howWorks" className="hvr-underline-from-left  text-center fz16 blackNav nav-btn heigth-45 solicita-butto metropolisReg">¿Cómo funciona?</Nav.Link>
 							<Nav.Link  onClick={close} href="/#about" id="ymb-dp-nav-about" className="hvr-underline-from-left  text-center fz16 blackNav nav-btn heigth-45 solicita-butto metropolisReg">Nosotros</Nav.Link>
 		 					<Nav.Link  onClick={close} href="https://distritopyme.com.mx/" id="ymb-dp-nav-howWorks" target="_blank" className="hvr-underline-from-left  text-center fz16 blackNav nav-btn heigth-45 solicita-butto metropolisReg">Blog</Nav.Link>
-							{location.pathname != '/brokers' && 
+							{location.pathname != '/brokers' && location.pathname != '/solicitud_enviada_brokers' && 
 								<>
 									<Nav.Link  onClick={close} as={NavLink} to="/login" id="ymb-dp-nav-register" className="hvr-underline-from-left  text-center fz16 blackNav nav-btn heigth-45 solicita-butto metropolisReg">Inicia sesión</Nav.Link>
 									<Nav.Link  onClick={close} as={NavLink} to="/registrate" id="ymb-dp-nav-login" className="text-center fz16 white nav-btn nav-btn-rad primary heigth-45 w-360 ml-auto mr-auto solicita-button coolvetica" style={{textDecoration: "none"}}>Solicita tu crédito</Nav.Link>
