@@ -66,6 +66,7 @@ let SignupForm = (props) => {
   const onChange = value => {setButton(!value)};
   const onlyLirycs = (nextValue, previousValue) => /^([a-z ñáéíóú]{0,60})$/i.test(nextValue) ? nextValue : previousValue;
   const onlyNumbers = (nextValue, previousValue) => /^\d+$/.test(nextValue) || nextValue.length === 0 ? nextValue : previousValue;
+  const sanitizeString = e => { e.preventDefault(); props.change(e.target.name, e.target.value.trim()) };
 
   const goToError = () => {
 		const nameError = document.getElementById("name-error");
@@ -103,10 +104,7 @@ let SignupForm = (props) => {
           name="name"
           label="Nombre(s)"
           normalize={onlyLirycs}
-          noUpdateOnChange
-          noUpdateOnBlur
-          onChange={e = e.preventDefault()}
-          onBlur={ e => {e.preventDefault(); props.change("name", "newFormValue")}}
+          onBlur={ e => { sanitizeString(e) } }
         />
 
         <Field
@@ -115,6 +113,7 @@ let SignupForm = (props) => {
           name="lastname"
           label="Apellido Paterno"
           normalize={onlyLirycs}
+          onBlur={ e => { sanitizeString(e) } }
         />
         <Field
           component={renderField}
@@ -125,12 +124,14 @@ let SignupForm = (props) => {
           name="email"
           label="Correo electrónico"
           errorEmail={errorEmail}
+          onBlur={ e => { sanitizeString(e) } }
         />
         <Field
           component={renderField}
           type="email"
           name="email_confirm"
-          label="Confirmar correo electrónico"          
+          label="Confirmar correo electrónico"     
+          onBlur={ e => { sanitizeString(e) } }     
         />
         <span>
           <small id="ymb-dp-signup-email-confirm" className="d-none error">
