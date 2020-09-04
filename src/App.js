@@ -136,7 +136,7 @@ class App extends Component {
                 <Route path="/registroexitoso" exact component={RegistroExitoso} />
                 <Route path="/login" exact component={Login} />
                 <Route path="/brokers" exact component={Brokers}/>
-                <Route path="/solicitud_enviada" exact component={ThankyouPage} />
+                <Route path="/solicitud_enviada_brokers" exact component={ThankyouPage} />
                 <PrivateRoute exact path="/home" component={Home} />
                 <PrivateRoute exact path="/solicitud" component={Appliance} />
                 <PrivateRoute
