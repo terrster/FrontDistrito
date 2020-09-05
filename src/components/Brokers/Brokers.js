@@ -16,6 +16,14 @@ const Brokers = () => {
     const dispatch = useDispatch();
     dispatch( updateLoader(true) );
 
+    const handleSubmit = () => {
+        dispatch( updateLoader(true) );
+        setTimeout(() => {
+            dispatch( updateLoader(false) );
+            history.push("/solicitud_enviada_brokers");
+        }, 3000);
+    }
+
     return(
         <>
             {/* <CustomModal modalName="brokers_modal"/> */}
@@ -25,7 +33,7 @@ const Brokers = () => {
                 portalId='4957447'
                 formId='9d3b7766-2ffe-441a-8a62-e7fd39d0aca4'
                 // onSubmit={() => dispatch( updateModal('brokers_modal', 'Gracias por llenar el formulario, en breve nos comunicaremos contigo.') )}
-                onSubmit={() => history.push("/solicitud_enviada_brokers")}
+                onSubmit={() => handleSubmit}
                 onReady={() => dispatch( updateLoader(false) )}
                 loading={<Loader/>}
                 />
