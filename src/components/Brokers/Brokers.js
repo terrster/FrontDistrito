@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import HubspotForm from 'react-hubspot-form';
 import Loader from "../Loader/Loader";
 // import CustomModal from "../Generic/CustomModal";
@@ -16,7 +16,10 @@ const Brokers = () => {
     const dispatch = useDispatch();
     dispatch( updateLoader(true) );
 
+    const [cover, setCover] = useState(false);
+
     const handleSubmit = () => {
+        setCover(true);
         dispatch( updateLoader(true) );
         setTimeout(() => {
             dispatch( updateLoader(false) );
@@ -28,6 +31,12 @@ const Brokers = () => {
         <>
             {/* <CustomModal modalName="brokers_modal"/> */}
 
+            {cover == true &&
+                <div className={'styleCover'}></div>
+            }
+
+            <Loader/>
+
             <div style={{padding: '20px', marginRight: '20px'}}>
                 <HubspotForm
                 portalId='4957447'
@@ -35,7 +44,7 @@ const Brokers = () => {
                 // onSubmit={() => dispatch( updateModal('brokers_modal', 'Gracias por llenar el formulario, en breve nos comunicaremos contigo.') )}
                 onSubmit={() => handleSubmit()}
                 onReady={() => dispatch( updateLoader(false) )}
-                loading={<Loader/>}
+                loading={() => dispatch( updateLoader(true) )}
                 />
             </div>
 

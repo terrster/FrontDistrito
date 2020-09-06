@@ -547,3 +547,11 @@
 /*Cliengo*/
 #popupIframe, #chatIframe {float:left!important;right:auto!important;}
 #wspIframe {float:right!important;left:auto!important; right: 0px !important;}
+
+.styleCover{
+	background-color: #ffffff !important;
+	width: 100% !important;
+	height: 100% !important;
+	position: absolute !important;
+	z-index: 199 !important;
+}
