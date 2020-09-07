@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useLayoutEffect } from 'react';
 import { Navbar, Nav, Button } from 'react-bootstrap'
 import { Link, NavLink, useHistory, useLocation } from 'react-router-dom'
 import isAuthenticated from '../../utils/isAuthenticated'
@@ -7,18 +7,27 @@ import '../../css/nav-bar.css'
 import Whatsapp from '../../assets/img/redes_sociales/whatsapp.png';
 const NavBar = props => {
 	const [isOpen, setIsOpen] = useState(false);
+	const [showHome, setShowHome] = useState(false);
 	let user = null;
 	let idClient = null;
 	let finishAppliance = false;
 	let appliance = null;
-	if (isAuthenticated()){
-		user = JSON.parse(sessionStorage.getItem("user"));
-		idClient = user.idClient;
-		if (idClient.appliance.length > 0){
-			appliance = idClient.appliance[idClient.appliance.length - 1];
-			finishAppliance = appliance.status;
+
+	useLayoutEffect(() => {
+		if (isAuthenticated()){
+			user = JSON.parse(sessionStorage.getItem("user"));
+			idClient = user.idClient;
+			if (idClient.appliance.length > 0){
+				appliance = idClient.appliance[idClient.appliance.length - 1];
+				finishAppliance = appliance.status;
+	
+				if(user.idClient.appliance[0].hasOwnProperty("idGeneralInfo") && user.idClient.appliance[0].hasOwnProperty("idComercialInfo") && user.idClient.appliance[0].hasOwnProperty("idDocuments")){
+					setShowHome(true);
+				}
+			}
 		}
-	}
+	})
+	
 	const history = useHistory();
 	const location = useLocation();
 	const close = () => setIsOpen(false);
@@ -58,7 +67,10 @@ const NavBar = props => {
 							<Link onClick={close} to="/credito/" className={ (props.url === 'credito') ? classDefault+' nav_bar_active': classDefault}>Mi crédito</Link>
 						}
 		 				<Link onClick={close} to="/historial" className={ (props.url === 'historial') ? classDefault+' nav_bar_active': classDefault}>Historial</Link>
-		 				<Link onClick={close} to="/home" className={ (props.url === 'home') ? classDefault+' nav_bar_active': classDefault}>Mi cuenta</Link>
+		 				{ showHome &&
+							<Link onClick={close} to="/home" className={ (props.url === 'home') ? classDefault+' nav_bar_active': classDefault}>Mi cuenta</Link>
+
+						}
 		 				<Nav.Link onClick={close} href="/" className="text-center blackBlue heigth-45 metropolisReg"> <Button className="logout fz-12" onClick={() => {
 							sessionStorage.clear();
 		 					window.location.reload()
