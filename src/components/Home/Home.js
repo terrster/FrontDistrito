@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from 'react-router-dom';
 import Title from "../Generic/Title";
 import "../../css/account.css";
 import ApplianceCard from "../Generic/ApplianceCard";
@@ -12,6 +13,7 @@ import { updateLoader } from '../../redux/actions/loaderActions';
 
 
 const Home = (props) => {
+  const history = useHistory();
   // Redux state
   const {
     loader: { isLoading },
@@ -43,7 +45,12 @@ const Home = (props) => {
 	dispatch (updateLoader(true));
     const getData = () => {
 		const idUser = user._id;
-		const idClient = user.idClient;
+    const idClient = user.idClient;
+
+    if(!user.idClient.appliance[0].hasOwnProperty("idGeneralInfo") && !user.idClient.appliance[0].hasOwnProperty("idComercialInfo") && !user.idClient.appliance[0].hasOwnProperty("idDocuments")){
+      history.push("/credito/");
+    }
+
 		const type = idClient.hasOwnProperty("type") ? idClient.type : "";
 		let newProfile = {
 			...myProfile,
