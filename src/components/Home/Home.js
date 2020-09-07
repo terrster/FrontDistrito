@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useLayoutEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from 'react-router-dom';
 import Title from "../Generic/Title";
@@ -41,13 +41,18 @@ const Home = (props) => {
 
   const [newApplianceID, setNewApplianceID] = useState( user._id );
   
-  useEffect(() => {
+  useLayoutEffect(() => {
 	dispatch (updateLoader(true));
     const getData = () => {
 		const idUser = user._id;
     const idClient = user.idClient;
 
-    if(!user.idClient.appliance[0].hasOwnProperty("idGeneralInfo") && !user.idClient.appliance[0].hasOwnProperty("idComercialInfo") && !user.idClient.appliance[0].hasOwnProperty("idDocuments")){
+    if(user.idClient.appliance.length > 0){
+      if(!user.idClient.appliance[0].hasOwnProperty("idGeneralInfo") && !user.idClient.appliance[0].hasOwnProperty("idComercialInfo") && !user.idClient.appliance[0].hasOwnProperty("idDocuments")){
+        history.push("/credito/");
+      }
+    }
+    else{
       history.push("/credito/");
     }
 

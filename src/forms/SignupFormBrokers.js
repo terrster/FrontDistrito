@@ -128,14 +128,12 @@ let SignupForm = (props) => {
           name="email"
           label="Correo electrónico"
           errorEmail={errorEmail}
-          onBlur={ e => { sanitizeString(e) } }
         />
         <Field
           component={renderField}
           type="email"
           name="email_confirm"
-          label="Confirmar correo electrónico"      
-          onBlur={ e => { sanitizeString(e) } }    
+          label="Confirmar correo electrónico"  
         />
         <span>
           <small id="ymb-dp-signup-email-confirm" className="d-none error">
