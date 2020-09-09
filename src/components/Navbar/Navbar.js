@@ -66,7 +66,7 @@ const NavBar = props => {
 							!finishAppliance && 
 							<Link onClick={close} to="/credito/" className={ (props.url === 'credito') ? classDefault+' nav_bar_active': classDefault}>Mi crédito</Link>
 						}
-		 				<Link onClick={close} to="/historial" className={ (props.url === 'historial') ? classDefault+' nav_bar_active': classDefault}>Historial</Link>
+		 				<Link onClick={close} to="/estatus_solicitud" className={ (props.url === 'estatus_solicitud') ? classDefault+' nav_bar_active': classDefault}>Estatus de Solicitud</Link>
 		 				{ showHome &&
 							<Link onClick={close} to="/home" className={ (props.url === 'home') ? classDefault+' nav_bar_active': classDefault}>Mi cuenta</Link>
 
