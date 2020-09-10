@@ -16,6 +16,7 @@ const Solicitud = () => {
       } = useSelector((state) => state);
     // const user = JSON.parse(sessionStorage.getItem("user"));
     const user = {
+        _id: '5ec8365e67de6c3fd0d807c7',
         hubspotDealId: '2916511024'
     }
     const [properties, setProperties] = useState(null);
@@ -28,15 +29,15 @@ const Solicitud = () => {
             break;
 
             case '88b229ab-5161-4c94-ab74-fd68faee5140'://Solicitud Curso (Info Parcial)
-                setComponent(<Curso/>);
+                setComponent(<Curso id={user._id}/>);
             break;
 
             case 'd52c3e71-74ee-499b-8af9-abe5245deaaa'://Integrando Documentación
-                setComponent(<Pendiente/>);
+                setComponent(<Pendiente id={user._id}/>);
             break;
 
             case 'd0874266-3f5f-44a4-9905-76f9e1871805'://No autenticó
-                setComponent(<BuroPendiente/>);
+                setComponent(<BuroPendiente id={user._id}/>);
             break;
 
             case 'a91d7ff2-ad67-4953-8d60-f08cb14a328d'://Consulta Buró Física
@@ -102,7 +103,7 @@ const Solicitud = () => {
 
         setTimeout(() => {
             getHubspotProperties();
-        }, 3000);
+        }, 2000);
     
     }, []);
 

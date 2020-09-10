@@ -3,7 +3,7 @@ import { Row, Col, Button } from "react-bootstrap";
 import tito from '../../assets/img/estatus_solicitud/POSES TITO-01.png';
 import { useHistory } from 'react-router-dom';
 
-const Curso = () => {
+const Curso = ({id}) => {
     const history = useHistory();
 
     return(
@@ -16,7 +16,7 @@ const Curso = () => {
                     Aún nos falta información sobre tu negocio. Ayúdanos a completar
                     el 100% de tu solicitud y a subir tus documentos.
                 </div>
-                <Button className={"btn-blue-status mb-5"} style={{ width: '250px' }} onClick={() => history.push("/credito/")}>Ver solicitud</Button>
+                <Button className={"btn-blue-status mb-5"} style={{ width: '250px' }} onClick={() => history.push(`/datos-comerciales/${id}`)}>Ver solicitud</Button>
             </Col>
             <Col lg={4} md={4} sm={12}>
                 <div className='text-center'>

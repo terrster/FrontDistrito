@@ -138,6 +138,7 @@ let AmountForm = props => {
 						<Button
 							type="submit"
 							className={"mt-50 btn-blue-general"}
+							style={{ width: '250px' }}
 						>
 							Continuar
 						</Button>
@@ -146,6 +147,7 @@ let AmountForm = props => {
 							type="button"
 							className="mt-50 btn-blue-general btn-gray-general"
 							onClick={() => goToError()}
+							style={{ width: '250px' }}
 						>
 							Continuar
 						</Button>

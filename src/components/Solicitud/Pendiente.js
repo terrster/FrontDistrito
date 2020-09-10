@@ -4,7 +4,7 @@ import tito from '../../assets/img/estatus_solicitud/POSES TITO-02.png';
 import SolicitudBox from '../Generic/SolicitudBox';
 import { useHistory } from 'react-router-dom';
 
-const Curso = () => {
+const Curso = ({id}) => {
     const history = useHistory();
 
     const user = JSON.parse(sessionStorage.getItem("user"));
@@ -180,7 +180,7 @@ const Curso = () => {
                 
                 <SolicitudBox docs={mdocs}/>
 
-                <Button className={"btn-blue-status mt-3 mb-5"} style={{ width: '250px' }} onClick={() => history.push("/credito/")}>Ver solicitud</Button>
+                <Button className={"btn-blue-status mt-3 mb-5"} style={{ width: '250px' }} onClick={() => history.push(`/documentos/${id}`)}>Ver solicitud</Button>
             </Col>
             <Col lg={4} md={4} sm={12}>
                 <div className='text-center'>

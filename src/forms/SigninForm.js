@@ -60,7 +60,7 @@ let SigninForm = props => {
 					<Link to="/reset-password" className="fw500 fz12 blue-primary">¿Olvidaste tu Contraseña?</Link>
 				</div>
 				<div className="text-center">
-					<Button type="submit" className={submitButtonClass} disabled={submitting}>CONTINUAR</Button>
+					<Button type="submit" className={submitButtonClass} disabled={submitting} style={{ width: '250px' }}>CONTINUAR</Button>
 				</div>
 			</form>
 		</div>

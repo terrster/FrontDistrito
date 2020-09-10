@@ -3,7 +3,7 @@ import { Row, Col, Button } from "react-bootstrap";
 import tito from '../../assets/img/estatus_solicitud/POSES TITO-03.png';
 import { useHistory } from 'react-router-dom';
 
-const BuroPendiente = () => {
+const BuroPendiente = ({id}) => {
     const history = useHistory();
 
     return(
@@ -24,7 +24,7 @@ const BuroPendiente = () => {
   
                     <p>Por favor regresa a tu solicitud y verifica tu información</p>
 
-                    <Button className={"btn-blue-status mb-5"} style={{ width: '250px' }} onClick={() => history.push("/credito/")}>Verificar datos</Button>
+                    <Button className={"btn-blue-status mb-5"} style={{ width: '250px' }} onClick={() => history.push(`/informacion-general/${id}`)}>Verificar datos</Button>
                 </div>
             </Col>
             <Col lg={4} md={4} sm={12}>
