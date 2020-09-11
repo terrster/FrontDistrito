@@ -31,7 +31,7 @@ const Solicitud = () => {
             break;
 
             case '88b229ab-5161-4c94-ab74-fd68faee5140'://Solicitud Curso (Info Parcial)
-                setComponent(<Curso id={user._id}/>);
+                setComponent(<Curso/>);
             break;
 
             case 'd52c3e71-74ee-499b-8af9-abe5245deaaa'://Integrando Documentación
@@ -120,7 +120,7 @@ const Solicitud = () => {
 
     /*Mostrar componente*/
     useEffect(() => {
-        if(properties != null){
+        if(estatus != null){
             dispatch( updateLoader(false) );
             //showEstatus(estatus);//etapa del deal
             showEstatus('d52c3e71-74ee-499b-8af9-abe5245deaaa');//forzar visualización de etapa
@@ -133,10 +133,6 @@ const Solicitud = () => {
     return(
         <div className="container mt-30 mb-5">
             {component}
-            {/* <Curso/>  
-            <Pendiente/>  
-            <BuroPendiente/>
-            <BuroPendienteAnalisando/> */}
         </div>
     );
 }
