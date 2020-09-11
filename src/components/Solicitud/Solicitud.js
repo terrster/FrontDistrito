@@ -8,6 +8,8 @@ import Curso from "./Curso";
 import Pendiente from "./Pendiente";
 import BuroPendiente from "./BuroPendiente";
 import BuroPendienteAnalisando from "./BuroPendienteAnalisando";
+import BuroEmpresa from "./BuroEmpresa";
+import PropuestaEnviada from "./PropuestaEnviada";
 
 const Solicitud = () => {
     const dispatch = useDispatch();
@@ -17,7 +19,7 @@ const Solicitud = () => {
     // const user = JSON.parse(sessionStorage.getItem("user"));
     const user = {
         _id: '5ec8365e67de6c3fd0d807c7',
-        hubspotDealId: '2916511024'
+        hubspotDealId: '2920076369'
     }
     const [properties, setProperties] = useState(null);
     const [estatus, setEstatus] = useState(null);
@@ -45,9 +47,11 @@ const Solicitud = () => {
             break;
 
             case '1210171'://Consulta Buró Moral
+                setComponent(<BuroEmpresa/>);
             break;
 
             case '768759'://Pre-análisis y Envío de Propuesta
+                setComponent(<PropuestaEnviada/>);
             break;
 
             case '768760'://Integrando/Contactar
