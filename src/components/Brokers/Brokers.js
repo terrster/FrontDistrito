@@ -48,6 +48,14 @@ const Brokers = () => {
                 />
             </div>
 
+            <style>{"\
+                #clgo{\
+                    display: none !important;\
+                }\
+                #clgo-wsp{\
+                    display: none !important;\
+                }\
+            "}</style>
         </>
     );
 }
