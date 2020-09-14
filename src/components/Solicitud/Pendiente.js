@@ -180,7 +180,7 @@ const Curso = ({id}) => {
                 
                 <SolicitudBox docs={mdocs}/>
 
-                <Button className={"btn-blue-status mt-3 mb-5"} style={{ width: '250px' }} onClick={() => history.push(`/documentos/${id}`)}>Ver solicitud</Button>
+                <Button className={"btn-blue-status mt-3 mb-5"} style={{ width: '250px' }} onClick={() => history.push(`/documentos/${id}`)}>Completar solicitud</Button>
             </Col>
             <Col lg={4} md={4} sm={12}>
                 <div className='text-center'>
