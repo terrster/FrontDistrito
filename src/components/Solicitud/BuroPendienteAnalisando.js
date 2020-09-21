@@ -10,7 +10,7 @@ const BuroPendienteAnalisando = () => {
                     Consulta de Buró Pendiente
                 </div>
                 <div className="text-dp mb-18">
-                    Estamos análisando tu Buró de Crédito. En unos minutos tendrás noticias nuestras.
+                    Estamos análizando tu Buró de Crédito. En unos minutos tendrás noticias nuestras.
                 </div>
             </Col>
             <Col lg={4} md={4} sm={12}>

@@ -16,11 +16,11 @@ const Solicitud = () => {
     const {
         loader: { isLoading },
       } = useSelector((state) => state);
-    //const user = JSON.parse(sessionStorage.getItem("user"));
-    const user = {
-        _id: '5ec8365e67de6c3fd0d807c7',
-        hubspotDealId: '2935598659'
-    }
+    const user = JSON.parse(sessionStorage.getItem("user"));
+    // const user = {
+    //     _id: '5ec8365e67de6c3fd0d807c7',
+    //     hubspotDealId: '2935598659'
+    // }
     const [properties, setProperties] = useState(null);
     const [estatus, setEstatus] = useState(null);
     const [component, setComponent] = useState(null);
@@ -122,8 +122,8 @@ const Solicitud = () => {
     useEffect(() => {
         if(estatus != null){
             dispatch( updateLoader(false) );
-            showEstatus(estatus);//etapa del deal
-            //showEstatus('88b229ab-5161-4c94-ab74-fd68faee5140');//forzar visualización de etapa
+            //showEstatus(estatus);//etapa del deal
+            showEstatus('a91d7ff2-ad67-4953-8d60-f08cb14a328d');//forzar visualización de etapa
         }
     }, [estatus]);
 

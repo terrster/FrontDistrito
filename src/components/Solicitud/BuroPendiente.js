@@ -24,7 +24,12 @@ const BuroPendiente = ({id}) => {
   
                     <p>Por favor regresa a tu solicitud y verifica tu información</p>
 
-                    <Button className={"btn-blue-status mb-5"} style={{ width: '250px' }} onClick={() => history.push(`/informacion-general/${id}`)}>Verificar datos</Button>
+                    <Button className={"btn-blue-status mb-5"} style={{ width: '250px' }} 
+                    onClick={() => 
+                    history.push({
+                        pathname: `/informacion-general/${id}`,
+                        position_ref: 'name2-error'
+                    })}>Verificar datos</Button>
                 </div>
             </Col>
             <Col lg={4} md={4} sm={12}>

@@ -22,6 +22,7 @@ let GeneralInfoForm = ({
   changeAddress,
   initialValues,
   setInitialValues,
+  positionRef
 }) => {
   const dispatch = useDispatch();
   const [currentAddress, setCurrentAddress] = useState({
@@ -254,6 +255,10 @@ let GeneralInfoForm = ({
 
   useEffect(() => {
     getInitialValues();
+    if(positionRef){
+      const positionElement = document.getElementById(positionRef);
+      scroll(positionElement.id);
+    }
   }, []);
 
   const goToError = () => {
