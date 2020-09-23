@@ -248,6 +248,7 @@ let ComercialInfoForm = (props) => {
     const webSiteError = document.getElementById("webSite-error");
     const facebookError = document.getElementById("facebook-error");
     const terminalError = document.getElementById("terminal-error");
+    const exportationError = document.getElementById("exportation-error");
     const warrantyError = document.getElementById("warranty-error");
 
     let banksErrors = [];
@@ -275,6 +276,7 @@ let ComercialInfoForm = (props) => {
       webSiteError,
       facebookError,
       terminalError,
+      exportationError,
       warrantyError,
     ];
     for (let x = 0; x < errors.length; x++) {
