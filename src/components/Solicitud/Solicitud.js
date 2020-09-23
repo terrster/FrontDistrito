@@ -7,20 +7,21 @@ import Axios from "../../utils/axios";
 import Curso from "./Curso";
 import Pendiente from "./Pendiente";
 import BuroPendiente from "./BuroPendiente";
-import BuroPendienteAnalisando from "./BuroPendienteAnalisando";
+import BuroPendienteAnalizando from "./BuroPendienteAnalizando";
 import BuroEmpresa from "./BuroEmpresa";
 import PropuestaEnviada from "./PropuestaEnviada";
+import PropuestaEnviadaPendiente from "./PropuestaEnviadaPendiente";
 
 const Solicitud = () => {
     const dispatch = useDispatch();
     const {
         loader: { isLoading },
       } = useSelector((state) => state);
-    const user = JSON.parse(sessionStorage.getItem("user"));
-    // const user = {
-    //     _id: '5ec8365e67de6c3fd0d807c7',
-    //     hubspotDealId: '2935598659'
-    // }
+    // const user = JSON.parse(sessionStorage.getItem("user"));
+    const user = {
+        _id: '5ec8365e67de6c3fd0d807c7',
+        hubspotDealId: '2973538958'
+    }
     const [properties, setProperties] = useState(null);
     const [estatus, setEstatus] = useState(null);
     const [component, setComponent] = useState(null);
@@ -43,7 +44,7 @@ const Solicitud = () => {
             break;
 
             case 'a91d7ff2-ad67-4953-8d60-f08cb14a328d'://Consulta Buró Física
-                setComponent(<BuroPendienteAnalisando/>);
+                setComponent(<BuroPendienteAnalizando/>);
             break;
 
             case '1210171'://Consulta Buró Moral
@@ -122,8 +123,8 @@ const Solicitud = () => {
     useEffect(() => {
         if(estatus != null){
             dispatch( updateLoader(false) );
-            //showEstatus(estatus);//etapa del deal
-            showEstatus('a91d7ff2-ad67-4953-8d60-f08cb14a328d');//forzar visualización de etapa
+            showEstatus(estatus);//etapa del deal
+            //showEstatus('a91d7ff2-ad67-4953-8d60-f08cb14a328d');//forzar visualización de etapa
         }
     }, [estatus]);
 

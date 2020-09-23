@@ -2,7 +2,7 @@ import React from "react";
 import { Row, Col } from "react-bootstrap";
 import tito from '../../assets/img/estatus_solicitud/POSES TITO-04.png';
 
-const BuroPendienteAnalisando = () => {
+const BuroPendienteAnalizando = () => {
     return(
         <Row>
             <Col lg={8} md={8} sm={12}>
@@ -22,4 +22,4 @@ const BuroPendienteAnalisando = () => {
     );
 }
 
-export default BuroPendienteAnalisando;
+export default BuroPendienteAnalizando;
