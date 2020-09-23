@@ -726,10 +726,19 @@ let ComercialInfoForm = (props) => {
           cls="mb-3"
         />
         <InputLabel
-          label="¿Vendes tu producto o servicio a Estados Unidos?"
+          label="¿Cuentas con terminal punto de venta?"
           class="mt-18"
         />
         <Field component={renderSelectField} name="terminal" cls="mb-3">
+          <option value="">Seleccionar</option>
+          <option value="1">Sí</option>
+          <option value="0">No</option>
+        </Field>
+        <InputLabel
+          label="¿Vendes tu producto o servicio a Estados Unidos?"
+          class="mt-18"
+        />
+        <Field component={renderSelectField} name="exportation" cls="mb-3">
           <option value="">Seleccionar</option>
           <option value="1">Sí</option>
           <option value="0">No</option>
