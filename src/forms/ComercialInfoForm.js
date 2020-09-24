@@ -248,6 +248,7 @@ let ComercialInfoForm = (props) => {
     const webSiteError = document.getElementById("webSite-error");
     const facebookError = document.getElementById("facebook-error");
     const terminalError = document.getElementById("terminal-error");
+    const exportationError = document.getElementById("exportation-error");
     const warrantyError = document.getElementById("warranty-error");
 
     let banksErrors = [];
@@ -275,6 +276,7 @@ let ComercialInfoForm = (props) => {
       webSiteError,
       facebookError,
       terminalError,
+      exportationError,
       warrantyError,
     ];
     for (let x = 0; x < errors.length; x++) {
@@ -726,10 +728,19 @@ let ComercialInfoForm = (props) => {
           cls="mb-3"
         />
         <InputLabel
-          label="¿Vendes tu producto o servicio a Estados Unidos?"
+          label="¿Cuentas con terminal punto de venta?"
           class="mt-18"
         />
         <Field component={renderSelectField} name="terminal" cls="mb-3">
+          <option value="">Seleccionar</option>
+          <option value="1">Sí</option>
+          <option value="0">No</option>
+        </Field>
+        <InputLabel
+          label="¿Vendes tu producto o servicio a Estados Unidos?"
+          class="mt-18"
+        />
+        <Field component={renderSelectField} name="exportation" cls="mb-3">
           <option value="">Seleccionar</option>
           <option value="1">Sí</option>
           <option value="0">No</option>

@@ -121,6 +121,10 @@ export const validateComercialInfo = (values) => {
     errors.terminal = "Selecciona una opción";
   }
 
+  if (!values.exportation) {
+    errors.exportation = "Selecciona una opción";
+  }
+
   if (type !== "PF") {
     if (!values.ciec) {
       errors.ciec = "";
