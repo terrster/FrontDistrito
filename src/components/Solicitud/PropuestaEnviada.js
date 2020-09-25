@@ -18,7 +18,7 @@ const PropuestaEnviada = ({id}) => {
                     para asegurarnos de contar con toda tu documentación y resolver
                     tus dudas.
                 </div>
-                <Button className={"btn-blue-status mb-5"} style={{ width: '250px' }}>Ver Propuestas</Button>
+                <Button className={"btn-blue-status mb-5"} style={{ width: '250px' }} onClick={ () => history.push("/propuestas") }>Ver Propuestas</Button>
             </Col>
             <Col lg={4} md={4} sm={12}>
                 <div className='text-center'>

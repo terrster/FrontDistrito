@@ -57,9 +57,9 @@ const Curso = ({user}) => {
                     Aún nos falta información sobre tu negocio. Ayúdanos a completar
                     el 100% de tu solicitud y a subir tus documentos.
                 </div>
-                <div className={"text-center text-md-left"}>
+                {/* <div className={"text-center text-md-left"}> */}
                     <Button className={"btn-blue-status mb-5"} style={{ width: '250px' }} onClick={() => history.push(link)}>Completar solicitud</Button>
-                </div>
+                {/* </div> */}
             </Col>
             <Col lg={4} md={4} sm={12}>
                 <div className='text-center'>

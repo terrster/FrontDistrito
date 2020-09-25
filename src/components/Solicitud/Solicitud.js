@@ -14,13 +14,11 @@ import PropuestaEnviadaPendiente from "./PropuestaEnviadaPendiente";
 
 const Solicitud = () => {
     const dispatch = useDispatch();
-    const {
-        loader: { isLoading },
-      } = useSelector((state) => state);
-    // const user = JSON.parse(sessionStorage.getItem("user"));
+    const { loader: { isLoading } } = useSelector((state) => state);
+    //const user = JSON.parse(sessionStorage.getItem("user"));
     const user = {
         _id: '5ec8365e67de6c3fd0d807c7',
-        hubspotDealId: '2973538958'
+        hubspotDealId: '2951617913'
     }
     const [properties, setProperties] = useState(null);
     const [estatus, setEstatus] = useState(null);
@@ -56,6 +54,7 @@ const Solicitud = () => {
             break;
 
             case '768760'://Integrando/Contactar
+                setComponent(<PropuestaEnviadaPendiente/>);
             break;
 
             case 'cb42f8c5-4c77-498c-a4e9-e02b74b9bc4c'://Información Adicional Requerida
@@ -123,8 +122,8 @@ const Solicitud = () => {
     useEffect(() => {
         if(estatus != null){
             dispatch( updateLoader(false) );
-            showEstatus(estatus);//etapa del deal
-            //showEstatus('a91d7ff2-ad67-4953-8d60-f08cb14a328d');//forzar visualización de etapa
+            //showEstatus(estatus);//etapa del deal
+            showEstatus('768759');//forzar visualización de etapa
         }
     }, [estatus]);
 

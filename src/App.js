@@ -46,6 +46,7 @@ import Documents from "./components/Appliance/Documents";
 import Brokers from "./components/Brokers/Brokers";
 import ThankyouPage from "./components/Brokers/ThankyouPage";
 import Solicitud from "./components/Solicitud/Solicitud";
+import Propuestas from "./components/Propuestas/Propuestas";
 
 // ROUTER & REDUX
 import {
@@ -166,6 +167,7 @@ class App extends Component {
                 {/* Estatus de solicitud */}
 
                 <PrivateRoute exact path="/estatus_solicitud" component={Solicitud}/>
+                <PrivateRoute exact path="/propuestas" component={Propuestas}/>
               </Switch>
             </div>
             <div className="container-fluid">
