@@ -571,7 +571,7 @@ let ComercialInfoForm = (props) => {
                     label={field.friendlyName}
                     type={field.type}
                     name={field.name + 0}
-                    value={"123"}
+                    normalize={field.name == 'username' ? onlyNumbers : ''}
                     required={true}
                     onChange={(e, newValue) => {
                       const copyBanks = banks;
@@ -667,6 +667,7 @@ let ComercialInfoForm = (props) => {
                           label={field.friendlyName}
                           type={field.type}
                           name={field.name + indexBank}
+                          normalize={field.name == 'username' ? onlyNumbers : ''}
                           required={true}
                           onChange={(e, newValue) => {
                             const copyBanks = banks;
