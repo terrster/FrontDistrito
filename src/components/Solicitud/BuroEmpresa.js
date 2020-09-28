@@ -18,7 +18,7 @@ const BuroEmpresa = ({id}) => {
                     negocio para continuar con el proceso.</p>
 
                     <p><Button className={"btn-blue-status"} style={{ width: '400px' }}>Firmar Términos y Condiciones</Button></p>
-                    <p><Button className={"btn-blue-status mb-5"} style={{ width: '400px' }}>Firmar Consulta de Buró de la Empresa</Button></p>
+                    <p><Button className={"btn-blue-status mb-5"} style={{ width: '400px' }}>Firmar Consulta de Buró de tú Empresa</Button></p>
                 </div>
             </Col>
             <Col lg={4} md={4} sm={12}>
