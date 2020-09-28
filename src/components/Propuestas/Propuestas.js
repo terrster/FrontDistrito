@@ -2,11 +2,12 @@ import React, { useState, useLayoutEffect, useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
 import Axios from "../../utils/axios";
 
+//Imágenes financieras
 import ASPIRIA from '../../assets/img/alianzas/aspiria.png';
 import IMPULSO from '../../assets/img/alianzas/impulsomx.png';
 import CREZE from '../../assets/img/alianzas/creze.png';
 import CUMPLO from '../../assets/img/alianzas/cumplo.png';
-import BIENPARABIEN from '../../assets/img/alianzas/bien para bien.png';
+import BIENPARABIEN from '../../assets/img/alianzas/bienparabien.png';
 //BANCOPPEL
 //CREDIJUSTO
 import DOCUFORMAS from '../../assets/img/alianzas/docuformas.png';
@@ -17,6 +18,7 @@ import MUNDI from '../../assets/img/alianzas/mundi.png';
 //MICRO
 //AV CAPITAL
 //Hay Cash
+
 const Propuestas = () => {
     //const user = JSON.parse(sessionStorage.getItem("user"));
     const user = {
