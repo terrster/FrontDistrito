@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col, Button } from "react-bootstrap";
-import tito from '../../assets/img/estatus_solicitud/POSES TITO-01.png';
+import tito from '../../assets/img/estatus_solicitud/POSES_TITO-01.png';
 import { useHistory } from 'react-router-dom';
 
 const Curso = ({user}) => {
@@ -58,12 +58,12 @@ const Curso = ({user}) => {
                     el 100% de tu solicitud y a subir tus documentos.
                 </div>
                 {/* <div className={"text-center text-md-left"}> */}
-                    <Button className={"btn-blue-status mb-5"} style={{ width: '250px' }} onClick={() => history.push(link)}>Completar solicitud</Button>
+                    <Button className={"btn-blue-status mb-5"} onClick={() => history.push(link)}>Completar solicitud</Button>
                 {/* </div> */}
             </Col>
             <Col lg={4} md={4} sm={12}>
                 <div className='text-center'>
-                    <img src={tito} alt="tito_curso" style={{ width: '250px' }}/>
+                    <img src={tito} alt="tito" style={{ width: '250px' }}/>
                 </div>
             </Col>
         </Row>

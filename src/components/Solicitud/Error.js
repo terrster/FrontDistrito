@@ -1,16 +1,16 @@
 import React from "react";
 import { Row, Col } from "react-bootstrap";
-import tito from '../../assets/img/estatus_solicitud/POSES_TITO-04.png';
+import tito from '../../assets/img/estatus_solicitud/POSES_TITO-14.png';
 
-const BuroPendienteAnalizando = () => {
+const Error = () => {
     return(
         <Row>
             <Col lg={8} md={8} sm={12}>
                 <div className="title-dp fz42 mb-18 fw500">
-                    Consulta de Buró Pendiente
+                    Upsss :(
                 </div>
                 <div className="text-dp mb-18">
-                    Estamos análizando tu Buró de Crédito. En unos minutos tendrás noticias nuestras.
+                    Algo salió mal tratando de obtener el estatus de tú solicitud
                 </div>
             </Col>
             <Col lg={4} md={4} sm={12}>
@@ -22,4 +22,4 @@ const BuroPendienteAnalizando = () => {
     );
 }
 
-export default BuroPendienteAnalizando;
+export default Error;

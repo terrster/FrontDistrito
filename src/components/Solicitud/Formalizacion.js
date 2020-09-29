@@ -1,6 +1,7 @@
 import React, { useLayoutEffect, useState } from "react";
-import { Row, Col } from "react-bootstrap";
-import tito from '../../assets/img/estatus_solicitud/POSES_TITO-06.png';
+import { Row, Col, Button } from "react-bootstrap";
+import tito from '../../assets/img/estatus_solicitud/POSES_TITO-09.png';
+import SolicitudBox from '../Generic/SolicitudBox';
 
 //Imágenes financieras
 import ASPIRIA from '../../assets/img/alianzas/aspiria.png';
@@ -19,12 +20,9 @@ import FACTOREXPRES from '../../assets/img/alianzas/factorexpres.png';
 import AVCAPITAL from '../../assets/img/alianzas/avcapital.png';
 import HayCash from '../../assets/img/alianzas/haycash.png';
 
-const PropuestaEnviada = ({properties}) => {
-    const [proposals, setProposals] = useState(null);
+const Formalizacion = ({properties}) => {
 
-    useLayoutEffect( () => {
-        setProposals(properties.financiera_banco_que_analiza.value.split(';'));
-    }, []);
+    const [autorizationData, setautorizationData] = useState(null);
 
     const ShowFinancial = (financial) => {
         switch(financial.replace(" ", "")){
@@ -32,6 +30,7 @@ const PropuestaEnviada = ({properties}) => {
             return ASPIRIA;
 
             case 'IMPULSO':
+            case 'ImpulsoMxAut':
             return IMPULSO;
 
             case 'CREZE':
@@ -75,42 +74,60 @@ const PropuestaEnviada = ({properties}) => {
         }
     }
 
-    return(<>
+    useLayoutEffect( () => {
+        const data = {
+            financiera: properties.otorgante_que_autoriza.value,
+            monto: properties.n12_1_monto_autorizado.value,
+            plazo: properties.n12_3_plazo_autorizado.value,
+            tasa: properties.n12_2_tasa_autorizada.value,
+            logo: ShowFinancial(properties.otorgante_que_autoriza.value)
+        };
+
+        setautorizationData(data);
+
+    }, []);
+
+    return(
         <Row>
             <Col lg={8} md={8} sm={12}>
-                <div className="title-dp fz42 mb-18 fw500">
-                    Propuesta Enviada
+                <div className="title-dp fz42 fw500">
+                    Autorizado / Formalización
                 </div>
 
                 <div className="text-dp mb-18">
-                    <strong>¡Felicidades!</strong> Hemos enviado una o más propuestas de crédito a tu
-                    correo. En breve, uno de nuestros asesores se comunicará contigo
-                    para asegurarnos de contar con toda tu documentación y resolver
-                    tus dudas.
+                    <strong>¡Muchas Felicidades!</strong> Tu Crédito ha sido autorizado, solo hace falta
+                    firmar contrato. Muy pronto tu crédito será depositado.
                 </div>
 
-                <Row>
+                <SolicitudBox>
                     {
-                        proposals != null &&
-                        proposals.map((proposal, i) => {
-                            return <Col key={i} lg={3} md={6} xs={6}>
-                                        <div className="text-center">
-                                            <img src={ShowFinancial(proposal)} alt={proposal} className={`imgAlianza ${proposal}`} />
-                                        </div>
-                                    </Col>
-                        })
+                        autorizationData != null &&
+
+                        <div className="text-dp p-1 fz12">
+                            <Row>
+                                <Col xs={8}>
+                                    Banco/Financiera: {autorizationData.financiera}<br></br>
+                                    Monto Autorizado: ${new Intl.NumberFormat().format(autorizationData.monto)}<br></br>
+                                    Plazo: {autorizationData.plazo.toLowerCase()}<br></br>
+                                    Tasa: {autorizationData.tasa + "% anual"}<br></br>
+                                </Col>
+                                <Col xs={4}>
+                                    <div className="float-right mr-2">
+                                        <img src={autorizationData.logo} alt={autorizationData.financiera} style={{ width: '100px'}}/>
+                                    </div>
+                                </Col>
+                            </Row>
+                        </div>
                     }
-                </Row>
+                </SolicitudBox>
             </Col>
             <Col lg={4} md={4} sm={12}>
-                <div className='text-center mt-xs-5'>
+                <div className='text-center'>
                     <img src={tito} alt="tito" style={{ width: '250px' }}/>
                 </div>
             </Col>
         </Row>
-
-        </>
     );
 }
 
-export default PropuestaEnviada;
+export default Formalizacion;

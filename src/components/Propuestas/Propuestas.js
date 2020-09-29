@@ -4,20 +4,20 @@ import Axios from "../../utils/axios";
 
 //Imágenes financieras
 import ASPIRIA from '../../assets/img/alianzas/aspiria.png';
-import IMPULSO from '../../assets/img/alianzas/impulsomx.png';
+import IMPULSO from '../../assets/img/alianzas/impulso.png';
 import CREZE from '../../assets/img/alianzas/creze.png';
 import CUMPLO from '../../assets/img/alianzas/cumplo.png';
 import BIENPARABIEN from '../../assets/img/alianzas/bienparabien.png';
-//BANCOPPEL
-//CREDIJUSTO
+import BANCOPPEL from '../../assets/img/alianzas/bancoppel.png';
+import CREDIJUSTO from '../../assets/img/alianzas/credijusto.png';
 import DOCUFORMAS from '../../assets/img/alianzas/docuformas.png';
 import PRETMEX from '../../assets/img/alianzas/pretmex.png';
 import UNICLICK from '../../assets/img/alianzas/uniclick.png';
 import MUNDI from '../../assets/img/alianzas/mundi.png';
-//FACTOR EXPRES
-//MICRO
-//AV CAPITAL
-//Hay Cash
+import FACTOREXPRES from '../../assets/img/alianzas/factorexpres.png';
+//import MICRO from '../../assets/img/alianzas/micro.png';
+import AVCAPITAL from '../../assets/img/alianzas/avcapital.png';
+import HayCash from '../../assets/img/alianzas/haycash.png';
 
 const Propuestas = () => {
     //const user = JSON.parse(sessionStorage.getItem("user"));
@@ -71,6 +71,12 @@ const Propuestas = () => {
             case 'BIENPARABIEN':
             return BIENPARABIEN;
 
+            case 'BANCOPPEL':
+            return BANCOPPEL;
+
+            case 'CREDIJUSTO':
+            return CREDIJUSTO;
+
             case 'DOCUFORMAS':
             return DOCUFORMAS;
 
@@ -82,7 +88,18 @@ const Propuestas = () => {
 
             case 'MUNDI':
             return MUNDI;
+            
+            case 'FACTOREXPRES':
+            return FACTOREXPRES;
 
+            case 'MICRO':
+            return '';
+
+            case 'AVCAPITAL':
+            return AVCAPITAL;
+
+            case 'HayCash':
+            return HayCash;
         }
     }
 
@@ -93,14 +110,18 @@ const Propuestas = () => {
                     <div className="title-dp fz42 mb-18 fw500">
                         Propuestas
                     </div>
-                    <div className="text-dp mb-18">
+                    <Row>
                         {
                             proposals != null &&
                             proposals.map((proposal, i) => {
-                                return <img key={i} src={ShowFinancial(proposal)} alt={proposal} style={{ width: '250px' }}/>
+                                return <Col key={i} lg={3} md={6} xs={6}>
+                                            <div className="text-center">
+                                                <img src={ShowFinancial(proposal)} alt={proposal} className={`imgAlianza ${proposal}`} />
+                                            </div>
+                                        </Col>
                             })
                         }
-                    </div>
+                    </Row>
                 </Col>
             </Row>
         </div>

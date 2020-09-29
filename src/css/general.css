@@ -323,6 +323,10 @@
 	letter-spacing: 2px;
 }
 
+.btn-blue-status{
+	padding: 0px 15px 0px 15px !important;
+}
+
 .btn-blue-general{
 	max-width: 200px !important;
 }
@@ -567,4 +571,13 @@
 	background-origin: border-box;
 	background-clip: content-box, border-box;
 	padding: 1px;
+}
+
+.imgAlianza{
+	width: 160px;
+	height: 60px;
+}
+
+.IMPULSO{
+	margin-top: -5px;
 }

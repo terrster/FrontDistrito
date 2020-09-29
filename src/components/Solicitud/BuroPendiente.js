@@ -1,6 +1,6 @@
 import React from "react";
 import { Row, Col, Button } from "react-bootstrap";
-import tito from '../../assets/img/estatus_solicitud/POSES TITO-03.png';
+import tito from '../../assets/img/estatus_solicitud/POSES_TITO-03.png';
 import { useHistory } from 'react-router-dom';
 
 const BuroPendiente = ({id}) => {
@@ -24,7 +24,7 @@ const BuroPendiente = ({id}) => {
   
                     <p>Por favor regresa a tu solicitud y verifica tu información</p>
 
-                    <Button className={"btn-blue-status mb-5"} style={{ width: '250px' }} 
+                    <Button className={"btn-blue-status mb-5"} 
                     onClick={() => 
                     history.push({
                         pathname: `/informacion-general/${id}`,
@@ -34,7 +34,7 @@ const BuroPendiente = ({id}) => {
             </Col>
             <Col lg={4} md={4} sm={12}>
                 <div className='text-center'>
-                    <img src={tito} alt="tito_curso" style={{ width: '250px' }}/>
+                    <img src={tito} alt="tito" style={{ width: '250px' }}/>
                 </div>
             </Col>
         </Row>

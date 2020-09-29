@@ -1,6 +1,6 @@
 import React, { useLayoutEffect, useState } from "react";
 import { Row, Col } from "react-bootstrap";
-import tito from '../../assets/img/estatus_solicitud/POSES_TITO-06.png';
+import tito from '../../assets/img/estatus_solicitud/POSES_TITO-08.png';
 
 //Imágenes financieras
 import ASPIRIA from '../../assets/img/alianzas/aspiria.png';
@@ -19,7 +19,7 @@ import FACTOREXPRES from '../../assets/img/alianzas/factorexpres.png';
 import AVCAPITAL from '../../assets/img/alianzas/avcapital.png';
 import HayCash from '../../assets/img/alianzas/haycash.png';
 
-const PropuestaEnviada = ({properties}) => {
+const AnalisisCredito = ({properties}) => {
     const [proposals, setProposals] = useState(null);
 
     useLayoutEffect( () => {
@@ -75,18 +75,16 @@ const PropuestaEnviada = ({properties}) => {
         }
     }
 
-    return(<>
+    return(
         <Row>
             <Col lg={8} md={8} sm={12}>
-                <div className="title-dp fz42 mb-18 fw500">
-                    Propuesta Enviada
+                <div className="title-dp fz42 fw500">
+                    En Análisis de Crédito
                 </div>
 
                 <div className="text-dp mb-18">
-                    <strong>¡Felicidades!</strong> Hemos enviado una o más propuestas de crédito a tu
-                    correo. En breve, uno de nuestros asesores se comunicará contigo
-                    para asegurarnos de contar con toda tu documentación y resolver
-                    tus dudas.
+                    <strong>¡Genial!</strong> Tu solicitud está siendo analizada por los siguientes
+                    Bancos y/o Financieras, en breve un asesor se pondrá en contacto contigo.
                 </div>
 
                 <Row>
@@ -103,14 +101,12 @@ const PropuestaEnviada = ({properties}) => {
                 </Row>
             </Col>
             <Col lg={4} md={4} sm={12}>
-                <div className='text-center mt-xs-5'>
+                <div className='text-center'>
                     <img src={tito} alt="tito" style={{ width: '250px' }}/>
                 </div>
             </Col>
         </Row>
-
-        </>
     );
 }
 
-export default PropuestaEnviada;
+export default AnalisisCredito;

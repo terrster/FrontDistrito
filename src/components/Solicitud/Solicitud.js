@@ -11,6 +11,13 @@ import BuroPendienteAnalizando from "./BuroPendienteAnalizando";
 import BuroEmpresa from "./BuroEmpresa";
 import PropuestaEnviada from "./PropuestaEnviada";
 import PropuestaEnviadaPendiente from "./PropuestaEnviadaPendiente";
+import PropuestaEnviadaAdicional from "./PropuestaEnviadaAdicional";
+import ValidacionDocumentos from "./ValidacionDocumentos";
+import AnalisisCredito from "./AnalisisCredito";
+import Formalizacion from "./Formalizacion";
+import Depositado from "./Depositado";
+import NoViableRechazado from "./NoViableRechazado";
+import Error from "./Error";
 
 const Solicitud = () => {
     const dispatch = useDispatch();
@@ -18,7 +25,7 @@ const Solicitud = () => {
     //const user = JSON.parse(sessionStorage.getItem("user"));
     const user = {
         _id: '5ec8365e67de6c3fd0d807c7',
-        hubspotDealId: '2951617913'
+        hubspotDealId: '2951617913'//2951617913 //2947900743
     }
     const [properties, setProperties] = useState(null);
     const [estatus, setEstatus] = useState(null);
@@ -50,7 +57,7 @@ const Solicitud = () => {
             break;
 
             case '768759'://Pre-análisis y Envío de Propuesta
-                setComponent(<PropuestaEnviada/>);
+                setComponent(<PropuestaEnviada properties={properties}/>);
             break;
 
             case '768760'://Integrando/Contactar
@@ -58,21 +65,27 @@ const Solicitud = () => {
             break;
 
             case 'cb42f8c5-4c77-498c-a4e9-e02b74b9bc4c'://Información Adicional Requerida
+                setComponent(<PropuestaEnviadaAdicional properties={properties}/>);
             break;
 
             case '58b0edce-4810-4be2-85e4-b3fa4b2239bf'://Validación de Documentos
+                setComponent(<ValidacionDocumentos/>);
             break;
 
             case '8e979808-5a1d-4d08-b03f-d369c6370355'://Análisis Banco/Financiera
+                setComponent(<AnalisisCredito properties={properties}/>);
             break;
 
             case 'e831b8e3-4a3a-429e-932e-6fb7fa40d011'://Formalización
+                setComponent(<Formalizacion properties={properties}/>);
             break;
 
             case '9d2b4ccf-18ad-4dd6-9d10-ff4f65d6f1be'://Cierre Exitoso
+                setComponent(<Depositado/>);
             break;
             
             case 'ebdea2f6-dea7-4646-b8e0-089a4b7f5c02'://Rechazado
+                setComponent(<NoViableRechazado/>);
             break;
 
             case 'fdf366d3-865e-4fe4-844e-d16dc64c58d5'://Inactivo (Cliente no continuo)
@@ -84,8 +97,8 @@ const Solicitud = () => {
             case '4289875'://StandBy
             break;
 
-            default:// ****Falta determinar un componente por defecto en caso de un error con backend o la api de hubspot
-                setComponent(null);
+            default://Error
+                setComponent(<Error/>);
             break;
         }
     }
@@ -123,7 +136,7 @@ const Solicitud = () => {
         if(estatus != null){
             dispatch( updateLoader(false) );
             //showEstatus(estatus);//etapa del deal
-            showEstatus('768759');//forzar visualización de etapa
+            showEstatus('cb42f8c5-4c77-498c-a4e9-e02b74b9bc4c');//forzar visualización de etapa
         }
     }, [estatus]);
 

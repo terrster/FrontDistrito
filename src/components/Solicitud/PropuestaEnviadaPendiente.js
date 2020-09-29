@@ -1,6 +1,6 @@
 import React, { useLayoutEffect, useState, useEffect } from "react";
 import { Row, Col, Button } from "react-bootstrap";
-import tito from '../../assets/img/estatus_solicitud/POSES TITO-06.png';
+import tito from '../../assets/img/estatus_solicitud/POSES_TITO-06.png';
 import SolicitudBox from '../Generic/SolicitudBox';
 import { useHistory } from 'react-router-dom';
 
@@ -171,7 +171,7 @@ const PropuestaEnviada = ({id}) => {
         <Row>
             <Col lg={8} md={8} sm={12}>
                 <div className="title-dp fz42 fw500">
-                    Propuesta Enviada /
+                    Propuesta Enviada
                 </div>
                 <br></br>
                 <div className="title-dp fz20 mb-18 fw500" style={{ marginTop: '-33px' }}>
@@ -184,13 +184,27 @@ const PropuestaEnviada = ({id}) => {
                     tu propuesta.
                 </div>
 
-                <SolicitudBox docs={mdocs}/>
+                <SolicitudBox>
+                    <div className="text-dp p-1 fz12">
+                        DOCUMENTOS PENDIENTES
+                        <br></br>
 
-                <Button className={"btn-blue-status mt-3 mb-5"} style={{ width: '250px' }}>Ver Propuestas</Button>
+                        {
+                            mdocs != null && 
+                            mdocs.map((doc, i) => {
+                                return <span key={i}>{(i+1) +'.- '+ doc} <br></br> </span>
+                            })
+                        }
+                    </div>
+                </SolicitudBox>
+
+                <Button className={"btn-blue-status mt-3 mb-5"} onClick={ () => history.push("/propuestas") }>Ver Propuestas</Button>
+                <Button className={"btn-blue-status mt-3 ml-3 mb-5"} onClick={() => history.push(`/documentos/${id}`)}>Completar solicitud</Button>
+
             </Col>
             <Col lg={4} md={4} sm={12}>
                 <div className='text-center'>
-                    <img src={tito} alt="tito_curso" style={{ width: '250px' }}/>
+                    <img src={tito} alt="tito" style={{ width: '250px' }}/>
                 </div>
             </Col>
         </Row>
