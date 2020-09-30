@@ -160,7 +160,7 @@ const PropuestaEnviada = ({properties}) => {console.log(properties)
                     Propuesta Enviada
                 </div>
 
-                <div className="text-dp mb-18">
+                <div className="text-dp mb-8">
                     <strong>¡Felicidades!</strong> Hemos enviado una o más propuestas de crédito a tu
                     correo. En breve, uno de nuestros asesores se comunicará contigo
                     para asegurarnos de contar con toda tu documentación y resolver
