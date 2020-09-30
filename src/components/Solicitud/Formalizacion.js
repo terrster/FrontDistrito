@@ -99,7 +99,7 @@ const Formalizacion = ({properties}) => {
                     firmar contrato. Muy pronto tu crédito será depositado.
                 </div>
 
-                <SolicitudBox>
+                <SolicitudBox styleParams={{ width: '80%' }}>
                     {
                         autorizationData != null &&
 

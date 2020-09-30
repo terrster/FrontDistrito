@@ -3,9 +3,11 @@ import { Row, Col, Button } from "react-bootstrap";
 import tito from '../../assets/img/estatus_solicitud/POSES_TITO-01.png';
 import { useHistory } from 'react-router-dom';
 
-const Curso = ({user}) => {
+const Curso = () => {
     const history = useHistory();
+
     const [link, setLink] = useState('/credito/');
+    const user = JSON.parse(sessionStorage.getItem("user"));
 
     const verifyAppliance = (array) => {
         if (typeof array !== "object") return false;

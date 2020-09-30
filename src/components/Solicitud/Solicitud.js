@@ -17,11 +17,15 @@ import AnalisisCredito from "./AnalisisCredito";
 import Formalizacion from "./Formalizacion";
 import Depositado from "./Depositado";
 import NoViableRechazado from "./NoViableRechazado";
+import Inactivo from "./Inactivo";
+import NoViableSinRequisitos from "./NoViableSinRequisitos";
 import Error from "./Error";
 
 const Solicitud = () => {
     const dispatch = useDispatch();
+
     const { loader: { isLoading } } = useSelector((state) => state);
+
     //const user = JSON.parse(sessionStorage.getItem("user"));
     const user = {
         _id: '5ec8365e67de6c3fd0d807c7',
@@ -37,15 +41,15 @@ const Solicitud = () => {
             break;
 
             case '88b229ab-5161-4c94-ab74-fd68faee5140'://Solicitud Curso (Info Parcial)
-                setComponent(<Curso user={user}/>);
+                setComponent(<Curso/>);
             break;
 
             case 'd52c3e71-74ee-499b-8af9-abe5245deaaa'://Integrando Documentación
-                setComponent(<Pendiente id={user._id}/>);
+                setComponent(<Pendiente/>);
             break;
 
             case 'd0874266-3f5f-44a4-9905-76f9e1871805'://No autenticó
-                setComponent(<BuroPendiente id={user._id}/>);
+                setComponent(<BuroPendiente/>);
             break;
 
             case 'a91d7ff2-ad67-4953-8d60-f08cb14a328d'://Consulta Buró Física
@@ -89,9 +93,11 @@ const Solicitud = () => {
             break;
 
             case 'fdf366d3-865e-4fe4-844e-d16dc64c58d5'://Inactivo (Cliente no continuo)
+                setComponent(<Inactivo/>);
             break;
 
             case '7e4ec2de-1478-45e3-9fab-b702740d4733'://Sin requisitos básicos
+                setComponent(<NoViableSinRequisitos/>);
             break;
 
             case '4289875'://StandBy

@@ -3,8 +3,10 @@ import { Row, Col, Button } from "react-bootstrap";
 import tito from '../../assets/img/estatus_solicitud/POSES_TITO-03.png';
 import { useHistory } from 'react-router-dom';
 
-const BuroPendiente = ({id}) => {
+const BuroPendiente = () => {
     const history = useHistory();
+
+    const user = JSON.parse(sessionStorage.getItem("user"));
 
     return(
         <Row>
@@ -27,7 +29,7 @@ const BuroPendiente = ({id}) => {
                     <Button className={"btn-blue-status mb-5"} 
                     onClick={() => 
                     history.push({
-                        pathname: `/informacion-general/${id}`,
+                        pathname: `/informacion-general/${user._id}`,
                         position_ref: 'name2-error'
                     })}>Verificar datos</Button>
                 </div>
