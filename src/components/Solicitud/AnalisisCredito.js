@@ -1,13 +1,17 @@
 import React, { useLayoutEffect, useState } from "react";
 import { Row, Col } from "react-bootstrap";
 import tito from '../../assets/img/estatus_solicitud/POSES_TITO-08.png';
-import { imgFinancial } from '../../utils/imgFinancials';
+import { filterFinancials, imgFinancial } from '../../utils/Financials';
 
 const AnalisisCredito = ({properties}) => {
     const [proposals, setProposals] = useState(null);
 
     useLayoutEffect( () => {
-        setProposals(properties.financiera_banco_que_analiza.value.split(';'));
+        // setProposals(properties.financiera_banco_que_analiza.value.split(';'));
+        let _proposals = properties.financiera_banco_que_analiza.value;
+        //let _proposals = "ASPIRIA;IMPULSO;ImpulsoMx Aut;CREZE;CUMPLO;BIEN PARA BIEN;Bancoppel;CREDIJUSTO;DOCUFORMAS;PRETMEX;UNICLICK;MUNDI;Factor Expres;MICRO;AV CAPITAL;HayCash";
+        let proposalsfilt = filterFinancials(_proposals);
+        setProposals(proposalsfilt);
     }, []);
 
     return(

@@ -37,8 +37,8 @@ const Solicitud = () => {
     
     const showEstatus = (estatus) => {
         switch(estatus){
-            case '366828'://Registro, se deshabilitará cuando no haya elegido tipo de persona
-            break;
+            // case '366828'://Registro, se deshabilitará cuando no haya elegido tipo de persona
+            // break;
 
             case '88b229ab-5161-4c94-ab74-fd68faee5140'://Solicitud Curso (Info Parcial)
                 setComponent(<Curso/>);
