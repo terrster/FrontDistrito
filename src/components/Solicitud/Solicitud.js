@@ -120,6 +120,7 @@ const Solicitud = () => {
             } 
             catch(error){
                 //console.log(error);
+                dispatch( updateLoader(false) );
                 showEstatus(null);
             }
         }
