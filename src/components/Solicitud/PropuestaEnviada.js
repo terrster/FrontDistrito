@@ -47,7 +47,7 @@ const PropuestaEnviada = ({properties}) => {
                                             </Col>
                                             <Col xs={4}>
                                                 <div className="float-right mr-2">
-                                                    <img src={financial.logo} alt={financial.financiera} style={{ width: '100px' }} className={`imgAlianza ${proposal.class}`}/>
+                                                    <img src={financial.logo} alt={financial.financiera} style={{ width: '100px' }} className={`imgAlianza ${financial.class}`}/>
                                                 </div>
                                             </Col>
                                         </Row>

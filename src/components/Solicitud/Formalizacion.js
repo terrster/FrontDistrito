@@ -15,7 +15,7 @@ const Formalizacion = ({properties}) => {
             plazo: properties.n12_3_plazo_autorizado.value,
             tasa: properties.n12_2_tasa_autorizada.value,
             logo: imgFinancial(properties.otorgante_que_autoriza.value),
-            class: properties.otorgante_que_autoriza.value.toUpperCase()
+            class: properties.otorgante_que_autoriza.value.toUpperCase() == 'IMPULSOMX AUT' ? 'IMPULSO' : properties.otorgante_que_autoriza.value.toUpperCase()
         };
 
         setautorizationData(data);

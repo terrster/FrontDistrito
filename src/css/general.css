@@ -580,10 +580,10 @@
 }
 
 .ASPIRIA{
-	margin-top: 15px;
-	height: 50px;
+	margin-top: 20px;
+	height: 40px;
 }
 
-/* .IMPULSO{
-	margin-top: -5px;
-} */
+.IMPULSO{
+	margin-top: 5px;
+}
