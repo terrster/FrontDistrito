@@ -1,8 +1,8 @@
 import React from "react";
 
-const SolicitudBox = ({children, styleParams}) => {
+const SolicitudBox = ({children, classParams, styleParams}) => {
     return(
-        <div className="estatus-solicitud-box" style={styleParams}>
+        <div className={`estatus-solicitud-box ${classParams}`} style={styleParams}>
             {children}
         </div>
     );

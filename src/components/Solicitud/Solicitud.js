@@ -143,9 +143,9 @@ const Solicitud = () => {
         if(estatus != null){
             dispatch( updateLoader(false) );
             //showEstatus(estatus);//etapa del deal
-            showEstatus('768759');//forzar visualización de etapa
+            showEstatus('8e979808-5a1d-4d08-b03f-d369c6370355');//forzar visualización de etapa
         }
-    }, [estatus]);
+    },[estatus]);
 
     if(isLoading)
 		return <CustomLoader />
