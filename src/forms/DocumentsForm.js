@@ -29,6 +29,8 @@ let DocumentsForm = (props) => {
   const acomplishOpinion = React.createRef();
   const cventerprise = React.createRef();
   const proofAddressMainFounders = React.createRef();
+  const collectionReportSaleTerminals = React.createRef();
+  const localContractLease = React.createRef();
 
   const { handleSubmit } = props;
   const [validFiles, setValidFiles] = useState([]);
@@ -130,6 +132,7 @@ let DocumentsForm = (props) => {
   const appliance = idClient.appliance[idClient.appliance.length - 1];
   const comercialInfo = appliance.idComercialInfo;
   const ciec = comercialInfo.ciec;
+  const tpv = comercialInfo.terminal;
 
   let docFiles = [];
   switch (typePerson) {
@@ -164,6 +167,20 @@ let DocumentsForm = (props) => {
           files: props.docs.others,
           refs: others,
         },
+        {
+          title: "Reporte de cobranza de las terminales punto de venta (12 meses)",
+          subtitle: "",
+          name: "collectionReportSaleTerminals",
+          files: props.docs.collectionReportSaleTerminals,
+          refs: collectionReportSaleTerminals,
+        },
+        {
+          title: "Contrato de arrendamiento vigente de tu local",
+          subtitle: "",
+          name: "localContractLease",
+          files: props.docs.localContractLease,
+          refs: localContractLease,
+        }
       ];
       break;
     case "PFAE":
@@ -216,7 +233,7 @@ let DocumentsForm = (props) => {
           name: "others",
           files: props.docs.others,
           refs: others,
-        },
+        }
       ];
       break;
     case "RIF":
@@ -333,7 +350,13 @@ let DocumentsForm = (props) => {
   }
   let currDocs = props.currentDocuments;
 
-  const filterDocs = ["oficialID", "proofAddress", "others", "bankStatements"];
+  const filterDocs = [
+    "oficialID", 
+    "proofAddress", 
+    "bankStatements",
+    "others"
+  ];
+
   const filterDocsPM = [
     "constitutiveAct",
     "financialStatements",
@@ -343,11 +366,38 @@ let DocumentsForm = (props) => {
     "others",
   ];
 
+  // const filterDocsTPV = [
+  //   "oficialID", 
+  //   "proofAddress", 
+  //   "bankStatements",
+  //   "others", 
+  //   "collectionReportSaleTerminals",
+  //   "localContractLease"
+  // ];
+
   if ((typePerson === "RIF" || typePerson === "PFAE") && ciec) {
     docFiles = docFiles.filter((doc) => filterDocs.includes(doc.name));
   }
+
   if (typePerson === "PM" && ciec) {
     docFiles = docFiles.filter((doc) => filterDocsPM.includes(doc.name));
+  }
+
+  if (tpv) {
+    docFiles.push({
+      title: "Reporte de cobranza de las terminales punto de venta (12 meses)",
+      subtitle: "",
+      name: "collectionReportSaleTerminals",
+      files: props.docs.collectionReportSaleTerminals,
+      refs: collectionReportSaleTerminals,
+    },
+    {
+      title: "Contrato de arrendamiento vigente de tu local",
+      subtitle: "",
+      name: "localContractLease",
+      files: props.docs.localContractLease,
+      refs: localContractLease,
+    })
   }
 
   return (

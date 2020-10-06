@@ -94,6 +94,7 @@ const ComercialInfo = (props) => {
           const comercial = appliance.idComercialInfo;
           const address = comercial.address;
           const terminal = comercial.terminal ? "1" : "0";
+          const exportation = comercial.exportation ? "1" : "0";
           let colonias = [];
           try {
             const coloniasRequest = await axiosBase.get(
@@ -116,9 +117,9 @@ const ComercialInfo = (props) => {
               };
             });
             
-            setInitialValues({ ...comercial, ...address, terminal, colonias, ...bankFields[0] });
+            setInitialValues({ ...comercial, ...address, terminal, exportation, colonias, ...bankFields[0] });
           } catch (error) {
-            setInitialValues({ ...comercial, ...address, terminal, colonias });
+            setInitialValues({ ...comercial, ...address, terminal, exportation, colonias });
           }
         }
       }

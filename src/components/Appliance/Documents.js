@@ -47,8 +47,12 @@ const getDocsMethod = () => {
     const typePerson = idClient.type;
     const { appliance } = idClient;  
     let ciec = '';
+    let tpv = false;
     if (appliance[0].idComercialInfo) {
       ciec = appliance[0].idComercialInfo.ciec;
+    }
+    if (appliance[0].idComercialInfo) {
+      tpv = appliance[0].idComercialInfo.terminal;
     }
     let docFiles = [];
     /**
@@ -96,6 +100,7 @@ const getDocsMethod = () => {
       default:
         break;
     }
+
     if (ciec){
       if (typePerson === "PM"){
         docFiles = ["constitutiveAct","financialStatements","bankStatements","oficialID", "proofAddressMainFounders", "others"];
@@ -103,6 +108,11 @@ const getDocsMethod = () => {
         docFiles = ["oficialID", "proofAddress", "others", "bankStatements"];
       }
     }
+
+    if(tpv == true){
+      docFiles.push("collectionReportSaleTerminals", "localContractLease");
+    }
+
     return docFiles;
   };
 
@@ -173,7 +183,7 @@ const getDocsMethod = () => {
   const testDocumentsMethod = (array) => {
     let status = true;
     let requiredDocs = getDocsMethod();    
-    for (const k in requiredDocs) {
+    for (const k in requiredDocs) {console.log(requiredDocs[k])
       if (array[requiredDocs[k]].length <= 0) {
         status = false;
       }
@@ -204,13 +214,13 @@ const getDocsMethod = () => {
 				cventerprise, facturacion, financialStatements, 
 				lastDeclarations, oficialID, otherActs, others, 
 				proofAddress, proofAddressMainFounders, 
-				rfc } = appliance.idDocuments;
+				rfc, collectionReportSaleTerminals, localContractLease } = appliance.idDocuments;
 			const currentDocuments = {
 				acomplishOpinion, bankStatements, constitutiveAct, 
 				cventerprise, facturacion, financialStatements, 
 				lastDeclarations, oficialID, otherActs, others, 
 				proofAddress, proofAddressMainFounders, 
-				rfc
+				rfc, collectionReportSaleTerminals, localContractLease
 			}
       //let status = testDocumentsMethod(currentDocuments);
       //dispatch(updateDocumentsStatus(status));

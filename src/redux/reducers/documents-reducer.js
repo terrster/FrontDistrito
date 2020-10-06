@@ -15,8 +15,10 @@ const initialState = {
     lastDeclarations : [], 
     facturacion: [],
     others : [], 
-    cventerprise:[], 
-    proofAddressMainFounders:[]
+    cventerprise: [], 
+    proofAddressMainFounders: [],
+    collectionReportSaleTerminals: [],
+    localContractLease: []
 }
 
 const documentsReducer = (state = initialState,action) => {
