@@ -183,7 +183,7 @@ const getDocsMethod = () => {
   const testDocumentsMethod = (array) => {
     let status = true;
     let requiredDocs = getDocsMethod();    
-    for (const k in requiredDocs) {console.log(requiredDocs[k])
+    for (const k in requiredDocs) {
       if (array[requiredDocs[k]].length <= 0) {
         status = false;
       }
