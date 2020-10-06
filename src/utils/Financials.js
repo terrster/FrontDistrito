@@ -11,7 +11,7 @@ import PRETMEX from '../assets/img/alianzas/pretmex.png';
 import UNICLICK from '../assets/img/alianzas/uniclick.png';
 import MUNDI from '../assets/img/alianzas/mundi.png';
 import FACTOREXPRES from '../assets/img/alianzas/factorexpres.png';
-//import MICRO from '../assets/img/alianzas/micro.png';
+import MICRO from '../assets/img/alianzas/micro.png';
 import AVCAPITAL from '../assets/img/alianzas/avcapital.png';
 import HayCash from '../assets/img/alianzas/haycash.png';
 
@@ -67,7 +67,7 @@ export const imgFinancial = (financial) => {
         return FACTOREXPRES;
 
         case 'MICRO':
-        return '';
+        return MICRO;
 
         case 'AV CAPITAL':
         return AVCAPITAL;
@@ -204,7 +204,6 @@ export const dataFinancial = (financial, properties) => {
                 logo: imgFinancial(financial),
                 class: 'FACTOREXPRES'
             };
-        break;
 
         case 'MICRO':
             return {
