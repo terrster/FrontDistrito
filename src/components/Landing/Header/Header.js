@@ -88,18 +88,18 @@ const Header = props => {
 						</div>
 					</Carousel.Caption>
 				</Carousel.Item>
-				<Carousel.Item>
+				{/* <Carousel.Item>
 					<img
 						className="d-block w-100"
 						src={images[1][versionImage]}
 						alt="Second slide"
-					/>
+					/> */}
 					{/* <Carousel.Caption>
 						<Button className={versionImage == 0 ? styleWEB : styleWEBM} onClick={() => goToForm()}>
 							Regístrate
 						</Button>
 					</Carousel.Caption> */}
-					<Carousel.Caption>
+					{/* <Carousel.Caption>
 						<div className="coolvetica">
 						<NavLink to="/brokers">
 							<Button className={versionImage == 0 ? styleWEB : styleWEBM}>
@@ -107,7 +107,7 @@ const Header = props => {
 							</Button>
 						</NavLink>
 						</div>
-					</Carousel.Caption>
+					</Carousel.Caption> */}
 					{/* <Carousel.Caption>
 						<h3 className="coolvetica fz48 white mb-34 header-title">
                             ¿Necesitas financiamiento?
@@ -136,7 +136,7 @@ const Header = props => {
 							</Link>
 						</div>
 					</Carousel.Caption> */}
-				</Carousel.Item>
+				{/* </Carousel.Item> */}
 			</Carousel>
 		</div>
 	);
