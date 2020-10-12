@@ -10,7 +10,7 @@ const PropuestaEnviada = ({properties}) => {
     useLayoutEffect( () => {
         // setProposals(properties.financiera_banco_que_analiza.value.split(';'));
         let _proposals = properties.financiera_banco_que_analiza.value;
-        //let _proposals = "ASPIRIA;IMPULSO;ImpulsoMx Aut;CREZE;CUMPLO;BIEN PARA BIEN;Bancoppel;CREDIJUSTO;DOCUFORMAS;PRETMEX;UNICLICK;MUNDI;Factor Expres;MICRO;AV CAPITAL;HayCash";
+        //let _proposals = "ASPIRIA;IMPULSO;ImpulsoMx Aut;CREZE;CUMPLO;BIEN PARA BIEN;Bancoppel;CREDIJUSTO;DOCUFORMAS;PRETMEX;UNICLICK;MUNDI;Factor Expres;MICRO;AV CAPITAL;HayCash;Pagaloop;iBan";
         let proposalsfilt = filterFinancials(_proposals);
         setProposals(proposalsfilt);
     }, []);

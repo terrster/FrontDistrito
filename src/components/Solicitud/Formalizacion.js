@@ -48,7 +48,7 @@ const Formalizacion = ({properties}) => {
                                 </Col>
                                 <Col xs={4}>
                                     <div className="float-right mr-2">
-                                        <img src={autorizationData.logo} alt={autorizationData.financiera} style={{ width: '100px'}} className={`imgAlianza ${autorizationData.class}`}/>
+                                        <img src={autorizationData.logo} alt={autorizationData.financiera} className={`imgAlianza ${autorizationData.class}`}/>
                                     </div>
                                 </Col>
                             </Row>

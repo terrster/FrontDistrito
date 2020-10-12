@@ -14,6 +14,8 @@ import FACTOREXPRES from '../assets/img/alianzas/factorexpres.png';
 import MICRO from '../assets/img/alianzas/micro.png';
 import AVCAPITAL from '../assets/img/alianzas/avcapital.png';
 import HayCash from '../assets/img/alianzas/haycash.png';
+import Pagaloop from '../assets/img/alianzas/pagaloop.png';
+import iBan from '../assets/img/alianzas/iBan.png';
 
 export const filterFinancials = (financials) => {
     let financialsfilt = [];
@@ -74,6 +76,12 @@ export const imgFinancial = (financial) => {
 
         case 'HAYCASH':
         return HayCash;
+
+        case 'PAGALOOP':
+        return Pagaloop;
+
+        case 'IBAN':
+        return iBan;
     }
 }
 
@@ -207,7 +215,7 @@ export const dataFinancial = (financial, properties) => {
 
         case 'MICRO':
             return {
-                financiera: 'Micro',
+                financiera: 'Impulsate',
                 monto: properties.monto_preaut.value,
                 plazo: '3 meses',
                 tasa: '5.74% mensual',
@@ -233,6 +241,26 @@ export const dataFinancial = (financial, properties) => {
                 tasa: '2.5% mensual',
                 logo: imgFinancial(financial),
                 class: 'HAYCASH'
+            };
+
+        case 'PAGALOOP':
+            return {
+                financiera: 'Pagaloop',
+                monto: properties.monto_preaut.value,
+                plazo: '',
+                tasa: '',
+                logo: imgFinancial(financial),
+                class: 'PAGALOOP'
+            };
+
+        case 'IBAN':
+            return {
+                financiera: 'iBan',
+                monto: properties.monto_preaut.value,
+                plazo: '',
+                tasa: '',
+                logo: imgFinancial(financial),
+                class: 'IBAN'
             };
     }
 }

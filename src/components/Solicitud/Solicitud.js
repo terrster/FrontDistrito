@@ -100,7 +100,7 @@ const Solicitud = () => {
                 setComponent(<NoViableSinRequisitos/>);
             break;
 
-            case '4289875'://StandBy
+            case '4289875'://StandBy - Mostrar la pantalla de inactivo
             break;
 
             default://Error
