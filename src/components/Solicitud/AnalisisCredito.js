@@ -32,7 +32,7 @@ const AnalisisCredito = ({properties}) => {
                         proposals.map((proposal, i) => {
                             return <Col key={i} lg={3} md={6} xs={6}>
                                         <div className="text-center">
-                                            <img src={imgFinancial(proposal)} alt={proposal} style={{width: '100px', height: '45px'}}/>
+                                            <img src={imgFinancial(proposal)} alt={proposal} className={`imgAlianza`}/>
                                         </div>
                                     </Col>
                         })

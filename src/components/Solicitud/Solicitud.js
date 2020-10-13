@@ -97,10 +97,11 @@ const Solicitud = () => {
             break;
 
             case '7e4ec2de-1478-45e3-9fab-b702740d4733'://Sin requisitos básicos
-                setComponent(<NoViableSinRequisitos/>);
+                setComponent(<NoViableSinRequisitos properties={properties}/>);
             break;
 
             case '4289875'://StandBy - Mostrar la pantalla de inactivo
+                setComponent(<Inactivo/>);
             break;
 
             default://Error
@@ -143,7 +144,7 @@ const Solicitud = () => {
         if(estatus != null){
             dispatch( updateLoader(false) );
             //showEstatus(estatus);//etapa del deal
-            showEstatus('768759');//forzar visualización de etapa
+            showEstatus('7e4ec2de-1478-45e3-9fab-b702740d4733');//forzar visualización de etapa
         }
     },[estatus]);
 

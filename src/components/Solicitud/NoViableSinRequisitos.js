@@ -3,10 +3,11 @@ import { Row, Col, Button } from "react-bootstrap";
 import tito from '../../assets/img/estatus_solicitud/POSES_TITO-13.png';
 // import { useHistory } from 'react-router-dom';
 
-const NoViableSinRequisitos = () => {
+const NoViableSinRequisitos = ({properties}) => {
     // const history = useHistory();
 
     return(
+        
         <Row>
             <Col lg={8} md={8} sm={12}>
                 <div className="title-dp fz42 mb-18 fw500">
@@ -17,7 +18,7 @@ const NoViableSinRequisitos = () => {
                     Desafortunadamente, no cumples con nuestros requisitos básicos:
                 </div>
 
-                <div className="text-dp font-weight-bold mb-18">{/*Falta por validar de donde se toman los datos*/}
+                <div className="text-dp font-weight-bold mb-18">
                     Ventas mínimas de $20,000 pesos mensuales <br></br>
                     Antigüedad mínima del negocio: 6 meses <br></br>
                     Buen historial de crédito
