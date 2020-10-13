@@ -64,14 +64,14 @@ const NavBar = props => {
 		 		{isAuthenticated() === true && 
 		 		<Navbar.Collapse id="basic-navbar-nav">	
 		 			<Nav className="ml-auto">
-						{  
+						{/* {  
 							finishAppliance && 
 							<Link onClick={close} to={`/credito/solicitud/${appliance._id}`} className={ (props.url === 'credito') ? classDefault+' nav_bar_active': classDefault}>Mi crédito</Link>
 						}
 						{
 							!finishAppliance && 
 							<Link onClick={close} to="/credito/" className={ (props.url === 'credito') ? classDefault+' nav_bar_active': classDefault}>Mi crédito</Link>
-						}
+						} */}
 						{
 							showEstatus &&
 							<Link onClick={close} to="/estatus_solicitud" className={ (props.url === 'estatus_solicitud') ? classDefault+' nav_bar_active': classDefault}>Estatus de Solicitud</Link>

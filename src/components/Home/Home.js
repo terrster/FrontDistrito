@@ -10,7 +10,7 @@ import { Row, Col } from "react-bootstrap";
 import titoAccount from "../../assets/img/POSES TITO-14-01.png";
 import axios from '../../utils/axios';
 import { updateLoader } from '../../redux/actions/loaderActions';
-
+import Steps from "../Appliance/Steps";
 
 const Home = (props) => {
   const history = useHistory();
@@ -137,6 +137,9 @@ const Home = (props) => {
           title={`Hola ` + user.name}
         />
         {/* info */}
+      </div>
+      <div className="mt-50 mb-50">
+        <Steps />
       </div>
       <Row className="d-flex justify-content-center">
         <Col lg={6} md={6} sm={12}>
