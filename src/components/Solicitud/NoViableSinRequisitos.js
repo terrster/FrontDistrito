@@ -3,7 +3,7 @@ import { Row, Col, Button } from "react-bootstrap";
 import tito from '../../assets/img/estatus_solicitud/POSES_TITO-13.png';
 // import { useHistory } from 'react-router-dom';
 
-const NoViableSinRequisitos = ({properties}) => {
+const NoViableSinRequisitos = () => {
     // const history = useHistory();
 
     return(

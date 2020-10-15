@@ -10,7 +10,7 @@ const Error = () => {
                     Upsss :(
                 </div>
                 <div className="text-dp mb-18">
-                    Algo salió mal tratando de obtener el estatus de tú solicitud
+                    Algo salió mal tratando de obtener el estatus de solicitud
                 </div>
             </Col>
             <Col lg={4} md={4} sm={12}>
