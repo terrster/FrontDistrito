@@ -13,12 +13,15 @@ const BuroEmpresa = ({id}) => {
                     Consulta de Buró de la Empresa
                 </div>
                 <div className="text-dp mb-18">
-                    <p>Te hemos enviado el formato de autorización para consultar el Buró de tu empresa 
+                    <p>Te hemos enviado a tu correo el formato de autorización para consultar el Buró de tu empresa 
                     a través de Mifiel. Ahora solo falta firmar el documento con la Fiel de tu empresa o 
                     negocio para continuar con el proceso.</p>
 
-                    <p><Button className={"btn-blue-status"}>Firmar Términos y Condiciones</Button></p>
-                    <p><Button className={"btn-blue-status mb-5"}>Firmar Consulta de Buró de tú Empresa</Button></p>
+                    {/* <p><Button className={"btn-blue-status"}>Firmar Términos y Condiciones</Button></p>
+                    <p><Button className={"btn-blue-status mb-5"}>Firmar Consulta de Buró de tú Empresa</Button></p> */}
+
+                    <Button className={"btn-blue-status mt-3 mb-5"}>Contáctanos</Button>
+
                 </div>
             </Col>
             <Col lg={4} md={4} sm={12}>
