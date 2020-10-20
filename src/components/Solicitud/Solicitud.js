@@ -26,11 +26,11 @@ const Solicitud = () => {
 
     const { loader: { isLoading } } = useSelector((state) => state);
 
-    //const user = JSON.parse(sessionStorage.getItem("user"));
-    const user = {
-        _id: '5ec8365e67de6c3fd0d807c7',
-        hubspotDealId: '2947900743'//2951617913 //2947900743
-    }
+    const user = JSON.parse(sessionStorage.getItem("user"));
+    // const user = {
+    //     _id: '5ec8365e67de6c3fd0d807c7',
+    //     hubspotDealId: '2947900743'//2951617913 //2947900743
+    // }
     const [properties, setProperties] = useState(null);
     const [estatus, setEstatus] = useState(null);
     const [component, setComponent] = useState(null);
@@ -143,8 +143,8 @@ const Solicitud = () => {
     useEffect(() => {
         if(estatus != null){
             dispatch( updateLoader(false) );
-            //showEstatus(estatus);//etapa del deal
-            showEstatus('ebdea2f6-dea7-4646-b8e0-089a4b7f5c02');//forzar visualización de etapa
+            showEstatus(estatus);//etapa del deal
+            //showEstatus('7e4ec2de-1478-45e3-9fab-b702740d4733');//forzar visualización de etapa
         }
     },[estatus]);
 

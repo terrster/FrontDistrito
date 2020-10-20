@@ -20,7 +20,7 @@ const BuroEmpresa = ({id}) => {
                     {/* <p><Button className={"btn-blue-status"}>Firmar Términos y Condiciones</Button></p>
                     <p><Button className={"btn-blue-status mb-5"}>Firmar Consulta de Buró de tú Empresa</Button></p> */}
 
-                    <Button className={"btn-blue-status mt-3 mb-5"}>Contáctanos</Button>
+                    <a href="https://web.whatsapp.com/send?phone=5215621109079" target="_blank"><Button className="btn-blue-status mb-5">Contáctanos</Button></a>
 
                 </div>
             </Col>

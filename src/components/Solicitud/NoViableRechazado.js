@@ -19,7 +19,7 @@ const NoViableRechazado = () => {
                     condiciones actuales.
                 </div>
 
-                <Button className={"btn-blue-status mt-3 mb-5"}>Contáctanos</Button>
+                <a href="mailto:contacto@distritopyme.com"><Button className="btn-blue-status mb-5">Contáctanos</Button></a>
             </Col>
             <Col lg={4} md={4} sm={12}>
                 <div className='text-center'>

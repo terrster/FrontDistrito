@@ -28,7 +28,7 @@ const NoViableSinRequisitos = () => {
                     Si crees que es un error por favor comunicate con nosotros para continuar con tu solicitud.
                 </div>
 
-                <Button className={"btn-blue-status mb-5"}>Contáctanos</Button>
+                <a href="mailto:contacto@distritopyme.com"><Button className="btn-blue-status mb-5">Contáctanos</Button></a>
             </Col>
             <Col lg={4} md={4} sm={12}>
                 <div className='text-center'>
