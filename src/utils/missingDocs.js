@@ -1,7 +1,7 @@
 export const missingDocs = (user, docs) => {
     let missing_docs = [];
 
-    if(docs != null){
+    // if(docs != null){
         if(user.idClient.type == 'PF'){
             if(docs.oficialID.length == 0){
                 missing_docs.push('Identificación oficial');
@@ -25,59 +25,61 @@ export const missingDocs = (user, docs) => {
         }
 
         if(user.idClient.type == 'PFAE'){
-            if(user.idClient.appliance[0].idComercialInfo.ciec != null){
-                if(docs.oficialID.length == 0){
+            if(docs == null){
+                if(user.idClient.appliance[0].idComercialInfo.ciec != null){
                     missing_docs.push('Identificación oficial');
-                }
-                if(docs.proofAddress.length == 0){
                     missing_docs.push('Comprobante de domicilio particular y del negocio');
-                }
-                if(docs.bankStatements.length == 0){
                     missing_docs.push('Estados de cuenta bancarios');
-                }
-                if(docs.others.length == 0){
                     missing_docs.push('Otros');
                 }
-            }
-            else{
-                if(docs.oficialID.length == 0){
+                else{
                     missing_docs.push('Identificación oficial');
-                }
-                if(docs.rfc.length == 0){
                     missing_docs.push('RFC');
-                }
-                if(docs.proofAddress.length == 0){
                     missing_docs.push('Comprobante de domicilio particular y del negocio');
-                }
-                if(docs.bankStatements.length == 0){
                     missing_docs.push('Estados de cuenta bancarios');
-                }
-                if(docs.lastDeclarations.length == 0){
                     missing_docs.push('Última declaración de impuestos presentada');
-                }
-                if(docs.acomplishOpinion.length == 0){
                     missing_docs.push('Opinión de cumplimiento');
-                }
-                if(docs.others.length == 0){
                     missing_docs.push('Otros');
                 }
             }
-        }
-        else{
-            if(user.idClient.appliance[0].idComercialInfo.ciec != null){
-                missing_docs.push('Identificación oficial');
-                missing_docs.push('Comprobante de domicilio particular y del negocio');
-                missing_docs.push('Estados de cuenta bancarios');
-                missing_docs.push('Otros');
-            }
             else{
-                missing_docs.push('Identificación oficial');
-                missing_docs.push('RFC');
-                missing_docs.push('Comprobante de domicilio particular y del negocio');
-                missing_docs.push('Estados de cuenta bancarios');
-                missing_docs.push('Última declaración de impuestos presentada');
-                missing_docs.push('Opinión de cumplimiento');
-                missing_docs.push('Otros');
+                if(user.idClient.appliance[0].idComercialInfo.ciec != null){
+                    if(docs.oficialID.length == 0){
+                        missing_docs.push('Identificación oficial');
+                    }
+                    if(docs.proofAddress.length == 0){
+                        missing_docs.push('Comprobante de domicilio particular y del negocio');
+                    }
+                    if(docs.bankStatements.length == 0){
+                        missing_docs.push('Estados de cuenta bancarios');
+                    }
+                    if(docs.others.length == 0){
+                        missing_docs.push('Otros');
+                    }
+                }
+                else{
+                    if(docs.oficialID.length == 0){
+                        missing_docs.push('Identificación oficial');
+                    }
+                    if(docs.rfc.length == 0){
+                        missing_docs.push('RFC');
+                    }
+                    if(docs.proofAddress.length == 0){
+                        missing_docs.push('Comprobante de domicilio particular y del negocio');
+                    }
+                    if(docs.bankStatements.length == 0){
+                        missing_docs.push('Estados de cuenta bancarios');
+                    }
+                    if(docs.lastDeclarations.length == 0){
+                        missing_docs.push('Última declaración de impuestos presentada');
+                    }
+                    if(docs.acomplishOpinion.length == 0){
+                        missing_docs.push('Opinión de cumplimiento');
+                    }
+                    if(docs.others.length == 0){
+                        missing_docs.push('Otros');
+                    }
+                }
             }
         }
 
@@ -206,7 +208,7 @@ export const missingDocs = (user, docs) => {
                 missing_docs.push('Fotos de tu empresa o negocio u otros');
             }
         }
-    }
+    // }
 
     return missing_docs;
 }
