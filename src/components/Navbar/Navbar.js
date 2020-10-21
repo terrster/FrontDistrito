@@ -8,6 +8,8 @@ import Whatsapp from '../../assets/img/redes_sociales/whatsapp.png';
 const NavBar = props => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [showHome, setShowHome] = useState(false);
+	const [showEstatus, setShowEstatus] = useState(false);
+
 	let user = null;
 	let idClient = null;
 	let finishAppliance = false;
@@ -17,6 +19,9 @@ const NavBar = props => {
 		if (isAuthenticated()){
 			user = JSON.parse(sessionStorage.getItem("user"));
 			idClient = user.idClient;
+			if (idClient.hasOwnProperty("type")){
+				setShowEstatus(true);
+			}
 			if (idClient.appliance.length > 0){
 				appliance = idClient.appliance[idClient.appliance.length - 1];
 				finishAppliance = appliance.status;
@@ -25,6 +30,7 @@ const NavBar = props => {
 					setShowHome(true);
 				}
 			}
+
 		}
 	})
 	
@@ -58,18 +64,21 @@ const NavBar = props => {
 		 		{isAuthenticated() === true && 
 		 		<Navbar.Collapse id="basic-navbar-nav">	
 		 			<Nav className="ml-auto">
-						{  
+						{/* {  
 							finishAppliance && 
 							<Link onClick={close} to={`/credito/solicitud/${appliance._id}`} className={ (props.url === 'credito') ? classDefault+' nav_bar_active': classDefault}>Mi crédito</Link>
 						}
 						{
 							!finishAppliance && 
 							<Link onClick={close} to="/credito/" className={ (props.url === 'credito') ? classDefault+' nav_bar_active': classDefault}>Mi crédito</Link>
+						} */}
+						{
+							showEstatus &&
+							<Link onClick={close} to="/estatus_solicitud" className={ (props.url === 'estatus_solicitud') ? classDefault+' nav_bar_active': classDefault}>Estatus de Solicitud</Link>
 						}
-		 				<Link onClick={close} to="/historial" className={ (props.url === 'historial') ? classDefault+' nav_bar_active': classDefault}>Historial</Link>
-		 				{ showHome &&
+						 { 
+						 	showHome &&
 							<Link onClick={close} to="/home" className={ (props.url === 'home') ? classDefault+' nav_bar_active': classDefault}>Mi cuenta</Link>
-
 						}
 		 				<Nav.Link onClick={close} href="/" className="text-center blackBlue heigth-45 metropolisReg"> <Button className="logout fz-12" onClick={() => {
 							sessionStorage.clear();

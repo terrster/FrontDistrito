@@ -446,6 +446,7 @@ let DocumentsForm = (props) => {
                 handleSubmit(e, false);
               }}
               className="reduce-font mt-50 btn-blue-general"
+              style={{ width: '250px' }}
             >
               Guardar
             </Button>
@@ -457,6 +458,7 @@ let DocumentsForm = (props) => {
                 handleSubmit(e, true);
               }}
               className="reduce-font mt-50 btn-blue-general btn-blue-send-documents ml-2"
+              style={{ width: '250px' }}
             >
               Guardar y Enviar Solicitud
             </Button>

@@ -15,7 +15,7 @@ import axiosBase from "axios";
 import Loader from "../Loader/Loader";
 import { ToastContainer } from "react-toastify";
 
-const GeneralInfo = () => {
+const GeneralInfo = (props) => {
   const dispatch = useDispatch();
   const toast = useSelector((state) => state.app.toast);
   const [initialValues, setInitialValues] = useState({});
@@ -271,6 +271,7 @@ const GeneralInfo = () => {
         setInitialValues={setInitialValues}
         changeAddress={setComercialAddress}
         initialValues={initialValues}
+        positionRef={props.location.position_ref}
       />
       <CustomModal
         modalName="generalInfoError"

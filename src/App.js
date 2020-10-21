@@ -42,9 +42,11 @@ import Appliance from "./components/Appliance/Appliance";
 import Credit from "./components/Credit/Credit";
 import Record from "./components/Record/Record";
 import Documents from "./components/Appliance/Documents";
-import Loader from "./components/Loader/Loader";
+// import Loader from "./components/Loader/Loader";
 import Brokers from "./components/Brokers/Brokers";
 import ThankyouPage from "./components/Brokers/ThankyouPage";
+import Solicitud from "./components/Solicitud/Solicitud";
+import Propuestas from "./components/Propuestas/Propuestas";
 
 // ROUTER & REDUX
 import {
@@ -161,6 +163,11 @@ class App extends Component {
                   path="/documentos/:idAppliance"
                   component={Documents}
                 />
+
+                {/* Estatus de solicitud */}
+
+                <PrivateRoute exact path="/estatus_solicitud" component={Solicitud}/>
+                <PrivateRoute exact path="/propuestas" component={Propuestas}/>
               </Switch>
             </div>
             <div className="container-fluid">

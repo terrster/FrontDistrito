@@ -12,10 +12,11 @@ function DocumentsModal() {
           src={comparativeImage}
           className="modal-comparative--image"
           alt="Comparativo de imagenes en buena calidad"
+          style={{ width: '100%' }}
         />
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" className="btn-blue-documents" onClick={handleClose}>
+        <Button variant="secondary" className="btn-blue-documents" onClick={handleClose} style={{ width: '100%' }}>
           Entiendo
         </Button>
       </Modal.Footer>
