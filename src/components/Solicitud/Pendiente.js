@@ -13,15 +13,17 @@ const Pendiente = () => {
     const [mdocs, setmDocs] = useState([]);
 
     useLayoutEffect(() => {
-        setDocs(user.idClient.appliance[0].idDocuments);
+        if(user.idClient.appliance[0].hasOwnProperty('idDocuments')){
+            setDocs(user.idClient.appliance[0].idDocuments);
+        }
     }, []);
 
     useEffect(() => {
-        if(docs != null){
+        //if(docs != null){
             let missing_docs = missingDocs(user, docs);
 
             setmDocs(missing_docs);
-        }        
+        //}        
     }, [docs]);
     
     return(

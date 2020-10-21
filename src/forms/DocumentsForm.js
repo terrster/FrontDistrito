@@ -103,17 +103,20 @@ let DocumentsForm = (props) => {
     const user = JSON.parse(sessionStorage.getItem("user"));
     const idClient = user.idClient;
     if (idClient.appliance.length > 0) {
-      const appliance = idClient.appliance[idClient.appliance.length - 1];
-      const idDocuments = appliance.idDocuments;
-      const res = await axiosLocal.delete(`api/documents/${idDocuments._id}`, {
-        data: {
-          url: key,
-          name: typeDoc,
-        },
-      });
-      const data = res.data;
-      if (!data.hasOwnProperty("error") && data.msg !== "Sin archivos") {
-        sessionStorage.setItem("user", JSON.stringify(data.user));
+      const appliance = idClient.appliance[0];
+      if(appliance.hasOwnProperty("idDocuments")){
+        const idDocuments = appliance.idDocuments;
+        const res = await axiosLocal.delete(`api/documents/${idDocuments._id}`, {
+          data: {
+            url: key,
+            name: typeDoc,
+          },
+        });
+        const data = res.data;console.log(res)
+  
+        if (!data.hasOwnProperty("error") && data.msg !== "Sin archivos") {
+          sessionStorage.setItem("user", JSON.stringify(data.user));
+        }
       }
     }
     props.testDocs();
