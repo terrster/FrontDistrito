@@ -27,7 +27,7 @@ const Steps = (props) => {
   let statusDocuments = { status: false };
   
   if (idDocuments){
-	  statusDocuments.status = idDocuments.status;
+    statusDocuments.status = appliance.idDocuments.status;
   }
 
   let activeClass = {
