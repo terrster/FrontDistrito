@@ -143,8 +143,8 @@ const Solicitud = () => {
     useEffect(() => {
         if(estatus != null){
             dispatch( updateLoader(false) );
-            //showEstatus(estatus);//etapa del deal
-            showEstatus('d52c3e71-74ee-499b-8af9-abe5245deaaa');//forzar visualización de etapa
+            showEstatus(estatus);//etapa del deal
+            //showEstatus('d52c3e71-74ee-499b-8af9-abe5245deaaa');//forzar visualización de etapa
         }
     },[estatus]);
 
