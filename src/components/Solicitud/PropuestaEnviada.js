@@ -2,7 +2,8 @@ import React from "react";
 import { Row, Col } from "react-bootstrap";
 import tito from '../../assets/img/estatus_solicitud/POSES_TITO-06-02.png';
 
-const PropuestaEnviada = ({user}) => {
+const PropuestaEnviada = () => {
+    const user = JSON.parse(sessionStorage.getItem("user"));
 
     return(
         <Row>

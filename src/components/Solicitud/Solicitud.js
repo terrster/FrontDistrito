@@ -61,7 +61,7 @@ const Solicitud = () => {
             break;
 
             case '768759'://Pre-análisis y Envío de Propuesta
-                setComponent(<PropuestaEnviada user={user}/>);
+                setComponent(<PropuestaEnviada/>);
             break;
 
             case '768760'://Integrando/Contactar
