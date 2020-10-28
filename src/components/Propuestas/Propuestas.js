@@ -6,10 +6,6 @@ import SolicitudBox from '../Generic/SolicitudBox';
 
 const Propuestas = () => {
     const user = JSON.parse(sessionStorage.getItem("user"));
-    // const user = {
-    //     _id: '5ec8365e67de6c3fd0d807c7',
-    //     hubspotDealId: '2951617913'
-    // }
 
     const [properties, setProperties] = useState(null);
     const [proposals, setProposals] = useState(null);

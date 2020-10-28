@@ -65,7 +65,7 @@ const Solicitud = () => {
             break;
 
             case '768760'://Integrando/Contactar
-                setComponent(<PropuestaEnviadaPendiente/>);
+                setComponent(<PropuestaEnviadaPendiente properties={properties}/>);
             break;
 
             case 'cb42f8c5-4c77-498c-a4e9-e02b74b9bc4c'://Información Adicional Requerida

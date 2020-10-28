@@ -37,21 +37,27 @@ const Pendiente = () => {
                     Si no tienes todos a la mano, podemos empezar con los que tengas.
                 </div>
                 
-                <SolicitudBox>
-                    <div className="text-dp p-1 fz12">
-                        DOCUMENTOS PENDIENTES
-                        <br></br>
+                {
+                    mdocs != null || mdocs.length > 0 && 
+                    <SolicitudBox>
+                        <div className="text-dp p-1 fz12">
+                            DOCUMENTOS PENDIENTES
+                            <br></br>
 
-                        {
-                            mdocs != null && 
-                            mdocs.map((doc, i) => {
-                                return <span key={i}>{(i+1) +'.- '+ doc} <br></br> </span>
-                            })
-                        }
-                    </div>
-                </SolicitudBox>
+                            {
+                                mdocs != null && 
+                                mdocs.map((doc, i) => {
+                                    return <span key={i}>{(i+1) +'.- '+ doc} <br></br> </span>
+                                })
+                            }
+                        </div>
+                    </SolicitudBox>
+                }
 
-                <Button className={"btn-blue-status mt-3 mb-5"} onClick={() => history.push(`/documentos/${user._id}`)}>Subir Documentos</Button>
+                {
+                    mdocs != null || mdocs.length > 0 && 
+                    <Button className={"btn-blue-status mt-3 mb-5"} onClick={() => history.push(`/documentos/${user._id}`)}>Subir Documentos</Button>
+                }
             </Col>
             <Col lg={4} md={4} sm={12}>
                 <div className='text-center'>

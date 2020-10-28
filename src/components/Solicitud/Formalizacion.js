@@ -9,23 +9,9 @@ const Formalizacion = ({properties}) => {
     const [autorizationData, setautorizationData] = useState(null);
 
     useLayoutEffect( () => {
-        let aux = "ImpulsoMx Aut";
-
-        let financialName = aux.replace("Aut", "", "gi").trim();
-
-        // const data = {
-        //     financiera: financialName,
-        //     monto: properties.n12_1_monto_autorizado.value,
-        //     plazo: properties.n12_3_plazo_autorizado.value + " meses",
-        //     tasa: properties.n12_2_tasa_autorizada.value,
-        //     logo: imgFinancial(financialName.toUpperCase()),
-        //     class: financialName.toUpperCase() == 'IMPULSOMX AUT' ? 'IMPULSO' : financialName.toUpperCase()
-        // };
-
-        const data = dataFinancialFormalization(financialName, properties);
+        const data = dataFinancialFormalization(properties);
 
         setautorizationData(data);
-
     }, []);
 
     return(

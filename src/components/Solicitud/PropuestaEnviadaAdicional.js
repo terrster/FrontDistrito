@@ -81,8 +81,14 @@ const PropuestaEnviadaAdicional = ({properties}) => {
                     </SolicitudBox>
                 }
 
-                <Button className={"btn-blue-status mt-3 mb-5"} onClick={ () => history.push("/propuestas") }>Ver Propuestas</Button>
-                <Button className={"btn-blue-status mt-3 ml-2 mb-5"} onClick={() => history.push(`/documentos/${user._id}`)}>Completar solicitud</Button>
+                {
+                    properties.hasOwnProperty('financiera_banco_que_analiza') &&
+                    <Button className={"btn-blue-status mt-3 mb-5"} onClick={ () => history.push("/propuestas") }>Ver Propuestas</Button>
+                }
+                {
+                    mdocs != null &&
+                    <Button className={"btn-blue-status mt-3 ml-2 mb-5"} onClick={() => history.push(`/documentos/${user._id}`)}>Subir Documentos</Button>
+                }
             </Col>
             <Col lg={4} md={4} sm={12}>
                 <div className='text-center'>
