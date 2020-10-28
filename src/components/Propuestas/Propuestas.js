@@ -5,11 +5,11 @@ import { filterFinancials, dataFinancial  } from '../../utils/Financials';
 import SolicitudBox from '../Generic/SolicitudBox';
 
 const Propuestas = () => {
-    //const user = JSON.parse(sessionStorage.getItem("user"));
-    const user = {
-        _id: '5ec8365e67de6c3fd0d807c7',
-        hubspotDealId: '2951617913'
-    }
+    const user = JSON.parse(sessionStorage.getItem("user"));
+    // const user = {
+    //     _id: '5ec8365e67de6c3fd0d807c7',
+    //     hubspotDealId: '2951617913'
+    // }
 
     const [properties, setProperties] = useState(null);
     const [proposals, setProposals] = useState(null);
@@ -62,7 +62,7 @@ const Propuestas = () => {
                                             <Row>
                                                 <Col xs={8}>
                                                     Banco/Financiera: {financial.financiera}<br></br>
-                                                    Monto Autorizado: { financial.monto < 10000 ? 'Pendiente' : '$' + new Intl.NumberFormat().format(financial.monto)}<br></br>
+                                                    Monto Autorizado: { (financial.financiera != 'ImpulsoMx' && financial.financiera != 'Impulsate') && financial.monto < 10000 ? 'Pendiente' : '$' + new Intl.NumberFormat().format(financial.monto)}<br></br>
                                                     Plazo: {financial.plazo}<br></br>
                                                     Tasa: {financial.tasa}<br></br>
                                                 </Col>

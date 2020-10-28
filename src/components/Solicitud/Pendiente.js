@@ -51,7 +51,7 @@ const Pendiente = () => {
                     </div>
                 </SolicitudBox>
 
-                <Button className={"btn-blue-status mt-3 mb-5"} onClick={() => history.push(`/documentos/${user._id}`)}>Completar solicitud</Button>
+                <Button className={"btn-blue-status mt-3 mb-5"} onClick={() => history.push(`/documentos/${user._id}`)}>Subir Documentos</Button>
             </Col>
             <Col lg={4} md={4} sm={12}>
                 <div className='text-center'>

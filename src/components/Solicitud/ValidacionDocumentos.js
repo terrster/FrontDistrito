@@ -11,7 +11,7 @@ const ValidacionDocumentos = () => {
                 </div>
 
                 <div className="text-dp mb-18">
-                    <strong>¡Nos encontramos revisando tu solicitud!</strong> Estamos trabajando en
+                    <strong>¡Nos encontramos revisando tus documentos!</strong> Estamos trabajando en
                     validar si contamos con tu expediente completo. Pronto recibirás
                     noticias nuestras.
                 </div>

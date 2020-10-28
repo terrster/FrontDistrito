@@ -64,19 +64,22 @@ const PropuestaEnviadaAdicional = ({properties}) => {
                     </SolicitudBox>
                 }
 
-                <SolicitudBox>
-                    <div className="text-dp p-1 fz12">
-                        DOCUMENTOS ADICIONALES
-                        <br></br>
+                {
+                    aditionalDocs != null && 
+                    <SolicitudBox>
+                        <div className="text-dp p-1 fz12">
+                            DOCUMENTOS ADICIONALES
+                            <br></br>
 
-                        {
-                            aditionalDocs != null && 
-                            aditionalDocs.map((doc, i) => {
-                                return <span key={i}>{(i+1) +'.- '+ doc} <br></br> </span>
-                            })
-                        }
-                    </div>
-                </SolicitudBox>
+                            {
+                                aditionalDocs != null && 
+                                aditionalDocs.map((doc, i) => {
+                                    return <span key={i}>{(i+1) +'.- '+ doc} <br></br> </span>
+                                })
+                            }
+                        </div>
+                    </SolicitudBox>
+                }
 
                 <Button className={"btn-blue-status mt-3 mb-5"} onClick={ () => history.push("/propuestas") }>Ver Propuestas</Button>
                 <Button className={"btn-blue-status mt-3 ml-2 mb-5"} onClick={() => history.push(`/documentos/${user._id}`)}>Completar solicitud</Button>

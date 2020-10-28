@@ -61,7 +61,7 @@ const Solicitud = () => {
             break;
 
             case '768759'://Pre-análisis y Envío de Propuesta
-                setComponent(<PropuestaEnviada properties={properties}/>);
+                setComponent(<PropuestaEnviada user={user}/>);
             break;
 
             case '768760'://Integrando/Contactar
@@ -93,7 +93,7 @@ const Solicitud = () => {
             break;
 
             case 'fdf366d3-865e-4fe4-844e-d16dc64c58d5'://Inactivo (Cliente no continuo)
-                setComponent(<Inactivo/>);
+                setComponent(<Inactivo properties={properties}/>);
             break;
 
             case '7e4ec2de-1478-45e3-9fab-b702740d4733'://Sin requisitos básicos
@@ -143,8 +143,8 @@ const Solicitud = () => {
     useEffect(() => {
         if(estatus != null){
             dispatch( updateLoader(false) );
-            showEstatus(estatus);//etapa del deal
-            //showEstatus('d52c3e71-74ee-499b-8af9-abe5245deaaa');//forzar visualización de etapa
+            //showEstatus(estatus);//etapa del deal
+            showEstatus('768760');//forzar visualización de etapa
         }
     },[estatus]);
 

@@ -5,13 +5,14 @@ import SolicitudBox from '../Generic/SolicitudBox';
 import { useHistory } from 'react-router-dom';
 import { missingDocs } from '../../utils/missingDocs';
 
-const Inactivo = () => {
+const Inactivo = ({properties}) => {
 
     const history = useHistory();
 
     const user = JSON.parse(sessionStorage.getItem("user"));
     const [docs, setDocs] = useState(null);
     const [mdocs, setmDocs] = useState([]);
+    const [aditionalDocs, setaditionalDocs] = useState(null);
 
     useLayoutEffect(() => {
         setDocs(user.idClient.appliance[0].idDocuments);
@@ -25,6 +26,11 @@ const Inactivo = () => {
         }  
     }, [docs]);
 
+    useLayoutEffect( () => {
+        const infoAdicional = properties.n8_4_info_adicional_requerida.value.replace(/\n|\r/g, ";");
+        setaditionalDocs(infoAdicional.split(';'));
+    }, []);
+
     return(
         <Row>
             <Col lg={8} md={8} sm={12}>
@@ -37,19 +43,39 @@ const Inactivo = () => {
                     dada de baja. En caso de seguir interesado por favor comunícate con nosotros.
                 </div>
 
-                <SolicitudBox>
-                    <div className="text-dp p-1 fz12">
-                        DOCUMENTOS PENDIENTES
-                        <br></br>
+                {
+                    mdocs != null &&
+                    <SolicitudBox classParams="mb-2">
+                        <div className="text-dp p-1 fz12">
+                            DOCUMENTOS PENDIENTES
+                            <br></br>
 
-                        {
-                            mdocs != null && 
-                            mdocs.map((doc, i) => {
-                                return <span key={i}>{(i+1) +'.- '+ doc} <br></br> </span>
-                            })
-                        }
-                    </div>
-                </SolicitudBox>
+                            {
+                                mdocs != null && 
+                                mdocs.map((doc, i) => {
+                                    return <span key={i}>{(i+1) +'.- '+ doc} <br></br> </span>
+                                })
+                            }
+                        </div>
+                    </SolicitudBox>
+                }
+
+                {
+                    aditionalDocs != null && 
+                    <SolicitudBox>
+                        <div className="text-dp p-1 fz12">
+                            DOCUMENTOS ADICIONALES
+                            <br></br>
+
+                            {
+                                aditionalDocs != null && 
+                                aditionalDocs.map((doc, i) => {
+                                    return <span key={i}>{(i+1) +'.- '+ doc} <br></br> </span>
+                                })
+                            }
+                        </div>
+                    </SolicitudBox>
+                }
 
                 <Button className={"btn-blue-status mt-3 mb-5"} onClick={() => history.push(`/elige-monto/${user._id}`)}>Reactivar solicitud</Button>
             </Col>

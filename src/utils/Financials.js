@@ -18,15 +18,12 @@ import Pagaloop from '../assets/img/alianzas/pagaloop.png';
 import iBan from '../assets/img/alianzas/iBan.png';
 
 export const filterFinancials = (financials) => {
-    let financialsfilt = [];
-
-    financials.split(';').forEach(financial => {
-        if(financial !== 'CREZE' && financial !== 'Bancoppel' && financial !== 'DOCUFORMAS' && financial !== 'AV CAPITAL'){
-            financialsfilt.push(financial);
-        }
+    
+    const filteredFinancials = financials.split(';').filter((financial) => {
+        return financial !== 'CREZE' && financial !== 'Bancoppel' && financial !== 'DOCUFORMAS' && financial !== 'AV CAPITAL'; 
     });
 
-    return financialsfilt;
+    return filteredFinancials;
 }
 
 export const imgFinancial = (financial) => {
@@ -36,6 +33,7 @@ export const imgFinancial = (financial) => {
 
         case 'IMPULSO':
         case 'IMPULSOMX AUT':
+        case 'IMPULSOMX':
         return IMPULSO;
 
         case 'CREZE':
@@ -85,7 +83,7 @@ export const imgFinancial = (financial) => {
     }
 }
 
-export const dataFinancial = (financial, properties) => {
+export const dataFinancial = (financial, properties) => {//Propuestas
     switch(financial.toUpperCase()){
         case 'ASPIRIA':
             return {
@@ -99,6 +97,7 @@ export const dataFinancial = (financial, properties) => {
 
         case 'IMPULSO':
         case 'IMPULSOMX AUT':
+        case 'IMPULSOMX':
             let tasa = parseFloat(properties.tasa_preaut.value);
             function toFixed(num, fixed) {
                 var re = new RegExp('^-?\\d+(?:\.\\d{0,' + (fixed || -1) + '})?');
@@ -108,7 +107,7 @@ export const dataFinancial = (financial, properties) => {
                 financiera: 'ImpulsoMx',
                 monto: properties.monto_preaut.value,
                 plazo: properties.plazo_preaut.value + ' meses',
-                tasa: toFixed(tasa, 1) + '% anual',
+                tasa: toFixed(tasa, 1) + '% mensual',
                 logo: imgFinancial(financial),
                 class: 'IMPULSO'
             };
@@ -259,6 +258,188 @@ export const dataFinancial = (financial, properties) => {
                 monto: properties.monto_preaut.value,
                 plazo: '',
                 tasa: '',
+                logo: imgFinancial(financial),
+                class: 'IBAN'
+            };
+    }
+}
+
+export const dataFinancialFormalization = (financial, properties) => {
+
+    switch(financial.toUpperCase()){
+        case 'ASPIRIA':
+            return {
+                financiera: 'Aspiria',
+                monto: properties.n12_1_monto_autorizado.value,
+                plazo: properties.n12_3_plazo_autorizado.value + ' meses',
+                tasa: properties.n12_2_tasa_autorizada.value + '% semanal',
+                logo: imgFinancial(financial),
+                class: 'ASPIRIA'
+            };
+
+        case 'IMPULSO':
+        case 'IMPULSOMX AUT':
+        case 'IMPULSOMX':
+            let tasa = parseFloat(properties.n12_2_tasa_autorizada.value);
+            function toFixed(num, fixed) {
+                var re = new RegExp('^-?\\d+(?:\.\\d{0,' + (fixed || -1) + '})?');
+                return num.toString().match(re)[0];
+            }
+            return {
+                financiera: 'ImpulsoMx',
+                monto: properties.n12_1_monto_autorizado.value,
+                plazo: properties.n12_3_plazo_autorizado.value + ' meses',
+                tasa: toFixed(tasa, 1) + '% mensual',
+                logo: imgFinancial(financial),
+                class: 'IMPULSO'
+            };
+
+        // case 'CREZE'://Ya no
+        //     return {
+        //         financiera: 'Creze',
+        //         monto: properties.n12_1_monto_autorizado.value,
+        //         plazo: properties.n12_3_plazo_autorizado.value + ' meses',
+        //         tasa: properties.n12_2_tasa_autorizada.value,
+        //         logo: imgFinancial(financial),
+        //         class: 'CREZE'
+        //     };
+
+        case 'CUMPLO':
+            return {
+                financiera: 'Cumplo',
+                monto: properties.n12_1_monto_autorizado.value,
+                plazo: properties.n12_3_plazo_autorizado.value + ' meses',
+                tasa: properties.n12_2_tasa_autorizada.value + '% mensual',
+                logo: imgFinancial(financial),
+                class: 'CUMPLO'
+            };
+
+        case 'BIEN PARA BIEN':
+            return {
+                financiera: 'Bien para Bien',
+                monto: properties.n12_1_monto_autorizado.value,
+                plazo: properties.n12_3_plazo_autorizado.value + ' meses',
+                tasa: properties.n12_2_tasa_autorizada.value + '% mensual',
+                logo: imgFinancial(financial),
+                class: 'BIENPARABIEN'
+            };
+
+        // case 'BANCOPPEL'://Sin firma de contrato
+        //     return {
+        //         financiera: 'Bancoppel',
+        //         monto: properties.n12_1_monto_autorizado.value,
+        //         plazo: properties.n12_3_plazo_autorizado.value + ' meses',
+        //         tasa: properties.n12_2_tasa_autorizada.value,
+        //         logo: imgFinancial(financial),
+        //         class: 'BANCOPPEL'
+        //     };
+
+        case 'CREDIJUSTO':
+            return {
+                financiera: 'Credijusto',
+                monto: properties.n12_1_monto_autorizado.value,
+                plazo: properties.n12_3_plazo_autorizado.value + ' meses',
+                tasa: properties.n12_2_tasa_autorizada.value + '% mensual',
+                logo: imgFinancial(financial),
+                class: 'CREDIJUSTO'
+            };
+
+        // case 'DOCUFORMAS'://No aplica
+        //     return {
+        //         financiera: 'Docuformas',
+        //         monto: properties.n12_1_monto_autorizado.value,
+        //         plazo: properties.n12_3_plazo_autorizado.value + ' meses',
+        //         tasa: properties.n12_2_tasa_autorizada.value,
+        //         logo: imgFinancial(financial),
+        //         class: 'DOCUFORMAS'
+        //     };
+
+        case 'PRETMEX':
+            return {
+                financiera: 'Pretmex',
+                monto: properties.n12_1_monto_autorizado.value,
+                plazo: properties.n12_3_plazo_autorizado.value + ' meses',
+                tasa: properties.n12_2_tasa_autorizada.value + '% mensual',
+                logo: imgFinancial(financial),
+                class: 'PRETMEX'
+            };
+
+        case 'UNICLICK':
+            return {
+                financiera: 'Uniclick',
+                monto: properties.n12_1_monto_autorizado.value,
+                plazo: properties.n12_3_plazo_autorizado.value + ' meses',
+                tasa: properties.n12_2_tasa_autorizada.value + '% mensual',
+                logo: imgFinancial(financial),
+                class: 'UNICLICK'
+            };
+
+        case 'MUNDI':
+            return {
+                financiera: 'Mundi',
+                monto: properties.n12_1_monto_autorizado.value,
+                plazo: properties.n12_3_plazo_autorizado.value + ' meses',
+                tasa: properties.n12_2_tasa_autorizada.value + '% mensual',
+                logo: imgFinancial(financial),
+                class: 'MUNDI'
+            };
+
+        case 'FACTOR EXPRES':
+            return {
+                financiera: 'Factorexpres',
+                monto: properties.n12_1_monto_autorizado.value,
+                plazo: properties.n12_3_plazo_autorizado.value + ' meses',
+                tasa: properties.n12_2_tasa_autorizada.value + '% mensual',
+                logo: imgFinancial(financial),
+                class: 'FACTOREXPRES'
+            };
+
+        case 'MICRO':
+            return {
+                financiera: 'Impulsate',
+                monto: properties.n12_1_monto_autorizado.value,
+                plazo: properties.n12_3_plazo_autorizado.value + ' meses',
+                tasa: properties.n12_2_tasa_autorizada.value + '% mensual',
+                logo: imgFinancial(financial),
+                class: 'MICRO'
+            };
+
+        // case 'AV CAPITAL'://Omitir
+        //     return {
+        //         financiera: 'Av Capital',
+        //         monto: properties.n12_1_monto_autorizado.value,
+        //         plazo: properties.n12_3_plazo_autorizado.value + ' meses',
+        //         tasa: properties.n12_2_tasa_autorizada.value,
+        //         logo: imgFinancial(financial),
+        //         class: 'AVCAPITAL'
+        //     };
+
+        case 'HAYCASH':
+            return {
+                financiera: 'Hay Cash',
+                monto: properties.n12_1_monto_autorizado.value,
+                plazo: properties.n12_3_plazo_autorizado.value + ' meses',
+                tasa: properties.n12_2_tasa_autorizada.value + '% mensual',
+                logo: imgFinancial(financial),
+                class: 'HAYCASH'
+            };
+
+        case 'PAGALOOP':
+            return {
+                financiera: 'Pagaloop',
+                monto: properties.n12_1_monto_autorizado.value,
+                plazo: properties.n12_3_plazo_autorizado.value + ' meses',
+                tasa: properties.n12_2_tasa_autorizada.value + '% mensual',
+                logo: imgFinancial(financial),
+                class: 'PAGALOOP'
+            };
+
+        case 'IBAN':
+            return {
+                financiera: 'iBan',
+                monto: properties.n12_1_monto_autorizado.value,
+                plazo: properties.n12_3_plazo_autorizado.value + ' meses',
+                tasa: properties.n12_2_tasa_autorizada.value + '% mensual',
                 logo: imgFinancial(financial),
                 class: 'IBAN'
             };
