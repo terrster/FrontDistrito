@@ -11,7 +11,7 @@ const PropuestaEnviadaAdicional = ({properties}) => {
     const user = JSON.parse(sessionStorage.getItem("user"));
     const [docs, setDocs] = useState(null);
     const [mdocs, setmDocs] = useState([]);
-    const [aditionalDocs, setaditionalDocs] = useState(null);
+    const [aditionalDocs, setaditionalDocs] = useState([]);
 
     useLayoutEffect(() => {
         setDocs(user.idClient.appliance[0].idDocuments);
@@ -48,7 +48,7 @@ const PropuestaEnviadaAdicional = ({properties}) => {
                 </div>
 
                 {
-                    mdocs != null &&
+                    mdocs != null || mdocs.length > 0 &&
                     <SolicitudBox classParams="mb-2">
                         <div className="text-dp p-1 fz12">
                             DOCUMENTOS PENDIENTES
@@ -65,7 +65,7 @@ const PropuestaEnviadaAdicional = ({properties}) => {
                 }
 
                 {
-                    aditionalDocs != null && 
+                    aditionalDocs != null || aditionalDocs.length > 0 && 
                     <SolicitudBox>
                         <div className="text-dp p-1 fz12">
                             DOCUMENTOS ADICIONALES
@@ -85,8 +85,9 @@ const PropuestaEnviadaAdicional = ({properties}) => {
                     properties.hasOwnProperty('financiera_banco_que_analiza') &&
                     <Button className={"btn-blue-status mt-3 mb-5"} onClick={ () => history.push("/propuestas") }>Ver Propuestas</Button>
                 }
+                
                 {
-                    mdocs != null &&
+                    mdocs != null || mdocs.length > 0 &&
                     <Button className={"btn-blue-status mt-3 ml-2 mb-5"} onClick={() => history.push(`/documentos/${user._id}`)}>Subir Documentos</Button>
                 }
             </Col>

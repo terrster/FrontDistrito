@@ -101,7 +101,7 @@ const Solicitud = () => {
             break;
 
             case '4289875'://StandBy - Mostrar la pantalla de inactivo
-                setComponent(<Inactivo/>);
+                setComponent(<Inactivo properties={properties}/>);
             break;
 
             default://Error

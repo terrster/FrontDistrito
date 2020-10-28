@@ -64,6 +64,7 @@ const PropuestaEnviada = ({properties}) => {
                     properties.hasOwnProperty('financiera_banco_que_analiza') &&
                     <Button className={"btn-blue-status mt-3 mb-5"} onClick={ () => history.push("/propuestas") }>Ver Propuestas</Button>
                 }
+                
                 {
                     mdocs != null || mdocs.length > 0 && 
                     <Button className={"btn-blue-status mt-3 ml-3 mb-5"} onClick={() => history.push(`/documentos/${user._id}`)}>Subir Documentos</Button>

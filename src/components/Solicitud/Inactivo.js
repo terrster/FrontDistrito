@@ -12,18 +12,18 @@ const Inactivo = ({properties}) => {
     const user = JSON.parse(sessionStorage.getItem("user"));
     const [docs, setDocs] = useState(null);
     const [mdocs, setmDocs] = useState([]);
-    const [aditionalDocs, setaditionalDocs] = useState(null);
+    const [aditionalDocs, setaditionalDocs] = useState([]);
 
     useLayoutEffect(() => {
         setDocs(user.idClient.appliance[0].idDocuments);
     }, []);
 
     useEffect(() => {
-        if(docs != null){
+        // if(docs != null){
             let missing_docs = missingDocs(user, docs);
 
             setmDocs(missing_docs);
-        }  
+        // }  
     }, [docs]);
 
     useLayoutEffect( () => {
@@ -44,7 +44,7 @@ const Inactivo = ({properties}) => {
                 </div>
 
                 {
-                    mdocs != null &&
+                    mdocs != null || mdocs.length > 0 &&
                     <SolicitudBox classParams="mb-2">
                         <div className="text-dp p-1 fz12">
                             DOCUMENTOS PENDIENTES
@@ -61,7 +61,7 @@ const Inactivo = ({properties}) => {
                 }
 
                 {
-                    aditionalDocs != null && 
+                    aditionalDocs != null || aditionalDocs.length > 0 && 
                     <SolicitudBox>
                         <div className="text-dp p-1 fz12">
                             DOCUMENTOS ADICIONALES
@@ -77,7 +77,10 @@ const Inactivo = ({properties}) => {
                     </SolicitudBox>
                 }
 
-                <Button className={"btn-blue-status mt-3 mb-5"} onClick={() => history.push(`/elige-monto/${user._id}`)}>Reactivar solicitud</Button>
+                {
+                    properties.hasOwnProperty('financiera_banco_que_analiza') &&
+                    <Button className={"btn-blue-status mt-3 mb-5"} onClick={() => history.push(`/elige-monto/${user._id}`)}>Reactivar solicitud</Button>
+                }
             </Col>
             <Col lg={4} md={4} sm={12}>
                 <div className='text-center'>
