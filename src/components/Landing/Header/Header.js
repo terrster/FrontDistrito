@@ -48,6 +48,8 @@ const Header = props => {
 			<Carousel
         		activeIndex={indexImage}
 				onSelect={handleSelect}
+				controls={false} 
+				indicators={false}
 			>
 				<Carousel.Item>
 					<img

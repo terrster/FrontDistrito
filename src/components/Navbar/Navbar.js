@@ -42,6 +42,7 @@ const NavBar = props => {
 		 		{isAuthenticated() === false && 
 		 			<Navbar.Collapse>
 		 				<Nav className="ml-auto ">
+						 	<Nav.Link onClick={close} as={NavLink} to="/nuestros-aliados" className="hvr-underline-from-left  text-center fz16 blackNav nav-btn heigth-45 solicita-butto metropolisReg">Aliados</Nav.Link>
 		 					<Nav.Link  onClick={close} href="/#simulador" id="ymb-dp-nav-simulator" className="hvr-underline-from-left  text-center fz16 blackNav nav-btn heigth-45 solicita-butto metropolisReg">Simulador</Nav.Link>
 							<Nav.Link  onClick={close} href="/#howWorks" id="ymb-dp-nav-howWorks" className="hvr-underline-from-left  text-center fz16 blackNav nav-btn heigth-45 solicita-butto metropolisReg">¿Cómo funciona?</Nav.Link>
 							<Nav.Link  onClick={close} href="/#about" id="ymb-dp-nav-about" className="hvr-underline-from-left  text-center fz16 blackNav nav-btn heigth-45 solicita-butto metropolisReg">Nosotros</Nav.Link>

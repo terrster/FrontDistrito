@@ -30,6 +30,7 @@ import Terms from "./components/Landing/Terms/Terms";
 import Privacy from "./components/Landing/Privacy/Privacy";
 import RecoverPassword from "./components/RecoverPassword/RecoverPassword";
 import ResetPassword from "./components/ResetPassword/ResetPassword";
+import OurAllies from "./components/OurAllies/OurAllies";
 import Signup from "./components/Signup/Signup";
 import SignupBrokers from "./components/Brokers/SignupBrokers";
 import RegistroExitoso from "./components/Registro/RegistroExitoso";
@@ -126,6 +127,7 @@ class App extends Component {
                 <Route path="/terminos-y-condiciones" exact component={Terms} />
                 <Route path="/privacidad" exact component={Privacy} />
                 <Route path="/reset-password" exact component={ResetPassword} />
+                <Route path="/nuestros-aliados" exact component={OurAllies}/>
                 <Route
                   path="/recover-password/:hash"
                   exact
