@@ -48,7 +48,7 @@ const PropuestaEnviadaAdicional = ({properties}) => {
                 </div>
 
                 {
-                    mdocs != null || mdocs.length > 0 &&
+                    mdocs != null &&
                     <SolicitudBox classParams="mb-2">
                         <div className="text-dp p-1 fz12">
                             DOCUMENTOS PENDIENTES
@@ -65,7 +65,7 @@ const PropuestaEnviadaAdicional = ({properties}) => {
                 }
 
                 {
-                    aditionalDocs != null || aditionalDocs.length > 0 && 
+                    aditionalDocs != null && 
                     <SolicitudBox>
                         <div className="text-dp p-1 fz12">
                             DOCUMENTOS ADICIONALES
@@ -87,7 +87,7 @@ const PropuestaEnviadaAdicional = ({properties}) => {
                 }
                 
                 {
-                    mdocs != null || mdocs.length > 0 &&
+                    mdocs != null &&
                     <Button className={"btn-blue-status mt-3 ml-2 mb-5"} onClick={() => history.push(`/documentos/${user._id}`)}>Subir Documentos</Button>
                 }
             </Col>

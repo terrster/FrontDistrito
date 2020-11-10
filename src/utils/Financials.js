@@ -204,7 +204,7 @@ export const dataFinancial = (financial, properties) => {//Propuestas
 
         case 'FACTOR EXPRES':
             return {
-                financiera: 'Factorexpres',
+                financiera: 'Factor Expres',
                 monto: properties.monto_preaut.value,
                 plazo: '12 meses',
                 tasa: '2% mensual',
@@ -272,8 +272,8 @@ export const dataFinancialFormalization = (properties) => {
             return {
                 financiera: 'Aspiria',
                 monto: properties.n12_1_monto_autorizado.value,
-                plazo: properties.n12_3_plazo_autorizado.value,
-                tasa: properties.n12_2_tasa_autorizada.value,
+                plazo: properties.n12_3_plazo_autorizado.value + " meses",
+                tasa: properties.n12_2_tasa_autorizada.value + "% mensual",
                 logo: imgFinancial(financial),
                 class: 'ASPIRIA'
             };
@@ -289,8 +289,8 @@ export const dataFinancialFormalization = (properties) => {
             return {
                 financiera: 'ImpulsoMx',
                 monto: properties.n12_1_monto_autorizado.value,
-                plazo: properties.n12_3_plazo_autorizado.value,
-                tasa: toFixed(tasa, 1),
+                plazo: properties.n12_3_plazo_autorizado.value + " meses",
+                tasa: toFixed(tasa, 1) + "% mensual",
                 logo: imgFinancial(financial),
                 class: 'IMPULSO'
             };
@@ -309,8 +309,8 @@ export const dataFinancialFormalization = (properties) => {
             return {
                 financiera: 'Cumplo',
                 monto: properties.n12_1_monto_autorizado.value,
-                plazo: properties.n12_3_plazo_autorizado.value,
-                tasa: properties.n12_2_tasa_autorizada.value,
+                plazo: properties.n12_3_plazo_autorizado.value + " meses",
+                tasa: properties.n12_2_tasa_autorizada.value + "% mensual",
                 logo: imgFinancial(financial),
                 class: 'CUMPLO'
             };
@@ -319,8 +319,8 @@ export const dataFinancialFormalization = (properties) => {
             return {
                 financiera: 'Bien para Bien',
                 monto: properties.n12_1_monto_autorizado.value,
-                plazo: properties.n12_3_plazo_autorizado.value,
-                tasa: properties.n12_2_tasa_autorizada.value,
+                plazo: properties.n12_3_plazo_autorizado.value + " meses",
+                tasa: properties.n12_2_tasa_autorizada.value + "% mensual",
                 logo: imgFinancial(financial),
                 class: 'BIENPARABIEN'
             };
@@ -339,8 +339,8 @@ export const dataFinancialFormalization = (properties) => {
             return {
                 financiera: 'Credijusto',
                 monto: properties.n12_1_monto_autorizado.value,
-                plazo: properties.n12_3_plazo_autorizado.value,
-                tasa: properties.n12_2_tasa_autorizada.value,
+                plazo: properties.n12_3_plazo_autorizado.value + " meses",
+                tasa: properties.n12_2_tasa_autorizada.value + "% mensual",
                 logo: imgFinancial(financial),
                 class: 'CREDIJUSTO'
             };
@@ -359,8 +359,8 @@ export const dataFinancialFormalization = (properties) => {
             return {
                 financiera: 'Pretmex',
                 monto: properties.n12_1_monto_autorizado.value,
-                plazo: properties.n12_3_plazo_autorizado.value,
-                tasa: properties.n12_2_tasa_autorizada.value,
+                plazo: properties.n12_3_plazo_autorizado.value + " meses",
+                tasa: properties.n12_2_tasa_autorizada.value + "% mensual",
                 logo: imgFinancial(financial),
                 class: 'PRETMEX'
             };
@@ -369,8 +369,8 @@ export const dataFinancialFormalization = (properties) => {
             return {
                 financiera: 'Uniclick',
                 monto: properties.n12_1_monto_autorizado.value,
-                plazo: properties.n12_3_plazo_autorizado.value,
-                tasa: properties.n12_2_tasa_autorizada.value,
+                plazo: properties.n12_3_plazo_autorizado.value + " meses",
+                tasa: properties.n12_2_tasa_autorizada.value+ "% mensual",
                 logo: imgFinancial(financial),
                 class: 'UNICLICK'
             };
@@ -379,8 +379,8 @@ export const dataFinancialFormalization = (properties) => {
             return {
                 financiera: 'Mundi',
                 monto: properties.n12_1_monto_autorizado.value,
-                plazo: properties.n12_3_plazo_autorizado.value,
-                tasa: properties.n12_2_tasa_autorizada.value,
+                plazo: properties.n12_3_plazo_autorizado.value + " meses",
+                tasa: properties.n12_2_tasa_autorizada.value + "% mensual",
                 logo: imgFinancial(financial),
                 class: 'MUNDI'
             };
@@ -389,8 +389,8 @@ export const dataFinancialFormalization = (properties) => {
             return {
                 financiera: 'Factorexpres',
                 monto: properties.n12_1_monto_autorizado.value,
-                plazo: properties.n12_3_plazo_autorizado.value,
-                tasa: properties.n12_2_tasa_autorizada.value,
+                plazo: properties.n12_3_plazo_autorizado.value + " meses",
+                tasa: properties.n12_2_tasa_autorizada.value + "% mensual",
                 logo: imgFinancial(financial),
                 class: 'FACTOREXPRES'
             };
@@ -399,8 +399,8 @@ export const dataFinancialFormalization = (properties) => {
             return {
                 financiera: 'Impulsate',
                 monto: properties.n12_1_monto_autorizado.value,
-                plazo: properties.n12_3_plazo_autorizado.value,
-                tasa: properties.n12_2_tasa_autorizada.value,
+                plazo: properties.n12_3_plazo_autorizado.value + " meses",
+                tasa: properties.n12_2_tasa_autorizada.value + "% mensual",
                 logo: imgFinancial(financial),
                 class: 'MICRO'
             };
@@ -419,8 +419,8 @@ export const dataFinancialFormalization = (properties) => {
             return {
                 financiera: 'Hay Cash',
                 monto: properties.n12_1_monto_autorizado.value,
-                plazo: properties.n12_3_plazo_autorizado.value,
-                tasa: properties.n12_2_tasa_autorizada.value,
+                plazo: properties.n12_3_plazo_autorizado.value + " meses",
+                tasa: properties.n12_2_tasa_autorizada.value + "% mensual",
                 logo: imgFinancial(financial),
                 class: 'HAYCASH'
             };
@@ -429,8 +429,8 @@ export const dataFinancialFormalization = (properties) => {
             return {
                 financiera: 'Pagaloop',
                 monto: properties.n12_1_monto_autorizado.value,
-                plazo: properties.n12_3_plazo_autorizado.value,
-                tasa: properties.n12_2_tasa_autorizada.value,
+                plazo: properties.n12_3_plazo_autorizado.value + " meses",
+                tasa: properties.n12_2_tasa_autorizada.value + "% mensual",
                 logo: imgFinancial(financial),
                 class: 'PAGALOOP'
             };
@@ -439,8 +439,8 @@ export const dataFinancialFormalization = (properties) => {
             return {
                 financiera: 'iBan',
                 monto: properties.n12_1_monto_autorizado.value,
-                plazo: properties.n12_3_plazo_autorizado.value,
-                tasa: properties.n12_2_tasa_autorizada.value,
+                plazo: properties.n12_3_plazo_autorizado.value + " meses",
+                tasa: properties.n12_2_tasa_autorizada.value + "% mensual",
                 logo: imgFinancial(financial),
                 class: 'IBAN'
             };

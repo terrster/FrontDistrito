@@ -22,7 +22,7 @@ const Depositado = () => {
                     </p>
                 </div>
 
-                <Button className={"btn-blue-status mt-3 mb-5"}>Estatus de Crédito</Button>
+                {/* <Button className={"btn-blue-status mt-3 mb-5"}>Estatus de Crédito</Button> */}
             </Col>
             <Col lg={4} md={4} sm={12}>
                 <div className='text-center'>

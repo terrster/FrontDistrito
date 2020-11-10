@@ -32,7 +32,7 @@ const Propuestas = () => {
             if(properties.hasOwnProperty('financiera_banco_que_analiza')){
                 //setProposals(properties.financiera_banco_que_analiza.value.split(';'));
                 let _proposals = properties.financiera_banco_que_analiza.value;
-                //let _proposals = "ASPIRIA;IMPULSO;ImpulsoMx Aut;CREZE;CUMPLO;BIEN PARA BIEN;Bancoppel;CREDIJUSTO;DOCUFORMAS;PRETMEX;UNICLICK;MUNDI;Factor Expres;MICRO;AV CAPITAL;HayCash";
+                //let _proposals = "ASPIRIA;ImpulsoMx Aut;CREZE;CUMPLO;BIEN PARA BIEN;Bancoppel;CREDIJUSTO;DOCUFORMAS;PRETMEX;UNICLICK;MUNDI;Factor Expres;MICRO;AV CAPITAL;HayCash";
                 let proposalsfilt = filterFinancials(_proposals);
                 setProposals(proposalsfilt);
             }
@@ -58,7 +58,7 @@ const Propuestas = () => {
                                             <Row>
                                                 <Col xs={8}>
                                                     Banco/Financiera: {financial.financiera}<br></br>
-                                                    Monto Autorizado: { (financial.financiera != 'ImpulsoMx' && financial.financiera != 'Impulsate') && financial.monto < 10000 ? 'Pendiente' : '$' + new Intl.NumberFormat().format(financial.monto)}<br></br>
+                                                    Monto Autorizado: { financial.monto < 10000 ? 'Pendiente' : '$' + new Intl.NumberFormat().format(financial.monto)}<br></br>
                                                     Plazo: {financial.plazo}<br></br>
                                                     Tasa: {financial.tasa}<br></br>
                                                 </Col>

@@ -44,7 +44,7 @@ const PropuestaEnviada = ({properties}) => {
                 </div>
 
                 {
-                    mdocs != null || mdocs.length > 0 && 
+                    mdocs != null && 
                     <SolicitudBox>
                         <div className="text-dp p-1 fz12">
                             DOCUMENTOS PENDIENTES
@@ -66,7 +66,7 @@ const PropuestaEnviada = ({properties}) => {
                 }
                 
                 {
-                    mdocs != null || mdocs.length > 0 && 
+                    mdocs != null && 
                     <Button className={"btn-blue-status mt-3 ml-3 mb-5"} onClick={() => history.push(`/documentos/${user._id}`)}>Subir Documentos</Button>
                 }
             </Col>
