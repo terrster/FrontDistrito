@@ -35,6 +35,8 @@ const GeneralInfo = (props) => {
     const getData = async () => {
       try {
       const user = JSON.parse(sessionStorage.getItem("user"));
+      console.log(user)
+
       const idClient = user.idClient;
       if (idClient.appliance.length > 0) {
         const appliance = idClient.appliance[0]; 
@@ -101,9 +103,12 @@ const GeneralInfo = (props) => {
             municipality,
           });
         }
+        else{
+          setInitialValues({...initialValues, name: user.name, lastname: user.lastname, phone: user.phone });
+        }
       }
       else{
-        setInitialValues({...initialValues, name: user.name, lastname: user.lastname, secondLastname, phone: user.phone });
+        setInitialValues({...initialValues, name: user.name, lastname: user.lastname, phone: user.phone });
       }
     } catch (e) {
       console.log(e);

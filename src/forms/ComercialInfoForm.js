@@ -700,11 +700,7 @@ let ComercialInfoForm = (props) => {
           </Button>
           <PopUpBanks />
           </>
-<<<<<<< HEAD
-        {/* )} */}
-=======
         )} */}
->>>>>>> 13928a679e41f91968688bdd520066cab1d09caf
 
         <SubtitleForm subtitle="¿Cuentas con alguno?" className="mt-11 mb-3" />
         <Field
