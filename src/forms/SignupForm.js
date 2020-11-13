@@ -193,14 +193,16 @@ let SignupForm = (props) => {
 					!disabled && !button ? (
 						<Button
 							type="submit"
-							className={"mt-50 btn-blue-general"}
+              className={"mt-50 btn-blue-general"}
+              style={{ width: '250px' }}
 						>
 							Continuar
 						</Button>
 					) : (
 						<Button 
 							type="button"
-							className="mt-50 btn-blue-general btn-gray-general"
+              className="mt-50 btn-blue-general btn-gray-general"
+              style={{ width: '250px' }}
 							onClick={() => goToError()}
 						>
 							Continuar
