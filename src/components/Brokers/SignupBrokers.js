@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Title from "../Generic/Title";
 import SignupFormBrokers from "../../forms/SignupFormBrokers";
@@ -17,9 +17,19 @@ import StepSignup from "../Appliance/StepSignup";
 import publicIp from "public-ip";
 
 let SignupBrokers = props => {
-	const toast = useSelector(state => state.app.toast);
+  const toast = useSelector(state => state.app.toast);
+  const [ownerId, setOwnerId] = useState(props.match.params.ownerId ? props.match.params.ownerId : '');
   const [errorEmail, setErrorEmail] = useState("");
   const [errorBroker, setErrorBroker] = useState("");
+  const [initialValues, setInitialValues] = useState({});
+
+  useEffect(() => {
+    if(ownerId != ''){
+      setInitialValues({
+        brokercode: ownerId
+      });
+    }
+  },[ownerId]);
 
   const dispatch = useDispatch();
 
@@ -55,13 +65,13 @@ let SignupBrokers = props => {
         <Loader />
         {!props.statusSingup ? (
           <>
-            <Title
+            {/* <Title
               className="fz56 text-center title-dp fw500"
               title="¡Bienvenido a Distrito Pyme!"
             />
             <div className="mt-30 text-dp fw300 fz20 text-center mb-30">
               <p className="gray50">Te ayudamos a crecer tu negocio <label className="blue-primary">&nbsp;#ComunidadDeCrédito&nbsp;</label></p>
-            </div>
+            </div> */}
             <div className="mt-50">
 							<StepSignup/>
 						</div>
@@ -78,7 +88,7 @@ let SignupBrokers = props => {
         ) : (
           <div></div>
         )}
-        <SignupFormBrokers onSubmit={e => onFormSubmit(e)} errorEmail={errorEmail} setErrorEmail={setErrorEmail} errorBroker={errorBroker} setErrorBroker={setErrorBroker}/>
+        <SignupFormBrokers onSubmit={e => onFormSubmit(e)} errorEmail={errorEmail} setErrorEmail={setErrorEmail} errorBroker={errorBroker} setErrorBroker={setErrorBroker} initialValues={initialValues} ownerId={ownerId}/>
       </div>
     );
   }

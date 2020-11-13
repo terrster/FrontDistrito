@@ -4,6 +4,7 @@ import tito from '../../assets/img/estatus_solicitud/POSES_TITO-12.png';
 import SolicitudBox from '../Generic/SolicitudBox';
 import { useHistory } from 'react-router-dom';
 import { missingDocs } from '../../utils/missingDocs';
+import axios from "../../utils/axios";
 
 const Inactivo = ({properties}) => {
 
@@ -15,7 +16,9 @@ const Inactivo = ({properties}) => {
     const [aditionalDocs, setaditionalDocs] = useState([]);
 
     useLayoutEffect(() => {
-        setDocs(user.idClient.appliance[0].idDocuments);
+        if(user.idClient.appliance[0].hasOwnProperty('idDocuments')){
+            setDocs(user.idClient.appliance[0].idDocuments);
+        }
     }, []);
 
     useEffect(() => {
@@ -27,9 +30,16 @@ const Inactivo = ({properties}) => {
     }, [docs]);
 
     useLayoutEffect( () => {
-        const infoAdicional = properties.n8_4_info_adicional_requerida.value.replace(/\n|\r/g, ";");
-        setaditionalDocs(infoAdicional.split(';'));
+        if(properties.hasOwnProperty('n8_4_info_adicional_requerida')){
+            const infoAdicional = properties.n8_4_info_adicional_requerida.value.replace(/\n|\r/g, ";");
+            setaditionalDocs(infoAdicional.split(';'));
+        }
     }, []);
+
+    const handleClick = () => {
+        axios.post("/api/user/reactivate");
+        history.push(`/elige-monto/${user._id}`)
+    }
 
     return(
         <Row>
@@ -44,7 +54,7 @@ const Inactivo = ({properties}) => {
                 </div>
 
                 {
-                    mdocs != null || mdocs.length > 0 &&
+                    mdocs.length > 0 &&
                     <SolicitudBox classParams="mb-2">
                         <div className="text-dp p-1 fz12">
                             DOCUMENTOS PENDIENTES
@@ -61,7 +71,7 @@ const Inactivo = ({properties}) => {
                 }
 
                 {
-                    aditionalDocs != null || aditionalDocs.length > 0 && 
+                    aditionalDocs.length > 0 && 
                     <SolicitudBox>
                         <div className="text-dp p-1 fz12">
                             DOCUMENTOS ADICIONALES
@@ -77,10 +87,7 @@ const Inactivo = ({properties}) => {
                     </SolicitudBox>
                 }
 
-                {
-                    properties.hasOwnProperty('financiera_banco_que_analiza') &&
-                    <Button className={"btn-blue-status mt-3 mb-5"} onClick={() => history.push(`/elige-monto/${user._id}`)}>Reactivar solicitud</Button>
-                }
+                <Button className={"btn-blue-status mt-3 mb-5"} onClick={handleClick}>Reactivar solicitud</Button>
             </Col>
             <Col lg={4} md={4} sm={12}>
                 <div className='text-center'>

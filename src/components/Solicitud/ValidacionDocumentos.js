@@ -1,8 +1,11 @@
 import React from "react";
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Button } from "react-bootstrap";
+import { useHistory } from 'react-router-dom';
 import tito from '../../assets/img/estatus_solicitud/POSES_TITO-07.png';
 
-const ValidacionDocumentos = () => {
+const ValidacionDocumentos = ({properties}) => {
+    const history = useHistory();
+
     return(
         <Row>
             <Col lg={8} md={8} sm={12}>
@@ -15,6 +18,11 @@ const ValidacionDocumentos = () => {
                     validar si contamos con tu expediente completo. Pronto recibirás
                     noticias nuestras.
                 </div>
+
+                {
+                    properties.hasOwnProperty('financiera_banco_que_analiza') &&
+                    <Button className={"btn-blue-status mt-3 mb-5"} onClick={ () => history.push("/propuestas") }>Ver Propuestas</Button>
+                }
             </Col>
             <Col lg={4} md={4} sm={12}>
                 <div className='text-center'>

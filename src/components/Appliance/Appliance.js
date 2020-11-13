@@ -102,6 +102,7 @@ class Appliance extends Component {
 									<Button
 										className="btn-blue-general mt-30 fz24"
 										onClick={() => this.props.history.push('/home')}
+										style={{ width: '250px' }}
 									>
 										Ir a mi cuenta
 									</Button>

@@ -73,7 +73,7 @@ const Solicitud = () => {
             break;
 
             case '58b0edce-4810-4be2-85e4-b3fa4b2239bf'://Validación de Documentos
-                setComponent(<ValidacionDocumentos/>);
+                setComponent(<ValidacionDocumentos properties={properties}/>);
             break;
 
             case '8e979808-5a1d-4d08-b03f-d369c6370355'://Análisis Banco/Financiera
@@ -144,7 +144,7 @@ const Solicitud = () => {
         if(estatus != null){
             dispatch( updateLoader(false) );
             showEstatus(estatus);//etapa del deal
-            //showEstatus('768760');//forzar visualización de etapa
+            //showEstatus('e831b8e3-4a3a-429e-932e-6fb7fa40d011');//forzar visualización de etapa
         }
     },[estatus]);
 

@@ -16,7 +16,9 @@ const renderField = ({
   minLength,
   meta: { touched, error, warning },
   errorEmail,
-  errorBroker
+  errorBroker,
+  readOnly,
+  style
 }) => (
   <div>
     {label !== "Teléfono" ? (
@@ -28,6 +30,8 @@ const renderField = ({
           type={type}
           minLength={minLength}
           maxLength={maxLength}
+          readOnly={readOnly}
+          style={style}
         />
       </div>
     ) : (
@@ -61,7 +65,7 @@ const passwordTooltip = (
 );
 
 let SignupForm = (props) => {
-  const { handleSubmit, submitting, errorEmail, setErrorEmail, errorBroker, setErrorBroker, valid } = props;
+  const { handleSubmit, submitting, errorEmail, setErrorEmail, errorBroker, setErrorBroker, valid, ownerId } = props;
 
   const [button, setButton] = useState(true);
   const [disabled, setDisabled] = useState(true);
@@ -170,29 +174,47 @@ let SignupForm = (props) => {
             label="Crea una contraseña"
           />
         </OverlayTrigger>
-        <Row>
-          <Col lg={8} md={8} sm={8}>
+        {
+          ownerId ? 
+          (<div>
+            <label className="label-style mt-24">
+              Código brokers
+            </label>
             <Field
               component={renderField}
               type="text"
               name="brokercode"
               label="Código brokers"
-              onChange={ (event, newValue, previousValue, name) => {
-                setErrorBroker("");
-              }}
-              errorBroker={errorBroker}
-              normalize={onlyNumbers}
-              onBlur={ e => { sanitizeString(e) } }
+              readOnly={true}
+              style={{marginTop: '0px'}}
             />
-          </Col>
-          <Col lg={4} md={4} sm={4}>
-            <NavLink to="/registrate">
-              <Button type="button" className={"btn-blue-brokers"}>
-                No eres Broker, clic aquí
-              </Button>
-            </NavLink>
-          </Col>
-        </Row>
+          </div>) :
+          (
+          <Row>
+            <Col lg={8} md={8} sm={8}>
+              <Field
+                component={renderField}
+                type="text"
+                name="brokercode"
+                label="Código brokers"
+                onChange={ (event, newValue, previousValue, name) => {
+                  setErrorBroker("");
+                }}
+                errorBroker={errorBroker}
+                normalize={onlyNumbers}
+                onBlur={ e => { sanitizeString(e) } }
+              />
+            </Col>
+            <Col lg={4} md={4} sm={4}>
+              <NavLink to="/registrate">
+                <Button type="button" className={"btn-blue-brokers"}>
+                  No eres Broker, clic aquí
+                </Button>
+              </NavLink>
+            </Col>
+          </Row>
+          )
+        }
         
         <div className="recaptcha-container">
           <ReCAPTCHA
@@ -252,7 +274,8 @@ SignupForm = connect(state => {
 
 SignupForm = reduxForm({
   form: 'signupForm',
-  validate: validateSignup 
+  validate: validateSignup,
+  enableReinitialize: true,
 })(SignupForm);
 
 export default SignupForm;

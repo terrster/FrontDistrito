@@ -34,7 +34,7 @@ const Formalizacion = ({properties}) => {
                             <Row>
                                 <Col xs={8}>
                                     Banco/Financiera: {autorizationData.financiera}<br></br>
-                                    Monto Autorizado: ${new Intl.NumberFormat().format(autorizationData.monto)}<br></br>
+                                    Monto Autorizado: ${new Intl.NumberFormat().format(autorizationData.monto).toString().replace('.', ',')}<br></br>
                                     Plazo: {autorizationData.plazo}<br></br>
                                     Tasa: {autorizationData.tasa}<br></br>
                                 </Col>
