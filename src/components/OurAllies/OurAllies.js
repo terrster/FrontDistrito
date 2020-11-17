@@ -3,7 +3,6 @@ import Title from '../Generic/Title';
 import Carousel from './Carousel';
 import Allies from './Allies';
 
-
 const OurAllies = () => {
     return(
         <div className="text-center">

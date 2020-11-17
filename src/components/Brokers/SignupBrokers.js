@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import Title from "../Generic/Title";
+// import Title from "../Generic/Title";
 import SignupFormBrokers from "../../forms/SignupFormBrokers";
 // import * as $ from "jquery";
 import "react-toastify/dist/ReactToastify.css";
@@ -15,6 +15,9 @@ import { updateToast } from '../../redux/actions/appActions';
 import axios from '../../utils/axios';
 import StepSignup from "../Appliance/StepSignup";
 import publicIp from "public-ip";
+import { Carousel, Button } from 'react-bootstrap';
+import brokersBanner from '../../assets/img/brokers/broker_banner.png';
+import { useHistory } from 'react-router-dom';
 
 let SignupBrokers = props => {
   const toast = useSelector(state => state.app.toast);
@@ -22,6 +25,7 @@ let SignupBrokers = props => {
   const [errorEmail, setErrorEmail] = useState("");
   const [errorBroker, setErrorBroker] = useState("");
   const [initialValues, setInitialValues] = useState({});
+  const history = useHistory();
 
   useEffect(() => {
     if(ownerId != ''){
@@ -55,12 +59,23 @@ let SignupBrokers = props => {
 
   if (sessionStorage.getItem("nameUser")) {
     setTimeout(() => {
-      window.location = "/home";
+      history.push("/home");
     }, 5000)
 
   }
   else {
     return (
+      <>
+      <Carousel className="mb-2" controls={false} indicators={false}>
+          <Carousel.Item>
+              <img className="d-block w-100" src={brokersBanner} alt="brokersBanner"/>
+              <Carousel.Caption>
+                <div className="text-center">
+                  <Button className={"btn-blue-brokers btn-broker"} onClick={() => history.push("/brokers")}>Aplica aquí</Button>
+                </div>
+              </Carousel.Caption>
+          </Carousel.Item>
+      </Carousel>
       <div className="container mt-30">
         <Loader />
         {!props.statusSingup ? (
@@ -90,6 +105,7 @@ let SignupBrokers = props => {
         )}
         <SignupFormBrokers onSubmit={e => onFormSubmit(e)} errorEmail={errorEmail} setErrorEmail={setErrorEmail} errorBroker={errorBroker} setErrorBroker={setErrorBroker} initialValues={initialValues} ownerId={ownerId}/>
       </div>
+      </>
     );
   }
 };

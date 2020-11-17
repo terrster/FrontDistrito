@@ -337,9 +337,8 @@
 	color: #ffffff !important;
 	background-color: #023E95 !important;
 	border-color: #023e95 !important;
-	/* border-radius: 25px !important; */
 	width: 100% !important;	
-	height: 40px !important;
+	height: 40px;
 	text-align: center !important;
 	letter-spacing: 2px;
 	margin-top: 23px;
