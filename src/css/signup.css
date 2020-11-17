@@ -37,6 +37,12 @@
 	border-radius: 35px !important;
 }
 
+.btn-broker:hover{
+	background-color: white !important;
+	color: #023E95 !important;
+	border-color: white !important;
+}
+
 @media (min-width: 399px) {
 	.btn-broker{
 		margin-top: 19%;
