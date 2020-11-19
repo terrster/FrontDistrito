@@ -97,7 +97,9 @@ let SignupBrokers = props => {
                 #clgo{\
                     display: none !important;\
                 }\
-                \
+                #clgo-wsp{\
+                    display: none !important;\
+                }\
             "}</style>
           </>
         ) : (
