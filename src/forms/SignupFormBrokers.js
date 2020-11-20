@@ -218,7 +218,7 @@ let SignupForm = (props) => {
         
         <div className="recaptcha-container">
           <ReCAPTCHA
-            sitekey="6LcTuPEUAAAAAF4wO3suJh3zugOr5pO-daAE-Puc"
+            sitekey="6Ld2huQZAAAAANpPc8zQKPnS948P7vzt2T7t-GCF"
             onChange={onChange}
           />
         </div>
