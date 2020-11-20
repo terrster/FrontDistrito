@@ -62,7 +62,6 @@ let DocumentsForm = (props) => {
     for (let j = 0; j < filesNotUploaded.keys.length; j++) {
       value.splice(filesNotUploaded.keys[j] - j, 1);
     }
-
     setFileToKey(key, value);
 
     if (filesNotUploaded.names.length > 0) {
@@ -112,7 +111,7 @@ let DocumentsForm = (props) => {
             name: typeDoc,
           },
         });
-        const data = res.data;console.log(res)
+        const data = res.data;
   
         if (!data.hasOwnProperty("error") && data.msg !== "Sin archivos") {
           sessionStorage.setItem("user", JSON.stringify(data.user));

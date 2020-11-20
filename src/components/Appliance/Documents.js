@@ -4,7 +4,7 @@ import Title from "../Generic/Title";
 import CustomModal from "../Generic/CustomModal";
 import DocumentsForm from "../../forms/DocumentsForm";
 import { execToast } from "../../utils/ToastUtils";
-import { Alert, Button } from "react-bootstrap";
+import { Alert, ProgressBar } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 
 // Components
@@ -41,6 +41,7 @@ const Documents = (props) => {
   const documents = useSelector((state) => state.documents);
   const alert = useSelector((state) => state.alert);
   const statusdocument = useSelector((state) => state.docsStatus);
+  const [uploadPercentage, setUploadPercentage] = useState(0);
 
 const getDocsMethod = () => {
     const idClient = user.idClient;
@@ -116,7 +117,7 @@ const getDocsMethod = () => {
     return docFiles;
   };
 
-  const onFormSubmit = async (e, finish) => {
+  const onFormSubmit = async(e, finish) => {
 
     e.preventDefault();
     window.scrollTo(0, 0);
@@ -126,12 +127,13 @@ const getDocsMethod = () => {
 		  execToast("documents");
 		  dispatch( updateToast(toast,"documents"));
     }
-    const formData = new FormData();
+    let formData = new FormData();
     for (const typeDoc in documents){
-		documents[typeDoc].forEach(doc => {			
-			formData.append(typeDoc,doc);
-		});
-	}
+      documents[typeDoc].forEach(doc => {		
+        formData.append(typeDoc, doc);
+      });
+    }
+
 	try {
 		const idClient = user.idClient;
 		if (idClient.appliance.length > 0){
@@ -144,7 +146,10 @@ const getDocsMethod = () => {
 				const { data } = await axios.post(`api/documents/${user._id}`, formData, {
 					headers:{
 					'Content-Type': 'multipart/form-data'
-					}	
+          },
+          onUploadProgress: progressEvent => {
+            setUploadPercentage(parseInt(Math.round((progressEvent.loaded * 100) / progressEvent.total)));
+          }	
 				});
 				if(!data.hasOwnProperty("error") && data.msg !== "Sin archivos"){
 					sessionStorage.setItem('user', JSON.stringify(data.user));
@@ -154,7 +159,10 @@ const getDocsMethod = () => {
 				const { data } = await axios.put(`api/documents/${idDocuments._id}`, formData, {
 					headers:{
 					'Content-Type': 'multipart/form-data'
-					}	
+          },
+          onUploadProgress: progressEvent => {
+            setUploadPercentage(parseInt(Math.round((progressEvent.loaded * 100) / progressEvent.total)));
+          }		
 				});
 				if(!data.hasOwnProperty("error") && data.msg != "Sin archivos"){
 					sessionStorage.setItem('user', JSON.stringify(data.user));
@@ -260,6 +268,14 @@ const getDocsMethod = () => {
      <Loader />
       <DocumentsModal />
       <Steps />
+      {
+        uploadPercentage > 0 &&
+        <div className="text-center">
+          <p className="text-dp">Subiendo documento(s)...</p>
+          <p className="text-dp">{uploadPercentage}%</p>
+          <ProgressBar animated now={uploadPercentage}/>
+        </div>
+      }
       <div className="text-center mb-3">
         <Title
           title="Sube tus documentos"
