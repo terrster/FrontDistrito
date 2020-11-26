@@ -18,7 +18,7 @@ import FACTOREXPRES from '../../assets/img/alianzas/factorexpres.png';
 import AVCAPITAL from '../../assets/img/alianzas/avcapital.png';
 import HayCash from '../../assets/img/alianzas/haycash.png';
 import Pagaloop from '../../assets/img/alianzas/pagaloop.png';
-// import iBan from '../../assets/img/alianzas/iBan.png';
+import iBan from '../../assets/img/alianzas/iBan.png';
 
 const Allies = () => {
     
@@ -39,7 +39,7 @@ const Allies = () => {
         AVCAPITAL,
         HayCash,
         Pagaloop,
-        // iBan,
+        iBan,
         //Lendera *Aún si alta cómo financiera
     ];
 
