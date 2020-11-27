@@ -16,6 +16,8 @@ import AVCAPITAL from '../assets/img/alianzas/avcapital.png';
 import HayCash from '../assets/img/alianzas/haycash.png';
 import Pagaloop from '../assets/img/alianzas/pagaloop.png';
 import iBan from '../assets/img/alianzas/iBan.png';
+import Lendera from '../assets/img/alianzas/Lendera.png';
+import Dimex from '../assets/img/alianzas/dimex.png';
 
 export const filterFinancials = (financials) => {
     
@@ -80,6 +82,35 @@ export const imgFinancial = (financial) => {
 
         case 'IBAN':
         return iBan;
+
+        case 'PRETMEX (FASTTRACK)':
+        return Lendera;
+
+        case 'DIMEX':
+        return Dimex;
+
+        case 'ALL':
+        return [
+            ASPIRIA,
+            IMPULSO,
+            CREZE,
+            CUMPLO,
+            BIENPARABIEN,
+            BANCOPPEL,
+            CREDIJUSTO,
+            DOCUFORMAS,
+            PRETMEX,
+            UNICLICK,
+            MUNDI,
+            FACTOREXPRES,
+            MICRO,
+            AVCAPITAL,
+            HayCash,
+            Pagaloop,
+            iBan,
+            Lendera, //PRETMEX (FASTTRACK)
+            Dimex
+        ];
     }
 }
 
@@ -246,8 +277,8 @@ export const dataFinancial = (financial, properties) => {//Propuestas
             return {
                 financiera: 'Pagaloop',
                 monto: properties.monto_preaut.value,
-                plazo: '',
-                tasa: '',
+                plazo: '12 meses',
+                tasa: '18.5% mensual',
                 logo: imgFinancial(financial),
                 class: 'PAGALOOP'
             };
@@ -256,10 +287,30 @@ export const dataFinancial = (financial, properties) => {//Propuestas
             return {
                 financiera: 'iBan',
                 monto: properties.monto_preaut.value,
-                plazo: '',
-                tasa: '',
+                plazo: 'Hasta 120 meses',
+                tasa: '2% mensual',
                 logo: imgFinancial(financial),
                 class: 'IBAN'
+            };
+        
+        case 'PRETMEX (FASTTRACK)':
+            return {
+                financiera: 'Lendera',
+                monto: properties.monto_preaut.value,
+                plazo: '24 meses',
+                tasa: '2% mensual',
+                logo: imgFinancial(financial),
+                class: 'LENDERA'
+            };
+
+        case 'DIMEX':
+            return {
+                financiera: 'Dimex',
+                monto: properties.monto_preaut.value,
+                plazo: 'Hasta 120 meses',
+                tasa: '2.5% mensual',
+                logo: imgFinancial(financial),
+                class: 'DIMEX'
             };
     }
 }
@@ -444,5 +495,24 @@ export const dataFinancialFormalization = (properties) => {
                 logo: imgFinancial(financial),
                 class: 'IBAN'
             };
+
+        case 'PRETMEX (FASTTRACK)':
+            return {
+                financiera: 'Lendera',
+                monto: properties.n12_1_monto_autorizado.value,
+                plazo: properties.n12_3_plazo_autorizado.value + " meses",
+                tasa: properties.n12_2_tasa_autorizada.value + "% mensual",
+                logo: imgFinancial(financial),
+                class: 'LENDERA'
+            };
+        case 'DIMEX':
+            return {
+                financiera: 'Dimex',
+                monto: properties.n12_1_monto_autorizado.value,
+                plazo: properties.n12_3_plazo_autorizado.value + " meses",
+                tasa: properties.n12_2_tasa_autorizada.value + "% mensual",
+                logo: imgFinancial(financial),
+                class: 'DIMEX'
+            }
     }
 }

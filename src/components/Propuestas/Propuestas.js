@@ -1,5 +1,5 @@
 import React, { useState, useLayoutEffect, useEffect } from "react";
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Alert } from "react-bootstrap";
 import Axios from "../../utils/axios";
 import { filterFinancials, dataFinancial  } from '../../utils/Financials';
 import SolicitudBox from '../Generic/SolicitudBox';
@@ -9,6 +9,7 @@ const Propuestas = () => {
 
     const [properties, setProperties] = useState(null);
     const [proposals, setProposals] = useState(null);
+    const [error, setError] = useState(false);
 
     useLayoutEffect( () => {
         const getHubspotProperties = async() => {
@@ -32,9 +33,12 @@ const Propuestas = () => {
             if(properties.hasOwnProperty('financiera_banco_que_analiza')){
                 //setProposals(properties.financiera_banco_que_analiza.value.split(';'));
                 let _proposals = properties.financiera_banco_que_analiza.value;
-                //let _proposals = "ASPIRIA;ImpulsoMx Aut;CREZE;CUMPLO;BIEN PARA BIEN;Bancoppel;CREDIJUSTO;DOCUFORMAS;PRETMEX;UNICLICK;MUNDI;Factor Expres;MICRO;AV CAPITAL;HayCash";
+                //let _proposals = "ASPIRIA;ImpulsoMx Aut;CREZE;CUMPLO;BIEN PARA BIEN;Bancoppel;CREDIJUSTO;DOCUFORMAS;PRETMEX;UNICLICK;MUNDI;Factor Expres;MICRO;AV CAPITAL;HayCash;PagaLoop;Iban;Pretmex (FastTrack);Dimex";
                 let proposalsfilt = filterFinancials(_proposals);
                 setProposals(proposalsfilt);
+            }
+            else{
+                setError(true);
             }
         }
     }, [properties]);
@@ -72,6 +76,12 @@ const Propuestas = () => {
                                     }
                                 </SolicitudBox>
                             })
+                        }
+                        {
+                            error &&
+                            <Alert variant="danger" style={{width: '100%'}}>
+                                Aún no hay propuestas que mostrar :(
+                            </Alert>
                         }
                     </Row>
                 </Col>
