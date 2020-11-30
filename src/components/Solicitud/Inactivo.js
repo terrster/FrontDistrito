@@ -22,11 +22,11 @@ const Inactivo = ({properties}) => {
     }, []);
 
     useEffect(() => {
-        // if(docs != null){
+        if(docs != null){
             let missing_docs = missingDocs(user, docs);
 
             setmDocs(missing_docs);
-        // }  
+        }  
     }, [docs]);
 
     useLayoutEffect( () => {

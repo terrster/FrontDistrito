@@ -93,23 +93,23 @@ export const imgFinancial = (financial) => {
         return [
             ASPIRIA,
             IMPULSO,
-            CREZE,
+            // CREZE,
             CUMPLO,
             BIENPARABIEN,
-            BANCOPPEL,
+            // BANCOPPEL,
             CREDIJUSTO,
-            DOCUFORMAS,
+            // DOCUFORMAS,
             PRETMEX,
             UNICLICK,
             MUNDI,
             FACTOREXPRES,
-            MICRO,
+            // MICRO, //Es un producto dentro de Impulso
             AVCAPITAL,
             HayCash,
             Pagaloop,
             iBan,
             Lendera, //PRETMEX (FASTTRACK)
-            Dimex
+            // Dimex
         ];
     }
 }
