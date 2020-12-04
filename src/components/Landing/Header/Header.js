@@ -68,7 +68,7 @@ const Header = props => {
 									style={{ letterSpacing: 0.8 }}
 								>
 									<p>Recibe las mejores ofertas de crédito</p>
-									<p className="metropolisMed ">¡En menos de 24 horas!</p>
+									<p className="metropolisMed ">¡En menos de 30 minutos!</p>
 								</div>
 							</div>
 							<Link
