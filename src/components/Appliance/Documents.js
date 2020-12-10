@@ -128,63 +128,64 @@ const getDocsMethod = () => {
 		  dispatch( updateToast(toast,"documents"));
     }
     let formData = new FormData();
-    for (const typeDoc in documents){
-      documents[typeDoc].forEach(doc => {		
-        formData.append(typeDoc, doc);
-      });
+    for (const typeDoc in documents){console.log(documents);
+      // documents[typeDoc].forEach(doc => {		
+      //   console.log(typeDoc, doc);
+      //   //formData.append(typeDoc, doc);
+      // });
     }
 
-	try {
-		const idClient = user.idClient;
-		if (idClient.appliance.length > 0){
-			let update = false;
-			const appliance = idClient.appliance[idClient.appliance.length - 1];
-			if (appliance.hasOwnProperty("idDocuments")){
-				update = true;
-			}
-			if (!update){
-				const { data } = await axios.post(`api/documents/${user._id}`, formData, {
-					headers:{
-					'Content-Type': 'multipart/form-data'
-          },
-          onUploadProgress: progressEvent => {
-            setUploadPercentage(parseInt(Math.round((progressEvent.loaded * 100) / progressEvent.total)));
-          }	
-				});
-				if(!data.hasOwnProperty("error") && data.msg !== "Sin archivos"){
-					sessionStorage.setItem('user', JSON.stringify(data.user));
-				}
-			} else {
-				const idDocuments = appliance.idDocuments;
-				const { data } = await axios.put(`api/documents/${idDocuments._id}`, formData, {
-					headers:{
-					'Content-Type': 'multipart/form-data'
-          },
-          onUploadProgress: progressEvent => {
-            setUploadPercentage(parseInt(Math.round((progressEvent.loaded * 100) / progressEvent.total)));
-          }		
-				});
-				if(!data.hasOwnProperty("error") && data.msg != "Sin archivos"){
-					sessionStorage.setItem('user', JSON.stringify(data.user));
-				}
-			}
-		}
+	// try {
+	// 	const idClient = user.idClient;
+	// 	if (idClient.appliance.length > 0){
+	// 		let update = false;
+	// 		const appliance = idClient.appliance[idClient.appliance.length - 1];
+	// 		if (appliance.hasOwnProperty("idDocuments")){
+	// 			update = true;
+	// 		}
+	// 		if (!update){
+	// 			const { data } = await axios.post(`api/documents/${user._id}`, formData, {
+	// 				headers:{
+	// 				'Content-Type': 'multipart/form-data'
+  //         },
+  //         onUploadProgress: progressEvent => {
+  //           setUploadPercentage(parseInt(Math.round((progressEvent.loaded * 100) / progressEvent.total)));
+  //         }	
+	// 			});
+	// 			if(!data.hasOwnProperty("error") && data.msg !== "Sin archivos"){
+	// 				sessionStorage.setItem('user', JSON.stringify(data.user));
+	// 			}
+	// 		} else {
+	// 			const idDocuments = appliance.idDocuments;
+	// 			const { data } = await axios.put(`api/documents/${idDocuments._id}`, formData, {
+	// 				headers:{
+	// 				'Content-Type': 'multipart/form-data'
+  //         },
+  //         onUploadProgress: progressEvent => {
+  //           setUploadPercentage(parseInt(Math.round((progressEvent.loaded * 100) / progressEvent.total)));
+  //         }		
+	// 			});
+	// 			if(!data.hasOwnProperty("error") && data.msg != "Sin archivos"){
+	// 				sessionStorage.setItem('user', JSON.stringify(data.user));
+	// 			}
+	// 		}
+	// 	}
 		
-	} catch(e){
-		console.log(e);
-	}
-	const idClient = user.idClient;
-	if (finish === true && idClient.appliance.length > 0){
-		// Finalizar solicitud, igual a la función de appliance
-		const appliance = idClient.appliance[idClient.appliance.length - 1];
-		const applianceRequest = await axios.put(`api/appliance/${appliance._id}`, { status: true });
-		if(!applianceRequest.data.hasOwnProperty("error")){
-					sessionStorage.setItem('user', JSON.stringify(applianceRequest.data.user));
-		}
-		history.push('/credito/solicitud/'+appliance._id);
-	} else {
-		history.push('/credito');
-	}
+	// } catch(e){
+	// 	console.log(e);
+	// }
+	// const idClient = user.idClient;
+	// if (finish === true && idClient.appliance.length > 0){
+	// 	// Finalizar solicitud, igual a la función de appliance
+	// 	const appliance = idClient.appliance[idClient.appliance.length - 1];
+	// 	const applianceRequest = await axios.put(`api/appliance/${appliance._id}`, { status: true });
+	// 	if(!applianceRequest.data.hasOwnProperty("error")){
+	// 				sessionStorage.setItem('user', JSON.stringify(applianceRequest.data.user));
+	// 	}
+	// 	history.push('/credito/solicitud/'+appliance._id);
+	// } else {
+	// 	history.push('/credito');
+	// }
 	dispatch(updateLoader(false));
   };
 

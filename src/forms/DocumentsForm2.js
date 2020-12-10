@@ -3,6 +3,10 @@ import { withFormik, Form } from 'formik';
 import clip from "../assets/img/clip-copy-2@3x.png";
 import { FieldDoc } from "../components/Generic/DocInput";
 import { Alert, Button } from 'react-bootstrap';
+import PopUp from "./PopUp";
+import axiosLocal from "../utils/axios";
+import { useDispatch } from "react-redux";
+import { updateLoader } from "../redux/actions/loaderActions";
 
 const DocumentsForm = (props) => {
     const [errorDocs, setErrorDocs] = useState({
@@ -28,10 +32,13 @@ const DocumentsForm = (props) => {
     const user = JSON.parse(sessionStorage.getItem("user"));
     const idClient = user.idClient;
     const typePerson = idClient.type;
-    const appliance = idClient.appliance[idClient.appliance.length - 1];
+    const appliance = idClient.appliance[0];
     const comercialInfo = appliance.idComercialInfo;
     const ciec = comercialInfo.ciec;
     const tpv = comercialInfo.terminal;
+
+    const [show, setShow] = useState(true);
+    const dispatch = useDispatch();
 
     let docFiles = [];
     switch (typePerson) {
@@ -39,150 +46,70 @@ const DocumentsForm = (props) => {
         docFiles = [
           {
             title: "Identificación oficial",
-            subtitle:
-              "(INE, Pasaporte, Cédula Profesional o Documento Migratorio)",
+            subtitle: "(INE, Pasaporte, Cédula Profesional o Documento Migratorio)",
             name: "oficialID",
-            files: props.docs.oficialID,
             refs: refOficialId,
           },
           {
             title: "Comprobante de domicilio particular y del negocio",
             subtitle: "(Antigüedad no mayor a 3 meses. Luz, Agua, Gas, Teléfono)",
             name: "proofAddress",
-            files: props.docs.proofAddress,
             refs: proofAddress,
           },
           {
             title: "Estados de cuenta bancarios",
             subtitle: "(Documento completo, mínimo 6 meses)",
             name: "bankStatements",
-            files: props.docs.bankStatements,
             refs: bankStatements,
           },
           {
             title: "Otros",
             subtitle: "(Fotos, notas de venta u otros comprobantes de ingreso)",
             name: "others",
-            files: props.docs.others,
             refs: others,
-          },
-          {
-            title: "Reporte de cobranza de las terminales punto de venta (12 meses)",
-            subtitle: "",
-            name: "collectionReportSaleTerminals",
-            files: props.docs.collectionReportSaleTerminals,
-            refs: collectionReportSaleTerminals,
-          },
-          {
-            title: "Contrato de arrendamiento vigente de tu local",
-            subtitle: "",
-            name: "localContractLease",
-            files: props.docs.localContractLease,
-            refs: localContractLease,
           }
         ];
         break;
       case "PFAE":
-        docFiles = [
-          {
-            title: "Identificación oficial",
-            subtitle:
-              "(INE, Pasaporte, Cédula Profesional o Documento Migratorio)",
-            name: "oficialID",
-            files: props.docs.oficialID,
-            refs: refOficialId,
-          },
-          {
-            title: "RFC",
-            subtitle: "(Constancia de situación fiscal)",
-            name: "rfc",
-            files: props.docs.rfc,
-            refs: rfc,
-          },
-          {
-            title: "Comprobante de domicilio particular y del negocio",
-            subtitle: "(Antigüedad no mayor a 3 meses. Luz, Agua, Gas, Teléfono)",
-            name: "proofAddress",
-            files: props.docs.proofAddress,
-            refs: proofAddress,
-          },
-          {
-            title: "Estados de cuenta bancarios",
-            subtitle:
-              "(Documento completo con todas las hojas que contenga, mínimo 6 meses)",
-            name: "bankStatements",
-            files: props.docs.bankStatements,
-            refs: bankStatements,
-          },
-          {
-            title: "Última declaración de impuestos presentada",
-            name: "lastDeclarations",
-            files: props.docs.lastDeclarations,
-            refs: lastDeclarations,
-          },
-          {
-            title: "Opinión de cumplimiento",
-            name: "acomplishOpinion",
-            files: props.docs.acomplishOpinion,
-            refs: acomplishOpinion,
-          },
-          {
-            title: "Otros",
-            subtitle: "(Fotos, notas de venta u otros comprobantes de ingreso)",
-            name: "others",
-            files: props.docs.others,
-            refs: others,
-          }
-        ];
-        break;
       case "RIF":
         docFiles = [
           {
             title: "Identificación oficial",
-            subtitle:
-              "(INE, Pasaporte, Cédula Profesional o Documento Migratorio)",
+            subtitle: "INE, Pasaporte, Cédula Profesional o Documento Migratorio)",
             name: "oficialID",
-            files: props.docs.oficialID,
             refs: refOficialId,
           },
           {
             title: "RFC",
             subtitle: "(Constancia de situación fiscal)",
             name: "rfc",
-            files: props.docs.rfc,
             refs: rfc,
           },
           {
             title: "Comprobante de domicilio particular y del negocio",
             subtitle: "(Antigüedad no mayor a 3 meses. Luz, Agua, Gas, Teléfono)",
             name: "proofAddress",
-            files: props.docs.proofAddress,
             refs: proofAddress,
           },
           {
             title: "Estados de cuenta bancarios",
-            subtitle:
-              "(Documento completo con todas las hojas que contenga, mínimo 6 meses)",
+            subtitle: "(Documento completo con todas las hojas que contenga, mínimo 6 meses)",
             name: "bankStatements",
-            files: props.docs.bankStatements,
             refs: bankStatements,
           },
           {
             title: "Última declaración de impuestos presentada",
             name: "lastDeclarations",
-            files: props.docs.lastDeclarations,
             refs: lastDeclarations,
           },
           {
             title: "Opinión de cumplimiento",
             name: "acomplishOpinion",
-            files: props.docs.acomplishOpinion,
             refs: acomplishOpinion,
           },
           {
             title: "Fotos de tu empresa o negocio u otros",
             name: "others",
-            files: props.docs.others,
             refs: others,
           },
         ];
@@ -192,63 +119,53 @@ const DocumentsForm = (props) => {
           {
             title: "Acta constitutiva, asamblea y poderes",
             name: "constitutiveAct",
-            // files: props.docs.constitutiveAct,
             refs: constitutiveAct,
           },
           {
             title: "RFC",
             subtitle: "(Constancia de situación fiscal)",
             name: "rfc",
-            // files: props.docs.rfc,
             refs: rfc,
           },
           {
             title: "Estados financieros",
-            subtitle:
-              "(Últimos 3 ejercicios completos y parcial del año en curso con relaciones analíticas)",
+            subtitle: "(Últimos 3 ejercicios completos y parcial del año en curso con relaciones analíticas)",
             name: "financialStatements",
-            // files: props.docs.financialStatements,
             refs: financialStatements,
           },
           {
             title: "Estados de cuenta bancarios",
-            subtitle:
-              "(Documento completo con todas las hojas que contenga, mínimo 6 meses)",
+            subtitle: "(Documento completo con todas las hojas que contenga, mínimo 6 meses)",
             name: "bankStatements",
-            // files: props.docs.bankStatements,
             refs: bankStatements,
           },
           {
             title: "Declaraciones anuales de los dos últimos años",
             name: "lastDeclarations",
-            // files: props.docs.lastDeclarations,
             refs: lastDeclarations,
           },
           {
             title:
               "Identificación de representante legal y principales accionistas",
             name: "oficialID",
-            // files: props.docs.oficialID,
             refs: refOficialId,
           },
           {
             title:
               "Comprobante de domicilio del negocio y particular del representante legal y principales accionistas",
             name: "proofAddressMainFounders",
-            // files: props.docs.proofAddressMainFounders,
             refs: proofAddressMainFounders,
           },
           {
             title: "Fotos de tu empresa o negocio u otros",
             name: "others",
-            // files: props.docs.others,
             refs: others,
           },
         ];
         break;
     }
   
-    const filterDocs = [
+    const filterDocs = [//RIF, PFAE
       "oficialID", 
       "proofAddress", 
       "bankStatements",
@@ -277,24 +194,22 @@ const DocumentsForm = (props) => {
         title: "Reporte de cobranza de las terminales punto de venta (12 meses)",
         subtitle: "",
         name: "collectionReportSaleTerminals",
-        // files: props.docs.collectionReportSaleTerminals,
         refs: collectionReportSaleTerminals,
       },
       {
         title: "Contrato de arrendamiento vigente de tu local",
         subtitle: "",
         name: "localContractLease",
-        // files: props.docs.localContractLease,
         refs: localContractLease,
       })
     }
 
-    let fileHandler = async (component, key, e) => {
+    const fileHandler = async (component, key, e) => {
         let value;
-        let limitSize = 10000000; // 10 MB
+        let limitSize = 10000000; //10MB
 
         let filesNotUploaded = [];
-        value = component === "drag" ? e : e.target.files;
+        value = (component === "drag" ? e : e.target.files);
         value = Array.from(value);
         for (let i = 0; i < value.length; i++) {
             if (value[i].size > limitSize) {
@@ -328,9 +243,23 @@ const DocumentsForm = (props) => {
         }
     };
 
-    let deleteChip = (index, key) => {console.log(props.values[key][index],props.values[key][index].split('-')[6]+props.values[key][index].split('-')[7]);
+    const deleteChip = async(index, key) => {
         if(props.values[key][index].name == undefined){
-
+            dispatch(updateLoader(true));
+            const res = await axiosLocal.delete(`api/documents/${appliance.idDocuments._id}`, {
+                    data: {
+                        url: props.values[key][index],
+                        name: key,
+                    },
+                });
+            const data = res.data;
+    
+            if(!data.hasOwnProperty("error") && data.msg !== "Sin archivos"){
+                sessionStorage.setItem("user", JSON.stringify(data.user));
+                props.values[key].splice(index, 1);
+                props.setValues(props.values);
+            }
+            dispatch(updateLoader(false));
         }
         else{
             props.values[key].splice(index, 1);
@@ -360,6 +289,15 @@ const DocumentsForm = (props) => {
                 }
                 </ul>
             </Alert>
+        }
+        {
+            idClient.type !== "PF" && (ciec == "" || ciec == null) && (
+                <PopUp
+                show={show}
+                setShow={(value) => setShow(value)}
+                isDocuments={true}
+                />
+            )
         }
         <Form className="ml-auto mr-auto" style={{ maxWidth: "690px" }}>
             {docFiles.map((d, i) => {

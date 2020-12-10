@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faIgloo,faPaperclip } from '@fortawesome/free-solid-svg-icons'
 import clip from "../../assets/img/clip-01.png";
 

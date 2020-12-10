@@ -31,18 +31,20 @@ export const FieldDoc = ({
 				</FileDrop>
 				{files && files.map((value, index) => {
 					let nameDoc = ""
-					if (value.name == undefined){
-						nameDoc = value.split('-')[6];
-					} else {
-						nameDoc = value.name	
+					if(value.name == undefined){
+                        let aux = value.split('-');
+                        for(let i=6; i<aux.length; i++){
+                            nameDoc += aux[i];
+                        }
+                    } 
+                    else{
+                        let aux = value.name.replace(' ', '');
+						nameDoc = aux;	
 					}
 					return (
-						(value !== undefined) ?
-						((value.name === undefined ) ? 
-							<Chip fileName={nameDoc} typeDoc={name} delete={() => deleteFile(index, name)} docName={value} index={index} key={index}/>: 
-							<Chip fileName={value.name} typeDoc={name} delete={() => deleteFile(index, name)} docName={name} index={index} key={index}/>)
-						:<></>
-					);
+						(value !== undefined) &&
+                            <Chip fileName={nameDoc} typeDoc={name} delete={() => deleteFile(index, name)} docName={value} index={index} key={index}/>
+                        );
 				})}
 			</div>
         )}</Field>
