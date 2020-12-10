@@ -8,7 +8,7 @@ import CustomLoader from '../Generic/CustomLoader';
 import comercialOptions from "../../models/ComercialInfoModels";
 import { Row, Col } from "react-bootstrap";
 import titoAccount from "../../assets/img/POSES TITO-14-01.png";
-import axios from '../../utils/axios';
+// import axios from '../../utils/axios';
 import { updateLoader } from '../../redux/actions/loaderActions';
 import Steps from "../Appliance/Steps";
 
@@ -176,6 +176,8 @@ const Home = (props) => {
               keyData={"documents"}
               first={uploadedReady(myProfile.idClient.idDocuments.oficialID[0])}
               second={uploadedReady(
+                myProfile.idClient.type === 'PM' ? 
+                myProfile.idClient.idDocuments.proofAddressMainFounders[0] :
                 myProfile.idClient.idDocuments.proofAddress[0]
               )}
               third={uploadedReady(
