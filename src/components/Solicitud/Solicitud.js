@@ -144,7 +144,7 @@ const Solicitud = () => {
         if(estatus != null){
             dispatch( updateLoader(false) );
             showEstatus(estatus);//etapa del deal
-            //showEstatus('e831b8e3-4a3a-429e-932e-6fb7fa40d011');//forzar visualización de etapa
+            //showEstatus('d52c3e71-74ee-499b-8af9-abe5245deaaa');//forzar visualización de etapa
         }
     },[estatus]);
 

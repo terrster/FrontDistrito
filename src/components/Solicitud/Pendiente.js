@@ -38,7 +38,7 @@ const Pendiente = () => {
                 </div>
                 
                 {
-                    mdocs != null || mdocs.length > 0 && 
+                    mdocs.length > 0 && 
                     <SolicitudBox>
                         <div className="text-dp p-1 fz12">
                             DOCUMENTOS PENDIENTES
@@ -55,7 +55,7 @@ const Pendiente = () => {
                 }
 
                 {
-                    mdocs != null || mdocs.length > 0 && 
+                    mdocs.length > 0 && 
                     <Button className={"btn-blue-status mt-3 mb-5"} onClick={() => history.push(`/documentos/${user._id}`)}>Subir Documentos</Button>
                 }
             </Col>
