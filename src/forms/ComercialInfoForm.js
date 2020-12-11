@@ -725,7 +725,7 @@ let ComercialInfoForm = (props) => {
           <option value="0">No</option>
         </Field>
         <InputLabel
-          label="¿Vendes tu producto o servicio a Estados Unidos?"
+          label="¿Vendes tu producto o servicio a Estados Unidos ó Europa?"
           class="mt-18"
         />
         <Field component={renderSelectField} name="exportation" cls="mb-3">
