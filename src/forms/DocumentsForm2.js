@@ -7,6 +7,7 @@ import PopUp from "./PopUp";
 import axiosLocal from "../utils/axios";
 import { useDispatch } from "react-redux";
 import { updateLoader } from "../redux/actions/loaderActions";
+// import validationsDocsForm2 from './validationsDocsForm2';
 
 const DocumentsForm = (props) => {
     const [errorDocs, setErrorDocs] = useState({
@@ -260,6 +261,7 @@ const DocumentsForm = (props) => {
                 props.setValues(props.values);
             }
             dispatch(updateLoader(false));
+            window.location.reload(false);
         }
         else{
             props.values[key].splice(index, 1);
@@ -355,6 +357,7 @@ export default withFormik({
     mapPropsToValues({initialValues}){
         return initialValues;
     },
+    //validate: validationsDocsForm2, 
     handleSubmit(values, formikBag){
         formikBag.props.handleSubmit(values);
     },

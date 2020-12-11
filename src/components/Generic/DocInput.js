@@ -1,5 +1,5 @@
 import React from 'react';
-import { Field } from 'formik';
+import { Field, ErrorMessage } from 'formik';
 import { FileDrop } from 'react-file-drop';
 import Chip from './Chip';
 
@@ -29,6 +29,7 @@ export const FieldDoc = ({
 					</label>
 					</div>
 				</FileDrop>
+                {/* <ErrorMessage name={field.name} render={msg => <div className="invalid-feedback">{msg}</div>}/> */}
 				{files && files.map((value, index) => {
 					let nameDoc = ""
 					if(value.name == undefined){
