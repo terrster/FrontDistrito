@@ -20,7 +20,7 @@ export const FieldDoc = ({
 				<div className="font-weight-bold">
 					{title} {subtitle && <span className="fz12 font-weight-normal">{subtitle}</span>}
 				</div>
-				<input className="d-none" type="file" ref={refs} onChange={ (e)  => fileMethod('input', name, e) } multiple/>
+				<input className="d-none" type="file" ref={refs} onChange={ (e)  => fileMethod('input', name, e) } value="" multiple/>
 				<FileDrop {...field} {...props} onDrop={ (e)  => fileMethod('drag', name, e)}>
 					<div className="dnd">
 					<img src={image} className="clip-image" alt="Clip"/>

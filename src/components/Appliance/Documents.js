@@ -1,325 +1,197 @@
-import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import Title from "../Generic/Title";
-import CustomModal from "../Generic/CustomModal";
-import DocumentsForm from "../../forms/DocumentsForm";
-import { execToast } from "../../utils/ToastUtils";
-import { Alert, ProgressBar } from "react-bootstrap";
-import { useHistory } from "react-router-dom";
-
-// Components
-import Steps from "./Steps";
-import DocumentsModal from './DocumentsModal';
-
-import { updateLoader } from "../../redux/actions/loaderActions";
-import { updateToast } from "../../redux/actions/appActions";
-import {
-  updateDocumentsStatus,
-  updateDocumentsNames,
-  updateDocumentsType,
-} from "../../redux/actions/documentsStatusActions";
-import { updateRefDocuments } from '../../redux/actions/modalCiecActions';
-import { updateAllDocs, updateDocuments } from "../../redux/actions/documentsActions";
-import { updateAlert } from '../../redux/actions/alertActions';
+import React, { useState, useEffect } from 'react';
 import axios from '../../utils/axios';
 import Loader from "../Loader/Loader";
 import { ToastContainer } from "react-toastify";
+import DocumentsModal from './DocumentsModal';
+import Steps from "./Steps";
+import Title from "../Generic/Title";
+import DocumentsForm from "../../forms/DocumentsForm";
+import { ProgressBar, Alert } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { updateLoader } from "../../redux/actions/loaderActions";
+import { execToast } from "../../utils/ToastUtils";
+import { updateToast } from "../../redux/actions/appActions";
 
 const Documents = (props) => {
-
-  const history = useHistory();
-  const [show, setShow] = useState(true);
-  const [user, setUser] = useState(JSON.parse(sessionStorage.getItem("user")));
-  const [initialValues, setInitialValues] = useState({});
-  const dispatch = useDispatch();
-  const app = useSelector(state => state.app)
-  const modal = useSelector((state) => state.modal.name);
-  const appliance = useSelector((state) => state.appliance.appliance);
-  const applianceAmount = useSelector((state) => state.appliance.amount);
-  //const user = useSelector(state => state.user.user);
-  const toast = useSelector((state) => state.app.toast);
-  const documents = useSelector((state) => state.documents);
-  const alert = useSelector((state) => state.alert);
-  const statusdocument = useSelector((state) => state.docsStatus);
-  const [uploadPercentage, setUploadPercentage] = useState(0);
-
-const getDocsMethod = () => {
-    const idClient = user.idClient;
-    const typePerson = idClient.type;
-    const { appliance } = idClient;  
-    let ciec = '';
-    let tpv = false;
-    if (appliance[0].idComercialInfo) {
-      ciec = appliance[0].idComercialInfo.ciec;
-    }
-    if (appliance[0].idComercialInfo) {
-      tpv = appliance[0].idComercialInfo.terminal;
-    }
-    let docFiles = [];
-    /**
-     * [Dependiendo la persona le creamos los documentos]
-     */
-    switch (typePerson) {
-      case "PF":
-        docFiles = ["oficialID", "proofAddress", "bankStatements", "others"];
-        break;
-      case "PFAE":
-        docFiles = [
-          "oficialID",
-          "rfc",
-          "proofAddress",
-          "bankStatements",
-          "lastDeclarations",
-          "acomplishOpinion",
-          "others",
-        ];
-        break;
-      case "RIF":
-        docFiles = [
-          "oficialID",
-          "rfc",
-          "proofAddress",
-          "bankStatements",
-          "lastDeclarations",
-          "acomplishOpinion",
-          "others",
-        ];
-        break;
-      case "PM":
-        docFiles = [
-          "constitutiveAct",
-          "rfc",
-          "proofAddress",
-          "financialStatements",
-          "bankStatements",
-          "lastDeclarations",
-          "oficialID",
-          "proofAddressMainFounders",
-          "others",
-        ];
-        break;
-      default:
-        break;
-    }
-
-    if (ciec){
-      if (typePerson === "PM"){
-        docFiles = ["constitutiveAct","financialStatements","bankStatements","oficialID", "proofAddressMainFounders", "others"];
-      } else if ( typePerson === "RIF" || typePerson === "PFAE") {
-        docFiles = ["oficialID", "proofAddress", "others", "bankStatements"];
-      }
-    }
-
-    if(tpv == true){
-      docFiles.push("collectionReportSaleTerminals", "localContractLease");
-    }
-
-    return docFiles;
-  };
-
-  const onFormSubmit = async(e, finish) => {
-
-    e.preventDefault();
-    window.scrollTo(0, 0);
-    dispatch(updateRefDocuments(false));
-    dispatch(updateLoader(true));
-    if (!toast.documents){
-		  execToast("documents");
-		  dispatch( updateToast(toast,"documents"));
-    }
-    let formData = new FormData();
-    for (const typeDoc in documents){console.log(documents);
-      // documents[typeDoc].forEach(doc => {		
-      //   console.log(typeDoc, doc);
-      //   //formData.append(typeDoc, doc);
-      // });
-    }
-
-	// try {
-	// 	const idClient = user.idClient;
-	// 	if (idClient.appliance.length > 0){
-	// 		let update = false;
-	// 		const appliance = idClient.appliance[idClient.appliance.length - 1];
-	// 		if (appliance.hasOwnProperty("idDocuments")){
-	// 			update = true;
-	// 		}
-	// 		if (!update){
-	// 			const { data } = await axios.post(`api/documents/${user._id}`, formData, {
-	// 				headers:{
-	// 				'Content-Type': 'multipart/form-data'
-  //         },
-  //         onUploadProgress: progressEvent => {
-  //           setUploadPercentage(parseInt(Math.round((progressEvent.loaded * 100) / progressEvent.total)));
-  //         }	
-	// 			});
-	// 			if(!data.hasOwnProperty("error") && data.msg !== "Sin archivos"){
-	// 				sessionStorage.setItem('user', JSON.stringify(data.user));
-	// 			}
-	// 		} else {
-	// 			const idDocuments = appliance.idDocuments;
-	// 			const { data } = await axios.put(`api/documents/${idDocuments._id}`, formData, {
-	// 				headers:{
-	// 				'Content-Type': 'multipart/form-data'
-  //         },
-  //         onUploadProgress: progressEvent => {
-  //           setUploadPercentage(parseInt(Math.round((progressEvent.loaded * 100) / progressEvent.total)));
-  //         }		
-	// 			});
-	// 			if(!data.hasOwnProperty("error") && data.msg != "Sin archivos"){
-	// 				sessionStorage.setItem('user', JSON.stringify(data.user));
-	// 			}
-	// 		}
-	// 	}
-		
-	// } catch(e){
-	// 	console.log(e);
-	// }
-	// const idClient = user.idClient;
-	// if (finish === true && idClient.appliance.length > 0){
-	// 	// Finalizar solicitud, igual a la función de appliance
-	// 	const appliance = idClient.appliance[idClient.appliance.length - 1];
-	// 	const applianceRequest = await axios.put(`api/appliance/${appliance._id}`, { status: true });
-	// 	if(!applianceRequest.data.hasOwnProperty("error")){
-	// 				sessionStorage.setItem('user', JSON.stringify(applianceRequest.data.user));
-	// 	}
-	// 	history.push('/credito/solicitud/'+appliance._id);
-	// } else {
-	// 	history.push('/credito');
-	// }
-	dispatch(updateLoader(false));
-  };
-
-  const testDocumentsMethod = (array) => {
-    let status = true;
-    let requiredDocs = getDocsMethod();    
-    for (const k in requiredDocs) {
-      if (array[requiredDocs[k]].length <= 0) {
-        status = false;
-      }
-    }
-    if (requiredDocs.length <= 0) {
-      status = false;
-    }
-    return status;
-  };
-
-  const testDocuments = (data = documents) => {
-    let status = testDocumentsMethod(data);
-    dispatch(updateDocumentsStatus(status));
-  };
-
-  useEffect(() => {
-	  window.scrollTo(0, 0);
-    if (!toast) {
-      execToast("documents");
-      dispatch(updateToast(app, "docs"));
-    }    
-	  const idClient = user.idClient;
-    if (idClient.appliance.length > 0){
-		const appliance = idClient.appliance[idClient.appliance.length - 1];
-		if (appliance.hasOwnProperty("idDocuments")){
-			const { 
-				acomplishOpinion, bankStatements, constitutiveAct, 
-				cventerprise, facturacion, financialStatements, 
-				lastDeclarations, oficialID, otherActs, others, 
-				proofAddress, proofAddressMainFounders, 
-				rfc, collectionReportSaleTerminals, localContractLease } = appliance.idDocuments;
-			const currentDocuments = {
-				acomplishOpinion, bankStatements, constitutiveAct, 
-				cventerprise, facturacion, financialStatements, 
-				lastDeclarations, oficialID, otherActs, others, 
-				proofAddress, proofAddressMainFounders, 
-				rfc, collectionReportSaleTerminals, localContractLease
-			}
-      //let status = testDocumentsMethod(currentDocuments);
-      //dispatch(updateDocumentsStatus(status));
-			for (const key in currentDocuments){
-				const files = currentDocuments[key];
-				dispatch(updateAllDocs(files, key));
-			};
-       testDocuments(currentDocuments);
-		}
-	}
-    dispatch(updateDocumentsNames(getDocsMethod()));
+    const history = useHistory();
+    const dispatch = useDispatch();
+    const app = useSelector(state => state.app);
+    const toast = useSelector((state) => state.app.toast);
+    const [initialValues, setValues] = useState({
+        oficialID : [], 
+        proofAddress : [], 
+        bankStatements : [],  
+        constitutiveAct : [], 
+        otherActs : [], 
+        financialStatements : [], 
+        rfc : [] , 
+        acomplishOpinion : [], 
+        lastDeclarations : [], 
+        facturacion: [],
+        others : [], 
+        cventerprise: [], 
+        proofAddressMainFounders: [],
+        collectionReportSaleTerminals: [],
+        localContractLease: [],
+        status: false
+    });
+    const [uploadPercentage, setUploadPercentage] = useState(0);
+    const [errorUpload, setErrorUpload] = useState({
+        msg: '',
+        show: false
+    });
     
+    useEffect(() => {
+        window.scrollTo(0, 0);
+        if(toast) {
+            execToast("documents");
+            dispatch(updateToast(app, "docs"));
+        }  
+    }, []);
 
-  }, []);
+    const [user, setUser] = useState(JSON.parse(sessionStorage.getItem("user")));
 
-  let currentDocs = [];
-  let isCompleteForm = statusdocument;
-
-  if (appliance !== undefined && appliance.idDocuments !== undefined) {
-    currentDocs = appliance.idDocuments;
-    if (!statusdocument.isUpdate) {
-      dispatch(updateDocumentsType(true, appliance.idDocuments.id));
-      for (const key in documents) {
-        if (appliance.idDocuments[key]) {
-          dispatch(updateAllDocs(appliance.idDocuments[key], key));
+    useEffect(() => {
+        if(user.idClient.appliance[0].hasOwnProperty('idDocuments')){
+            setValues(user.idClient.appliance[0].idDocuments);
         }
-      }
-    }
-    if (appliance.idDocuments && testDocumentsMethod(appliance.idDocuments)) {
-      isCompleteForm.status = true;
-    }
-  }
+    }, user);
 
-  return (
-    <div className="container mt-3">
-     <ToastContainer />
-     <Loader />
-      <DocumentsModal />
-      <Steps />
-      {
-        uploadPercentage > 0 &&
-        <div className="text-center">
-          <p className="text-dp">Subiendo documento(s)...</p>
-          <p className="text-dp">{uploadPercentage}%</p>
-          <ProgressBar animated now={uploadPercentage}/>
-        </div>
-      }
-      <div className="text-center mb-3">
-        <Title
-          title="Sube tus documentos"
-          className="title-dp fz42"
-        />
-        <div className="brandonReg fz16 mt-3 mailto-content">
-          Procura que la calidad sea óptima y legible en formato: <br></br>
-          PNG, JPG, ZIP, PDF y/o FOTO en buena calidad según sea el caso (Peso
-          máximo de 10MB por archivo). <br></br>
-          Si lo prefieres, también puedes enviarnos tu documentación a{" "}
-          <a href="mailto:documentos@distritopyme.com">
-            documentos@distritopyme.com
-          </a>
-        </div>
-      </div>
-      {alert.status ? (
-        <Alert variant="danger">
-          Los siguiente archivos no se subieron: {alert.names}
-        </Alert>
-      ) : (
-        ""
-      )}
+    const handleSubmit = async(files) => {
+        window.scrollTo(0, 0);
+        dispatch(updateLoader(true));
+        if (!toast.documents){
+            execToast("documents");
+            dispatch( updateToast(toast,"documents"));
+        }
 
-      <CustomModal
-        modalName="documentsError"
-        message="Error al subir los archivos. Favor de regresar a la pantalla de inicio y continúa tu solicitud."
-      />
-      <DocumentsForm
-        docSelection={sessionStorage.getItem("type")}
-        docs={documents}
-        updateAllDocs={updateAllDocs}
-        updateDocs={updateDocuments}
-        testDocs={testDocuments}
-        handleSubmit={onFormSubmit}
-        updateAlertMsg={updateAlert}
-        updateStatusDocs={updateDocumentsStatus}
-        currentDocuments={currentDocs}
-        statusDocs={isCompleteForm}
-        statusComplete={appliance.status}
-        setInitialValues={setInitialValues}
-      />
-    </div>
-  );
+        let formData = new FormData();
+        var docsToUpload = 0;
+        for(const inputField in files){
+            if(inputField!= '_id' && inputField!= 'idClient' && inputField!= '__v' && inputField!= 'status'){
+                files[inputField].forEach(f => {		
+                    if(f.name !== undefined){
+                        docsToUpload++;
+                        formData.append(inputField, f);
+                    }
+                });
+            }
+        }
+  
+        try{
+            if(docsToUpload === 0){
+                dispatch(updateLoader(false));
+                setErrorUpload({
+                    msg: 'No hay documentos que subir.',
+                    show: true
+                });
+                setTimeout(() => {
+                    setErrorUpload({
+                        msg: '',
+                        show: false
+                    })
+                }, 25000);
+                return;
+            }
+            const idClient = user.idClient;
+            if (idClient.appliance.length > 0){
+                let update = false;
+                const appliance = idClient.appliance[idClient.appliance.length - 1];
+                if (appliance.hasOwnProperty("idDocuments")){
+                    update = true;
+                }
+                if(!update){
+                    const { data } = await axios.post(`api/documents/${user._id}`, formData, {
+                    headers:{
+                        'Content-Type': 'multipart/form-data'
+                    },
+                        onUploadProgress: progressEvent => {
+                        setUploadPercentage(parseInt(Math.round((progressEvent.loaded * 100) / progressEvent.total)));
+                    }	
+                    });
+
+                    if(!data.hasOwnProperty("error") && data.msg !== "Sin archivos"){
+                        sessionStorage.setItem('user', JSON.stringify(data.user));
+                        setUser(JSON.parse(sessionStorage.getItem("user")));
+                    }
+                } 
+                else{
+                    const idDocuments = appliance.idDocuments;
+                    const { data } = await axios.put(`api/documents/${idDocuments._id}`, formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    },
+                        onUploadProgress: progressEvent => {
+                        setUploadPercentage(parseInt(Math.round((progressEvent.loaded * 100) / progressEvent.total)));
+                    }		
+                    });
+                    
+                    if(!data.hasOwnProperty("error") && data.msg != "Sin archivos"){
+                        sessionStorage.setItem('user', JSON.stringify(data.user));
+                        setUser(JSON.parse(sessionStorage.getItem("user")));
+                    }
+                }
+
+                if(JSON.parse(sessionStorage.getItem("user")).idClient.appliance[0].idDocuments.status === true && idClient.appliance.length > 0){
+                    const appliance = idClient.appliance[idClient.appliance.length - 1];
+                    const applianceRequest = await axios.put(`api/appliance/${appliance._id}`, { status: true });
+                    if(!applianceRequest.data.hasOwnProperty("error")){
+                                sessionStorage.setItem('user', JSON.stringify(applianceRequest.data.user));
+                                setUser(JSON.parse(sessionStorage.getItem("user")));
+                    }
+                    history.push('/credito/solicitud/'+appliance._id);
+                } 
+                else {
+                    history.push('/credito');
+                }
+            }
+            dispatch(updateLoader(false));
+        } 
+        catch(e){
+            console.log(e);
+        }
+    }; 
+
+    return (
+        <div className="container mt-3">
+            <ToastContainer />
+            <Loader />
+            <DocumentsModal />
+            <Steps />
+            {
+                uploadPercentage > 0 &&
+                <div className="text-center">
+                    <p className="text-dp">Subiendo documento(s)...</p>
+                    <p className="text-dp">{uploadPercentage}%</p>
+                    <ProgressBar animated now={uploadPercentage}/>
+                </div>
+            }
+            {
+                errorUpload.show &&
+                <Alert variant="danger">
+                    <strong>{errorUpload.msg}</strong>
+                </Alert>
+
+            }
+            <div className="text-center mb-3">
+                <Title
+                title="Sube tus documentos"
+                className="title-dp fz42"
+                />
+                <div className="metropolisReg fz16 mt-3 mailto-content">
+                Procura que la calidad sea óptima y legible en formato: <br></br>
+                PNG, JPG, ZIP, PDF y/o FOTO en buena calidad según sea el caso (Peso
+                máximo de 10MB por archivo). <br></br>
+                Si lo prefieres, también puedes enviarnos tu documentación a{" "}
+                <a href="mailto:documentos@distritopyme.com">
+                    documentos@distritopyme.com
+                </a>
+                </div>
+            </div>
+            <DocumentsForm initialValues={initialValues} setValues={setValues} handleSubmit={handleSubmit} setUser={setUser} history={history} params={props.match.params}/>
+        </div>
+    );
 };
 
 export default Documents;

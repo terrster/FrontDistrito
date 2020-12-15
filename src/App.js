@@ -42,8 +42,7 @@ import Amount from "./components/Appliance/Amount";
 import Appliance from "./components/Appliance/Appliance";
 import Credit from "./components/Credit/Credit";
 import Record from "./components/Record/Record";
-// import Documents from "./components/Appliance/Documents";
-import Documents2 from "./components/Appliance/Documents2";
+import Documents from "./components/Appliance/Documents";
 // import Loader from "./components/Loader/Loader";
 import Brokers from "./components/Brokers/Brokers";
 import ThankyouPage from "./components/Brokers/ThankyouPage";
@@ -164,7 +163,7 @@ class App extends Component {
                 <PrivateRoute
                   exact
                   path="/documentos/:idAppliance"
-                  component={Documents2}
+                  component={Documents}
                 />
                 {/* <PrivateRoute
                   exact

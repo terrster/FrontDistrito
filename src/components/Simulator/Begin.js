@@ -71,6 +71,7 @@ const Begin = props => {
 				style={{ cursor: error ? "not-allowed" : "pointer"}}
 				disabled={disabled}
 				onClick={changeStep}
+				style={{width: '250px'}}
 			>
 				Siguiente
 			</Button>
