@@ -30,7 +30,7 @@ function TypeCardModal(props) {
           {props.text}
         </p>
         <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <Button onClick={props.onHide} className="btn-blue-general">Cerrar</Button>
+        <Button onClick={props.onHide} className="btn-blue-general" style={{width: '250px'}}>Cerrar</Button>
         </div>
       </Modal.Body>
     </Modal>

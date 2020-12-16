@@ -11,13 +11,17 @@ import CustomLoader from '../Generic/CustomLoader';
 
 // REDUX ACTIONS
 import {
-	updateStep
+	newSimulation
 } from '../../redux/actions/simulatorActions'
 
 const LandSimulator = () => {
 
 	const dispatch = useDispatch();
-	const { step, amount } = useSelector(state => state.simulator)
+	const { step, amount, loading } = useSelector(state => state.simulator)
+
+	const setNewSimulation = () => {
+		dispatch(newSimulation());
+	}
 
 	return (
 		<div id="simulador" className={`${step < 2 ? 'bg-gray' : 'bg-gray'} pt-4 pb-2 mb-3 text-center ml-auto mr-auto plr-20 center-items`} style={{maxWidth : '1440px'}}>
@@ -28,10 +32,13 @@ const LandSimulator = () => {
 					<Title className="subtitle-dp fz32 mb-18 fw500" title="Hemos encontrado 4 ofertas de crédito para tu negocio"/>
 				</div>
 			}
+			{
+				loading &&
+				<CustomLoader />
+			}
 			{	step === 0 && <Begin />	}
-			{	step === 1 && amount > 0 && <StablishTerm />	}
-			{	step === 2 && amount > 0 &&  setInterval(() => dispatch(updateStep(3)), 2000 ) && <CustomLoader />	}
-			{	step === 3 && <Proposals />	}
+			{	step === 1 && amount > 0 && !loading && <StablishTerm />	}
+			{	step === 2 && !loading && <Proposals setNewSimulation={setNewSimulation}/>	}
 		</div>
 	)
 }

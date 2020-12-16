@@ -10,7 +10,10 @@ import {
     UPDATE_STEP_ERROR,
     UPDATE_TERM,
     UPDATE_TERM_SUCCESS,
-    UPDATE_TERM_ERROR
+    UPDATE_TERM_ERROR,
+    SET_NEW_SIMULATION,
+    SET_NEW_SIMULATION_SUCCESS,
+    SET_NEW_SIMULATION_ERROR
 } from '../types/simulatorTypes';
 
 export function updateAmount(amount){
@@ -39,7 +42,14 @@ export function updateStep(step){
     return (dispatch) => {
         dispatch( stepF() );
         try {
-            dispatch(stepSuccess(step))
+            if(step === 2){
+                setTimeout(() => {
+                    dispatch(stepSuccess(step))
+                }, 3000);
+            }
+            else{
+                dispatch(stepSuccess(step))
+            }
         } catch (e) {
             dispatch (stepError('Ocurrio un error. Intente otra vez'))
         }
@@ -53,6 +63,17 @@ export function updateTerm(term){
             dispatch(termSuccess(term))
         } catch (e) {
             dispatch (termError('Ocurrio un error. Intente otra vez'))
+        }
+    }
+}
+
+export function newSimulation(){console.log("Nueva simluacion");
+    return (dispatch) => {
+        dispatch( setNewSimulation() );
+        try {
+            dispatch(setNewSimulationSuccess())
+        } catch (e) {
+            dispatch (setNewSimulationError('Ocurrio un error. Intente otra vez'))
         }
     }
 }
@@ -111,4 +132,16 @@ const termSuccess = term => ({
 const termError = error => ({
     type: UPDATE_TERM_ERROR,
     payload: error
+});
+
+const setNewSimulation = () => ({
+    type: SET_NEW_SIMULATION,
+});
+
+const setNewSimulationSuccess = () => ({
+    type: SET_NEW_SIMULATION_SUCCESS,
+});
+
+const setNewSimulationError = () => ({
+    type: SET_NEW_SIMULATION_ERROR,
 });

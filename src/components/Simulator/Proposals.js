@@ -2,11 +2,11 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 // COMPONENTS
-import { Row } from 'react-bootstrap';
+import { Row, Button } from 'react-bootstrap';
 import PropCard from './PropCard';
 import { Link } from 'react-router-dom'
 
-const Proposals = () => {
+const Proposals = (props) => {
 	const { amount, term } = useSelector(state => state.simulator);
 
 	const amountFloat = parseFloat(amount)
@@ -20,9 +20,9 @@ const Proposals = () => {
 	let ans = [];
 	let totalFinal = 0;
 	
-	const changeStep = () => {
-		window.location.reload()
-	}
+	// const changeStep = () => {
+	// 	window.location.reload()
+	// }
 
 	for(let i = 0; i < termInt; i++){
 		let aux = amountFloat/termInt;
@@ -59,14 +59,14 @@ const Proposals = () => {
 		ans.push(Math.round(totalFinal/termInt));
 	}
 
-	let tasasDisplay = ["16.9%","24.6%", "47.4%", "73.1%" ]
+	let tasasDisplay = ["16.9%","24.6%", "47.4%", "73.1%" ];
 
 	return (
 		<div style={{maxWidth: '620px'}} className="ml-auto mr-auto">
 			
 			<Row className="d-flex justify-content-center">
 				{ans.map( (value, index) =>
-					<PropCard pay={value} tasa={tasasDisplay[index]} number={index + 1} key={index} />
+					<PropCard pay={value} tasa={tasasDisplay[index]} number={index + 1} key={index}/>
 				)}
 			</Row>
 			<div className="mt-45 mb-5 margin-reduce-buttons">
@@ -76,13 +76,13 @@ const Proposals = () => {
 				{
 					(sessionStorage.getItem('token') && sessionStorage.getItem('token') !== '') ?
 					<div className="container-buttons">
-						<Link className="btn-blue-general mt-45 fz24 link-blue-general" to="/home">Solicitar ahora</Link>
-						<Link className="btn-blue-general mt-45 fz24 link-blue-general" to="/" onClick={changeStep} >Nueva simulación</Link>
+						<Link className="btn-blue-general mt-45 fz24 link-blue-general" to="/home" style={{width: '250px'}}>Solicitar ahora</Link>
+						<Button className="btn-blue-general mt-45 fz24 link-blue-general" onClick={props.setNewSimulation} style={{width: '250px'}}>Nueva simulación</Button>
 					</div>
 					:
 					<div className="container-buttons">
-						<Link className="btn-blue-general mt-45 fz24 link-blue-general" to="/registrate">Solicitar ahora</Link>
-						<Link className="btn-blue-general mt-45 fz24 link-blue-general" to="/" onClick={changeStep} >Nueva simulación</Link>
+						<Link className="btn-blue-general mt-45 fz24 link-blue-general" to="/registrate" style={{width: '250px'}}>Solicitar ahora</Link>
+						<Button className="btn-blue-general mt-45 fz24 link-blue-general" onClick={props.setNewSimulation} style={{width: '250px'}}>Nueva simulación</Button>
 					</div>
 				}
 			</div>

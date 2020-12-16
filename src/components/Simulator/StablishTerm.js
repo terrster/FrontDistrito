@@ -42,7 +42,7 @@ const StablishTerm = () => {
 					<option value="48" style={{cursor: 'pointer'}}>48 meses</option>
 				</select>
 			</div>
-			<Button className="btn-blue-general mt-45 fz24" disabled={(term !== 0) ? false : true} onClick={changeStep}>Siguiente</Button>
+			<Button className="btn-blue-general mt-45 fz24" disabled={(term !== 0) ? false : true} style={{width: '250px'}} onClick={changeStep}>Siguiente</Button>
 		</div>
 	)
 }

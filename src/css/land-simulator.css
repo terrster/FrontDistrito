@@ -105,3 +105,10 @@
 .simulator-next-button.link:hover{
 	text-decoration: none;
 }
+
+.helpImg{
+	position: absolute;
+	margin-left: 38px;
+	top: 23px;
+	cursor: pointer;
+}

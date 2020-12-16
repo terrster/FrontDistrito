@@ -10,7 +10,10 @@ import {
 	UPDATE_STEP_ERROR,
 	UPDATE_TERM,
 	UPDATE_TERM_SUCCESS,
-	UPDATE_TERM_ERROR
+	UPDATE_TERM_ERROR,
+	SET_NEW_SIMULATION,
+    SET_NEW_SIMULATION_SUCCESS,
+    SET_NEW_SIMULATION_ERROR
 } from '../types/simulatorTypes'
 
 const initialState = {
@@ -28,6 +31,7 @@ const simulatorReducer = ( state = initialState, action) => {
 		case UPDATE_CONT:
 		case UPDATE_STEP:
 		case UPDATE_TERM:
+		case SET_NEW_SIMULATION:
 			return {
 				...state,
 				loading: true
@@ -36,6 +40,7 @@ const simulatorReducer = ( state = initialState, action) => {
 		case UPDATE_CONT_ERROR:
 		case UPDATE_STEP_ERROR:
 		case UPDATE_TERM_ERROR:
+		case SET_NEW_SIMULATION_ERROR:
 			return {
 				...state,
 				loading: false,
@@ -64,6 +69,15 @@ const simulatorReducer = ( state = initialState, action) => {
 				...state,
 				loading: false,
 				cont: action.payload
+			}
+		case SET_NEW_SIMULATION_SUCCESS:
+			return {
+				amount : 0, 
+				term: 0, 
+				step: 0, 
+				cont: 0,
+				loading: false,
+				error: null
 			}
 		default :
 			return state
