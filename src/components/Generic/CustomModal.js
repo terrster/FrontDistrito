@@ -26,7 +26,7 @@ const CustomModal = () => {
 				</Col>
 			</Row>
 			<div className="text-center mt-30">
-				<Button className="btn-blue-general ml-auto mr-auto" onClick={closeModal}>
+				<Button className="btn-blue-general ml-auto mr-auto" onClick={closeModal} style={{width: '250px'}}>
 					Aceptar
 				</Button>
 			</div>

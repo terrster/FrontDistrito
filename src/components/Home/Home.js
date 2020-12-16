@@ -33,7 +33,7 @@ const Home = (props) => {
       idDocuments: null,
     },
     name: userd.name,
-    lastname: userd.lastName,
+    lastname: userd.lastname,
     email: userd.email,
     phone: userd.phone,
   });
@@ -146,7 +146,7 @@ const Home = (props) => {
           <ApplianceCard
             keyData={"generalData"}
             first={myProfile.idClient.type}
-            second={`${user.name} ${user.lastname}`}
+            second={`${user.name} ${user.lastname || user.lastName}`}
             third={myProfile.email}
             fourth={myProfile.phone}
             applianceId={newApplianceID}

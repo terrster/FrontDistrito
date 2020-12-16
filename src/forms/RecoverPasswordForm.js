@@ -113,6 +113,7 @@ const RecoverPasswordForm = (props) => {
             type="submit"
             className={submitButtonClass}
             disabled={submitting}
+            style={{width: '250px'}}
           >
             Reestablecer
           </Button>

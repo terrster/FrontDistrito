@@ -34,7 +34,7 @@ let ResetPasswordForm = props => {
 			<form onSubmit={handleSubmit} className="mr-auto ml-auto" style={{maxWidth : '690px'}}>
 				<Field component={renderField} type="email" name="email" label="Correo electrónico"/>
 				<div className="text-center">
-					<Button type="submit" className={submitButtonClass} disabled={submitting}>Enviar Email</Button>
+					<Button type="submit" className={submitButtonClass} disabled={submitting} style={{width: '250px'}}>Enviar Email</Button>
 				</div>
 			</form>
 		</div>
