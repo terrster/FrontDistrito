@@ -1,27 +1,35 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import Header from './Header/Header';
 import LandSimulator from '../Simulator/LandSimulator';
 import AboutUs from './AboutUs/AboutUs';
 import Video from './Video/Video';
 import HowWorks from './HowWorks/HowWorks';
 import Doubts from './Doubts/Doubts';
+import Axios from "../../utils/axios";
 
-class Landing extends Component {
+const Landing = () => {
 
-    render(){
-        return (
-            <div className="">
-                <Header title={"¿Necesitas financiamiento?"} text={"Recibe las mejores ofertas de crédito "} highlighted={"¡En menos de 24 horas!"} buttonText={"Solicitar ahora"} />
-                <LandSimulator />
-                <div className="container-fluid">               
-                    <HowWorks />
-                    <Video />
-                    <AboutUs />      
-                    <Doubts /> 
-                </div>
+    useEffect(() => {
+        const addVisit = async() => {
+            let res = await Axios.post('/counter/visit');
+            console.log(res);
+        }
+
+        addVisit();
+    }, []);
+
+    return (
+        <div className="">
+            <Header title={"¿Necesitas financiamiento?"} text={"Recibe las mejores ofertas de crédito "} highlighted={"¡En menos de 24 horas!"} buttonText={"Solicitar ahora"} />
+            <LandSimulator />
+            <div className="container-fluid">               
+                <HowWorks />
+                <Video />
+                <AboutUs />      
+                <Doubts /> 
             </div>
-        );
-    }
+        </div>
+    );
 }
 
 export default Landing;

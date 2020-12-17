@@ -1,12 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 // COMPONENTS
 import { Row, Button } from 'react-bootstrap';
 import PropCard from './PropCard';
 import { Link } from 'react-router-dom'
+import Axios from "../../utils/axios";
 
 const Proposals = (props) => {
+
+	useEffect(() => {
+        const incrementSimulatorCount = async() => {
+            await Axios.post('/counter/simulator');
+        }
+
+        incrementSimulatorCount();
+	}, []);
+	
 	const { amount, term } = useSelector(state => state.simulator);
 
 	const amountFloat = parseFloat(amount)
