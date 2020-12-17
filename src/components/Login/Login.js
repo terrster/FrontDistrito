@@ -51,7 +51,7 @@ let Login = props => {
 						</Col>
 					</Row>
 					<div className="text-center mt-30">
-						<Button className="btn-blue-general ml-auto mr-auto" onClick={() => setOpen(false)}>
+						<Button className="btn-blue-general ml-auto mr-auto" style={{width: '250px'}} onClick={() => setOpen(false)}>
 							Aceptar
 						</Button>
 					</div>
