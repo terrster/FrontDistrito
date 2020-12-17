@@ -46,6 +46,7 @@ import Documents from "./components/Appliance/Documents";
 // import Loader from "./components/Loader/Loader";
 import Brokers from "./components/Brokers/Brokers";
 import ThankyouPage from "./components/Brokers/ThankyouPage";
+import Counter from "./components/Counter/Counter";
 import Solicitud from "./components/Solicitud/Solicitud";
 import Propuestas from "./components/Propuestas/Propuestas";
 
@@ -141,6 +142,7 @@ class App extends Component {
                 <Route path="/login" exact component={Login} />
                 <Route path="/brokers" exact component={Brokers}/>
                 <Route path="/solicitud_enviada_brokers" exact component={ThankyouPage} />
+                <Route path="/contador" exact component={Counter}/>
                 <PrivateRoute exact path="/home" component={Home} />
                 <PrivateRoute exact path="/solicitud" component={Appliance} />
                 <PrivateRoute
