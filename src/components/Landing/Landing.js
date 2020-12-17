@@ -11,8 +11,7 @@ const Landing = () => {
 
     useEffect(() => {
         const addVisit = async() => {
-            let res = await Axios.post('/counter/visit');
-            console.log(res);
+            await Axios.post('/counter/visit');
         }
 
         addVisit();
