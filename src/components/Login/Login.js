@@ -18,7 +18,7 @@ let Login = props => {
 
 	let onFormSubmit = async (data) => {
 		dispatch ( updateLoader(true));
-		const loginRequest = await axios.post('login', data);
+		const loginRequest = await axios.post('login'+ '?nocache=' + new Date().getTime(), data);
 		if (loginRequest.data.code === 200){
 			dispatch( loginAction(loginRequest.data) );
 		} else {
