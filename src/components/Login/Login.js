@@ -18,18 +18,9 @@ let Login = props => {
 
 	let onFormSubmit = async (data) => {
 		dispatch ( updateLoader(true));
-		// const loginRequest = await axios.post('login', data);
-		const loginRequest = await fetch(`${process.env.REACT_APP_BACKEND}/login`, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(data)
-		}).then(response => response.json()).then(response => {return response});
-		// if (loginRequest.data.code === 200){
-		if (loginRequest.code === 200){
-			// dispatch( loginAction(loginRequest.data) );
-			dispatch( loginAction(loginRequest) );
+		const loginRequest = await axios.post('login', data);
+		if (loginRequest.data.code === 200){
+			dispatch( loginAction(loginRequest.data) );
 		} else {
 			setOpen(true);	
 		}

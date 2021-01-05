@@ -37,6 +37,11 @@ export const FieldDoc = ({
                         for(let i=6; i<aux.length; i++){
                             nameDoc += aux[i];
                         }
+                        if(nameDoc === ''){
+                            for(let i=5; i<aux.length; i++){
+                                nameDoc += aux[i];
+                            }
+                        }
                     } 
                     else{
                         let aux = value.name.replace(' ', '');
