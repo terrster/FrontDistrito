@@ -43,6 +43,7 @@ import Appliance from "./components/Appliance/Appliance";
 import Credit from "./components/Credit/Credit";
 import Record from "./components/Record/Record";
 import Documents from "./components/Appliance/Documents";
+import FinancialData from "./components/FinancialData/FinancialData";
 // import Loader from "./components/Loader/Loader";
 import Brokers from "./components/Brokers/Brokers";
 import ThankyouPage from "./components/Brokers/ThankyouPage";
@@ -139,7 +140,7 @@ class App extends Component {
                 <Route path="/registrate" exact component={Signup} />
                 <Route path="/solicitudBrokers/:ownerId?" exact component={SignupBrokers} />
                 <Route path="/registroexitoso" exact component={RegistroExitoso} />
-                <Route path="/login" exact component={Login} />
+                <Route path="/login/:redirect?" exact component={Login} />
                 <Route path="/brokers" exact component={Brokers}/>
                 <Route path="/solicitud_enviada_brokers" exact component={ThankyouPage} />
                 <Route path="/contador" exact component={Counter}/>
@@ -167,6 +168,7 @@ class App extends Component {
                   path="/documentos/:idAppliance"
                   component={Documents}
                 />
+                <Route path="/datos-financieros" exact component={FinancialData}/>
                 {/* <PrivateRoute
                   exact
                   path="/documentos2/:idAppliance"

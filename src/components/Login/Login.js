@@ -10,8 +10,9 @@ import { loginAction } from '../../redux/actions/authActions';
 import { updateLoader } from '../../redux/actions/loaderActions';
 import { Modal } from 'react-responsive-modal';
 import { Row, Button, Col } from 'react-bootstrap';
+import { Redirect } from "react-router-dom";
 
-let Login = props => {
+const Login = props => {
 
 	const dispatch = useDispatch();
 	const [open, setOpen] = useState(false);
@@ -21,25 +22,28 @@ let Login = props => {
 		const loginRequest = await axios.post('login', data);
 		if (loginRequest.data.code === 200){
 			dispatch( loginAction(loginRequest.data) );
+
+			if(props.match.params.redirect){
+				window.location.replace(`/${props.match.params.redirect}`);
+			}
+			else{
+				window.location.replace("/credito");
+			}
 		} else {
 			setOpen(true);	
 		}
 		dispatch ( updateLoader(false));
 	}
 
-	const auth = useSelector(state => state.auth.logged);
-
-	if(auth){
-		props.history.push("/credito")
-		/* props.updateLoader(false) */
-		/* props.updateNav("login") */
-	}
+	const auth = sessionStorage.getItem('token');
 
 	window.scrollTo(0, 0)
-	if(sessionStorage.getItem('user')){
-		window.location="/credito";
-	}else{
-		return (
+	return (
+		<>
+			{
+				auth &&
+				<Redirect to="/credito"/>
+			}
 			<div>
 				<Loader />
 				<Modal onClose={() => setOpen(false)} open={open} style={{ padding: '30px 40px!important', width: 'auto!important' }}>
@@ -64,10 +68,8 @@ let Login = props => {
 						<SigninForm onSubmit={(e) => onFormSubmit(e,Login)} />
 				</div>
 			</div>
-			
-		)
-	}	
-	
+		</>
+	);
 }
 
 /* const mapStateToProps = (state, ownProps) => {

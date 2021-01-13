@@ -52,14 +52,33 @@
 .btn-bank-del{
 	background-color: transparent !important;
 	border: none !important;
+	margin-left: -15px;
 }
 
 .bankDel{
-	/* position: relative; */
-    margin-top: 7px;
-	/* left: 60px; */
-	width: 25px;
-	height: 25px;
+	margin-top: -2px;
+	width: 39.5px;
+	height: 39.5px;
+}
+
+@media (min-width: 400px){
+	.btn-bank-del{
+		margin-top: 15px;
+	}
+}
+
+@media (min-width: 576px){
+	.btn-bank-del{
+		margin-top: 0px;
+		margin-left: -30px;
+	}
+}
+
+@media (min-width: 768px){
+	.btn-bank-del{
+		margin-top: 0px;
+		margin-left: -15px;
+	}
 }
 
 .modal-comparative{
