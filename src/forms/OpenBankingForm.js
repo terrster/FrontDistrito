@@ -6,7 +6,40 @@ import SubtitleForm from '../components/Generic/SubtitleForm';
 
 import Delete from "../assets/img/basura-01.png";
 
-const FinancialDataForm = ({user, banksOptions, getBankFields, bankFields, banks, setBanks}) => {
+const OpenBankingForm = (props) => {
+
+    const {user, initialValues, setinitialValues, banksOptions, getBankFields, bankFields, setBankFields, banks, setBanks} = props;
+
+    const deleteBank = async(indexBank) => {
+        // let banksCopy = [...banks];
+        // let initialValuesCopy = [...initialValues];
+        
+        // if(indexBank === 0){
+        //     let bankFieldsCopy = [...bankFields];
+        //     bankFieldsCopy[0] = [];
+        //     setBankFields(bankFieldsCopy);
+
+        //     banksCopy[0] = {
+        //         code: null,
+        //         id: null,
+        //         idArray: 0,
+        //         name: null,
+        //         status: null,
+        //     };
+
+        //     initialValuesCopy[0][`bank${0}`].id = '';
+        //     // props.values[`bank${0}`].id = ''
+        // }
+        // else{
+        //     banksCopy.splice(indexBank, 1);
+        //     initialValuesCopy[indexBank][`bank${indexBank}`].id = '';
+        //     // props.values[indexBank][`bank${indexBank}`].id = ''
+        // }
+        // setBanks(banksCopy);
+        // setinitialValues(initialValuesCopy);
+        
+        console.log(props);
+    };
 
     return (
         <Form className="ml-auto mr-auto pl-3 pr-3 pb-4" style={{ maxWidth: "690px" }}>
@@ -232,7 +265,7 @@ const FinancialDataForm = ({user, banksOptions, getBankFields, bankFields, banks
                     <Field
                         key={0}
                         component={renderFieldSelect}
-                        name={"bank" + 0}
+                        name={`bank${0}.id`}
                         required={true}
                         className="mb-3"
                         onChange={({target}) => {
@@ -264,7 +297,7 @@ const FinancialDataForm = ({user, banksOptions, getBankFields, bankFields, banks
                     </Field>
                 </Col>
                 <Col xs={12} sm={1}>
-                    <Button className="btn btn-bank-del mb-xs-5" /*onClick={() => deleteBank(0)}*/>
+                    <Button className="btn btn-bank-del mb-xs-5" onClick={() => deleteBank(0)}>
                         <img src={Delete} alt="Datos bancarios delete" title="Eliminar banco" className="bankDel"/>
                     </Button>
                 </Col>
@@ -272,7 +305,7 @@ const FinancialDataForm = ({user, banksOptions, getBankFields, bankFields, banks
                     bankFields
                     .filter((fields, index) => index === 0)
                     .map((fields, index) => {
-                        return fields.map((field) => {console.log(field);
+                        return fields.map((field) => {
                             return (
                                 <Col xs={12} key={index}>
                                     <Field
@@ -345,9 +378,12 @@ const FinancialDataForm = ({user, banksOptions, getBankFields, bankFields, banks
                                     <Field
                                         key={indexBank}
                                         component={renderFieldSelect}
-                                        name={"banks" + indexBank}
+                                        name={`bank${indexBank}.id`}
                                         required={true}
                                         className="mb-3"
+                                        onChange={({target}) => {
+                                            getBankFields(target.value, indexBank);
+                                        }}
                                     >
                                         <option value="">Seleccionar</option>
                                         {banksOptions.map((bank, index) => {
@@ -361,7 +397,7 @@ const FinancialDataForm = ({user, banksOptions, getBankFields, bankFields, banks
                                 </Col>
             
                                 <Col xs={12} sm={1}>
-                                    <Button className="btn btn-bank-del" /*onClick={() => deleteBank(indexBank)}*/>
+                                    <Button className="btn btn-bank-del" onClick={() => deleteBank(indexBank)}>
                                         <img src={Delete} alt="Datos bancarios delete" title="Eliminar banco" className="bankDel"/>
                                     </Button>
                                 </Col>
@@ -382,11 +418,8 @@ const FinancialDataForm = ({user, banksOptions, getBankFields, bankFields, banks
                 onClick={() => {
                     if(banks.length < 10){
                         const newBank = {
-                            code: null,
                             id: null,
                             idArray: banks.length ? banks[banks.length - 1].idArray + 1 : 1,
-                            name: null,
-                            status: null,
                         };
                         setBanks([...banks, newBank]);
                     }
@@ -398,14 +431,14 @@ const FinancialDataForm = ({user, banksOptions, getBankFields, bankFields, banks
 }
 
 export default withFormik({
-    // mapPropsToValues({initialValues}){
-    //     return initialValues;
-    // },
+    mapPropsToValues({initialValues}){
+        return initialValues;
+    },
     // validate: itemValidations, 
     // handleSubmit(values, formikBag){
     //     formikBag.setSubmitting(false);
     //     formikBag.props.submitFunction(values);
     // },
     enableReinitialize: true,
-    displayName: 'FinancialDataForm'
-})(FinancialDataForm);
+    displayName: 'OpenBankingForm'
+})(OpenBankingForm);

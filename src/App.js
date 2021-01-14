@@ -43,7 +43,7 @@ import Appliance from "./components/Appliance/Appliance";
 import Credit from "./components/Credit/Credit";
 import Record from "./components/Record/Record";
 import Documents from "./components/Appliance/Documents";
-import FinancialData from "./components/FinancialData/FinancialData";
+import OpenBanking from "./components/OpenBanking/OpenBanking";
 // import Loader from "./components/Loader/Loader";
 import Brokers from "./components/Brokers/Brokers";
 import ThankyouPage from "./components/Brokers/ThankyouPage";
@@ -168,7 +168,7 @@ class App extends Component {
                   path="/documentos/:idAppliance"
                   component={Documents}
                 />
-                <Route path="/datos-financieros" exact component={FinancialData}/>
+                <Route path="/open-banking" exact component={OpenBanking}/>
                 {/* <PrivateRoute
                   exact
                   path="/documentos2/:idAppliance"
@@ -179,6 +179,7 @@ class App extends Component {
 
                 <PrivateRoute exact path="/estatus_solicitud" component={Solicitud}/>
                 <PrivateRoute exact path="/propuestas" component={Propuestas}/>
+                <Redirect to="/"/>
               </Switch>
             </div>
             <div className="container-fluid">
