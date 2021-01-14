@@ -69,6 +69,22 @@ export const validateComercialInfo = (values) => {
     }
   }
 
+  if(!values.employeesNumber){
+    errors.employeesNumber = "Selecciona una opción";
+  }
+
+  if (type === "PM") {
+    if(!values.bankAccount){
+      errors.bankAccount = "Selecciona una opción";
+    }
+  }
+
+  if (type !== "PF") {
+    if(!values.paymentsMoreThan30){
+      errors.paymentsMoreThan30 = "Selecciona una opción";
+    }
+  }
+
   if (!values.street) {
     errors.street = "Ingresa la calle de tu negocio";
   }

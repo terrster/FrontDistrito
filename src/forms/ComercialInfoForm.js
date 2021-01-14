@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Field, reduxForm } from "redux-form";
 import comercialOptions from "../models/ComercialInfoModels";
+import employeesNumber from "../models/EmployeesNumber";
+import bankAccount from "../models/BankAccount";
 import { Row, Col, Button } from "react-bootstrap";
 import InputLabel from "../components/Generic/InputLabel";
 import SubtitleForm from "../components/Generic/SubtitleForm";
@@ -236,6 +238,9 @@ let ComercialInfoForm = (props) => {
     const businessNameError = document.getElementById("businessName-error");
     const specificError = document.getElementById("specific-error");
     const rfcError = document.getElementById("rfc-error");
+    const employeesNumberError = document.getElementById("employeesNumber-error");
+    const bankAccountError = document.getElementById("bankAccount-error");
+    const paymentsMoreThan30Error = document.getElementById("paymentsMoreThan30-error");
     const streetError = document.getElementById("street-error");
     const extNumberError = document.getElementById("extNumber-error");
     const intNumberError = document.getElementById("intNumber-error");
@@ -264,6 +269,9 @@ let ComercialInfoForm = (props) => {
       businessNameError,
       specificError,
       rfcError,
+      employeesNumberError,
+      bankAccountError,
+      paymentsMoreThan30Error,
       streetError,
       extNumberError,
       intNumberError,
@@ -359,6 +367,51 @@ let ComercialInfoForm = (props) => {
           maxLength={12}
           minLength={12}
         />
+
+        <Field component={renderSelectField} name="employeesNumber" cls="mb-3">
+          <option className="metropolisReg" value="">
+            Número de empleados
+          </option>
+          {employeesNumber.map((option, index) => {
+            return (
+              <option value={option.value} key={index}>
+                {option.text}
+              </option>
+            );
+          })}
+        </Field>
+
+        {
+          type === "PM" &&
+          <Field component={renderSelectField} name="bankAccount" cls="mb-3">
+            <option className="metropolisReg" value="">
+              ¿Tienes cuenta bancaria?
+            </option>
+            {bankAccount.map((option, index) => {
+              return (
+                <option value={option.value} key={index}>
+                  {option.text}
+                </option>
+              );
+            })}
+          </Field>
+        }
+
+        {
+          type !== "PF" &&
+          <Field component={renderSelectField} name="paymentsMoreThan30" cls="mb-3">
+            <option className="metropolisReg" value="">
+              ¿Alguno de tus clientes te pagan a más de 30 días?
+            </option>
+            <option className="metropolisReg" value="1">
+              Sí
+            </option>
+            <option className="metropolisReg" value="0">
+              No
+            </option>
+          </Field>
+        }
+
         <label className="label-style">
           El número telefónico debe tener 10 dígitos
         </label>
@@ -415,7 +468,7 @@ let ComercialInfoForm = (props) => {
           </Col>
           <Col lg={6} md={6} sm={12}>
             <Field component={renderSelectField} name="town" cls="mb-3">
-              <option className="brandonReg" value="">
+              <option className="metropolisReg" value="">
                 Selecciona tu colonia
               </option>
               {colonias.map((colonia, index) => {

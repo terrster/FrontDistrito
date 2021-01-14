@@ -60,6 +60,13 @@ export const validateGeneralInfo = (values) => {
     }
   }
 
+  if (type !== "PM") {//PF, PFAE, RIF
+    if(!values.bankAccount){
+      errors.bankAccount = "Selecciona una opción";
+    }
+  }
+
+
   if (!values.name1) {
     errors.name1 = "Ingresa el nombre de la referencia";
   } else if (!/^[A-Za-záéíóúñ\s]+$/g.test(values.name1)) {

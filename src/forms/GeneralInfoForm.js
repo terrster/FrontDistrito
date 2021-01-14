@@ -3,6 +3,7 @@ import { Field, reduxForm } from "redux-form";
 import SubtitleForm from "../components/Generic/SubtitleForm";
 import { Row, Col, Button } from "react-bootstrap";
 import generalInfoOptions from "../models/GeneralInfoModels";
+import bankAccount from "../models/BankAccount";
 import InputLabel from "../components/Generic/InputLabel";
 import { useDispatch } from "react-redux";
 import helper from "../models/DateModels";
@@ -271,6 +272,7 @@ let GeneralInfoForm = ({
     const yearError = document.getElementById("year-error");
     const edadError = document.getElementById("edad-error");
     const rfcPersonError = document.getElementById("rfcPerson-error");
+    const bankAccountError = document.getElementById("bankAccount-error");
     const streetError = document.getElementById("street-error");
     const extNumberError = document.getElementById("extNumber-error");
     const intNumberError = document.getElementById("intNumber-error");
@@ -300,6 +302,7 @@ let GeneralInfoForm = ({
       yearError,
       edadError,
       rfcPersonError,
+      bankAccountError,
       streetError,
       extNumberError,
       intNumberError,
@@ -485,6 +488,26 @@ let GeneralInfoForm = ({
             </Col>
           </Row>
         )}
+
+        {
+          user.idClient.type !== "PM" &&
+          <Row>
+            <Col lg={12} md={12} sm={12}>
+              <Field component={renderSelectField} name="bankAccount" cls="mt-3 mb-3">
+                <option className="metropolisReg" value="">
+                  ¿Tienes cuenta bancaria?
+                </option>
+                {bankAccount.map((option, index) => {
+                  return (
+                    <option value={option.value} key={index}>
+                      {option.text}
+                    </option>
+                  );
+                })}
+              </Field>
+            </Col>
+          </Row>
+        }
 
         <SubtitleForm
           subtitle="Domicilio particular"
