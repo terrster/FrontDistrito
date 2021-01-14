@@ -18,11 +18,13 @@ import Pagaloop from '../assets/img/alianzas/pagaloop.png';
 import iBan from '../assets/img/alianzas/iBan.png';
 import Lendera from '../assets/img/alianzas/Lendera.png';
 import Dimex from '../assets/img/alianzas/dimex.png';
+import ION from '../assets/img/alianzas/ion.png';
+import Amifin from '../assets/img/alianzas/amifin.png';
 
 export const filterFinancials = (financials) => {
     
     const filteredFinancials = financials.split(';').filter((financial) => {
-        return financial !== 'CREZE' && financial !== 'Bancoppel' && financial !== 'DOCUFORMAS' && financial !== 'AV CAPITAL'; 
+        return financial !== 'CREZE' && financial !== 'Bancoppel' && financial !== 'DOCUFORMAS' && financial !== 'AV CAPITAL' && financial !== 'DIMEX'; 
     });
 
     return filteredFinancials;
@@ -89,6 +91,12 @@ export const imgFinancial = (financial) => {
         case 'DIMEX':
         return Dimex;
 
+        case 'ION':
+        return ION;
+        
+        case 'AMIFIN':
+        return Amifin;
+
         case 'ALL':
         return [
             ASPIRIA,
@@ -110,6 +118,8 @@ export const imgFinancial = (financial) => {
             iBan,
             Lendera, //PRETMEX (FASTTRACK)
             // Dimex
+            ION,
+            Amifin
         ];
     }
 }
@@ -303,14 +313,34 @@ export const dataFinancial = (financial, properties) => {//Propuestas
                 class: 'LENDERA'
             };
 
-        case 'DIMEX':
+        // case 'DIMEX':
+        //     return {
+        //         financiera: 'Dimex',
+        //         monto: properties.monto_preaut.value,
+        //         plazo: 'Hasta 120 meses',
+        //         tasa: '2.5% mensual',
+        //         logo: imgFinancial(financial),
+        //         class: 'DIMEX'
+        //     };
+
+        case 'ION':
             return {
-                financiera: 'Dimex',
+                financiera: 'ION',
+                monto: properties.monto_preaut.value,
+                plazo: 'Hasta 144 meses',
+                tasa: '1.5% mensual',
+                logo: imgFinancial(financial),
+                class: 'ION'
+            };
+        
+        case 'AMIFIN':
+            return {
+                financiera: 'Amifin',
                 monto: properties.monto_preaut.value,
                 plazo: 'Hasta 120 meses',
-                tasa: '2.5% mensual',
+                tasa: '28% anual',
                 logo: imgFinancial(financial),
-                class: 'DIMEX'
+                class: 'AMIFIN'
             };
     }
 }
@@ -505,14 +535,35 @@ export const dataFinancialFormalization = (properties) => {
                 logo: imgFinancial(financial),
                 class: 'LENDERA'
             };
-        case 'DIMEX':
+
+        // case 'DIMEX':
+        //     return {
+        //         financiera: 'Dimex',
+        //         monto: properties.n12_1_monto_autorizado.value,
+        //         plazo: properties.n12_3_plazo_autorizado.value + " meses",
+        //         tasa: properties.n12_2_tasa_autorizada.value + "% mensual",
+        //         logo: imgFinancial(financial),
+        //         class: 'DIMEX'
+        //     };
+
+        case 'ION':
             return {
-                financiera: 'Dimex',
+                financiera: 'ION',
                 monto: properties.n12_1_monto_autorizado.value,
                 plazo: properties.n12_3_plazo_autorizado.value + " meses",
                 tasa: properties.n12_2_tasa_autorizada.value + "% mensual",
                 logo: imgFinancial(financial),
-                class: 'DIMEX'
-            }
+                class: 'ION'
+            };
+        
+        case 'AMIFIN':
+            return {
+                financiera: 'Amifin',
+                monto: properties.n12_1_monto_autorizado.value,
+                plazo: properties.n12_3_plazo_autorizado.value + " meses",
+                tasa: properties.n12_2_tasa_autorizada.value + "% mensual",
+                logo: imgFinancial(financial),
+                class: 'AMIFIN'
+            };
     }
 }
