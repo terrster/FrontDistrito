@@ -59,16 +59,22 @@ const Header = props => {
 					/>
 					<Carousel.Caption>
 						<div className="text-center ml-auto mr-auto">
-							<div className="vertical-center mr-auto ml-auto container">
-								<h3 className="coolvetica fz48 white mb-34 header-title">
-                                    Todas las opciones de crédito <br/> en una sola solicitud
-								</h3>
-								<div
-									className="metropolisReg white fz24 lh133"
-									style={{ letterSpacing: 0.8 }}
-								>
-									<p>Recibe las mejores opciones de crédito</p>
-									<p className="metropolisMed ">¡En menos de 15 minutos!</p>
+							<div className="vertical-center mr-auto ml-auto container" style={{ letterSpacing: 0.8 }}>
+								<div className="d-block d-md-none" style={{marginBottom: '-40px'}}>
+									<div className="coolvetica fz25 white mb-34 header-title">
+										Todas las opciones de crédito en una sola solicitud
+									</div>
+									<div className="metropolisReg white fz18 lh133" style={{marginTop: '120px'}}>
+										¡Recíbelas en menos de <br/> 15 minutos!
+									</div>
+								</div>
+								<div className="d-none d-md-block">
+									<div className="coolvetica fz48 white mb-34 header-title">
+										Todas las opciones de crédito en una sola solicitud
+									</div>
+									<div className="metropolisReg white fz24 lh133 mt-72">
+										¡Recíbelas en menos de 15 minutos!
+									</div>
 								</div>
 							</div>
 							<Link
@@ -81,7 +87,7 @@ const Header = props => {
 										: '/registrate'
 								}
 							>
-								<div className="coolvetica mt-72 text-center">
+								<div className="coolvetica mt-158 text-center">
 									<Button className="header-button fz24 bluePrimary">
                                         Solicitar ahora
 									</Button>
