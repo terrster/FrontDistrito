@@ -61,14 +61,14 @@ const Header = props => {
 						<div className="text-center ml-auto mr-auto">
 							<div className="vertical-center mr-auto ml-auto container">
 								<h3 className="coolvetica fz48 white mb-34 header-title">
-                                    ¿Necesitas financiamiento?
+                                    Todas las opciones de crédito <br/> en una sola solicitud
 								</h3>
 								<div
 									className="metropolisReg white fz24 lh133"
 									style={{ letterSpacing: 0.8 }}
 								>
-									<p>Recibe las mejores ofertas de crédito</p>
-									<p className="metropolisMed ">¡En menos de 30 minutos!</p>
+									<p>Recibe las mejores opciones de crédito</p>
+									<p className="metropolisMed ">¡En menos de 15 minutos!</p>
 								</div>
 							</div>
 							<Link

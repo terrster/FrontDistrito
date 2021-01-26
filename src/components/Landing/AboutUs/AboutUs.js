@@ -13,7 +13,8 @@ const AboutUs = props => {
         <div id="about" className="pt-0 text-center">
             <Title title="Nosotros" className="title-dp fz42 fw500 mb-1"/>
             <div className="subtitle-dp fw300 mb-2 fz29" style={{letterSpacing : '0.1px'}}>
-                La #ComunidadDeCrédito más grande de México
+                <p>Somos la mejor plataforma para solicitar crédito</p>
+                <p>#ComunidadDeCrédito</p>
             </div>
             <div className="container-logos">
                 <div className="logos"><img alt="Premios Pitch" src={prizes} className="img-about-us"/></div>

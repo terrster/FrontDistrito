@@ -20,6 +20,7 @@ import Lendera from '../assets/img/alianzas/Lendera.png';
 import Dimex from '../assets/img/alianzas/dimex.png';
 import ION from '../assets/img/alianzas/ion.png';
 import Amifin from '../assets/img/alianzas/amifin.png';
+import DeltAi from '../assets/img/alianzas/deltAi.png';
 
 export const filterFinancials = (financials) => {
     
@@ -97,6 +98,9 @@ export const imgFinancial = (financial) => {
         case 'AMIFIN':
         return Amifin;
 
+        case 'DELTAI':
+        return DeltAi;
+
         case 'ALL':
         return [
             ASPIRIA,
@@ -119,7 +123,8 @@ export const imgFinancial = (financial) => {
             Lendera, //PRETMEX (FASTTRACK)
             // Dimex
             ION,
-            Amifin
+            Amifin,
+            DeltAi
         ];
     }
 }
@@ -341,6 +346,16 @@ export const dataFinancial = (financial, properties) => {//Propuestas
                 tasa: '28% anual',
                 logo: imgFinancial(financial),
                 class: 'AMIFIN'
+            };
+
+        case 'DELTAI':
+            return {
+                financiera: 'delt.ai',
+                monto: properties.monto_preaut.value,
+                plazo: 'Hasta 45 días',
+                tasa: '30% anual',
+                logo: imgFinancial(financial),
+                class: 'DELTAI'
             };
     }
 }
@@ -564,6 +579,16 @@ export const dataFinancialFormalization = (properties) => {
                 tasa: properties.n12_2_tasa_autorizada.value + "% mensual",
                 logo: imgFinancial(financial),
                 class: 'AMIFIN'
+            };
+
+        case 'DELTAI':
+            return {
+                financiera: 'delt.ai',
+                monto: properties.n12_1_monto_autorizado.value,
+                plazo: properties.n12_3_plazo_autorizado.value + " meses",
+                tasa: properties.n12_2_tasa_autorizada.value + "% mensual",
+                logo: imgFinancial(financial),
+                class: 'DELTAI'
             };
     }
 }
