@@ -16,7 +16,7 @@ export const renderField = ({
         <div className="input-container">
             <input {...field} placeholder={placeholder} type={type} className={`form-control custom-form-input text-dp mt-1 ${className} ${errors[field.name] && touched[field.name] ? ' is-invalid' : null}`} onKeyUp={onKeyUp} maxLength={maxLength} {...props}/>
             {children}
-            <ErrorMessage name={field.name} render={msg => <div className="invalid-feedback">{msg}</div>} />
+            <ErrorMessage name={field.name.toString()} render={msg => <div className="error">{msg}</div>} />
         </div>
 	)
 };
@@ -44,7 +44,7 @@ export const renderFieldSelect = ({
                 }}>  
                     {children}
                 </select>
-                <ErrorMessage name={field.name} render={msg => <div className="invalid-feedback">{msg}</div>} />
+                {/* <ErrorMessage name={field.name} render={msg => <div className="error">{msg}</div>} /> */}
             </div>
         </>
 	)

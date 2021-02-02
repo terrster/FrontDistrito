@@ -91,17 +91,17 @@ export const validateComercialInfo = (values) => {
     errors.town = "Ingresa la colonia donde se ubica tu negocio";
   }
 
-  for(let i=0; i<=10; i++){
-    if(!values['username'+i]){
-      errors['username'+i] = "Ingresa el usuario/número de tarjeta o cuenta de tu banco";
-    }
-    if(!values['password'+i]){
-      errors['password'+i] = "Ingresa la contraseña de tu banco";
-    }
-    if(!values['securityCode'+i]){
-      errors['securityCode'+i] = "Ingresa el token/clave de seguridad de tu banco";
-    }
-  }
+  // for(let i=0; i<=10; i++){
+  //   if(!values['username'+i]){
+  //     errors['username'+i] = "Ingresa el usuario/número de tarjeta o cuenta de tu banco";
+  //   }
+  //   if(!values['password'+i]){
+  //     errors['password'+i] = "Ingresa la contraseña de tu banco";
+  //   }
+  //   if(!values['securityCode'+i]){
+  //     errors['securityCode'+i] = "Ingresa el token/clave de seguridad de tu banco";
+  //   }
+  // }
 
   if (!values.phone) {
     errors.phone = "Ingresa el teléfono de tu negocio";

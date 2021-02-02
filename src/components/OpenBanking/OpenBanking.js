@@ -11,17 +11,15 @@ import openBankingWeb from '../../assets/img/open_banking/openbanking_banner-01.
 const OpenBanking = () => {
     const history = useHistory();
     const [user] = useState(JSON.parse(sessionStorage.getItem("user")));   
-    const [initialValues, setinitialValues] = useState([{
-        bank0: {
-            id: ''
-        }
-    }]);
     const [banksOptions, setBanksOptions] = useState([]);//Options for select
-    const [bankFields, setBankFields] = useState([]);//Fields required for each bank
-    const [banks, setBanks] = useState([{
-        id: null,
-        idArray: 0,
-    }]);//Banks choosen by user
+    const [initialValues, setinitialValues] = useState({
+        bank0: {
+            id: 0,
+            fields: [],
+            values: {},
+            validate: false,
+        }
+    });
 
     useEffect(() => {
         if(!user){
@@ -37,7 +35,7 @@ const OpenBanking = () => {
         }
     }, []);
 
-    const getBankFields = async (idBank, i) => {
+    const getBankFields = async (idBank, bank) => {
         const { data } = await axios.get(`api/finerio/bank/${idBank}/fields`);
         // let newFieldsBank = bankFields;
         // if (idBank === 1) {
@@ -56,45 +54,29 @@ const OpenBanking = () => {
 
         // console.log(data);
 
-        let initialValuesCopy = [...initialValues];
-        initialValuesCopy[i][`bank${i}`].id = parseInt(idBank);
-        setinitialValues(initialValuesCopy);
+        let initialValuesCopy = {...initialValues};
+        initialValuesCopy[`${bank}`].id = idBank;
+        initialValuesCopy[`${bank}`].fields = data;
 
-        let banksCopy = [...banks];
-        banksCopy[i] = {
-            id: parseInt(idBank),
-            idArray: 0
-        };
-        setBanks(banksCopy);
+        Object.entries(data).forEach(([key]) => {
+            initialValuesCopy[`${bank}`].values[data[key].name] = '';
+        });
         
-        let newFieldsBank = [...bankFields];
-        newFieldsBank[i] = data;
-        setBankFields(newFieldsBank);
-
-        // setBankFields({...bankFields, 
-        //     [i]: {
-        //         idBank,
-        //         data
-        //     }
-        // });
+        setinitialValues(initialValuesCopy);
 
         // dispatch(updateLoader(false));
     };
 
-    useEffect(() => {
-        console.log("bankFields");
-        console.log(bankFields);
-    }, [bankFields]);
+    // useEffect(() => {
+    //     console.log("initialValues");
+    //     console.log(initialValues);
+    // }, [initialValues]);
 
-    useEffect(() => {
-        console.log("banks");
-        console.log(banks);
-    }, [banks]);
+    const handleSubmit = (values) => {
+        // let isValidated = false;
 
-    useEffect(() => {
-        console.log("initialValues");
-        console.log(initialValues);
-    }, [initialValues]);
+        console.log(values);
+    }
 
     return (
         <>
@@ -110,7 +92,7 @@ const OpenBanking = () => {
                 </p>
                 <p>
                     El <strong>open banking</strong>  es el uso de tecnología automatizada para acceder de forma segura y controlada a 
-                    información de tu banco para extraer info como: saldos y movimientos haciendo que el trámite de tu crédito sea 
+                    información de tu banco para extraer info como: saldos y movimientos, haciendo que el trámite de tu crédito sea 
                     reducido a la mitad del tiempo.​
                 </p>
                 <p>
@@ -121,7 +103,7 @@ const OpenBanking = () => {
                 </p>
             </div>
 
-            <OpenBankingForm user={user} initialValues={initialValues} setinitialValues={setinitialValues} banksOptions={banksOptions} getBankFields={getBankFields} bankFields={bankFields} setBankFields={setBankFields} banks={banks} setBanks={setBanks}/>
+            <OpenBankingForm user={user} banksOptions={banksOptions} initialValues={initialValues} setinitialValues={setinitialValues} getBankFields={getBankFields} handleSubmit={handleSubmit}/>
         </>
     );
 }
