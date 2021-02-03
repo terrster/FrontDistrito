@@ -1,14 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Title from "../Generic/Title";
 import SignupForm from "../../forms/SignupForm";
-import * as $ from "jquery";
+// import * as $ from "jquery";
 import "react-toastify/dist/ReactToastify.css";
- import { execToast } from "../../utils/ToastUtils";
+//  import { execToast } from "../../utils/ToastUtils";
 //import signupReducer from "../../redux/reducers/signup-reducer"; 
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import "../../css/signup.css";
-import registerImage from "../../assets/img/register.png";
+// import registerImage from "../../assets/img/register.png";
 //import RegistroExitoso from "../../components/Registro/RegistroExitoso";
 import Loader from "../Loader/Loader";
 import { updateLoader } from '../../redux/actions/loaderActions';
@@ -17,45 +17,50 @@ import { updateToast } from '../../redux/actions/appActions';
 import axios from '../../utils/axios';
 import StepSignup from "../Appliance/StepSignup";
 import publicIp from "public-ip";
+import { Carousel } from 'react-bootstrap';
 
-let Signup = props => {
+//FinancialPartners
+import impulsoDP from '../../assets/img/financialPartners/impulsoDP.jpg';
+
+const financialPartner = (partner) => {
+  switch(partner.toUpperCase()){
+    case 'IMPULSOMX':
+      return {
+        image: impulsoDP,
+        text: [
+          'Solicita tu crédito Pyme a través de nuestro aliado tecnológico Distrito Pyme.',
+          'El proceso es fácil, rápido y podrás recibir respuesta en menos de 15 min.'
+        ],
+        dealstage: '2753634',
+        prefix: process.env.REACT_APP_CONFIGURATION === 'localhost' || process.env.REACT_APP_CONFIGURATION === 'development' ? 'FormImpulsoDev - ' : 'FormImpulso - '
+      };
+    default:
+      return false;
+  }
+}
+
+const Signup = props => {
+  const [partner, setPartner] = useState(false);
 	const toast = useSelector(state => state.app.toast);
 	const [errorEmail, setErrorEmail] = useState("");
-  //  let onFormSubmit = async (data,Login,Signup) => {
-  //   props.updateLoader(true);
-  //   try {
-  //     let variables = ''  variablesManager.createSignupVariables(data) ;
-  //     await Signup({ variables });
-  //     props.updateSignupState(true);
-  //     props.updateToast(true);
-  //    let loginUser = await Login({
-  //       variables: {
-  //         email: variables.email,
-  //         password: variables.password
-  //       }
-  //     });
-  //     sessionStorage.setItem("token", loginUser.data.signin.token);
-  //     sessionStorage.setItem("nameUser", loginUser.data.signin.user.name);
-  //     props.updateLoader(false)
-  //   } catch (err) {
-  //     let errors =  0  errorManager.handleError(err) ;
-  //     if (errors.length > 0) {
-  //       $("#ymb-dp-signup-email-used").removeClass("d-none");
-  //     }
-  //     props.updateToast(true);
-  //     props.updateLoader(false);
-  //   }
-  // };
-
-  // let handleToLogin = () => {
-  //   props.history.push("/login");
-  //   props.updateSignupState(false);
-  //   props.updateToast(true);
-  // }; 
 
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    if(props.match.params.financialPartner !== undefined){
+      if(financialPartner(props.match.params.financialPartner)){
+        setPartner(financialPartner(props.match.params.financialPartner))
+      }
+    }
+  }, [props.match.params.financialPartner])
+
   let onFormSubmit = async (data) => {
+
+  if(partner){
+    let { dealstage, prefix } = partner;
+    data = {...data, dealstage, prefix };
+  }
+  
 	dispatch ( updateToast(toast, "register") );
   dispatch( updateLoader(true) );
   let ipV4 = await publicIp.v4();
@@ -78,10 +83,10 @@ let Signup = props => {
     //return (<RegistroExitoso />);
   }else {
     return (
-      <div className="container mt-30">
+      <>
         <Loader />
-        {!props.statusSingup ? (
-          <>
+        {!partner ? (
+          <div className="container mt-30">
             <Title
               className="fz56 text-center blue-primary title-dp fw500"
               title="¡Bienvenido a Distrito Pyme!"
@@ -92,36 +97,34 @@ let Signup = props => {
             <div className="mt-50">
 							<StepSignup/>
 						</div>
-          </>
+          </div>
         ) : (
-          <div></div>
+          <>
+            <Carousel controls={false} indicators={false}>
+                <Carousel.Item>
+                    <img className="d-block w-100" src={partner.image} alt={`${props.match.params.financialPartner}`}/>
+                </Carousel.Item>
+            </Carousel>
+            <div className="mt-50 pl-2 pr-2">
+              <div className="gray50 text-dp fw300 fz20 text-center mb-5">
+                {
+                  partner.text.map((text, index) => {
+                    return <span className="d-block" key={index}>
+                              {text}
+                           </span>
+                  })
+                }
+              </div>
+              <StepSignup/>
+            </div>
+          </>
         )}
-        <SignupForm onSubmit={e => onFormSubmit(e)} errorEmail={errorEmail} setErrorEmail={setErrorEmail}/>
-      </div>
+        <div className="container mt-30">
+          <SignupForm onSubmit={e => onFormSubmit(e)} errorEmail={errorEmail} setErrorEmail={setErrorEmail}/>
+        </div>
+      </>
     );
   }
 };
-//window.scrollTo(0, 0);
-/* const mapStateToProps = (state, ownProps) => {
-  return {
-    history: ownProps.history,
-    toast: state.app.toast,
-    statusSingup: state.signupReducer.status
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    updateLoader: isLoading => {
-      dispatch({ type: "UPDATE_LOADER", data: { isLoading } });
-    },
-    updateToast: status => {
-      dispatch({ type: "UPDATE_TOAST_REGISTER", data: { status } });
-    },
-    updateSignupState: status => {
-      dispatch({ type: "UPDATE_SIGNPU_STATUS", data: { status } });
-    }
-  };
-}; */
 
 export default Signup;
