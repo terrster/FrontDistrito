@@ -20,13 +20,19 @@ import publicIp from "public-ip";
 import { Carousel } from 'react-bootstrap';
 
 //FinancialPartners
-import impulsoDP from '../../assets/img/financialPartners/impulsoDP.jpg';
+import impulsoDPWEB from '../../assets/img/financialPartners/impulsoDP-WEB.jpg';
+import impulsoDPMovil from '../../assets/img/financialPartners/impulsoDP-Movil.jpg';
+
+const getVersionImage = () => {
+	const currentSize = document.getElementsByTagName('body')[0].clientWidth;
+	return currentSize < 775 ? 1 : 0;
+};
 
 const financialPartner = (partner) => {
   switch(partner.toUpperCase()){
     case 'IMPULSOMX':
       return {
-        image: impulsoDP,
+        image: [impulsoDPWEB, impulsoDPMovil],
         text: [
           'Solicita tu crédito Pyme a través de nuestro aliado tecnológico Distrito Pyme.',
           'El proceso es fácil, rápido y podrás recibir respuesta en menos de 15 min.'
@@ -40,11 +46,14 @@ const financialPartner = (partner) => {
 }
 
 const Signup = props => {
+  const [versionImage, setVersionImage] = useState(getVersionImage());
   const [partner, setPartner] = useState(false);
 	const toast = useSelector(state => state.app.toast);
 	const [errorEmail, setErrorEmail] = useState("");
 
   const dispatch = useDispatch();
+
+  window.addEventListener('resize', () => setVersionImage(getVersionImage()));
 
   useEffect(() => {
     if(props.match.params.financialPartner !== undefined){
@@ -102,19 +111,22 @@ const Signup = props => {
           <>
             <Carousel controls={false} indicators={false}>
                 <Carousel.Item>
-                    <img className="d-block w-100" src={partner.image} alt={`${props.match.params.financialPartner}`}/>
+                    <img className="d-block w-100" src={partner.image[versionImage]} alt={`${props.match.params.financialPartner}`}/>
                 </Carousel.Item>
             </Carousel>
             <div className="mt-50 pl-2 pr-2">
-              <div className="gray50 text-dp fw300 fz20 text-center mb-5">
-                {
-                  partner.text.map((text, index) => {
-                    return <span className="d-block" key={index}>
-                              {text}
-                           </span>
-                  })
-                }
-              </div>
+              {
+                versionImage === 1 &&
+                <div className="gray50 text-dp fw300 fz20 text-center mb-5">
+                  {
+                    partner.text.map((text, index) => {
+                      return <span className="d-block" key={index}>
+                                {text}
+                            </span>
+                    })
+                  }
+                </div>
+              }
               <StepSignup/>
             </div>
           </>
