@@ -12,10 +12,10 @@ const OpenBanking = () => {
     const history = useHistory();
     const [user] = useState(JSON.parse(sessionStorage.getItem("user")));   
     const [banksOptions, setBanksOptions] = useState([]);//Options for select
+    const [bankFields, setBankFields] = useState([]);
     const [initialValues, setinitialValues] = useState({
         bank0: {
-            id: 0,
-            fields: [],
+            id: '',
             values: {},
             validate: false,
         }
@@ -36,6 +36,9 @@ const OpenBanking = () => {
     }, []);
 
     const getBankFields = async (idBank, bank) => {
+        let bankFieldsCopy = {...bankFields};
+        let initialValuesCopy = {...initialValues};
+
         const { data } = await axios.get(`api/finerio/bank/${idBank}/fields`);
         // let newFieldsBank = bankFields;
         // if (idBank === 1) {
@@ -52,17 +55,15 @@ const OpenBanking = () => {
         // }
         // setForceRender(!forceRender);
 
-        // console.log(data);
-
-        let initialValuesCopy = {...initialValues};
-        initialValuesCopy[`${bank}`].id = idBank;
-        initialValuesCopy[`${bank}`].fields = data;
+        initialValuesCopy[bank].id = idBank;
+        bankFieldsCopy[bank] = data;
 
         Object.entries(data).forEach(([key]) => {
-            initialValuesCopy[`${bank}`].values[data[key].name] = '';
+            initialValuesCopy[bank].values[data[key].name] = '';
         });
-        
+
         setinitialValues(initialValuesCopy);
+        setBankFields(bankFieldsCopy);
 
         // dispatch(updateLoader(false));
     };
@@ -71,6 +72,12 @@ const OpenBanking = () => {
     //     console.log("initialValues");
     //     console.log(initialValues);
     // }, [initialValues]);
+
+    // useEffect(() => {
+    //     console.log("bankFields");
+    //     console.log(bankFields);
+    // }, [bankFields]);
+
 
     const handleSubmit = (values) => {
         // let isValidated = false;
@@ -103,7 +110,7 @@ const OpenBanking = () => {
                 </p>
             </div>
 
-            <OpenBankingForm user={user} banksOptions={banksOptions} initialValues={initialValues} setinitialValues={setinitialValues} getBankFields={getBankFields} handleSubmit={handleSubmit}/>
+            <OpenBankingForm user={user} banksOptions={banksOptions} bankFields={bankFields} setBankFields={setBankFields} initialValues={initialValues} setinitialValues={setinitialValues} getBankFields={getBankFields} handleSubmit={handleSubmit}/>
         </>
     );
 }

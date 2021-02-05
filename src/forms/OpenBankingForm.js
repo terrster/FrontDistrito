@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { withFormik, Form, Field } from 'formik';
 import { Row, Col, Button } from 'react-bootstrap';
 import { renderField, renderFieldSelect } from '../components/Generic/FinancialDataFields';
@@ -8,15 +8,15 @@ import {validateOpenBanking} from '../components/Validate/ValidateOpenBanking';
 
 const OpenBankingForm = (props) => {
 
-    const { user, banksOptions, initialValues, setinitialValues, getBankFields } = props;
+    const { user, banksOptions, bankFields, setBankFields, initialValues, setinitialValues, getBankFields } = props;
 
     const deleteBank = async(bank) => {
+        let bankFieldsCopy = {...bankFields};
         let initialValuesCopy = {...initialValues};
 
         if(bank === 'bank0'){
             initialValuesCopy[`${bank}`] = {
                 id: '',
-                fields: [],
                 values: {},
                 validate: false,
             };
@@ -24,7 +24,9 @@ const OpenBankingForm = (props) => {
         else{
             delete initialValuesCopy[`${bank}`];
         }
+        delete bankFieldsCopy[`${bank}`];
         setinitialValues(initialValuesCopy);
+        setBankFields(bankFieldsCopy);
     };
 
     useEffect(() => {
@@ -40,14 +42,17 @@ const OpenBankingForm = (props) => {
                     <Field
                         key={0}
                         component={renderFieldSelect}
-                        name={`bank${0}.id`}
+                        name={`bank0.id`}
                         required={true}
                         className="mb-3"
                         onChange={({target}) => {
                             getBankFields(target.value, `bank0`);
                         }}
                     >
-                        <option value="">Seleccionar</option>
+                        {
+                            props.values[`bank0`].id === '' &&
+                            <option value="">Seleccionar</option>
+                        }
                         {banksOptions.map((bank, index) => {
                             return (
                                 <option value={bank.id} key={bank.name + index}>
@@ -63,13 +68,13 @@ const OpenBankingForm = (props) => {
                     </Button>
                 </Col>
                 {
-                    initialValues[`bank${0}`].fields.map((field, index) => {
+                    bankFields.hasOwnProperty(`bank0`) && bankFields[`bank0`].map((field, index) => {
                         return <Col xs={12} key={index} key={field.name + 0}>
                                     <Field
                                         component={renderField}
                                         placeholder={field.friendlyName}
                                         type={field.type}
-                                        name={`bank${0}.values.${field.name}`}
+                                        name={`bank0.values.${field.name}`}
                                         // normalize={field.name == 'username' ? onlyNumbers : ''}
                                         required={true}
                                         className="mb-3"
@@ -94,7 +99,10 @@ const OpenBankingForm = (props) => {
                                                 getBankFields(target.value, bank);
                                             }}
                                         >
-                                            <option value="">Seleccionar</option>
+                                            {
+                                                props.values[bank].id === '' &&
+                                                <option value="">Seleccionar</option>
+                                            }
                                             {banksOptions.map((bank, index) => {
                                                 return (
                                                     <option value={bank.id} key={bank.name + index}>
@@ -112,7 +120,7 @@ const OpenBankingForm = (props) => {
                                     </Col>
 
                                     {
-                                        initialValues[bank].fields.map((field, index) => {
+                                        bankFields.hasOwnProperty(bank) && bankFields[bank].map((field, index) => {
                                             return <Col xs={12} key={index} key={field.name + index}>
                                                         <Field
                                                             component={renderField}
@@ -142,15 +150,13 @@ const OpenBankingForm = (props) => {
                 onClick={() => {
                     if(Object.keys(initialValues).length < 10){
                         //if(initialValues[`bank${Object.keys(initialValues).length - 1}`].validate){
-                            let valuesCopy = {...initialValues,
+                            setinitialValues({...initialValues,
                                 [`bank${Object.keys(initialValues).length}`]: {
                                     id: '',
-                                    fields: [],
                                     values: {},
                                     validate: false,
                                 }
-                            };
-                            setinitialValues(valuesCopy);
+                            });
                         }
                     //}
                 }}>

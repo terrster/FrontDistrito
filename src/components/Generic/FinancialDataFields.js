@@ -1,5 +1,5 @@
 import React from 'react';
-import { ErrorMessage } from 'formik';
+// import { ErrorMessage } from 'formik';
 
 export const renderField = ({
     placeholder,
@@ -8,15 +8,18 @@ export const renderField = ({
     className,
     onKeyUp,
     maxLength,
-    form: { touched, errors },
+    form: { errors },
     props,
     children
 }) => {
 	return (
         <div className="input-container">
-            <input {...field} placeholder={placeholder} type={type} className={`form-control custom-form-input text-dp mt-1 ${className} ${errors[field.name] && touched[field.name] ? ' is-invalid' : null}`} onKeyUp={onKeyUp} maxLength={maxLength} {...props}/>
+            <input {...field} placeholder={placeholder} type={type} className={`form-control custom-form-input text-dp mt-1 ${className}`} onKeyUp={onKeyUp} maxLength={maxLength} {...props}/>
             {children}
-            <ErrorMessage name={field.name.toString()} render={msg => <div className="error">{msg}</div>} />
+            {
+                errors[field.name] && <div id={field.name} className="error">{errors[field.name]}</div>
+            }
+            {/* <ErrorMessage name={field.name} render={msg => <div className="error">{msg}</div>}/> */}
         </div>
 	)
 };
@@ -26,7 +29,7 @@ export const renderFieldSelect = ({
 	field,
     className,
     onChange,
-    form: { touched, errors, setFieldValue },
+    form: { errors, setFieldValue },
     props,
     children
 }) => {
@@ -37,13 +40,16 @@ export const renderFieldSelect = ({
                     label &&
                     <label>{label}</label>
                 }
-                <select {...field} className={`form-control custom-form-input text-dp mt-1 ${className} ${errors[field.name] && touched[field.name] ? ' is-invalid' : null}`} {...props} 
-                onChange={ e => {
-                    setFieldValue(field.name, e.target.value);
-                    onChange && onChange(e)
-                }}>  
+                <select {...field} className={`form-control custom-form-input text-dp mt-1 ${className}`} {...props} 
+                    onChange={ e => {
+                        setFieldValue(field.name, e.target.value);
+                        onChange && onChange(e)
+                    }}>  
                     {children}
                 </select>
+                {
+                    errors[field.name] && <div id={field.name} className="error">{errors[field.name]}</div>
+                }
                 {/* <ErrorMessage name={field.name} render={msg => <div className="error">{msg}</div>} /> */}
             </div>
         </>
