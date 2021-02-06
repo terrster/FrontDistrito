@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { withFormik, Form, Field } from 'formik';
-import { Row, Col, Button } from 'react-bootstrap';
+import { Row, Col, Spinner, Button } from 'react-bootstrap';
 import { renderField, renderFieldSelect } from '../components/Generic/FinancialDataFields';
 import SubtitleForm from '../components/Generic/SubtitleForm';
 import Delete from "../assets/img/basura-01.png";
@@ -9,6 +9,7 @@ import {validateOpenBanking} from '../components/Validate/ValidateOpenBanking';
 const OpenBankingForm = (props) => {
 
     const { user, banksOptions, bankFields, setBankFields, initialValues, setinitialValues, getBankFields } = props;
+    const [error, setError] = useState(null);
 
     const deleteBank = async(bank) => {
         let bankFieldsCopy = {...bankFields};
@@ -32,6 +33,10 @@ const OpenBankingForm = (props) => {
     useEffect(() => {
         setinitialValues({...initialValues, ...props.values})
     }, [props.values, props.initialValues])
+
+    useEffect(() => {
+        console.log(props);
+    }, [props])
 
     return (
         <Form className="ml-auto mr-auto pl-3 pr-3 pb-4" style={{ maxWidth: "690px" }}>
@@ -62,7 +67,7 @@ const OpenBankingForm = (props) => {
                         })}
                     </Field>
                 </Col>
-                <Col xs={12} sm={1}>
+                <Col xs={12} sm={1} className="text-center">
                     <Button className="btn btn-bank-del mb-xs-5" onClick={() => deleteBank(`bank0`)}>
                         <img src={Delete} alt="Datos bancarios delete" title="Eliminar banco" className="bankDel"/>
                     </Button>
@@ -113,7 +118,7 @@ const OpenBankingForm = (props) => {
                                         </Field>
                                     </Col>
                 
-                                    <Col xs={12} sm={1}>
+                                    <Col xs={12} sm={1} className="text-center">
                                         <Button className="btn btn-bank-del" onClick={() => deleteBank(bank)}>
                                             <img src={Delete} alt="Datos bancarios delete" title="Eliminar banco" className="bankDel"/>
                                         </Button>
@@ -143,31 +148,56 @@ const OpenBankingForm = (props) => {
                 Esta información no es obligatoria, pero podrá agilizar tu solicitud de crédito a la mitad del tiempo. 
                 Se ingresará por única ocasión para descargar solo tus movimientos bancarios.
             </div>
-            <Button
-                type="button"
-                className={"btn-blue-general btn-add-bank"}
-                disabled={Object.keys(initialValues).length < 10 ? false : true}
-                onClick={() => {
-                    if(Object.keys(initialValues).length < 10){
-                        //if(initialValues[`bank${Object.keys(initialValues).length - 1}`].validate){
-                            setinitialValues({...initialValues,
-                                [`bank${Object.keys(initialValues).length}`]: {
-                                    id: '',
-                                    values: {},
-                                    validate: false,
-                                }
-                            });
+
+            {
+                error &&
+                <div className="error mb-4">
+                    <p className="text-center"><Spinner animation="grow" variant="danger" /></p>
+                    {error}
+                </div>
+            }
+            
+            <Row>
+                <Col className="mb-2 d-flex justify-content-around justify-content-md-start">
+                    <Button
+                    type="button"
+                    className={"btn-blue-general btn-add-bank"}
+                    disabled={Object.keys(initialValues).length < 10 ? false : true}
+                    onClick={() => {
+                        let invalid = Object.keys(initialValues).find(credencial => !credencial.validate);
+                        if(Object.keys(initialValues).length < 10){
+                            if(!invalid){
+                                setinitialValues({...initialValues,
+                                    [`bank${Object.keys(initialValues).length}`]: {
+                                        id: '',
+                                        values: {},
+                                        validate: false,
+                                    }
+                                });
+                            }
+                            else{
+                                setError("Para poder agregar una credencial adicional, debe primero agregar una correctamente.");
+                                setTimeout(() => {
+                                    setError(null);
+                                }, 5000);
+                            }
                         }
-                    //}
-                }}>
-                Agregar otro banco
-            </Button>
-            <Button 
-            type="submit"
-            className={"btn-blue-general btn-add-bank float-right"}
-            >
-                Guardar
-            </Button>
+                    }}>
+                    Agregar otro banco
+                    </Button>
+                </Col>
+                <Col className="d-flex justify-content-around justify-content-md-end">
+                    {
+                        Object.keys(initialValues).find(credencial => !credencial.validate) &&
+                        <Button 
+                        type="submit"
+                        className={"btn-blue-general btn-add-bank"}
+                        >
+                            Validar
+                        </Button>
+                    }
+                </Col>
+            </Row>
         </Form>
     );
 }

@@ -1,5 +1,4 @@
 import React from 'react';
-// import { ErrorMessage } from 'formik';
 
 export const renderField = ({
     placeholder,
@@ -8,18 +7,17 @@ export const renderField = ({
     className,
     onKeyUp,
     maxLength,
-    form: { errors },
+    form: {touched, errors, setTouched},
     props,
     children
 }) => {
 	return (
         <div className="input-container">
-            <input {...field} placeholder={placeholder} type={type} className={`form-control custom-form-input text-dp mt-1 ${className}`} onKeyUp={onKeyUp} maxLength={maxLength} {...props}/>
+            <input {...field} placeholder={placeholder} type={type} className={`form-control custom-form-input text-dp mt-1 ${className}`} onKeyUp={onKeyUp} /*onTouchStart={() => setTouched({...touched, [field.name.split(".")[0]+"-"+field.name.split(".")[2]]: true})}*/ {...props}/>
             {children}
             {
-                errors[field.name] && <div id={field.name} className="error">{errors[field.name]}</div>
+                (touched.hasOwnProperty(field.name.split(".")[0]) && touched[field.name.split(".")[0]].hasOwnProperty('values') && touched[field.name.split(".")[0]].values.hasOwnProperty(field.name.split(".")[2])) && errors[field.name] ? <div className="error">{errors[field.name]}</div> : null
             }
-            {/* <ErrorMessage name={field.name} render={msg => <div className="error">{msg}</div>}/> */}
         </div>
 	)
 };
@@ -50,7 +48,6 @@ export const renderFieldSelect = ({
                 {
                     errors[field.name] && <div id={field.name} className="error">{errors[field.name]}</div>
                 }
-                {/* <ErrorMessage name={field.name} render={msg => <div className="error">{msg}</div>} /> */}
             </div>
         </>
 	)
