@@ -7,10 +7,12 @@ import OpenBankingForm from '../../forms/OpenBankingForm';
 
 /*Images*/
 import openBankingWeb from '../../assets/img/open_banking/openbanking_banner-01.jpg';
+import io from 'socket.io-client';
 
 const OpenBanking = () => {
     const history = useHistory();
-    const [user] = useState(JSON.parse(sessionStorage.getItem("user")));   
+    const user = JSON.parse(sessionStorage.getItem("user"));   
+    const [socket, setSocket] = useState(null);
     const [banksOptions, setBanksOptions] = useState([]);//Options for select
     const [bankFields, setBankFields] = useState([]);
     const [initialValues, setinitialValues] = useState({
@@ -20,6 +22,40 @@ const OpenBanking = () => {
             validate: false,
         }
     });
+    const [validating, setValidating] = useState(null);
+    const [showModal, setShowModal] = useState(false);
+    const [provideToken, setProvideToken] = useState({
+        token: '',
+        idCredential: ''
+    });
+
+    useEffect(() => {
+        const socket = io.connect(process.env.REACT_APP_BACKEND, {
+            transports: ['websocket'],
+            autoConnect: true,
+            forceNew: true,
+            query: {
+                'idU': user._id
+            }
+        });
+        setSocket(socket);
+    }, []);
+
+    useEffect(() => {
+        if(socket){
+            socket.on('askForToken', (data) => {
+                setProvideToken({
+                    ...provideToken,
+                    idCredential: data.idCredential
+                });
+                setShowModal(true);
+            });
+
+            socket.on('askForTokenResult', data => {
+                console.log(data);
+            });
+        }
+    }, [socket]);
 
     useEffect(() => {
         if(!user){
@@ -79,10 +115,25 @@ const OpenBanking = () => {
     // }, [bankFields]);
 
 
-    const handleSubmit = (values) => {
-        // let isValidated = false;
+    const handleSubmit = async(values) => {
 
-        console.log(values);
+        setValidating(true);
+        const { data } = await axios.post(`api/open-banking/store`, values);
+        console.log(data);
+        if(data.code === 200){
+            
+            setValidating(false);
+        }
+        else{
+            setValidating(false);
+        }
+    }
+
+    const handleProvideToken = async() => {
+        setShowModal(false);
+        const { data } = await axios.post(`api/open-banking/storeToken`, provideToken);
+        console.log(data);
+        // console.log(provideToken);
     }
 
     return (
@@ -110,7 +161,23 @@ const OpenBanking = () => {
                 </p>
             </div>
 
-            <OpenBankingForm user={user} banksOptions={banksOptions} bankFields={bankFields} setBankFields={setBankFields} initialValues={initialValues} setinitialValues={setinitialValues} getBankFields={getBankFields} handleSubmit={handleSubmit}/>
+            <OpenBankingForm 
+                user={user} 
+                banksOptions={banksOptions} 
+                bankFields={bankFields} 
+                setBankFields={setBankFields} 
+                initialValues={initialValues} 
+                setinitialValues={setinitialValues} 
+                getBankFields={getBankFields} 
+                handleSubmit={handleSubmit} 
+                validating={validating}
+                setValidating={setValidating}
+                showModal={showModal}
+                setShowModal={setShowModal}
+                provideToken={provideToken}
+                setProvideToken={setProvideToken}
+                handleProvideToken={handleProvideToken}
+            />
         </>
     );
 }

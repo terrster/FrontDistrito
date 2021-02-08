@@ -25,8 +25,5 @@ export const validateOpenBanking = (values) => {
         }
     }
 
-    // console.log(values);
-    // console.log(errors);
-
     return errors;
 };
