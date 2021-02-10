@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import Title from '../Generic/Title';
 import { Carousel } from 'react-bootstrap';
 import { useHistory } from "react-router-dom";
@@ -17,10 +17,7 @@ const OpenBanking = () => {
     const user = JSON.parse(sessionStorage.getItem("user"));   
     const dispatch = useDispatch();
     const [socket, setSocket] = useState(null);
-    const [banksOptions, setBanksOptions] = useState([]);//Options for select
-    const [bankFields, setBankFields] = useState([]);
-    const [error, setError] = useState(null);
-    const [success, setSuccess] = useState(false);
+    const [banksOptions, setBanksOptions] = useState([]);//List of banks to choose
     const [initialValues, setinitialValues] = useState({
         bank0: {
             id: '',
@@ -29,25 +26,14 @@ const OpenBanking = () => {
             validate: false,
         }
     });
-    const [updateValues, setUpdateValues] = useState(false);
     const [validating, setValidating] = useState(null);
-    const [showModal, setShowModal] = useState(false);
-    const [provideToken, setProvideToken] = useState({
-        token: '',
-        idCredential: ''
-    });
+    const [error, setError] = useState(null);
+    const [message, setMessage] = useState(null);
+
 
     useEffect(() => {
         if(user){
-            const socket = io.connect(process.env.REACT_APP_BACKEND, {
-                transports: ['websocket'],
-                autoConnect: true,
-                forceNew: true,
-                query: {
-                    'idU': user._id
-                }
-            });
-            setSocket(socket);
+            connectSocket();
 
             if(user.idClient.appliance[0].hasOwnProperty('idFinerio')){
                 let credentials = user.idClient.appliance[0].idFinerio.credentials;
@@ -80,65 +66,17 @@ const OpenBanking = () => {
         }
     }, []);
 
-    useEffect(() => {
-        if(socket){
-            socket.on('askForToken', (data) => {
-                dispatch(updateLoader(false));
-                setProvideToken({
-                    ...provideToken,
-                    idCredential: data.credentialId
-                });
-                setShowModal(true);
-            });
-
-            socket.on('notifySuccess', (callback) => {
-                let index = Object.keys(initialValues)[Object.values(initialValues).findIndex(bank => bank.idCredential == callback.credentialId)];
-                
-                if(callback && index){
-                    let initialValuesCopy = {...initialValues};
-                    initialValuesCopy[index].validate = true;
-                    setinitialValues(initialValuesCopy);
-                    setUpdateValues(true);
-    
-                    sessionStorage.setItem('user', JSON.stringify(callback.user));
-    
-                    setSuccess(true);
-                    setTimeout(() => {
-                        setSuccess(false);
-                    }, 5000);
-                }
-
-                setValidating(false);
-                dispatch(updateLoader(false));
-            });
-
-            socket.on('notifyFailure', async(callback) => {
-                let index = Object.keys(initialValues)[Object.values(initialValues).findIndex(bank => bank.idCredential === callback.credentialId)];
-                
-                if(callback && index){
-                    let {data} = await axios.delete(`api/finerio/credentials/${callback.credentialId}`);
-                
-                    if(data.user){
-                        sessionStorage.setItem('user', JSON.stringify(data.user));
-                    }
-    
-                    let initialValuesCopy = {...initialValues};
-                    initialValuesCopy[index].idCredential = null;
-                    setinitialValues(initialValuesCopy);
-                    setUpdateValues(true);
-    
-                    setError(callback.message);
-                    setTimeout(() => {
-                        setError(null);
-                    }, 5000);
-    
-                }
-
-                setValidating(false);
-                dispatch(updateLoader(false));
-            });
-        }
-    }, [socket, initialValues]);
+    const connectSocket = useCallback(() => {
+        const socket = io.connect(process.env.REACT_APP_BACKEND, {
+            transports: ['websocket'],
+            autoConnect: true,
+            forceNew: true,
+            query: {
+                'idU': user._id
+            }
+        });
+        setSocket(socket);
+    }, []);
 
     useEffect(() => {
         if(!user){
@@ -156,61 +94,6 @@ const OpenBanking = () => {
             getBanks();
         }
     }, []);
-
-    const getBankFields = async (idBank, bank) => {
-        dispatch(updateLoader(true));
-
-        let bankFieldsCopy = {...bankFields};
-        let initialValuesCopy = {...initialValues};
-
-        const { data } = await axios.get(`api/finerio/bank/${idBank}/fields`);
-
-        initialValuesCopy[bank].id = idBank;
-        bankFieldsCopy[bank] = data;
-
-        Object.entries(data).forEach(([key]) => {
-            initialValuesCopy[bank].values[data[key].name] = '';
-        });
-
-        setinitialValues(initialValuesCopy);
-        setBankFields(bankFieldsCopy);
-        setUpdateValues(true);
-
-        dispatch(updateLoader(false));
-    };
-
-    const handleSubmit = async(values) => {
-        dispatch(updateLoader(true));
-
-        setValidating(true);
-        setUpdateValues(true);
-
-        const { data } = await axios.post(`api/open-banking/store`, values);
-
-        if(data.code === 200){
-            let initialValuesCopy = {...initialValues};
-            initialValuesCopy[`bank${Object.keys(initialValues).length - 1}`].idCredential = data.idCredential;
-            setinitialValues(initialValuesCopy);
-        }
-        else{
-            setValidating(false);
-        }
-    }
-
-    const handleProvideToken = async() => {
-        dispatch(updateLoader(true));
-        setShowModal(false);
-        setUpdateValues(true);
-
-        const { data } = await axios.post(`api/open-banking/storeToken`, provideToken);
-
-        if(data.code === 200){
-            setProvideToken({
-                token: '',
-                idCredential: ''
-            });
-        }
-    }
 
     return (
         <>
@@ -239,28 +122,19 @@ const OpenBanking = () => {
             </div>
 
             <OpenBankingForm 
+                socket={socket}
                 axios={axios}
                 banksOptions={banksOptions} 
-                bankFields={bankFields} 
-                setBankFields={setBankFields} 
-                error={error}
-                success={success}
-                setError={setError}
                 initialValues={initialValues} 
                 setinitialValues={setinitialValues} 
-                updateValues={updateValues}
-                setUpdateValues={setUpdateValues}
-                getBankFields={getBankFields} 
-                handleSubmit={handleSubmit} 
                 validating={validating}
                 setValidating={setValidating}
-                showModal={showModal}
-                setShowModal={setShowModal}
-                provideToken={provideToken}
-                setProvideToken={setProvideToken}
-                handleProvideToken={handleProvideToken}
                 dispatch={dispatch}
                 updateLoader={updateLoader}
+                error={error}
+                setError={setError}
+                message={message}
+                setMessage={setMessage}
             />
         </>
     );
