@@ -8,8 +8,7 @@ import {validateOpenBanking} from '../components/Validate/ValidateOpenBanking';
 
 const OpenBankingForm = (props) => {
 
-    const { user, banksOptions, bankFields, setBankFields, initialValues, setinitialValues, getBankFields, validating, setValidating, showModal, setShowModal, provideToken, setProvideToken, handleProvideToken } = props;
-    const [error, setError] = useState(null);
+    const { user, axios, banksOptions, bankFields, setBankFields, error, setError, initialValues, setinitialValues, getBankFields, validating, setValidating, showModal, setShowModal, provideToken, setProvideToken, handleProvideToken } = props;
     const [timer, setTimer] = useState(30);
 
     const deleteBank = async(bank) => {
@@ -17,13 +16,24 @@ const OpenBankingForm = (props) => {
         let initialValuesCopy = {...initialValues};
 
         if(bank === 'bank0'){
+            if(initialValuesCopy[bank].idCredential){
+                let {data} = await axios.delete(`api/finerio/credentials/${initialValuesCopy[bank].idCredential}`);
+                sessionStorage.setItem('user', JSON.stringify(data.user));
+            }
+
             initialValuesCopy[`${bank}`] = {
                 id: '',
+                idCredential: null,
                 values: {},
                 validate: false,
             };
         }
         else{
+            if(initialValuesCopy[bank].idCredential){
+                let {data} = await axios.delete(`api/finerio/credentials/${initialValuesCopy[bank].idCredential}`);
+                sessionStorage.setItem('user', JSON.stringify(data.user));
+            }
+
             delete initialValuesCopy[`${bank}`];
         }
         delete bankFieldsCopy[`${bank}`];
@@ -92,6 +102,7 @@ const OpenBankingForm = (props) => {
                             onChange={({target}) => {
                                 getBankFields(target.value, `bank0`);
                             }}
+                            disabled={props.values[`bank0`].validate}
                         >
                             {
                                 props.values[`bank0`].id === '' &&
@@ -145,6 +156,7 @@ const OpenBankingForm = (props) => {
                                                 onChange={({target}) => {
                                                     getBankFields(target.value, bank);
                                                 }}
+                                                disabled={props.values[bank].validate}
                                             >
                                                 {
                                                     props.values[bank].id === '' &&
@@ -215,6 +227,7 @@ const OpenBankingForm = (props) => {
                                     setinitialValues({...initialValues,
                                         [`bank${Object.keys(initialValues).length}`]: {
                                             id: '',
+                                            idCredential: null,
                                             values: {},
                                             validate: false,
                                         }

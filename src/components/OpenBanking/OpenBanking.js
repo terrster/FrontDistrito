@@ -15,9 +15,11 @@ const OpenBanking = () => {
     const [socket, setSocket] = useState(null);
     const [banksOptions, setBanksOptions] = useState([]);//Options for select
     const [bankFields, setBankFields] = useState([]);
+    const [error, setError] = useState(null);
     const [initialValues, setinitialValues] = useState({
         bank0: {
             id: '',
+            idCredential: null,
             values: {},
             validate: false,
         }
@@ -40,6 +42,35 @@ const OpenBanking = () => {
                 }
             });
             setSocket(socket);
+
+            if(user.idClient.appliance[0].hasOwnProperty('idFinerio')){
+                let credentials = user.idClient.appliance[0].idFinerio.credentials;
+                let initialValuesCopy = {...initialValues};
+
+                if(credentials.length){
+                    credentials.map((credential, index) => {
+                        if(index === 0){
+                            initialValuesCopy[`bank0`].id = credential.idBank;
+                            initialValuesCopy[`bank0`].idCredential = credential.id;
+                            initialValuesCopy[`bank0`].values = {};
+                            initialValuesCopy[`bank0`].validate = true;
+                        }
+                        else{
+                            initialValuesCopy = {
+                                ...initialValuesCopy,
+                                [`bank${Object.keys(initialValues).length}`]: {
+                                    id: credential.idBank,
+                                    idCredential: credential.id,
+                                    values: {},
+                                    validate: true
+                                }
+                            };
+                        }
+                    });
+                    
+                    setinitialValues(initialValuesCopy);
+                }
+            }
         }
     }, []);
 
@@ -53,14 +84,31 @@ const OpenBanking = () => {
                 setShowModal(true);
             });
 
-            socket.on('askForTokenResult', data => {
-                console.log('askForTokenResult');
-                console.log(data);
+            socket.on('notifySuccess', (callback) => {
+                let index = Object.keys(initialValues)[Object.values(initialValues).findIndex(bank => bank.credentialId == callback.credentialId)];
+
+                let initialValuesCopy = {...initialValues};
+                initialValuesCopy[index].validate = true;
+                setinitialValues(initialValuesCopy);
+
+                sessionStorage.setItem('user', JSON.stringify(callback.user));
+                setValidating(false);
             });
 
-            socket.on("credentialSuccessfullyStored", data => {
-                console.log("credentialSuccessfullyStored");
-                console.log(data);
+            socket.on('notifyFailure', async(callback) => {
+                let index = Object.keys(initialValues)[Object.values(initialValues).findIndex(bank => bank.credentialId == callback.credentialId)];
+                
+                let {data} = await axios.delete(`api/finerio/credentials/${callback.credentialId}`);
+                sessionStorage.setItem('user', JSON.stringify(data.user));
+
+                let initialValuesCopy = {...initialValues};
+                initialValuesCopy[index].idCredential = null;
+                setinitialValues(initialValuesCopy);
+                setError(callback.message);
+                setTimeout(() => {
+                    setError(null);
+                }, 5000);
+                setValidating(false);
             });
         }
     }, [socket]);
@@ -84,20 +132,6 @@ const OpenBanking = () => {
         let initialValuesCopy = {...initialValues};
 
         const { data } = await axios.get(`api/finerio/bank/${idBank}/fields`);
-        // let newFieldsBank = bankFields;
-        // if (idBank === 1) {
-        //   const tokenField = {
-        //     friendlyName: "Token",
-        //     name: "securityCode",
-        //     type: "TEXT",
-        //     position: data.length + 1,
-        //   };
-        //   const newFields = [...data, tokenField];
-        //   newFieldsBank[i] = newFields;
-        // } else {
-        //   newFieldsBank[i] = data;
-        // }
-        // setForceRender(!forceRender);
 
         initialValuesCopy[bank].id = idBank;
         bankFieldsCopy[bank] = data;
@@ -112,25 +146,17 @@ const OpenBanking = () => {
         // dispatch(updateLoader(false));
     };
 
-    // useEffect(() => {
-    //     console.log("initialValues");
-    //     console.log(initialValues);
-    // }, [initialValues]);
-
-    // useEffect(() => {
-    //     console.log("bankFields");
-    //     console.log(bankFields);
-    // }, [bankFields]);
-
-
     const handleSubmit = async(values) => {
-
         setValidating(true);
+        
         const { data } = await axios.post(`api/open-banking/store`, values);
-        console.log(data);
+
         if(data.code === 200){
-            
-            setValidating(false);
+            let initialValuesCopy = {...initialValues};
+            initialValuesCopy[`bank${Object.keys(initialValues).length - 1}`].idCredential = data.idCredential;
+            setinitialValues(initialValuesCopy);
+
+            // setValidating(false);
         }
         else{
             setValidating(false);
@@ -140,8 +166,15 @@ const OpenBanking = () => {
     const handleProvideToken = async() => {
         setShowModal(false);
         const { data } = await axios.post(`api/open-banking/storeToken`, provideToken);
-        console.log(data);
-        // console.log(provideToken);
+
+        if(data.code === 200){
+
+        }
+        
+        setProvideToken({
+            token: '',
+            idCredential: ''
+        });
     }
 
     return (
@@ -171,9 +204,12 @@ const OpenBanking = () => {
 
             <OpenBankingForm 
                 user={user} 
+                axios={axios}
                 banksOptions={banksOptions} 
                 bankFields={bankFields} 
                 setBankFields={setBankFields} 
+                error={error}
+                setError={setError}
                 initialValues={initialValues} 
                 setinitialValues={setinitialValues} 
                 getBankFields={getBankFields} 

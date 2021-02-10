@@ -51,7 +51,8 @@ export const renderFieldSelect = ({
     onChange,
     form: { errors, setFieldValue },
     props,
-    children
+    children,
+    disabled
 }) => {
 	return (
         <>
@@ -60,7 +61,7 @@ export const renderFieldSelect = ({
                     label &&
                     <label>{label}</label>
                 }
-                <select {...field} className={`form-control custom-form-input text-dp mt-1 ${className}`} {...props} 
+                <select {...field} className={`form-control custom-form-input text-dp mt-1 ${className}`} disabled={disabled} {...props} 
                     onChange={ e => {
                         setFieldValue(field.name, e.target.value);
                         onChange && onChange(e)

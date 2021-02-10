@@ -23,7 +23,7 @@ export const validateOpenBanking = (values) => {
                 errors[`bank${i}.values.securityCode`] = "Ingresa el token o clave de seguridad de tu banco.";
             }
         }
-    }console.log(errors);
+    }
 
     return errors;
 };
