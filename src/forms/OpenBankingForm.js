@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { withFormik, Form, Field } from 'formik';
-import { Modal, Row, Col, Spinner, Button } from 'react-bootstrap';
+import { Modal, Row, Col, Spinner, Button, Alert } from 'react-bootstrap';
 import { renderField, renderFieldSelect } from '../components/Generic/FinancialDataFields';
 import SubtitleForm from '../components/Generic/SubtitleForm';
 import Delete from "../assets/img/basura-01.png";
@@ -8,17 +8,20 @@ import {validateOpenBanking} from '../components/Validate/ValidateOpenBanking';
 
 const OpenBankingForm = (props) => {
 
-    const { user, axios, banksOptions, bankFields, setBankFields, error, setError, initialValues, setinitialValues, getBankFields, validating, setValidating, showModal, setShowModal, provideToken, setProvideToken, handleProvideToken } = props;
+    const { axios, banksOptions, bankFields, setBankFields, error, success, setError, initialValues, setinitialValues, updateValues, setUpdateValues, getBankFields, validating, showModal, setShowModal, provideToken, setProvideToken, handleProvideToken, dispatch, updateLoader } = props;
     const [timer, setTimer] = useState(30);
 
     const deleteBank = async(bank) => {
+        dispatch(updateLoader(true));
         let bankFieldsCopy = {...bankFields};
         let initialValuesCopy = {...initialValues};
 
         if(bank === 'bank0'){
             if(initialValuesCopy[bank].idCredential){
                 let {data} = await axios.delete(`api/finerio/credentials/${initialValuesCopy[bank].idCredential}`);
-                sessionStorage.setItem('user', JSON.stringify(data.user));
+                if(data.hasOwnProperty('user')){
+                    sessionStorage.setItem('user', JSON.stringify(data.user));
+                }
             }
 
             initialValuesCopy[`${bank}`] = {
@@ -31,7 +34,9 @@ const OpenBankingForm = (props) => {
         else{
             if(initialValuesCopy[bank].idCredential){
                 let {data} = await axios.delete(`api/finerio/credentials/${initialValuesCopy[bank].idCredential}`);
-                sessionStorage.setItem('user', JSON.stringify(data.user));
+                if(data.hasOwnProperty('user')){
+                    sessionStorage.setItem('user', JSON.stringify(data.user));
+                }
             }
 
             delete initialValuesCopy[`${bank}`];
@@ -39,11 +44,14 @@ const OpenBankingForm = (props) => {
         delete bankFieldsCopy[`${bank}`];
         setinitialValues(initialValuesCopy);
         setBankFields(bankFieldsCopy);
+
+        dispatch(updateLoader(false));
     };
 
     useEffect(() => {
-        setinitialValues({...initialValues, ...props.values})
-    }, [props.values, props.initialValues]);
+        setinitialValues({...initialValues, ...props.values});
+        setUpdateValues(false);
+    }, [props.values, props.initialValues, updateValues]);
 
     useEffect(() => {
         let interval = null;
@@ -57,14 +65,20 @@ const OpenBankingForm = (props) => {
         if(!showModal || timer === 0){
             clearInterval(interval);
             setShowModal(false);
-            setValidating(false);
             setTimeout(() => {
                 setTimer(30);
             }, 1000);
         }
 
         return () => clearInterval(interval);
-    }, [showModal, timer])
+    }, [showModal, timer]);
+
+    const handleChangeToken = ({target}) => {
+        setProvideToken({
+            ...provideToken,
+            token: target.value
+        });
+    }
 
     return (
         <>
@@ -74,12 +88,7 @@ const OpenBankingForm = (props) => {
                 </Modal.Header>
                 <Modal.Body>
                     <p className="text-dp">Necesitamos el token para terminar de validar tu cuenta</p>
-                    <input className="form-control custom-form-input text-dp" value={provideToken.token} onChange={({target}) => {
-                        setProvideToken({
-                            ...provideToken,
-                            token: target.value
-                        });
-                    }}/>
+                    <input className="form-control custom-form-input text-dp" value={provideToken.token} onChange={handleChangeToken}/>
                     <p className="text-dp">Tienes: </p>
                     <p className="title-dp fz25 text-center">{timer} {timer > 1 ? "segundos" : "segundo"}</p>
                 </Modal.Body>
@@ -123,7 +132,7 @@ const OpenBankingForm = (props) => {
                         </Button>
                     </Col>
                     {
-                        bankFields.hasOwnProperty(`bank0`) && bankFields[`bank0`].map((field, index) => {
+                        !props.values[`bank0`].validate && bankFields.hasOwnProperty(`bank0`) && bankFields[`bank0`].map((field, index) => {
                             return <Col xs={12} key={index} key={field.name + 0}>
                                         <Field
                                             component={renderField}
@@ -179,7 +188,7 @@ const OpenBankingForm = (props) => {
                                         </Col>
 
                                         {
-                                            bankFields.hasOwnProperty(bank) && bankFields[bank].map((field, index) => {
+                                            !props.values[bank].validate && bankFields.hasOwnProperty(bank) && bankFields[bank].map((field, index) => {
                                                 return <Col xs={12} key={index} key={field.name + index}>
                                                             <Field
                                                                 component={renderField}
@@ -201,18 +210,30 @@ const OpenBankingForm = (props) => {
                     })
                 }
 
+                {
+                    error &&
+                    <div className="mt-4 mb-4">
+                        <p className="text-center"><Spinner animation="grow" variant="danger" /></p>
+                        <Alert variant="danger">
+                            {error}
+                        </Alert>
+                    </div>
+                }
+
+                {
+                    success &&
+                    <div className="mt-4 mb-4">
+                        <p className="text-center"><Spinner animation="grow" variant="success" /></p>
+                        <Alert variant="success">
+                            Credencial guardada exitosamente.
+                        </Alert>
+                    </div>
+                }
+
                 <div className="fz18 gray50 text-dp mb-30 mt-4 text-left">
                     Esta información no es obligatoria, pero podrá agilizar tu solicitud de crédito a la mitad del tiempo. 
                     Se ingresará por única ocasión para descargar solo tus movimientos bancarios.
                 </div>
-
-                {
-                    error &&
-                    <div className="error mb-4">
-                        <p className="text-center"><Spinner animation="grow" variant="danger" /></p>
-                        {error}
-                    </div>
-                }
                 
                 <Row>
                     <Col className="mb-2 d-flex justify-content-around justify-content-md-start">

@@ -4,6 +4,9 @@ import { Carousel } from 'react-bootstrap';
 import { useHistory } from "react-router-dom";
 import axios from "../../utils/axios";
 import OpenBankingForm from '../../forms/OpenBankingForm';
+import Loader from "../Loader/Loader";
+import { useDispatch } from "react-redux";
+import { updateLoader } from "../../redux/actions/loaderActions";
 
 /*Images*/
 import openBankingWeb from '../../assets/img/open_banking/openbanking_banner-01.jpg';
@@ -12,10 +15,12 @@ import io from 'socket.io-client';
 const OpenBanking = () => {
     const history = useHistory();
     const user = JSON.parse(sessionStorage.getItem("user"));   
+    const dispatch = useDispatch();
     const [socket, setSocket] = useState(null);
     const [banksOptions, setBanksOptions] = useState([]);//Options for select
     const [bankFields, setBankFields] = useState([]);
     const [error, setError] = useState(null);
+    const [success, setSuccess] = useState(false);
     const [initialValues, setinitialValues] = useState({
         bank0: {
             id: '',
@@ -24,6 +29,7 @@ const OpenBanking = () => {
             validate: false,
         }
     });
+    const [updateValues, setUpdateValues] = useState(false);
     const [validating, setValidating] = useState(null);
     const [showModal, setShowModal] = useState(false);
     const [provideToken, setProvideToken] = useState({
@@ -77,50 +83,74 @@ const OpenBanking = () => {
     useEffect(() => {
         if(socket){
             socket.on('askForToken', (data) => {
+                dispatch(updateLoader(false));
                 setProvideToken({
                     ...provideToken,
-                    idCredential: data.idCredential
+                    idCredential: data.credentialId
                 });
                 setShowModal(true);
             });
 
             socket.on('notifySuccess', (callback) => {
-                let index = Object.keys(initialValues)[Object.values(initialValues).findIndex(bank => bank.credentialId == callback.credentialId)];
+                let index = Object.keys(initialValues)[Object.values(initialValues).findIndex(bank => bank.idCredential == callback.credentialId)];
+                
+                if(callback && index){
+                    let initialValuesCopy = {...initialValues};
+                    initialValuesCopy[index].validate = true;
+                    setinitialValues(initialValuesCopy);
+                    setUpdateValues(true);
+    
+                    sessionStorage.setItem('user', JSON.stringify(callback.user));
+    
+                    setSuccess(true);
+                    setTimeout(() => {
+                        setSuccess(false);
+                    }, 5000);
+                }
 
-                let initialValuesCopy = {...initialValues};
-                initialValuesCopy[index].validate = true;
-                setinitialValues(initialValuesCopy);
-
-                sessionStorage.setItem('user', JSON.stringify(callback.user));
                 setValidating(false);
+                dispatch(updateLoader(false));
             });
 
             socket.on('notifyFailure', async(callback) => {
-                let index = Object.keys(initialValues)[Object.values(initialValues).findIndex(bank => bank.credentialId == callback.credentialId)];
+                let index = Object.keys(initialValues)[Object.values(initialValues).findIndex(bank => bank.idCredential === callback.credentialId)];
                 
-                let {data} = await axios.delete(`api/finerio/credentials/${callback.credentialId}`);
-                sessionStorage.setItem('user', JSON.stringify(data.user));
+                if(callback && index){
+                    let {data} = await axios.delete(`api/finerio/credentials/${callback.credentialId}`);
+                
+                    if(data.user){
+                        sessionStorage.setItem('user', JSON.stringify(data.user));
+                    }
+    
+                    let initialValuesCopy = {...initialValues};
+                    initialValuesCopy[index].idCredential = null;
+                    setinitialValues(initialValuesCopy);
+                    setUpdateValues(true);
+    
+                    setError(callback.message);
+                    setTimeout(() => {
+                        setError(null);
+                    }, 5000);
+    
+                }
 
-                let initialValuesCopy = {...initialValues};
-                initialValuesCopy[index].idCredential = null;
-                setinitialValues(initialValuesCopy);
-                setError(callback.message);
-                setTimeout(() => {
-                    setError(null);
-                }, 5000);
                 setValidating(false);
+                dispatch(updateLoader(false));
             });
         }
-    }, [socket]);
+    }, [socket, initialValues]);
 
     useEffect(() => {
         if(!user){
             history.push("/login/open-banking");
         }
         else{
+            dispatch(updateLoader(true));
+
             const getBanks = async () => {
                 const { data } = await axios.get("api/finerio/banks");
                 setBanksOptions(data);
+                dispatch(updateLoader(false));
             };
         
             getBanks();
@@ -128,6 +158,8 @@ const OpenBanking = () => {
     }, []);
 
     const getBankFields = async (idBank, bank) => {
+        dispatch(updateLoader(true));
+
         let bankFieldsCopy = {...bankFields};
         let initialValuesCopy = {...initialValues};
 
@@ -142,21 +174,23 @@ const OpenBanking = () => {
 
         setinitialValues(initialValuesCopy);
         setBankFields(bankFieldsCopy);
+        setUpdateValues(true);
 
-        // dispatch(updateLoader(false));
+        dispatch(updateLoader(false));
     };
 
     const handleSubmit = async(values) => {
+        dispatch(updateLoader(true));
+
         setValidating(true);
-        
+        setUpdateValues(true);
+
         const { data } = await axios.post(`api/open-banking/store`, values);
 
         if(data.code === 200){
             let initialValuesCopy = {...initialValues};
             initialValuesCopy[`bank${Object.keys(initialValues).length - 1}`].idCredential = data.idCredential;
             setinitialValues(initialValuesCopy);
-
-            // setValidating(false);
         }
         else{
             setValidating(false);
@@ -164,21 +198,23 @@ const OpenBanking = () => {
     }
 
     const handleProvideToken = async() => {
+        dispatch(updateLoader(true));
         setShowModal(false);
+        setUpdateValues(true);
+
         const { data } = await axios.post(`api/open-banking/storeToken`, provideToken);
 
         if(data.code === 200){
-
+            setProvideToken({
+                token: '',
+                idCredential: ''
+            });
         }
-        
-        setProvideToken({
-            token: '',
-            idCredential: ''
-        });
     }
 
     return (
         <>
+            <Loader />
             <Title title="Open Banking" className="title-dp fz42 fw500 mb-1 text-center"/>
             <Carousel controls={false} indicators={false}>
                 <Carousel.Item>
@@ -203,15 +239,17 @@ const OpenBanking = () => {
             </div>
 
             <OpenBankingForm 
-                user={user} 
                 axios={axios}
                 banksOptions={banksOptions} 
                 bankFields={bankFields} 
                 setBankFields={setBankFields} 
                 error={error}
+                success={success}
                 setError={setError}
                 initialValues={initialValues} 
                 setinitialValues={setinitialValues} 
+                updateValues={updateValues}
+                setUpdateValues={setUpdateValues}
                 getBankFields={getBankFields} 
                 handleSubmit={handleSubmit} 
                 validating={validating}
@@ -221,6 +259,8 @@ const OpenBanking = () => {
                 provideToken={provideToken}
                 setProvideToken={setProvideToken}
                 handleProvideToken={handleProvideToken}
+                dispatch={dispatch}
+                updateLoader={updateLoader}
             />
         </>
     );
