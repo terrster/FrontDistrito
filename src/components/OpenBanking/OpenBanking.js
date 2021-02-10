@@ -30,15 +30,17 @@ const OpenBanking = () => {
     });
 
     useEffect(() => {
-        const socket = io.connect(process.env.REACT_APP_BACKEND, {
-            transports: ['websocket'],
-            autoConnect: true,
-            forceNew: true,
-            query: {
-                'idU': user._id
-            }
-        });
-        setSocket(socket);
+        if(user){
+            const socket = io.connect(process.env.REACT_APP_BACKEND, {
+                transports: ['websocket'],
+                autoConnect: true,
+                forceNew: true,
+                query: {
+                    'idU': user._id
+                }
+            });
+            setSocket(socket);
+        }
     }, []);
 
     useEffect(() => {
@@ -52,6 +54,12 @@ const OpenBanking = () => {
             });
 
             socket.on('askForTokenResult', data => {
+                console.log('askForTokenResult');
+                console.log(data);
+            });
+
+            socket.on("credentialSuccessfullyStored", data => {
+                console.log("credentialSuccessfullyStored");
                 console.log(data);
             });
         }

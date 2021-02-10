@@ -119,7 +119,10 @@ const OpenBankingForm = (props) => {
                                             placeholder={field.friendlyName}
                                             type={field.type}
                                             name={`bank0.values.${field.name}`}
-                                            normalize={field.name === 'username' ? 'onlyNumbers' : ''}
+                                            normalize={
+                                                field.name === 'username' && props.values[`bank0`].id <= 7
+                                                ? 'onlyNumbers' : 'numbersLettersWithoutSpace'
+                                            }
                                             required={true}
                                             className="mb-3"
                                         />
@@ -171,7 +174,10 @@ const OpenBankingForm = (props) => {
                                                                 placeholder={field.friendlyName}
                                                                 type={field.type}
                                                                 name={`${bank}.values.${field.name}`}
-                                                                // normalize={field.name == 'username' ? onlyNumbers : ''}
+                                                                normalize={
+                                                                    field.name === 'username' && props.values[bank].id <= 7
+                                                                    ? 'onlyNumbers' : 'numbersLettersWithoutSpace'
+                                                                }
                                                                 required={true}
                                                                 className="mb-3"
                                                             />

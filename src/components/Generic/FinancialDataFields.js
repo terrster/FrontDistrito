@@ -5,11 +5,18 @@ const onlyNumbers = (e, form) =>
 form.setFieldValue(e.target.name, e.target.value) : 
 form.setFieldValue(e.target.name, e.target.value.substring(0, e.target.value.length - 1));
 
+const numbersLettersWithoutSpace = (e, form) => 
+/^[A-Za-z0-9]+$/g.test(e.target.value) && e.target.value.length > 0 ? 
+form.setFieldValue(e.target.name, e.target.value) : 
+form.setFieldValue(e.target.name, e.target.value.substring(0, e.target.value.length - 1));
+
 const normalizeFn = (rule, e, form) => {
     switch(rule){
         case "onlyNumbers":
             onlyNumbers(e, form);
         break;
+        case "numbersLettersWithoutSpace":
+            numbersLettersWithoutSpace(e, form);
         default:
         break;
     }
