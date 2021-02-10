@@ -413,18 +413,18 @@ export default withFormik({
                 initialValuesCopy[`bank${Object.keys(formikBag.props.initialValues).length - 1}`].idCredential = data.idCredential;
                 formikBag.props.setinitialValues(initialValuesCopy);
             }
-            else if(data.code === 204){
-                formikBag.props.setMessage(data.msg);
-                setTimeout(() => {
-                    formikBag.props.setMessage(null);
-                }, 5000);
-                formikBag.props.dispatch(formikBag.props.updateLoader(false));
-                formikBag.props.setValidating(false);
-            }
-            else{
-                formikBag.props.dispatch(formikBag.props.updateLoader(false));
-                formikBag.props.setValidating(false);
-            }
+            // else if(data.code === 204){
+            //     formikBag.props.setMessage(data.msg);
+            //     setTimeout(() => {
+            //         formikBag.props.setMessage(null);
+            //     }, 5000);
+            //     formikBag.props.dispatch(formikBag.props.updateLoader(false));
+            //     formikBag.props.setValidating(false);
+            // }
+            // else{
+            //     formikBag.props.dispatch(formikBag.props.updateLoader(false));
+            //     formikBag.props.setValidating(false);
+            // }
         }
         catch(error){
             formikBag.props.setError("Hubo un error al tratar de guardar la credencial.");
