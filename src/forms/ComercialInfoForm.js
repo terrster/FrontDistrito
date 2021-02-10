@@ -539,7 +539,7 @@ let ComercialInfoForm = (props) => {
           )}
         </Row>
 
-        {/* {type !== "PM" && (
+        {type !== "PM" && (
           <>
           <SubtitleForm subtitle="Datos Bancarios" className="mt-11 mb-3" />
           <div
@@ -753,7 +753,7 @@ let ComercialInfoForm = (props) => {
           </Button>
           <PopUpBanks />
           </>
-        )} */}
+        )}
 
         <SubtitleForm subtitle="¿Cuentas con alguno?" className="mt-11 mb-3" />
         <Field
