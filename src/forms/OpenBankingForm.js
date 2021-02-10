@@ -22,16 +22,16 @@ const OpenBankingForm = (props) => {
 
     useEffect(() => {
         if(socket){
-            socket.on('askForToken', (data) => {
+            socket.on('askForToken', (callback) => {console.log(callback);
                 dispatch(updateLoader(false));
                 setProvideToken({
                     ...provideToken,
-                    idCredential: data.credentialId
+                    idCredential: callback.credentialId
                 });
                 setShowModal(true);
             });
 
-            socket.on('notifySuccess', (callback) => {
+            socket.on('notifySuccess', (callback) => {console.log(callback);
                 let index = Object.keys(initialValues)[Object.values(initialValues).findIndex(bank => bank.idCredential == callback.credentialId)];
                 
                 if(callback && index){
@@ -51,7 +51,7 @@ const OpenBankingForm = (props) => {
                 dispatch(updateLoader(false));
             });
 
-            socket.on('notifyFailure', async(callback) => {
+            socket.on('notifyFailure', async(callback) => {console.log(callback);
                 let index = Object.keys(initialValues)[Object.values(initialValues).findIndex(bank => bank.idCredential === callback.credentialId)];
                 
                 if(callback && index){
