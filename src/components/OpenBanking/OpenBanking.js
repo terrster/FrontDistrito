@@ -96,22 +96,29 @@ const OpenBanking = () => {
     }, []);
 
     const handleSubmit = async(values) => {
-        dispatch(updateLoader(true));
-
-        setValidating(true);
-
-        const { data } = await axios.post(`api/open-banking/store`, values);
-
-        if(data.code === 200){
-            let initialValuesCopy = {...initialValues};
-            initialValuesCopy[`bank${Object.keys(initialValues).length - 1}`].idCredential = data.idCredential;
-            setinitialValues(initialValuesCopy);
+        try{
+            dispatch(updateLoader(true));
+            setValidating(true);
+    
+            const { data } = await axios.post(`api/open-banking/store`, values);
+    
+            if(data.code === 200){
+                let initialValuesCopy = {...initialValues};
+                initialValuesCopy[`bank${Object.keys(initialValues).length - 1}`].idCredential = data.idCredential;
+                setinitialValues(initialValuesCopy);
+            }
         }
-        else{
+        catch(error){
+            dispatch(updateLoader(false));
             setValidating(false);
+
+            setError("Ha ocurrido un error tratando de registrar la credencial bancaria");
+
+            setTimeout(() => {
+                setError(null);
+            }, 5000);
         }
     }
-
 
     return (
         <>
