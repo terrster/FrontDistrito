@@ -22,14 +22,7 @@ const OpenBankingForm = (props) => {
 
     useEffect(() => {
         if(socket){
-            socket.on('welcome', (data) => {
-                setMessage(data.msg);
-                setTimeout(() => {
-                    setMessage(null);
-                }, 5000);
-            });
-
-            socket.on('askForToken', (callback) => {console.log(callback);
+            socket.on('askForToken', (callback) => {
                 dispatch(updateLoader(false));
                 setProvideToken({
                     ...provideToken,
@@ -38,52 +31,53 @@ const OpenBankingForm = (props) => {
                 setShowModal(true);
             });
 
-            socket.on('notifySuccess', (callback) => {console.log(callback);
-                let index = Object.keys(initialValues)[Object.values(initialValues).findIndex(bank => bank.idCredential == callback.credentialId)];
-                
-                if(callback && index){
+            socket.on('notifySuccess', (callback) => {
+                let index = Object.keys(initialValues).find(bank => initialValues[bank].idCredential === callback.credentialId);
+
+                if(index){
                     let initialValuesCopy = {...initialValues};
                     initialValuesCopy[index].validate = true;
                     setinitialValues(initialValuesCopy);
-    
+
                     sessionStorage.setItem('user', JSON.stringify(callback.user));
-    
+
                     setSuccess(true);
                     setTimeout(() => {
                         setSuccess(false);
                     }, 5000);
-                }
 
-                setValidating(false);
-                dispatch(updateLoader(false));
+                    setValidating(false);
+                    dispatch(updateLoader(false));
+                }
             });
 
-            socket.on('notifyFailure', async(callback) => {console.log(callback);
-                let index = Object.keys(initialValues)[Object.values(initialValues).findIndex(bank => bank.idCredential === callback.credentialId)];
-                
-                if(callback && index){
+            socket.on('notifyFailure', async(callback) => {
+                let index = Object.keys(props.initialValues).find(bank => props.initialValues[bank].idCredential === callback.credentialId);
+
+                if(index){
                     let {data} = await axios.delete(`api/finerio/credentials/${callback.credentialId}`);
                 
                     if(data.user){
                         sessionStorage.setItem('user', JSON.stringify(data.user));
-                    }
-    
-                    let initialValuesCopy = {...initialValues};
+                    }    
+
+                    let initialValuesCopy = {...props.initialValues};
                     initialValuesCopy[index].idCredential = null;
+
                     setinitialValues(initialValuesCopy);
-    
+
                     setError(callback.message);
                     setTimeout(() => {
                         setError(null);
                     }, 5000);
-    
+
+                    setValidating(false);
+                    dispatch(updateLoader(false));
                 }
 
-                setValidating(false);
-                dispatch(updateLoader(false));
             });
         }
-    }, [socket]);
+    }, [socket, initialValues]);
 
     const getBankFields = async (idBank, bank) => {
         dispatch(updateLoader(true));
@@ -408,39 +402,8 @@ export default withFormik({
         return initialValues;
     },
     validate: validateOpenBanking, 
-    async handleSubmit(values, formikBag){
-        formikBag.props.dispatch(formikBag.props.updateLoader(true));
-        formikBag.props.setValidating(true);
-        
-        try{
-            const { data } = await formikBag.props.axios.post(`api/open-banking/store`, values);
-
-            if(data.code === 200){
-                let initialValuesCopy = {...formikBag.props.initialValues};
-                initialValuesCopy[`bank${Object.keys(formikBag.props.initialValues).length - 1}`].idCredential = data.idCredential;
-                formikBag.props.setinitialValues(initialValuesCopy);
-            }
-            // else if(data.code === 204){
-            //     formikBag.props.setMessage(data.msg);
-            //     setTimeout(() => {
-            //         formikBag.props.setMessage(null);
-            //     }, 5000);
-            //     formikBag.props.dispatch(formikBag.props.updateLoader(false));
-            //     formikBag.props.setValidating(false);
-            // }
-            // else{
-            //     formikBag.props.dispatch(formikBag.props.updateLoader(false));
-            //     formikBag.props.setValidating(false);
-            // }
-        }
-        catch(error){
-            formikBag.props.setError("Hubo un error al tratar de guardar la credencial.");
-            setTimeout(() => {
-                formikBag.props.setError(null);
-            }, 5000);
-            formikBag.props.dispatch(formikBag.props.updateLoader(false));
-            formikBag.props.setValidating(false);
-        }
+    handleSubmit(values, formikBag){
+        formikBag.props.handleSubmit(values);
     },
     enableReinitialize: true,
     displayName: 'OpenBankingForm'

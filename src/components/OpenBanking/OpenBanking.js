@@ -66,8 +66,8 @@ const OpenBanking = () => {
         }
     }, []);
 
-    const connectSocket = useCallback(() => {
-        const socket = io.connect(process.env.REACT_APP_BACKEND, {
+    const connectSocket = useCallback(() => {//process.env.REACT_APP_BACKEND
+        const socket = io.connect('https://apidev.distritopyme.com', {
             transports: ['websocket'],
             autoConnect: true,
             forceNew: true,
@@ -94,6 +94,24 @@ const OpenBanking = () => {
             getBanks();
         }
     }, []);
+
+    const handleSubmit = async(values) => {
+        dispatch(updateLoader(true));
+
+        setValidating(true);
+
+        const { data } = await axios.post(`api/open-banking/store`, values);
+
+        if(data.code === 200){
+            let initialValuesCopy = {...initialValues};
+            initialValuesCopy[`bank${Object.keys(initialValues).length - 1}`].idCredential = data.idCredential;
+            setinitialValues(initialValuesCopy);
+        }
+        else{
+            setValidating(false);
+        }
+    }
+
 
     return (
         <>
@@ -127,6 +145,7 @@ const OpenBanking = () => {
                 banksOptions={banksOptions} 
                 initialValues={initialValues} 
                 setinitialValues={setinitialValues} 
+                handleSubmit={handleSubmit}
                 validating={validating}
                 setValidating={setValidating}
                 dispatch={dispatch}
