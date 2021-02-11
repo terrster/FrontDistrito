@@ -31,10 +31,11 @@ const OpenBankingForm = (props) => {
                 setShowModal(true);
             });
 
-            socket.on('notifySuccess', (callback) => {
+            socket.on('notifySuccess', (callback) => {console.log(callback);
                 let index = Object.keys(initialValues).find(bank => initialValues[bank].idCredential === callback.credentialId);
-
+                console.log(index);
                 if(index){
+                    console.log(index);
                     let initialValuesCopy = {...initialValues};
                     initialValuesCopy[index].validate = true;
                     setinitialValues(initialValuesCopy);
@@ -51,10 +52,11 @@ const OpenBankingForm = (props) => {
                 }
             });
 
-            socket.on('notifyFailure', async(callback) => {
+            socket.on('notifyFailure', async(callback) => {console.log(callback);
                 let index = Object.keys(props.initialValues).find(bank => props.initialValues[bank].idCredential === callback.credentialId);
-
+                console.log(index);
                 if(index){
+                    console.log(index);
                     let {data} = await axios.delete(`api/finerio/credentials/${callback.credentialId}`);
                 
                     if(data.user){
