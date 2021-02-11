@@ -22,6 +22,13 @@ const OpenBankingForm = (props) => {
 
     useEffect(() => {
         if(socket){
+            socket.on('welcome', (data) => {
+                setMessage(data.msg);
+                setTimeout(() => {
+                    setMessage(null);
+                }, 5000);
+            });
+
             socket.on('askForToken', (callback) => {console.log(callback);
                 dispatch(updateLoader(false));
                 setProvideToken({
