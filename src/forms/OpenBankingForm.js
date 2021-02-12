@@ -55,8 +55,10 @@ const OpenBankingForm = (props) => {
 
                     setValidating(false);
                     dispatch(updateLoader(false));
+
                     props.setErrors({});
-                    // props.setSubmitting(false);
+                    props.setSubmitting(false);
+                    props.resetForm();
                 }
             });
 
@@ -83,8 +85,10 @@ const OpenBankingForm = (props) => {
 
                     setValidating(false);
                     dispatch(updateLoader(false));
+
                     props.setErrors({});
-                    // props.setSubmitting(false);
+                    props.setSubmitting(false);
+                    props.resetForm();
                 }
 
             });
@@ -109,8 +113,10 @@ const OpenBankingForm = (props) => {
 
         setinitialValues(initialValuesCopy);
         setBankFields(bankFieldsCopy);
+
         props.setErrors({});
-        // props.setSubmitting(false);
+        props.setSubmitting(false);
+        props.resetForm();
 
         dispatch(updateLoader(false));
     };
@@ -187,16 +193,12 @@ const OpenBankingForm = (props) => {
         return () => clearInterval(interval);
     }, [showModal, timer]);
 
-    useEffect(() => {
-        console.log(props);
-    }, [props])
-
     const handleChangeToken = ({target}) => {
         setProvideToken({
             ...provideToken,
             token: target.value
         });
-    }
+    };
 
     return (
         <>
@@ -398,6 +400,7 @@ const OpenBankingForm = (props) => {
                         type="submit"
                         className={"btn-blue-general btn-open-banking"}
                         disabled={validating || !Object.keys(initialValues).find(bank => initialValues[bank].validate === false) || !Object.keys(props.values).find(bank => props.values[bank].validate === false)}
+                        // onClick={}
                         >
                             <Spinner
                             as="span"
@@ -424,6 +427,7 @@ export default withFormik({
     handleSubmit(values, formikBag){
         formikBag.props.handleSubmit(values);
         formikBag.setSubmitting(false);
+        formikBag.resetForm();
     },
     enableReinitialize: true,
     displayName: 'OpenBankingForm'
