@@ -11,7 +11,7 @@ const OpenBankingForm = (props) => {
     const { socket, axios, banksOptions, initialValues, setinitialValues, dispatch, updateLoader, validating, setValidating, error, setError, message, setMessage } = props;
 
     const [bankFields, setBankFields] = useState([]);//Fields of a chosen bank
-    const [timer, setTimer] = useState(30);
+    const [timer, setTimer] = useState(60);
     const [success, setSuccess] = useState(false);
     const [showModal, setShowModal] = useState(false);
     const tokenRef = useRef();
@@ -29,7 +29,7 @@ const OpenBankingForm = (props) => {
             });
 
             socket.on('askForToken', (callback) => {
-                dispatch(updateLoader(false));
+                // dispatch(updateLoader(false));
                 setProvideToken({
                     ...provideToken,
                     idCredential: callback.credentialId
@@ -68,8 +68,9 @@ const OpenBankingForm = (props) => {
                         sessionStorage.setItem('user', JSON.stringify(data.user));
                     }    
 
-                    let initialValuesCopy = {...props.initialValues};
+                    let initialValuesCopy = {...initialValues};
                     initialValuesCopy[index].idCredential = null;
+                    props.values[index].idCredential = null;
 
                     setinitialValues(initialValuesCopy);
 
@@ -84,7 +85,7 @@ const OpenBankingForm = (props) => {
 
             });
         }
-    }, [socket, initialValues]);
+    }, [socket, initialValues, props.values]);
 
     const getBankFields = async (idBank, bank) => {
         dispatch(updateLoader(true));
@@ -174,7 +175,7 @@ const OpenBankingForm = (props) => {
             clearInterval(interval);
             setShowModal(false);
             setTimeout(() => {
-                setTimer(30);
+                setTimer(60);
             }, 1000);
         }
 

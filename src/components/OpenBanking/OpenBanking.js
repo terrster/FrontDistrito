@@ -99,8 +99,8 @@ const OpenBanking = () => {
                 } 
                 catch(error){
                     setError("Ha ocurrido un error tratando de obtener los bancos.");
+                    dispatch(updateLoader(false));
                 }
-                dispatch(updateLoader(false));
             };
         
             getBanks();
