@@ -388,7 +388,7 @@ const OpenBankingForm = (props) => {
                         <Button 
                         type="submit"
                         className={"btn-blue-general btn-open-banking"}
-                        disabled={validating}
+                        disabled={validating || !Object.keys(initialValues).find(bank => initialValues[bank].validate === false)}
                         >
                             <Spinner
                             as="span"
@@ -413,6 +413,7 @@ export default withFormik({
     },
     validate: validateOpenBanking, 
     handleSubmit(values, formikBag){
+        formikBag.setSubmitting(false);
         formikBag.props.handleSubmit(values);
     },
     enableReinitialize: true,
