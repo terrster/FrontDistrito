@@ -55,6 +55,8 @@ const OpenBankingForm = (props) => {
 
                     setValidating(false);
                     dispatch(updateLoader(false));
+                    props.setErrors({});
+                    // props.setSubmitting(false);
                 }
             });
 
@@ -81,6 +83,8 @@ const OpenBankingForm = (props) => {
 
                     setValidating(false);
                     dispatch(updateLoader(false));
+                    props.setErrors({});
+                    // props.setSubmitting(false);
                 }
 
             });
@@ -106,6 +110,7 @@ const OpenBankingForm = (props) => {
         setinitialValues(initialValuesCopy);
         setBankFields(bankFieldsCopy);
         props.setErrors({});
+        // props.setSubmitting(false);
 
         dispatch(updateLoader(false));
     };
@@ -181,6 +186,10 @@ const OpenBankingForm = (props) => {
 
         return () => clearInterval(interval);
     }, [showModal, timer]);
+
+    useEffect(() => {
+        console.log(props);
+    }, [props])
 
     const handleChangeToken = ({target}) => {
         setProvideToken({
@@ -388,7 +397,7 @@ const OpenBankingForm = (props) => {
                         <Button 
                         type="submit"
                         className={"btn-blue-general btn-open-banking"}
-                        disabled={validating || !Object.keys(initialValues).find(bank => initialValues[bank].validate === false)}
+                        disabled={validating || !Object.keys(initialValues).find(bank => initialValues[bank].validate === false) || !Object.keys(props.values).find(bank => props.values[bank].validate === false)}
                         >
                             <Spinner
                             as="span"
@@ -413,8 +422,8 @@ export default withFormik({
     },
     validate: validateOpenBanking, 
     handleSubmit(values, formikBag){
-        formikBag.setSubmitting(false);
         formikBag.props.handleSubmit(values);
+        formikBag.setSubmitting(false);
     },
     enableReinitialize: true,
     displayName: 'OpenBankingForm'
