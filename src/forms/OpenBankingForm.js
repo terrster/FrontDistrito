@@ -57,7 +57,8 @@ const OpenBankingForm = (props) => {
                     dispatch(updateLoader(false));
 
                     props.setErrors({});
-                    props.setSubmitting(false);
+                    props.resetForm(initialValues);
+                    // props.setSubmitting(false);
                 }
             });
 
@@ -86,7 +87,7 @@ const OpenBankingForm = (props) => {
                     dispatch(updateLoader(false));
 
                     props.setErrors({});
-                    props.setSubmitting(false);
+                    // props.setSubmitting(false);
                 }
 
             });
@@ -113,7 +114,7 @@ const OpenBankingForm = (props) => {
         setBankFields(bankFieldsCopy);
 
         props.setErrors({});
-        props.setSubmitting(false);
+        // props.setSubmitting(false);
 
         dispatch(updateLoader(false));
     };
@@ -427,7 +428,7 @@ export default withFormik({
     validate: validateOpenBanking, 
     handleSubmit(values, formikBag){
         formikBag.props.handleSubmit(values);
-        formikBag.setSubmitting(false);
+        // formikBag.setSubmitting(false);
     },
     enableReinitialize: true,
     displayName: 'OpenBankingForm'
