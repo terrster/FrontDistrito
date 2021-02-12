@@ -58,7 +58,6 @@ const OpenBankingForm = (props) => {
 
                     props.setErrors({});
                     props.setSubmitting(false);
-                    props.resetForm();
                 }
             });
 
@@ -88,7 +87,6 @@ const OpenBankingForm = (props) => {
 
                     props.setErrors({});
                     props.setSubmitting(false);
-                    props.resetForm();
                 }
 
             });
@@ -116,7 +114,6 @@ const OpenBankingForm = (props) => {
 
         props.setErrors({});
         props.setSubmitting(false);
-        props.resetForm();
 
         dispatch(updateLoader(false));
     };
@@ -199,6 +196,10 @@ const OpenBankingForm = (props) => {
             token: target.value
         });
     };
+
+    useEffect(() => {
+        console.log(props);
+    }, [props])
 
     return (
         <>
@@ -400,7 +401,7 @@ const OpenBankingForm = (props) => {
                         type="submit"
                         className={"btn-blue-general btn-open-banking"}
                         disabled={validating || !Object.keys(initialValues).find(bank => initialValues[bank].validate === false) || !Object.keys(props.values).find(bank => props.values[bank].validate === false)}
-                        // onClick={}
+                        onClick={() => props.submitForm()}
                         >
                             <Spinner
                             as="span"
@@ -427,7 +428,6 @@ export default withFormik({
     handleSubmit(values, formikBag){
         formikBag.props.handleSubmit(values);
         formikBag.setSubmitting(false);
-        formikBag.resetForm();
     },
     enableReinitialize: true,
     displayName: 'OpenBankingForm'
