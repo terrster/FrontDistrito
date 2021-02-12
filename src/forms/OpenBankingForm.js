@@ -22,6 +22,12 @@ const OpenBankingForm = (props) => {
 
     useEffect(() => {
         if(socket){
+            socket.on('forceDisconnect', () => {
+                socket.disconnect();
+                sessionStorage.clear();
+                window.location.reload();
+            });
+
             socket.on('askForToken', (callback) => {
                 dispatch(updateLoader(false));
                 setProvideToken({
@@ -37,6 +43,7 @@ const OpenBankingForm = (props) => {
                 if(index){
                     let initialValuesCopy = {...initialValues};
                     initialValuesCopy[index].validate = true;
+                    props.values[index].validate = true;
                     setinitialValues(initialValuesCopy);
 
                     sessionStorage.setItem('user', JSON.stringify(callback.user));
@@ -52,7 +59,7 @@ const OpenBankingForm = (props) => {
             });
 
             socket.on('notifyFailure', async(callback) => {
-                let index = Object.keys(props.initialValues).find(bank => props.initialValues[bank].idCredential === callback.credentialId);
+                let index = Object.keys(initialValues).find(bank => initialValues[bank].idCredential === callback.credentialId);
                 
                 if(index){
                     let {data} = await axios.delete(`api/finerio/credentials/${callback.credentialId}`);
@@ -97,6 +104,7 @@ const OpenBankingForm = (props) => {
 
         setinitialValues(initialValuesCopy);
         setBankFields(bankFieldsCopy);
+        props.setErrors({});
 
         dispatch(updateLoader(false));
     };
@@ -109,6 +117,7 @@ const OpenBankingForm = (props) => {
         if(bank === 'bank0'){
             if(initialValuesCopy[bank].idCredential){
                 let {data} = await axios.delete(`api/finerio/credentials/${initialValuesCopy[bank].idCredential}`);
+                
                 if(data.hasOwnProperty('user')){
                     sessionStorage.setItem('user', JSON.stringify(data.user));
                 }
@@ -239,7 +248,7 @@ const OpenBankingForm = (props) => {
                                             type={field.type}
                                             name={`bank0.values.${field.name}`}
                                             normalize={
-                                                field.name === 'username' && props.values[`bank0`].id <= 7
+                                                field.name === 'username' && initialValues[`bank0`].id <= 7
                                                 ? 'onlyNumbers' : 'numbersLettersWithoutSpace'
                                             }
                                             required={true}
@@ -351,7 +360,7 @@ const OpenBankingForm = (props) => {
                         className={"btn-blue-general btn-open-banking"}
                         disabled={Object.keys(initialValues).length < 10 ? false : true}
                         onClick={() => {
-                            let invalid = Object.keys(initialValues)[Object.values(initialValues).findIndex(c => c.validate == false)];
+                            let invalid = Object.keys(initialValues)[Object.values(initialValues).findIndex(c => c.validate === false)];
                             if(Object.keys(initialValues).length < 10){
                                 if(invalid === undefined){
                                     setinitialValues({...initialValues,
@@ -378,7 +387,7 @@ const OpenBankingForm = (props) => {
                         <Button 
                         type="submit"
                         className={"btn-blue-general btn-open-banking"}
-                        disabled={validating || !Object.keys(props.values).find(bank => props.values[bank].validate === false)}
+                        disabled={validating}
                         >
                             <Spinner
                             as="span"

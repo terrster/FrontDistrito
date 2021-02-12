@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import Title from '../Generic/Title';
-import { Carousel } from 'react-bootstrap';
+import { Carousel, Alert } from 'react-bootstrap';
 import { useHistory } from "react-router-dom";
 import axios from "../../utils/axios";
 import OpenBankingForm from '../../forms/OpenBankingForm';
@@ -30,7 +30,6 @@ const OpenBanking = () => {
     const [error, setError] = useState(null);
     const [message, setMessage] = useState(null);
 
-
     useEffect(() => {
         if(user){
             connectSocket();
@@ -50,7 +49,7 @@ const OpenBanking = () => {
                         else{
                             initialValuesCopy = {
                                 ...initialValuesCopy,
-                                [`bank${Object.keys(initialValues).length}`]: {
+                                [`bank${Object.keys(initialValuesCopy).length}`]: {
                                     id: credential.idBank,
                                     idCredential: credential.id,
                                     values: {},
@@ -66,8 +65,8 @@ const OpenBanking = () => {
         }
     }, []);
 
-    const connectSocket = useCallback(() => {//process.env.REACT_APP_BACKEND
-        const socket = io.connect('https://apidev.distritopyme.com', {
+    const connectSocket = useCallback(() => {//process.env.REACT_APP_BACKEND, https://apidev.distritopyme.com/
+        const socket = io.connect(process.env.REACT_APP_BACKEND, {
             transports: ['websocket'],
             autoConnect: true,
             forceNew: true,
@@ -85,9 +84,22 @@ const OpenBanking = () => {
         else{
             dispatch(updateLoader(true));
 
-            const getBanks = async () => {
-                const { data } = await axios.get("api/finerio/banks");
-                setBanksOptions(data);
+            const getBanks = async() => {
+                try{
+                    const { data } = await axios.get("api/finerio/banks");
+
+                    if(data.code === 200){
+                        setBanksOptions(data.banks);
+                    }
+                    else{
+                        throw Error;
+                    }
+
+                    dispatch(updateLoader(false));
+                } 
+                catch(error){
+                    setError("Ha ocurrido un error tratando de obtener los bancos.");
+                }
                 dispatch(updateLoader(false));
             };
         
@@ -96,26 +108,36 @@ const OpenBanking = () => {
     }, []);
 
     const handleSubmit = async(values) => {
-        try{
-            dispatch(updateLoader(true));
-            setValidating(true);
+        let banks = Object.keys(values).filter(bank => values[bank].validate === false);
+
+        if(banks.length){
+            try{
+                dispatch(updateLoader(true));
+                setValidating(true);
+        
+                const { data } = await axios.post(`api/open-banking/store`, banks);
+        
+                if(data.code === 200){
+                    let initialValuesCopy = {...initialValues};
+                    initialValuesCopy[`bank${Object.keys(initialValuesCopy).length - 1}`].idCredential = data.idCredential;
+                    setinitialValues(initialValuesCopy);
+                }
+            }
+            catch(error){
+                dispatch(updateLoader(false));
+                setValidating(false);
     
-            const { data } = await axios.post(`api/open-banking/store`, values);
+                setError("Ha ocurrido un error tratando de registrar la credencial bancaria");
     
-            if(data.code === 200){
-                let initialValuesCopy = {...initialValues};
-                initialValuesCopy[`bank${Object.keys(initialValues).length - 1}`].idCredential = data.idCredential;
-                setinitialValues(initialValuesCopy);
+                setTimeout(() => {
+                    setError(null);
+                }, 5000);
             }
         }
-        catch(error){
-            dispatch(updateLoader(false));
-            setValidating(false);
-
-            setError("Ha ocurrido un error tratando de registrar la credencial bancaria");
-
+        else{
+            setMessage("No hay nuevas credenciales que guardar.");
             setTimeout(() => {
-                setError(null);
+                setMessage(null);
             }, 5000);
         }
     }
@@ -146,22 +168,33 @@ const OpenBanking = () => {
                 </p>
             </div>
 
-            <OpenBankingForm 
-                socket={socket}
-                axios={axios}
-                banksOptions={banksOptions} 
-                initialValues={initialValues} 
-                setinitialValues={setinitialValues} 
-                handleSubmit={handleSubmit}
-                validating={validating}
-                setValidating={setValidating}
-                dispatch={dispatch}
-                updateLoader={updateLoader}
-                error={error}
-                setError={setError}
-                message={message}
-                setMessage={setMessage}
-            />
+            {
+                banksOptions.length === 0 && error &&
+                <Alert className="container" variant="danger">
+                    {error}
+                </Alert>
+            }
+
+            {
+                banksOptions.length > 0 &&
+                
+                <OpenBankingForm 
+                    socket={socket}
+                    axios={axios}
+                    banksOptions={banksOptions} 
+                    initialValues={initialValues} 
+                    setinitialValues={setinitialValues} 
+                    handleSubmit={handleSubmit}
+                    validating={validating}
+                    setValidating={setValidating}
+                    dispatch={dispatch}
+                    updateLoader={updateLoader}
+                    error={error}
+                    setError={setError}
+                    message={message}
+                    setMessage={setMessage}
+                />
+            }
         </>
     );
 }

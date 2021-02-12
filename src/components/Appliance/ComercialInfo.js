@@ -22,7 +22,6 @@ const ComercialInfo = (props) => {
   const toast = useSelector((state) => state.app.toast);
   const { showModal, refDocuments } = useSelector((state) => state.modalCiec);
 
-  const [banks, setBanks] = useState([]); // Bancos que ya tiene seleccionados el usuario
   const [initialValues, setInitialValues] = useState({});
   const [municipality, setMunicipality] = useState("");
   const [state, setState] = useState("");
@@ -36,8 +35,7 @@ const ComercialInfo = (props) => {
     const data = {
       ...dataForm,
       state,
-      municipality,
-      banks
+      municipality
     };
     if (idClient.appliance.length > 0) {
       const appliance = idClient.appliance[idClient.appliance.length - 1];
@@ -107,23 +105,14 @@ const ComercialInfo = (props) => {
             } else if (coloniasRequest.error) {
               colonias = [];
             }
-
-            let bankFields = [];
-            banks.map((bank, indexBank) => {
-              bankFields[0] = {
-                ...bankFields[0],
-                ['banks'+indexBank] : bank.idBank,
-                ['username'+indexBank] : bank.username 
-              };
-            });
             
-            setInitialValues({ ...comercial, ...address, terminal, exportation, colonias, ...bankFields[0] });
+            setInitialValues({ ...comercial, ...address, terminal, exportation, colonias });
           } catch (error) {
             setInitialValues({ ...comercial, ...address, terminal, exportation, colonias });
           }
         }
       }
-      const { email } = JSON.parse(sessionStorage.getItem("user"));
+      // const { email } = JSON.parse(sessionStorage.getItem("user"));
 
       dispatch(updateLoader(false));
     };
@@ -150,8 +139,6 @@ const ComercialInfo = (props) => {
         setMunicipality={setMunicipality}
         state={state}
         municipality={municipality}
-        banks={banks}
-        setBanks={setBanks}
       ></ComercialInfoForm>
     </div>
   );
