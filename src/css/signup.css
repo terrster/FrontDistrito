@@ -32,8 +32,19 @@
 	opacity: 0.95;
 }
 
+.btn-broker-container{
+	position: absolute;
+	margin-left: auto;
+	margin-right: auto;
+	left: 0;
+	right: 0;
+}
+
 .btn-broker{
 	position: relative;
+	font-size: 18px !important;
+	width: 250px !important;
+	height: 40px !important;
 	border-radius: 35px !important;
 }
 
@@ -44,52 +55,64 @@
 }
 
 @media (min-width: 399px) {
-	.btn-broker{
-		margin-top: 19%;
-		font-size: 11px !important;
-		width: 120px !important;
-		height: 28px !important;
+	.btn-broker-container{
+		bottom: 30px;
+	}
+
+	/* .btn-broker{
+		bottom: 30px;
+	} */
+}
+
+@media (min-width: 507px) {
+	.btn-broker-container{
+		top: 85%;
 	}
 }
 
-@media (min-width: 576px) {/*SM*/
+/*SM*/
+/*@media (min-width: 576px) {
 	.btn-broker{
 		margin-top: 22%;
 		font-size: 12px !important;
 		width: 120px !important;
 		height: 32px !important;
 	}
-}
+}*/
 
-@media (min-width: 768px) {/*MD*/
+/*MD*/
+/*@media (min-width: 768px) {
 	.btn-broker{
 		margin-top: 24%;
 		font-size: 16px !important;
 		width: 160px !important;
 		height: 40px !important;
 	}
-}
+}*/
 
-@media (min-width: 992px) {/*LG*/
+/*LG*/
+/*@media (min-width: 992px) {
 	.btn-broker{
 		margin-top: 25%;
 		font-size: 18px !important;
 		width: 250px !important;
 		height: 40px !important;
 	}
-}
+}*/
 
-@media (min-width: 1200px) {/*XL*/
+/*XL*/
+/*@media (min-width: 1200px) {
 	.btn-broker{
 		margin-top: 27%;
 	}
-}
+}*/
 
-@media (min-width: 2000px) {/*XXL*/
+/*XXL*/
+/*@media (min-width: 2000px) {
 	.btn-broker{
 		margin-top: 28%;
 		font-size: 36px !important;
 		width: 400px !important;
 		height: 70px !important;
 	}
-}
+}*/

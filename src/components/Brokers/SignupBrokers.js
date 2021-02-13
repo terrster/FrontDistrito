@@ -18,17 +18,17 @@ import publicIp from "public-ip";
 import { Carousel, Button } from 'react-bootstrap';
 // import brokersBanner from '../../assets/img/brokers/broker_banner.png';
 import brokersBannerWeb from '../../assets/img/brokers/broker_banner-2.jpg';
-// import brokersBannerMovil from '../../assets/img/brokers/WEBMOVIL_2.jpg';
+import brokersBannerMovil from '../../assets/img/brokers/WEBMOVIL_2.jpg';
 import { useHistory } from 'react-router-dom';
 
-// const getVersionImage = () => {
-// 	const currentSize = document.getElementsByTagName('body')[0].clientWidth;
-// 	return currentSize < 775 ? 1 : 0;
-// };
+const getVersionImage = () => {
+	const currentSize = document.getElementsByTagName('body')[0].clientWidth;
+	return currentSize < 775 ? 1 : 0;
+};
 
 const SignupBrokers = props => {
-  // const [versionImage, setVersionImage] = useState(getVersionImage());
-  // const imageBroker = [brokersBannerWeb, brokersBannerMovil]; //imageBroker[versionImage]
+  const [versionImage, setVersionImage] = useState(getVersionImage());
+  const imageBroker = [brokersBannerWeb, brokersBannerMovil];
   const toast = useSelector(state => state.app.toast);
   const [ownerId] = useState(props.match.params.ownerId ? props.match.params.ownerId : '');
   const [errorEmail, setErrorEmail] = useState("");
@@ -36,7 +36,7 @@ const SignupBrokers = props => {
   const [initialValues, setInitialValues] = useState({});
   const history = useHistory();
 
-  // window.addEventListener('resize', () => setVersionImage(getVersionImage()));
+  window.addEventListener('resize', () => setVersionImage(getVersionImage()));
 
   useEffect(() => {
     if(ownerId != ''){
@@ -79,9 +79,9 @@ const SignupBrokers = props => {
       <>
       <Carousel className="mb-2" controls={false} indicators={false}>
           <Carousel.Item>
-              <img className="d-block w-100" src={brokersBannerWeb} alt="brokersBanner"/>
+              <img /*className="d-block w-100"*/ style={{width: '100%'}} src={imageBroker[versionImage]} alt="brokersBanner"/>
               <Carousel.Caption>
-                <div className="text-center">
+                <div className="btn-broker-container">
                   <Button className={"btn-blue-brokers btn-broker"} onClick={() => history.push("/brokers")}>Aplica aquí</Button>
                 </div>
               </Carousel.Caption>
