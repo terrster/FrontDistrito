@@ -77,7 +77,7 @@ const SignupBrokers = props => {
   else {
     return (
       <>
-      <Carousel className="mb-2" controls={false} indicators={false}>
+      <Carousel id="brokers-carousel" className="mb-2" controls={false} indicators={false}>
           <Carousel.Item>
               <img className="d-block w-100"  src={imageBroker[versionImage]} alt="brokersBanner"/>
               <Carousel.Caption>

@@ -61,7 +61,7 @@
 }
 
 @media (min-width: 507px) {
-	.carousel-inner{
+	#brokers-carousel .carousel-inner{
 		max-height: none !important;
 	}
 }
@@ -85,7 +85,7 @@
 }
 
 @media (min-width: 775px) {
-	.carousel-inner{
+	#brokers-carousel .carousel-inner{
 		max-height: 720px !important;
 	}
 
