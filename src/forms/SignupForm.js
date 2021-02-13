@@ -64,9 +64,10 @@ let SignupForm = (props) => {
   const [disabled, setDisabled] = useState(true);
 
   const onChange = value => {setButton(!value)};
-  const onlyLirycs = (nextValue, previousValue) => /^([a-z ñáéíóú]{0,60})$/i.test(nextValue) ? nextValue : previousValue;
+  const onlyLirycsWithOnlyOneSpaceBetween = (nextValue, previousValue) => /^$|^([^\s]*[A-Za-zñáéíóú]\s{0,1})[^\s]*$/.test(nextValue) ? nextValue : previousValue;
+  const onlyLirycsWithAnySpace = (nextValue, previousValue) => /^([A-Za-zñáéíóú]{0,30}$)/i.test(nextValue) ? nextValue : previousValue;
   const onlyNumbers = (nextValue, previousValue) => /^\d+$/.test(nextValue) || nextValue.length === 0 ? nextValue : previousValue;
-  const sanitizeString = e => { e.preventDefault(); props.change(e.target.name, e.target.value.trim()) };
+  const validatePassword = (nextValue, previousValue) => /^[A-Za-z0-9]*$/i.test(nextValue) ? nextValue : previousValue;
 
   const goToError = () => {
 		const nameError = document.getElementById("name-error");
@@ -103,8 +104,8 @@ let SignupForm = (props) => {
           type="text"
           name="name"
           label="Nombre(s)"
-          normalize={onlyLirycs}
-          onBlur={ e => { sanitizeString(e) } }
+          maxLength={60}
+          normalize={onlyLirycsWithOnlyOneSpaceBetween}
         />
 
         <Field
@@ -112,8 +113,7 @@ let SignupForm = (props) => {
           type="text"
           name="lastname"
           label="Apellido Paterno"
-          normalize={onlyLirycs}
-          onBlur={ e => { sanitizeString(e) } }
+          normalize={onlyLirycsWithAnySpace}
         />
         <Field
           component={renderField}
@@ -164,6 +164,7 @@ let SignupForm = (props) => {
             type="password"
             name="password"
             label="Crea una contraseña"
+            normalize={validatePassword}
           />
         </OverlayTrigger>
         <div className="recaptcha-container">
@@ -200,7 +201,7 @@ let SignupForm = (props) => {
 						</Button>
 					) : (
 						<Button 
-							type="button"
+							type="submit"
               className="mt-50 btn-blue-general btn-gray-general"
               style={{ width: '250px' }}
 							onClick={() => goToError()}

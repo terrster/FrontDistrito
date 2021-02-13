@@ -8,7 +8,7 @@ import {validateOpenBanking} from '../components/Validate/ValidateOpenBanking';
 
 const OpenBankingForm = (props) => {
 
-    const { socket, axios, banksOptions, initialValues, setinitialValues, dispatch, updateLoader, validating, setValidating, error, setError, message, setMessage } = props;
+    const { socket, axios, banksOptions, initialValues, setinitialValues, dispatch, updateLoader, validating, setValidating, error, setError, message } = props;
 
     const [bankFields, setBankFields] = useState([]);//Fields of a chosen bank
     const [timer, setTimer] = useState(60);

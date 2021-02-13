@@ -99,7 +99,7 @@ export const validateComercialInfo = (values) => {
     errors.extNumber = "Ingresa un número exterior valido";
   }
 
-  if(values.intNumber != '' && !/^[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*$/.test(values.intNumber)){
+  if(values.intNumber !== '' && !/^[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*$/.test(values.intNumber)){
     errors.intNumber = "Ingresa un número interior valido";
   }
 

@@ -4,11 +4,13 @@ const isName = /^([a-z ñáéíóú]{2,60})$/i;
 const isNumber = /^\d*$/;
 export const validateSignup = values => {
   const errors = {};
+
   if (!values.name) {
     errors.name = "Ingresa tu nombre";
   } else if (values.name.length < 2) {
     errors.name = "El nombre es muy corto";
-  } else if (!isName.test(values.name)) {
+  } 
+  else if (!isName.test(values.name)) {
     errors.name = "El nombre sólo puede contener caracteres de la A a la Z";
   }
 

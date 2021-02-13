@@ -64,16 +64,17 @@ const passwordTooltip = (
   </Tooltip>
 );
 
-let SignupForm = (props) => {
+let SignupFormBrokers = (props) => {
   const { handleSubmit, submitting, errorEmail, setErrorEmail, errorBroker, setErrorBroker, valid, ownerId } = props;
 
   const [button, setButton] = useState(true);
   const [disabled, setDisabled] = useState(true);
 
   const onChange = value => {setButton(!value)};
-  const onlyLirycs = (nextValue, previousValue) => /^([a-z ñáéíóú]{0,60})$/i.test(nextValue) ? nextValue : previousValue;
-  const onlyNumbers = (nextValue, previousValue) => /^\d+$/.test(nextValue) || nextValue.length === 0? nextValue : previousValue;
-  const sanitizeString = e => { e.preventDefault(); props.change(e.target.name, e.target.value.trim()) };
+  const onlyLirycsWithOnlyOneSpaceBetween = (nextValue, previousValue) => /^$|^([^\s]*[A-Za-zñáéíóú]\s{0,1})[^\s]*$/.test(nextValue) ? nextValue : previousValue;
+  const onlyLirycsWithAnySpace = (nextValue, previousValue) => /^([A-Za-zñáéíóú]{0,30}$)/i.test(nextValue) ? nextValue : previousValue;
+  const onlyNumbers = (nextValue, previousValue) => /^\d+$/.test(nextValue) || nextValue.length === 0 ? nextValue : previousValue;
+  const validatePassword = (nextValue, previousValue) => /^[A-Za-z0-9]*$/i.test(nextValue) ? nextValue : previousValue;
 
   const goToError = () => {
 		const nameError = document.getElementById("name-error");
@@ -111,8 +112,8 @@ let SignupForm = (props) => {
           type="text"
           name="name"
           label="Nombre(s)"
-          normalize={onlyLirycs}
-          onBlur={ e => { sanitizeString(e) } }
+          maxLength={60}
+          normalize={onlyLirycsWithOnlyOneSpaceBetween}
         />
 
         <Field
@@ -120,8 +121,7 @@ let SignupForm = (props) => {
           type="text"
           name="lastname"
           label="Apellido Paterno"
-          normalize={onlyLirycs}
-          onBlur={ e => { sanitizeString(e) } }
+          normalize={onlyLirycsWithAnySpace}
         />
         <Field
           component={renderField}
@@ -137,7 +137,7 @@ let SignupForm = (props) => {
           component={renderField}
           type="email"
           name="email_confirm"
-          label="Confirmar correo electrónico"  
+          label="Confirmar correo electrónico"
         />
         <span>
           <small id="ymb-dp-signup-email-confirm" className="d-none error">
@@ -169,9 +169,10 @@ let SignupForm = (props) => {
         >
           <Field
             component={renderField}
-            type="password"
+            type="text"
             name="password"
             label="Crea una contraseña"
+            normalize={validatePassword}
           />
         </OverlayTrigger>
         {
@@ -202,7 +203,6 @@ let SignupForm = (props) => {
                 }}
                 errorBroker={errorBroker}
                 normalize={onlyNumbers}
-                onBlur={ e => { sanitizeString(e) } }
               />
             </Col>
             <Col lg={4} md={4} sm={4}>
@@ -250,7 +250,7 @@ let SignupForm = (props) => {
 						</Button>
 					) : (
 						<Button 
-							type="button"
+							type="submit"
               className="mt-50 btn-blue-general btn-gray-general"
               style={{ width: '250px' }}
 							onClick={() => goToError()}
@@ -265,19 +265,19 @@ let SignupForm = (props) => {
   );
 };
 
-const selector = formValueSelector("signupForm");
+const selector = formValueSelector("signupFormBrokers");
 
-SignupForm = connect(state => {
+SignupFormBrokers = connect(state => {
   const email = selector(state, "email");
   return {
     email
   };
-})(SignupForm);
+})(SignupFormBrokers);
 
-SignupForm = reduxForm({
-  form: 'signupForm',
+SignupFormBrokers = reduxForm({
+  form: 'signupFormBrokers',
   validate: validateSignup,
   enableReinitialize: true,
-})(SignupForm);
+})(SignupFormBrokers);
 
-export default SignupForm;
+export default SignupFormBrokers;

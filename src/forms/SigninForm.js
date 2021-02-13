@@ -50,12 +50,13 @@ let SigninForm = props => {
 
 	const { handleSubmit, submitting} = props
  	const submitButtonClass = (submitting) ? "btn-blue-general mt-30 disabled" : "btn-blue-general mt-30"
+	const validatePassword = (nextValue, previousValue) => /^[A-Za-z0-9]*$/i.test(nextValue) ? nextValue : previousValue;
 
 	return (
 		<div className="container">
 			<form onSubmit={handleSubmit} className="mr-auto ml-auto" style={{maxWidth : '690px'}}>
 				<Field component={renderField} type="email" name="email" label="Correo electrónico"/>
-				<Field component={renderField} type="password" name="password" label="Contraseña"/>
+				<Field component={renderField} type="password" name="password" label="Contraseña" normalize={validatePassword}/>
 				<div className="mb-1 text-center">
 					<Link to="/reset-password" className="fw500 fz12 blue-primary">¿Olvidaste tu Contraseña?</Link>
 				</div>

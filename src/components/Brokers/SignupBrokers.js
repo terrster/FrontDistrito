@@ -16,16 +16,27 @@ import axios from '../../utils/axios';
 import StepSignup from "../Appliance/StepSignup";
 import publicIp from "public-ip";
 import { Carousel, Button } from 'react-bootstrap';
-import brokersBanner from '../../assets/img/brokers/broker_banner.png';
+// import brokersBanner from '../../assets/img/brokers/broker_banner.png';
+import brokersBannerWeb from '../../assets/img/brokers/broker_banner-2.jpg';
+// import brokersBannerMovil from '../../assets/img/brokers/WEBMOVIL_2.jpg';
 import { useHistory } from 'react-router-dom';
 
-let SignupBrokers = props => {
+// const getVersionImage = () => {
+// 	const currentSize = document.getElementsByTagName('body')[0].clientWidth;
+// 	return currentSize < 775 ? 1 : 0;
+// };
+
+const SignupBrokers = props => {
+  // const [versionImage, setVersionImage] = useState(getVersionImage());
+  // const imageBroker = [brokersBannerWeb, brokersBannerMovil]; //imageBroker[versionImage]
   const toast = useSelector(state => state.app.toast);
-  const [ownerId, setOwnerId] = useState(props.match.params.ownerId ? props.match.params.ownerId : '');
+  const [ownerId] = useState(props.match.params.ownerId ? props.match.params.ownerId : '');
   const [errorEmail, setErrorEmail] = useState("");
   const [errorBroker, setErrorBroker] = useState("");
   const [initialValues, setInitialValues] = useState({});
   const history = useHistory();
+
+  // window.addEventListener('resize', () => setVersionImage(getVersionImage()));
 
   useEffect(() => {
     if(ownerId != ''){
@@ -68,7 +79,7 @@ let SignupBrokers = props => {
       <>
       <Carousel className="mb-2" controls={false} indicators={false}>
           <Carousel.Item>
-              <img className="d-block w-100" src={brokersBanner} alt="brokersBanner"/>
+              <img className="d-block w-100" src={brokersBannerWeb} alt="brokersBanner"/>
               <Carousel.Caption>
                 <div className="text-center">
                   <Button className={"btn-blue-brokers btn-broker"} onClick={() => history.push("/brokers")}>Aplica aquí</Button>
