@@ -79,7 +79,7 @@ const SignupBrokers = props => {
       <>
       <Carousel className="mb-2" controls={false} indicators={false}>
           <Carousel.Item>
-              <img /*className="d-block w-100"*/ style={{width: '100%'}} src={imageBroker[versionImage]} alt="brokersBanner"/>
+              <img className="d-block w-100"  src={imageBroker[versionImage]} alt="brokersBanner"/>
               <Carousel.Caption>
                 <div className="btn-broker-container">
                   <Button className={"btn-blue-brokers btn-broker"} onClick={() => history.push("/brokers")}>Aplica aquí</Button>
