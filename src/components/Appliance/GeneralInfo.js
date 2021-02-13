@@ -35,7 +35,6 @@ const GeneralInfo = (props) => {
     const getData = async () => {
       try {
       const user = JSON.parse(sessionStorage.getItem("user"));
-      console.log(user)
 
       const idClient = user.idClient;
       if (idClient.appliance.length > 0) {

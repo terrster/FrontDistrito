@@ -29,7 +29,6 @@ const OpenBankingForm = (props) => {
             });
 
             socket.on('askForToken', (callback) => {
-                // dispatch(updateLoader(false));
                 setProvideToken({
                     ...provideToken,
                     idCredential: callback.credentialId
@@ -55,10 +54,6 @@ const OpenBankingForm = (props) => {
 
                     setValidating(false);
                     dispatch(updateLoader(false));
-
-                    props.setErrors({});
-                    props.resetForm(initialValues);
-                    // props.setSubmitting(false);
                 }
             });
 
@@ -85,9 +80,6 @@ const OpenBankingForm = (props) => {
 
                     setValidating(false);
                     dispatch(updateLoader(false));
-
-                    props.setErrors({});
-                    // props.setSubmitting(false);
                 }
 
             });
@@ -114,7 +106,6 @@ const OpenBankingForm = (props) => {
         setBankFields(bankFieldsCopy);
 
         props.setErrors({});
-        // props.setSubmitting(false);
 
         dispatch(updateLoader(false));
     };
@@ -197,10 +188,6 @@ const OpenBankingForm = (props) => {
             token: target.value
         });
     };
-
-    useEffect(() => {
-        console.log(props);
-    }, [props])
 
     return (
         <>
@@ -335,7 +322,7 @@ const OpenBankingForm = (props) => {
                 {
                     error &&
                     <div className="mt-4 mb-4">
-                        <p className="text-center"><Spinner animation="grow" variant="danger" /></p>
+                        <div className="text-center mb-3"><Spinner animation="grow" variant="danger" /></div>
                         <Alert variant="danger">
                             {error}
                         </Alert>
@@ -345,7 +332,7 @@ const OpenBankingForm = (props) => {
                 {
                     success &&
                     <div className="mt-4 mb-4">
-                        <p className="text-center"><Spinner animation="grow" variant="success" /></p>
+                        <div className="text-center mb-3"><Spinner animation="grow" variant="success" /></div>
                         <Alert variant="success">
                             Credencial guardada exitosamente.
                         </Alert>
@@ -355,7 +342,7 @@ const OpenBankingForm = (props) => {
                 {
                     message &&
                     <div className="mt-4 mb-4">
-                        <p className="text-center"><Spinner animation="grow" variant="info" /></p>
+                        <div className="text-center mb-3"><Spinner animation="grow" variant="info" /></div>
                         <Alert variant="info">
                             {message}
                         </Alert>
@@ -401,7 +388,7 @@ const OpenBankingForm = (props) => {
                         <Button 
                         type="submit"
                         className={"btn-blue-general btn-open-banking"}
-                        disabled={validating || !Object.keys(initialValues).find(bank => initialValues[bank].validate === false) || !Object.keys(props.values).find(bank => props.values[bank].validate === false)}
+                        disabled={validating || !Object.keys(initialValues).find(bank => initialValues[bank].validate === false)}
                         onClick={() => props.submitForm()}
                         >
                             <Spinner
@@ -428,7 +415,6 @@ export default withFormik({
     validate: validateOpenBanking, 
     handleSubmit(values, formikBag){
         formikBag.props.handleSubmit(values);
-        // formikBag.setSubmitting(false);
     },
     enableReinitialize: true,
     displayName: 'OpenBankingForm'
