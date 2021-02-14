@@ -122,6 +122,16 @@ const OpenBanking = () => {
                     initialValuesCopy[`bank${Object.keys(initialValuesCopy).length - 1}`].idCredential = data.idCredential;
                     setinitialValues(initialValuesCopy);
                 }
+                else if(data.code === 500){
+                    dispatch(updateLoader(false));
+                    setValidating(false);
+        
+                    setError("Ha ocurrido un error tratando de registrar la credencial bancaria");
+        
+                    setTimeout(() => {
+                        setError(null);
+                    }, 5000);
+                }
             }
             catch(error){
                 dispatch(updateLoader(false));
