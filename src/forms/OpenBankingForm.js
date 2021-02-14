@@ -320,6 +320,16 @@ const OpenBankingForm = (props) => {
                 }
 
                 {
+                    validating &&
+                    <div className="mt-4 mb-4">
+                        <Alert variant="info">
+                            <p>No cierres la ventana, hasta terminar el proceso.</p>
+                            <p>Recuerda que este paso solo se realiza por única ocasión y es 100% seguro.</p>
+                        </Alert>
+                    </div>
+                }
+
+                {
                     error &&
                     <div className="mt-4 mb-4">
                         <div className="text-center mb-3"><Spinner animation="grow" variant="danger" /></div>
@@ -334,7 +344,8 @@ const OpenBankingForm = (props) => {
                     <div className="mt-4 mb-4">
                         <div className="text-center mb-3"><Spinner animation="grow" variant="success" /></div>
                         <Alert variant="success">
-                            Credencial guardada exitosamente.
+                            <p>Credencial guardada exitosamente.</p>
+                            <p>Revisa tu correo con la información que se obtuvo de este proceso, recuerda que esta información se elimina y se consulta por única ocasión.</p>
                         </Alert>
                     </div>
                 }

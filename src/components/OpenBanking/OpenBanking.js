@@ -166,6 +166,14 @@ const OpenBanking = () => {
                 <p>
                     Es un servicio 100% regulado por la CNBV a través de la ley Fintech.
                 </p>
+
+                <p>Antes de agregar tus datos:</p>
+                <ul>
+                   <li>Verifica que tu usuario/cuenta y contraseña de tu banca por internet estén actualizados.</li> 
+                   <li>Cierra tu sesión de tu banca por internet (página web o aplicación móvil).</li> 
+                   <li>Si tu banco requiere un Token dinámico para entrar a la banca por internet, debes tenerlo cerca de ti.</li> 
+                   <li>Al dar click en validar, no cierres la ventana mientras el proceso avanza.</li> 
+                </ul>
             </div>
 
             {
