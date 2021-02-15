@@ -108,7 +108,7 @@ const OpenBanking = () => {
     }, []);
 
     const handleSubmit = async(values) => {
-        // let banks = Object.keys(values).filter(bank => values[bank].validate === false);
+        let banks = Object.keys(values).filter(bank => values[bank].validate === false);
 
         if(!validating && banks){
             try{
