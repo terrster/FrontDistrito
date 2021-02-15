@@ -108,9 +108,9 @@ const OpenBanking = () => {
     }, []);
 
     const handleSubmit = async(values) => {
-        let banks = Object.keys(values).filter(bank => values[bank].validate === false);
+        // let banks = Object.keys(values).filter(bank => values[bank].validate === false);
 
-        if(banks.length){
+        // if(banks.length){
             try{
                 dispatch(updateLoader(true));
                 setValidating(true);
@@ -143,13 +143,13 @@ const OpenBanking = () => {
                     setError(null);
                 }, 5000);
             }
-        }
-        else{
-            setMessage("No hay nuevas credenciales que guardar.");
-            setTimeout(() => {
-                setMessage(null);
-            }, 5000);
-        }
+        // }
+        // else{
+        //     setMessage("No hay nuevas credenciales que guardar.");
+        //     setTimeout(() => {
+        //         setMessage(null);
+        //     }, 5000);
+        // }
     }
 
     return (
