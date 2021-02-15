@@ -116,6 +116,7 @@ const OpenBanking = () => {
                 setValidating(true);
         
                 const { data } = await axios.post(`api/open-banking/store`, values);
+                console.log("Enviando...")
         
                 if(data.code === 200){
                     let initialValuesCopy = {...initialValues};
