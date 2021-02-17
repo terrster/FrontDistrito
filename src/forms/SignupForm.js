@@ -14,6 +14,7 @@ const renderField = ({
   maxLength,
   minLength,
   meta: { touched, error, warning },
+  name,
   errorEmail
 }) => (
   <div>
@@ -40,7 +41,7 @@ const renderField = ({
         />
       </div>
     )}
-	{type === "email" && <span> <small className="error" id={input.name + "-error"}>{errorEmail}</small> </span>}
+	{name === "email" && <span> <small className="error" id={input.name + "-error"}>{errorEmail}</small> </span>}
     {touched &&
       ((error && (
         <span>
@@ -127,6 +128,10 @@ let SignupForm = (props) => {
           errorEmail={errorEmail}
           normalize={validateEmail}
         />
+        {
+          errorEmail &&
+          <span><small className="error" id={"email-error"}>{errorEmail}</small></span>
+        }
         <Field
           component={renderField}
           type="text"

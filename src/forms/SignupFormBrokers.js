@@ -9,6 +9,7 @@ import ReCAPTCHA from "react-google-recaptcha";
 import scroll from "../utils/scroll";
 
 const renderField = ({
+  name,
   input,
   label,
   type,
@@ -46,7 +47,7 @@ const renderField = ({
         />
       </div>
     )}
-	{type === "email" && <span> <small className="error" id={input.name + "-error"}>{errorEmail}</small> </span>}
+	{name === "email" && <span> <small className="error" id={input.name + "-error"}>{errorEmail}</small> </span>}
   {type === "text" && errorBroker != '' && <span> <small className="error" id={input.name + "-error"}>{errorBroker}</small> </span>}
     {touched &&
       ((error && (
@@ -135,6 +136,10 @@ let SignupFormBrokers = (props) => {
           errorEmail={errorEmail}
           normalize={validateEmail}
         />
+        {
+          errorEmail &&
+          <span><small className="error" id={"email-error"}>{errorEmail}</small></span>
+        }
         <Field
           component={renderField}
           type="text"
