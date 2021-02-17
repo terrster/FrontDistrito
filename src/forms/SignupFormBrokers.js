@@ -74,7 +74,8 @@ let SignupFormBrokers = (props) => {
   const onlyLirycsWithOnlyOneSpaceBetween = (nextValue, previousValue) => /^$|^([^\s]*[A-Za-zñáéíóú]\s{0,1})[^\s]*$/.test(nextValue) ? nextValue : previousValue;
   const onlyLirycsWithAnySpace = (nextValue, previousValue) => /^([A-Za-zñáéíóú]{0,30}$)/i.test(nextValue) ? nextValue : previousValue;
   const onlyNumbers = (nextValue, previousValue) => /^\d+$/.test(nextValue) || nextValue.length === 0 ? nextValue : previousValue;
-  const validatePassword = (nextValue, previousValue) => /^[A-Za-z0-9]*$/i.test(nextValue) ? nextValue : previousValue;
+  const validateEmail = (nextValue, previousValue) => /^$|^[^\s]*[\w-\.\@]+$/i.test(nextValue) ? nextValue : previousValue;
+	const validatePassword = (nextValue, previousValue) => /^[^\s]*$/i.test(nextValue) ? nextValue : previousValue;
 
   const goToError = () => {
 		const nameError = document.getElementById("name-error");
@@ -125,19 +126,21 @@ let SignupFormBrokers = (props) => {
         />
         <Field
           component={renderField}
-          type="email"
+          type="text"
           onChange={ (event, newValue, previousValue, name) => {
             setErrorEmail("");
           }}
           name="email"
           label="Correo electrónico"
           errorEmail={errorEmail}
+          normalize={validateEmail}
         />
         <Field
           component={renderField}
-          type="email"
+          type="text"
           name="email_confirm"
           label="Confirmar correo electrónico"
+          normalize={validateEmail}
         />
         <span>
           <small id="ymb-dp-signup-email-confirm" className="d-none error">

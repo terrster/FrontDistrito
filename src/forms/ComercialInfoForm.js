@@ -4,6 +4,7 @@ import { Field, reduxForm } from "redux-form";
 import comercialOptions from "../models/ComercialInfoModels";
 import employeesNumber from "../models/EmployeesNumber";
 import bankAccount from "../models/BankAccount";
+import empresarialCreditCard from "../models/EmpresarialCreditCard";
 import { Row, Col, Button } from "react-bootstrap";
 import InputLabel from "../components/Generic/InputLabel";
 import SubtitleForm from "../components/Generic/SubtitleForm";
@@ -158,6 +159,7 @@ let ComercialInfoForm = (props) => {
     const employeesNumberError = document.getElementById("employeesNumber-error");
     const bankAccountError = document.getElementById("bankAccount-error");
     const paymentsMoreThan30Error = document.getElementById("paymentsMoreThan30-error");
+    const empresarialCreditCardError = document.getElementById("empresarialCreditCard-error");
     const streetError = document.getElementById("street-error");
     const extNumberError = document.getElementById("extNumber-error");
     const intNumberError = document.getElementById("intNumber-error");
@@ -182,6 +184,7 @@ let ComercialInfoForm = (props) => {
       employeesNumberError,
       bankAccountError,
       paymentsMoreThan30Error,
+      empresarialCreditCardError,
       streetError,
       extNumberError,
       intNumberError,
@@ -312,6 +315,22 @@ let ComercialInfoForm = (props) => {
             <option className="metropolisReg" value="0">
               No
             </option>
+          </Field>
+        }
+
+        {
+          type === "PM" || type === "PFAE" &&
+          <Field component={renderSelectField} name="empresarialCreditCard" cls="mb-3">
+            <option className="metropolisReg" value="">
+              ¿Cuentas con tarjeta de crédito empresarial?
+            </option>
+            {empresarialCreditCard.map((option, index) => {
+              return (
+                <option value={option.value} key={index}>
+                  {option.text}
+                </option>
+              );
+            })}
           </Field>
         }
 
