@@ -361,7 +361,7 @@ export const dataFinancial = (financial, properties) => {//Propuestas
 }
 
 export const dataFinancialFormalization = (properties) => {
-    let financial = properties.otorgante_que_autoriza.value.replace("Aut", "", "gi").trim();
+    let financial = properties.otorgante_que_autoriza.value.split(";")[0].replace("Aut", "", "gi").trim();
 
     switch(financial.toUpperCase()){
         case 'ASPIRIA':

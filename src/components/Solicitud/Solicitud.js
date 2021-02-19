@@ -29,7 +29,7 @@ const Solicitud = () => {
     const user = JSON.parse(sessionStorage.getItem("user"));
     // const user = {
     //     _id: '5ec8365e67de6c3fd0d807c7',
-    //     hubspotDealId: '2947900743'//2951617913 //2947900743
+    //     hubspotDealId: '3444093998'//2951617913 //2947900743 //3444093998
     // }
     const [properties, setProperties] = useState(null);
     const [estatus, setEstatus] = useState(null);
