@@ -72,8 +72,9 @@ let SignupFormBrokers = (props) => {
   const [disabled, setDisabled] = useState(true);
 
   const onChange = value => {setButton(!value)};
-  const onlyLirycsWithOnlyOneSpaceBetween = (nextValue, previousValue) => /^$|^([^\s]*[A-Za-zñáéíóú]\s{0,1})[^\s]*$/.test(nextValue) ? nextValue : previousValue;
-  const onlyLirycsWithAnySpace = (nextValue, previousValue) => /^([A-Za-zñáéíóú]{0,30}$)/i.test(nextValue) ? nextValue : previousValue;
+  const onlyLirycs = (nextValue, previousValue) => /^$|^([^\s]*[A-Za-zñáéíóú]\s{0,1})*[^\s]*$/i.test(nextValue) ? nextValue : previousValue;
+  const onlyLirycsWithOnlyOneSpaceBetween = (nextValue, previousValue) => /^$|^([^\s]*[A-Za-zñáéíóú]\s{0,1})[^\s]*$/i.test(nextValue) ? nextValue : previousValue;
+  // const onlyLirycsWithAnySpace = (nextValue, previousValue) => /^([A-Za-zñáéíóú]{0,30}$)/i.test(nextValue) ? nextValue : previousValue;
   const onlyNumbers = (nextValue, previousValue) => /^\d+$/.test(nextValue) || nextValue.length === 0 ? nextValue : previousValue;
   const validateEmail = (nextValue, previousValue) => /^$|^[^\s]*[\w-\.\@]+$/i.test(nextValue) ? nextValue : previousValue;
 	const validatePassword = (nextValue, previousValue) => /^[^\s]*$/i.test(nextValue) ? nextValue : previousValue;
@@ -123,7 +124,7 @@ let SignupFormBrokers = (props) => {
           type="text"
           name="lastname"
           label="Apellido Paterno"
-          normalize={onlyLirycsWithAnySpace}
+          normalize={onlyLirycs}
         />
         <Field
           component={renderField}
