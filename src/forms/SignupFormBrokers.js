@@ -125,6 +125,10 @@ let SignupFormBrokers = (props) => {
           name="lastname"
           label="Apellido Paterno"
           normalize={onlyLirycs}
+          onBlur={(e) => {
+            e.preventDefault(); 
+            props.change('lastname', e.target.value.trim());
+          }}
         />
         <Field
           component={renderField}
