@@ -25,7 +25,7 @@ import DeltAi from '../assets/img/alianzas/deltAi.png';
 export const filterFinancials = (financials) => {
     
     const filteredFinancials = financials.split(';').filter((financial) => {
-        return financial !== 'CREZE' && financial !== 'Bancoppel' && financial !== 'DOCUFORMAS' && financial !== 'AV CAPITAL' && financial !== 'DIMEX'; 
+        return financial !== 'Bancoppel' && financial !== 'DOCUFORMAS' && financial !== 'AV CAPITAL' && financial !== 'DIMEX'; 
     });
 
     return filteredFinancials;
@@ -105,7 +105,7 @@ export const imgFinancial = (financial) => {
         return [
             ASPIRIA,
             IMPULSO,
-            // CREZE,
+            CREZE,
             CUMPLO,
             BIENPARABIEN,
             // BANCOPPEL,
@@ -158,15 +158,15 @@ export const dataFinancial = (financial, properties) => {//Propuestas
                 class: 'IMPULSO'
             };
 
-        // case 'CREZE'://Ya no
-        //     return {
-        //         financiera: 'Creze',
-        //         monto: properties.monto_preaut.value,
-        //         plazo: '',
-        //         tasa: '',
-        //         logo: imgFinancial(financial),
-        //         class: 'CREZE'
-        //     };
+        case 'CREZE':
+            return {
+                financiera: 'Creze',
+                monto: properties.monto_preaut.value,
+                plazo: '18 meses',
+                tasa: '2.5% mensual',
+                logo: imgFinancial(financial),
+                class: 'CREZE'
+            };
 
         case 'CUMPLO':
             return {
@@ -391,15 +391,15 @@ export const dataFinancialFormalization = (properties) => {
                 class: 'IMPULSO'
             };
 
-        // case 'CREZE'://Ya no
-        //     return {
-        //         financiera: 'Creze',
-        //         monto: properties.n12_1_monto_autorizado.value,
-        //         plazo: properties.n12_3_plazo_autorizado.value,
-        //         tasa: properties.n12_2_tasa_autorizada.value,
-        //         logo: imgFinancial(financial),
-        //         class: 'CREZE'
-        //     };
+        case 'CREZE':
+            return {
+                financiera: 'Creze',
+                monto: properties.n12_1_monto_autorizado.value,
+                plazo: properties.n12_3_plazo_autorizado.value + " meses",
+                tasa: properties.n12_2_tasa_autorizada.value + "% mensual",
+                logo: imgFinancial(financial),
+                class: 'CREZE'
+            };
 
         case 'CUMPLO':
             return {
