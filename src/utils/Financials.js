@@ -21,6 +21,7 @@ import Dimex from '../assets/img/alianzas/dimex.png';
 import ION from '../assets/img/alianzas/ion.png';
 import Amifin from '../assets/img/alianzas/amifin.png';
 import DeltAi from '../assets/img/alianzas/deltAi.png';
+import Cualli from '../assets/img/alianzas/cualli.png';
 
 export const filterFinancials = (financials) => {
     
@@ -101,6 +102,9 @@ export const imgFinancial = (financial) => {
         case 'DELTAI':
         return DeltAi;
 
+        case 'CUALLI':
+        return Cualli;
+
         case 'ALL':
         return [
             ASPIRIA,
@@ -124,7 +128,8 @@ export const imgFinancial = (financial) => {
             // Dimex
             ION,
             Amifin,
-            DeltAi
+            DeltAi,
+            Cualli
         ];
     }
 }
@@ -356,6 +361,16 @@ export const dataFinancial = (financial, properties) => {//Propuestas
                 tasa: '30% anual',
                 logo: imgFinancial(financial),
                 class: 'DELTAI'
+            };
+
+        case 'CUALLI':
+            return {
+                financiera: 'Cualli',
+                monto: properties.monto_preaut.value,
+                plazo: 'Hasta 48 meses',
+                tasa: '2.4% mensual',
+                logo: imgFinancial(financial),
+                class: 'CUALLI'
             };
     }
 }
@@ -589,6 +604,16 @@ export const dataFinancialFormalization = (properties) => {
                 tasa: properties.n12_2_tasa_autorizada.value + "% mensual",
                 logo: imgFinancial(financial),
                 class: 'DELTAI'
+            };
+
+        case 'CUALLI':
+            return {
+                financiera: 'Cualli',
+                monto: properties.n12_1_monto_autorizado.value,
+                plazo: properties.n12_3_plazo_autorizado.value + " meses",
+                tasa: properties.n12_2_tasa_autorizada.value + "% mensual",
+                logo: imgFinancial(financial),
+                class: 'CUALLI'
             };
     }
 }
