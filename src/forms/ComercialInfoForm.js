@@ -309,10 +309,10 @@ let ComercialInfoForm = (props) => {
             <option className="metropolisReg" value="">
               ¿Alguno de tus clientes te pagan a más de 30 días?
             </option>
-            <option className="metropolisReg" value="true">
+            <option className="metropolisReg" value="1">
               Sí
             </option>
-            <option className="metropolisReg" value="false">
+            <option className="metropolisReg" value="0">
               No
             </option>
           </Field>

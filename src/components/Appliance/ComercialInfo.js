@@ -91,6 +91,7 @@ const ComercialInfo = (props) => {
         if (appliance.hasOwnProperty("idComercialInfo")) {
           const comercial = appliance.idComercialInfo;
           const address = comercial.address;
+          const paymentsMoreThan30 = comercial.paymentsMoreThan30 ? "1" : "0";
           const terminal = comercial.terminal ? "1" : "0";
           const exportation = comercial.exportation ? "1" : "0";
           let colonias = [];
@@ -106,9 +107,9 @@ const ComercialInfo = (props) => {
               colonias = [];
             }
             
-            setInitialValues({ ...comercial, ...address, terminal, exportation, colonias });
+            setInitialValues({ ...comercial, ...address, paymentsMoreThan30, terminal, exportation, colonias });
           } catch (error) {
-            setInitialValues({ ...comercial, ...address, terminal, exportation, colonias });
+            setInitialValues({ ...comercial, ...address, paymentsMoreThan30, terminal, exportation, colonias });
           }
         }
       }
