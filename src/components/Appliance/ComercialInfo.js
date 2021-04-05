@@ -97,8 +97,8 @@ const ComercialInfo = (props) => {
           let colonias = [];
           try {
             const coloniasRequest = await axiosBase.get(
-              `https://api-sepomex.hckdrk.mx/query/info_cp/${address.zipCode}`
-            );
+              `https://api-sepomex.hckdrk.mx/query/info_cp/${address.zipCode}?token=${process.env.REACT_APP_SEPOMEXTOKEN}`
+            );console.log(coloniasRequest)
             if (Array.isArray(coloniasRequest.data)) {
               coloniasRequest.data.map((datos) => {
                 colonias.push(datos.response.asentamiento);
