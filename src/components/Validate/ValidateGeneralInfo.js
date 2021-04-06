@@ -12,13 +12,13 @@ export const validateGeneralInfo = (values) => {
 
   if (!values.lastname) {
     errors.lastname = "Ingresa tu apellido paterno";
-  } else if (!/^[A-Za-záéíóúñ\s]+$/g.test(values.lastname)) {
+  } else if (!/^([a-zñáéíóúü\s]{0,60})$/i.test(values.lastname)) {
     errors.lastname = "Apellido inválido";
   }
 
   if (!values.secondLastname) {
     errors.secondLastname = "Ingresa tu apellido materno";
-  } else if (!/^[A-Za-záéíóúñ\s]+$/g.test(values.secondLastname)) {
+  } else if (!/^([a-zñáéíóúü\s]{0,60})$/i.test(values.secondLastname)) {
     errors.secondLastname = "Apellido inválido";
   }
   if (!values.civilStatus) {

@@ -339,7 +339,7 @@ let GeneralInfoForm = ({
   }
 
   const onlyLirycs = (nextValue, previousValue) =>
-    /^([a-z ñáéíóú]{0,60})$/i.test(nextValue) ? nextValue : previousValue;
+    /^([a-zñáéíóúü\s]{0,60})$/i.test(nextValue) ? nextValue : previousValue;
   const onlyNumbers = (nextValue, previousValue) =>
     /^\d+$/.test(nextValue) || nextValue.length === 0
       ? nextValue
