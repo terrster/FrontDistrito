@@ -22,6 +22,7 @@ import ION from '../assets/img/alianzas/ion.png';
 import Amifin from '../assets/img/alianzas/amifin.png';
 import DeltAi from '../assets/img/alianzas/deltAi.png';
 import Cualli from '../assets/img/alianzas/cualli.png';
+import KUBO from '../assets/img/alianzas/kubo.png';
 
 export const filterFinancials = (financials) => {
     
@@ -105,6 +106,9 @@ export const imgFinancial = (financial) => {
         case 'CUALLI':
         return Cualli;
 
+        case 'KUBO':
+        return KUBO;
+
         case 'ALL':
         return [
             ASPIRIA,
@@ -129,7 +133,8 @@ export const imgFinancial = (financial) => {
             ION,
             Amifin,
             DeltAi,
-            Cualli
+            Cualli,
+            KUBO
         ];
     }
 }
@@ -371,6 +376,16 @@ export const dataFinancial = (financial, properties) => {//Propuestas
                 tasa: '2.4% mensual',
                 logo: imgFinancial(financial),
                 class: 'CUALLI'
+            };
+
+        case 'KUBO':
+            return {
+                financiera: 'Kubo',
+                monto: properties.monto_preaut.value,
+                plazo: 'De 4 a 36 meses',
+                tasa: '3.75% mensual',
+                logo: imgFinancial(financial),
+                class: 'KUBO'
             };
     }
 }
@@ -614,6 +629,16 @@ export const dataFinancialFormalization = (properties) => {
                 tasa: properties.n12_2_tasa_autorizada.value + "% mensual",
                 logo: imgFinancial(financial),
                 class: 'CUALLI'
+            };
+
+        case 'KUBO':
+            return {
+                financiera: 'Kubo',
+                monto: properties.n12_1_monto_autorizado.value,
+                plazo: properties.n12_3_plazo_autorizado.value + " meses",
+                tasa: properties.n12_2_tasa_autorizada.value + "% mensual",
+                logo: imgFinancial(financial),
+                class: 'KUBO'
             };
     }
 }
