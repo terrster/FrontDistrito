@@ -23,6 +23,7 @@ import Amifin from '../assets/img/alianzas/amifin.png';
 import DeltAi from '../assets/img/alianzas/deltAi.png';
 import Cualli from '../assets/img/alianzas/cualli.png';
 import KUBO from '../assets/img/alianzas/kubo.png';
+import Mexarrend from '../assets/img/alianzas/mexarrend.jpg';
 
 export const filterFinancials = (financials) => {
     
@@ -109,6 +110,9 @@ export const imgFinancial = (financial) => {
         case 'KUBO':
         return KUBO;
 
+        case 'MEXARREND':
+        return Mexarrend;
+
         case 'ALL':
         return [
             ASPIRIA,
@@ -134,7 +138,8 @@ export const imgFinancial = (financial) => {
             Amifin,
             DeltAi,
             Cualli,
-            KUBO
+            KUBO,
+            Mexarrend
         ];
     }
 }
@@ -386,6 +391,15 @@ export const dataFinancial = (financial, properties) => {//Propuestas
                 tasa: '3.75% mensual',
                 logo: imgFinancial(financial),
                 class: 'KUBO'
+            };
+        case 'MEXARREND':
+            return {
+                financiera: 'Mexarrend',
+                monto: properties.monto_preaut.value,
+                plazo: '36 meses',
+                tasa: '31% anual',
+                logo: imgFinancial(financial),
+                class: 'MEXARREND'
             };
     }
 }
@@ -639,6 +653,16 @@ export const dataFinancialFormalization = (properties) => {
                 tasa: properties.n12_2_tasa_autorizada.value + "% mensual",
                 logo: imgFinancial(financial),
                 class: 'KUBO'
+            };
+
+        case 'MEXARREND':
+            return {
+                financiera: 'Mexarrend',
+                monto: properties.n12_1_monto_autorizado.value,
+                plazo: properties.n12_3_plazo_autorizado.value + " meses",
+                tasa: properties.n12_2_tasa_autorizada.value + "% mensual",
+                logo: imgFinancial(financial),
+                class: 'MEXARREND'
             };
     }
 }
