@@ -50,6 +50,7 @@ import ThankyouPage from "./components/Brokers/ThankyouPage";
 import Counter from "./components/Counter/Counter";
 import Solicitud from "./components/Solicitud/Solicitud";
 import Propuestas from "./components/Propuestas/Propuestas";
+import Allies from "./components/Allies/Allies";
 
 // ROUTER & REDUX
 import {
@@ -144,6 +145,7 @@ class App extends Component {
                 <Route path="/brokers" exact component={Brokers}/>
                 <Route path="/solicitud_enviada_brokers" exact component={ThankyouPage} />
                 <Route path="/contador" exact component={Counter}/>
+                <Route path="/alianza" exact component={Allies}/>
                 <PrivateRoute exact path="/home" component={Home} />
                 <PrivateRoute exact path="/solicitud" component={Appliance} />
                 <PrivateRoute

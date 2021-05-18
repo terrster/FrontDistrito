@@ -304,7 +304,7 @@ const DocumentsForm = (props) => {
                 />
             )
         }
-        <Form className="ml-auto mr-auto" style={{ maxWidth: "690px" }}>
+        <Form className="ml-auto mr-auto docs" style={{ maxWidth: "690px" }}>
             {docFiles.map((d, i) => {
                 return (
                     <div key={`div-file-input-${i}`}>
