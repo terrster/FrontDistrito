@@ -13,7 +13,7 @@ const AlliesForm = (props) => {
     }, [props.values])
 	return (
 		<Form className="pt-3 pl-5 pr-5 pb-3">
-            <Title title="Información General" className="subtitle-dp fz25 fw300 mb-1 text-center"/>
+            <Title title="Información General" className="title-dp fz25 fw300 mb-1 text-center"/>
 
             <Row>
                 <Col lg={4}>
@@ -41,9 +41,11 @@ const AlliesForm = (props) => {
                 </Col>
             </Row>
 
-            <Title title="Variables de Crédito" className="subtitle-dp fz25 fw300 mb-1 text-center"/>
+            <Title title="Variables de Crédito" className="title-dp fz25 fw300 mb-1 text-center"/>
 
-            <SubtitleFrom subtitle="Tipo de crédito que ofreces (elige uno o más)" className="fz20 mb-1"/>
+            <div className="subtitle form fz20 mb-1">
+                Tipo de crédito que ofreces <small>(elige uno o más)</small>
+            </div>
 
             <Row>
                 <Col lg={2}>
@@ -61,12 +63,17 @@ const AlliesForm = (props) => {
                 <Col lg={2}>
                     <FieldCheck name="typeCredit.leaseBack" label="Lease Back"/>
                 </Col>
-                <Col lg={2}>
+                <Col lg={1}>
                     <FieldCheck name="typeCredit.puente" label="Puente"/>
+                </Col>
+                <Col lg={1}>
+                    <FieldCheck name="typeCredit.otro" label="Otro"/>
                 </Col>
             </Row>
 
-            <SubtitleFrom subtitle="Régimen fiscal aceptado (elige uno o más)" className="fz20 mb-1"/>
+            <div className="subtitle form fz20 mb-1">
+                Régimen fiscal aceptado <small>(elige uno o más)</small>
+            </div>
 
             <Row>
                 <Col lg={2}>
@@ -83,6 +90,8 @@ const AlliesForm = (props) => {
                 </Col>
             </Row>
 
+            <Title title="Datos financieros" className="title-dp fz25 fw300 mb-1 text-center"/>
+
             <Row>
                 <Col lg={4}>
                     <FieldText name="annualSales" placeholder="Ventas anuales mínimas aceptadas"/>
@@ -95,7 +104,7 @@ const AlliesForm = (props) => {
                 </Col>
             </Row>
 
-            <SubtitleFrom subtitle="Antigüedad del negocio" className="fz20 mb-1"/>
+            <SubtitleFrom subtitle="Antigüedad mínima aceptada" className="fz20 mb-1"/>
 
             <Row>
                 <Col lg={3}>
@@ -119,22 +128,24 @@ const AlliesForm = (props) => {
 
             <Row>
                 <Col lg={2}>
-                    <FieldRadio id="flexibilityCreditBureau1" name="flexibilityCreditBureau" label="Poca" value="LITTLE"/>
+                    <FieldRadio id="flexibilityCreditBureau1" name="flexibilityCreditBureau" label="Poca flexibilidad" value="LITTLE"/>
                 </Col>
                 <Col lg={2}>
-                    <FieldRadio id="flexibilityCreditBureau2" name="flexibilityCreditBureau" label="Media" value="MEDIUM"/>
+                    <FieldRadio id="flexibilityCreditBureau2" name="flexibilityCreditBureau" label="Media flexibilidad" value="MEDIUM"/>
                 </Col>
                 <Col lg={2}>
-                    <FieldRadio id="flexibilityCreditBureau3" name="flexibilityCreditBureau" label="Alta" value="HIGH"/>
+                    <FieldRadio id="flexibilityCreditBureau3" name="flexibilityCreditBureau" label="Alta flexibilidad" value="HIGH"/>
                 </Col>
                 <Col lg={6}>
                     <FieldText name="score" placeholder="BC Score" labelFooter="(mínimo aceptado)"/>
                 </Col>
             </Row>
 
+            <Title title="Ubicación geografíca" className="title-dp fz25 fw300 mb-1 text-center"/>
+
             <Row>
                 <Col lg={12}>
-                    <FieldTextArea name="geographicLocationsRejected" placeholder="Coloca todas las ubicaciones geográficas rechazadas" className="forceFullWidth"/>
+                    <FieldTextArea name="geographicLocationsRejected" placeholder="Coloca todas las entidades federativas que no entren en el perfil" className="forceFullWidth"/>
                 </Col>
             </Row>
 
@@ -172,7 +183,9 @@ const AlliesForm = (props) => {
                 </Col>
             </Row>
 
-            <SubtitleFrom subtitle="Uso del crédito otorgado(elige todas la necesarias)" className="fz20 mb-1"/>
+            <div className="subtitle form fz20 mb-1">
+                Uso del crédito otorgado <small>(elige todas la necesarias)</small>
+            </div>
 
             <Row>
                 <Col lg={3}>
