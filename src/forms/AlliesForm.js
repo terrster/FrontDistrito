@@ -69,6 +69,13 @@ const AlliesForm = (props) => {
                 <Col lg={1}>
                     <FieldCheck name="typeCredit.otro" label="Otro"/>
                 </Col>
+                {
+                    props.values.typeCredit.otro && 
+
+                    <Col lg={12}>
+                        <FieldText name="typeCredit.otroTxt" placeholder="Indica cuál es el tipo de crédito que ofreces" className="forceFullWidth"/>
+                    </Col>
+                }
             </Row>
 
             <div className="subtitle form fz20 mb-1">
@@ -145,7 +152,7 @@ const AlliesForm = (props) => {
 
             <Row>
                 <Col lg={12}>
-                    <FieldTextArea name="geographicLocationsRejected" placeholder="Coloca todas las entidades federativas que no entren en el perfil" className="forceFullWidth"/>
+                    <FieldTextArea name="geographicLocationsRejected" placeholder="Coloca todas las entidades federativas que NO entren en el perfil" className="forceFullWidth"/>
                 </Col>
             </Row>
 
@@ -177,9 +184,11 @@ const AlliesForm = (props) => {
                 </Col>
             </Row>
 
+            <SubtitleFrom subtitle="Apalancamiento aceptado" className="fz20 mb-1"/>
+
             <Row>
                 <Col lg={12}>
-                    <FieldText name="acceptedLeverage" placeholder="Apalancamiento aceptado" labelFooter="(% sobre las ventas)" className="forceFullWidth"/>
+                    <FieldText name="acceptedLeverage" placeholder="% sobre las ventas" className="forceFullWidth"/>
                 </Col>
             </Row>
 
@@ -215,7 +224,7 @@ const AlliesForm = (props) => {
             </Row>
 
 			<div className="text-center">
-				<Button type="submit" className="btn-blue-documents mt-30" disabled={props.submitting} style={{ width: '300px' }}>Enviar Alta de Alianza</Button>
+				<Button type="submit" className="btn-blue-documents mt-30" disabled={props.submitting} style={{ width: '300px' }}>Dar de Alta Alianza</Button>
 			</div>
 		</Form>
 	);

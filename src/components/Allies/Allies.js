@@ -19,7 +19,9 @@ const Allies = () => {
             factoraje: false,
             arrendamiento: false,
             leaseBack: false,
-            puente: false
+            puente: false,
+            otro: false,
+            otroTxt: ''
         },
         taxRegime: {
             sinAlta: false,
