@@ -48,8 +48,12 @@ const AlliesValidations = values => {
     errors.annualSales = "Debe de indicar las ventas mínimas anuales";
   }
 
-  if(!values.requestedAmountRange){
-    errors.requestedAmountRange = "Debe de indicar el rango de monto solicitado";
+  if(!values.since){
+    errors.since = "Debe de indicar desde que monto se puede solicitar";
+  }
+
+  if(!values.until){
+    errors.until = "Debe de indicar hasta que monto se puede solicitar";
   }
 
   if(!values.sales){

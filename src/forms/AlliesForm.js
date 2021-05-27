@@ -172,8 +172,14 @@ const AlliesForm = (props) => {
                 <Col lg={4}>
                     <FieldText name="annualSales" placeholder="Ventas anuales mínimas aceptadas" className="forceFullWidth"/>
                 </Col>
-                <Col lg={4}>
+                {/* <Col lg={4}>
                     <FieldText name="requestedAmountRange" placeholder="Rango de monto solicitado" labelFooter="(de $ hasta $)" className="forceFullWidth"/>
+                </Col> */}
+                <Col lg={2}>
+                    <FieldText name="since" placeholder="Desde $" className="forceFullWidth"/>
+                </Col>
+                <Col lg={2}>
+                    <FieldText name="until" placeholder="Hasta $" className="forceFullWidth"/>
                 </Col>
                 <Col lg={4}>
                     <FieldText name="sales" placeholder="Monto/Ventas" labelFooter="(Porcentaje de ventas al que se podría acceder en crédito)" className="forceFullWidth"/>

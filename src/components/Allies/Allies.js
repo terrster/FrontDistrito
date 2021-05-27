@@ -37,7 +37,8 @@ const Allies = () => {
             PM: false
         },
         annualSales: "",
-        requestedAmountRange: "",
+        since: "",
+        until: "",
         sales: "",
         antiquity: "",
         flexibilityCreditBureau: "",
