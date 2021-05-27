@@ -3,16 +3,23 @@ import Title from '../Generic/Title';
 import AlliesForm from '../../forms/AlliesForm';
 import { Carousel } from 'react-bootstrap';
 import AlianzaBanner from '../../assets/img/alianzas/form/alianzas_banner.jpg';
+import Loader from "../Loader/Loader";
+import { useDispatch } from "react-redux";
+import { updateLoader } from "../../redux/actions/loaderActions";
+import axios from '../../utils/axios';
 
 const Allies = () => {
+    const dispatch = useDispatch();
+
     const initialValues = {
 		nameMainContact: '',
 		allieName: '',
         businessName: '',
-        leadsEmail1: '',
-        leadsEmail2: '',
-        leadsEmail3: '',
-        logo: [],
+        leadEmail: {
+            primary: '',
+            secondary: '',
+            tertiary: '',
+        },
         typeCredit: {
             simple: false,
             revolvente: false,
@@ -48,7 +55,8 @@ const Allies = () => {
             consolidarDeudas: false,
             compraEquipo: false,
             otros: false
-        }
+        },
+        logo: []
 	}
 
     const handleSubmit = (values) => {
@@ -57,6 +65,7 @@ const Allies = () => {
 
     return (
         <>
+            <Loader />
             <Carousel id="alianza-carousel" className="mb-2" controls={false} indicators={false}>
                 <Carousel.Item>
                     <img className="d-block w-100"  src={AlianzaBanner} alt="alianzaBanner"/>

@@ -1,29 +1,89 @@
-import React, { useEffect } from 'react';
-import { withFormik, Form } from 'formik';
-import { FieldText, FieldRadio, FieldCheck, FieldTextArea } from '../components/Generic/Fields';
-import { Row, Col, Button } from 'react-bootstrap';
+import React, { useEffect, createRef, useState } from 'react';
+import { withFormik, Form, ErrorMessage , Field} from 'formik';
+import clip from "../assets/img/clip-copy-2@3x.png";
+import { FieldDoc } from "../components/Generic/DocInput";
+import { FieldText, FieldCheck, FieldTextArea } from '../components/Generic/Fields';
+import { Row, Col, Alert, Button } from 'react-bootstrap';
 import Title from "../components/Generic/Title";
 import SubtitleFrom from "../components/Generic/SubtitleForm";
-// import { Link } from 'react-router-dom';
-// import loginValidations from '../components/Validate/loginValidations';
+import AlliesValidations from '../components/Validate/alliesValidations';
 
 const AlliesForm = (props) => {
+    const [errorDocsBySize, setErrorDocsBySize] = useState({
+        files: [],
+        show : false
+    });
+    const [errorDocs, setErrorDocs] = useState(false);
+    const refAttachments = createRef();
+
+    const fileHandler = async (component, key, e) => {
+        let value;
+        let limitSize = 10000000; //10MB
+
+        let filesNotUploadedBySize = [];
+        let filesNotUploaded = false;
+        value = (component === "drag" ? e : e.target.files);
+        value = Array.from(value);
+        for (let i = 0; i < value.length; i++) {
+            if (value[i].size > limitSize) {
+                filesNotUploadedBySize.push(value[i].name);
+            }
+            else{
+                if(props.values[key].length === 0){
+                    props.values[key].push(value[i]);
+                    props.setValues(props.values);
+                }
+                else{
+                    filesNotUploaded = true;
+                }
+            }
+        }
+
+        if(filesNotUploadedBySize.length > 0){
+            setErrorDocsBySize({
+                files: filesNotUploadedBySize,
+                show: true
+            })
+            setTimeout(() => {
+                setErrorDocsBySize({
+                    files: [],
+                    show: false
+                })
+            }, 3500);
+        }
+
+        if(filesNotUploaded){
+            setErrorDocs(true)
+            setTimeout(() => {
+                setErrorDocs(false)
+            }, 3500);
+        }
+    };
+
+    const deleteChip = (index, key) => {
+        props.values[key].splice(index, 1);
+        props.setValues(props.values);
+    };
+
     useEffect(() => {
-        console.log(props.values);
-    }, [props.values])
+        if(!props.values.typeCredit.otro){
+            props.setFieldValue('typeCredit.otroTxt', '');
+        }
+    }, [props.values.typeCredit.otro])
+
 	return (
 		<Form className="pt-3 pl-5 pr-5 pb-3">
             <Title title="Información General" className="title-dp fz25 fw300 mb-1 text-center"/>
 
             <Row>
                 <Col lg={4}>
-                    <FieldText name="nameMainContact" placeholder="Nombre de contacto principal"/>
+                    <FieldText name="nameMainContact" placeholder="Nombre de contacto principal" className="forceFullWidth"/>
                 </Col>
                 <Col lg={4}>
-                    <FieldText name="allieName" placeholder="Nombre Alianza"/>
+                    <FieldText name="allieName" placeholder="Nombre Alianza" className="forceFullWidth"/>
                 </Col>
                 <Col lg={4}>
-                    <FieldText name="businessName" placeholder="Razón Social"/>
+                    <FieldText name="businessName" placeholder="Razón Social" className="forceFullWidth"/>
                 </Col>
             </Row>
 
@@ -31,13 +91,16 @@ const AlliesForm = (props) => {
 
             <Row>
                 <Col lg={4}>
-                    <FieldText name="leadsEmail1" placeholder="Correo electrónico"/>
+                    <FieldText name="leadEmail.primary" placeholder="Correo electrónico" className="forceFullWidth"/>
                 </Col>
                 <Col lg={4}>
-                    <FieldText name="leadsEmail2" placeholder="Correo electrónico"/>
+                    <FieldText name="leadEmail.secondary" placeholder="Correo electrónico" className="forceFullWidth"/>
                 </Col>
                 <Col lg={4}>
-                    <FieldText name="leadsEmail3" placeholder="Correo electrónico"/>
+                    <FieldText name="leadEmail.tertiary" placeholder="Correo electrónico" className="forceFullWidth"/>
+                </Col>
+                <Col>
+                    <ErrorMessage name="leadEmail" render={msg => <div className="error mt-1">{msg}</div>}/>
                 </Col>
             </Row>
 
@@ -76,6 +139,9 @@ const AlliesForm = (props) => {
                         <FieldText name="typeCredit.otroTxt" placeholder="Indica cuál es el tipo de crédito que ofreces" className="forceFullWidth"/>
                     </Col>
                 }
+                <Col>
+                    <ErrorMessage name="typeCredit" render={msg => <div className="error mt-1">{msg}</div>}/>
+                </Col>
             </Row>
 
             <div className="subtitle form fz20 mb-1">
@@ -95,58 +161,100 @@ const AlliesForm = (props) => {
                 <Col lg={2}>
                     <FieldCheck name="taxRegime.PM" label="Persona Moral"/>
                 </Col>
+                <Col>
+                    <ErrorMessage name="taxRegime" render={msg => <div className="error mt-1">{msg}</div>}/>
+                </Col>
             </Row>
 
             <Title title="Datos financieros" className="title-dp fz25 fw300 mb-1 text-center"/>
 
             <Row>
                 <Col lg={4}>
-                    <FieldText name="annualSales" placeholder="Ventas anuales mínimas aceptadas"/>
+                    <FieldText name="annualSales" placeholder="Ventas anuales mínimas aceptadas" className="forceFullWidth"/>
                 </Col>
                 <Col lg={4}>
-                    <FieldText name="requestedAmountRange" placeholder="Rango de monto solicitado" labelFooter="(de $ hasta $)"/>
+                    <FieldText name="requestedAmountRange" placeholder="Rango de monto solicitado" labelFooter="(de $ hasta $)" className="forceFullWidth"/>
                 </Col>
                 <Col lg={4}>
-                    <FieldText name="sales" placeholder="Monto/Ventas" labelFooter="(Porcentaje de ventas al que se podría acceder en crédito)"/>
+                    <FieldText name="sales" placeholder="Monto/Ventas" labelFooter="(Porcentaje de ventas al que se podría acceder en crédito)" className="forceFullWidth"/>
                 </Col>
             </Row>
 
-            <SubtitleFrom subtitle="Antigüedad mínima aceptada" className="fz20 mb-1"/>
+            <SubtitleFrom id="antiquity-radio-group" subtitle="Antigüedad mínima aceptada" className="fz20 mb-1"/>
 
-            <Row>
-                <Col lg={3}>
-                    <FieldRadio id="antiquity1" name="antiquity" label="Menos de 6 meses" value="LESS6"/>
-                </Col>
-                <Col lg={2}>
-                    <FieldRadio id="antiquity2" name="antiquity" label="1 año" value="ONE"/>
-                </Col>
-                <Col lg={2}>
-                    <FieldRadio id="antiquity3" name="antiquity" label="2 años" value="TWO"/>
-                </Col>
-                <Col lg={2}>
-                    <FieldRadio id="antiquity4" name="antiquity" label="3 años" value="THREE"/>
-                </Col>
-                <Col lg={3}>
-                    <FieldRadio id="antiquity5" name="antiquity" label="4 años o más" value="PFOUR"/>
-                </Col>
-            </Row>
+            
+            <div role="group" aria-labelledby="antiquity-radio-group" className="form-group">
+                <Row>
+                    <Col lg={3}>
+                        <label>
+                            <Field type="radio" name="antiquity" value="LESS6"/>
+                            &nbsp;Menos de 6 meses
+                        </label>
+                    </Col>
+                    <Col lg={2}>
+                        <label>
+                            <Field type="radio" name="antiquity" value="ONE"/>
+                            &nbsp;1 año
+                        </label>
+                    </Col>
+                    <Col lg={2}>
+                        <label>
+                            <Field type="radio" name="antiquity" value="TWO"/>
+                            &nbsp;2 años
+                        </label>
+                    </Col>
+                    <Col lg={2}>
+                        <label>
+                            <Field type="radio" name="antiquity" value="THREE"/>
+                            &nbsp;3 años
+                        </label>
+                    </Col>
+                    <Col lg={3}>
+                        <label>
+                            <Field type="radio" name="antiquity" value="PFOUR"/>
+                            &nbsp;4 años o más
+                        </label>
+                    </Col>
+                    <Col>
+                        <ErrorMessage name="antiquity" render={msg => <div className="error mt-1">{msg}</div>}/>
+                    </Col>
+                </Row>
+            </div>
 
-            <SubtitleFrom subtitle="Flexibilidad en Buró de Crédito" className="fz20 mb-1"/>
+            <SubtitleFrom id="flexibilityCreditBureau-radio-group" subtitle="Flexibilidad en Buró de Crédito" className="fz20 mb-1"/>
 
-            <Row>
-                <Col lg={2}>
-                    <FieldRadio id="flexibilityCreditBureau1" name="flexibilityCreditBureau" label="Poca flexibilidad" value="LITTLE"/>
-                </Col>
-                <Col lg={2}>
-                    <FieldRadio id="flexibilityCreditBureau2" name="flexibilityCreditBureau" label="Media flexibilidad" value="MEDIUM"/>
-                </Col>
-                <Col lg={2}>
-                    <FieldRadio id="flexibilityCreditBureau3" name="flexibilityCreditBureau" label="Alta flexibilidad" value="HIGH"/>
-                </Col>
-                <Col lg={6}>
-                    <FieldText name="score" placeholder="BC Score" labelFooter="(mínimo aceptado)"/>
-                </Col>
-            </Row>
+            <div role="group" aria-labelledby="flexibilityCreditBureau-radio-group" className="form-group">
+                <Row>
+                    <Col lg={6}>
+                        <Row>
+                            <Col lg={4}>
+                                <label>
+                                    <Field type="radio" name="flexibilityCreditBureau" value="LITTLE"/>
+                                    &nbsp;Poca flexibilidad
+                                </label>
+                            </Col>
+                            <Col lg={4}>
+                                <label>
+                                    <Field type="radio" name="flexibilityCreditBureau" value="MEDIUM"/>
+                                    &nbsp;Media flexibilidad
+                                </label>
+                            </Col>
+                            <Col lg={4}>
+                                <label>
+                                    <Field type="radio" name="flexibilityCreditBureau" value="HIGH"/>
+                                    &nbsp;Alta flexibilidad
+                                </label>
+                            </Col>
+                            <Col>
+                                <ErrorMessage name="flexibilityCreditBureau" render={msg => <div className="error mt-1">{msg}</div>}/>
+                            </Col>
+                        </Row>
+                    </Col>
+                    <Col lg={6}>
+                        <FieldText name="score" placeholder="BC Score (mínimo aceptado)" className="forceFullWidth"/>
+                    </Col>
+                </Row>
+            </div>
 
             <Title title="Ubicación geografíca" className="title-dp fz25 fw300 mb-1 text-center"/>
 
@@ -156,33 +264,61 @@ const AlliesForm = (props) => {
                 </Col>
             </Row>
 
-            <SubtitleFrom subtitle="CIEC obligatoria para iniciar proceso de crédito" className="fz20 mb-1"/>
+            <SubtitleFrom id="ciec-radio-group" subtitle="CIEC obligatoria para iniciar proceso de crédito" className="fz20 mb-1"/>
 
-            <Row>
-                <Col lg={2}>
-                    <FieldRadio id="ciec1" name="ciec" label="Sí" checked={props.values.ciec === "YES" ? true : false} value="Sí"/>
-                </Col>
-                <Col lg={2}>
-                    <FieldRadio id="ciec2" name="ciec" label="No" checked={props.values.ciec === "NO" ? true : false} value="No"/>
-                </Col>
-            </Row>
+            <div role="group" aria-labelledby="ciec-radio-group" className="form-group">
+                <Row>
+                    <Col lg={2}>
+                        <label>
+                            <Field type="radio" name="ciec" value="Sí"/>
+                            &nbsp;Sí
+                        </label>
+                    </Col>
+                    <Col lg={2}>
+                        <label>
+                            <Field type="radio" name="ciec" value="No"/>
+                            &nbsp;No
+                        </label>
+                    </Col>
+                    <Col lg={12}>
+                        <ErrorMessage name="ciec" render={msg => <div className="error mt-1">{msg}</div>}/>
+                    </Col>
+                </Row>
+            </div>
 
-            <SubtitleFrom subtitle="Garantías" className="fz20 mb-1"/>
+            <SubtitleFrom id="warranty-radio-group" subtitle="Garantías" className="fz20 mb-1"/>
 
-            <Row>
-                <Col lg={2}>
-                    <FieldRadio id="warranty1" name="warranty" label="No" checked={props.values.warranty === "No" ? true : false} value="No"/>
-                </Col>
-                <Col lg={2}>
-                    <FieldRadio id="warranty2" name="warranty" label="Inmobiliaria" checked={props.values.warranty === "Inmobiliaria" ? true : false} value="Inmobiliaria"/>
-                </Col>
-                <Col lg={2}>
-                    <FieldRadio id="warranty3" name="warranty" label="Activo fijo"checked={props.values.warranty === "Activo fijo" ? true : false} value="Activo fijo"/>
-                </Col>
-                <Col lg={2}>
-                    <FieldRadio id="warranty4" name="warranty" label="Ambas" checked={props.values.warranty === "Ambas" ? true : false} value="Ambas"/>
-                </Col>
-            </Row>
+            <div role="group" aria-labelledby="warranty-radio-group" className="form-group">
+                <Row>
+                    <Col lg={2}>
+                        <label>
+                            <Field type="radio" name="warranty" value="No"/>
+                            &nbsp;No
+                        </label>
+                    </Col>
+                    <Col lg={2}>
+                        <label>
+                            <Field type="radio" name="warranty" value="Inmobiliaria"/>
+                            &nbsp;Inmobiliaria
+                        </label>
+                    </Col>
+                    <Col lg={2}>
+                        <label>
+                            <Field type="radio" name="warranty" value="Activo fijo"/>
+                            &nbsp;Activo fijo
+                        </label>
+                    </Col>
+                    <Col lg={2}>
+                        <label>
+                            <Field type="radio" name="warranty" value="Ambas"/>
+                            &nbsp;Ambas
+                        </label>
+                    </Col>
+                    <Col lg={12}>
+                        <ErrorMessage name="warranty" render={msg => <div className="error mt-1">{msg}</div>}/>
+                    </Col>
+                </Row>
+            </div>
 
             <SubtitleFrom subtitle="Apalancamiento aceptado" className="fz20 mb-1"/>
 
@@ -221,7 +357,43 @@ const AlliesForm = (props) => {
                 <Col lg={3}>
                     <FieldCheck name="useOfCredit.otros" label="Otros" checked={props.values.useOfCredit.otros}/>
                 </Col>
+                <Col>
+                    <ErrorMessage name="useOfCredit" render={msg => <div className="error mt-1">{msg}</div>}/>
+                </Col>
             </Row>
+
+            <div key={`div-file-input-allies`}>
+                <FieldDoc
+                    title={"Adjunta tu logo (Archivo editable o PFD)"}
+                    className="forceFullWidth"
+                    name='logo'
+                    fileMethod={fileHandler}
+                    refs={refAttachments}
+                    image={clip}
+                    files={props.initialValues['logo']}
+                    deleteFile={deleteChip}
+                    key={`file-input-allies`}
+                />
+            </div>
+            {
+                errorDocsBySize.show && 
+                <Alert variant="danger">
+                    Los siguiente archivos pesan más de 10MB y fueron descartados:
+                    <ul> 
+                    {
+                        errorDocsBySize.files.map((d, i) => {
+                            return <li key={i}><strong>{d}</strong></li>
+                        })
+                    }
+                    </ul>
+                </Alert>
+            }
+            {
+                errorDocs && 
+                <Alert variant="danger">
+                    Ya ha adjuntado un archivo de logo
+                </Alert>
+            }
 
 			<div className="text-center">
 				<Button type="submit" className="btn-blue-documents mt-30" disabled={props.submitting} style={{ width: '300px' }}>Dar de Alta Alianza</Button>
@@ -234,7 +406,7 @@ export default withFormik({
 	mapPropsToValues({initialValues}){
         return initialValues;
     },
-    // validate: loginValidations, 
+    validate: AlliesValidations, 
     handleSubmit(values, formikBag){
         formikBag.setSubmitting(false);
         formikBag.props.handleSubmit(values);
