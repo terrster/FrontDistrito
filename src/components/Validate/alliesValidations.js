@@ -1,3 +1,5 @@
+const isValidEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+
 const AlliesValidations = values => {
   // console.log(values);
   let errors = {};
@@ -16,6 +18,15 @@ const AlliesValidations = values => {
 
   if(values.leadEmail.primary.length === 0 && values.leadEmail.secondary.length === 0 && values.leadEmail.tertiary.length === 0){
     errors.leadEmail = "Debe ingresar al menos un correo a donde llegarán los leads";
+  }
+  else if(values.leadEmail.primary.length > 0 && !isValidEmail.test(values.leadEmail.primary)){
+    errors.leadEmail = "El correo de la primera casilla no es válido";
+  }
+  else if(values.leadEmail.secondary.length > 0 && !isValidEmail.test(values.leadEmail.secondary)){
+    errors.leadEmail = "El correo de la segunda casilla no es válido";
+  }
+  else if(values.leadEmail.tertiary.length > 0 && !isValidEmail.test(values.leadEmail.tertiary)){
+    errors.leadEmail = "El correo de la tercera casilla no es válido";
   }
 
   let someTypeCreditSelected = false;
@@ -36,7 +47,7 @@ const AlliesValidations = values => {
   let someTaxRegimeSelected = false;
   Object.keys(values.taxRegime).map(tr => {
     if(values.taxRegime[tr]){
-      someTaxRegimeSelected = !someTaxRegimeSelected;
+      someTaxRegimeSelected = true;
     }
   });
 
@@ -87,7 +98,7 @@ const AlliesValidations = values => {
   let someUseOfCreditSelected = false;
   Object.keys(values.useOfCredit).map(uc => {
     if(values.useOfCredit[uc]){
-      someUseOfCreditSelected = !someUseOfCreditSelected;
+      someUseOfCreditSelected = true;
     }
   });
 

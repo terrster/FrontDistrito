@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Title from '../Generic/Title';
 import AlliesForm from '../../forms/AlliesForm';
 import { Carousel } from 'react-bootstrap';
@@ -60,8 +60,45 @@ const Allies = () => {
         logo: []
 	}
 
-    const handleSubmit = (values) => {
-        console.log(values);
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
+    const handleSubmit = async(values) => {
+        try{
+            console.log(values);
+            // window.scrollTo(0, 0);
+            // dispatch(updateLoader(true));
+            let formData = new FormData();
+            Object.keys(values).map((f) => {
+                if(f !== 'logo'){
+                    formData.append(f, values[f]);
+                }
+                else{
+                    values[f].map((lf) => {
+                        formData.append(f, lf);
+                    })
+                }
+            })
+            let {data} = axios.post('allie', formData, {
+                headers:{
+                    'Content-Type': 'multipart/form-data'
+                },
+                // onUploadProgress: progressEvent => {
+                //     setUploadPercentage(parseInt(Math.round((progressEvent.loaded * 100) / progressEvent.total)));
+                // }	
+            });
+
+            // if(data.code === 200){
+            //     dispatch(updateLoader(false));
+            // }
+            // else{
+
+            // }
+        }
+        catch(error){
+            console.log(error);
+        }
     }
 
     return (
