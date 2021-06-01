@@ -1,4 +1,5 @@
 import React from "react";
+import { Field, ErrorMessage } from 'formik';
 
 export const renderField = ({
   input,
@@ -261,3 +262,211 @@ export const renderSelectFieldFull = ({
     )}
   </div>
 );
+
+/*
+* FORMIK
+*/
+
+export const FieldText = ({
+  name,
+  label,
+  className,
+  placeholder,
+  maxLength,
+  labelFooter,
+  props
+}) => {
+  return (
+    <Field name={name}>
+      {({field}) => (
+        <div className="form-group">
+          {
+            label &&
+              <div className="fz16 metropolisReg mb-2 text-left">{label}</div>
+          }
+          <input
+            className={`form-control custom-form-input text-dp ${className}`}
+            placeholder={placeholder}
+            type="text"
+            maxLength={maxLength}
+            {...field}
+            {...props}
+          />
+          {
+            labelFooter &&
+              <div className="label-footer">{labelFooter}</div>
+          }
+          <ErrorMessage name={field.name} render={msg => <div id={`${field.name}-error`} className="error mt-1">{msg}</div>}/>
+        </div>
+      )}
+    </Field>
+  )
+};
+
+export const FieldTextArea = ({
+  name,
+  label,
+  className,
+  placeholder,
+  maxLength,
+  labelFooter,
+  props
+}) => {
+  return (
+    <Field name={name}>
+      {({field}) => (
+        <div className="form-group">
+          {
+            label &&
+              <div className="fz16 metropolisReg mb-2 text-left">{label}</div>
+          }
+          <textarea
+            className={`form-control custom-form-input text-dp ${className}`}
+            placeholder={placeholder}
+            type="text"
+            maxLength={maxLength}
+            {...field}
+            {...props}
+          >
+          </textarea>
+          {
+            labelFooter &&
+              <div className="label-footer">{labelFooter}</div>
+          }
+          <ErrorMessage name={field.name} render={msg => <div id={`${field.name}-error`} className="error mt-1">{msg}</div>}/>
+        </div>
+      )}
+    </Field>
+  )
+};
+
+export const FieldPassword = ({
+  name,
+  label,
+  placeholder,
+  props,
+  showPassword,
+  setShowPassword
+}) => {
+  return (
+    <Field name={name}>
+      {({field}) => (
+        <div className="form-group">
+          {
+            label &&
+              <div className="fz16 metropolisReg mb-2 text-left">{label}</div>
+          }
+          <div className="input-group form-group center-flex">
+            <input
+              className="form-control custom-form-input text-dp center-flex-input"
+              placeholder={placeholder}
+              type={showPassword ? "text" : "password"}
+              {...field}
+              {...props}
+            />
+            <span className={`${showPassword ? "eye-slash" : "eye"} icon-style`} onClick={() => setShowPassword(!showPassword)}/>
+          </div>
+          <ErrorMessage name={field.name} render={msg => <div className="error mt-1">{msg}</div>}/>
+        </div>
+      )}
+    </Field>
+  )
+};
+
+export const FieldSelect = ({
+  name,
+  label,
+  onChange,
+  props,
+  children,
+  labelFooter
+}) => {
+return (
+      <Field name={name}>
+        {({field, form: { setFieldValue }}) => (
+          <div className="form-group">
+              {
+                label &&
+                  <div className="fz16 metropolisReg text-left">{label}</div>
+              }
+              <select {...field} className="form-control custom-form-input text-dp" {...props} 
+              onChange={ e => {
+                  setFieldValue(field.name, e.target.value);
+                  onChange && onChange(e)
+              }}>
+                  {children}
+              </select>
+              {
+                labelFooter &&
+                  <div className="label-footer">{labelFooter}</div>
+              }
+              <ErrorMessage name={field.name} render={msg => <div className="error mt-1">{msg}</div>} />
+          </div>
+        )}
+      </Field>
+)
+};
+
+export const FieldCheck = ({
+  name,
+  checked,
+  label,
+  props
+}) => {
+  return (
+    <Field name={name}>
+      {({field}) => (
+        <div className="form-group">
+          <div className="form-check">  
+              <input
+                id={field.name}
+                className="form-check-input text-dp"
+                type="checkbox"
+                defaultChecked={checked}
+                {...field}
+                {...props}
+              />
+            <label className="form-check-label fz16 metropolisReg" htmlFor={field.name}>
+              {label}
+            </label>
+          </div>
+          <ErrorMessage name={field.name} render={msg => <div className="error mt-1">{msg}</div>}/>
+        </div>
+      )}
+    </Field>
+  )
+};
+
+export const FieldRadio = ({
+  name,
+  checked,
+  value,
+  label,
+  props
+}) => {
+  return (
+    <Field name={name}>
+      {({field, form}) => (
+        <div className="form-group">
+          <div className="form-check">  
+            <label className="form-check-label fz16 metropolisReg">
+              <input
+                className="form-check-input"
+                type="radio"
+                defaultChecked={checked}
+                value={value}
+                onClick={() => {
+                  form.setFieldValue(field.name, value)
+                }}
+                {...field}
+                {...props}
+              />
+              {label}
+            </label>
+          </div>
+          <ErrorMessage name={field.name} render={msg => <div className="error mt-1">{msg}</div>}/>
+        </div>
+      )}
+    </Field>
+  )
+};

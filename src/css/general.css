@@ -192,41 +192,41 @@
 .ml-39{margin-left: 39px;}
 
 /* FONT SIZE */
-.fz56 {font-size: 3.5rem;}
+.fz56 {font-size: 3.5rem !important;}
 
-.fz50 { font-size: 3.125rem; }
+.fz50 { font-size: 3.125rem !important; }
 
-.fz52 { font-size: 3.25rem;}
+.fz52 { font-size: 3.25rem !important;}
 
-.fz48 {font-size: 3rem ;}
+.fz48 {font-size: 3rem !important;}
 
-.fz42 {font-size: 2.62rem ;}
+.fz42 {font-size: 2.62rem !important;}
 
-.fz38 {font-size: 2.375rem ;}
+.fz38 {font-size: 2.375rem !important;}
 
-.fz32 {font-size: 2rem ;}
+.fz32 {font-size: 2rem !important;}
 
-.fz29 {font-size: 1.81rem ;}
+.fz29 {font-size: 1.81rem !important;}
 
-.fz25 {font-size: 1.56rem ;}
+.fz25 {font-size: 1.56rem !important;}
 
-.fz24 {font-size: 1.5rem ;}
+.fz24 {font-size: 1.5rem !important;}
 
-.fz23 {font-size: 1.43rem ;}
+.fz23 {font-size: 1.43rem !important;}
 
-.fz22 {font-size: 1.37rem ;}
+.fz22 {font-size: 1.37rem !important;}
 
-.fz20 {font-size: 1.25rem ;}
+.fz20 {font-size: 1.25rem !important;}
 
-.fz18 {font-size: 1.125rem ;}
+.fz18 {font-size: 1.125rem !important;}
 
-.fz16 {font-size: 1rem ;}
+.fz16 {font-size: 1rem !important;}
 
-.fz15 {font-size: 0.93rem ;}
+.fz15 {font-size: 0.93rem !important;}
 
-.fz12 {font-size: 0.796rem ;}
+.fz12 {font-size: 0.796rem !important;}
 
-.fz10 {font-size: 0.625rem ;}
+.fz10 {font-size: 0.625rem !important;}
 
 
 /* FONT TYPE */
@@ -613,3 +613,9 @@
 	margin-top: 20px;
 	height: 40px;
 } */
+
+.forceFullWidth{
+	width: 100% !important;
+	max-width: 100% !important;
+	min-width: 100% !important;
+}
