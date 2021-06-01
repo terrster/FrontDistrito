@@ -83,6 +83,9 @@ const AlliesForm = (props) => {
         const sinceError = document.getElementById("since-error");
         const untilError = document.getElementById("until-error");
         const salesError = document.getElementById("sales-error");
+        // const averageRateError = document.getElementById("averageRate-error");
+        // const deadlineError = document.getElementById("deadline-error");
+        // const openingExpensesError = document.getElementById("openingExpenses-error");
         const antiquityError = document.getElementById("antiquity-error");
         const flexibilityCreditBureauError = document.getElementById("flexibilityCreditBureau-error");
         const scoreError = document.getElementById("score-error");
@@ -102,6 +105,9 @@ const AlliesForm = (props) => {
             sinceError,
             untilError,
             salesError,
+            // averageRateError,
+            // deadlineError,
+            // openingExpensesError,
             antiquityError,
             flexibilityCreditBureauError,
             scoreError,
@@ -217,19 +223,31 @@ const AlliesForm = (props) => {
 
             <Row>
                 <Col lg={4}>
-                    <FieldText name="annualSales" placeholder="Ventas anuales mínimas aceptadas" className="forceFullWidth"/>
+                    <FieldText name="annualSales" placeholder="Ventas anuales mínimas aceptadas" normalize="onlyNumbers" className="forceFullWidth"/>
                 </Col>
                 {/* <Col lg={4}>
                     <FieldText name="requestedAmountRange" placeholder="Rango de monto solicitado" labelFooter="(de $ hasta $)" className="forceFullWidth"/>
                 </Col> */}
                 <Col lg={2}>
-                    <FieldText name="since" placeholder="Desde $" className="forceFullWidth"/>
+                    <FieldText name="since" placeholder="Créditos desde $" normalize="onlyNumbers" className="forceFullWidth"/>
                 </Col>
                 <Col lg={2}>
-                    <FieldText name="until" placeholder="Hasta $" className="forceFullWidth"/>
+                    <FieldText name="until" placeholder="Créditos hasta $" normalize="onlyNumbers" className="forceFullWidth"/>
                 </Col>
                 <Col lg={4}>
-                    <FieldText name="sales" placeholder="Monto/Ventas" labelFooter="(Porcentaje de ventas al que se podría acceder en crédito)" className="forceFullWidth"/>
+                    <FieldText name="sales" placeholder="Monto/Ventas" normalize="onlyNumbers" labelFooter="(Porcentaje de ventas al que se podría acceder en crédito)" className="forceFullWidth"/>
+                </Col>
+            </Row>
+
+            <Row>
+                <Col lg={4}>
+                    <FieldText name="averageRate" placeholder="Tasa promedio" normalize="onlyNumbers" className="forceFullWidth"/>
+                </Col>
+                <Col lg={4}>
+                    <FieldText name="deadline" placeholder="Plazo máximo" normalize="onlyNumbers" className="forceFullWidth"/>
+                </Col>
+                <Col lg={4}>
+                    <FieldText name="openingExpenses" placeholder="Gastos por apertura" normalize="onlyNumbers" className="forceFullWidth"/>
                 </Col>
             </Row>
 
@@ -304,7 +322,7 @@ const AlliesForm = (props) => {
                         </Row>
                     </Col>
                     <Col lg={6}>
-                        <FieldText name="score" placeholder="BC Score (mínimo aceptado)" className="forceFullWidth"/>
+                        <FieldText name="score" placeholder="BC Score (mínimo aceptado)" normalize="onlyNumbers" className="forceFullWidth"/>
                     </Col>
                 </Row>
             </div>

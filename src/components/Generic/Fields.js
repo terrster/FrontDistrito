@@ -267,18 +267,58 @@ export const renderSelectFieldFull = ({
 * FORMIK
 */
 
+const onlyLirycs = (e, form) =>
+/^([a-z ñáéíóú]{0,60})$/i.test(e.target.value) && e.target.value.length > 0 ? 
+form.setFieldValue(e.target.name, e.target.value) : 
+form.setFieldValue(e.target.name, e.target.value.substring(0, e.target.value.length - 1));
+
+const onlyNumbers = (e, form) =>
+/^\d+$/.test(e.target.value) && e.target.value.length > 0 ? 
+form.setFieldValue(e.target.name, e.target.value) : 
+form.setFieldValue(e.target.name, e.target.value.substring(0, e.target.value.length - 1));
+
+const onlyNumbersDotComa = (e, form) => 
+/^[0-9]{1,2}([,.][0-9]{1,2})?$/.test(e.target.value) && e.target.value.length > 0 ? 
+form.setFieldValue(e.target.name, e.target.value) : 
+form.setFieldValue(e.target.name, e.target.value.substring(0, e.target.value.length - 1));
+
+const LirycsNumbersDotComa = (e, form) =>
+/^([a-z ñáéíóú0-9,.]{0,45})$/i.test(e.target.value) && e.target.value.length > 0 ? 
+form.setFieldValue(e.target.name, e.target.value) : 
+form.setFieldValue(e.target.name, e.target.value.substring(0, e.target.value.length - 1));
+
+const normalizeFn = (fn, e, form) => {
+    switch(fn){
+        case "onlyLirycs":
+            onlyLirycs(e, form);
+        break;
+        case "onlyNumbers":
+            onlyNumbers(e, form);
+        break;
+        case "onlyNumbersDotComa":
+            onlyNumbersDotComa(e, form);
+        break;
+        case "LirycsNumbersDotComa":
+            LirycsNumbersDotComa(e, form);
+        break;
+        default:
+        break;
+    }
+};
+
 export const FieldText = ({
   name,
   label,
   className,
   placeholder,
   maxLength,
+  normalize,
   labelFooter,
   props
 }) => {
   return (
     <Field name={name}>
-      {({field}) => (
+      {({field, form: { setFieldValue }}) => (
         <div className="form-group">
           {
             label &&
@@ -289,6 +329,7 @@ export const FieldText = ({
             placeholder={placeholder}
             type="text"
             maxLength={maxLength}
+            onKeyUp={(e) => {normalizeFn(normalize, e, {setFieldValue})}}
             {...field}
             {...props}
           />

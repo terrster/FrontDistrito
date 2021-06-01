@@ -71,6 +71,18 @@ const AlliesValidations = values => {
     errors.sales = "Debe de indicar el porcentaje mínimo de ventas";
   }
 
+  // if(!values.averageRate){
+  //   errors.averageRate = "Debe de indicar la tasa promedio";
+  // }
+
+  // if(!values.deadline){
+  //   errors.deadline = "Debe de indicar el plazo máximo";
+  // }
+
+  // if(!values.openingExpenses){
+  //   errors.openingExpenses = "Debe de indicar los gastos por apertura";
+  // }
+
   if(!values.antiquity){
     errors.antiquity = "Debe de indicar la antigüedad mínima aceptada";
   }
