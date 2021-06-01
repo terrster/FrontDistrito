@@ -76,7 +76,7 @@ const GeneralInfo = (props) => {
               colonias = null;
             }
           } catch (e) {
-            let origin = process.env.REACT_APP_CONFIGURATION === 'development' ? 'Dev' : 'Prod';
+              let origin = process.env.REACT_APP_CONFIGURATION === 'production' ? 'Prod' : process.env.REACT_APP_CONFIGURATION === 'development' ? 'Dev' : 'Local';
               await axios.post('/private/api/sms_internal_notify', {
                 msg: origin + ' - Ha ocurrido un error con la API de COPOMEX'
               },{
