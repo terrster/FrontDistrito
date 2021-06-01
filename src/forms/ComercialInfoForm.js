@@ -51,7 +51,7 @@ let ComercialInfoForm = (props) => {
       try {
         const res = await (
           await fetch(
-            `https://api-sepomex.hckdrk.mx/query/info_cp/${zipCode}?token=${process.env.REACT_APP_SEPOMEXTOKEN}`,
+            `https://api.copomex.com/query/info_cp/${zipCode}?token=${process.env.REACT_APP_SEPOMEXTOKEN}`,
             {
               method: "GET",
             }
@@ -106,7 +106,7 @@ let ComercialInfoForm = (props) => {
           try {
             const res = await (
               await fetch(
-                `https://api-sepomex.hckdrk.mx/query/info_cp/${zipCode}?token=${process.env.REACT_APP_SEPOMEXTOKEN}`,
+                `https://api.copomex.com/query/info_cp/${zipCode}?token=${process.env.REACT_APP_SEPOMEXTOKEN}`,
                 {
                   method: "GET",
                 }

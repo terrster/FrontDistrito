@@ -66,7 +66,7 @@ const GeneralInfo = (props) => {
           let colonias = [];
           try {
             const coloniasRequest = await axiosBase.get(
-              `https://api-sepomex.hckdrk.mx/query/info_cp/${zipCode}?token=${process.env.REACT_APP_SEPOMEXTOKEN}`
+              `https://api.copomex.com/query/info_cp/${zipCode}?token=${process.env.REACT_APP_SEPOMEXTOKEN}`
             );
             if (Array.isArray(coloniasRequest.data)) {
               coloniasRequest.data.map((datos) => {
