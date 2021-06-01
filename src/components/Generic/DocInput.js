@@ -30,7 +30,7 @@ export const FieldDoc = ({
 					</label>
 					</div>
 				</FileDrop>
-                <ErrorMessage name={field.name} render={msg => <div className="fz15 error mt-1">{msg}</div>}/>
+                <ErrorMessage name={field.name} render={msg => <div id={`${field.name}-error`} className="fz15 error mt-1">{msg}</div>}/>
 				{files && files.map((value, index) => {
 					let nameDoc = ""
 					if(value.name == undefined){

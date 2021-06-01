@@ -296,7 +296,7 @@ export const FieldText = ({
             labelFooter &&
               <div className="label-footer">{labelFooter}</div>
           }
-          <ErrorMessage name={field.name} render={msg => <div className="error mt-1">{msg}</div>}/>
+          <ErrorMessage name={field.name} render={msg => <div id={`${field.name}-error`} className="error mt-1">{msg}</div>}/>
         </div>
       )}
     </Field>
@@ -333,7 +333,7 @@ export const FieldTextArea = ({
             labelFooter &&
               <div className="label-footer">{labelFooter}</div>
           }
-          <ErrorMessage name={field.name} render={msg => <div className="error mt-1">{msg}</div>}/>
+          <ErrorMessage name={field.name} render={msg => <div id={`${field.name}-error`} className="error mt-1">{msg}</div>}/>
         </div>
       )}
     </Field>

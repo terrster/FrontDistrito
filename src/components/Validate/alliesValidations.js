@@ -91,9 +91,9 @@ const AlliesValidations = values => {
     errors.warranty = "Debe de seleccionar alguna garantía";
   }
 
-  if(!values.acceptedLeverage){
-    errors.acceptedLeverage = "Debe de indicar el apalancamiento aceptado";
-  }
+  // if(!values.acceptedLeverage){
+  //   errors.acceptedLeverage = "Debe de indicar el apalancamiento aceptado";
+  // }
 
   let someUseOfCreditSelected = false;
   Object.keys(values.useOfCredit).map(uc => {

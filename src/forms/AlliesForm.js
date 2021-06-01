@@ -7,6 +7,7 @@ import { Row, Col, Alert, Button } from 'react-bootstrap';
 import Title from "../components/Generic/Title";
 import SubtitleFrom from "../components/Generic/SubtitleForm";
 import AlliesValidations from '../components/Validate/alliesValidations';
+import scroll from "../utils/scroll";
 
 const AlliesForm = (props) => {
     const [errorDocsBySize, setErrorDocsBySize] = useState({
@@ -69,7 +70,53 @@ const AlliesForm = (props) => {
         if(!props.values.typeCredit.otro){
             props.setFieldValue('typeCredit.otroTxt', '');
         }
-    }, [props.values.typeCredit.otro])
+    }, [props.values.typeCredit.otro]);
+
+    const goToError = () => {
+        const nameMainContactError = document.getElementById("nameMainContact-error");
+        const allieNameError = document.getElementById("allieName-error");
+        const businessNameError = document.getElementById("businessName-error");
+        const leadEmailError = document.getElementById("leadEmail-error");
+        const typeCreditError = document.getElementById("typeCredit-error");
+        const taxRegimeError = document.getElementById("taxRegime-error");
+        const annualSalesError = document.getElementById("annualSales-error");
+        const sinceError = document.getElementById("since-error");
+        const untilError = document.getElementById("until-error");
+        const salesError = document.getElementById("sales-error");
+        const antiquityError = document.getElementById("antiquity-error");
+        const flexibilityCreditBureauError = document.getElementById("flexibilityCreditBureau-error");
+        const scoreError = document.getElementById("score-error");
+        const ciecError = document.getElementById("ciec-error");
+        const warrantyError = document.getElementById("warranty-error");
+        const useOfCreditError = document.getElementById("useOfCredit-error");
+        const logoError = document.getElementById("logo-error");
+        
+        const errors = [
+            nameMainContactError,
+            allieNameError,
+            businessNameError,
+            leadEmailError,
+            typeCreditError,
+            taxRegimeError,
+            annualSalesError,
+            sinceError,
+            untilError,
+            salesError,
+            antiquityError,
+            flexibilityCreditBureauError,
+            scoreError,
+            ciecError,
+            warrantyError,
+            useOfCreditError,
+            logoError
+        ];
+        for (let x = 0; x < errors.length; x++) {
+          if (errors[x] != null) {
+            scroll(errors[x].id);
+            break;
+          }
+        }
+    }
 
 	return (
 		<Form className="pt-3 pl-5 pr-5 pb-3">
@@ -100,7 +147,7 @@ const AlliesForm = (props) => {
                     <FieldText name="leadEmail.tertiary" placeholder="Correo electrónico" className="forceFullWidth"/>
                 </Col>
                 <Col>
-                    <ErrorMessage name="leadEmail" render={msg => <div className="error mt-1">{msg}</div>}/>
+                    <ErrorMessage name="leadEmail" render={msg => <div id="leadEmail-error" className="error mt-1">{msg}</div>}/>
                 </Col>
             </Row>
 
@@ -140,7 +187,7 @@ const AlliesForm = (props) => {
                     </Col>
                 }
                 <Col>
-                    <ErrorMessage name="typeCredit" render={msg => <div className="error mt-1">{msg}</div>}/>
+                    <ErrorMessage name="typeCredit" render={msg => <div id="typeCredit-error"  className="error mt-1">{msg}</div>}/>
                 </Col>
             </Row>
 
@@ -162,7 +209,7 @@ const AlliesForm = (props) => {
                     <FieldCheck name="taxRegime.PM" label="Persona Moral"/>
                 </Col>
                 <Col>
-                    <ErrorMessage name="taxRegime" render={msg => <div className="error mt-1">{msg}</div>}/>
+                    <ErrorMessage name="taxRegime" render={msg => <div id="taxRegime-error" className="error mt-1">{msg}</div>}/>
                 </Col>
             </Row>
 
@@ -222,7 +269,7 @@ const AlliesForm = (props) => {
                         </label>
                     </Col>
                     <Col>
-                        <ErrorMessage name="antiquity" render={msg => <div className="error mt-1">{msg}</div>}/>
+                        <ErrorMessage name="antiquity" render={msg => <div id="antiquity-error" className="error mt-1">{msg}</div>}/>
                     </Col>
                 </Row>
             </div>
@@ -252,7 +299,7 @@ const AlliesForm = (props) => {
                                 </label>
                             </Col>
                             <Col>
-                                <ErrorMessage name="flexibilityCreditBureau" render={msg => <div className="error mt-1">{msg}</div>}/>
+                                <ErrorMessage name="flexibilityCreditBureau" render={msg => <div id="flexibilityCreditBureau-error" className="error mt-1">{msg}</div>}/>
                             </Col>
                         </Row>
                     </Col>
@@ -287,7 +334,7 @@ const AlliesForm = (props) => {
                         </label>
                     </Col>
                     <Col lg={12}>
-                        <ErrorMessage name="ciec" render={msg => <div className="error mt-1">{msg}</div>}/>
+                        <ErrorMessage name="ciec" render={msg => <div id="ciec-error" className="error mt-1">{msg}</div>}/>
                     </Col>
                 </Row>
             </div>
@@ -321,18 +368,18 @@ const AlliesForm = (props) => {
                         </label>
                     </Col>
                     <Col lg={12}>
-                        <ErrorMessage name="warranty" render={msg => <div className="error mt-1">{msg}</div>}/>
+                        <ErrorMessage name="warranty" render={msg => <div id="warranty-error" className="error mt-1">{msg}</div>}/>
                     </Col>
                 </Row>
             </div>
 
-            <SubtitleFrom subtitle="Apalancamiento aceptado" className="fz20 mb-1"/>
+            {/* <SubtitleFrom subtitle="Apalancamiento aceptado" className="fz20 mb-1"/>
 
             <Row>
                 <Col lg={12}>
                     <FieldText name="acceptedLeverage" placeholder="% sobre las ventas" className="forceFullWidth"/>
                 </Col>
-            </Row>
+            </Row> */}
 
             <div className="subtitle form fz20 mb-1">
                 Uso del crédito otorgado <small>(elige todas la necesarias)</small>
@@ -364,7 +411,7 @@ const AlliesForm = (props) => {
                     <FieldCheck name="useOfCredit.otros" label="Otros" checked={props.values.useOfCredit.otros}/>
                 </Col>
                 <Col>
-                    <ErrorMessage name="useOfCredit" render={msg => <div className="error mt-1">{msg}</div>}/>
+                    <ErrorMessage name="useOfCredit" render={msg => <div id="useOfCredit-error" className="error mt-1">{msg}</div>}/>
                 </Col>
             </Row>
 
@@ -402,7 +449,7 @@ const AlliesForm = (props) => {
             }
 
 			<div className="text-center">
-				<Button type="submit" className="btn-blue-documents mt-30" disabled={props.submitting} style={{ width: '300px' }}>Dar de Alta Alianza</Button>
+				<Button type="submit" className="btn-blue-documents mt-30" disabled={props.submitting || props.isLoading} onClick={() => goToError()} style={{ width: '300px' }}>Dar de Alta Alianza</Button>
 			</div>
 		</Form>
 	);
