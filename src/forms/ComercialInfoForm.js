@@ -71,6 +71,14 @@ let ComercialInfoForm = (props) => {
         props.setMunicipality(municipio);
         setZipCodeError(false);
       } catch (error) {
+        let origin = process.env.REACT_APP_CONFIGURATION === 'development' ? 'Dev' : 'Prod';
+        await axios.post('/private/api/sms_internal_notify', {
+          msg: origin + ' - Ha ocurrido un error con la API de COPOMEX'
+        },{
+          headers: {
+            'tokensecret': 'D7Mqvg5aPcypn97dxdB/Kfe330wwu0IXx0pFQXIFmjs='
+          }
+        });
         setZipCodeError(true);
         props.setState("");
         props.setMunicipality("");
@@ -125,7 +133,7 @@ let ComercialInfoForm = (props) => {
             props.setState(estado);
             props.setMunicipality(municipio);
             setZipCodeError(false);
-          } catch (error) {
+          } catch (error) {       
             props.setState("");
             props.setMunicipality("");
             setColonias([]);

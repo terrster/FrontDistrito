@@ -244,7 +244,7 @@ const AlliesForm = (props) => {
                     <FieldText name="averageRate" placeholder="Tasa promedio" normalize="onlyNumbers" className="forceFullWidth"/>
                 </Col>
                 <Col lg={4}>
-                    <FieldText name="deadline" placeholder="Plazo máximo" normalize="onlyNumbers" className="forceFullWidth"/>
+                    <FieldText name="deadline" placeholder="Plazo máximo (en meses)" normalize="onlyNumbers" className="forceFullWidth"/>
                 </Col>
                 <Col lg={4}>
                     <FieldText name="openingExpenses" placeholder="Gastos por apertura" normalize="onlyNumbers" className="forceFullWidth"/>

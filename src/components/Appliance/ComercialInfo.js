@@ -109,6 +109,14 @@ const ComercialInfo = (props) => {
             
             setInitialValues({ ...comercial, ...address, paymentsMoreThan30, terminal, exportation, colonias });
           } catch (error) {
+              let origin = process.env.REACT_APP_CONFIGURATION === 'development' ? 'Dev' : 'Prod';
+              await axios.post('/private/api/sms_internal_notify', {
+                msg: origin + ' - Ha ocurrido un error con la API de COPOMEX'
+              },{
+                headers: {
+                  'tokensecret': 'D7Mqvg5aPcypn97dxdB/Kfe330wwu0IXx0pFQXIFmjs='
+                }
+              });
             setInitialValues({ ...comercial, ...address, paymentsMoreThan30, terminal, exportation, colonias });
           }
         }
