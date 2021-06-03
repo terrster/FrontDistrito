@@ -45,7 +45,10 @@ const financialPartner = (partner) => {
     case 'VISOOR':
       return {
         image: [visoorWEB, visoorWEB],
-        text: [],
+        text: [
+          'Solicita un crédito para tu empresa o negocio a través de nuestro aliado Distrito Pyme.',
+          'Podrás recibir las mejores opciones de crédito en menos de 15 min con un proceso fácil, rápido y sin papeleos.'
+        ],
         prefix: process.env.REACT_APP_CONFIGURATION === 'localhost' || process.env.REACT_APP_CONFIGURATION === 'development' ? 'VisoorDev - ' : 'Visoor - ',
         channel: 'Visoor',
         brokercode: '36408310'
