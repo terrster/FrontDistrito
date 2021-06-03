@@ -22,6 +22,7 @@ import { Carousel } from 'react-bootstrap';
 //FinancialPartners
 import impulsoDPWEB from '../../assets/img/financialPartners/impulsoDP-WEB.jpg';
 import impulsoDPMovil from '../../assets/img/financialPartners/impulsoDP-Movil.jpg';
+import visoorWEB from '../../assets/img/financialPartners/Visoor-WEB.jpg';
 
 const getVersionImage = () => {
 	const currentSize = document.getElementsByTagName('body')[0].clientWidth;
@@ -38,8 +39,17 @@ const financialPartner = (partner) => {
           'El proceso es fácil, rápido y podrás recibir respuesta en menos de 15 min.'
         ],
         dealstage: '2753634',
-        prefix: process.env.REACT_APP_CONFIGURATION === 'localhost' || process.env.REACT_APP_CONFIGURATION === 'development' ? 'FormImpulsoDev - ' : 'FormImpulso - '
+        prefix: process.env.REACT_APP_CONFIGURATION === 'localhost' || process.env.REACT_APP_CONFIGURATION === 'development' ? 'FormImpulsoDev - ' : 'FormImpulso - ',
+        channel: 'Impulso'
       };
+    case 'VISOOR':
+      return {
+        image: [visoorWEB, visoorWEB],
+        text: [],
+        prefix: process.env.REACT_APP_CONFIGURATION === 'localhost' || process.env.REACT_APP_CONFIGURATION === 'development' ? 'VisoorDev - ' : 'Visoor - ',
+        channel: 'Visoor',
+        brokercode: '36408310'
+      }
     default:
       return false;
   }
@@ -66,8 +76,11 @@ const Signup = props => {
   let onFormSubmit = async (data) => {
 
   if(partner){
-    let { dealstage, prefix } = partner;
-    data = {...data, dealstage, prefix };
+    let partnerFields = Object.fromEntries(Object.entries(partner).filter(([key]) => key !== 'image' && key !== 'text'));
+    data = {...data, ...partnerFields };
+  }
+  else{
+    data.channel = 'Online';
   }
   
 	dispatch ( updateToast(toast, "register") );

@@ -4,7 +4,7 @@ import AlliesForm from '../../forms/AlliesForm';
 import { Carousel, ProgressBar, Alert, Button } from 'react-bootstrap';
 import AlianzaBanner from '../../assets/img/alianzas/form/alianzas_banner.jpg';
 import Loader from "../Loader/Loader";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { updateLoader } from "../../redux/actions/loaderActions";
 import axios from '../../utils/axios';
 import registerImage from '../../assets/img/registroexitoso-01.png';
@@ -67,7 +67,6 @@ const Allies = () => {
 	}
 
     const [uploadPercentage, setUploadPercentage] = useState(0);
-    const {isLoading} = useSelector(state => state.loader);
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState({
         show: false,
@@ -81,6 +80,7 @@ const Allies = () => {
     const handleSubmit = async(values) => {
         try{
             dispatch(updateLoader(true));
+            
             let formData = new FormData();
             Object.keys(values).map((f) => {
                 if(f !== 'logo' && f !== 'leadEmail' && f !== 'typeCredit' && f !== 'taxRegime' && f !== 'useOfCredit'){
@@ -94,7 +94,7 @@ const Allies = () => {
                         formData.append(f, lf);
                     })
                 }
-            })
+            });
             let {data} = await axios.post('allie', formData, {
                 headers:{
                     'Content-Type': 'multipart/form-data'
@@ -111,11 +111,30 @@ const Allies = () => {
                 setSuccess(true);
             }
             else{
-                setError(data.msg);
+                setUploadPercentage(0);
+                setError({
+                    show: true,
+                    msg: data.msg
+                });
+                setTimeout(() => {
+                    setError({
+                        show: false,
+                        msg: ''
+                    });
+                }, 5000);
             }
         }
         catch(error){
-            setError('Algo salió mal tratando de dar de alta la alianza');
+            setError({
+                show: true,
+                msg: 'Algo salió mal tratando de dar de alta la alianza'
+            });
+            setTimeout(() => {
+                setError({
+                    show: false,
+                    msg: ''
+                });
+            }, 5000);
         }
     }
 
@@ -133,7 +152,7 @@ const Allies = () => {
 
                     <Title title="Alta de Alianza" className="subtitle-dp fz42 fw500 mb-1 text-center"/> 
 
-                    <AlliesForm initialValues={initialValues} handleSubmit={handleSubmit} isLoading={isLoading}/>
+                    <AlliesForm initialValues={initialValues} handleSubmit={handleSubmit}/>
                 </>
             }
 
@@ -161,10 +180,11 @@ const Allies = () => {
 
             {
                 error.show &&
-                <Alert variant="danger" className="pl-5 pr-5 pb-5">
-                    <strong>{error.msg}</strong>
-                </Alert>
-
+                <div className="pl-5 pr-5 pb-5">
+                    <Alert variant="danger">
+                        <strong>{error.msg}</strong>
+                    </Alert>
+                </div>
             }
         </>
     );

@@ -467,7 +467,7 @@ const AlliesForm = (props) => {
             }
 
 			<div className="text-center">
-				<Button type="submit" className="btn-blue-documents mt-30" disabled={props.submitting || props.isLoading} onClick={() => goToError()} style={{ width: '300px' }}>Dar de Alta Alianza</Button>
+				<Button type="submit" className="btn-blue-documents mt-30" onClick={() => goToError()} style={{ width: '300px' }}>Dar de Alta Alianza</Button>
 			</div>
 		</Form>
 	);
@@ -482,6 +482,6 @@ export default withFormik({
         formikBag.setSubmitting(false);
         formikBag.props.handleSubmit(values);
     },
-    enableReinitialize: true,
+    // enableReinitialize: true,
     displayName: 'AlliesForm'
 })(AlliesForm);

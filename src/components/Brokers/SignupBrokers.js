@@ -49,6 +49,7 @@ const SignupBrokers = props => {
   const dispatch = useDispatch();
 
   let onFormSubmit = async (data) => {
+    data.channel = 'Brokers';
     dispatch ( updateToast(toast, "register") );
     dispatch( updateLoader(true) );
     let ipV4 = await publicIp.v4();
