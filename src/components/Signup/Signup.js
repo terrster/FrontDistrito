@@ -23,6 +23,7 @@ import { Carousel } from 'react-bootstrap';
 import impulsoDPWEB from '../../assets/img/financialPartners/impulsoDP-WEB.jpg';
 import impulsoDPMovil from '../../assets/img/financialPartners/impulsoDP-Movil.jpg';
 import visoorWEB from '../../assets/img/financialPartners/Visoor-WEB.jpg';
+import visoorMovil from '../../assets/img/financialPartners/Visoor-Movil.jpg';
 
 const getVersionImage = () => {
 	const currentSize = document.getElementsByTagName('body')[0].clientWidth;
@@ -44,7 +45,7 @@ const financialPartner = (partner) => {
       };
     case 'VISOOR':
       return {
-        image: [visoorWEB, visoorWEB],
+        image: [visoorWEB, visoorMovil],
         text: [
           'Solicita un crédito para tu empresa o negocio a través de nuestro aliado Distrito Pyme.',
           'Podrás recibir las mejores opciones de crédito en menos de 15 min con un proceso fácil, rápido y sin papeleos.'
