@@ -20,13 +20,22 @@ const AlliesValidations = values => {
     errors.leadEmail = "Debe ingresar al menos un correo a donde llegarán los leads";
   }
   else if(values.leadEmail.primary.length > 0 && !isValidEmail.test(values.leadEmail.primary)){
-    errors.leadEmail = "El correo de la primera casilla no es válido";
+      errors.leadEmail = "El correo de la primera casilla no es válido";
+  }
+  else if(values.leadEmail.primary.length > 0 && isValidEmail.test(values.leadEmail.primary) && (values.leadEmail.primary === values.leadEmail.secondary || values.leadEmail.primary === values.leadEmail.tertiary)){
+    errors.leadEmail = "Ningún correo puede repetirse";
   }
   else if(values.leadEmail.secondary.length > 0 && !isValidEmail.test(values.leadEmail.secondary)){
     errors.leadEmail = "El correo de la segunda casilla no es válido";
   }
+  else if(values.leadEmail.secondary.length > 0 && isValidEmail.test(values.leadEmail.secondary) && (values.leadEmail.secondary === values.leadEmail.primary || values.leadEmail.secondary === values.leadEmail.tertiary)){
+    errors.leadEmail = "Ningún correo puede repetirse";
+  }
   else if(values.leadEmail.tertiary.length > 0 && !isValidEmail.test(values.leadEmail.tertiary)){
     errors.leadEmail = "El correo de la tercera casilla no es válido";
+  }
+  else if(values.leadEmail.tertiary.length > 0 && isValidEmail.test(values.leadEmail.tertiary) && (values.leadEmail.tertiary === values.leadEmail.primary || values.leadEmail.tertiary === values.leadEmail.secondary)){
+    errors.leadEmail = "Ningún correo puede repetirse";
   }
 
   let someTypeCreditSelected = false;
