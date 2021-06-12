@@ -13,15 +13,15 @@ const Cards = () => {
   document.addEventListener("scroll", (e) => {
     let scrolled = document.scrollingElement.scrollTop;
     if (counterRef.current) {
-      if (scrolled > counterRef.current.scrollTop + 100) {
-        setTimeout(contador, 3000);
+      if (scrolled > counterRef.current.offsetTop - 350) {
+        setTimeout(contador, 1000);
       }
     }
   });
 
   const contador = () => {
     const counters = document.querySelectorAll('.counter');
-    const speed = 100;
+    const speed = 500;
     counters.forEach(counter => {
       const updateCount = () => {
         const target = +counter.getAttribute('data-target');
@@ -29,7 +29,12 @@ const Cards = () => {
         const inc = target / speed;
 
         if (count < target) {
-          counter.innerText = count + parseInt(inc);
+          if (target > 100) {
+            counter.innerText = count + inc;
+          }
+          else {
+            counter.innerText = count + 5;
+          }
           setTimeout(updateCount, 1);
         }
         else {
