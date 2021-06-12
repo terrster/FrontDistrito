@@ -30,4 +30,13 @@
   -webkit-transform: translateY(-10px);
   -ms-transform: translateY(-10px);
   transform: translateY(-10px);
+  box-shadow: #bbc7c7 10px 10px 10px;
 }
+
+.titulos{  
+  font-size: 72px;  
+  background: -webkit-linear-gradient(left top, #3acfd5, #3a4ed5);
+  background: linear-gradient(to bottom right, #3acfd5, #3a4ed5);
+  -webkit-background-clip: text;  
+  -webkit-text-fill-color: transparent;  
+}  

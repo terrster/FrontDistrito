@@ -5,6 +5,7 @@ import Icons from '../../Landing/Icons/Icons';
 import '../../../css/brokers-landing.css';
 
 import REQUISITOS_BÁSICOS_01 from '../../../assets/img/REQUISITOS BÁSICOS-01.png';
+import LOGO_CLIP from '../../../assets/img/brokers-landing/logo-clip.svg';
 
 
 const Cards = () => {
@@ -14,7 +15,7 @@ const Cards = () => {
     let scrolled = document.scrollingElement.scrollTop;
     if (counterRef.current) {
       if (scrolled > counterRef.current.offsetTop - 350) {
-        setTimeout(contador, 1000);
+        setTimeout(contador, 500);
       }
     }
   });
@@ -33,7 +34,7 @@ const Cards = () => {
             counter.innerText = count + inc;
           }
           else {
-            counter.innerText = count + 5;
+            counter.innerText = count + 1;
           }
           setTimeout(updateCount, 1);
         }
@@ -96,8 +97,9 @@ const Cards = () => {
                   <br />
                   Inversión única de <b>$2,500 MXN +IVA</b> y la podrás pagar
                   a 3 o 6 MSI a través de nuestra alianza con
-                  CLIP
               </Card.Text>
+                <Icons img={LOGO_CLIP} alt="clip" width="80px" />
+
             </Card.Body>
           </Card>
         </Col>
@@ -134,21 +136,46 @@ const Cards = () => {
       </Row>
     </div>
 
-
+      {/* <div>
+        + <span className="counter" data-target="500">0</span> M
+      </div> */}
 
 
       <div id="counterContainer" ref={counterRef}>
         <Title title="Sé parte de nuestra comunidad" className="subtitle-dp fz42 fw300 ls-01 pt-5" />
+          <Row className="mt-5">
+            <Col>
+            <label className="metropolisReg fz32 blackBlue">Monto colocado</label>
+              <div className="titulos">
+                 +<span className="counter" data-target="500">0</span>M
+              </div>
+            </Col>
 
-        <div className="counter" data-target="500" style={{ fontSize: '25px', fontWeight: 'bold', textAlign: 'center' }}>0</div>
+            <Col>
+            <label className="metropolisReg fz32 blackBlue">Brokers activos</label>
+              <div className="titulos">
+                +<span className="counter" data-target="100">0</span>
+              </div>
+            </Col>
+          </Row>
 
-        <div className="counter" data-target="100" style={{ fontSize: '25px', fontWeight: 'bold', textAlign: 'center' }}>0</div>
+          <Row className="mt-5">
+            <Col>
+            <label className="metropolisReg fz32 blackBlue">Solicitudes</label>
+              <div className="titulos">
+                 <span className="counter" data-target="15000">0</span>
+              </div>
+            </Col>
 
-        <div className="counter" data-target="15000" style={{ fontSize: '25px', fontWeight: 'bold', textAlign: 'center' }}>0</div>
+            <Col>
+            <label className="metropolisReg fz32 blackBlue"> Aliados financieros</label>
+              <div className="titulos">
+               <span className="counter" data-target="21">0</span>
+              </div>
+            </Col>
+          </Row>
 
-        <div className="counter" data-target="21" style={{ fontSize: '25px', fontWeight: 'bold', textAlign: 'center' }}>0</div>
-
-        <Title title="8 DE CADA 10 SOLICITUDES RECIBE UNA OPCIÓN DE CRÉDITO" className="title-dp fw500 mb-1 fz32" />
+        <Title title="8 DE CADA 10 SOLICITUDES RECIBE UNA OPCIÓN DE CRÉDITO" className="title-dp fw500 mt-5 fz32" />
       </div>
 
     </div>

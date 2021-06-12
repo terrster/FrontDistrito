@@ -1,36 +1,14 @@
 import React from 'react';
 import Title from '../../Generic/Title';
-//import { Container,Carousel} from 'react-bootstrap';
+import { Container,Carousel} from 'react-bootstrap';
 
-//import { imgFinancial } from '../../utils/Financials';
+import { imgFinancial } from '../../../utils/Financials';
 
 
 
 const Comunity = () => {
 
-  // const allies = imgFinancial('ALL');
-
-  // const [options] = useState([
-  //   {
-  //     loop: true,
-  //     nav: false,
-  //     autoplay: true,
-  //     autoplayTimeout: 2000,
-  //     startPosition: 'URLHash',
-  //     responsive: {
-  //       0: {
-  //         items: 2,
-  //       },
-  //       600: {
-  //         items: 3,
-  //       },
-  //       1000: {
-  //         items: 4,
-  //       },
-  //     }
-  //   }
-  // ]);
-
+  const allies = imgFinancial('ALL');
 
   return(
     <div className="container pt-5">
@@ -38,19 +16,19 @@ const Comunity = () => {
         <Title title="Nuestros Aliados" className="title-dp fw500 mb-1 fz42"/>
       </div>
 
-      {/* <Container>
+      <Container>
 
-        <Carousel  {...options[0]} >
+        <Carousel>
           {
             allies.map((name, key) => {
-              return <div className="item" key={key}>
-                <img  allies={name} alt={`cliente${key}`} />
-              </div>
+              return <Carousel.Item key={key}>
+                <img src={name} alt={`allies${key}`} className="imgAlianza" />
+              </Carousel.Item>
             })
           }
         </Carousel>
 
-      </Container> */}
+      </Container>
   </div>
   );
 }
