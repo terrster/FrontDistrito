@@ -22,8 +22,6 @@
   background-image: -moz-linear-gradient(top, #3acfd5 0%, #3a4ed5 100%), -moz-linear-gradient(top, #3acfd5 0%, #3a4ed5 100%);
   background-image: -o-linear-gradient(top, #3acfd5 0%, #3a4ed5 100%), -o-linear-gradient(top, #3acfd5 0%, #3a4ed5 100%);
   background-image: linear-gradient(to bottom, #3acfd5 0%, #3a4ed5 100%), linear-gradient(to bottom, #3acfd5 0%, #3a4ed5 100%);
-  
- 
 
 }
 
@@ -63,7 +61,7 @@
 }
 
 .quote-card {
-  background: #fff;
+  background: transparent;
   color: #222222;
   padding: 20px;
   padding-left: 70px;
@@ -81,6 +79,7 @@
   margin: 0;
   max-width: 80%;
   font-weight: 900;
+  z-index: 1;
 }
 .quote-card cite {
   font-size: 16px;
@@ -105,8 +104,9 @@
   position: absolute;
   bottom: -110px;
   line-height: 100px;
-  right: -32px;
+  right: -17px;
   font-size: 25em;
   color: rgba(238, 238, 238, 0.8);
   font-weight: normal;
+  z-index: -1;
 }

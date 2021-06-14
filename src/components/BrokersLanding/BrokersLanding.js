@@ -25,7 +25,7 @@ const BrokersLanding = () =>{
       
       <div className="text-center mt-30 mb-30">
         <Button className="btn-blue-general ml-auto mr-auto" style={{ width: '250px' }} onClick={() => { history.push("/brokers")}}>
-          Registratete aqui
+          Registrate aquí
         </Button>
       </div>
     </>
