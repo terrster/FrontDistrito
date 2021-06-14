@@ -1,6 +1,6 @@
 import React from 'react';
 import Title from '../../Generic/Title';
-import { Container} from 'react-bootstrap';
+import { Container, Card} from 'react-bootstrap';
 import OwlCarousel from 'react-owl-carousel';
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
@@ -10,7 +10,7 @@ import '../../../css/brokers-landing.css'
 import  {imgFinancial}  from '../../../utils/Financials';
 
 
-const Comunity = () => {
+const Allies = () => {
 
   const allies = imgFinancial('ALL');
 
@@ -22,22 +22,29 @@ const Comunity = () => {
 
       <Container>
         <OwlCarousel
-          className="alliesc owl-theme"
-          center={false}
+          className="alliesc"
           items={7}
-          center={true}
-          responsive = {
-            678 = {
-              mergeFit:true
+          responsive={
+            {
+              576: {
+                items: 3
+              },
+              768: {
+                items: 5
+              },
+              992: {
+                items: 7
+              }
             }
           }
+          docs={false}
           margin={20}
           loop={true}
           autoplay={true}
           autoplayHoverPause={true}>
           {
             allies.map((name, key) => {
-              return <div className="item" key={key}>
+              return <div className="item imgAlianza" key={key}>
                 <img src={name} alt={`allies${key}`} />
               </div>
             })
@@ -49,4 +56,4 @@ const Comunity = () => {
   );
 }
 
-export default Comunity;
+export default Allies;
