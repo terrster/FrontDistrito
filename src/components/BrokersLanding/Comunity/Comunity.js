@@ -23,7 +23,7 @@ const Allies = () => {
       <Container>
         <OwlCarousel
           className="alliesc"
-          items={7}
+          items={3}
           responsive={
             {
               576: {
