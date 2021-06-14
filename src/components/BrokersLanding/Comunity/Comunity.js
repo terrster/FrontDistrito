@@ -1,9 +1,13 @@
 import React from 'react';
 import Title from '../../Generic/Title';
-import { Container,Carousel} from 'react-bootstrap';
+import { Container} from 'react-bootstrap';
+import OwlCarousel from 'react-owl-carousel';
+import 'owl.carousel/dist/assets/owl.carousel.css';
+import 'owl.carousel/dist/assets/owl.theme.default.css';
 
-import { imgFinancial } from '../../../utils/Financials';
+import '../../../css/brokers-landing.css'
 
+import  {imgFinancial}  from '../../../utils/Financials';
 
 
 const Comunity = () => {
@@ -17,16 +21,28 @@ const Comunity = () => {
       </div>
 
       <Container>
-
-        <Carousel>
+        <OwlCarousel
+          className="alliesc owl-theme"
+          center={false}
+          items={7}
+          center={true}
+          responsive = {
+            678 = {
+              mergeFit:true
+            }
+          }
+          margin={20}
+          loop={true}
+          autoplay={true}
+          autoplayHoverPause={true}>
           {
             allies.map((name, key) => {
-              return <Carousel.Item key={key}>
-                <img src={name} alt={`allies${key}`} className="imgAlianza" />
-              </Carousel.Item>
+              return <div className="item" key={key}>
+                <img src={name} alt={`allies${key}`} />
+              </div>
             })
           }
-        </Carousel>
+        </OwlCarousel>
 
       </Container>
   </div>

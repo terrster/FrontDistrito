@@ -14,7 +14,7 @@ const Cards = () => {
   document.addEventListener("scroll", (e) => {
     let scrolled = document.scrollingElement.scrollTop;
     if (counterRef.current) {
-      if (scrolled > counterRef.current.offsetTop - 350) {
+      if (scrolled > counterRef.current.offsetTop - 100) {
         setTimeout(contador, 500);
       }
     }
@@ -39,7 +39,7 @@ const Cards = () => {
           setTimeout(updateCount, 1);
         }
         else {
-          counter.innerText = target;
+          counter.innerText = new Intl.NumberFormat().format(target).toString().replace('.', ',');
         }
       };
       updateCount();
@@ -144,30 +144,28 @@ const Cards = () => {
       <div id="counterContainer" ref={counterRef}>
         <Title title="Sé parte de nuestra comunidad" className="subtitle-dp fz42 fw300 ls-01 pt-5" />
           <Row className="mt-5">
-            <Col>
+            <Col md={6} className="mb-4">
             <label className="metropolisReg fz32 blackBlue">Monto colocado</label>
               <div className="titulos">
                  +<span className="counter" data-target="500">0</span>M
               </div>
             </Col>
 
-            <Col>
+            <Col md={6} className="mb-4">
             <label className="metropolisReg fz32 blackBlue">Brokers activos</label>
               <div className="titulos">
                 +<span className="counter" data-target="100">0</span>
               </div>
             </Col>
-          </Row>
-
-          <Row className="mt-5">
-            <Col>
+    
+            <Col md={6} className="mb-4">
             <label className="metropolisReg fz32 blackBlue">Solicitudes</label>
               <div className="titulos">
                  <span className="counter" data-target="15000">0</span>
               </div>
             </Col>
 
-            <Col>
+            <Col md={6} className="mb-4">
             <label className="metropolisReg fz32 blackBlue"> Aliados financieros</label>
               <div className="titulos">
                <span className="counter" data-target="21">0</span>
