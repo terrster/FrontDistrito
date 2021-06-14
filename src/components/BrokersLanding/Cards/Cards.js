@@ -16,7 +16,7 @@ const Cards = () => {
     <div className="justify-content-center container pt-4">
       <Row className="justify-content-center container-xl">
           <Col xl={4} md={5} sm={7} className="mb-4">
-          <Card style={{ height: '30rem' }} className="tarjet-info">
+          <Card style={{ height: '33rem' }} className="tarjet-info">
             <Icons img={REQUISITOS_BÁSICOS_01} alt="Simulador" width="100px" />
             <Card.Body>
               <Card.Title>Registrate</Card.Title>
@@ -31,7 +31,7 @@ const Cards = () => {
         </Col>
 
           <Col xl={4} md={5} sm={7} className="mb-4">
-          <Card style={{ height: '30rem' }} className="tarjet-info">
+          <Card style={{ height: '33rem' }} className="tarjet-info">
             <Icons img={REQUISITOS_BÁSICOS_01} alt="Simulador" width="100px" />
             <Card.Body>
               <Card.Title>Firma tu contrato</Card.Title>
@@ -50,7 +50,7 @@ const Cards = () => {
         </Col>
 
           <Col xl={4} md={5} sm={7} className="mb-4">
-          <Card  style={{ height: '30rem'}} className="tarjet-info">
+          <Card  style={{ height: '33rem'}} className="tarjet-info">
             <Icons img={REQUISITOS_BÁSICOS_01} alt="Simulador" width="100px" />
             <Card.Body>
               <Card.Title>Adquiere tu membresia</Card.Title>
@@ -63,13 +63,12 @@ const Cards = () => {
                   a 3 o 6 MSI a través de nuestra alianza con
               </Card.Text>
                 <Icons img={LOGO_CLIP} alt="clip" width="80px" />
-
             </Card.Body>
           </Card>
         </Col>
 
         <Col xl={4} md={5} sm={7} className="mb-4">
-          <Card style={{ height: '30rem' }} className="tarjet-info">
+          <Card style={{ height: '33rem' }} className="tarjet-info">
             <Icons img={REQUISITOS_BÁSICOS_01} alt="Simulador" width="100px" />
             <Card.Body>
               <Card.Title>Recibe tus herramientas</Card.Title>
@@ -84,7 +83,7 @@ const Cards = () => {
         </Col>
 
           <Col xl={4} md={5} sm={7} className="mb-4">
-          <Card style={{ height: '30rem' }} className="tarjet-info">
+          <Card style={{ height: '33rem' }} className="tarjet-info">
             <Icons img={REQUISITOS_BÁSICOS_01} alt="Simulador" width="100px" />
             <Card.Body>
               <Card.Title>Comienza a ganar dinero</Card.Title>
