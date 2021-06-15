@@ -34,8 +34,8 @@
 
 .titulos{  
   font-size: 72px;  
-  background: -webkit-linear-gradient(left top, #3acfd5, #3a4ed5);
-  background: linear-gradient(to bottom right, #3acfd5, #3a4ed5);
+  background: -webkit-linear-gradient(to right, #0095FF 45%, #6DFFFF 65%);
+  background: linear-gradient(to right, #0095FF 45%, #6DFFFF 65%);
   -webkit-background-clip: text;  
   -webkit-text-fill-color: transparent;  
 }  

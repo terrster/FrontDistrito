@@ -48,34 +48,34 @@ const Comunity = () =>{
         <Row className="mt-5">
           <Col md={6} className="mb-4">
             <label className="metropolisReg fz32 blackBlue">Monto colocado</label>
-            <div className="titulos">
+            <div className="titulos coolvetica">
               +<span className="counter" data-target="500">0</span>M
             </div>
           </Col>
 
           <Col md={6} className="mb-4">
             <label className="metropolisReg fz32 blackBlue">Brokers activos</label>
-            <div className="titulos">
+            <div className="titulos coolvetica">
               +<span className="counter" data-target="100">0</span>
             </div>
           </Col>
 
           <Col md={6} className="mb-4">
             <label className="metropolisReg fz32 blackBlue">Solicitudes</label>
-            <div className="titulos">
+            <div className="titulos coolvetica">
               <span className="counter" data-target="15000">0</span>
             </div>
           </Col>
 
           <Col md={6} className="mb-4">
             <label className="metropolisReg fz32 blackBlue"> Aliados financieros</label>
-            <div className="titulos">
+            <div className="titulos coolvetica">
               <span className="counter" data-target="21">0</span>
             </div>
           </Col>
         </Row>
 
-        <Title title="8 DE CADA 10 SOLICITUDES RECIBE UNA OPCIÓN DE CRÉDITO" className="title-dp fw500 mt-5 fz32" />
+        <Title title="8 de cada 10 solicitudes recibe una opción de crédito" className="title-dp fw500 mt-5 fz32" />
       </div>
     </div>
   );

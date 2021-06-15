@@ -33,7 +33,7 @@ const Allies = () => {
                 items: 5
               },
               992: {
-                items: 7
+                items: 6
               }
             }
           }
@@ -41,7 +41,9 @@ const Allies = () => {
           margin={20}
           loop={true}
           autoplay={true}
-          autoplayHoverPause={true}>
+          autoplayTimeout={2000}
+          autoplayHoverPause={true}
+           >
           {
             allies.map((name, key) => {
               return <div className="item imgAlianza" key={key}>

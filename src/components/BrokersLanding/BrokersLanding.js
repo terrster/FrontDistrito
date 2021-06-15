@@ -20,7 +20,7 @@ const BrokersLanding = () =>{
         <Cards />
         <Allies />
         <Comunity />
-        <Testimonio />
+        {/* <Testimonio /> */}
       </div>
       
       <div className="text-center mt-30 mb-30">
