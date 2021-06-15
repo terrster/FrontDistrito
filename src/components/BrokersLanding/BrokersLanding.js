@@ -3,9 +3,9 @@ import {Button} from 'react-bootstrap';
 import BannerBrokers from './Banner/Banner';
 import Info from './Info/Info';
 import Cards from './Cards/Cards';
-import Allies from './Aliados/Allies';
-import Comunity from './Comunity/Comunity';
-import Testimonio from './Testimonios/Testimonio';
+import  Comunity from './Comunity/Comunity';
+import  Allies from './Aliados/Allies';
+//import Testimonio from './Testimonios/Testimonio';
 import { useHistory } from 'react-router-dom';
 
 const BrokersLanding = () =>{
@@ -18,14 +18,14 @@ const BrokersLanding = () =>{
       <div className="container-fluid">
         <Info />
         <Cards />
-        <Comunity />
         <Allies />
-        <Testimonio />
+        <Comunity />
+        {/* <Testimonio /> */}
       </div>
       
       <div className="text-center mt-30 mb-30">
         <Button className="btn-blue-general ml-auto mr-auto" style={{ width: '250px' }} onClick={() => { history.push("/brokers")}}>
-          Registratete aqui
+          Registrate aquí
         </Button>
       </div>
     </>

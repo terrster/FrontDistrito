@@ -1,84 +1,59 @@
-import React, { createRef } from 'react';
+import React from 'react';
 import Title from '../../Generic/Title';
-import { Row, Col } from 'react-bootstrap';
-import '../../../css/brokers-landing.css';
+import { Container, Card} from 'react-bootstrap';
+import OwlCarousel from 'react-owl-carousel';
+import 'owl.carousel/dist/assets/owl.carousel.css';
+import 'owl.carousel/dist/assets/owl.theme.default.css';
 
-const Comunity = () =>{
+import '../../../css/brokers-landing.css'
 
-  const counterRef = createRef();
-  document.addEventListener("scroll", (e) => {
-    let scrolled = document.scrollingElement.scrollTop;
-    if (counterRef.current) {
-      if (scrolled > counterRef.current.offsetTop - 100) {
-        setTimeout(contador, 500);
-      }
-    }
-  });
+import  {imgFinancial}  from '../../../utils/Financials';
 
-  const contador = () => {
-    const counters = document.querySelectorAll('.counter');
-    const speed = 500;
-    counters.forEach(counter => {
-      const updateCount = () => {
-        const target = +counter.getAttribute('data-target');
-        const count = +counter.innerText;
-        const inc = target / speed;
 
-        if (count < target) {
-          if (target > 100) {
-            counter.innerText = count + inc;
-          }
-          else {
-            counter.innerText = count + 1;
-          }
-          setTimeout(updateCount, 1);
-        }
-        else {
-          counter.innerText = new Intl.NumberFormat().format(target).toString().replace('.', ',');
-        }
-      };
-      updateCount();
-    });
-  }
+const Allies = () => {
 
-  return (
-    <div className="pt-3 text-center">
-      <div id="counterContainer" ref={counterRef}>
-        <Title title="Sé parte de nuestra comunidad" className="subtitle-dp fz42 fw300 ls-01 pt-5" />
-        <Row className="mt-5">
-          <Col md={6} className="mb-4">
-            <label className="metropolisReg fz32 blackBlue">Monto colocado</label>
-            <div className="titulos">
-              +<span className="counter" data-target="500">0</span>M
-            </div>
-          </Col>
+  const allies = imgFinancial('ALL');
 
-          <Col md={6} className="mb-4">
-            <label className="metropolisReg fz32 blackBlue">Brokers activos</label>
-            <div className="titulos">
-              +<span className="counter" data-target="100">0</span>
-            </div>
-          </Col>
-
-          <Col md={6} className="mb-4">
-            <label className="metropolisReg fz32 blackBlue">Solicitudes</label>
-            <div className="titulos">
-              <span className="counter" data-target="15000">0</span>
-            </div>
-          </Col>
-
-          <Col md={6} className="mb-4">
-            <label className="metropolisReg fz32 blackBlue"> Aliados financieros</label>
-            <div className="titulos">
-              <span className="counter" data-target="21">0</span>
-            </div>
-          </Col>
-        </Row>
-
-        <Title title="8 DE CADA 10 SOLICITUDES RECIBE UNA OPCIÓN DE CRÉDITO" className="title-dp fw500 mt-5 fz32" />
+  return(
+    <div className="container pt-5">
+      <div className="text-center">
+        <Title title="Nuestros Aliados" className="title-dp fw500 mb-1 fz42"/>
       </div>
-    </div>
+
+      <Container>
+        <OwlCarousel
+          className="alliesc"
+          items={3}
+          responsive={
+            {
+              576: {
+                items: 3
+              },
+              768: {
+                items: 5
+              },
+              992: {
+                items: 7
+              }
+            }
+          }
+          docs={false}
+          margin={20}
+          loop={true}
+          autoplay={true}
+          autoplayHoverPause={true}>
+          {
+            allies.map((name, key) => {
+              return <div className="item imgAlianza" key={key}>
+                <img src={name} alt={`allies${key}`} />
+              </div>
+            })
+          }
+        </OwlCarousel>
+
+      </Container>
+  </div>
   );
 }
 
-export default Comunity;
+export default Allies;

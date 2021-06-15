@@ -13,8 +13,8 @@ const Cards = () => {
   return(
     <div className="pt-5 text-center">
       <Title title="¿Cómo convertirme en Broker Digital?" className="title-dp fw500 mb-1 fz42"/>
-    <div className="justify-content-center container pt-4">
-      <Row className="justify-content-center container-xl">
+    <div className="justify-content-center container conteiner-xl pt-4">
+      <Row className="justify-content-center">
           <Col xl={4} md={5} sm={7} className="mb-4">
           <Card style={{ height: '30rem' }} className="tarjet-info">
             <Icons img={REQUISITOS_BÁSICOS_01} alt="Simulador" width="100px" />
@@ -62,8 +62,7 @@ const Cards = () => {
                   Inversión única de <b>$2,500 MXN +IVA</b> y la podrás pagar
                   a 3 o 6 MSI a través de nuestra alianza con
               </Card.Text>
-                <Icons img={LOGO_CLIP} alt="clip" width="80px" />
-
+                <Icons img={LOGO_CLIP} alt="clip" width="65px" />
             </Card.Body>
           </Card>
         </Col>
