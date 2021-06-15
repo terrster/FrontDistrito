@@ -21,7 +21,7 @@ const Cards = () => {
             <Card.Body>
               <Card.Title>Registrate</Card.Title>
               <Card.Text >
-                <div className="metropolisReg fz12 blackBlue text-left">
+                <div className="metropolisReg fz12 blackBlue text-center">
                 Completa tu regitro y uno de nuestros asesores
                 se pondrá en contacto contigo para ofrecerte mayor información.
                 </div>
@@ -35,7 +35,7 @@ const Cards = () => {
             <Icons img={REQUISITOS_BÁSICOS_01} alt="Simulador" width="100px" />
             <Card.Body>
               <Card.Title>Firma tu contrato</Card.Title>
-              <Card.Text className="metropolisReg fz12 blackBlue text-left">
+              <Card.Text className="metropolisReg fz12 blackBlue text-center">
                 Nuestro proceso de firma es 100% Digital.
 
                 Necesitaras: <br />
@@ -54,7 +54,7 @@ const Cards = () => {
             <Icons img={REQUISITOS_BÁSICOS_01} alt="Simulador" width="100px" />
             <Card.Body>
               <Card.Title>Adquiere tu membresia</Card.Title>
-              <Card.Text className="metropolisReg fz12 blackBlue text-left">    
+              <Card.Text className="metropolisReg fz12 blackBlue text-center">    
                   Al adquirir tu membresia tendrás acceso total a la tecnología
                   de Distrito Pyme, herramientas, CRM, programa de incentivos,
                   convenciones y asignación automática de leads.
@@ -73,7 +73,7 @@ const Cards = () => {
             <Icons img={REQUISITOS_BÁSICOS_01} alt="Simulador" width="100px" />
             <Card.Body>
               <Card.Title>Recibe tus herramientas</Card.Title>
-              <Card.Text className="metropolisReg fz12 blackBlue text-left">
+              <Card.Text className="metropolisReg fz12 blackBlue text-center">
                 - ID exclusivo que te identifica como broker. <br />
                 - Acceso a CRM. <br />
                 - Plan de marketing y desarrollo de tu propia marca.<br />
@@ -88,7 +88,7 @@ const Cards = () => {
             <Icons img={REQUISITOS_BÁSICOS_01} alt="Simulador" width="100px" />
             <Card.Body>
               <Card.Title>Comienza a ganar dinero</Card.Title>
-              <Card.Text className="metropolisReg fz12 blackBlue text-left">
+              <Card.Text className="metropolisReg fz12 blackBlue text-center">
                 Ahora estas listo para ofrecer a tus clientes las mejores opciones
                 de crédito. <br />
 
