@@ -28,28 +28,24 @@ const Allies = () => {
             {
               576: {
                 items: 3,
-                slideBy: 3
               },
               768: {
                 items: 5,
-                slideBy: 5
               },
               992: {
-                items: 6,
-                slideBy: 6
+                items: 8,
               }
             }
           }
           docs={false}
           margin={20}
-          loop={true}
+          loop={false}
           autoplay={true}
-          autoplayTimeout={1000}
-          // smartSpeed={50}
-          // fluidSpeed={1}
-          autoplaySpeed={true}
+          autoplayTimeout={2000}
+          slideTransition={'linear'}
+          autoplaySpeed={3000}
           autoplayHoverPause={true}
-          slideBy={6}
+
            >
           {
             allies.map((name, key) => {
