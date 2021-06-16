@@ -18,10 +18,6 @@ const Banner = () => {
 
   window.addEventListener('resize', () => setVersionImage(getVersionImage()));
 
-  React.useEffect(() => {
-    console.log(versionImage);
-  }, [versionImage])
-
   return(
   <>
       {/* <Carousel className="mb-2" activeIndex={indexImage} onSelect={handleSelect}>
@@ -34,12 +30,9 @@ const Banner = () => {
         }
       </Carousel> */}
       <div className="brokers-header">
-        <img
-          className="w-100"
-          src={images[versionImage]} alt="WEB"
-        />
+        <img className="d-block w-100" src={images[versionImage]} alt="WEB"/>
         <Button className="brokers-header-button header-button fz24 bluePrimary">
-          Solicitar ahora
+          Conviertete en Broker
         </Button>
       </div>
       {/* <video style={{
