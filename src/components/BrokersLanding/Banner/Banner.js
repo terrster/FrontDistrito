@@ -8,7 +8,7 @@ const Banner = () => {
 
   return(
   <>
-      <div>
+      <div className="brokers-header">
         <img
           className="w-100"
           src={BANNER_WEB} alt="WEB"
