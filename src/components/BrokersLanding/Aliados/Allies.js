@@ -37,15 +37,13 @@ const Allies = () => {
               }
             }
           }
-          docs={false}
+          loop={true}
           margin={20}
-          loop={false}
           autoplay={true}
-          autoplayTimeout={2000}
-          slideTransition={'linear'}
-          autoplaySpeed={3000}
+          //slideTransition={'linear'}
+          autoplayTimeout={1000}
+          autoplaySpeed={1000}
           autoplayHoverPause={true}
-
            >
           {
             allies.map((name, key) => {
