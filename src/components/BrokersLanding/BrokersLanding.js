@@ -8,9 +8,13 @@ import  Allies from './Aliados/Allies';
 //import Testimonio from './Testimonios/Testimonio';
 import BannerFinal from './BannerFinal/BannerFinal'
 import '../../css/brokers-landing.css';
+import { useHistory } from 'react-router-dom';
+
 
 const BrokersLanding = () =>{
 
+const history = useHistory();
+ 
   return(
     <>
       <BannerBrokers />
@@ -22,6 +26,12 @@ const BrokersLanding = () =>{
         {/* <Testimonio /> */}
       </div>
       <BannerFinal />
+      <a
+        target="_blank"
+        rel="noreferrer"
+      >
+        <div className="nav-bar-icon header-button fz24 bluePrimary" onClick={() => { history.push("/brokers") }}>Conviértete en Broker</div>
+      </a>
       <style>{"\
           #clgo{\
               display: none !important;\

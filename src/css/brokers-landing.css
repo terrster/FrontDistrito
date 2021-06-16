@@ -178,6 +178,28 @@
   cursor: pointer;
 }
 
+.nav-bar-icon{
+	position: fixed; 
+	bottom: 1rem; 
+	right: -8rem;
+  font-family: 'coolvetica_rg';
+  width: 300px;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+	line-height: 3rem;
+	text-align: center;
+	cursor: pointer;
+	text-decoration: none;
+  z-index: 999;
+  }
+
+  .nav-bar-icon:hover{
+	  opacity: 0.8;
+  }
+  .nav-bar-icon > a {
+	color: white !important;
+  }
+
 
 
 
