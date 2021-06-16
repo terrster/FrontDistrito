@@ -2,7 +2,6 @@ import React from 'react';
 import Title from '../../Generic/Title';
 import { Card, Row, Col, Image} from 'react-bootstrap';
 import Icons from '../../Landing/Icons/Icons';
-import '../../../css/brokers-landing.css';
 
 import REGISTRATE from '../../../assets/img/brokers-landing/iconos/registrate.png';
 import FIRMA from '../../../assets/img/brokers-landing/iconos/firma.png';

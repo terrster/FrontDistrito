@@ -9,7 +9,7 @@ import  Allies from './Aliados/Allies';
 import { useHistory } from 'react-router-dom';
 
 import BANNER_WEB from '../../../src/assets/img/brokers-landing/BANNER_final.jpg';
-
+import '../../css/brokers-landing.css';
 
 const BrokersLanding = () =>{
 
