@@ -15,7 +15,7 @@ import LOGO_CLIP from '../../../assets/img/brokers-landing/logo-clip.svg';
 const Cards = () => {
 
   return(
-    <div className="pt-5 text-center">
+    <div id="cardsBrokers" className="pt-5 text-center">
       <Title title="¿Cómo convertirme en Broker Digital?" className="title-dp fw500 mb-1 fz42"/>
     <div className="justify-content-center container conteiner-xl pt-4">
       <Row className="justify-content-center">
@@ -92,7 +92,7 @@ const Cards = () => {
               <Card.Title>Comienza a ganar dinero</Card.Title>
               <Card.Text className="metropolisReg fz12 blackBlue text-center">
                 <p>Ahora estas listo para ofrecer a tus clientes las mejores opciones
-                de crédito. </p>
+                de crédito.</p>
 
                 <p className="font-weight-bold">¡Todo en menos de 15 min!</p>
               </Card.Text>

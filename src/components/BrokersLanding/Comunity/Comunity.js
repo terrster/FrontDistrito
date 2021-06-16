@@ -42,7 +42,7 @@ const Comunity = () =>{
   }
 
   return (
-    <div className="pt-3 pb-5 text-center">
+    <div id="comunityBrokers" className="pt-3 pb-5 text-center">
       <div id="counterContainer" ref={counterRef}>
         <Title title="Sé parte de nuestra comunidad"  className="title-dp fw500 mb-1 fz42 ls-01 pt-5"/>
         <Row className="mt-5">

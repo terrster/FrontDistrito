@@ -1,5 +1,4 @@
 import React from 'react';
-import {Button} from 'react-bootstrap';
 import BannerBrokers from './Banner/Banner';
 import Info from './Info/Info';
 import Cards from './Cards/Cards';
@@ -13,6 +12,22 @@ import { useHistory } from 'react-router-dom';
 
 const BrokersLanding = () =>{
 
+document.addEventListener("scroll", () => {
+  let floatButton = document.getElementById("float-button-dp");
+  let cardsBrokers = document.getElementById("cardsBrokers");
+  let comunityBrokers = document.getElementById("comunityBrokers");
+  let scrolled = document.scrollingElement.scrollTop;
+
+  if (floatButton && cardsBrokers) {
+    if (scrolled > cardsBrokers.offsetTop - 500 && scrolled < comunityBrokers.offsetTop + 100) {
+      floatButton.style.display = 'block';
+    }
+    else{
+      floatButton.style.display = 'none';
+    }
+  }
+});
+
 const history = useHistory();
  
   return(
@@ -20,18 +35,15 @@ const history = useHistory();
       <BannerBrokers />
       <div className="brokers-container container-fluid">
         <Info />
-        <Cards />
+        <Cards/>
         <Allies />
-        <Comunity />
+        <Comunity/>
         {/* <Testimonio /> */}
       </div>
       <BannerFinal />
-      <a
-        target="_blank"
-        rel="noreferrer"
-      >
-        <div className="nav-bar-icon header-button fz24 bluePrimary" onClick={() => { history.push("/brokers") }}>Conviértete en Broker</div>
-      </a>
+      
+      <div id="float-button-dp" className="float-button float-button-dp" onClick={() => { history.push("/brokers") }}>Conviértete en Broker</div>
+      
       <style>{"\
           #clgo{\
               display: none !important;\

@@ -99,6 +99,7 @@
   font-weight: 900;
   z-index: 1;
 }
+
 .quote-card cite {
   font-size: 16px;
   margin-top: 10px;
@@ -106,6 +107,7 @@
   font-weight: 200;
   opacity: 0.8;
 }
+
 .quote-card:before {
   font-family: Georgia, serif;
   content: "“";
@@ -116,6 +118,7 @@
   color: rgba(238, 238, 238, 0.8);
   font-weight: normal;
 }
+
 .quote-card:after {
   font-family: Georgia, serif;
   content: "”";
@@ -128,7 +131,6 @@
   font-weight: normal;
   z-index: -1;
 }
-
 
 .title-bd{
   text-align: center;
@@ -178,27 +180,45 @@
   cursor: pointer;
 }
 
-.nav-bar-icon{
+.float-button{
 	position: fixed; 
-	bottom: 1rem; 
-	right: -8rem;
-  font-family: 'coolvetica_rg';
-  width: 300px;
-  transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-	line-height: 3rem;
-	text-align: center;
-	cursor: pointer;
-	text-decoration: none;
+	bottom: 15px; 
+	right: 15px;
   z-index: 999;
-  }
+}
 
-  .nav-bar-icon:hover{
-	  opacity: 0.8;
+.float-button-dp{
+  text-align: center;
+  font-family: 'coolvetica_rg';
+  cursor: pointer;
+  border-radius: 28px;
+	box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.6);
+	border: solid 1px rgba(255, 255, 255, 0.1);
+	background-color: #ffffff;
+	color: var(--primary-color);
+  padding: 5px 20px;
+  transition: all ease 0.2s;
+  width: 120px;
+  font-size: 13px;
+}
+
+#float-button-dp{
+  display: none;
+}
+
+.float-button-dp:hover{
+  border-color: transparent;
+  background-color: var(--primary-color);
+  color: #ffffff;
+  cursor: pointer;
+}
+
+@media (min-width: 768px) {
+  .float-button-dp{
+    width: 190px;
+    font-size: 16px;
   }
-  .nav-bar-icon > a {
-	color: white !important;
-  }
+}
 
 
 
