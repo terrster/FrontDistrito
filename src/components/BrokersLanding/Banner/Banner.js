@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import {Button,Carousel} from 'react-bootstrap';
+import {Button} from 'react-bootstrap';
 
 import BANNER_WEB from '../../../assets/img/brokers-landing/BANNER_web.jpg';
 import BANNER_MOVIL from '../../../assets/img/brokers-landing/BANNER_movil.jpg';
