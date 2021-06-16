@@ -22,7 +22,7 @@ const Allies = () => {
       </div>
 
       <Container>
-        <Marquee velocity={18}>
+        <Marquee velocity={12}>
           {
             allies.map((name, key) => {
               return <div  key={key}>
