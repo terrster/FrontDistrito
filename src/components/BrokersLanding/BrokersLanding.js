@@ -33,6 +33,15 @@ const BrokersLanding = () =>{
           Registrate aquí
         </Button>
       </div> */}
+
+      <style>{"\
+          #clgo{\
+              display: none !important;\
+          }\
+          #clgo-wsp{\
+              display: none !important;\
+          }\
+      "}</style>
     </>
   );
 }
