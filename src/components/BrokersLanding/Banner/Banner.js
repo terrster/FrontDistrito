@@ -1,5 +1,7 @@
 import React,{useState} from 'react';
 import {Button} from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
+
 
 import BANNER_WEB from '../../../assets/img/brokers-landing/BANNER_web.jpg';
 import BANNER_MOVIL from '../../../assets/img/brokers-landing/BANNER_movil.jpg';
@@ -13,6 +15,8 @@ const getVersionImage = () => {
 
 
 const Banner = () => {
+
+  const history = useHistory();
 
   const [versionImage, setVersionImage] = useState(getVersionImage());
 
@@ -31,7 +35,7 @@ const Banner = () => {
       </Carousel> */}
       <div className="brokers-header">
         <img className="d-block w-100" src={images[versionImage]} alt="WEB"/>
-        <Button className="brokers-header-button header-button fz24 bluePrimary">
+        <Button className="brokers-header-button header-button fz24 bluePrimary" onClick={() => { history.push("/brokers") }}>
           Conviertete en Broker
         </Button>
       </div>

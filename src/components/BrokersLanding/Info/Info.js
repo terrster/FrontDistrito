@@ -2,7 +2,8 @@ import React from 'react';
 import {Col,Row}  from 'react-bootstrap';
 import Title from '../../Generic/Title';
 
-import GENERALIDADES_IMG from '../../../assets/img/brokers-landing/generalidades.png';
+import '../../../css/brokers-landing.css';
+
 
 
 const Info = () => {
@@ -10,7 +11,7 @@ const Info = () => {
    <div className="container pt-5">
     <Row>
       <Col xl={7} lg={7} md={7}>
-         <Title title="Brokers Digitales Distrito Pyme" className="title-dp fw500 fz42" />
+         <Title title="Brokers Digitales Distrito Pyme" className="title-dp fw500 fz42 title-bd" />
         <div className="metropolisReg fz21 blackBlue text-justify">
 					Nuestro programa de Brokers Digitales, te permite adquirir una
           membresía exclusiva de nuestra plataforma y las
@@ -25,13 +26,13 @@ const Info = () => {
 				</div>
       </Col>
 
-      <Col xl={5} lg={5} md={5} className="mt-2">
-          <video style={{
+      <Col xl={5} lg={5} md={5} className="mt-2 video">
+         <video loop style={{
                 objectFit: 'fill',
                 width: '100%',
                 height: '350px',
                 border: '0',
-                padding: '0'
+                padding: '0',
             }} 
           controls={false} muted={true} autoPlay={true} preload={"true"} 
            src="https://distrito-pyme-media.s3.us-west-2.amazonaws.com/Brokers+Digitales+Distrito+Pyme.mp4"/>

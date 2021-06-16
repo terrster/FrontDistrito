@@ -75,7 +75,7 @@ const Comunity = () =>{
           </Col>
         </Row>
 
-        <Title title="8 de cada 10 solicitudes recibe una opción de crédito" className="title-dp fw500 mt-5 fz32" />
+        <Title title="8 De Cada 10 Solicitudes Recibe Una Opción De Crédito" className="title-dp fw500 mt-5 fz32" />
       </div>
     </div>
   );
