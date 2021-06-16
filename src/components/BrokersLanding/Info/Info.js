@@ -10,8 +10,7 @@ const Info = () => {
    <div className="container pt-5">
     <Row>
       <Col xl={7} lg={7} md={7}>
-         <Title title="Brokers Digitales Distrito Pyme" className="subtitle-dp fw300 fz20" />
-        <Title title="Generalidades del programa" className="title-dp fw500 fz42" />
+         <Title title="Brokers Digitales Distrito Pyme" className="title-dp fw500 fz42" />
         <div className="metropolisReg fz21 blackBlue text-justify">
 					Nuestro programa de Brokers Digitales, te permite adquirir una
           membresía exclusiva de nuestra plataforma y las

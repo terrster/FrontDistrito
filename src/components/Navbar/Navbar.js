@@ -45,7 +45,7 @@ const NavBar = props => {
 		 <Navbar collapseOnSelect className="nav-bar" expand="lg" bg="light" expanded={isOpen}>
 		 	<Navbar.Brand href="/"><img src={logo} alt="Distrito Pyme Logo" className="nav-logo"/></Navbar.Brand>
 		 		<Navbar.Toggle aria-controls="responsive-navbar-nav" onClick={() => setIsOpen(!isOpen)}/>
-		 		{isAuthenticated() === false && 
+				{isAuthenticated() === false && location.pathname != '/BrokersLanding' && location.pathname != '/brokersLanding' &&
 		 			<Navbar.Collapse>
 		 				<Nav className="ml-auto ">
 						 	<Nav.Link onClick={close} as={NavLink} to="/solicitudBrokers" className="hvr-underline-from-left  text-center fz16 blackNav nav-btn heigth-45 solicita-butto metropolisReg">Brokers</Nav.Link>

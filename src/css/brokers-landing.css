@@ -25,6 +25,16 @@
 
 }
 
+.brokers-container{
+  background-color: var(--black04) !important;
+}
+
+.brokers-header-button{
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+
 .tarjet-info:hover {
   -webkit-transform: translateY(-10px);
   -ms-transform: translateY(-10px);

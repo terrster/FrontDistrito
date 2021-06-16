@@ -8,6 +8,9 @@ import  Allies from './Aliados/Allies';
 //import Testimonio from './Testimonios/Testimonio';
 import { useHistory } from 'react-router-dom';
 
+import BANNER_WEB from '../../../src/assets/img/brokers-landing/BANNER_final.jpg';
+
+
 const BrokersLanding = () =>{
 
   const history = useHistory();
@@ -15,7 +18,7 @@ const BrokersLanding = () =>{
   return(
     <>
       <BannerBrokers />
-      <div className="container-fluid">
+      <div className="brokers-container container-fluid">
         <Info />
         <Cards />
         <Allies />
@@ -27,6 +30,13 @@ const BrokersLanding = () =>{
         <Button className="btn-blue-general ml-auto mr-auto" style={{ width: '250px' }} onClick={() => { history.push("/brokers")}}>
           Registrate aquí
         </Button>
+      </div>
+
+      <div className="mb-5">
+        <img
+          className="d-block w-100"
+          src={BANNER_WEB} alt="WEB"
+        />
       </div>
     </>
   );
