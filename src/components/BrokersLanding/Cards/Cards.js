@@ -23,7 +23,7 @@ const Cards = () => {
           <Card style={{ height: '30rem' }} className="tarjet-info">
               <Icons img={REGISTRATE} alt="registrate" width="100px" />
             <Card.Body>
-              <Card.Title>Registrate</Card.Title>
+              <Card.Title>Regístrate</Card.Title>
               <Card.Text >
                 <div className="metropolisReg fz12 blackBlue text-center">
                 Completa tu regitro y uno de nuestros asesores
@@ -42,7 +42,7 @@ const Cards = () => {
               <Card.Text className="metropolisReg fz12 blackBlue text-center">
                 Nuestro proceso de firma es 100% Digital.
 
-                Necesitaras: <br />
+                Necesitarás: <br />
                 - INE. <br />
                 - Comprobante de domicilio. <br />
                 - RFC. <br />
@@ -57,14 +57,13 @@ const Cards = () => {
           <Card  style={{ height: '30rem'}} className="tarjet-info">
               <Icons img={MEMBRESIA} alt="Membresia" width="100px" />
             <Card.Body>
-              <Card.Title>Adquiere tu membresia</Card.Title>
+              <Card.Title>Adquiere tu membresía</Card.Title>
               <Card.Text className="metropolisReg fz12 blackBlue text-center">    
-                  Al adquirir tu membresia tendrás acceso total a la tecnología
+                  <p>Al adquirir tu membresia tendrás acceso total a la tecnología
                   de Distrito Pyme, herramientas, CRM, programa de incentivos,
-                  convenciones y asignación automática de leads.
-                  <br />
-                  Inversión única de <b>$2,500 MXN +IVA</b> y la podrás pagar
-                  a 3 o 6 MSI a través de nuestra alianza con
+                  convenciones y asignación automática de leads.</p>
+                  <p>Inversión única de <b>$2,500 MXN +IVA</b> y la podrás pagar
+                  a 3 o 6 MSI a través de nuestra alianza con</p>
               </Card.Text>
                 <Icons img={LOGO_CLIP} alt="clip" width="65px" />
             </Card.Body>
@@ -92,10 +91,10 @@ const Cards = () => {
             <Card.Body>
               <Card.Title>Comienza a ganar dinero</Card.Title>
               <Card.Text className="metropolisReg fz12 blackBlue text-center">
-                Ahora estas listo para ofrecer a tus clientes las mejores opciones
-                de crédito. <br />
+                <p>Ahora estas listo para ofrecer a tus clientes las mejores opciones
+                de crédito. </p>
 
-                <b>¡Todo en menos de 15 min!</b>
+                <p className="font-weight-bold">¡Todo en menos de 15 min!</p>
               </Card.Text>
             </Card.Body>
           </Card>

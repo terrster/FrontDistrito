@@ -10,7 +10,7 @@ const Info = () => {
  return(
    <div className="container pt-5">
     <Row>
-      <Col xl={7} lg={7} md={7}>
+      <Col xl={7} lg={7} md={7} className="mb-3">
          <Title title="Brokers Digitales Distrito Pyme" className="title-dp fw500 fz42 title-bd" />
         <div className="metropolisReg fz21 blackBlue text-justify">
 					Nuestro programa de Brokers Digitales, te permite adquirir una
@@ -26,7 +26,7 @@ const Info = () => {
 				</div>
       </Col>
 
-      <Col xl={5} lg={5} md={5} className="mt-2 video">
+      <Col xl={5} lg={5} md={5} className="video">
          <video loop style={{
                 objectFit: 'fill',
                 width: '100%',

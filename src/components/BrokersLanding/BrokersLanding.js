@@ -7,14 +7,9 @@ import  Comunity from './Comunity/Comunity';
 import  Allies from './Aliados/Allies';
 //import Testimonio from './Testimonios/Testimonio';
 import BannerFinal from './BannerFinal/BannerFinal'
-//import { useHistory } from 'react-router-dom';
-
-//import BANNER_WEB from '../../../src/assets/img/brokers-landing/BANNER_final.jpg';
 import '../../css/brokers-landing.css';
 
 const BrokersLanding = () =>{
-
-  //const history = useHistory();
 
   return(
     <>
@@ -27,13 +22,6 @@ const BrokersLanding = () =>{
         {/* <Testimonio /> */}
       </div>
       <BannerFinal />
-      
-      {/* <div className="text-center mt-30 mb-30">
-        <Button className="btn-blue-general ml-auto mr-auto" style={{ width: '250px' }} onClick={() => { history.push("/brokers")}}>
-          Registrate aquí
-        </Button>
-      </div> */}
-
       <style>{"\
           #clgo{\
               display: none !important;\

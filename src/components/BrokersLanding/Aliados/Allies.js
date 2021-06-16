@@ -1,6 +1,6 @@
 import React from 'react';
 import Title from '../../Generic/Title';
-import { Container, Card} from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import OwlCarousel from 'react-owl-carousel';
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
@@ -27,13 +27,16 @@ const Allies = () => {
           responsive={
             {
               576: {
-                items: 3
+                items: 3,
+                slideBy: 3
               },
               768: {
-                items: 5
+                items: 5,
+                slideBy: 5
               },
               992: {
-                items: 6
+                items: 6,
+                slideBy: 6
               }
             }
           }
@@ -41,8 +44,12 @@ const Allies = () => {
           margin={20}
           loop={true}
           autoplay={true}
-          autoplayTimeout={2000}
+          autoplayTimeout={1000}
+          // smartSpeed={50}
+          // fluidSpeed={1}
+          autoplaySpeed={true}
           autoplayHoverPause={true}
+          slideBy={6}
            >
           {
             allies.map((name, key) => {

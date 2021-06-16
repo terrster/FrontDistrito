@@ -24,30 +24,12 @@ const Banner = () => {
 
   return(
   <>
-      {/* <Carousel className="mb-2" activeIndex={indexImage} onSelect={handleSelect}>
-        {
-          images.map((image, index) => {
-            return <Carousel.Item>
-              <img className="d-block w-100" src={image[versionImage]} alt={`banner${index}`} />
-            </Carousel.Item>
-          })
-        }
-      </Carousel> */}
       <div className="brokers-header">
         <img className="d-block w-100" src={images[versionImage]} alt="WEB"/>
         <Button className="brokers-header-button header-button fz24 bluePrimary" onClick={() => { history.push("/brokers") }}>
-          Conviertete en Broker
+          Conviértete en Broker
         </Button>
       </div>
-      {/* <video style={{
-                objectFit: 'fill',
-                width: '100%',
-                height: '350px',
-                border: '0',
-                padding: '0'
-            }} 
-          controls={false} muted={true} autoPlay={true} preload={"true"} 
-          src="https://distrito-pyme-media.s3.us-west-2.amazonaws.com/%C2%BFC%C3%B3mo+Funciona+Distrito+Pyme_+Solicita+tu+CR%C3%89DITO+Ya!!.mp4"/> */}
   </>
   );
 }
