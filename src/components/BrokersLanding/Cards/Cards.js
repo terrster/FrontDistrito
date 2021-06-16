@@ -43,11 +43,11 @@ const Cards = () => {
                 Nuestro proceso de firma es 100% Digital.
 
                 Necesitarás: <br />
-                - INE. <br />
-                - Comprobante de domicilio. <br />
-                - RFC. <br />
-                - Estado de cuenta bancario. <br />
-                - Acta Constitutiva. (en caso de ser personal moral)
+                • INE. <br />
+                • Comprobante de domicilio. <br />
+                • RFC. <br />
+                • Estado de cuenta bancario. <br />
+                • Acta Constitutiva. (en caso de ser personal moral)
               </Card.Text>
             </Card.Body>
           </Card>
@@ -76,10 +76,10 @@ const Cards = () => {
             <Card.Body>
               <Card.Title>Recibe tus herramientas</Card.Title>
               <Card.Text className="metropolisReg fz12 blackBlue text-center">
-                - ID exclusivo que te identifica como broker. <br />
-                - Acceso a CRM. <br />
-                - Plan de marketing y desarrollo de tu propia marca.<br />
-                - Tarjeta de presentación digital.
+                • ID exclusivo que te identifica como broker. <br />
+                • Acceso a CRM. <br />
+                • Plan de marketing y desarrollo de tu propia marca.<br />
+                • Tarjeta de presentación digital.
               </Card.Text>
             </Card.Body>
           </Card>

@@ -12,7 +12,7 @@ const BannerFinal = () => {
       <div className="brokers-header">
         <img className="d-block w-100 h-100" src={BANNER_FINAL} alt="WEB" />
         <Button className="brokers-button-final fz20 bluePrimary" onClick={() => { history.push("/brokers") }}>
-          Registrate aquí
+          Regístrate aquí
         </Button>
       </div>
     </>
