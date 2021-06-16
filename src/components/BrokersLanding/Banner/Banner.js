@@ -1,17 +1,42 @@
-import React from 'react';
-import {Button} from 'react-bootstrap';
+import React,{useState} from 'react';
+import {Button,Carousel} from 'react-bootstrap';
 
 import BANNER_WEB from '../../../assets/img/brokers-landing/BANNER_web.jpg';
+import BANNER_MOVIL from '../../../assets/img/brokers-landing/BANNER_movil.jpg';
+
+const images = [BANNER_WEB, BANNER_MOVIL];
+
+const getVersionImage = () => {
+  const currentSize = document.getElementsByTagName('body')[0].clientWidth;
+  return currentSize < 775 ? 1 : 0;
+};
 
 
 const Banner = () => {
 
+  const [versionImage, setVersionImage] = useState(getVersionImage());
+
+  window.addEventListener('resize', () => setVersionImage(getVersionImage()));
+
+  React.useEffect(() => {
+    console.log(versionImage);
+  }, [versionImage])
+
   return(
   <>
+      {/* <Carousel className="mb-2" activeIndex={indexImage} onSelect={handleSelect}>
+        {
+          images.map((image, index) => {
+            return <Carousel.Item>
+              <img className="d-block w-100" src={image[versionImage]} alt={`banner${index}`} />
+            </Carousel.Item>
+          })
+        }
+      </Carousel> */}
       <div>
-        <img
+        <img images
           className="w-100"
-          src={BANNER_WEB} alt="WEB"
+          src={images[versionImage]} alt="WEB"
         />
         <Button className="brokers-header-button header-button fz24 bluePrimary">
           Solicitar ahora

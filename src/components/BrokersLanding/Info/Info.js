@@ -26,7 +26,13 @@ const Info = () => {
       </Col>
 
       <Col xl={5} lg={5} md={5} className="mt-2">
-         <img className="w-100" src={GENERALIDADES_IMG} alt="gn" />
+         <video style={{
+                objectFit: 'fill',
+                border: '0',
+                padding: '0'
+            }} 
+          controls={false} muted={true} autoPlay={true} preload={"true"} 
+           src="https://distrito-pyme-media.s3.us-west-2.amazonaws.com/Brokers+Digitales+Distrito+Pyme.mp4"/>
       </Col>
     </Row>
    </div>

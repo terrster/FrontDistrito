@@ -4,7 +4,12 @@ import { Card, Row, Col, Image} from 'react-bootstrap';
 import Icons from '../../Landing/Icons/Icons';
 import '../../../css/brokers-landing.css';
 
-import REQUISITOS_BÁSICOS_01 from '../../../assets/img/REQUISITOS BÁSICOS-01.png';
+import REGISTRATE from '../../../assets/img/brokers-landing/iconos/registrate.png';
+import FIRMA from '../../../assets/img/brokers-landing/iconos/firma.png';
+import MEMBRESIA from '../../../assets/img/brokers-landing/iconos/membresia.png';
+import HERRAMIENTAS from '../../../assets/img/brokers-landing/iconos/recibe_herramientas.png';
+import GANAR_DINERO from '../../../assets/img/brokers-landing/iconos/gana_dinero.png';
+
 import LOGO_CLIP from '../../../assets/img/brokers-landing/logo-clip.svg';
 
 
@@ -17,7 +22,7 @@ const Cards = () => {
       <Row className="justify-content-center">
           <Col xl={4} md={5} sm={7} className="mb-4">
           <Card style={{ height: '30rem' }} className="tarjet-info">
-            <Icons img={REQUISITOS_BÁSICOS_01} alt="Simulador" width="100px" />
+              <Icons img={REGISTRATE} alt="registrate" width="100px" />
             <Card.Body>
               <Card.Title>Registrate</Card.Title>
               <Card.Text >
@@ -32,7 +37,7 @@ const Cards = () => {
 
           <Col xl={4} md={5} sm={7} className="mb-4">
           <Card style={{ height: '30rem' }} className="tarjet-info">
-            <Icons img={REQUISITOS_BÁSICOS_01} alt="Simulador" width="100px" />
+              <Icons img={FIRMA} alt="Firma" width="100px" />
             <Card.Body>
               <Card.Title>Firma tu contrato</Card.Title>
               <Card.Text className="metropolisReg fz12 blackBlue text-center">
@@ -51,7 +56,7 @@ const Cards = () => {
 
           <Col xl={4} md={5} sm={7} className="mb-4">
           <Card  style={{ height: '30rem'}} className="tarjet-info">
-            <Icons img={REQUISITOS_BÁSICOS_01} alt="Simulador" width="100px" />
+              <Icons img={MEMBRESIA} alt="Membresia" width="100px" />
             <Card.Body>
               <Card.Title>Adquiere tu membresia</Card.Title>
               <Card.Text className="metropolisReg fz12 blackBlue text-center">    
@@ -69,7 +74,7 @@ const Cards = () => {
 
         <Col xl={4} md={5} sm={7} className="mb-4">
           <Card style={{ height: '30rem' }} className="tarjet-info">
-            <Icons img={REQUISITOS_BÁSICOS_01} alt="Simulador" width="100px" />
+              <Icons img={HERRAMIENTAS} alt="Herramientas" width="100px" />
             <Card.Body>
               <Card.Title>Recibe tus herramientas</Card.Title>
               <Card.Text className="metropolisReg fz12 blackBlue text-center">
@@ -84,7 +89,7 @@ const Cards = () => {
 
           <Col xl={4} md={5} sm={7} className="mb-4">
           <Card style={{ height: '30rem' }} className="tarjet-info">
-            <Icons img={REQUISITOS_BÁSICOS_01} alt="Simulador" width="100px" />
+              <Icons img={GANAR_DINERO} alt="Ganar_dinero" width="100px" />
             <Card.Body>
               <Card.Title>Comienza a ganar dinero</Card.Title>
               <Card.Text className="metropolisReg fz12 blackBlue text-center">
