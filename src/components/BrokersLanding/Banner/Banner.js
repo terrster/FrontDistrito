@@ -33,8 +33,8 @@ const Banner = () => {
           })
         }
       </Carousel> */}
-      <div>
-        <img images
+      <div className="brokers-header">
+        <img
           className="w-100"
           src={images[versionImage]} alt="WEB"
         />

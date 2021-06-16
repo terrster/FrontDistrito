@@ -29,10 +29,16 @@
   background-color: var(--black04) !important;
 }
 
+.brokers-header{
+  position: relative;
+}
+
 .brokers-header-button{
   position: absolute;
-  left: 0;
-  right: 0;
+  left: 50%;
+  top: 68%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
 }
 
 .tarjet-info:hover {
