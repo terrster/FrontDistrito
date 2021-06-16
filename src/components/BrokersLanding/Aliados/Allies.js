@@ -1,9 +1,10 @@
 import React from 'react';
 import Title from '../../Generic/Title';
 import { Container } from 'react-bootstrap';
-import OwlCarousel from 'react-owl-carousel';
-import 'owl.carousel/dist/assets/owl.carousel.css';
-import 'owl.carousel/dist/assets/owl.theme.default.css';
+//import OwlCarousel from 'react-owl-carousel';
+//mport 'owl.carousel/dist/assets/owl.carousel.css';
+//import 'owl.carousel/dist/assets/owl.theme.default.css';
+import Marquee from 'react-marquee-slider';
 
 import '../../../css/brokers-landing.css'
 
@@ -21,7 +22,16 @@ const Allies = () => {
       </div>
 
       <Container>
-        <OwlCarousel
+        <Marquee velocity={18}>
+          {
+            allies.map((name, key) => {
+              return <div  key={key}>
+                <img className="imgAlianzaBrokers" src={name} alt={`allies${key}`} />
+              </div>
+            })
+          }
+        </Marquee>
+        {/* <OwlCarousel
           className="alliesc"
           items={3}
           responsive={
@@ -52,7 +62,7 @@ const Allies = () => {
               </div>
             })
           }
-        </OwlCarousel>
+        </OwlCarousel> */}
 
       </Container>
   </div>
