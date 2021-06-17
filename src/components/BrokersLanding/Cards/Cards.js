@@ -23,7 +23,7 @@ const Cards = () => {
               <Card.Title>Regístrate</Card.Title>
               <Card.Text >
                 <div className="metropolisReg fz12 blackBlue text-center">
-                Completa tu regitro y uno de nuestros asesores
+                Completa tu registro y uno de nuestros asesores
                 se pondrá en contacto contigo para ofrecerte mayor información.
                 </div>
               </Card.Text>
