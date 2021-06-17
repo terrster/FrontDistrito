@@ -2,10 +2,6 @@ import React from 'react';
 import {Col,Row}  from 'react-bootstrap';
 import Title from '../../Generic/Title';
 
-import '../../../css/brokers-landing.css';
-
-
-
 const Info = () => {
  return(
    <div className="container pt-5">
@@ -26,17 +22,8 @@ const Info = () => {
 				</div>
       </Col>
 
-      <Col xl={5} lg={5} md={5} className="video">
-         <video loop style={{
-                objectFit: 'fill',
-                width: '100%',
-                height: '350px',
-                border: '0',
-                padding: '0',
-            }} 
-          controls={false} muted={true} autoPlay={true} preload={"true"} 
-           src="https://distrito-pyme-media.s3.us-west-2.amazonaws.com/Brokers+Digitales+Distrito+Pyme.mp4"/>
-         {/* <img className="w-100" src={GENERALIDADES_IMG} alt="gn" /> */}
+      <Col xl={5} lg={5} md={5}>
+         <video className="d-block w-100" loop={true} controls={false} muted={true} autoPlay={true} preload={"true"} src="https://distrito-pyme-media.s3.us-west-2.amazonaws.com/Brokers+Digitales+Distrito+Pyme.mp4"/>
       </Col>
     </Row>
    </div>

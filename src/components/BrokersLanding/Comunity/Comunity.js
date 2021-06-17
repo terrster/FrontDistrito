@@ -1,18 +1,15 @@
-import React, { createRef } from 'react';
+import React from 'react';
 import Title from '../../Generic/Title';
 import { Row, Col } from 'react-bootstrap';
-import '../../../css/brokers-landing.css';
 
 const Comunity = () =>{
 
-  const counterRef = createRef();
   document.addEventListener("scroll", (e) => {
+    let counterContainer = document.getElementById('counterContainer');
     let scrolled = document.scrollingElement.scrollTop;
-    if (counterRef.current) {
-      if (scrolled > counterRef.current.offsetTop - 100) {
+      if (scrolled > counterContainer.offsetTop - 100) {
         setTimeout(contador, 500);
       }
-    }
   });
 
   const contador = () => {
@@ -43,7 +40,7 @@ const Comunity = () =>{
 
   return (
     <div id="comunityBrokers" className="pt-3 pb-5 text-center">
-      <div id="counterContainer" ref={counterRef}>
+      <div id="counterContainer">
         <Title title="Sé parte de nuestra comunidad"  className="title-dp fw500 mb-1 fz42 ls-01 pt-5"/>
         <Row className="mt-5">
           <Col md={6} className="mb-4">

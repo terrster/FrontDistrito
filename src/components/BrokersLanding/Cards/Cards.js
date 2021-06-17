@@ -1,6 +1,6 @@
 import React from 'react';
 import Title from '../../Generic/Title';
-import { Card, Row, Col, Image} from 'react-bootstrap';
+import { Card, Row, Col } from 'react-bootstrap';
 import Icons from '../../Landing/Icons/Icons';
 
 import REGISTRATE from '../../../assets/img/brokers-landing/iconos/registrate.png';
@@ -8,9 +8,7 @@ import FIRMA from '../../../assets/img/brokers-landing/iconos/firma.png';
 import MEMBRESIA from '../../../assets/img/brokers-landing/iconos/membresia.png';
 import HERRAMIENTAS from '../../../assets/img/brokers-landing/iconos/recibe_herramientas.png';
 import GANAR_DINERO from '../../../assets/img/brokers-landing/iconos/gana_dinero.png';
-
 import LOGO_CLIP from '../../../assets/img/brokers-landing/logo-clip.svg';
-
 
 const Cards = () => {
 

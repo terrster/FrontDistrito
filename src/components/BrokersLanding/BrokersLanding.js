@@ -2,13 +2,12 @@ import React from 'react';
 import BannerBrokers from './Banner/Banner';
 import Info from './Info/Info';
 import Cards from './Cards/Cards';
-import  Comunity from './Comunity/Comunity';
-import  Allies from './Aliados/Allies';
+import Comunity from './Comunity/Comunity';
+import Allies from './Aliados/Allies';
 //import Testimonio from './Testimonios/Testimonio';
 import BannerFinal from './BannerFinal/BannerFinal'
 import '../../css/brokers-landing.css';
 import { useHistory } from 'react-router-dom';
-
 
 const BrokersLanding = () =>{
 
