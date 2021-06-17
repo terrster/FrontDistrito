@@ -60,14 +60,14 @@ const Comunity = () =>{
           <Col md={6} className="mb-4">
             <label className="metropolisReg fz32 blackBlue">Solicitudes</label>
             <div className="titulos coolvetica">
-              <span className="counter" data-target="15000">0</span>
+              +<span className="counter" data-target="15000">0</span>
             </div>
           </Col>
 
           <Col md={6} className="mb-4">
             <label className="metropolisReg fz32 blackBlue"> Aliados financieros</label>
             <div className="titulos coolvetica">
-              <span className="counter" data-target="21">0</span>
+              +<span className="counter" data-target="25">0</span>
             </div>
           </Col>
         </Row>
