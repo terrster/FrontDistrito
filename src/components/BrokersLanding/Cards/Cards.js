@@ -56,7 +56,7 @@ const Cards = () => {
             <Card.Body>
               <Card.Title>Adquiere tu membresía</Card.Title>
               <Card.Text className="metropolisReg fz12 blackBlue text-center">    
-                  <p>Al adquirir tu membresia tendrás acceso total a la tecnología
+                  <p>Al adquirir tu membresía tendrás acceso total a la tecnología
                   de Distrito Pyme, herramientas, CRM, programa de incentivos,
                   convenciones y asignación automática de leads.</p>
                   <p>Inversión única de <b>$2,500 MXN +IVA</b> y la podrás pagar
@@ -75,7 +75,8 @@ const Cards = () => {
                 • ID exclusivo que te identifica como broker. <br />
                 • Acceso a CRM. <br />
                 • Plan de marketing y desarrollo de tu propia marca.<br />
-                • Tarjeta de presentación digital.
+                • Tarjeta de presentación digital.<br />
+                • Y más
               </Card.Text>
             </Card.Body>
           </Card>
@@ -87,7 +88,7 @@ const Cards = () => {
             <Card.Body>
               <Card.Title>Comienza a ganar dinero</Card.Title>
               <Card.Text className="metropolisReg fz12 blackBlue text-center">
-                <p>Ahora estas listo para ofrecer a tus clientes las mejores opciones
+                <p>Ahora estás listo para ofrecer a tus clientes las mejores opciones
                 de crédito.</p>
 
                 <p className="font-weight-bold">¡Todo en menos de 15 min!</p>
