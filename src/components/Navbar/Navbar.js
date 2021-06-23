@@ -44,18 +44,18 @@ const NavBar = props => {
 		<div className="pos-f-t">
 		 <Navbar collapseOnSelect className="nav-bar" expand="lg" bg="light" expanded={isOpen}>
 		 	<Navbar.Brand href="/"><img src={logo} alt="Distrito Pyme Logo" className="nav-logo"/></Navbar.Brand>
-			 {location.pathname != '/BrokersLanding' && location.pathname != '/brokersLanding' &&
+			 {location.pathname != '/brokers-landing' &&
 				<>
 					<Navbar.Toggle aria-controls="responsive-navbar-nav" onClick={() => setIsOpen(!isOpen)}/>
 					{isAuthenticated() === false &&
 						<Navbar.Collapse>
 							<Nav className="ml-auto ">
-								<Nav.Link onClick={close} as={NavLink} to="/solicitudBrokers" className="hvr-underline-from-left  text-center fz16 blackNav nav-btn heigth-45 solicita-butto metropolisReg">Brokers</Nav.Link>
+								<Nav.Link onClick={close} as={NavLink} to="/brokers-landing" className="hvr-underline-from-left  text-center fz16 blackNav nav-btn heigth-45 solicita-butto metropolisReg">Brokers</Nav.Link>
 								<Nav.Link onClick={close} as={NavLink} to="/nuestros-aliados" className="hvr-underline-from-left  text-center fz16 blackNav nav-btn heigth-45 solicita-butto metropolisReg">Aliados</Nav.Link>
 								<Nav.Link  onClick={close} href="/#simulador" id="ymb-dp-nav-simulator" className="hvr-underline-from-left  text-center fz16 blackNav nav-btn heigth-45 solicita-butto metropolisReg">Simulador</Nav.Link>
 								{/* <Nav.Link  onClick={close} href="/#howWorks" id="ymb-dp-nav-howWorks" className="hvr-underline-from-left  text-center fz16 blackNav nav-btn heigth-45 solicita-butto metropolisReg">¿Cómo funciona?</Nav.Link> */}
 								{/* <Nav.Link  onClick={close} href="/#about" id="ymb-dp-nav-about" className="hvr-underline-from-left  text-center fz16 blackNav nav-btn heigth-45 solicita-butto metropolisReg">Nosotros</Nav.Link> */}
-								<Nav.Link  onClick={close} href="https://distritopyme.com.mx/" id="ymb-dp-nav-howWorks" target="_blank" className="hvr-underline-from-left  text-center fz16 blackNav nav-btn heigth-45 solicita-butto metropolisReg">Blog</Nav.Link>
+								{/* <Nav.Link  onClick={close} href="https://distritopyme.com.mx/" id="ymb-dp-nav-howWorks" target="_blank" className="hvr-underline-from-left  text-center fz16 blackNav nav-btn heigth-45 solicita-butto metropolisReg">Blog</Nav.Link> */}
 								{location.pathname != '/brokers' && location.pathname != '/solicitud_enviada_brokers' && location.pathname != '/alianza' && 
 									<>
 										<Nav.Link  onClick={close} as={NavLink} to="/login" id="ymb-dp-nav-register" className="hvr-underline-from-left  text-center fz16 blackNav nav-btn heigth-45 solicita-butto metropolisReg">Inicia sesión</Nav.Link>

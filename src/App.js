@@ -183,7 +183,7 @@ class App extends Component {
                 <PrivateRoute exact path="/estatus_solicitud" component={Solicitud}/>
                 <PrivateRoute exact path="/propuestas" component={Propuestas}/>
 
-                <Route path="/BrokersLanding" exact component = {BrokersLanding}/>
+                <Route path="/brokers-landing" exact component = {BrokersLanding}/>
                 
                 <Redirect to="/"/>
               </Switch>
