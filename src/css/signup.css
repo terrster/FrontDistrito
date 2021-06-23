@@ -32,16 +32,16 @@
 	opacity: 0.95;
 }
 
-.btn-broker-container{
+/* .btn-broker-container{
 	position: absolute;
 	margin-left: auto;
 	margin-right: auto;
 	left: 0;
 	right: 0;
 	bottom: 30px;
-}
+} */
 
-.btn-broker{
+/* .btn-broker{
 	font-size: 16px !important;
 	width: 220px !important;
 	height: 40px !important;
@@ -52,19 +52,19 @@
 	background-color: white !important;
 	color: #023E95 !important;
 	border-color: white !important;
-}
+} */
 
-@media (min-width: 399px) {
+/* @media (min-width: 399px) {
 	.btn-broker-container{
 		bottom: 40px;
 	}
-}
+} */
 
-@media (min-width: 507px) {
+/* @media (min-width: 507px) {
 	#brokers-carousel .carousel-inner{
 		max-height: none !important;
 	}
-}
+} */
 
 /*SM*/
 /* @media (min-width: 576px) {
@@ -76,61 +76,61 @@
 } */
 
 /*MD*/
-@media (min-width: 768px) {
+/* @media (min-width: 768px) {
 	.btn-broker{
 		font-size: 22px !important;
 		width: 250px !important;
 		height: 50px !important;
 	}
-}
+} */
 
-@media (min-width: 775px) {
-	#brokers-carousel .carousel-inner{
+/* @media (min-width: 775px) { */
+	/* #brokers-carousel .carousel-inner{
 		max-height: 720px !important;
-	}
+	} */
 
-	.btn-broker-container{
+	/* .btn-broker-container{
 		bottom: 0;
-	}
+	} */
 
-	.btn-broker{
+	/* .btn-broker{
 		font-size: 12px !important;
 		width: 150px !important;
 		height: 30px !important;
-	}
-}
+	} */
+/* } */
 
 /*LG*/
-@media (min-width: 992px) {
-	.btn-broker-container{
+/* @media (min-width: 992px) { */
+	/* .btn-broker-container{
 		bottom: 0;
-	}
+	} */
 
-	.btn-broker{
+	/* .btn-broker{
 		font-size: 18px !important;
 		width: 220px !important;
 		height: 40px !important;
-	}
-}
+	} */
+/* } */
 
 /*XL*/
-@media (min-width: 1200px) {
-	.btn-broker-container{
+/* @media (min-width: 1200px) { */
+	/* .btn-broker-container{
 		bottom: 10px;
-	}
+	} */
 
-	.btn-broker{
+	/* .btn-broker{
 		font-size: 16px !important;
 		width: 220px !important;
 		height: 40px !important;
-	}
-}
+	} */
+/* } */
 
 /*XXL*/
-@media (min-width: 2000px) {
-	.btn-broker{
+/* @media (min-width: 2000px) { */
+	/* .btn-broker{
 		font-size: 28px !important;
 		width: 340px !important;
 		height: 60px !important;
-	}
-}
+	} */
+/* } */

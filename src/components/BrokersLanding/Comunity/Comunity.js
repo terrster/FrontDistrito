@@ -7,7 +7,7 @@ const Comunity = () =>{
   document.addEventListener("scroll", (e) => {
     let counterContainer = document.getElementById('counterContainer');
     let scrolled = document.scrollingElement.scrollTop;
-      if (scrolled > counterContainer.offsetTop - 400) {
+      if (counterContainer && scrolled > counterContainer.offsetTop - 400) {
         setTimeout(contador, 500);
       }
   });
