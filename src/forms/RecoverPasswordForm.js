@@ -15,11 +15,21 @@ const RecoverPasswordForm = (props) => {
   const [passwordConfirmError, setPasswordConfirmError] = useState("");
   const [touchPasswordConfirm, setTouchPasswordConfirm] = useState(false);
   const hash = props.hash;
+  const validatePassword = (value, fn) => {
+    if(/^[^\s]*$/i.test(value)){
+      if(fn === 'password'){
+        setPassword(value);
+      }
+      else{
+        setPasswordConfirm(value);
+      }
+    }
+  };
 
   const onFormSubmit = async (e) => {
     e.preventDefault();
     dispatch(updateLoader(true));
-    
+
     try {
       let {data} = await axios.post("/reset_password/" + hash, {password});
 
@@ -47,7 +57,7 @@ const RecoverPasswordForm = (props) => {
       setSubmitting(true);
     }
     if (password.length < 8 && touchPassword) {
-      setPasswordError("La contraseña debe tener 8 o más caracteres");
+      setPasswordError("La contraseña debe tener al menos 8 caracteres");
 
     } else {
       setPasswordError("");
@@ -77,7 +87,7 @@ const RecoverPasswordForm = (props) => {
               placeholder="Ingresa la nueva contraseña"
               onChange={({ target: { value } }) => {
                 setTouchPassword(true);
-                setPassword(value);
+                validatePassword(value, 'password');
               }}
               value={password}
               type="password"
@@ -96,7 +106,7 @@ const RecoverPasswordForm = (props) => {
               placeholder="Ingresa la nueva contraseña"
               onChange={({ target: { value } }) => {
                 setTouchPasswordConfirm(true);
-                setPasswordConfirm(value);
+                validatePassword(value, 'setPasswordConfirm');
               }}
               value={passwordConfirm}
               type="password"

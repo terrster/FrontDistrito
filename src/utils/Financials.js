@@ -23,7 +23,7 @@ import Amifin from '../assets/img/alianzas/amifin.png';
 import DeltAi from '../assets/img/alianzas/deltAi.png';
 import Cualli from '../assets/img/alianzas/cualli.png';
 import KUBO from '../assets/img/alianzas/kubo.png';
-import Mexarrend from '../assets/img/alianzas/mexarrend.jpg';
+import Mexarrend from '../assets/img/alianzas/mexarrend.png';
 
 export const filterFinancials = (financials) => {
     
