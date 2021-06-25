@@ -25,8 +25,8 @@ const Brokers = () => {
 
     const initialValues = {
         name: '',
-        lastname: '',
-        secondlastname: '',
+        // lastname: '',
+        // secondlastname: '',
         email: '',
         mobilephone: '',
         zip: '',

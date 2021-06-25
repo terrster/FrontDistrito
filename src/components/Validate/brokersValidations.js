@@ -8,13 +8,13 @@ const BrokerValidations = values => {
     errors.name = "Debe de ingresar su nombre";
   }
 
-  if (!values.lastname) {
-    errors.lastname = "Debe de ingresar su apellido paterno";
-  }
+  // if (!values.lastname) {
+  //   errors.lastname = "Debe de ingresar su apellido paterno";
+  // }
 
-  if (!values.secondlastname) {
-    errors.secondlastname = "Debe de ingresar su apellido materno";
-  }
+  // if (!values.secondlastname) {
+  //   errors.secondlastname = "Debe de ingresar su apellido materno";
+  // }
 
   if (!values.email) {
     errors.email = "Debe de ingresar un correo";

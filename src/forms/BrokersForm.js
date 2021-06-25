@@ -11,8 +11,8 @@ const BrokersForms = (props) => {
 
   const goToError = () => {
     const nameError = document.getElementById("name-error");
-    const lastnameError = document.getElementById("lastname-error");
-    const secondlastnameError = document.getElementById("secondlastname-error");
+    // const lastnameError = document.getElementById("lastname-error");
+    // const secondlastnameError = document.getElementById("secondlastname-error");
     const emailError = document.getElementById("email-error");
     const mobilephoneError = document.getElementById("mobilephone-error");
     const zipError = document.getElementById("zip-error");
@@ -21,8 +21,8 @@ const BrokersForms = (props) => {
 
     const errors = [
       nameError,
-      lastnameError,
-      secondlastnameError,
+      // lastnameError,
+      // secondlastnameError,
       emailError,
       mobilephoneError,
       zipError,
