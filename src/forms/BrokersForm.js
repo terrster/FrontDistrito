@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { withFormik, Form } from 'formik';
-import { Row, Col, Button } from 'react-bootstrap';
+import { Row, Col, Button, Container } from 'react-bootstrap';
 import { FieldText, FieldTextArea, FieldCheck } from '../components/Generic/Fields';
 import BrokerValidations from '../components/Validate/brokersValidations';
 import scroll from "../utils/scroll";
 import ReCAPTCHA from "react-google-recaptcha";
+import { useHistory } from 'react-router-dom';
+import {Link} from 'react-router-dom'
+
 
 
 const BrokersForms = (props) => {
@@ -49,8 +52,11 @@ const BrokersForms = (props) => {
     setDisabled(true);
   }
 
+  const history = useHistory();
+
   return(
       <>
+      <Container>
         <Form>
 
           {/* <Row>
@@ -96,7 +102,7 @@ const BrokersForms = (props) => {
               <div className="metropolisReg fz12 blackBlue text-left">
                 <b>Distrito Pyme</b> se compromete a proteger y respetar tu privacidad, y solo usaremos tu información
                 personal para administrar tu cuenta y proporcionar los servicios que nos solicitaste.
-                Consulta nuestro Aviso de privacidad
+                Consulta nuestro <Link to="/privacidad" target="_blank">Aviso de privacidad</Link>
               </div>
 
             <Col lg={5} className="mt-2">
@@ -143,6 +149,7 @@ const BrokersForms = (props) => {
             }
           </div>
         </Form> 
+      </Container>
       </>
   )
 }
