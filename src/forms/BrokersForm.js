@@ -1,9 +1,11 @@
-import React, {useEffect} from 'react';
+import React, { useState } from 'react';
 import { withFormik, Form, ErrorMessage, Field } from 'formik';
 import { Row, Col, Button } from 'react-bootstrap';
 import { FieldText, FieldTextArea, FieldCheck } from '../components/Generic/Fields';
 import BrokerValidations from '../components/Validate/brokersValidations';
 import scroll from "../utils/scroll";
+import ReCAPTCHA from "react-google-recaptcha";
+
 
 
 
@@ -20,8 +22,6 @@ const BrokersForms = (props) => {
     const zipError = document.getElementById("zip-error");
     const messageError = document.getElementById("message-error");
     const trmError = document.getElementById("trm-error");
-
-    
 
     const errors = [
       nameError,
@@ -40,6 +40,9 @@ const BrokersForms = (props) => {
       }
     }
   }
+
+  const onChange = value => { setButton(!value) };
+  const [button, setButton] = useState(true);
 
   return(
       <>
@@ -96,6 +99,13 @@ const BrokersForms = (props) => {
               </div>
             </div>
           </Row>
+
+          <div className="recaptcha-container">
+            <ReCAPTCHA
+              sitekey="6Ld2huQZAAAAANpPc8zQKPnS948P7vzt2T7t-GCF"
+              onChange={onChange}
+            />
+          </div>
 
           <div className="text-center mb-5">
           <Button type="submit" className="btn-blue-documents mt-30" onClick={() => goToError()} style={{ width: '300px' }}>Enviar</Button>
