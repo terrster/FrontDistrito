@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { withFormik, Form, ErrorMessage, Field } from 'formik';
+import { withFormik, Form } from 'formik';
 import { Row, Col, Button } from 'react-bootstrap';
 import { FieldText, FieldTextArea, FieldCheck } from '../components/Generic/Fields';
 import BrokerValidations from '../components/Validate/brokersValidations';
@@ -8,7 +8,6 @@ import ReCAPTCHA from "react-google-recaptcha";
 
 
 const BrokersForms = (props) => {
-  const { valid } = props;
 
   const goToError = () => {
     const nameError = document.getElementById("name-error");
@@ -43,10 +42,10 @@ const BrokersForms = (props) => {
   const [button, setButton] = useState(true);
   const [disabled, setDisabled] = useState(true);
   
-  if (disabled && valid) {
+  if (disabled && props.isValid) {
     setDisabled(false);
   }
-  if (!disabled && !valid) {
+  if (!disabled && !props.isValid) {
     setDisabled(true);
   }
 
@@ -54,7 +53,7 @@ const BrokersForms = (props) => {
       <>
         <Form>
 
-          <Row>
+          {/* <Row>
             <Col lg={4}>
             <FieldText name="name" placeholder="Nombre" className="forceFullWidth" />
             </Col>
@@ -66,9 +65,13 @@ const BrokersForms = (props) => {
             <Col lg={4}>
             <FieldText name="secondlastname" placeholder="Apellido materno" className="forceFullWidth" />
             </Col>
-          </Row>
+          </Row> */}
 
           <Row>
+            <Col lg={12}>
+            <FieldText name="name" placeholder="Nombre completo" className="forceFullWidth" />
+            </Col>
+
             <Col lg={4}>
             <FieldText name="email" placeholder="Correo" className="forceFullWidth" />
             </Col>
@@ -119,17 +122,20 @@ const BrokersForms = (props) => {
              !disabled && !button ? (
                 <Button 
                 type="submit" 
-                className="btn-blue-documents mt-30" 
+                className="mt-50 btn-blue-general" 
                 style={{ width: '300px' }}
                 >
                   Enviar
                 </Button>
               ) : (
                 <Button
-                  type="submit"
-                  className="btn-blue-documents mt-30"
+                  type="button"
+                  className="mt-50 btn-blue-general btn-gray-general"
                   style={{ width: '300px' }}
-                  onClick={() => goToError()}
+                  onClick={() => {
+                    props.validateForm().then(errors => props.setTouched({ ...props.touched, ...errors }))
+                    goToError()
+                  }}
                 >
                   Enviar
                 </Button>

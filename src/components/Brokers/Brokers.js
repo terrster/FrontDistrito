@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Title from '../Generic/Title';
-import { Carousel, Button, Container, Row, Col } from 'react-bootstrap'
-import BrokersBanner from '../../assets/img/brokers/broker_banner-2.jpg';
+import { Carousel, Container } from 'react-bootstrap'
 import BrokersForms from "../../forms/BrokersForm";
 
 import BANNER_WEB from '../../assets/img/brokers/broker_banner-2.jpg';
@@ -14,12 +13,15 @@ const getVersionImage = () => {
     return currentSize < 775 ? 1 : 0;
 };
 
-
 const Brokers = () => {
 
     const [versionImage, setVersionImage] = useState(getVersionImage());
 
     window.addEventListener('resize', () => setVersionImage(getVersionImage()));
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     const initialValues = {
         name: '',
@@ -32,11 +34,10 @@ const Brokers = () => {
         trm: false
     }
 
-    const handleSubmit = async (values) => {
+    const handleSubmit = async(values) => {
+        // dispatch(updateLoader(true));
         console.log(values);
-            // dispatch(updateLoader(true));
-
-            // dispatch(updateLoader(false));
+        // dispatch(updateLoader(false));
     }
 
     return(
@@ -49,31 +50,26 @@ const Brokers = () => {
 
             <Title title="Alta de Brokers" className="subtitle-dp fz42 fw500 mb-1 text-center" />
 
-            <div className="container">
-                <Container>
-                    <Row>
-                        <div className="metropolisReg fz12 blackBlue text-left">
-                        Nuestro plan de <b>Brokers Digital</b>, te permite adquirir una licencia exclusiva de <b>distritopyme.com</b> y las herramientas 
-                        necesarias para ayudarte a colocar más rápido
-                        y ofrecerle a tus clientes las mejores opciones de crédito.
-                        <br/>
-                        <br/>
-                        <Title title="¿Qué necesitas?" className="subtitle-dp fz22 mb-1" />
-                        • Gusto por las ventas. <br />
-                        • Conocimiento del sector pyme. <br />
-                        • Contar con cartera de prospectos. <br />
-                        </div>
+            <Container>
+                <div className="metropolisReg fz12 blackBlue text-left">
+                Nuestro plan de <b>Brokers Digital</b>, te permite adquirir una licencia exclusiva de <b>distritopyme.com</b> y las herramientas 
+                necesarias para ayudarte a colocar más rápido
+                y ofrecerle a tus clientes las mejores opciones de crédito.
+                <br/>
+                <br/>
+                <Title title="¿Qué necesitas?" className="subtitle-dp fz22 mb-1" />
+                • Gusto por las ventas. <br />
+                • Conocimiento del sector pyme. <br />
+                • Contar con cartera de prospectos. <br />
+                </div>
 
-                        <Title title="Al registrarte recibirás toda la información en tu correo y nuestro equipo de Brokers Digitales 
-                        te contactará para que comiences ¡YA!" 
-                        className="subtitle-dp fz14 mt-3 mb-3" />
-                    </Row>
+                <Title title="Al registrarte recibirás toda la información en tu correo y nuestro equipo de Brokers Digitales 
+                te contactará para que comiences ¡YA!" 
+                className="subtitle-dp fz14 mt-3 mb-3" />
 
-                    <BrokersForms initialValues={initialValues} handleSubmit={handleSubmit}/>
+                <BrokersForms initialValues={initialValues} handleSubmit={handleSubmit}/>
 
-                </Container>
-                
-            </div>
+            </Container>
 
             <style>{"\
                 #clgo{\
