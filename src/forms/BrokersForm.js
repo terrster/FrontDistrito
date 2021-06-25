@@ -7,11 +7,8 @@ import scroll from "../utils/scroll";
 import ReCAPTCHA from "react-google-recaptcha";
 
 
-
-
-
 const BrokersForms = (props) => {
-
+  const { valid } = props;
 
   const goToError = () => {
     const nameError = document.getElementById("name-error");
@@ -42,7 +39,16 @@ const BrokersForms = (props) => {
   }
 
   const onChange = value => { setButton(!value) };
+
   const [button, setButton] = useState(true);
+  const [disabled, setDisabled] = useState(true);
+  
+  if (disabled && valid) {
+    setDisabled(false);
+  }
+  if (!disabled && !valid) {
+    setDisabled(true);
+  }
 
   return(
       <>
@@ -108,9 +114,28 @@ const BrokersForms = (props) => {
           </div>
 
           <div className="text-center mb-5">
-          <Button type="submit" className="btn-blue-documents mt-30" onClick={() => goToError()} style={{ width: '300px' }}>Enviar</Button>
+            {
+             
+             !disabled && !button ? (
+                <Button 
+                type="submit" 
+                className="btn-blue-documents mt-30" 
+                style={{ width: '300px' }}
+                >
+                  Enviar
+                </Button>
+              ) : (
+                <Button
+                  type="submit"
+                  className="btn-blue-documents mt-30"
+                  style={{ width: '300px' }}
+                  onClick={() => goToError()}
+                >
+                  Enviar
+                </Button>
+              )
+            }
           </div>
-
         </Form> 
       </>
   )
