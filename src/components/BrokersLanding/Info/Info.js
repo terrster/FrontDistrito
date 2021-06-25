@@ -15,7 +15,7 @@ const Info = () => {
           todo en menos de 15 minutos.
           <br/>
           <br/>
-          Una solicitud a través de Distrito Pyme es como llenar más de 20
+          Una solicitud a través de Distrito Pyme es como llenar más de 25
           solicitudes de crédito de las mejores instituciones financieras
           para que ahorres tiempo e incrementes tus ingresos.
           
