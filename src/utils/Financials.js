@@ -28,7 +28,7 @@ import Mexarrend from '../assets/img/alianzas/mexarrend.png';
 export const filterFinancials = (financials) => {
     
     const filteredFinancials = financials.split(';').filter((financial) => {
-        return financial !== 'Bancoppel' && financial !== 'DOCUFORMAS' && financial !== 'AV CAPITAL' && financial !== 'DIMEX'; 
+        return financial !== 'Bancoppel' && financial !== 'DOCUFORMAS' && financial !== 'AV CAPITAL' && financial !== 'DIMEX' && financial !== 'RESUELVE'; 
     });
 
     return filteredFinancials;
