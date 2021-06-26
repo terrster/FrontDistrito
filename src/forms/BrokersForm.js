@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { withFormik, Form } from 'formik';
+import { withFormik, Form, ErrorMessage } from 'formik';
 import { Row, Col, Button, Container } from 'react-bootstrap';
 import { FieldText, FieldTextArea, FieldCheck } from '../components/Generic/Fields';
 import BrokerValidations from '../components/Validate/brokersValidations';
@@ -82,12 +82,16 @@ const BrokersForms = (props) => {
             <FieldText name="email" placeholder="Correo" className="forceFullWidth" />
             </Col>
 
-            <Col lg={4}>
-            <FieldText name="mobilephone" placeholder="WhatsApp" className="forceFullWidth" />
+            <Col>
+              <ErrorMessage name="email" render={msg => <div id="email-error" className="error mt-1">{msg}</div>} />
             </Col>
 
             <Col lg={4}>
-            <FieldText name="zip" placeholder="Código postal" className="forceFullWidth" />
+              <FieldText name="mobilephone" placeholder="WhatsApp" normalize="onlyNumbers" className="forceFullWidth" />
+            </Col>
+
+            <Col lg={4}>
+              <FieldText name="zip" placeholder="Código postal" normalize="onlyNumbers" className="forceFullWidth" />
             </Col>
           </Row>
 
