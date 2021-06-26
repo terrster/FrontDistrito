@@ -8,6 +8,7 @@ import BANNER_MOVIL from '../../assets/img/brokers/WEBMOVIL_2.jpg';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import { updateLoader } from "../../redux/actions/loaderActions";
+import Loader from "../Loader/Loader";
 
 const images = [BANNER_WEB, BANNER_MOVIL];
 
@@ -68,6 +69,8 @@ const Brokers = () => {
 
     return(
         <>
+            <Loader/>
+
             <Carousel className="mb-2" controls={false} indicators={false}>
                 <Carousel.Item>
                     <img className="d-block w-100" src={images[versionImage]} alt="brokersbanner" />
