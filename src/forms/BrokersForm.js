@@ -5,10 +5,7 @@ import { FieldText, FieldTextArea, FieldCheck } from '../components/Generic/Fiel
 import BrokerValidations from '../components/Validate/brokersValidations';
 import scroll from "../utils/scroll";
 import ReCAPTCHA from "react-google-recaptcha";
-import { useHistory } from 'react-router-dom';
-import {Link} from 'react-router-dom'
-
-
+import { Link } from 'react-router-dom'
 
 const BrokersForms = (props) => {
 
@@ -51,8 +48,6 @@ const BrokersForms = (props) => {
   if (!disabled && !props.isValid) {
     setDisabled(true);
   }
-
-  const history = useHistory();
 
   return(
       <>
