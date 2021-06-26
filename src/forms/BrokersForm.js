@@ -77,10 +77,6 @@ const BrokersForms = (props) => {
             <FieldText name="email" placeholder="Correo" className="forceFullWidth" />
             </Col>
 
-            <Col>
-              <ErrorMessage name="email" render={msg => <div id="email-error" className="error mt-1">{msg}</div>} />
-            </Col>
-
             <Col lg={4}>
               <FieldText name="mobilephone" placeholder="WhatsApp" normalize="onlyNumbers" className="forceFullWidth" />
             </Col>
