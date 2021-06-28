@@ -70,11 +70,11 @@ const BrokersForms = (props) => {
 
           <Row>
             <Col lg={12}>
-            <FieldText name="name" placeholder="Nombre completo" className="forceFullWidth" />
+            <FieldText name="name" placeholder="Nombre completo" normalize="onlyLirycs" className="forceFullWidth" />
             </Col>
 
             <Col lg={4}>
-            <FieldText name="email" placeholder="Correo" className="forceFullWidth" />
+            <FieldText name="email" placeholder="Correo" normalize="onlyEmailWithoutSpace" className="forceFullWidth" />
             </Col>
 
             <Col lg={4}>

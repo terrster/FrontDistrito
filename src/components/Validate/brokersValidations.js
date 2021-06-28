@@ -20,7 +20,7 @@ const BrokerValidations = values => {
     errors.email = "Debe de ingresar un correo";
   } 
   else if (values.email.length > 0 && !isValidEmail.test(values.email)) {
-    errors.email = "El correo  no es válido";
+    errors.email = "El correo no es válido";
   }
 
   if (!values.mobilephone) {
