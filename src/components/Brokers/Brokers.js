@@ -49,6 +49,7 @@ const Brokers = () => {
         let {data} = await axios.post('broker', values);
 
         if(data.code === 200){
+            window.scrollTo(0, 0);
             history.push("/solicitud_enviada_brokers");
         }
         else{
