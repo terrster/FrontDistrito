@@ -5,9 +5,9 @@ import Title from '../../Generic/Title';
 const Info = () => {
  return(
    <div className="container pt-5">
-    <Row>
+    <Row className="d-flex align-items-center justify-items-center">
       <Col xl={7} lg={7} md={7} className="mb-3">
-         <Title title="Brokers Digitales Distrito Pyme" className="title-dp fw500 fz42 title-bd" />
+        <Title title="Brokers Digitales Distrito Pyme" className="title-dp fw500 fz42 title-bd" />
         <div className="metropolisReg fz21 blackBlue text-justify">
 					Nuestro programa de Brokers Digitales, te permite adquirir una
           membresía exclusiva de nuestra plataforma y las
@@ -18,7 +18,6 @@ const Info = () => {
           Una solicitud a través de Distrito Pyme es como llenar más de 25
           solicitudes de crédito de las mejores instituciones financieras
           para que ahorres tiempo e incrementes tus ingresos.
-          
 				</div>
       </Col>
 
