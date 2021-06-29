@@ -50,7 +50,7 @@ const NavBar = props => {
 					{isAuthenticated() === false &&
 						<Navbar.Collapse>
 							<Nav className="ml-auto ">
-								<Nav.Link onClick={close} as={NavLink} to="/brokers" className="hvr-underline-from-left  text-center fz16 blackNav nav-btn heigth-45 solicita-butto metropolisReg">¿Quiero ser Broker?</Nav.Link>
+								<Nav.Link onClick={close} as={NavLink} to="/brokers" className="hvr-underline-from-left  text-center fz16 blackNav nav-btn heigth-45 solicita-butto metropolisReg">Quiero ser Broker</Nav.Link>
 								<Nav.Link onClick={close} as={NavLink} to="/solicitudBrokers" className="hvr-underline-from-left  text-center fz16 blackNav nav-btn heigth-45 solicita-butto metropolisReg">Soy Broker</Nav.Link>
 								<Nav.Link onClick={close} as={NavLink} to="/nuestros-aliados" className="hvr-underline-from-left  text-center fz16 blackNav nav-btn heigth-45 solicita-butto metropolisReg">Aliados</Nav.Link>
 								{/* <Nav.Link  onClick={close} href="/#simulador" id="ymb-dp-nav-simulator" className="hvr-underline-from-left  text-center fz16 blackNav nav-btn heigth-45 solicita-butto metropolisReg">Simulador</Nav.Link> */}
