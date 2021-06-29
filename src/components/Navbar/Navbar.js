@@ -44,13 +44,13 @@ const NavBar = props => {
 		<div className="pos-f-t">
 		 <Navbar collapseOnSelect className="nav-bar" expand="lg" bg="light" expanded={isOpen}>
 		 	<Navbar.Brand href="/"><img src={logo} alt="Distrito Pyme Logo" className="nav-logo"/></Navbar.Brand>
-			 {location.pathname != '/brokers-landing' &&
+			 {location.pathname != '/brokers' &&
 				<>
 					<Navbar.Toggle aria-controls="responsive-navbar-nav" onClick={() => setIsOpen(!isOpen)}/>
 					{isAuthenticated() === false &&
 						<Navbar.Collapse>
 							<Nav className="ml-auto ">
-								<Nav.Link onClick={close} as={NavLink} to="/brokers-landing" className="hvr-underline-from-left  text-center fz16 blackNav nav-btn heigth-45 solicita-butto metropolisReg">¿Quiero ser Broker?</Nav.Link>
+								<Nav.Link onClick={close} as={NavLink} to="/brokers" className="hvr-underline-from-left  text-center fz16 blackNav nav-btn heigth-45 solicita-butto metropolisReg">¿Quiero ser Broker?</Nav.Link>
 								<Nav.Link onClick={close} as={NavLink} to="/solicitudBrokers" className="hvr-underline-from-left  text-center fz16 blackNav nav-btn heigth-45 solicita-butto metropolisReg">Brokers</Nav.Link>
 								<Nav.Link onClick={close} as={NavLink} to="/nuestros-aliados" className="hvr-underline-from-left  text-center fz16 blackNav nav-btn heigth-45 solicita-butto metropolisReg">Aliados</Nav.Link>
 								<Nav.Link  onClick={close} href="/#simulador" id="ymb-dp-nav-simulator" className="hvr-underline-from-left  text-center fz16 blackNav nav-btn heigth-45 solicita-butto metropolisReg">Simulador</Nav.Link>

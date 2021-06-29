@@ -41,7 +41,7 @@ const history = useHistory();
       </div>
       <BannerFinal />
       
-      <div id="float-button-dp" className="float-button float-button-dp" onClick={() => { history.push("/brokers") }}>Conviértete en Broker</div>
+      <div id="float-button-dp" className="float-button float-button-dp" onClick={() => { history.push("/brokers-registro") }}>Conviértete en Broker</div>
       
       <style>{"\
           #clgo{\

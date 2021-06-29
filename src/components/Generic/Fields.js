@@ -272,6 +272,11 @@ const onlyLirycs = (e, form) =>
 form.setFieldValue(e.target.name, e.target.value) : 
 form.setFieldValue(e.target.name, e.target.value.substring(0, e.target.value.length - 1));
 
+const onlyEmailWithoutSpace = (e, form) =>
+/^$|^[^\s]*[\w-\.\@]+$/i.test(e.target.value) && e.target.value.length > 0 ? 
+form.setFieldValue(e.target.name, e.target.value) : 
+form.setFieldValue(e.target.name, e.target.value.substring(0, e.target.value.length - 1));
+
 const onlyNumbers = (e, form) =>
 /^\d+$/.test(e.target.value) && e.target.value.length > 0 ? 
 form.setFieldValue(e.target.name, e.target.value) : 
@@ -291,6 +296,9 @@ const normalizeFn = (fn, e, form) => {
     switch(fn){
         case "onlyLirycs":
             onlyLirycs(e, form);
+        break;
+        case "onlyEmailWithoutSpace":
+            onlyEmailWithoutSpace(e, form);
         break;
         case "onlyNumbers":
             onlyNumbers(e, form);

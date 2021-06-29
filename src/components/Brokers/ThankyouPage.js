@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Title from '../Generic/Title';
 import '../../css/signup.css';
 import registerImage from '../../assets/img/registroexitoso-01.png'
@@ -7,6 +7,10 @@ import { Button } from 'react-bootstrap';
 
 let ThankyouPage = () => {
     const history = useHistory();
+
+	useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
 	return (
 		<div className="container mt-30 registro-exitoso">

@@ -143,7 +143,7 @@ class App extends Component {
                 <Route path="/solicitudBrokers/:ownerId?" exact component={SignupBrokers} />
                 <Route path="/registroexitoso" exact component={RegistroExitoso} />
                 <Route path="/login/:redirect?" exact component={Login} />
-                <Route path="/brokers" exact component={Brokers}/>
+                <Route path="/brokers-registro" exact component={Brokers}/>
                 <Route path="/solicitud_enviada_brokers" exact component={ThankyouPage} />
                 <Route path="/contador" exact component={Counter}/>
                 <Route path="/alianza" exact component={Allies}/>
@@ -183,7 +183,7 @@ class App extends Component {
                 <PrivateRoute exact path="/estatus_solicitud" component={Solicitud}/>
                 <PrivateRoute exact path="/propuestas" component={Propuestas}/>
 
-                <Route path="/brokers-landing" exact component = {BrokersLanding}/>
+                <Route path="/brokers" exact component = {BrokersLanding}/>
                 
                 <Redirect to="/"/>
               </Switch>
