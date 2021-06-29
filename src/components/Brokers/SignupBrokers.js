@@ -64,10 +64,9 @@ const SignupBrokers = props => {
       <div className="container mt-30">
         <Loader />
 
-        <Title
-          className="fz56 text-center title-dp fw500"
-          title="¡Bienvenido a Distrito Pyme!"
-        />
+        <div className="fz56 text-center title-dp fw500">
+          ¡Bienvenido Broker a Distrito Pyme!
+        </div>
 
         <div className="mt-30 text-dp fw300 fz20 text-center mb-30">
           <p className="gray50">Te ayudamos a ofrecer las mejores opciones de crédito a tus clientes <br/> <label className="blue-primary">&nbsp;#ComunidadDeCrédito&nbsp;</label></p>
