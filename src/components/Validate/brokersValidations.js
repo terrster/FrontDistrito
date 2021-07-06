@@ -24,11 +24,17 @@ const BrokerValidations = values => {
   }
 
   if (!values.mobilephone) {
-    errors.mobilephone = "Debe de ingresar un numero telefónico";
+    errors.mobilephone = "Debe de ingresar un número telefónico";
+  }
+  else if(values.mobilephone.length < 10){
+    errors.mobilephone = "El número telefónico debe de ser de 10 dígitos";
   }
 
   if (!values.zip) {
     errors.zip = "Debe de ingresar su código postal";
+  }
+  else if(values.zip.length < 5){
+    errors.zip = "El código postal costa de cinco dígitos";
   }
 
   if (!values.message) {

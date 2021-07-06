@@ -28,7 +28,7 @@ import Mexarrend from '../assets/img/alianzas/mexarrend.png';
 export const filterFinancials = (financials) => {
     
     const filteredFinancials = financials.split(';').filter((financial) => {
-        return financial !== 'Bancoppel' && financial !== 'DOCUFORMAS' && financial !== 'AV CAPITAL' && financial !== 'DIMEX' && financial !== 'RESUELVE'; 
+        return financial !== 'Bancoppel' && financial !== 'DOCUFORMAS' && financial !== 'AV CAPITAL' && financial !== 'RESUELVE'; 
     });
 
     return filteredFinancials;
@@ -133,7 +133,7 @@ export const imgFinancial = (financial) => {
             Pagaloop,
             iBan,
             Lendera, //PRETMEX (FASTTRACK)
-            // Dimex
+            Dimex,
             ION,
             Amifin,
             DeltAi,
@@ -333,15 +333,15 @@ export const dataFinancial = (financial, properties) => {//Propuestas
                 class: 'LENDERA'
             };
 
-        // case 'DIMEX':
-        //     return {
-        //         financiera: 'Dimex',
-        //         monto: properties.monto_preaut.value,
-        //         plazo: 'Hasta 120 meses',
-        //         tasa: '2.5% mensual',
-        //         logo: imgFinancial(financial),
-        //         class: 'DIMEX'
-        //     };
+        case 'DIMEX':
+            return {
+                financiera: 'Neofin',
+                monto: properties.monto_preaut.value,
+                plazo: 'Hasta 120 meses',
+                tasa: '2.5% mensual',
+                logo: imgFinancial(financial),
+                class: 'DIMEX'
+            };
 
         case 'ION':
             return {

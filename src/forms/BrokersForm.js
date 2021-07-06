@@ -78,11 +78,11 @@ const BrokersForms = (props) => {
             </Col>
 
             <Col lg={4}>
-              <FieldText name="mobilephone" placeholder="WhatsApp" normalize="onlyNumbers" className="forceFullWidth" />
+              <FieldText name="mobilephone" placeholder="WhatsApp" normalize="onlyNumbers" maxLength={10} className="forceFullWidth" />
             </Col>
 
             <Col lg={4}>
-              <FieldText name="zip" placeholder="Código postal" normalize="onlyNumbers" className="forceFullWidth" />
+              <FieldText name="zip" placeholder="Código postal" normalize="onlyNumbers" maxLength={5} className="forceFullWidth" />
             </Col>
           </Row>
 
