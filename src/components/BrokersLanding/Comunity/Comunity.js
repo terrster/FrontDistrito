@@ -4,13 +4,9 @@ import { Row, Col } from 'react-bootstrap';
 var calculated = false;
 const Comunity = ({hubspotInfo}) =>{
 
-  // const [calculated, setCalculated] = useState(false);
-
   document.addEventListener("scroll", () => {
     let counterContainer = document.getElementById('counterContainer');
     let scrolled = document.scrollingElement.scrollTop;
-    console.log("scrolled" + scrolled);
-    console.log(counterContainer.offsetTop - 256);
       if (counterContainer && !calculated && scrolled > counterContainer.offsetTop - 256) {
         setTimeout(contador, 500);
       }
@@ -57,8 +53,6 @@ const Comunity = ({hubspotInfo}) =>{
     if(hubspotInfo){
       let counterContainer = document.getElementById('counterContainer');
       let scrolled = document.documentElement.scrollTop || document.body.scrollTop;
-      // console.log("scrolled" + scrolled);
-      // console.log(counterContainer.offsetTop - 200);
       if (counterContainer && scrolled > (counterContainer.offsetTop - 256)){
         contador();
       }
