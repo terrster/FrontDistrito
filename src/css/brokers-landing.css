@@ -68,6 +68,12 @@
 
 @media (min-width: 768px) {
   .titulos{
+    font-size: 38px;
+  }
+}
+
+@media (min-width: 992px) {
+  .titulos{
     font-size: 72px;
   }
 }

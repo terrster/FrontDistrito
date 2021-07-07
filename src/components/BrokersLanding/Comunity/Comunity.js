@@ -1,30 +1,30 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import Title from '../../Generic/Title';
 import { Row, Col } from 'react-bootstrap';
-
+var calculated = false;
 const Comunity = ({hubspotInfo}) =>{
 
-  const [calculated, setCalculated] = useState(false);
+  // const [calculated, setCalculated] = useState(false);
 
   document.addEventListener("scroll", () => {
     let counterContainer = document.getElementById('counterContainer');
     let scrolled = document.scrollingElement.scrollTop;
-      if (counterContainer && scrolled > counterContainer.offsetTop - 400) {
-        if(hubspotInfo){
-          setTimeout(contador, 500);
-        }
+    console.log("scrolled" + scrolled);
+    console.log(counterContainer.offsetTop - 256);
+      if (counterContainer && !calculated && scrolled > counterContainer.offsetTop - 256) {
+        setTimeout(contador, 500);
       }
   });
 
   const contador = () => {
     const counters = document.querySelectorAll('.counter');
-    const speed = 500;
+    // const speed = 500;
     counters.forEach(counter => {
       const updateCount = () => {
         const target = counter.getAttribute('data-target');
         const targetValue = parseInt(hubspotInfo[target]);
         const count = +counter.innerText;
-        const inc = targetValue / speed;
+        // const inc = targetValue / speed;
 
         if (count < targetValue) {
           if (targetValue > 10000) {
@@ -50,16 +50,18 @@ const Comunity = ({hubspotInfo}) =>{
       };
       updateCount();
     });
-    setCalculated(true);
+    calculated = true;
   }
 
   useEffect(() => {
-    if(hubspotInfo && calculated){
-      // const counters = document.querySelectorAll('.counter');
-      // setTimeout(counters.forEach(counter => {
-      //     counter.innerText = 0;
-      // }), 1000);
-      contador();
+    if(hubspotInfo){
+      let counterContainer = document.getElementById('counterContainer');
+      let scrolled = document.documentElement.scrollTop || document.body.scrollTop;
+      // console.log("scrolled" + scrolled);
+      // console.log(counterContainer.offsetTop - 200);
+      if (counterContainer && scrolled > (counterContainer.offsetTop - 256)){
+        contador();
+      }
     }
   }, [hubspotInfo]);
 

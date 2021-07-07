@@ -31,7 +31,14 @@ const BrokersLanding = () =>{
   const history = useHistory();
 
   const [socket, setSocket] = useState(null);
-  const [hubspotInfo, setHubspotInfo] = useState(null);
+  const [hubspotInfo, setHubspotInfo] = useState({
+    Colocado: 0,
+    ColocadoFormatted: 0,
+    Pymes: 0,
+    Brokers: 0,
+    Alianzas: 0,
+    Solicitudes: 0
+  });
   const connectSocket = useCallback(() => {//process.env.REACT_APP_BACKEND, https://apidev.distritopyme.com/
     const socket = io.connect(process.env.REACT_APP_BACKEND, {
         transports: ['websocket'],
