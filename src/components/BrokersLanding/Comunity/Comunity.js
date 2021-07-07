@@ -67,28 +67,28 @@ const Comunity = ({hubspotInfo}) =>{
           <Col md={6} className="mb-4">
             <label className="metropolisReg fz32 blackBlue">Monto colocado</label>
             <div className="titulos coolvetica">
-              +<span className="counter" data-target="Colocado">0</span>M
+              <span className="counter" data-target="Colocado">0</span>M
             </div>
           </Col>
 
           <Col md={6} className="mb-4">
             <label className="metropolisReg fz32 blackBlue">Brokers activos</label>
             <div className="titulos coolvetica">
-              +<span className="counter" data-target="Brokers">0</span>
+              <span className="counter" data-target="Brokers">0</span>
             </div>
           </Col>
 
           <Col md={6} className="mb-4">
             <label className="metropolisReg fz32 blackBlue">Solicitudes</label>
             <div className="titulos coolvetica">
-              +<span className="counter" data-target="Solicitudes">0</span>
+              <span className="counter" data-target="Solicitudes">0</span>
             </div>
           </Col>
 
           <Col md={6} className="mb-4">
             <label className="metropolisReg fz32 blackBlue"> Aliados financieros</label>
             <div className="titulos coolvetica">
-              +<span className="counter" data-target="Alianzas">0</span>
+              <span className="counter" data-target="Alianzas">0</span>
             </div>
           </Col>
         </Row>
