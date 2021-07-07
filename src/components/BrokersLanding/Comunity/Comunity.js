@@ -67,7 +67,7 @@ const Comunity = ({hubspotInfo}) =>{
           <Col md={6} className="mb-4">
             <label className="metropolisReg fz32 blackBlue">Monto colocado</label>
             <div className="titulos coolvetica">
-              <span className="counter" data-target="Colocado">0</span>M
+              <span className="counter" data-target="Colocado">0</span> M
             </div>
           </Col>
 
