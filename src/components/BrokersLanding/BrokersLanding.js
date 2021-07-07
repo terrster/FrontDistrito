@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import BannerBrokers from './Banner/Banner';
 import Info from './Info/Info';
 import Cards from './Cards/Cards';
@@ -8,26 +8,58 @@ import Allies from './Aliados/Allies';
 import BannerFinal from './BannerFinal/BannerFinal'
 import '../../css/brokers-landing.css';
 import { useHistory } from 'react-router-dom';
+import io from 'socket.io-client';
 
 const BrokersLanding = () =>{
 
-document.addEventListener("scroll", () => {
-  let floatButton = document.getElementById("float-button-dp");
-  let cardsBrokers = document.getElementById("cardsBrokers");
-  let comunityBrokers = document.getElementById("comunityBrokers");
-  let scrolled = document.scrollingElement.scrollTop;
+  document.addEventListener("scroll", () => {
+    let floatButton = document.getElementById("float-button-dp");
+    let cardsBrokers = document.getElementById("cardsBrokers");
+    let comunityBrokers = document.getElementById("comunityBrokers");
+    let scrolled = document.scrollingElement.scrollTop;
 
-  if (floatButton && cardsBrokers) {
-    if (scrolled > cardsBrokers.offsetTop - 500 && scrolled < comunityBrokers.offsetTop + 100) {
-      floatButton.style.display = 'block';
+    if (floatButton && cardsBrokers) {
+      if (scrolled > cardsBrokers.offsetTop - 500 && scrolled < comunityBrokers.offsetTop + 100) {
+        floatButton.style.display = 'block';
+      }
+      else{
+        floatButton.style.display = 'none';
+      }
     }
-    else{
-      floatButton.style.display = 'none';
-    }
-  }
-});
+  });
 
-const history = useHistory();
+  const history = useHistory();
+
+  const [socket, setSocket] = useState(null);
+  const [hubspotInfo, setHubspotInfo] = useState(null);
+  const connectSocket = useCallback(() => {//process.env.REACT_APP_BACKEND, https://apidev.distritopyme.com/
+    const socket = io.connect(process.env.REACT_APP_BACKEND, {
+        transports: ['websocket'],
+        autoConnect: true,
+        forceNew: true,
+        query: {
+          'origin': 'hubspotInfo'
+      }
+    });
+    setSocket(socket);
+  }, []);
+
+  useEffect(() => {
+    connectSocket();
+  }, []);
+
+  useEffect(() => {
+    if(socket){
+
+        socket.on('hubspotInfo', (callback) => {
+          callback.ColocadoFormatted = callback.Colocado;
+          callback.Colocado = callback.ColocadoFormatted.replace(/[$,.]/g, "");
+          setHubspotInfo(callback);
+        });
+
+    }
+}, [socket]);
+
  
   return(
     <>
@@ -36,7 +68,7 @@ const history = useHistory();
         <Info />
         <Cards/>
         <Allies />
-        <Comunity/>
+        <Comunity hubspotInfo={hubspotInfo}/>
         {/* <Testimonio /> */}
       </div>
       <BannerFinal />
