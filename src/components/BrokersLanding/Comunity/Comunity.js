@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
 import Title from '../../Generic/Title';
 import { Row, Col } from 'react-bootstrap';
+
 var calculated = false;
+
 const Comunity = ({hubspotInfo}) =>{
 
   document.addEventListener("scroll", () => {
@@ -22,25 +24,26 @@ const Comunity = ({hubspotInfo}) =>{
         const count = +counter.innerText;
         // const inc = targetValue / speed;
 
-        if (count < targetValue) {
-          if (targetValue > 10000) {
-            counter.innerText = parseInt(count + (targetValue / 50));
-          }
-          else if(targetValue > 500 && targetValue < 10000){
-            counter.innerText = parseInt(count + (targetValue / 100));
+        if(targetValue > 0){
+          if (count < targetValue) {
+            if (targetValue > 10000) {
+              counter.innerText = parseInt(count + (targetValue / 50));
+            }
+            else if(targetValue > 500 && targetValue < 10000){
+              counter.innerText = parseInt(count + (targetValue / 100));
+            }
+            else {
+              counter.innerText = count + 1;
+            }
+            setTimeout(updateCount, 1);
           }
           else {
-            counter.innerText = count + 1;
-          }
-          setTimeout(updateCount, 1);
-        }
-        else {
-          if(target === "Colocado"){
-            counter.innerText = hubspotInfo.ColocadoFormatted;
-          }
-          else{
-            // counter.innerText = new Intl.NumberFormat().format(targetValue).toString().replace('.', ',');
-            counter.innerText = targetValue;
+            if(target === "Colocado"){
+              counter.innerText = hubspotInfo.ColocadoFormatted + " M";
+            }
+            else{
+              counter.innerText = new Intl.NumberFormat().format(targetValue).toString().replace('.', ',');
+            }
           }
         }
       };
@@ -67,7 +70,7 @@ const Comunity = ({hubspotInfo}) =>{
           <Col md={6} className="mb-4">
             <label className="metropolisReg fz32 blackBlue">Monto colocado</label>
             <div className="titulos coolvetica">
-              <span className="counter" data-target="Colocado">0</span> M
+              <span className="counter" data-target="Colocado">0</span>
             </div>
           </Col>
 
