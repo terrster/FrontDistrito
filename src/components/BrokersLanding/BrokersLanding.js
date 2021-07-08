@@ -58,7 +58,7 @@ const BrokersLanding = () =>{
   useEffect(() => {
     if(socket){
 
-        socket.on('hubspotInfo', (callback) => {console.log(callback);
+        socket.on('hubspotInfo', (callback) => {
           callback.data.ColocadoFormatted = callback.data.Colocado;
           callback.data.Colocado = callback.data.ColocadoFormatted.replace(/[$,.]/g, "");
           setHubspotInfo(callback.data);
