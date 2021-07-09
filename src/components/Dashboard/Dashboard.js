@@ -173,7 +173,7 @@ const Dashboard = () => {
 
             <Col md={6}>
               <div className="text-center">
-                <label className="dashboard-label label-pymes">Pymes Apoyados</label>
+                <label className="dashboard-label label-pymes">Pymes Apoyadas</label>
                 <div className="dashboard-data">
                   <span className="counter" data-target="Pymes">0</span>
                 </div>
