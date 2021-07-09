@@ -129,7 +129,7 @@ const Dashboard = () => {
   return(
     <>
       
-      <div id="dashboard" className="dashboard container-fluid text-center">
+      <div id="dashboard" className="dashboard container-fluid text-center ">
         <Modal show={show} backdrop="static" keyboard={false} centered size="lg">
           <Modal.Header>
             <Modal.Title className="m-auto fz32">¡Aviso!</Modal.Title>
@@ -142,9 +142,8 @@ const Dashboard = () => {
           </Modal.Footer>
         </Modal>
 
-        <ToastContainer />
-        <div class="area" >
-          <ul class="circles">
+        <div className="area" >
+          <ul className="circles">
             <li></li>
             <li></li>
             <li></li>
@@ -157,51 +156,55 @@ const Dashboard = () => {
             <li></li>
           </ul>
         </div >
-        <Row>
-          <Col md={12}>
-            <img src={LOGO} width="200px" />
-          </Col>
-        </Row>
-        <Row>
-          <Col md={6}>
-            <label className="metropolisReg fz32 blackBlue label-solicitudes">Solicitudes</label>
-            <div className="titulos coolvetica">
-              <span className="counter" data-target="Solicitudes">0</span>
-            </div>
-          </Col>
 
-          <Col md={6} >
-            <label className="metropolisReg fz32 blackBlue label-pymes">Pymes Apoyados</label>
-            <div className="titulos coolvetica">
-              <span className="counter" data-target="Pymes">0</span>
-            </div>
-          </Col>
-        </Row>
+        <div className="campos">
+          <ToastContainer />
+          <Row>
+            <Col md={12}>
+              <img src={LOGO} width="200px" />
+            </Col>
+          </Row>
+          <Row>
+            <Col md={6}>
+              <label className="metropolisReg fz32 blackBlue label-solicitudes">Solicitudes</label>
+              <div className="titulos coolvetica">
+                <span className="counter" data-target="Solicitudes">0</span>
+              </div>
+            </Col>
 
-        <Row>
-          <Col md={12} className="mb-5">
-            <label className="metropolisReg fz32 blackBlue label-monto">Monto colocado</label>
-            <div className="titulos coolvetica">
-              <span className="counter" data-target="Colocado">0</span>
-            </div>
-          </Col>
-        </Row>
+            <Col md={6} >
+              <label className="metropolisReg fz32 blackBlue label-pymes">Pymes Apoyados</label>
+              <div className="titulos coolvetica">
+                <span className="counter" data-target="Pymes">0</span>
+              </div>
+            </Col>
+          </Row>
 
-        <Row>
-          <Col lg={6} >
-            <label className="metropolisReg fz32 blackBlue label-brokers">Brokers Activos</label>
-            <div className="titulos coolvetica">
-              <span className="counter" data-target="Brokers">0</span>
-            </div>
-          </Col>
+          <Row>
+            <Col md={12} className="mb-5">
+              <label className="metropolisReg fz32 blackBlue label-monto">Monto colocado</label>
+              <div className="titulos coolvetica">
+                <span className="counter" data-target="Colocado">0</span>
+              </div>
+            </Col>
+          </Row>
 
-          <Col md={6}>
-            <label className="metropolisReg fz32 blackBlue label-financieros"> Aliados financieros</label>
-            <div className="titulos coolvetica">
-              <span className="counter" data-target="Alianzas">0</span>
-            </div>
-          </Col>
-        </Row>
+          <Row>
+            <Col lg={6} >
+              <label className="metropolisReg fz32 blackBlue label-brokers">Brokers Activos</label>
+              <div className="titulos coolvetica">
+                <span className="counter" data-target="Brokers">0</span>
+              </div>
+            </Col>
+
+            <Col md={6}>
+              <label className="metropolisReg fz32 blackBlue label-financieros"> Aliados financieros</label>
+              <div className="titulos coolvetica">
+                <span className="counter" data-target="Alianzas">0</span>
+              </div>
+            </Col>
+          </Row>
+        </div>
       </div>
 
       <style>{"\

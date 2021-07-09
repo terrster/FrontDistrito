@@ -1,0 +1,9 @@
+#card-home .card-body {
+    transition: 0.3s;
+    border: 4px solid transparent;
+    border-image: linear-gradient(to bottom, #0095FF 45%, #3acfd5 80%) 1;
+  }
+
+  #card-home .card-body:hover {
+  box-shadow: #bbc7c7 10px 10px 10px;
+}
