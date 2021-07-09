@@ -262,6 +262,17 @@
   position: absolute;
 }
 
+.card-header {
+    padding: 0.12rem 0.25rem;
+    margin-bottom: 0;
+    border-bottom: 2px solid #0095FF;
+}
 
+.card-body {
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 1.25rem;
+    background-color: #f4f4f4 !important;
+}
 
 
