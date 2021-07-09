@@ -1,10 +1,11 @@
 import React, { useCallback, useState, useEffect } from 'react';
-import { Row, Col, Modal, Button } from 'react-bootstrap';
+import { Row, Col, Card, Modal, Button } from 'react-bootstrap';
 import io from 'socket.io-client';
 import '../../css/brokers-landing.css';
 import ColocadoSound from '../../assets/sounds/Colocado.mp3';
 import GeneralSound from '../../assets/sounds/General.mp3';
 import { ToastContainer, toast } from "react-toastify";
+import LOGO from '../../assets/img/logo_dp/extras-03.png';
 
 const Dashboard = () => {
 
@@ -122,7 +123,8 @@ const Dashboard = () => {
   }, [hubspotInfo]);
 
   return(
-    <div id="dashboard" className="dashboard container-fluid text-center">
+    <>
+      <div id="dashboard" className="dashboard container-fluid text-center">
         <Modal show={show} backdrop="static" keyboard={false} centered size="lg">
           <Modal.Header>
             <Modal.Title className="m-auto fz32">¡Aviso!</Modal.Title>
@@ -137,42 +139,82 @@ const Dashboard = () => {
 
         <ToastContainer />
 
-        <Row className="pt-4">
-          <Col md={6} className="mb-4">
-            <label className="metropolisReg fz32 blackBlue">Monto colocado</label>
-            <div className="titulos coolvetica">
-              <span className="counter" data-target="Colocado">0</span>
-            </div>
-          </Col>
-
-          <Col md={6} className="mb-4">
-            <label className="metropolisReg fz32 blackBlue">Brokers activos</label>
-            <div className="titulos coolvetica">
-              <span className="counter" data-target="Brokers">0</span>
-            </div>
-          </Col>
-
-          <Col lg={12} md={6} className="mb-4">
-            <label className="metropolisReg fz32 blackBlue">Brokers</label>
-            <div className="titulos coolvetica">
-              <span className="counter" data-target="Brokers">0</span>
-            </div>
-          </Col>
-
-          <Col md={6} className="mb-4">
-            <label className="metropolisReg fz32 blackBlue">Solicitudes</label>
-            <div className="titulos coolvetica">
-              <span className="counter" data-target="Solicitudes">0</span>
-            </div>
-          </Col>
-
-          <Col md={6} className="mb-4">
-            <label className="metropolisReg fz32 blackBlue"> Aliados financieros</label>
-            <div className="titulos coolvetica">
-              <span className="counter" data-target="Alianzas">0</span>
-            </div>
+        <Row>
+          <Col md={12}>
+            <img src={LOGO} width="300px" />
           </Col>
         </Row>
+
+        <Row className="mb-3">
+
+          <Col md={6}>
+            <Card border="light" style={{ height: '11rem' }}>
+              <Card.Header id="box" className="card-header metropolisReg fz32 blackBlue">Monto Colocado</Card.Header>
+              <Card.Body>
+                <Card.Text>
+                  <div className="titulos coolvetica">
+                    <span className="counter" data-target="Colocado">0</span>
+                  </div>
+                </Card.Text>
+              </Card.Body>
+            </Card>
+          </Col>
+
+          <Col md={6}>
+            <Card border="light" style={{ height: '11rem' }}>
+              <Card.Header className="metropolisReg fz32 blackBlue">Aliados Financieros</Card.Header>
+              <Card.Body>
+                <Card.Text>
+                  <div className="titulos coolvetica">
+                    <span className="counter" data-target="Alianzas">0</span>
+                  </div>
+                </Card.Text>
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
+
+        <Row>
+          <Col md={4}>
+            <Card border="light" style={{ height: '11rem' }}>
+              <Card.Header className="metropolisReg fz32 blackBlue">Solicitudes</Card.Header>
+              <Card.Body>
+                <Card.Text>
+                  <div className="titulos coolvetica">
+                    <span className="counter" data-target="Solicitudes">0</span>
+                  </div>
+                </Card.Text>
+              </Card.Body>
+            </Card>
+          </Col>
+
+          <Col md={4} >
+            <Card border="light" style={{ height: '11rem' }}>
+              <Card.Header className="metropolisReg fz32 blackBlue">Pymes Apoyados</Card.Header>
+              <Card.Body>
+                <Card.Text>
+                  <div className="titulos coolvetica">
+                    <span className="counter" data-target="Pymes">0</span>
+                  </div>
+                </Card.Text>
+              </Card.Body>
+            </Card>
+          </Col>
+
+          <Col md={4} >
+            <Card border="light" style={{ height: '11rem' }}>
+              <Card.Header className="metropolisReg fz32 blackBlue">Brokers Activos</Card.Header>
+              <Card.Body>
+                <Card.Text>
+                  <div className="titulos coolvetica">
+                    <span className="counter" data-target="Brokers">0</span>
+                  </div>
+                </Card.Text>
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
+      </div>
 
       <style>{"\
           #clgo{\
@@ -191,7 +233,8 @@ const Dashboard = () => {
             background-color: #f4f4f4 !important;\
         }\
       "}</style>
-    </div>
+  
+    </>
   );
 }
 
