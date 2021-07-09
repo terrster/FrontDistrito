@@ -41,7 +41,7 @@ const NavBar = props => {
 	let classDefaultLink = "text-center coolvetica fz16 gray50 heigth-45 nav-btn d-flex";
 
 	return (
-		<div className="pos-f-t">
+		<div id="navbar-dp" className="pos-f-t">
 		 <Navbar collapseOnSelect className="nav-bar" expand="lg" bg="light" expanded={isOpen}>
 		 	<Navbar.Brand href="/"><img src={logo} alt="Distrito Pyme Logo" className="nav-logo"/></Navbar.Brand>
 			 {location.pathname != '/brokers' &&

@@ -256,6 +256,12 @@
   }
 }
 
+.dashboard{
+  background-color: #f4f4f4 !important;
+  height: 100% !important;
+  position: absolute;
+}
+
 
 
 

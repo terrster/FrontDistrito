@@ -52,6 +52,7 @@ import Solicitud from "./components/Solicitud/Solicitud";
 import Propuestas from "./components/Propuestas/Propuestas";
 import Allies from "./components/Allies/Allies";
 import BrokersLanding from "./components/BrokersLanding/BrokersLanding";
+import Dashboard  from "./components/Dashboard/Dashboard"
 
 // ROUTER & REDUX
 import {
@@ -184,6 +185,8 @@ class App extends Component {
                 <PrivateRoute exact path="/propuestas" component={Propuestas}/>
 
                 <Route path="/brokers" exact component = {BrokersLanding}/>
+
+                <Route path="/dashboard" exact component = {Dashboard}/>
                 
                 <Redirect to="/"/>
               </Switch>

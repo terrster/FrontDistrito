@@ -12,7 +12,7 @@ import youtube from '../../../assets/img/redes_sociales/Youtube.png';
 
 const Footer = props => {
     return(
-    <div className="row d-flex justify-content-center footer-bg">
+    <div id="footer-dp" className="row d-flex justify-content-center footer-bg">
         <div className="col-xs-12 col-lg-3 text-center text-lg-left mb-1 mb-lg-0" >
             <img src={logo} alt="Distrito Pyme" className="nav-logo mb-1 mb-lg-0"/>
                 <div className="metropolisReg fw300 fz16 gray600"  >
