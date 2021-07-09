@@ -9,7 +9,7 @@
     display: block;
     margin: 0 auto;
     width: auto;
-    max-width: 30%;
+    max-width: 45%;
     z-index: 2;
 }
 
@@ -18,7 +18,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    margin-top: 50px;
+    margin-top: 40px;
     z-index: 2;
 }
 
@@ -56,6 +56,26 @@
     -webkit-background-clip: text;  
     -webkit-text-fill-color: transparent;  
 }  
+
+@media (min-width: 400px) {
+    .dashboard-logo{
+        max-width: 35%;
+    }
+
+    .dashboard-container{
+        margin-top: 50px;
+    }
+}
+
+@media (min-width: 400px) {
+    .dashboard-logo{
+        max-width: 28%;
+    }
+
+    .dashboard-container{
+        margin-top: 50px;
+    }
+}
 
 @media (min-width: 768px) {
     .dashboard-logo{
