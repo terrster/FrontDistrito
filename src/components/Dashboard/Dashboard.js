@@ -1,16 +1,16 @@
 import React, { useCallback, useState, useEffect } from 'react';
-import {Row, Col} from 'react-bootstrap';
+import { Row, Col, Modal, Button } from 'react-bootstrap';
 import io from 'socket.io-client';
 import '../../css/brokers-landing.css';
-import useSound from 'use-sound';
-import ColocadoSound from '../../assets/sounds/Colocado.mp3'
-import GeneralSound from '../../assets/sounds/General.mp3'
-
+import ColocadoSound from '../../assets/sounds/Colocado.mp3';
+import GeneralSound from '../../assets/sounds/General.mp3';
+import { ToastContainer, toast } from "react-toastify";
 
 const Dashboard = () => {
 
-  const [play] = useSound(ColocadoSound);
-  const [General] = useSound(GeneralSound);
+  const [Colocado] = useState(new Audio(ColocadoSound));
+  const [General] = useState(new Audio(GeneralSound));
+  const [show, setShow] = useState(true);
 
   const [socket, setSocket] = useState(null);
   const [hubspotInfo, setHubspotInfo] = useState({
@@ -33,37 +33,60 @@ const Dashboard = () => {
     setSocket(socket);
   }, []);
 
-  window.onload = function () {
-    setTimeout(connectSocket, 1000);
-  };
+  useEffect(() => {
+    if(!show){
+      setTimeout(connectSocket, 1);
+    }
+  }, [show]);
 
-  // useEffect(() => {
-  //   connectSocket();
-  // }, []);
+  const sleep = m => new Promise(r => setTimeout(r, m));
 
   useEffect(() => {
     if (socket) {
-
-      socket.on('hubspotInfo', (callback) => {
+      socket.on('hubspotInfo', async(callback) => {
         callback.data.ColocadoFormatted = callback.data.Colocado;
         callback.data.Colocado = callback.data.ColocadoFormatted.replace(/[$,.]/g, "");
         setHubspotInfo(callback.data);
+
+        if(callback.difference.length){
+          if(callback.difference.includes('Colocado')){
+            toast.success(<span dangerouslySetInnerHTML={{ __html: "Hemos colocado un nuevo crédito &#128276;" }}/>);
+            Colocado.play();
+            await sleep(Colocado.duration * 1000);
+          }
+          
+          if(callback.difference.includes('Pymes')){
+            General.play();
+            await sleep(General.duration * 1000);
+          }
+
+          if(callback.difference.includes('Brokers')){
+            General.play();
+            await sleep(General.duration * 1000);
+          }
+
+          if(callback.difference.includes('Alianzas')){
+            General.play();
+            await sleep(General.duration * 1000);
+          }
+
+          if(callback.difference.includes('Solicitudes')){
+            General.play();
+            await sleep(General.duration * 1000);
+          }
+        }
       });
 
     }
   }, [socket]);
 
-  ///////
-
   const contador = () => {
     const counters = document.querySelectorAll('.counter');
-    // const speed = 500;
     counters.forEach(counter => {
       const updateCount = () => {
         const target = counter.getAttribute('data-target');
         const targetValue = parseInt(hubspotInfo[target]);
         const count = +counter.innerText;
-        // const inc = targetValue / speed;
 
         if (targetValue > 0) {
           if (count < targetValue) {
@@ -93,15 +116,28 @@ const Dashboard = () => {
   }
 
   useEffect(() => {
-    if (hubspotInfo) {
-         contador();
-         play();
+    if (hubspotInfo && !show) {
+        contador();
     }
   }, [hubspotInfo]);
 
   return(
-    <div className="dashboard container-fluid text-center">
-        <Row className="mt-5">
+    <div id="dashboard" className="dashboard container-fluid text-center">
+        <Modal show={show} backdrop="static" keyboard={false} centered size="lg">
+          <Modal.Header>
+            <Modal.Title className="m-auto fz32">¡Aviso!</Modal.Title>
+          </Modal.Header>
+          <Modal.Body className="text-center text-justify fz22"><strong>Distrito Pyme</strong> reproducirá algunos sonidos que estarán conectados al entorno en tiempo real</Modal.Body>
+          <Modal.Footer>
+              <Button className="btn-blue-general m-auto" style={{ width: '180px' }} onClick={() => setShow(false)}>
+                Aceptar
+              </Button>
+          </Modal.Footer>
+        </Modal>
+
+        <ToastContainer />
+
+        <Row className="pt-4">
           <Col md={6} className="mb-4">
             <label className="metropolisReg fz32 blackBlue">Monto colocado</label>
             <div className="titulos coolvetica">
@@ -151,6 +187,9 @@ const Dashboard = () => {
           #footer-dp{\
               display: none !important;\
           }\
+          body{\
+            background-color: #f4f4f4 !important;\
+        }\
       "}</style>
     </div>
   );
