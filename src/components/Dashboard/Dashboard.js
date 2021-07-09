@@ -51,29 +51,33 @@ const Dashboard = () => {
 
         if(callback.difference.length){
           if(callback.difference.includes('Colocado')){
-            toast.success(<span dangerouslySetInnerHTML={{ __html: "Hemos colocado un nuevo crédito &#128276;" }}/>);
+            toast.success("Colocamos un nuevo crédito 🔔");
             Colocado.play();
             await sleep(Colocado.duration * 1000);
           }
           
           if(callback.difference.includes('Pymes')){
+            toast.success("Logramos apoyar a una nueva pyme 👌");
             General.play();
-            await sleep(General.duration * 1000);
+            await sleep(General.duration * 1100);
           }
 
           if(callback.difference.includes('Brokers')){
+            toast.success("Un nuevo broker se nos ha unido 👌");
             General.play();
-            await sleep(General.duration * 1000);
+            await sleep(General.duration * 1200);
           }
 
           if(callback.difference.includes('Alianzas')){
+            toast.success("Formalizamos una nueva alianza 💪");
             General.play();
-            await sleep(General.duration * 1000);
+            await sleep(General.duration * 1300);
           }
 
           if(callback.difference.includes('Solicitudes')){
+            toast.success("Recíbimos una nueva solicitud 💪");
             General.play();
-            await sleep(General.duration * 1000);
+            await sleep(General.duration * 1400);
           }
         }
       });
