@@ -276,23 +276,23 @@
 }
 
 .label-solicitudes{
-  border-bottom: 2px solid #007bff;
+  border-bottom: 4px solid #007bff;
 }
 
 .label-pymes{
-  border-bottom: 2px solid #ffc107;
+  border-bottom: 4px solid #ffc107;
 }
 
 .label-monto{
-  border-bottom: 2px solid #28a745;
+  border-bottom: 4px solid #28a745;
 }
 
 .label-brokers{
-  border-bottom: 2px solid #6c757d;
+  border-bottom: 4px solid #6c757d;
 }
 
 .label-financieros{
-  border-bottom: 2px solid #dc3545;
+  border-bottom: 4px solid #dc3545;
 }
 
 .area{
@@ -318,6 +318,7 @@
     list-style: none;
     width: 20px;
     height: 20px;
+    /* background-color: #6DFFFF; */
     background-image: linear-gradient(rgb(0, 149, 255 ), rgb(109, 255, 255));
     animation: animate 25s linear infinite;
     bottom: -150px;
