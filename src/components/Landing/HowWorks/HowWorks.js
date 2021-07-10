@@ -14,14 +14,16 @@ const HowWorks = props => {
 		<div id="howWorks" className="pt-4 text-center ml-auto mr-auto">
 			<Title title="Hoy en día existe una infinidad de créditos para tu empresa o negocio pero solo una plataforma
 			que aloja todas esas opciones en una sola solicitud en menos de 15 minutos" className="subtitle-dp fz29 fw300 ls-01" />
-			<Title title="Requisitos básicos" className="title-dp fw500 mt-5 mb-1 fz42" />
+		
+			<Title title="Requisitos básicos" className="title-dp fw500 mt-5 mb-4 fz42" />
+
 				<Row className="justify-content-center mt-3">
 
 				<Col xl={3} md={5} sm={7} className="mb-4">
 					<Card id="card-home" style={{ height: '20rem' }} className="tarjet-info-home">
 						<Card.Body>
 							<Card.Text className="metropolisReg fz22 blackBlue text-center">
-							  Sin alta en el SAT
+								<div className="txt">Sin alta en el SAT</div>
 							</Card.Text>
 						</Card.Body>
 					</Card>
@@ -31,7 +33,7 @@ const HowWorks = props => {
 					<Card id="card-home" style={{ height: '20rem' }} className="tarjet-info-home">
 						<Card.Body>
 							<Card.Text className="metropolisReg fz22 blackBlue text-center">
-								Personas Físicas con Actividad Empresarial
+								<div className="txt">Personas Físicas con Actividad Empresarial</div>
 							</Card.Text>
 						</Card.Body>
 					</Card>
@@ -41,7 +43,7 @@ const HowWorks = props => {
 					<Card id="card-home" style={{ height: '20rem' }} className="tarjet-info-home">
 						<Card.Body>
 							<Card.Text className="metropolisReg fz22 blackBlue text-center">
-								Persona Moral
+								<div className="txt">Persona Moral</div>
 							</Card.Text>
 						</Card.Body>
 					</Card>
@@ -60,6 +62,7 @@ const HowWorks = props => {
 						<Icons img={REQUISITOS_BÁSICOS_03} alt="Ofertas" width="100px" text="Buen buró (en caso de no contar con buen buró se puede analizar la opción de una garantía)"/>
 					</Col> */}
 				</Row>
+			 <Title title="8 De Cada 10 Solicitudes Recibe Una Opción De Crédito" className="title-dp fw500 mt-4 mb-5 fz42" />
 		</div>
 	)
 }

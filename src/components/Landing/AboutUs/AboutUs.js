@@ -8,10 +8,32 @@ import prizes from '../../../assets/img/logos-pitch-3-x@2x.png';
 import vtxnegocios from '../../../assets/img/aboutus/vxtnegocios.png';
 import grantthornton from '../../../assets/img/aboutus/grantthornton.png';
 
+import { Container } from 'react-bootstrap';
+import Marquee from 'react-marquee-slider';
+import { imgFinancial } from '../../../utils/Financials';
+
+
+
 const AboutUs = props => {
+
+    const allies = imgFinancial('ALL');
+
     return(
-        <div id="about" className="pt-0 text-center">
-            <Title title="Nosotros" className="title-dp fz42 fw500 mb-1"/>
+        <div id="about" className="pt-0 text-center mt-5">
+            
+            <Container>
+                <Marquee velocity={12}>
+                    {
+                        allies.map((name, key) => {
+                            return <div key={key}>
+                                <img className="imgAlianzaBrokers mr-3" src={name} alt={`allies${key}`} />
+                            </div>
+                        })
+                    }
+                </Marquee>
+            </Container>
+
+            <Title title="Nosotros" className="title-dp fz42 fw500 mb-2"/>
             <div className="subtitle-dp fw300 mb-2 fz29" style={{letterSpacing : '0.1px'}}>
                 <p>Somos la mejor plataforma para solicitar crédito</p>
                 <p className="gray50">#ComunidadDeCrédito</p>
