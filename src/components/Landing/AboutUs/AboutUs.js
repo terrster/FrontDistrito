@@ -20,7 +20,8 @@ const AboutUs = props => {
 
     return(
         <div id="about" className="pt-0 text-center mt-5">
-            
+
+        <Title title="Alianzas" className="title-dp fz42 fw500 mb-2" />
             <Container>
                 <Marquee velocity={12}>
                     {

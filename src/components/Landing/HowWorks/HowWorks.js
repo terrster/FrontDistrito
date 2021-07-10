@@ -19,7 +19,7 @@ const HowWorks = props => {
 
 				<Row className="justify-content-center mt-3">
 
-				<Col xl={3} md={5} sm={7} className="mb-4">
+				<Col xl={3} md={4} sm={7} className="mb-4">
 					<Card id="card-home" style={{ height: '20rem' }} className="tarjet-info-home">
 						<Card.Body>
 							<Card.Text className="metropolisReg fz22 blackBlue text-center">
@@ -29,7 +29,7 @@ const HowWorks = props => {
 					</Card>
 				</Col>
 
-				<Col xl={3} md={5} sm={7} className="mb-4">
+				<Col xl={3} md={4} sm={7} className="mb-4">
 					<Card id="card-home" style={{ height: '20rem' }} className="tarjet-info-home">
 						<Card.Body>
 							<Card.Text className="metropolisReg fz22 blackBlue text-center">
@@ -39,7 +39,7 @@ const HowWorks = props => {
 					</Card>
 				</Col>
 
-				<Col xl={3} md={5} sm={7} className="mb-4">
+				<Col xl={3} md={4} sm={7} className="mb-4">
 					<Card id="card-home" style={{ height: '20rem' }} className="tarjet-info-home">
 						<Card.Body>
 							<Card.Text className="metropolisReg fz22 blackBlue text-center">
