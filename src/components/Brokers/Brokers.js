@@ -82,7 +82,7 @@ const Brokers = () => {
 
             <Container>
                 <div className="metropolisReg fz12 blackBlue text-justify">
-                Nuestro plan de <b>Brokers Digital</b>, te permite adquirir una licencia exclusiva de <b>distritopyme.com</b> y las herramientas 
+                Nuestro plan de <b>Brokers Digital</b>, te permite adquirir una membresía exclusiva de <b>distritopyme.com</b> y las herramientas 
                 necesarias para ayudarte a colocar más rápido
                 y ofrecerle a tus clientes las mejores opciones de crédito.
                 <br/>
@@ -93,7 +93,7 @@ const Brokers = () => {
                 • Contar con cartera de prospectos. <br />
                 </div>
 
-                <Title title="Al registrarte recibirás toda la información en tu correo y nuestro equipo de Brokers Digitales 
+                <Title title="Al registrarte recibirás toda la información en tu correo y nuestro equipo de Atención a Brokers Digitales 
                 te contactará para que comiences ¡YA!" 
                 className="subtitle-dp fz14 mt-3 mb-3" />
 

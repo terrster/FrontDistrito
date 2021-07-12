@@ -26,7 +26,7 @@ const Documents = (props) => {
         otherActs : [], 
         financialStatements : [], 
         rfc : [] , 
-        acomplishOpinion : [], 
+        // acomplishOpinion : [], 
         lastDeclarations : [], 
         facturacion: [],
         others : [], 

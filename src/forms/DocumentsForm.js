@@ -24,7 +24,7 @@ const DocumentsForm = (props) => {
     const rfc = createRef();
     //const submitButtom = createRef();
     const lastDeclarations = createRef();
-    const acomplishOpinion = createRef();
+    // const acomplishOpinion = createRef();
     //const cventerprise = createRef();
     const proofAddressMainFounders = createRef();
     const collectionReportSaleTerminals = createRef();
@@ -103,11 +103,11 @@ const DocumentsForm = (props) => {
             name: "lastDeclarations",
             refs: lastDeclarations,
           },
-          {
-            title: "Opinión de cumplimiento",
-            name: "acomplishOpinion",
-            refs: acomplishOpinion,
-          },
+          // {
+          //   title: "Opinión de cumplimiento",
+          //   name: "acomplishOpinion",
+          //   refs: acomplishOpinion,
+          // },
           {
             title: "Fotos de tu empresa o negocio u otros",
             name: "others",
