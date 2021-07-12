@@ -218,7 +218,6 @@ let SignupForm = (props) => {
               className="mt-50 btn-blue-general btn-gray-general"
               style={{ width: '250px' }}
 							onClick={() => {
-                props.validateForm().then(errors => props.setTouched({..props.touched, ...errors}))
                 goToError()
               }}
 						>
