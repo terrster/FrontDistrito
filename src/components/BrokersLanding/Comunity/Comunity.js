@@ -21,7 +21,7 @@ const Comunity = ({hubspotInfo}) =>{
       const updateCount = () => {
         const target = counter.getAttribute('data-target');
         const targetValue = parseInt(hubspotInfo[target]);
-        const count = +counter.innerText;
+        const count = counter.innerText === '--' ? 0 : +counter.innerText;
         // const inc = targetValue / speed;
 
         if(targetValue > 0){
@@ -70,28 +70,28 @@ const Comunity = ({hubspotInfo}) =>{
           <Col md={6} className="mb-4">
             <label className="metropolisReg fz32 blackBlue">Monto colocado</label>
             <div className="titulos coolvetica">
-              <span className="counter" data-target="Colocado">0</span>
+              <span className="counter" data-target="Colocado">--</span>
             </div>
           </Col>
 
           <Col md={6} className="mb-4">
             <label className="metropolisReg fz32 blackBlue">Brokers activos</label>
             <div className="titulos coolvetica">
-              <span className="counter" data-target="Brokers">0</span>
+              <span className="counter" data-target="Brokers">--</span>
             </div>
           </Col>
 
           <Col md={6} className="mb-4">
             <label className="metropolisReg fz32 blackBlue">Solicitudes</label>
             <div className="titulos coolvetica">
-              <span className="counter" data-target="Solicitudes">0</span>
+              <span className="counter" data-target="Solicitudes">--</span>
             </div>
           </Col>
 
           <Col md={6} className="mb-4">
             <label className="metropolisReg fz32 blackBlue"> Aliados financieros</label>
             <div className="titulos coolvetica">
-              <span className="counter" data-target="Alianzas">0</span>
+              <span className="counter" data-target="Alianzas">--</span>
             </div>
           </Col>
         </Row>
