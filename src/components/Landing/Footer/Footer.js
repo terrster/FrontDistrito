@@ -12,7 +12,7 @@ import youtube from '../../../assets/img/redes_sociales/Youtube.png';
 
 const Footer = props => {
     return(
-    <div className="row d-flex justify-content-center footer-bg">
+    <div id="footer-dp" className="row d-flex justify-content-center footer-bg">
         <div className="col-xs-12 col-lg-3 text-center text-lg-left mb-1 mb-lg-0" >
             <img src={logo} alt="Distrito Pyme" className="nav-logo mb-1 mb-lg-0"/>
                 <div className="metropolisReg fw300 fz16 gray600"  >
@@ -40,6 +40,7 @@ const Footer = props => {
             <div className="metropolisReg fw300 fz18"><a href="/terminos-y-condiciones" className="footer-link" target="blank">Términos y condiciones</a></div>
             <div className="metropolisReg fw300 fz18"><a href="/privacidad" className="footer-link" target="blank">Aviso de privacidad</a></div>
             <div className="metropolisReg fw300 fz18"><a className="footer-link" href="mailto:contacto@distritopyme.com">Trabaja en Distrito Pyme</a></div>
+            <div className="metropolisReg fw300 fz18"><a className="footer-link" href="/alianza">Quiero ser Aliado Financiero</a></div>
         </div>
         <div className="col-12 col-lg-3">
             <div className="metropolisMed fw500 fz24">Contacto</div>

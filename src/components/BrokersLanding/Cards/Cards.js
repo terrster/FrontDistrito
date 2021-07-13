@@ -36,15 +36,16 @@ const Cards = () => {
               <Icons img={FIRMA} alt="Firma" width="100px" />
             <Card.Body>
               <Card.Title>Firma tu contrato</Card.Title>
-              <Card.Text className="metropolisReg fz12 blackBlue text-center">
+              <Card.Text className="metropolisReg fz12 blackBlue text-left">
                 Nuestro proceso de firma es 100% Digital.
-
                 Necesitarás: <br />
-                • INE. <br />
-                • Comprobante de domicilio. <br />
-                • RFC. <br />
-                • Estado de cuenta bancario. <br />
-                • Acta Constitutiva. (en caso de ser personal moral)
+                  <ul>
+                    <li>INE</li>
+                    <li>Comprobante de domicilio</li>
+                    <li>RFC</li>
+                    <li>Estados de cuentas bancarios</li>
+                    <li>Acta constitutiva. (en casa de ser personal moral)</li>
+                  </ul>
               </Card.Text>
             </Card.Body>
           </Card>
@@ -71,12 +72,14 @@ const Cards = () => {
               <Icons img={HERRAMIENTAS} alt="Herramientas" width="100px" />
             <Card.Body>
               <Card.Title>Recibe tus herramientas</Card.Title>
-              <Card.Text className="metropolisReg fz12 blackBlue text-center">
-                • ID exclusivo que te identifica como broker. <br />
-                • Acceso a CRM. <br />
-                • Plan de marketing y desarrollo de tu propia marca.<br />
-                • Tarjeta de presentación digital.<br />
-                • Y más
+              <Card.Text className="metropolisReg fz12 blackBlue text-left">
+                  <ul>
+                    <li>ID exclusivo que te identifica como broker.</li>
+                    <li>Acceso a CRM.</li>
+                    <li>Plan de marketing y desarrollo de tu propia marca.</li>
+                    <li>Tarjeta de presentación digital.</li>
+                    <li> Y más</li>
+                  </ul>
               </Card.Text>
             </Card.Body>
           </Card>

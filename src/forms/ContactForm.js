@@ -1,0 +1,132 @@
+import React, { useState, useEffect } from 'react';
+import { withFormik, Form, Field, ErrorMessage } from 'formik';
+import { Row, Col, Button, Container, Alert } from 'react-bootstrap';
+import HomeValidations from '../components/Validate/homeValidations';
+import scroll from "../utils/scroll";
+import ReCAPTCHA from "react-google-recaptcha";
+
+const HomeForm = (props) => {
+
+  const goToError = () => {
+    const nameError = document.getElementById("name-error");
+    const emailError = document.getElementById("email-error");
+    const messageError = document.getElementById("message-error");
+
+    const errors = [
+      nameError,
+      emailError,
+      messageError
+    ];
+    for (let x = 0; x < errors.length; x++) {
+      if (errors[x] != null) {
+        scroll(errors[x].id);
+        break;
+      }
+    }
+  }
+
+  const onChange = value => { setButton(!value) };
+
+  const [button, setButton] = useState(true);
+  const [disabled, setDisabled] = useState(true);
+
+  if (disabled && props.isValid) {
+    setDisabled(false);
+  }
+  if (!disabled && !props.isValid) {
+    setDisabled(true);
+  }
+
+  useEffect(() => {
+    if(props.success){
+      props.resetForm({});
+    }
+  }, [props.success])
+
+  return(
+    <>
+      <Container>
+        <Form>
+          <Row>
+            <Col lg={9}>
+              <Field name="name" placeholder="Nombre completo" className="metropolisReg fz20 mb24 input-doubt mb-2 mx-auto"/>
+              <ErrorMessage name={"name"} render={msg => <div id={`name-error`} className="error mb-1">{msg}</div>}/>
+            </Col>
+
+            <Col lg={9}>
+              <Field type="email" name="email" placeholder="Correo" className="metropolisReg fz20 mb24 input-doubt mb-2 mx-auto"/>
+              <ErrorMessage name={"email"} render={msg => <div id={`email-error`} className="error mb-1">{msg}</div>}/>
+            </Col>
+
+            <Col lg={9}>
+              <Field as="textarea" name="message" placeholder="Mensaje" className="metropolisReg fz20 mb24 input-doubt mb-2 mx-auto"/>
+              <ErrorMessage name={"message"} render={msg => <div id={`message-error`} className="error">{msg}</div>}/>
+            </Col>
+
+            <Col lg={9}>
+              {
+                  props.success.show &&
+                  <Alert variant="success">
+                      <strong>{props.success.msg}</strong>
+                  </Alert>
+              }
+              {
+                  props.error.show &&
+                  <Alert variant="danger">
+                      <strong>{props.error.msg}</strong>
+                  </Alert>
+              }
+              <div className="recaptcha-container">
+                <ReCAPTCHA
+                  sitekey="6Ld2huQZAAAAANpPc8zQKPnS948P7vzt2T7t-GCF"
+                  onChange={onChange}
+                />
+              </div>
+
+              <div className="text-center mb-5">
+                {
+
+                  !disabled && !button ? (
+                    <Button
+                      type="submit"
+                      className="mt-50 btn-blue-general"
+                      style={{ width: '300px' }}
+                    >
+                      Enviar
+                    </Button>
+                  ) : (
+                    <Button
+                      type="button"
+                      className="mt-50 btn-blue-general btn-gray-general"
+                      style={{ width: '300px' }}
+                      onClick={() => {
+                        props.validateForm().then(errors => props.setTouched({ ...props.touched, ...errors }))
+                        goToError()
+                      }}
+                    >
+                      Enviar
+                    </Button>
+                  )
+                }
+              </div>
+            </Col>
+          </Row>
+        </Form>
+      </Container>
+    </>
+  )
+}
+
+export default withFormik({
+  mapPropsToValues({ initialValues }) {
+    return initialValues;
+  },
+  validate: HomeValidations,
+  handleSubmit(values, formikBag) {
+    formikBag.setSubmitting(false);
+    formikBag.props.handleSubmit(values);
+  },
+  // enableReinitialize: true,
+  displayName: 'HomeForm'
+})(HomeForm);
+
