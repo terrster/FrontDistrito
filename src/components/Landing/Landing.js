@@ -5,7 +5,7 @@ import LandSimulator from '../Simulator/LandSimulator';
 // import AboutUs from './AboutUs/AboutUs';
 import Video from './Video/Video';
 import HowWorks from './HowWorks/HowWorks';
-import Doubts from './Doubts/Doubts';
+import Contact from './Contact/Contact';
 import Axios from "../../utils/axios";
 import CreditOption from './CreditOption/CreditOption';
 import Slider from '../BrokersLanding/Aliados/Allies';
@@ -68,7 +68,7 @@ const Landing = () => {
                 {/* <AboutUs />       */}
                 <Comunity hubspotInfo={hubspotInfo}/>
                 <Video />
-                <Doubts /> 
+                <Contact />
             </div>
         </div>
     );
