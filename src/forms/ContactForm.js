@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { withFormik, Form, Field, ErrorMessage } from 'formik';
-import { Row, Col, Button, Container } from 'react-bootstrap';
+import { Row, Col, Button, Container, Alert } from 'react-bootstrap';
 import HomeValidations from '../components/Validate/homeValidations';
 import scroll from "../utils/scroll";
 import ReCAPTCHA from "react-google-recaptcha";
@@ -37,6 +37,12 @@ const HomeForm = (props) => {
     setDisabled(true);
   }
 
+  useEffect(() => {
+    if(props.success){
+      props.resetForm({});
+    }
+  }, [props.success])
+
   return(
     <>
       <Container>
@@ -58,6 +64,18 @@ const HomeForm = (props) => {
             </Col>
 
             <Col lg={9}>
+              {
+                  props.success.show &&
+                  <Alert variant="success">
+                      <strong>{props.success.msg}</strong>
+                  </Alert>
+              }
+              {
+                  props.error.show &&
+                  <Alert variant="danger">
+                      <strong>{props.error.msg}</strong>
+                  </Alert>
+              }
               <div className="recaptcha-container">
                 <ReCAPTCHA
                   sitekey="6Ld2huQZAAAAANpPc8zQKPnS948P7vzt2T7t-GCF"
