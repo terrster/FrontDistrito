@@ -1,57 +1,64 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState }  from 'react';
 import Title from '../../Generic/Title'
 import { Button, Row, Col} from 'react-bootstrap';
+import HomeForm from '../../../forms/HomeForm';
+import axios from '../../../utils/axios';
+import { useHistory } from 'react-router-dom';
+import { useDispatch } from "react-redux";
+import { updateLoader } from "../../../redux/actions/loaderActions";
+
 
 import "../../../css/doubts.css";
 import titoLupa from '../../../assets/img/tito-lupa@2x.png'
 
 const Doubts = () => {
-
-	const [data, setData] = useState({ 
-		email: { value: '', isValid: false },
-		name: { value: '', isValid: false }
+	const history = useHistory();
+	const dispatch = useDispatch();
+	const [error, setError] = useState({
+		show: false,
+		msg: ''
 	});
-	const [status, setStatus] = useState(false)
 
-	const handleSend = async() => {
 
-		/* let contactEmail = await this.props.sendEmailContact({variables: {
-			from:this.state.data.email.value,
-			to: "contacto@distritopyme.com",
-			message:"Mensaje enviado desde DP",
-			subject:this.state.data.name.value
-        }});
-        
-		if(contactEmail.data.sendEmail.status){
-			this.setState({status: true});
-		} */
+	useEffect(() => {
+		window.scrollTo(0, 0);
+	}, []);
+
+	const initialValues = {
+		name: '',
+		email: '',
+		message: ''
 	}
 
-	const handleChange = (e) => {
-		let i = e.target;
-		let newData = {
-			email: data.email, 
-			name: data.name
-		};
-		if(i.id === 'name'){
-			newData.name.value = i.value;
-			newData.name.isValid = false;
-			if(newData.name.value.length > 5){
-				newData.name.isValid = true;
-			}
-		}else if(i.id === 'email'){
-			 newData.email.value = i.value;
-			 newData.email.isValid = false;
-			if(newData.email.value.length > 5 && /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(i.value)){
-				newData.email.isValid = true;
-			}
+	const handleSubmit = async (values) => {
+		dispatch(updateLoader(true));
+
+		let { data } = await axios.post('broker', values);
+
+		if (data.code === 200) {
+			window.scrollTo(0, 0);
+			history.push("/solicitud_enviada_brokers");
 		}
-		setData(newData);
+		else {
+			setError({
+				show: true,
+				msg: data.msg
+			});
+			setTimeout(() => {
+				setError({
+					msg: '',
+					show: false
+				})
+			}, 5000);
+		}
+
+		dispatch(updateLoader(false));
 	}
+	
 
 
 	return (
-		<div className="text-center" style={{marginBottom : '-10px'}}>
+		<div className="text-center mt-5"  style={{marginBottom : '-10px'}}>
 			<Title className="title-dp fw500 fz38 pt-3" title="¡Contáctanos!"/>
 			<Title className="title-dp fw500 fz38 mb-18" title="Déjanos tus datos"/>
 			<div className="mr-auto ml-auto" style={{maxWidth : '1200px'}}>
@@ -60,35 +67,9 @@ const Doubts = () => {
 						<img className="d-lg-block d-none" src={titoLupa} width="150px" alt="Tito lupa" style={{marginTop : '10px'}} />
 					</Col>
 					<Col lg={7} className="d-flex justify-content-center">
-						<form className="" style={{maxWidth : '560px', minWidth: '100%'}}>
-							<div className="form-group">
-								<input type="text" id="name" name="name" placeholder="Nombre completo" className="metropolisReg fz20 mb24 input-doubt mb-2 mx-auto" onChange={handleChange}/>
-								{
-									!data.name.isValid && data.name.value &&
-									<div className="error text-left ml-2">Ingresa un nombre mayor a 5 caracteres</div>
-								}
-								
-							</div>
-							<div className="form-group">
-								<input type="text" id="email" name="email" placeholder="Correo electrónico" className="metropolisReg fz20 input-doubt" onChange={handleChange}/>
-								{
-									!data.email.isValid && data.email.value &&
-									<div className="error text-left ml-2">Ingrese un correo electrónico valido</div>
-								}
-							</div>
-							{
-								status ?
-								<div className="mb-5">
-									<div className="text-center mt-5 h4 opacity-50">Correo enviado Satisfactoriamente.</div>
-									<div className="text-center mt-1  opacity-50">Pronto nos pondremos en contacto contigo.</div>
-								</div>
-								:
-								<div className="form-group text-center text-lg-right">
-									<Button className="btn-blue-general fw500 white fz16 mt-24 mb-5 mb-lg-0" disabled={(data.email.isValid && data.name.isValid) ? false : true} onClick={handleSend}>¡Contáctenme!</Button>
-								</div>
-							}
-						</form>
+						<HomeForm initialValues={initialValues} handleSubmit={handleSubmit}/>
 					</Col>
+					
 				</Row>
 			</div>
 		</div>
