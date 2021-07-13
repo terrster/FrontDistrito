@@ -3,22 +3,17 @@ import Title from '../../Generic/Title'
 import { Button, Row, Col} from 'react-bootstrap';
 import HomeForm from '../../../forms/HomeForm';
 import axios from '../../../utils/axios';
-import { useHistory } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import { updateLoader } from "../../../redux/actions/loaderActions";
-
-
 import "../../../css/doubts.css";
 import titoLupa from '../../../assets/img/tito-lupa@2x.png'
 
 const Doubts = () => {
-	const history = useHistory();
 	const dispatch = useDispatch();
 	const [error, setError] = useState({
 		show: false,
 		msg: ''
 	});
-
 
 	useEffect(() => {
 		window.scrollTo(0, 0);
@@ -33,11 +28,10 @@ const Doubts = () => {
 	const handleSubmit = async (values) => {
 		dispatch(updateLoader(true));
 
-		let { data } = await axios.post('broker', values);
+		let { data } = await axios.post('/contact', values);
 
 		if (data.code === 200) {
-			window.scrollTo(0, 0);
-			history.push("/solicitud_enviada_brokers");
+			// mostrar modal
 		}
 		else {
 			setError({
@@ -54,8 +48,6 @@ const Doubts = () => {
 
 		dispatch(updateLoader(false));
 	}
-	
-
 
 	return (
 		<div className="text-center mt-5"  style={{marginBottom : '-10px'}}>

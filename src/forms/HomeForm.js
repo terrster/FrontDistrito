@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
-import { withFormik, Form } from 'formik';
+import { withFormik, Form, Field, ErrorMessage } from 'formik';
 import { Row, Col, Button, Container } from 'react-bootstrap';
 import HomeValidations from '../components/Validate/homeValidations';
 import scroll from "../utils/scroll";
-import { FieldText, FieldTextArea } from '../components/Generic/Fields';
 import ReCAPTCHA from "react-google-recaptcha";
-
-
 
 const HomeForm = (props) => {
 
@@ -46,54 +43,56 @@ const HomeForm = (props) => {
         <Form>
           <Row>
             <Col lg={9}>
-              <FieldText name="name" placeholder="Nombre completo" normalize="onlyLirycs" className="forceFullWidth" />
+              <Field name="name" placeholder="Nombre completo" className="metropolisReg fz20 mb24 input-doubt mb-2 mx-auto"/>
+              <ErrorMessage name={"name"} render={msg => <div id={`name-error`} className="error mb-1">{msg}</div>}/>
             </Col>
 
             <Col lg={9}>
-              <FieldText name="email" placeholder="Correo" normalize="onlyEmailWithoutSpace" className="forceFullWidth" />
+              <Field type="email" name="email" placeholder="Correo" className="metropolisReg fz20 mb24 input-doubt mb-2 mx-auto"/>
+              <ErrorMessage name={"email"} render={msg => <div id={`email-error`} className="error mb-1">{msg}</div>}/>
             </Col>
 
-          </Row>
+            <Col lg={9}>
+              <Field as="textarea" name="message" placeholder="Mensaje" className="metropolisReg fz20 mb24 input-doubt mb-2 mx-auto"/>
+              <ErrorMessage name={"message"} render={msg => <div id={`message-error`} className="error">{msg}</div>}/>
+            </Col>
 
-          <Row>
-            <Col lg={7}>
-              <FieldTextArea name="message" placeholder="Mensaje" className="forceFullWidth" />
+            <Col lg={9}>
+              <div className="recaptcha-container">
+                <ReCAPTCHA
+                  sitekey="6Ld2huQZAAAAANpPc8zQKPnS948P7vzt2T7t-GCF"
+                  onChange={onChange}
+                />
+              </div>
+
+              <div className="text-center mb-5">
+                {
+
+                  !disabled && !button ? (
+                    <Button
+                      type="submit"
+                      className="mt-50 btn-blue-general"
+                      style={{ width: '300px' }}
+                    >
+                      Enviar
+                    </Button>
+                  ) : (
+                    <Button
+                      type="button"
+                      className="mt-50 btn-blue-general btn-gray-general"
+                      style={{ width: '300px' }}
+                      onClick={() => {
+                        props.validateForm().then(errors => props.setTouched({ ...props.touched, ...errors }))
+                        goToError()
+                      }}
+                    >
+                      Enviar
+                    </Button>
+                  )
+                }
+              </div>
             </Col>
           </Row>
-
-          <div className="recaptcha-container">
-            <ReCAPTCHA
-              sitekey="6Ld2huQZAAAAANpPc8zQKPnS948P7vzt2T7t-GCF"
-              onChange={onChange}
-            />
-          </div>
-
-          <div className="text-center mb-5">
-            {
-
-              !disabled && !button ? (
-                <Button
-                  type="submit"
-                  className="mt-50 btn-blue-general"
-                  style={{ width: '300px' }}
-                >
-                  Enviar
-                </Button>
-              ) : (
-                <Button
-                  type="button"
-                  className="mt-50 btn-blue-general btn-gray-general"
-                  style={{ width: '300px' }}
-                  onClick={() => {
-                    props.validateForm().then(errors => props.setTouched({ ...props.touched, ...errors }))
-                    goToError()
-                  }}
-                >
-                  Enviar
-                </Button>
-              )
-            }
-          </div>
         </Form>
       </Container>
     </>
