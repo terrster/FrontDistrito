@@ -4,7 +4,8 @@ import { Row, Col, Card } from 'react-bootstrap';
 import Icons from '../Icons/Icons';
 
 import '../../../css/HowWorks.css';
-import FIRMA from '../../../assets/img/brokers-landing/iconos/firma.png';
+import ICONPRUEBA from '../../../assets/img/home/prueba.png';
+
 
 const HowWorks = props => {
 	return(
@@ -18,8 +19,8 @@ const HowWorks = props => {
 
 			<Row className="justify-content-center mt-3">
 				<Col xl={3} md={6} sm={6} className="mb-4">
-					<Card id="card-home" style={{ height: '28rem' }}>
-						<Icons img={FIRMA} alt="Firma" width="100px" />
+					<Card  style={{ height: '28rem' }}>
+						<Icons img={ICONPRUEBA} alt="Firma" width="100px" />
 						<Card.Body>
 							<Card.Title>Sin alta en el SAT</Card.Title>
 							<Card.Text className="metropolisReg fz12 blackBlue text-left">
@@ -36,8 +37,8 @@ const HowWorks = props => {
 				</Col>
 
 				<Col xl={3} md={6} sm={6} className="mb-4">
-					<Card id="card-home" style={{ height: '28rem' }}>
-						<Icons img={FIRMA} alt="Firma" width="100px" />
+					<Card  style={{ height: '28rem' }}>
+						<Icons img={ICONPRUEBA} alt="Firma" width="100px" />
 						<Card.Body>
 							<Card.Title>Personas Físicas con Actividad Empresarial y RIF</Card.Title>
 							<Card.Text className="metropolisReg fz12 blackBlue text-left">
@@ -55,8 +56,8 @@ const HowWorks = props => {
 				</Col>
 
 				<Col xl={3} md={6} sm={6} className="mb-4">
-					<Card id="card-home" style={{ height: '28rem' }}>
-						<Icons img={FIRMA} alt="Firma" width="100px" />
+					<Card style={{ height: '28rem' }}>
+						<Icons img={ICONPRUEBA} alt="Firma" width="100px" />
 						<Card.Body>
 							<Card.Title>Persona Moral</Card.Title>
 							<Card.Text className="metropolisReg fz12 blackBlue text-left">
