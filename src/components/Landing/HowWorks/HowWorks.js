@@ -61,7 +61,7 @@ const HowWorks = props => {
 							<Card.Title>Persona Moral</Card.Title>
 							<Card.Text className="metropolisReg fz12 blackBlue text-left">
 								<ul>
-									<li>Identificación Oficial principal accionista y rep legal</li>
+									<li>Identificación Oficial principal accionista y representante legal</li>
 									<li className="mt-2">RFC</li>
 									<li className="mt-2">Comprobante de domicilio del negocio y personal</li>
 									<li className="mt-2">Estados de cuentas bancarios</li>
