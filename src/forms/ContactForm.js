@@ -7,6 +7,11 @@ import ReCAPTCHA from "react-google-recaptcha";
 
 const HomeForm = (props) => {
 
+	const onlyEmailWithoutSpace = (e) => 
+	/^$|^[^\s]*[\w-\.\@]+$/i.test(e.target.value) && e.target.value.length > 0 ? 
+	props.setFieldValue(e.target.name, e.target.value) : 
+	props.setFieldValue(e.target.name, e.target.value.substring(0, e.target.value.length - 1));
+
   const goToError = () => {
     const nameError = document.getElementById("name-error");
     const emailError = document.getElementById("email-error");
@@ -54,7 +59,7 @@ const HomeForm = (props) => {
             </Col>
 
             <Col lg={9}>
-              <Field type="email" name="email" placeholder="Correo" className="metropolisReg fz20 mb24 input-doubt mb-2 mx-auto"/>
+              <Field name="email" placeholder="Correo" className="metropolisReg fz20 mb24 input-doubt mb-2 mx-auto" onKeyUp={(e) => {onlyEmailWithoutSpace(e)}}/>
               <ErrorMessage name={"email"} render={msg => <div id={`email-error`} className="error mb-1">{msg}</div>}/>
             </Col>
 

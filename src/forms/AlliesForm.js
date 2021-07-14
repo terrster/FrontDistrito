@@ -144,13 +144,13 @@ const AlliesForm = (props) => {
 
             <Row>
                 <Col lg={4}>
-                    <FieldText name="leadEmail.primary" placeholder="Correo electrónico" className="forceFullWidth"/>
+                    <FieldText name="leadEmail.primary" placeholder="Correo electrónico" normalize="onlyEmailWithoutSpace" className="forceFullWidth"/>
                 </Col>
                 <Col lg={4}>
-                    <FieldText name="leadEmail.secondary" placeholder="Correo electrónico" className="forceFullWidth"/>
+                    <FieldText name="leadEmail.secondary" placeholder="Correo electrónico" normalize="onlyEmailWithoutSpace" className="forceFullWidth"/>
                 </Col>
                 <Col lg={4}>
-                    <FieldText name="leadEmail.tertiary" placeholder="Correo electrónico" className="forceFullWidth"/>
+                    <FieldText name="leadEmail.tertiary" placeholder="Correo electrónico" normalize="onlyEmailWithoutSpace" className="forceFullWidth"/>
                 </Col>
                 <Col>
                     <ErrorMessage name="leadEmail" render={msg => <div id="leadEmail-error" className="error mt-1">{msg}</div>}/>
