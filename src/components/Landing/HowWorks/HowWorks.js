@@ -12,7 +12,7 @@ const HowWorks = props => {
 		<Title title="Requisitos básicos" className="title-dp mt-5 mb-4 fz42" />
 
 		<Title title="Para hacer aún más rápido tu proceso y autorización de crédito, ten a la mano tu RFC con el  que facturas y
-      clave CIEC para fines de consulta. Con eso podemos ofrecerte las mejores opciones en menos de 10 minutos*." className="subtitle-dp fz24 fw300" />
+      clave CIEC para fines de consulta. Con eso podemos ofrecerte las mejores opciones en menos de 10 minutos.*" className="subtitle-dp fz24 fw300" />
 			<Title title="*Opcional" className="subtitle-dp fz18 fw300"/>
 		
 
