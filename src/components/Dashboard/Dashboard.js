@@ -1,7 +1,7 @@
 import React, { useCallback, useState, useEffect } from 'react';
-import { Row, Col, Card, Modal, Button } from 'react-bootstrap';
+import { Container, Row, Col, Modal, Button } from 'react-bootstrap';
 import io from 'socket.io-client';
-import '../../css/brokers-landing.css';
+import '../../css/dashboard.css';
 import ColocadoSound from '../../assets/sounds/Colocado.mp3';
 import GeneralSound from '../../assets/sounds/General.mp3';
 import { ToastContainer, toast } from "react-toastify";
@@ -128,20 +128,7 @@ const Dashboard = () => {
 
   return(
     <>
-      
-      <div id="dashboard" className="dashboard container-fluid text-center ">
-        <Modal show={show} backdrop="static" keyboard={false} centered size="lg">
-          <Modal.Header>
-            <Modal.Title className="m-auto fz32">¡Aviso!</Modal.Title>
-          </Modal.Header>
-          <Modal.Body className="text-center text-justify fz22"><strong>Distrito Pyme</strong> reproducirá algunos sonidos que estarán conectados al entorno en tiempo real</Modal.Body>
-          <Modal.Footer>
-              <Button className="btn-blue-general m-auto" style={{ width: '180px' }} onClick={() => setShow(false)}>
-                Aceptar
-              </Button>
-          </Modal.Footer>
-        </Modal>
-
+      <div id="dashboard" className="dashboard">
         <div className="area" >
           <ul className="circles">
             <li></li>
@@ -155,56 +142,72 @@ const Dashboard = () => {
             <li></li>
             <li></li>
           </ul>
-        </div >
-
-        <div className="campos">
-          <ToastContainer />
-          <Row>
-            <Col md={12}>
-              <img src={LOGO} width="200px" />
-            </Col>
-          </Row>
-          <Row>
-            <Col md={6}>
-              <label className="metropolisReg fz32 blackBlue label-solicitudes">Solicitudes</label>
-              <div className="titulos coolvetica">
-                <span className="counter" data-target="Solicitudes">0</span>
-              </div>
-            </Col>
-
-            <Col md={6} >
-              <label className="metropolisReg fz32 blackBlue label-pymes">Pymes Apoyados</label>
-              <div className="titulos coolvetica">
-                <span className="counter" data-target="Pymes">0</span>
-              </div>
-            </Col>
-          </Row>
-
-          <Row>
-            <Col md={12} className="mb-5">
-              <label className="metropolisReg fz32 blackBlue label-monto">Monto colocado</label>
-              <div className="titulos coolvetica">
-                <span className="counter" data-target="Colocado">0</span>
-              </div>
-            </Col>
-          </Row>
-
-          <Row>
-            <Col lg={6} >
-              <label className="metropolisReg fz32 blackBlue label-brokers">Brokers Activos</label>
-              <div className="titulos coolvetica">
-                <span className="counter" data-target="Brokers">0</span>
-              </div>
-            </Col>
-
-            <Col md={6}>
-              <label className="metropolisReg fz32 blackBlue label-financieros"> Aliados financieros</label>
-              <div className="titulos coolvetica">
-                <span className="counter" data-target="Alianzas">0</span>
-              </div>
-            </Col>
-          </Row>
         </div>
+
+        <Modal show={show} backdrop="static" keyboard={false} centered size={"lg"}>
+          <Modal.Header>
+            <Modal.Title className="m-auto">¡Aviso!</Modal.Title>
+          </Modal.Header>
+          <Modal.Body className="text-center text-justify"><strong>Distrito Pyme</strong> reproducirá algunos sonidos que estarán conectados al entorno en tiempo real</Modal.Body>
+          <Modal.Footer>
+              <Button className="btn-blue-general m-auto" style={{ width: '180px' }} onClick={() => setShow(false)}>
+                Aceptar
+              </Button>
+          </Modal.Footer>
+        </Modal>
+
+        <ToastContainer />
+
+        <img src={LOGO} className="dashboard-logo"/>
+
+        <Container className="dashboard-container container-xl-fluid">
+          <Row className="d-flex align-items-center">
+            <Col md={6}>
+              <div className="text-center">
+                <label className="dashboard-label label-solicitudes">Solicitudes</label>
+                <div className="dashboard-data">
+                  <span className="counter" data-target="Solicitudes">0</span>
+                </div>
+              </div>
+            </Col>
+
+            <Col md={6}>
+              <div className="text-center">
+                <label className="dashboard-label label-pymes">Pymes Apoyadas</label>
+                <div className="dashboard-data">
+                  <span className="counter" data-target="Pymes">0</span>
+                </div>
+              </div>
+            </Col>
+
+            <Col sm={12}>
+              <div className="text-center">
+                <label className="dashboard-label label-monto">Monto colocado</label>
+                <div className="dashboard-data">
+                  <span className="counter" data-target="Colocado">0</span>
+                </div>
+              </div>
+            </Col>
+
+            <Col md={6}>
+              <div className="text-center">
+                <label className="dashboard-label label-brokers">Brokers Activos</label>
+                <div className="dashboard-data">
+                  <span className="counter" data-target="Brokers">0</span>
+                </div>
+              </div>
+            </Col>
+
+            <Col md={6}>
+              <div className="text-center">
+                <label className="dashboard-label label-financieros"> Aliados financieros</label>
+                <div className="dashboard-data">
+                  <span className="counter" data-target="Alianzas">0</span>
+                </div>
+              </div>
+            </Col>
+          </Row>
+        </Container>
       </div>
 
       <style>{"\
@@ -222,7 +225,7 @@ const Dashboard = () => {
           }\
           body{\
             background-color: #f4f4f4 !important;\
-        }\
+          }\
       "}</style>
   
     </>
