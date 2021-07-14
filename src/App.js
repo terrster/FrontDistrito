@@ -142,7 +142,7 @@ class App extends Component {
                 />
                 <Route path="/registrate/:financialPartner?" exact component={Signup} />
                 <Route path="/solicitudBrokers/:ownerId?" exact component={SignupBrokers} />
-                <Route path="/registroexitoso" exact component={RegistroExitoso} />
+                <Route path="/registroexitoso/:partner?" exact component={RegistroExitoso} />
                 <Route path="/login/:redirect?" exact component={Login} />
                 <Route path="/brokers-registro" exact component={Brokers}/>
                 <Route path="/solicitud_enviada_brokers" exact component={ThankyouPage} />
