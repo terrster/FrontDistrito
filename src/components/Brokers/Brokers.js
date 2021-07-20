@@ -82,7 +82,7 @@ const Brokers = () => {
 
             <Container>
                 <div className="metropolisReg fz12 blackBlue text-justify">
-                Nuestro equipo de atención a <b>Brokers Digital</b>, te permite adquirir una membresía exclusiva de <b>distritopyme.com</b> y las herramientas 
+                Nuestro plan de <b>Brokers Digital</b>, te permite adquirir una membresía exclusiva de <b>distritopyme.com</b> y las herramientas 
                 necesarias para ayudarte a colocar más rápido
                 y ofrecerle a tus clientes las mejores opciones de crédito.
                 <br/>

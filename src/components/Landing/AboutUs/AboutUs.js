@@ -9,10 +9,9 @@ import vtxnegocios from '../../../assets/img/aboutus/vxtnegocios.png';
 import grantthornton from '../../../assets/img/aboutus/grantthornton.png';
 
 const AboutUs = props => {
-
     return(
-        <div id="about" className="pt-0 text-center mt-5">
-            <Title title="Nosotros" className="title-dp fz42 fw500 mb-2"/>
+        <div id="about" className="pt-0 text-center">
+            <Title title="Nosotros" className="title-dp fz42 fw500 mb-1"/>
             <div className="subtitle-dp fw300 mb-2 fz29" style={{letterSpacing : '0.1px'}}>
                 <p>Somos la mejor plataforma para solicitar crédito</p>
                 <p className="gray50">#ComunidadDeCrédito</p>

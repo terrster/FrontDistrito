@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import { Row, Col } from 'react-bootstrap';
 import Title from '../../Generic/Title';
+import { Row, Col } from 'react-bootstrap';
 
 var calculated = false;
 
@@ -63,7 +63,7 @@ const Comunity = ({hubspotInfo}) =>{
   }, [hubspotInfo]);
 
   return (
-    <div id="comunityBrokers" className="pt-3 text-center">
+    <div id="comunityBrokers" className="pt-3 pb-5 text-center">
       <div id="counterContainer">
         <Title title="Sé parte de nuestra comunidad"  className="title-dp fw500 mb-1 fz42 ls-01 pt-5"/>
         <Row className="mt-5">
@@ -96,6 +96,7 @@ const Comunity = ({hubspotInfo}) =>{
           </Col>
         </Row>
 
+        <Title title="8 De Cada 10 Solicitudes Recibe Una Opción De Crédito" className="title-dp fw500 mt-5 fz32" />
       </div>
     </div>
   );

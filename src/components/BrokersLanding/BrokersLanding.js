@@ -9,8 +9,6 @@ import BannerFinal from './BannerFinal/BannerFinal'
 import '../../css/brokers-landing.css';
 import { useHistory } from 'react-router-dom';
 import io from 'socket.io-client';
-import Title from '../Generic/Title';
-
 
 const BrokersLanding = () =>{
 
@@ -78,7 +76,6 @@ const BrokersLanding = () =>{
         <Cards/>
         <Allies />
         <Comunity hubspotInfo={hubspotInfo}/>
-        <Title title="8 De Cada 10 Solicitudes Recibe Una Opción De Crédito" className="title-dp fw500 fz32 text-center pb-5" />
         {/* <Testimonio /> */}
       </div>
       <BannerFinal />
