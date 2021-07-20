@@ -4,7 +4,7 @@ import LandSimulator from '../Simulator/LandSimulator';
 import AboutUs from './AboutUs/AboutUs';
 import Video from './Video/Video';
 import HowWorks from './HowWorks/HowWorks';
-import Doubts from './Doubts/Doubts';
+import Contact from './Contact/Contact';
 import Axios from "../../utils/axios";
 
 const Landing = () => {
@@ -25,7 +25,7 @@ const Landing = () => {
                 <HowWorks />
                 <Video />
                 <AboutUs />      
-                <Doubts /> 
+                <Contact /> 
             </div>
         </div>
     );
