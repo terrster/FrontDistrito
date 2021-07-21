@@ -1,0 +1,81 @@
+#card-credit {
+  transition: all 0.3s ease-in-out;
+  border-radius: 10px;
+ }
+ 
+
+  #card-credit:hover {
+ -webkit-transform: translateY(-10px);
+  -ms-transform: translateY(-10px);
+  transform: translateY(-10px);
+  box-shadow: #bbc7c7 10px 10px 10px;
+}
+
+
+.bancos-list li, .dp-list li {
+  list-style-type: none;
+  margin-bottom: 20px;
+}
+
+.bancos-list li:before {
+  position: absolute;
+  content: '';
+  display: inline-block;
+  height: 20px;
+  width: 20px;
+  background-image: url(../assets/img/home/prueba.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: left center;
+  margin-top: 2px;
+  margin-left: -25px;
+}
+
+.dp-list li:before {
+  position: absolute;
+  content: '';
+  display: inline-block;
+  height: 20px;
+  width: 20px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: left center;
+  margin-top: 2px;
+  margin-left: -25px;
+}
+
+.dp-opciones:before{
+    background-image: url(../assets/img/home/ICONO1.png);
+}
+
+.dp-15min:before{
+  background-image: url(../assets/img/home/ICONO2.png);
+}
+
+.dp-linea:before{
+  background-image: url(../assets/img/home/ICONO3.png);
+}
+
+.dp-facil:before{
+  background-image: url(../assets/img/home/ICONO4.png);
+}
+
+.fondo-card{
+  background-color: #F5F5F5;
+}
+
+.fondo-card-dp{
+  background-color: #023e95;
+}
+
+#header {
+    padding: .75rem 1.25rem;
+    background-color: transparent;
+    border-bottom: none;
+}
+
+#footer {
+    padding: .75rem 1.25rem;
+    background-color: transparent;
+    border-top: none;
+}

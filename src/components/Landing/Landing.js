@@ -6,6 +6,7 @@ import Video from './Video/Video';
 import HowWorks from './HowWorks/HowWorks';
 import Contact from './Contact/Contact';
 import Axios from "../../utils/axios";
+import CreditOption from './CreditOption/CreditOption';
 
 const Landing = () => {
 
@@ -21,7 +22,8 @@ const Landing = () => {
         <div className="">
             <Header title={"¿Necesitas financiamiento?"} text={"Recibe las mejores ofertas de crédito "} highlighted={"¡En menos de 24 horas!"} buttonText={"Solicitar ahora"} />
             <LandSimulator />
-            <div className="container-fluid">               
+            <div className="container-fluid">     
+                <CreditOption />
                 <HowWorks />
                 <Video />
                 <AboutUs />      
