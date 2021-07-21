@@ -19,12 +19,12 @@ const CreditOption = () => {
 
         <Row className="justify-content-center mt-3">
           <Col xl={4} md={5} sm={6} xs={8} className="mb-4">
-            <Card id="card-credit" className="fondo-card" style={{ height: '24.3rem' }}>
-              <Card.Header id="header" style={{ height: '5rem' }} className="subtitle-dp fz25">Bancos, financieras y fintechs</Card.Header>
+            <Card id="card-credit" className="fondo-card" style={{ height: '26.3rem' }}>
+              <Card.Header id="header" style={{ height: '5rem' }} className="metropolisBold blackNav fz25">Bancos, financieras y fintechs</Card.Header>
               <Card.Body>
                 <Card.Title></Card.Title>
                 <Card.Text className="metropolisReg fz12 blackBlue text-left">
-                  <ul>
+                  <ul className="bancos-list">
                     <li>Tienes que ir de sucursal en sucursal o de página en página para ver quien te presta</li>
                     <li className="mt-2">Trámites largos y complicados</li>
                     <li className="mt-2">Solicitud tradicional y expedientes físicos</li>
@@ -40,8 +40,8 @@ const CreditOption = () => {
               <Card.Header id="header" style={{ height: '5rem' }}><img src={LOGODP} alt="LOGODP" width="100px" /></Card.Header>
               <Card.Body>
                 <Card.Title></Card.Title>
-                <Card.Text className="metropolisReg fz12 white text-left">
-                  <ul>
+                <Card.Text className="metropolisReg fz12 white text-left ">
+                  <ul className="dp-list">
                     <li className="dp-opciones">Con una sola solicitud te ofrecemos las mejores opciones de crédito acorde a las características
                       de tu negocio
                     </li>
