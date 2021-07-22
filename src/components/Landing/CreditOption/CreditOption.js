@@ -13,14 +13,14 @@ const CreditOption = () => {
     <>
       <div id="creditoption" className="pt-4 text-center ml-auto mr-auto">
 
-        <Title title="8 De cada 10 solicitudes recibe una opción de crédito" className="title-dp fz29  fw300 ls-01" />
+        <Title title="8 De cada 10 solicitudes recibe una opción de crédito" className="title-dp fz29  fw300" />
 
-        <Title title="Existe una infinidad de opciones de crédito, pero solo una plataforma con todas esas opciones en una sola solicitud" className="text-dp fz12 text-center mb-30 gray50" />
+        <Title title="Existe una infinidad de opciones de crédito, pero solo una plataforma con todas esas opciones en una sola solicitud" className="subtitle-dp fz12 text-center mb-30" />
 
         <Row className="justify-content-center mt-3">
           <Col xl={4} md={5} sm={6} xs={8} className="mb-4">
             <Card id="card-credit" className="fondo-card" style={{ height: '26.3rem' }}>
-              <Card.Header id="header" style={{ height: '5rem' }} className="metropolisBold blackNav fz25">Bancos, financieras y fintechs</Card.Header>
+              <Card.Header id="header" style={{ height: '5rem' }} className="title-card-home-dp fz25">Bancos, financieras y fintechs</Card.Header>
               <Card.Body>
                 <Card.Title></Card.Title>
                 <Card.Text className="metropolisReg fz12 blackBlue text-left">
@@ -53,7 +53,7 @@ const CreditOption = () => {
               </Card.Body>
               <Card.Footer id="footer">
                 <Button className="text-center fz16 white nav-btn nav-btn-rad primary heigth-45 w-360 ml-auto mr-auto solicita-button coolvetica" style={{ textDecoration: "none" }}>
-                  Crear mi cuenta
+                  Solicita tu crédito
                 </Button>
               </Card.Footer>
             </Card>
