@@ -1,6 +1,8 @@
 import React from 'react';
 import Title from '../../Generic/Title';
 import { Row, Col, Card, Button } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
+
 
 import LOGODP from '../../../assets/img/logo_dp/extras-03.png';
 
@@ -9,6 +11,10 @@ import '../../../css/creditoption.css';
 
 
 const CreditOption = () => {
+
+  const history = useHistory();
+
+  
   return (
     <>
       <div id="creditoption" className="pt-4 text-center ml-auto mr-auto">
@@ -52,7 +58,7 @@ const CreditOption = () => {
                 </Card.Text>
               </Card.Body>
               <Card.Footer id="footer">
-                <Button className="text-center fz16 white nav-btn nav-btn-rad primary heigth-45 w-360 ml-auto mr-auto solicita-button coolvetica" style={{ textDecoration: "none" }}>
+                <Button className="text-center fz16 white nav-btn nav-btn-rad primary heigth-45 w-360 ml-auto mr-auto solicita-button coolvetica" style={{ textDecoration: "none" }} onClick={() => { history.push("/registrate") }}>
                   Solicita tu crédito
                 </Button>
               </Card.Footer>
