@@ -38,12 +38,13 @@
 }
 
 .dp-list-req li:before {
+  position: absolute;
   content: '✔';
   font-size: 20px;
-  display: inline-block;
-  margin-left: -25px;
+  margin-top: -5px;
+  margin-left: -20px;
   background: -webkit-linear-gradient(to right, #0095FF 45%, #6DFFFF 65%);
-   background: linear-gradient(to right, #0095FF 45%, #6DFFFF 65%);
-   -webkit-background-clip: text;  
-   -webkit-text-fill-color: transparent;  
+  background: linear-gradient(to right, #0095FF 45%, #6DFFFF 65%);
+  -webkit-background-clip: text;  
+  -webkit-text-fill-color: transparent;  
 }

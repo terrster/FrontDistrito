@@ -22,7 +22,7 @@ const HowWorks = props => {
 					<Card style={{ height: '35rem' }} id="card-home">
 						<Card.Header style={{ height: '8rem' }} id="header-SAT"></Card.Header>
 						<Card.Body>
-							<Card.Title className="title-cards-dp  fz22 text-left">Sin alta en el SAT</Card.Title>
+							<Card.Title className="title-cards-dp fz22 text-center">Sin alta en el SAT</Card.Title>
 							<Card.Text className="text-dp fz12  text-left mt-5">
 								<ul className="dp-list-req">
 									<li>Identificación Oficial</li>
@@ -40,8 +40,8 @@ const HowWorks = props => {
 					<Card style={{ height: '35rem' }} id="card-home">
 						<Card.Header style={{ height: '8rem' }} id="header-SAT"></Card.Header>
 						<Card.Body>
-							<Card.Title className="title-cards-dp  fz22 text-left">Personas Físicas con Actividad Empresarial y RIF</Card.Title>
-							<Card.Text className="text-dp fz12 fw200  text-left">
+							<Card.Title className="title-cards-dp fz22 text-center">Personas Físicas con Actividad Empresarial y RIF</Card.Title>
+							<Card.Text className="text-dp fz12 fw200 text-left" style={{marginTop: '25px'}}>
 								<ul className="dp-list-req">
 									<li className="mt-2">Identificación Oficial</li>
 									<li className="mt-2">RFC</li>
@@ -59,8 +59,8 @@ const HowWorks = props => {
 					<Card style={{ height: '35rem' }} id="card-home">
 						<Card.Header style={{ height: '8rem' }} id="header-SAT"></Card.Header>
 						<Card.Body>
-							<Card.Title className="title-cards-dp  fz22 text-left">Persona Moral</Card.Title>
-							<Card.Text className="text-dp fz12  text-left mt-5">
+							<Card.Title className="title-cards-dp fz22 text-center">Persona Moral</Card.Title>
+							<Card.Text className="text-dp fz12 text-left mt-5">
 								<ul className="dp-list-req">
 									<li className="mt-2">Identificación Oficial principal accionista y rep. legal</li>
 									<li className="mt-2">RFC</li>
