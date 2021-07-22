@@ -14,7 +14,7 @@ const Cards = () => {
   return(
     <div id="cardsBrokers" className="pt-5 text-center">
       <Title title="¿Cómo convertirme en Broker Digital?" className="title-dp fw500 mb-1 fz42"/>
-    <div className="justify-content-center container conteiner-xl pt-4">
+    <div className="justify-content-center container container-xl pt-4">
       <Row className="justify-content-center">
           <Col xl={4} md={5} sm={7} className="mb-4">
             <Card style={{ height: '24rem' }} className="tarjet-info">
