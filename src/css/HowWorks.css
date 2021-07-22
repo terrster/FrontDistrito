@@ -29,8 +29,8 @@
 
 #header-SAT{
   background-image: url(../assets/img/carousel/carrusel-01.jpg);
-  background-size: cover;
-  object-fit: cover;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 }
 
 .dp-list-req li{
