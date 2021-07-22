@@ -20,7 +20,7 @@ const CreditOption = () => {
         <Row className="justify-content-center mt-3">
           <Col xl={4} md={5} sm={6} xs={8} className="mb-4">
             <Card id="card-credit" className="fondo-card" style={{ height: '26.3rem' }}>
-              <Card.Header id="header" style={{ height: '5rem' }} className="fz25">Bancos, financieras y fintechs</Card.Header>
+              <Card.Header id="header" style={{ height: '5rem' }} className="title-cards-dp fz25">Bancos, financieras y fintechs</Card.Header>
               <Card.Body>
                 <Card.Title></Card.Title>
                 <Card.Text className="text-dp fz12  text-left">
