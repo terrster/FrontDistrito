@@ -42,7 +42,7 @@ const Comunity = ({hubspotInfo}) =>{
               counter.innerText = hubspotInfo.ColocadoFormatted + " M";
             }
             else{
-              counter.innerText = new Intl.NumberFormat().format(targetValue).toString().replace('.', ',');
+              counter.innerText = hubspotInfo[target];
             }
           }
         }
