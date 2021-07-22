@@ -451,6 +451,10 @@
 }
 
 /* Text */
+.title-cards-dp{
+	font-family: 'Metropolis-Bold';
+	color: #7F7F7F;
+}
 
 .title-dp{
 	font-family: 'coolvetica_rg';
