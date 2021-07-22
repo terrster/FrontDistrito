@@ -1,22 +1,62 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
+import io from 'socket.io-client';
 import Header from './Header/Header';
 import LandSimulator from '../Simulator/LandSimulator';
-import AboutUs from './AboutUs/AboutUs';
+// import AboutUs from './AboutUs/AboutUs';
 import Video from './Video/Video';
 import HowWorks from './HowWorks/HowWorks';
 import Contact from './Contact/Contact';
 import Axios from "../../utils/axios";
-import CreditOption from './CreditOption/CreditOption';
+import Slider from '../BrokersLanding/Aliados/Allies';
+import Comunity from '../BrokersLanding/Comunity/Comunity';
 
 const Landing = () => {
 
     useEffect(() => {
-        const addVisit = async() => {
+        const addVisit = async () => {
             await Axios.post('/counter/visit');
         }
 
         addVisit();
     }, []);
+
+    const [socket, setSocket] = useState(null);
+    const [hubspotInfo, setHubspotInfo] = useState({
+        Colocado: 0,
+        ColocadoFormatted: 0,
+        Pymes: 0,
+        Brokers: 0,
+        Alianzas: 0,
+        Solicitudes: 0
+    });
+    const connectSocket = useCallback(() => {//process.env.REACT_APP_BACKEND, https://apidev.distritopyme.com/
+        const socket = io.connect(process.env.REACT_APP_BACKEND, {
+            transports: ['websocket'],
+            autoConnect: true,
+            forceNew: true,
+            query: {
+                'origin': 'hubspotInfo'
+            }
+        });
+        setSocket(socket);
+    }, []);
+
+    useEffect(() => {
+        connectSocket();
+    }, []);
+
+    useEffect(() => {
+        if (socket) {
+
+            socket.on('hubspotInfo', (callback) => {
+                callback.data.ColocadoFormatted = callback.data.Colocado;
+                callback.data.Colocado = callback.data.ColocadoFormatted.replace(/[$,.]/g, "");
+                setHubspotInfo(callback.data);
+            });
+
+        }
+    }, [socket]);
+
 
     return (
         <div className="">
@@ -26,7 +66,9 @@ const Landing = () => {
                 <CreditOption />
                 <HowWorks />
                 <Video />
-                <AboutUs />      
+                <Slider />
+                {/* <AboutUs />       */}
+                <Comunity hubspotInfo={hubspotInfo} />
                 <Contact /> 
             </div>
         </div>
