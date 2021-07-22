@@ -4,6 +4,9 @@ import { Row, Col, Card } from 'react-bootstrap';
 
 import '../../../css/HowWorks.css';
 
+import HEADERCARD from '../../../assets/img/carousel/carrusel-01.jpg'
+
+
 
 
 const HowWorks = props => {
@@ -17,10 +20,10 @@ const HowWorks = props => {
 			<Row className="justify-content-center mt-3">
 				<Col xl={4} md={5} sm={6} xs={8} className="mb-4">
 					<Card style={{ height: '28rem' }} id="card-home">
-						<Card.Header>LOGO</Card.Header>
+						<Card.Header style={{ height: '8rem' }} id="header-SAT"></Card.Header>
 						<Card.Body>
-							<Card.Title>Sin alta en el SAT</Card.Title>
-							<Card.Text className="metropolisReg fz12 blackBlue text-left mt-5">
+							<Card.Title className="title-cards-dp  fz22 text-left">Sin alta en el SAT</Card.Title>
+							<Card.Text className="text-dp fz12  text-left mt-5">
 								<ul>
 									<li>Identificación Oficial</li>
 									<li className="mt-2">Comprobante de domicilio</li>
@@ -35,10 +38,10 @@ const HowWorks = props => {
 
 				<Col xl={4} md={5} sm={6} xs={8} className="mb-4">
 					<Card style={{ height: '28rem' }} id="card-home">
-						<Card.Header>LOGO</Card.Header>
+						<Card.Header style={{ height: '8rem' }} id="header-SAT"></Card.Header>
 						<Card.Body>
-							<Card.Title>Personas Físicas con Actividad Empresarial y RIF</Card.Title>
-							<Card.Text className="metropolisReg fz12 blackBlue text-left">
+							<Card.Title className="title-cards-dp  fz22 text-left">Personas Físicas con Actividad Empresarial y RIF</Card.Title>
+							<Card.Text className="text-dp fz12 fw200  text-left">
 								<ul>
 									<li className="mt-2">Identificación Oficial</li>
 									<li className="mt-2">RFC</li>
@@ -54,10 +57,10 @@ const HowWorks = props => {
 
 				<Col xl={4} md={5} sm={6} xs={8} className="mb-4">
 					<Card style={{ height: '28rem' }} id="card-home">
-						<Card.Header>LOGO</Card.Header>
+						<Card.Header style={{ height: '8rem' }} id="header-SAT"></Card.Header>
 						<Card.Body>
-							<Card.Title>Persona Moral</Card.Title>
-							<Card.Text className="metropolisReg fz12 blackBlue text-left mt-5">
+							<Card.Title className="title-cards-dp  fz22 text-left">Persona Moral</Card.Title>
+							<Card.Text className="text-dp fz12  text-left mt-5">
 								<ul>
 									<li>Identificación Oficial principal accionista y representante legal</li>
 									<li className="mt-2">RFC</li>
