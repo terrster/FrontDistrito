@@ -1,8 +1,22 @@
 #card-home {
-  -webkit-transition: all 0.3s ease-in-out;
-  -moz-transition: all 0.3s ease-in-out;
-  transition: all 0.3s ease-in-out;
-  border-radius: 5px;
+  -webkit-transform: translateY(0);
+   -ms-transform: translateY(0);
+   transform: translateY(0);
+   -webkit-transition: all 0.3s ease-in-out;
+   -moz-transition: all 0.3s ease-in-out;
+   transition: all 0.3s ease-in-out;
+   border-radius: 14px;
+   border-bottom: 4px solid #0095FF;
+   -webkit-box-sizing: border-box;
+   -moz-box-sizing: border-box;
+   box-sizing: border-box;
+   background-position: 0 0, 100% 0;
+   background-repeat: no-repeat;
+   -webkit-background-size: 20px 100%;
+   -moz-background-size: 20px 100%;
+   background-size: 2px 100%;
+   background-image: -o-linear-gradient(top, #6DFFFF 0%, #0095FF 100%), -o-linear-gradient(top, #6DFFFF 0%, #0095FF 100%);
+   background-image: linear-gradient(to bottom, #6DFFFF 0%, #0095FF 100%), linear-gradient(to bottom, #6DFFFF 0%, #0095FF 100%);
  }
  
 
@@ -16,4 +30,5 @@
 #header-SAT{
   background-image: url(../assets/img/carousel/carrusel-01.jpg);
   background-size: cover;
+  object-fit: cover;
 }
