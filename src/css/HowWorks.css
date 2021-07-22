@@ -32,3 +32,18 @@
   background-size: cover;
   object-fit: cover;
 }
+
+.dp-list-req li{
+    list-style-type: none;
+}
+
+.dp-list-req li:before {
+  content: '✔';
+  font-size: 20px;
+  display: inline-block;
+  margin-left: -25px;
+  background: -webkit-linear-gradient(to right, #0095FF 45%, #6DFFFF 65%);
+   background: linear-gradient(to right, #0095FF 45%, #6DFFFF 65%);
+   -webkit-background-clip: text;  
+   -webkit-text-fill-color: transparent;  
+}

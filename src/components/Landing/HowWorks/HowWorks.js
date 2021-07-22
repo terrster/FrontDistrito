@@ -19,12 +19,12 @@ const HowWorks = props => {
 
 			<Row className="justify-content-center mt-3">
 				<Col xl={4} md={5} sm={6} xs={8} className="mb-4">
-					<Card style={{ height: '28rem' }} id="card-home">
+					<Card style={{ height: '35rem' }} id="card-home">
 						<Card.Header style={{ height: '8rem' }} id="header-SAT"></Card.Header>
 						<Card.Body>
 							<Card.Title className="title-cards-dp  fz22 text-left">Sin alta en el SAT</Card.Title>
 							<Card.Text className="text-dp fz12  text-left mt-5">
-								<ul>
+								<ul className="dp-list-req">
 									<li>Identificación Oficial</li>
 									<li className="mt-2">Comprobante de domicilio</li>
 									<li className="mt-2">Estados de cuenta bancarios</li>
@@ -37,12 +37,12 @@ const HowWorks = props => {
 				</Col>
 
 				<Col xl={4} md={5} sm={6} xs={8} className="mb-4">
-					<Card style={{ height: '28rem' }} id="card-home">
+					<Card style={{ height: '35rem' }} id="card-home">
 						<Card.Header style={{ height: '8rem' }} id="header-SAT"></Card.Header>
 						<Card.Body>
 							<Card.Title className="title-cards-dp  fz22 text-left">Personas Físicas con Actividad Empresarial y RIF</Card.Title>
 							<Card.Text className="text-dp fz12 fw200  text-left">
-								<ul>
+								<ul className="dp-list-req">
 									<li className="mt-2">Identificación Oficial</li>
 									<li className="mt-2">RFC</li>
 									<li className="mt-2">Comprobante de domicilio</li>
@@ -56,13 +56,13 @@ const HowWorks = props => {
 				</Col>
 
 				<Col xl={4} md={5} sm={6} xs={8} className="mb-4">
-					<Card style={{ height: '28rem' }} id="card-home">
+					<Card style={{ height: '35rem' }} id="card-home">
 						<Card.Header style={{ height: '8rem' }} id="header-SAT"></Card.Header>
 						<Card.Body>
 							<Card.Title className="title-cards-dp  fz22 text-left">Persona Moral</Card.Title>
 							<Card.Text className="text-dp fz12  text-left mt-5">
-								<ul>
-									<li>Identificación Oficial principal accionista y representante legal</li>
+								<ul className="dp-list-req">
+									<li className="mt-2">Identificación Oficial principal accionista y rep. legal</li>
 									<li className="mt-2">RFC</li>
 									<li className="mt-2">Comprobante de domicilio del negocio y personal</li>
 									<li className="mt-2">Estados de cuentas bancarios</li>
