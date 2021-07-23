@@ -4,7 +4,7 @@ import { Row, Col, Card, Button } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 
 
-import LOGODP from '../../../assets/img/logo_dp/extras-03.png';
+import LOGODP from '../../../assets/img/home/LOGO_DP_WHITE.png';
 
 import '../../../css/creditoption.css';
 
@@ -21,7 +21,7 @@ const CreditOption = () => {
 
         <Title title="8 De cada 10 solicitudes recibe una opción de crédito" className="title-dp fz29  fw300" />
 
-        <Title title="Existe una infinidad de opciones de crédito, pero solo una plataforma con todas esas opciones en una sola solicitud" className="subtitle-dp fz12 text-center mb-30" />
+        <Title title="Existe una infinidad de opciones de crédito, pero solo una plataforma con todas esas opciones en una sola solicitud" className="subtitle-dp fz12 text-center mb-30 mt-2" />
 
         <Row className="justify-content-center mt-3">
           <Col xl={4} md={5} sm={6} xs={8} className="mb-4">
@@ -43,7 +43,7 @@ const CreditOption = () => {
 
           <Col xl={4} md={5} sm={6} xs={8}>
             <Card id="card-credit" className="fondo-card-dp">
-              <Card.Header id="header" style={{ height: '5rem' }}><img src={LOGODP} alt="LOGODP" width="100px" /></Card.Header>
+              <Card.Header id="header" style={{ height: '5rem' }}><img src={LOGODP} alt="LOGODP" width="150px" /></Card.Header>
               <Card.Body>
                 <Card.Title></Card.Title>
                 <Card.Text className="text-dp fz12 white text-left ">
