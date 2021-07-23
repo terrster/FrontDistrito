@@ -4,10 +4,6 @@ import { Row, Col, Card } from 'react-bootstrap';
 
 import '../../../css/HowWorks.css';
 
-import HEADERCARD from '../../../assets/img/carousel/carrusel-01.jpg'
-
-
-
 
 const HowWorks = props => {
 	return (
@@ -18,12 +14,12 @@ const HowWorks = props => {
        <br/>*Opcional" className="subtitle-dp fz15 text-center mb-30 " />
 
 			<Row className="justify-content-center mt-3">
-				<Col xl={4} md={5} sm={6} xs={8} className="mb-4">
-					<Card style={{ height: '35rem' }} id="card-home">
-						<Card.Header style={{ height: '8rem' }} id="header-SAT"></Card.Header>
+				<Col xl={4} md={5} sm={7} xs={11} className="mb-4">
+					<Card style={{ height: '32rem' }} id="card-home">
+						<Card.Header style={{ height: '10rem' }} id="header-SAT"></Card.Header>
 						<Card.Body>
-							<Card.Title className="title-cards-dp fz22 text-center">Sin alta en el SAT</Card.Title>
-							<Card.Text className="text-dp fz12  text-left mt-5">
+							<Card.Title className="title-cards-dp  white  fz18 text-center">Sin alta en el SAT</Card.Title>
+							<Card.Text className="text-dp fz12  white  text-left mt-5">
 								<ul className="dp-list-req">
 									<li>Identificación Oficial</li>
 									<li className="mt-2">Comprobante de domicilio</li>
@@ -36,12 +32,12 @@ const HowWorks = props => {
 					</Card>
 				</Col>
 
-				<Col xl={4} md={5} sm={6} xs={8} className="mb-4">
-					<Card style={{ height: '35rem' }} id="card-home">
-						<Card.Header style={{ height: '8rem' }} id="header-SAT"></Card.Header>
+				<Col xl={4} md={5} sm={7} xs={11} className="mb-4">
+					<Card style={{ height: '32rem' }} id="card-home">
+						<Card.Header style={{ height: '10rem' }} id="header-FISICA"></Card.Header>
 						<Card.Body>
-							<Card.Title className="title-cards-dp fz22 text-center">Personas Físicas con Actividad Empresarial y RIF</Card.Title>
-							<Card.Text className="text-dp fz12 fw200 text-left" style={{marginTop: '25px'}}>
+							<Card.Title className="title-cards-dp  white fz18 text-center fisica-title">Personas Físicas con Actividad Empresarial y RIF</Card.Title>
+							<Card.Text className="text-dp fz12 fw200  white text-left" style={{marginTop: '25px'}}>
 								<ul className="dp-list-req">
 									<li className="mt-2">Identificación Oficial</li>
 									<li className="mt-2">RFC</li>
@@ -55,12 +51,12 @@ const HowWorks = props => {
 					</Card>
 				</Col>
 
-				<Col xl={4} md={5} sm={6} xs={8} className="mb-4">
-					<Card style={{ height: '35rem' }} id="card-home">
-						<Card.Header style={{ height: '8rem' }} id="header-SAT"></Card.Header>
+				<Col xl={4} md={5} sm={7} xs={11} className="mb-4">
+					<Card style={{ height: '32rem' }} id="card-home">
+						<Card.Header style={{ height: '10rem' }} id="header-MORAL"></Card.Header>
 						<Card.Body>
-							<Card.Title className="title-cards-dp fz22 text-center">Persona Moral</Card.Title>
-							<Card.Text className="text-dp fz12 text-left mt-5">
+							<Card.Title className="title-cards-dp fz18  white text-center">Persona Moral</Card.Title>
+							<Card.Text className="text-dp fz12  white text-left mt-5">
 								<ul className="dp-list-req">
 									<li className="mt-2">Identificación Oficial principal accionista y rep. legal</li>
 									<li className="mt-2">RFC</li>
