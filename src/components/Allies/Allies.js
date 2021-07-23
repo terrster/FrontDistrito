@@ -150,7 +150,7 @@ const Allies = () => {
                         </Carousel.Item>
                     </Carousel>
 
-                    <Title title="Alta de Alianza" className="subtitle-dp fz42 fw500 mb-1 text-center"/> 
+                    <Title title="Alta de Alianza" className="title-dp fz42 fw500 mb-1 text-center"/> 
 
                     <AlliesForm initialValues={initialValues} handleSubmit={handleSubmit}/>
                 </>

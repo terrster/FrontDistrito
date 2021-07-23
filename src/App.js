@@ -52,6 +52,8 @@ import Solicitud from "./components/Solicitud/Solicitud";
 import Propuestas from "./components/Propuestas/Propuestas";
 import Allies from "./components/Allies/Allies";
 import BrokersLanding from "./components/BrokersLanding/BrokersLanding";
+import AlliePartner from "./components/Allies/AlliePartner";
+import ThankyouPageAllie from "./components/Allies/ThankyouPageAllie";
 
 // ROUTER & REDUX
 import {
@@ -184,7 +186,9 @@ class App extends Component {
                 <PrivateRoute exact path="/propuestas" component={Propuestas}/>
 
                 <Route path="/brokers" exact component = {BrokersLanding}/>
-                
+                <Route path="/aliado_financiero" exact component = {AlliePartner}/>
+                <Route path="/solicitud_enviada_aliado" exact component={ThankyouPageAllie} />
+
                 <Redirect to="/"/>
               </Switch>
             </div>
