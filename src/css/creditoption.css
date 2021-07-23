@@ -1,10 +1,36 @@
-#card-credit {
+.card-credit {
   transition: all 0.3s ease-in-out;
   border-radius: 14px;
+  height: 32rem;
+ }
+
+ .card-credit .title-cards-dp{
+   font-size: 1.25rem !important;
+ }
+
+ @media (min-width: 576px){
+    .card-credit .title-cards-dp{
+    font-size: 1.40rem !important;
+  }
+ }
+
+
+@media (min-width: 768px) {
+    .card-credit {
+    height: 30rem;
+  }
  }
  
+ @media (min-width: 992px) {
+   .card-credit .title-cards-dp{
+    font-size: 1.60rem !important;
+  }
+   .card-credit {
+  height: 26rem;
+ }
+ }
 
-  #card-credit:hover {
+.card-credit:hover {
  -webkit-transform: translateY(-10px);
   -ms-transform: translateY(-10px);
   transform: translateY(-10px);
