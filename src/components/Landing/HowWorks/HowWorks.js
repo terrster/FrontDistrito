@@ -13,58 +13,58 @@ const HowWorks = props => {
 			<Title title="Para hacer aún más rápido tu proceso y autorización de crédito, ten a la mano tu RFC con el que facturas y clave CIEC*
        <br/>*Opcional" className="subtitle-dp fz15 text-center mb-30 " />
 
-			<Row className="justify-content-center mt-3">
-				<Col xl={4} md={5} sm={7} xs={11} className="mb-4">
-					<Card style={{ height: '32rem' }} id="card-home">
-						<Card.Header style={{ height: '10rem' }} id="header-SAT"></Card.Header>
+			<Row className="d-flex justify-content-around">
+				<Col xl={4} md={5} sm={7} xs={11} className="mt-4">
+					<Card id="card-home">
+						<Card.Header  id="header-SAT"></Card.Header>
 						<Card.Body>
 							<Card.Title className="title-cards-dp  white  fz18 text-center">Sin alta en el SAT</Card.Title>
 							<Card.Text className="text-dp fz12  white  text-left mt-5">
 								<ul className="dp-list-req">
 									<li>Identificación Oficial</li>
-									<li className="mt-2">Comprobante de domicilio</li>
-									<li className="mt-2">Estados de cuenta bancarios</li>
-									<li className="mt-2">Mínimo 6 meses con tu negocio</li>
-									<li className="mt-2">Ventas mínimas de $15 mil pesos al mes</li>
+									<li className="mt-1">Comprobante de domicilio</li>
+									<li className="mt-1">Estados de cuenta bancarios</li>
+									<li className="mt-1">Mínimo 6 meses con tu negocio</li>
+									<li className="mt-1">Ventas mínimas de $15 mil pesos al mes</li>
 								</ul>
 							</Card.Text>
 						</Card.Body>
 					</Card>
 				</Col>
 
-				<Col xl={4} md={5} sm={7} xs={11} className="mb-4">
-					<Card style={{ height: '32rem' }} id="card-home">
-						<Card.Header style={{ height: '10rem' }} id="header-FISICA"></Card.Header>
+				<Col xl={4} md={5} sm={7} xs={11} className="mt-4">
+					<Card id="card-home">
+						<Card.Header id="header-FISICA"></Card.Header>
 						<Card.Body>
-							<Card.Title className="title-cards-dp  white fz18 text-center fisica-title">Personas Físicas con Actividad Empresarial y RIF</Card.Title>
+							<Card.Title className="title-cards-dp white fz18 text-center fisica-title">Personas Físicas con Actividad Empresarial y RIF</Card.Title>
 							<Card.Text className="text-dp fz12 fw200  white text-left" style={{marginTop: '25px'}}>
 								<ul className="dp-list-req">
-									<li className="mt-2">Identificación Oficial</li>
-									<li className="mt-2">RFC</li>
-									<li className="mt-2">Comprobante de domicilio</li>
-									<li className="mt-2">Estados de cuentas bancarios</li>
-									<li className="mt-2">Mínimo 12 meses con tu negocio</li>
-									<li className="mt-2">Ventas mínimas de $25 mil al mes</li>
+									<li>Identificación Oficial</li>
+									<li className="mt-1">RFC</li>
+									<li className="mt-1">Comprobante de domicilio</li>
+									<li className="mt-1">Estados de cuentas bancarios</li>
+									<li className="mt-1">Mínimo 12 meses con tu negocio</li>
+									<li className="mt-1">Ventas mínimas de $25 mil al mes</li>
 								</ul>
 							</Card.Text>
 						</Card.Body>
 					</Card>
 				</Col>
 
-				<Col xl={4} md={5} sm={7} xs={11} className="mb-4">
-					<Card style={{ height: '32rem' }} id="card-home">
-						<Card.Header style={{ height: '10rem' }} id="header-MORAL"></Card.Header>
+				<Col xl={4} md={5} sm={7} xs={11} className="mt-4">
+					<Card id="card-home">
+						<Card.Header id="header-MORAL"></Card.Header>
 						<Card.Body>
-							<Card.Title className="title-cards-dp fz18  white text-center">Persona Moral</Card.Title>
+							<Card.Title className="title-cards-dp fz18 white text-center">Persona Moral</Card.Title>
 							<Card.Text className="text-dp fz12  white text-left mt-5">
 								<ul className="dp-list-req">
-									<li className="mt-2">Identificación Oficial principal accionista y rep. legal</li>
-									<li className="mt-2">RFC</li>
-									<li className="mt-2">Comprobante de domicilio del negocio y personal</li>
-									<li className="mt-2">Estados de cuentas bancarios</li>
-									<li className="mt-2">Acta constitutiva</li>
-									<li className="mt-2">Mínimo 12 meses con tu negocio</li>
-									<li className="mt-2">Ventas mínimas de $50 mil al mes</li>
+									<li>Identificación Oficial principal accionista y rep. legal</li>
+									<li className="mt-1">RFC</li>
+									<li className="mt-1">Comprobante de domicilio del negocio y personal</li>
+									<li className="mt-1">Estados de cuentas bancarios</li>
+									<li className="mt-1">Acta constitutiva</li>
+									<li className="mt-1">Mínimo 12 meses con tu negocio</li>
+									<li className="mt-1">Ventas mínimas de $50 mil al mes</li>
 								</ul>
 							</Card.Text>
 						</Card.Body>

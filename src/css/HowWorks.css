@@ -4,6 +4,8 @@
    transition: all 0.3s ease-in-out;
    border-radius: 10px;
    background-image: linear-gradient(#0074FF, #242A5A);
+   height: 30rem;
+   width: 20rem;
  }
  
 
@@ -22,6 +24,7 @@
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   overflow: hidden;
+  height: 10rem;
 }
 
 #header-FISICA{
@@ -31,6 +34,7 @@
   background-size:cover;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+  height: 10rem;
 }
 
 #header-MORAL{
@@ -40,6 +44,7 @@
   background-size:cover;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+  height: 10rem;
 }
 
 .dp-list-req li{
