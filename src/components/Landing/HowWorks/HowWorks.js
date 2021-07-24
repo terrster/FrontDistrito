@@ -14,7 +14,7 @@ const HowWorks = props => {
        <br/>*Opcional" className="subtitle-dp fz15 text-center mb-30 mt-3" />
 
 			<Row className="d-inline-flex justify-content-center">
-				<Col xl={4} md={5} sm={7} xs={11} className="mt-4">
+				<Col xl={4} md={5} sm={7} xs={11} className="mt-4 d-flex justify-content-center">
 					<Card id="card-home">
 						<Card.Header  id="header-SAT"></Card.Header>
 						<Card.Body>
@@ -32,7 +32,7 @@ const HowWorks = props => {
 					</Card>
 				</Col>
 
-				<Col xl={4} md={5} sm={7} xs={11} className="mt-4">
+				<Col xl={4} md={5} sm={7} xs={11} className="mt-4 d-flex justify-content-center">
 					<Card id="card-home">
 						<Card.Header id="header-FISICA"></Card.Header>
 						<Card.Body>
