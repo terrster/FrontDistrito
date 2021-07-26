@@ -29,7 +29,7 @@ import Albo from '../assets/img/alianzas/albo.png';
 export const filterFinancials = (financials) => {
     
     const filteredFinancials = financials.split(';').filter((financial) => {
-        return financial !== 'Bancoppel' && financial !== 'DOCUFORMAS' && financial !== 'AV CAPITAL' && financial !== 'RESUELVE'; 
+        return financial !== 'Bancoppel' && financial !== 'DOCUFORMAS' && financial !== 'AV CAPITAL' && financial !== 'RESUELVE' && financial !== 'ALBO'; 
     });
 
     return filteredFinancials;
@@ -407,16 +407,6 @@ export const dataFinancial = (financial, properties) => {//Propuestas
                 logo: imgFinancial(financial),
                 class: 'MEXARREND'
             };
-
-        case 'ALBO':
-            return {
-                financiera: 'Albo',
-                monto: properties.monto_preaut.value,
-                plazo: '-- meses',
-                tasa: '--% anual',
-                logo: imgFinancial(financial),
-                class: 'ALBO'
-            };
     }
 }
 
@@ -679,16 +669,6 @@ export const dataFinancialFormalization = (properties) => {
                 tasa: properties.n12_2_tasa_autorizada.value + "% mensual",
                 logo: imgFinancial(financial),
                 class: 'MEXARREND'
-            };
-
-        case 'ALBO':
-            return {
-                financiera: 'Albo',
-                monto: properties.n12_1_monto_autorizado.value,
-                plazo: properties.n12_3_plazo_autorizado.value + " meses",
-                tasa: properties.n12_2_tasa_autorizada.value + "% mensual",
-                logo: imgFinancial(financial),
-                class: 'ALBO'
             };
     }
 }
