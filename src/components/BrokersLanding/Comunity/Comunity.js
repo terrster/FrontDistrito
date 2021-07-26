@@ -63,9 +63,9 @@ const Comunity = ({hubspotInfo}) =>{
   }, [hubspotInfo]);
 
   return (
-    <div id="comunityBrokers" className="pt-3 pb-5 text-center">
+    <div id="comunityBrokers" className="text-center">
       <div id="counterContainer">
-        <Title title="Sé parte de nuestra comunidad"  className="title-dp fw500 mb-1 fz42 ls-01 pt-5"/>
+        <Title title="Sé parte de nuestra comunidad"  className="title-dp fw500 mb-1 fz42 ls-01"/>
         <Row className="mt-5">
           <Col md={6} className="mb-4">
             <label className="title-cards-dp fz32">Monto colocado</label>
@@ -81,14 +81,14 @@ const Comunity = ({hubspotInfo}) =>{
             </div>
           </Col>
 
-          <Col md={6} className="mb-4">
+          <Col md={6}>
             <label className="title-cards-dp fz32">Solicitudes</label>
             <div className="titulos coolvetica">
               <span className="counter" data-target="Solicitudes">--</span>
             </div>
           </Col>
 
-          <Col md={6} className="mb-4">
+          <Col md={6}>
             <label className="title-cards-dp fz32"> Aliados financieros</label>
             <div className="titulos coolvetica">
               <span className="counter" data-target="Alianzas">--</span>
