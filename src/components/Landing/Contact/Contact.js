@@ -67,8 +67,8 @@ const Contact = () => {
 	return (
 	<>
 		<Loader />
-			<div className="text-center"  style={{marginBottom : '-10px'}}>
-				<Title className="title-dp fw500 fz38 pt-3" title="¡Contáctanos!"/>
+			<div className="text-center">
+				<Title className="title-dp fw500 fz38" title="¡Contáctanos!"/>
 				<div className="mr-auto ml-auto mt-5" style={{maxWidth : '1200px'}}>
 					<Row className="justify-content-center">
 						<Col lg={2}>
