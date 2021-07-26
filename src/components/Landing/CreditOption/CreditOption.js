@@ -56,7 +56,7 @@ const CreditOption = () => {
                     <li className="dp-facil">Fácil y rápido, solo preocúpate por seguir creciendo tu negocio</li>
                   </ul>
                 </Card.Text>
-                <Button className="text-center fz16 white nav-btn nav-btn-rad primary heigth-45 w-360 ml-auto mr-auto coolvetica" style={{ textDecoration: "none" }} onClick={() => { history.push("/registrate") }}>
+                <Button id="btn-white" className="text-center fz16 blackNav nav-btn nav-btn-rad primary heigth-45 w-360 ml-auto mr-auto coolvetica" style={{ textDecoration: "none" }} onClick={() => { history.push("/registrate") }}>
                   Solicita tu crédito
                 </Button>
               </Card.Body>
