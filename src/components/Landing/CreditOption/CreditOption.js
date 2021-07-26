@@ -21,9 +21,9 @@ const CreditOption = () => {
 
         <Title title="8 De cada 10 solicitudes recibe una opción de crédito" className="title-dp fz29  fw300" />
 
-        <Title title="Existe una infinidad de opciones de crédito, pero solo una plataforma con todas esas opciones en una sola solicitud" className="subtitle-dp fz12 text-center mb-5 mt-4" />
+        <Title title="Existe una infinidad de opciones de crédito, pero solo una plataforma con todas esas opciones en una sola solicitud" className="subtitle-dp fz12 text-center mb-4 mt-4" />
 
-        <Row className="d-inline-flex justify-content-center mt-3">
+        <Row className="d-inline-flex justify-content-center">
           <Col xl={4} md={5} sm={6} className="d-flex justify-content-center mb-3">
             <Card className="fondo-card card-credit">
               <Card.Header id="header" style={{ height: '5rem' }} className="title-cards-dp fz25">Bancos, financieras y fintechs</Card.Header>
