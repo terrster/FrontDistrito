@@ -42,7 +42,7 @@ const CreditOption = () => {
           </Col>
 
           <Col xl={4} md={5} sm={6} xs={8}>
-            <Card className="fondo-card-dp card-credit">
+            <Card className="fondo-card-dp card-credit" style={{border: 'none'}}>
               <Card.Header id="header" style={{ height: '5rem' }}><img src={LOGODP} alt="LOGODP" width="150px" /></Card.Header>
               <Card.Body>
                 <Card.Title></Card.Title>
