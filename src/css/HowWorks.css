@@ -6,6 +6,7 @@
    background-image: linear-gradient(#0074FF, #242A5A);
    height: 30rem;
    width: 20rem;
+   border: none;
  }
  
 
@@ -54,11 +55,11 @@
 .dp-list-req li:before {
   position: absolute;
   content: '✔';
-  font-size: 20px;
+  font-size: 15px;
   margin-top: -5px;
   margin-left: -20px;
-  background: -webkit-linear-gradient(to right, #0095FF 45%, #6DFFFF 65%);
-  background: linear-gradient(to right, #0095FF 45%, #6DFFFF 65%);
+  background: -webkit-linear-gradient(to right, #ffff 45%, #ffff 65%);
+  background: linear-gradient(to right, #ffff 45%, #ffff 65%);
   -webkit-background-clip: text;  
   -webkit-text-fill-color: transparent;  
 }
