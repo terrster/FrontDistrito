@@ -1,7 +1,9 @@
 .card-credit {
-  transition: all 0.3s ease-in-out;
-  border-radius: 14px;
-  height: 32rem;
+   transition: all 0.3s ease-in-out;
+   border-radius: 10px;
+   height: 30rem;
+   width: 20rem;
+   border: none;
  }
 
  .card-credit .title-cards-dp{
@@ -18,6 +20,7 @@
 @media (min-width: 768px) {
     .card-credit {
     height: 30rem;
+    width: 30rem;
   }
  }
  
@@ -26,9 +29,13 @@
     font-size: 1.60rem !important;
   }
    .card-credit {
-  height: 26rem;
+    height: 26rem;
+    width: 30rem;
+    } 
  }
- }
+
+
+
 
 .card-credit:hover {
  -webkit-transform: translateY(-10px);
