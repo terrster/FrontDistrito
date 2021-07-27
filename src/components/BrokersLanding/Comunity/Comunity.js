@@ -63,10 +63,10 @@ const Comunity = ({hubspotInfo, origen}) =>{
   }, [hubspotInfo]);
 
   return (
-    <div id="comunityBrokers" className="text-center mt-4">
+    <div id="comunityBrokers" className="text-center mt-5">
       <div id="counterContainer">
         <Title title="Sé parte de nuestra comunidad"  className="title-dp fw500 mb-1 fz42 ls-01"/>
-        <Row className="mt-5">
+        <Row className="mt-3">
           <Col md={6} className="mb-4">
             <label className="title-cards-dp fz32">Monto colocado</label>
             <div className="titulos coolvetica">
