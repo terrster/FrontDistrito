@@ -1,25 +1,30 @@
 .card-credit {
    transition: all 0.3s ease-in-out;
    border-radius: 10px;
-   height: 30rem;
+   height: 26rem;
    width: 20rem;
    border: none;
  }
 
  .card-credit .title-cards-dp{
    font-size: 1.25rem !important;
+   margin-top: 1.40rem;
  }
 
  @media (min-width: 576px){
     .card-credit .title-cards-dp{
     font-size: 1.40rem !important;
+    margin-top: 1.40rem;
   }
+  .card-credit {
+    height: 27rem;
+    } 
  }
 
 
 @media (min-width: 768px) {
     .card-credit {
-    height: 30rem;
+    height: 27rem;
     width: 30rem;
   }
  }

@@ -4,7 +4,7 @@ import { Row, Col } from 'react-bootstrap';
 
 var calculated = false;
 
-const Comunity = ({hubspotInfo}) =>{
+const Comunity = ({hubspotInfo, origen}) =>{
 
   document.addEventListener("scroll", () => {
     let counterContainer = document.getElementById('counterContainer');
@@ -63,7 +63,7 @@ const Comunity = ({hubspotInfo}) =>{
   }, [hubspotInfo]);
 
   return (
-    <div id="comunityBrokers" className="text-center">
+    <div id="comunityBrokers" className="text-center mt-4">
       <div id="counterContainer">
         <Title title="Sé parte de nuestra comunidad"  className="title-dp fw500 mb-1 fz42 ls-01"/>
         <Row className="mt-5">
@@ -75,7 +75,7 @@ const Comunity = ({hubspotInfo}) =>{
           </Col>
 
           <Col md={6} className="mb-4">
-            <label className="title-cards-dp fz32">Brokers activos</label>
+            <label className="title-cards-dp fz32">{origen === 'landing' ? 'Brokers digitales' : 'Brokers activos'}</label>
             <div className="titulos coolvetica">
               <span className="counter" data-target="Brokers">--</span>
             </div>

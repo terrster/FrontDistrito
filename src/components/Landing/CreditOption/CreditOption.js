@@ -24,7 +24,7 @@ const CreditOption = () => {
         <Title title="Existe una infinidad de opciones de crédito, pero solo una plataforma con todas esas opciones en una sola solicitud" className="subtitle-dp fz12 text-center mb-4 mt-4" />
 
         <Row className="d-inline-flex justify-content-center">
-          <Col xl={4} md={5} sm={6} className="d-flex justify-content-center mb-3">
+          <Col xl={4} md={5} sm={7}  className="d-flex justify-content-center mb-4">
             <Card className="fondo-card card-credit">
               <Card.Header id="header" style={{ height: '5rem' }} className="title-cards-dp fz25">Bancos, financieras y fintechs</Card.Header>
               <Card.Body>
@@ -41,9 +41,9 @@ const CreditOption = () => {
             </Card>
           </Col>
 
-          <Col xl={4} md={5} sm={6} className="d-flex justify-content-center">
+          <Col xl={4} md={5} sm={6} sm={7} className="d-flex justify-content-center">
             <Card className="fondo-card-dp card-credit" style={{border: 'none'}}>
-              <Card.Header id="header" style={{ height: '5rem' }}><img src={LOGODP} alt="LOGODP" width="150px" /></Card.Header>
+              <Card.Header id="header" style={{ height: '5rem' }}><img src={LOGODP} alt="LOGODP" width="150px" className="mt-4" /></Card.Header>
               <Card.Body>
                 <Card.Title></Card.Title>
                 <Card.Text className="text-dp fz12 white text-left ">

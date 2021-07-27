@@ -11,7 +11,7 @@ const Allies = () => {
   return(
     <div className="container pt-5">
       <div className="text-center">
-        <Title title="Nuestros Aliados" className="title-dp fw500 mb-1 fz42"/>
+        <Title title="Nuestros Aliados" className="title-dp fw500 mb-4 fz42"/>
       </div>
 
       <Container>

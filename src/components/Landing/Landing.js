@@ -69,7 +69,7 @@ const Landing = () => {
                 <Video />
                 <Slider />
                 {/* <AboutUs />       */}
-                <Comunity hubspotInfo={hubspotInfo} />
+                <Comunity hubspotInfo={hubspotInfo} origen={'landing'}/>
                 <Contact /> 
             </div>
         </div>
