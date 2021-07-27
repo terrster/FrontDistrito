@@ -55,11 +55,13 @@
 .dp-list-req li:before {
   position: absolute;
   content: '';
+  display: inline-block;
+  height: 15px;
+  width: 15px;
   background-image: url(../assets/img/home/checked.png);
-  font-size: 15px;
-  margin-top: -1px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: left center;
+  margin-top: 1px;
   margin-left: -20px;
-
-  -webkit-background-clip: text;  
-  -webkit-text-fill-color: transparent;  
 }
