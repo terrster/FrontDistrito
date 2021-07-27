@@ -9,9 +9,9 @@ const Allies = () => {
   const allies = imgFinancial('ALL');
 
   return(
-    <div className="container pt-5">
+    <div className="container pt-5 pb-3">
       <div className="text-center">
-        <Title title="Nuestros Aliados" className="title-dp fw500 mb-1 fz42"/>
+        <Title title="Nuestros Aliados" className="title-dp fw500 mb-4 fz42"/>
       </div>
 
       <Container>

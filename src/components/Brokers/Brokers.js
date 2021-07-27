@@ -78,7 +78,7 @@ const Brokers = () => {
                 </Carousel.Item>
             </Carousel>
 
-            <Title title="Alta de Brokers" className="subtitle-dp fz42 fw500 mb-1 text-center" />
+            <Title title="Alta de Brokers" className="title-dp fz42 fw500 mb-1 text-center" />
 
             <Container>
                 <div className="metropolisReg fz12 blackBlue text-justify">

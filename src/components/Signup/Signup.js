@@ -70,6 +70,10 @@ const Signup = props => {
   window.addEventListener('resize', () => setVersionImage(getVersionImage()));
 
   useEffect(() => {
+    window.scrollTo(0, 0)
+  }, []);
+
+  useEffect(() => {
     if(props.match.params.financialPartner !== undefined){
       if(financialPartner(props.match.params.financialPartner)){
         setPartner(financialPartner(props.match.params.financialPartner))
