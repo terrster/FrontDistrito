@@ -54,12 +54,12 @@
 
 .dp-list-req li:before {
   position: absolute;
-  content: '✔';
+  content: '';
+  background-image: url(../assets/img/home/checked.png);
   font-size: 15px;
   margin-top: -1px;
   margin-left: -20px;
-  background: -webkit-linear-gradient(to right, #ffff 45%, #ffff 65%);
-  background: linear-gradient(to right, #ffff 45%, #ffff 65%);
+
   -webkit-background-clip: text;  
   -webkit-text-fill-color: transparent;  
 }
