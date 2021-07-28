@@ -24,11 +24,11 @@ const Footer = props => {
             <div>
                 <a href="/#simulador" className="metropolisReg black-link fw300 fz18">Simulador</a>
             </div>
-            <div>
+            {/* <div>
                 <a href="/#about" className="metropolisReg black-link fw300 fz18">Conócenos</a>
-            </div>
+            </div> */}
             <div>
-                <a href="/#howWorks" className="metropolisReg black-link fw300 fz18">¿Cómo funciona?</a>
+                <a href="/#videoHowWorks" className="metropolisReg black-link fw300 fz18">¿Cómo funciona?</a>
             </div>
             <div>
                 <a href="https://distritopyme.com.mx/" target='_blank' rel="noopener noreferrer" className="metropolisReg black-link fw300 fz18">Blog</a>
