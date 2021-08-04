@@ -6,6 +6,7 @@ import ColocadoSound from '../../assets/sounds/Colocado.mp3';
 import GeneralSound from '../../assets/sounds/General.mp3';
 import { ToastContainer, toast } from "react-toastify";
 import LOGO from '../../assets/img/logo_dp/extras-03.png';
+import VIDEO from '../../assets/video-dashboard/back.mp4';
 
 const Dashboard = () => {
 
@@ -129,7 +130,7 @@ const Dashboard = () => {
   return(
     <>
       <div id="dashboard" className="dashboard">
-        <div className="area" >
+        {/* <div className="area" >
           <ul className="circles">
             <li></li>
             <li></li>
@@ -142,7 +143,9 @@ const Dashboard = () => {
             <li></li>
             <li></li>
           </ul>
-        </div>
+        </div> */}
+        <video src={VIDEO} autoPlay muted loop>
+        </video>
 
         <Modal show={show} backdrop="static" keyboard={false} centered size={"lg"}>
           <Modal.Header>
@@ -224,7 +227,7 @@ const Dashboard = () => {
               display: none !important;\
           }\
           body{\
-            background-color: #f4f4f4 !important;\
+            background-color: #ffff !important;\
           }\
       "}</style>
   
