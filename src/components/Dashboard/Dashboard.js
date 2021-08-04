@@ -10,6 +10,14 @@ import VIDEO from '../../assets/video-dashboard/back.mp4';
 
 const Dashboard = () => {
 
+  let today = new Date();
+  let months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+  
+  let date = today.getDate() + '/' + months[(today.getMonth()+1)-1] + '/' + today.getFullYear();
+
+
+
+
   const [Colocado] = useState(new Audio(ColocadoSound));
   const [General] = useState(new Audio(GeneralSound));
   const [show, setShow] = useState(true);
@@ -161,7 +169,6 @@ const Dashboard = () => {
 
         <ToastContainer />
 
-        <img src={LOGO} className="dashboard-logo"/>
 
         <Container className="dashboard-container container-xl-fluid">
           <Row className="d-flex align-items-center">
@@ -210,6 +217,15 @@ const Dashboard = () => {
               </div>
             </Col>
           </Row>
+
+          
+
+          <img src={LOGO} className="dashboard-logo" />
+
+          <div className="dashboard-label">
+            {date}
+          </div>
+
         </Container>
       </div>
 
