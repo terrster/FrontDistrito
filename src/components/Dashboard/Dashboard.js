@@ -5,7 +5,7 @@ import '../../css/dashboard.css';
 import ColocadoSound from '../../assets/sounds/Colocado.mp3';
 import GeneralSound from '../../assets/sounds/General.mp3';
 import { ToastContainer, toast } from "react-toastify";
-import LOGO from '../../assets/img/logo_dp/extras-03.png';
+import LOGO from '../../assets/img/home/LOGO_DP_WHITE.png';
 import VIDEO from '../../assets/video-dashboard/back.mp4';
 
 const Dashboard = () => {
