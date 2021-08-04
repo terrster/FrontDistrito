@@ -71,7 +71,7 @@ const Header = props => {
 									style={{ letterSpacing: 0.8 }}
 								>
 									<p>Todas las opciones de crédito en una sola solicitud</p>
-									<p className="metropolisMed ">¡Recíbelas en menos de 15 minutos!</p>
+									<p className="metropolisMed ">¡En menos de 15 minutos!</p>
 								</div>
 
 

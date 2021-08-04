@@ -67,10 +67,9 @@ const Contact = () => {
 	return (
 	<>
 		<Loader />
-			<div className="text-center mt-5"  style={{marginBottom : '-10px'}}>
-				<Title className="title-dp fw500 fz38 pt-3" title="¡Contáctanos!"/>
-				<Title className="title-dp fw500 fz38 mb-18" title="Déjanos tus datos"/>
-				<div className="mr-auto ml-auto" style={{maxWidth : '1200px'}}>
+			<div className="text-center mt-3">
+				<Title className="title-dp fw500 fz38" title="¡Contáctanos!"/>
+				<div className="mr-auto ml-auto mt-2" style={{maxWidth : '1200px'}}>
 					<Row className="justify-content-center">
 						<Col lg={2}>
 							<img className="d-lg-block d-none" src={titoLupa} width="150px" alt="Tito lupa" style={{marginTop : '10px'}} />

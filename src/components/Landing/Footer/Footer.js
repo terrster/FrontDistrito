@@ -1,6 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import '../../../css/footer.css';
-
 import logo from '../../../assets/img/logo_dp/extras-03.png';
 import face from '../../../assets/img/redes_sociales/Facebook.png';
 import mail from '../../../assets/img/redes_sociales/mail.png';
@@ -24,11 +24,11 @@ const Footer = props => {
             <div>
                 <a href="/#simulador" className="metropolisReg black-link fw300 fz18">Simulador</a>
             </div>
-            <div>
+            {/* <div>
                 <a href="/#about" className="metropolisReg black-link fw300 fz18">Conócenos</a>
-            </div>
+            </div> */}
             <div>
-                <a href="/#howWorks" className="metropolisReg black-link fw300 fz18">¿Cómo funciona?</a>
+                <a href="/#videoHowWorks" className="metropolisReg black-link fw300 fz18">¿Cómo funciona?</a>
             </div>
             <div>
                 <a href="https://distritopyme.com.mx/" target='_blank' rel="noopener noreferrer" className="metropolisReg black-link fw300 fz18">Blog</a>
@@ -40,6 +40,7 @@ const Footer = props => {
             <div className="metropolisReg fw300 fz18"><a href="/terminos-y-condiciones" className="footer-link" target="blank">Términos y condiciones</a></div>
             <div className="metropolisReg fw300 fz18"><a href="/privacidad" className="footer-link" target="blank">Aviso de privacidad</a></div>
             <div className="metropolisReg fw300 fz18"><a className="footer-link" href="mailto:contacto@distritopyme.com">Trabaja en Distrito Pyme</a></div>
+            <div className="metropolisReg fw300 fz18"><Link className="footer-link" to="/aliado_financiero">Quiero ser Aliado Financiero</Link></div>
         </div>
         <div className="col-12 col-lg-3">
             <div className="metropolisMed fw500 fz24">Contacto</div>

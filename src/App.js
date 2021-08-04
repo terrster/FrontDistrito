@@ -54,6 +54,8 @@ import Allies from "./components/Allies/Allies";
 import BrokersLanding from "./components/BrokersLanding/BrokersLanding";
 import Dashboard from "./components/Dashboard/Dashboard";
 
+import AlliePartner from "./components/Allies/AlliePartner";
+import ThankyouPageAllie from "./components/Allies/ThankyouPageAllie";
 
 // ROUTER & REDUX
 import {
@@ -189,6 +191,9 @@ class App extends Component {
                 <Route path="/dashboard" exact component={Dashboard} />
 
                 
+                <Route path="/aliado_financiero" exact component = {AlliePartner}/>
+                <Route path="/solicitud_enviada_aliado" exact component={ThankyouPageAllie} />
+
                 <Redirect to="/"/>
               </Switch>
             </div>

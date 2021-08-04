@@ -24,11 +24,12 @@ import DeltAi from '../assets/img/alianzas/deltAi.png';
 import Cualli from '../assets/img/alianzas/cualli.png';
 import KUBO from '../assets/img/alianzas/kubo.png';
 import Mexarrend from '../assets/img/alianzas/mexarrend.png';
+import Albo from '../assets/img/alianzas/albo.png';
 
 export const filterFinancials = (financials) => {
     
     const filteredFinancials = financials.split(';').filter((financial) => {
-        return financial !== 'Bancoppel' && financial !== 'DOCUFORMAS' && financial !== 'AV CAPITAL' && financial !== 'RESUELVE'; 
+        return financial !== 'Bancoppel' && financial !== 'DOCUFORMAS' && financial !== 'AV CAPITAL' && financial !== 'RESUELVE' && financial !== 'ALBO'; 
     });
 
     return filteredFinancials;
@@ -113,6 +114,9 @@ export const imgFinancial = (financial) => {
         case 'MEXARREND':
         return Mexarrend;
 
+        case 'ALBO':
+        return Albo;
+
         case 'ALL':
         return [
             ASPIRIA,
@@ -139,7 +143,8 @@ export const imgFinancial = (financial) => {
             DeltAi,
             Cualli,
             KUBO,
-            Mexarrend
+            Mexarrend,
+            Albo
         ];
     }
 }
@@ -392,6 +397,7 @@ export const dataFinancial = (financial, properties) => {//Propuestas
                 logo: imgFinancial(financial),
                 class: 'KUBO'
             };
+
         case 'MEXARREND':
             return {
                 financiera: 'Mexarrend',

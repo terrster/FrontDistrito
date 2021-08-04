@@ -4,7 +4,7 @@ import { Row, Col } from 'react-bootstrap';
 
 var calculated = false;
 
-const Comunity = ({hubspotInfo}) =>{
+const Comunity = ({hubspotInfo, origen}) =>{
 
   document.addEventListener("scroll", () => {
     let counterContainer = document.getElementById('counterContainer');
@@ -42,7 +42,7 @@ const Comunity = ({hubspotInfo}) =>{
               counter.innerText = hubspotInfo.ColocadoFormatted + " M";
             }
             else{
-              counter.innerText = new Intl.NumberFormat().format(targetValue).toString().replace('.', ',');
+              counter.innerText = hubspotInfo[target];
             }
           }
         }
@@ -63,40 +63,38 @@ const Comunity = ({hubspotInfo}) =>{
   }, [hubspotInfo]);
 
   return (
-    <div id="comunityBrokers" className="pt-3 pb-5 text-center">
+    <div id="comunityBrokers" className="text-center mt-5">
       <div id="counterContainer">
-        <Title title="Sé parte de nuestra comunidad"  className="title-dp fw500 mb-1 fz42 ls-01 pt-5"/>
-        <Row className="mt-5">
+        <Title title="Sé parte de nuestra comunidad"  className="title-dp fw500 mb-1 fz42 ls-01"/>
+        <Row className="mt-3">
           <Col md={6} className="mb-4">
-            <label className="metropolisReg fz32 blackBlue">Monto colocado</label>
+            <label className="title-cards-dp fz32">Monto colocado</label>
             <div className="titulos coolvetica">
               <span className="counter" data-target="Colocado">--</span>
             </div>
           </Col>
 
           <Col md={6} className="mb-4">
-            <label className="metropolisReg fz32 blackBlue">Brokers activos</label>
+            <label className="title-cards-dp fz32">{origen === 'landing' ? 'Brokers digitales' : 'Brokers activos'}</label>
             <div className="titulos coolvetica">
               <span className="counter" data-target="Brokers">--</span>
             </div>
           </Col>
 
-          <Col md={6} className="mb-4">
-            <label className="metropolisReg fz32 blackBlue">Solicitudes</label>
+          <Col md={6}>
+            <label className="title-cards-dp fz32">Solicitudes</label>
             <div className="titulos coolvetica">
               <span className="counter" data-target="Solicitudes">--</span>
             </div>
           </Col>
 
-          <Col md={6} className="mb-4">
-            <label className="metropolisReg fz32 blackBlue"> Aliados financieros</label>
+          <Col md={6}>
+            <label className="title-cards-dp fz32"> Aliados financieros</label>
             <div className="titulos coolvetica">
               <span className="counter" data-target="Alianzas">--</span>
             </div>
           </Col>
         </Row>
-
-        <Title title="8 De Cada 10 Solicitudes Recibe Una Opción De Crédito" className="title-dp fw500 mt-5 fz32" />
       </div>
     </div>
   );

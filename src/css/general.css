@@ -451,6 +451,10 @@
 }
 
 /* Text */
+.title-cards-dp{
+	font-family: 'Metropolis-Bold';
+	color: #3D3D3D;
+}
 
 .title-dp{
 	font-family: 'coolvetica_rg';
@@ -458,13 +462,13 @@
 }
 
 .subtitle-dp{
-	font-family: 'coolvetica_rg';
-	color: #2A2E59;
+	font-family: 'Metropolis-Regular';
+	color: #3D3D3D;
 }
 
 .text-dp{
 	font-family: 'Metropolis-Regular';
-	color: #2A2E59;
+	color: #3D3D3D;
 }
 
 .text-dp-white{
