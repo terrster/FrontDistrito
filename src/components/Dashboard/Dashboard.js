@@ -148,7 +148,7 @@ const Dashboard = () => {
 
       setTimeout(() => {
         setSection(section => !section);
-      }, 10000)
+      }, 3000)
       
       setTimeout(() => {
         document.getElementById("dashboard-container").style.visibility = 'visible';
@@ -160,7 +160,7 @@ const Dashboard = () => {
   return(
     <>
       <div id="dashboard" className="dashboard">
-        <video src={VIDEO} autoPlay muted loop>
+        <video id="video-dashboard" src={VIDEO} autoPlay muted loop>
         </video>
 
         <Modal show={show} backdrop="static" keyboard={false} centered size={"lg"}>
@@ -183,7 +183,7 @@ const Dashboard = () => {
             {
               section &&
               <Row className="d-flex align-items-center">
-                <Col md={6}>
+                <Col md={6} className="mb-5">
                   <div className="text-center">
                     <label className="dashboard-label label-solicitudes">Solicitudes</label>
                     <div className="dashboard-data">
@@ -192,7 +192,7 @@ const Dashboard = () => {
                   </div>
                 </Col>
 
-                <Col md={6}>
+                <Col md={6} className="mb-5">
                   <div className="text-center">
                     <label className="dashboard-label label-pymes">Pymes Apoyadas</label>
                     <div className="dashboard-data">
@@ -201,7 +201,7 @@ const Dashboard = () => {
                   </div>
                 </Col>
 
-                <Col md={6}>
+                <Col md={6} className="mb-5">
                   <div className="text-center">
                     <label className="dashboard-label label-brokers">Brokers Activos</label>
                     <div className="dashboard-data">
@@ -210,7 +210,7 @@ const Dashboard = () => {
                   </div>
                 </Col>
 
-                <Col md={6}>
+                <Col md={6} className="mb-5">
                   <div className="text-center">
                     <label className="dashboard-label label-financieros"> Aliados financieros</label>
                     <div className="dashboard-data">
@@ -223,7 +223,7 @@ const Dashboard = () => {
 
             {
               !section &&
-              <Row className="d-flex align-items-center mb-125">
+              <Row id="monto-colocado" className="d-flex align-items-center">
                 <Col sm={12} className="mb-10">
                   <div className="text-center">
                     <label className="dashboard-label label-monto">Monto colocado</label>
@@ -235,7 +235,7 @@ const Dashboard = () => {
               </Row>
             }
           </div>
-          <img src={LOGO} className="dashboard-logo" />
+          <img src={LOGO} className="dashboard-logo"/>
 
           <div className="dashboard-label-date">
             {date}

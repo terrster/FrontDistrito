@@ -5,7 +5,7 @@
     height: 100%;
 }
 
-video{
+#video-dashboard{
     position:fixed;
     min-height: 100%;
     min-height: 100%;
@@ -52,9 +52,9 @@ video{
 }
 
 .dashboard-label{
-    font-family: 'Metropolis-Regular';
+    font-family: 'Metropolis-Light';
     color : white;
-    font-size: 1.2rem;
+    font-size: 2rem !important;
 }
 
 .dashboard-label-date{
@@ -86,20 +86,9 @@ video{
 
 .dashboard-data{  
     font-family: 'coolvetica_rg';
-    font-size: 1.8rem;  
-    color: #ffff;
-}  
-
-
-@media (min-width: 400px) {
-    .dashboard-logo{
-        max-width: 35%;
-    }
-
-    .dashboard-container{
-        margin-top: 50px;
-    }
-}
+    font-size: 4.9rem !important;
+    color:#ffff;
+} 
 
 @media (min-width: 400px) {
     .dashboard-logo{
@@ -109,6 +98,22 @@ video{
     .dashboard-container{
         margin-top: 50px;
     }
+    
+    #monto-colocado{
+        margin-top: 230px;
+    }
+
+    #monto-colocado{
+        margin-bottom: 189px;
+    }
+
+    .dashboard-label{
+    font-size: 1rem !important;
+    }
+
+    .dashboard-data{  
+    font-size: 2rem !important;
+    } 
 }
 
 @media (min-width: 768px) {
@@ -117,17 +122,35 @@ video{
     }
 
     .dashboard-data{
-        font-size: 2.375rem;
+        font-size: 4rem !important;
+    }
+     #monto-colocado{
+        margin-top: 68px;
+    }
+
+    #monto-colocado{
+        margin-bottom: 158px;
+    }
+
+    .dashboard-label{
+    font-size: 1.5rem !important;
     }
 }
 
 @media (min-width: 992px) {
     .dashboard-label{
-        font-size: 1.5rem;
+        font-size: 1.5rem !important;
     }
 
     .dashboard-data{
-        font-size: 3rem;
+        font-size: 4rem !important;
+    }
+     #monto-colocado{
+        margin-top: 68px;
+    }
+
+    #monto-colocado{
+        margin-bottom: 158px;
     }
 }
 
@@ -137,15 +160,22 @@ video{
 	}
 
     .dashboard-logo{
-        max-width: 20%;
+        max-width: 30%;
     }
 
     .dashboard-label{
-        font-size: 1.7rem;
+        font-size: 2rem !important;
     }
 
     .dashboard-data{
-        font-size: 3.2rem;
+        font-size: 4.5rem !important;
+    }
+    #monto-colocado{
+        margin-top: 68px;
+    }
+
+    #monto-colocado{
+        margin-bottom: 213px;
     }
 }
 
@@ -171,15 +201,27 @@ video{
     }
 
     .dashboard-label{
-        font-size: 1.9rem;
+        font-size: 2rem !important;
     }
 
     .dashboard-data{
-        font-size: 3.4rem;
+        font-size: 6rem !important;
+    }
+
+    #monto-colocado{
+        margin-top: 68px;
+    }
+
+    #monto-colocado{
+        margin-bottom: 255px;
     }
 }
 
 @media (min-width: 1800px) {
+    .dashboard-logo{
+        width: 30% !important;
+    }
+
     .modal-content{
         max-width: 80% !important;
     }
@@ -201,25 +243,56 @@ video{
     }
     
     .dashboard-label{
-        font-size: 2.2rem;
+        font-size: 3rem !important;
     }
 
     .dashboard-data{
-        font-size: 3.6rem;
+        font-size: 6rem !important;
+    }
+
+    #monto-colocado{
+        margin-top: 68px;
+    }
+
+    #monto-colocado{
+        margin-bottom: 280px;
+    }
+
+    .dashboard-label-date{
+     font-size: 1.5rem !important;
     }
 }
 
 @media (min-width: 2000px) {
+    .dashboard-logo{
+        width: 30% !important;
+    }
+
     .dashboard-label{
-        font-size: 2.4rem;
+        font-size: 3rem !important;
     }
 
     .dashboard-data{  
-        font-size: 3.8rem;  
+        font-size: 8rem !important;  
+    }
+
+    #monto-colocado{
+        margin-top: 68px;
+    }
+
+    #monto-colocado{
+        margin-bottom: 333px;
+    }
+
+    .dashboard-label-date{
+     font-size: 2rem !important;
     }
 }
 
 @media (min-width: 2500px) {
+    .dashboard-logo{
+        width: 30% !important;
+    }
     .modal-content{
         max-width: 100% !important;
     }
@@ -241,11 +314,23 @@ video{
     }
 
     .dashboard-label{
-        font-size: 2.8rem;
+        font-size: 3rem !important;
     }
 
     .dashboard-data{  
-        font-size: 4.2rem;  
+        font-size: 10rem !important;  
+    }
+
+    #monto-colocado{
+        margin-top: 68px;
+    }
+
+    #monto-colocado{
+        margin-bottom: 393px;
+    }
+
+    .dashboard-label-date{
+     font-size: 2rem !important;
     }
 }
 
