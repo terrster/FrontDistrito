@@ -3,6 +3,7 @@
     background-color: #f4f4f4 !important;
     width: 100%;
     height: 100%;
+    overflow: hidden;
 }
 
 #video-dashboard{
@@ -29,6 +30,8 @@
     transition: visibility 0.5s ease-in-out, opacity 0.5s ease-in-out;
     visibility: visible;
     opacity: 1;
+        overflow: hidden;
+
 }
 
 
@@ -49,6 +52,7 @@
     transform: translate(-50%, -50%);
     margin-top: 50px;
     z-index: 2;
+    overflow: hidden;
 }
 
 .dashboard-label{
@@ -100,11 +104,11 @@
     }
     
     #monto-colocado{
-        margin-top: 230px;
+        margin-top: 150px;
     }
 
     #monto-colocado{
-        margin-bottom: 189px;
+        margin-bottom: 148px;
     }
 
     .dashboard-label{
@@ -114,6 +118,10 @@
     .dashboard-data{  
     font-size: 2rem !important;
     } 
+
+    .dashboard-label-date{
+     font-size: .8rem !important;
+    }
 }
 
 @media (min-width: 768px) {
@@ -129,7 +137,7 @@
     }
 
     #monto-colocado{
-        margin-bottom: 158px;
+        margin-bottom: 95px;
     }
 
     .dashboard-label{
@@ -150,7 +158,7 @@
     }
 
     #monto-colocado{
-        margin-bottom: 158px;
+        margin-bottom: 95px;
     }
 }
 
@@ -175,7 +183,7 @@
     }
 
     #monto-colocado{
-        margin-bottom: 213px;
+        margin-bottom: 145px;
     }
 }
 
@@ -213,7 +221,11 @@
     }
 
     #monto-colocado{
-        margin-bottom: 255px;
+        margin-bottom: 182px;
+    }
+
+    .dashboard-label-date{
+     font-size: 1rem !important;
     }
 }
 
@@ -255,7 +267,7 @@
     }
 
     #monto-colocado{
-        margin-bottom: 280px;
+        margin-bottom: 209px;
     }
 
     .dashboard-label-date{
@@ -281,7 +293,7 @@
     }
 
     #monto-colocado{
-        margin-bottom: 333px;
+        margin-bottom: 265px;
     }
 
     .dashboard-label-date{
@@ -322,11 +334,11 @@
     }
 
     #monto-colocado{
-        margin-top: 68px;
+        margin-top: 148px;
     }
 
     #monto-colocado{
-        margin-bottom: 393px;
+        margin-bottom: 235px;
     }
 
     .dashboard-label-date{

@@ -6,7 +6,6 @@ import ColocadoSound from '../../assets/sounds/Colocado.mp3';
 import GeneralSound from '../../assets/sounds/General.mp3';
 import { ToastContainer, toast } from "react-toastify";
 import LOGO from '../../assets/img/home/LOGO_DP_WHITE.png';
-import VIDEO from '../../assets/video-dashboard/back.mp4';
 
 var calculated = false;
 
@@ -162,7 +161,7 @@ const Dashboard = () => {
   return(
     <>
       <div id="dashboard" className="dashboard">
-        <video id="video-dashboard" src={VIDEO} autoPlay muted loop>
+        <video id="video-dashboard" src="https://distrito-pyme-media.s3.us-west-2.amazonaws.com/back.mp4" autoPlay muted loop>
         </video>
 
         <Modal show={show} backdrop="static" keyboard={false} centered size={"lg"}>
@@ -185,7 +184,7 @@ const Dashboard = () => {
             {
               section &&
               <Row className="d-flex align-items-center">
-                <Col md={6} className="mb-5">
+                <Col md={6} className="mb-3">
                   <div className="text-center">
                     <label className="dashboard-label label-solicitudes">Solicitudes</label>
                     <div className="dashboard-data">
@@ -194,7 +193,7 @@ const Dashboard = () => {
                   </div>
                 </Col>
 
-                <Col md={6} className="mb-5">
+                <Col md={6} className="mb-3">
                   <div className="text-center">
                     <label className="dashboard-label label-pymes">Pymes Apoyadas</label>
                     <div className="dashboard-data">
@@ -203,7 +202,7 @@ const Dashboard = () => {
                   </div>
                 </Col>
 
-                <Col md={6} className="mb-5">
+                <Col md={6} className="mb-3">
                   <div className="text-center">
                     <label className="dashboard-label label-brokers">Brokers Activos</label>
                     <div className="dashboard-data">
@@ -212,7 +211,7 @@ const Dashboard = () => {
                   </div>
                 </Col>
 
-                <Col md={6} className="mb-5">
+                <Col md={6} className="mb-3">
                   <div className="text-center">
                     <label className="dashboard-label label-financieros"> Aliados financieros</label>
                     <div className="dashboard-data">
@@ -237,9 +236,8 @@ const Dashboard = () => {
               </Row>
             }
           </div>
-          <img src={LOGO} className="dashboard-logo"/>
-
           <div className="dashboard-label-date">
+            <img src={LOGO} className="dashboard-logo" />
             {date}
           </div>
         </Container>
