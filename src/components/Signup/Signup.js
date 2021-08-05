@@ -22,8 +22,12 @@ import { Carousel } from 'react-bootstrap';
 //FinancialPartners
 import impulsoDPWEB from '../../assets/img/financialPartners/impulsoDP-WEB.jpg';
 import impulsoDPMovil from '../../assets/img/financialPartners/impulsoDP-Movil.jpg';
+
 import visoorWEB from '../../assets/img/financialPartners/Visoor-WEB.jpg';
 import visoorMovil from '../../assets/img/financialPartners/Visoor-Movil.jpg';
+
+import PagaloopWEB from '../../assets/img/financialPartners/Pagaloop-WEB.jpg';
+import PagaloopMovil from '../../assets/img/financialPartners/Pagaloop-WEB.jpg';
 
 const getVersionImage = () => {
 	const currentSize = document.getElementsByTagName('body')[0].clientWidth;
@@ -52,7 +56,18 @@ const financialPartner = (partner) => {
         ],
         prefix: process.env.REACT_APP_CONFIGURATION === 'localhost' || process.env.REACT_APP_CONFIGURATION === 'development' ? 'VisoorDev - ' : 'Visoor - ',
         channel: 'Visoor',
-        brokercode: '36408310'
+        brokercode: '36408310'//Luis Fer - DP
+      }
+    case 'PAGALOOP':
+      return {
+        image: [PagaloopWEB, PagaloopMovil],
+        text: [
+          'Solicita un crédito para tu empresa o negocio a través de nuestro aliado Distrito Pyme.',
+          'Podrás recibir las mejores opciones de crédito en menos de 15 min con un proceso fácil, rápido y sin papeleos.'
+        ],
+        prefix: process.env.REACT_APP_CONFIGURATION === 'localhost' || process.env.REACT_APP_CONFIGURATION === 'development' ? 'PagaloopDev - ' : 'Pagaloop - ',
+        channel: 'Pagaloop',
+        brokercode: '36408310'//Luis Fer - DP
       }
     default:
       return false;

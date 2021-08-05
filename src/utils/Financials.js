@@ -25,6 +25,8 @@ import Cualli from '../assets/img/alianzas/cualli.png';
 import KUBO from '../assets/img/alianzas/kubo.png';
 import Mexarrend from '../assets/img/alianzas/mexarrend.png';
 import Albo from '../assets/img/alianzas/albo.png';
+import Drip from '../assets/img/alianzas/drip.png';
+import Sqn from '../assets/img/alianzas/sqn.png';
 
 export const filterFinancials = (financials) => {
     
@@ -117,6 +119,12 @@ export const imgFinancial = (financial) => {
         case 'ALBO':
         return Albo;
 
+        case 'DRIP':
+        return Drip;
+
+        case 'SQN':
+        return Sqn;
+
         case 'ALL':
         return [
             ASPIRIA,
@@ -144,7 +152,9 @@ export const imgFinancial = (financial) => {
             Cualli,
             KUBO,
             Mexarrend,
-            Albo
+            Albo,
+            Drip,
+            Sqn
         ];
     }
 }
@@ -406,6 +416,16 @@ export const dataFinancial = (financial, properties) => {//Propuestas
                 tasa: '31% anual',
                 logo: imgFinancial(financial),
                 class: 'MEXARREND'
+            };
+
+        case 'DRIP':
+            return {
+                financiera: 'DripCapital',
+                monto: properties.monto_preaut.value,
+                plazo: 'Hasta 120 días por disposición',
+                tasa: '1.5% mensual',
+                logo: imgFinancial(financial),
+                class: 'DRIP'
             };
     }
 }
@@ -669,6 +689,16 @@ export const dataFinancialFormalization = (properties) => {
                 tasa: properties.n12_2_tasa_autorizada.value + "% mensual",
                 logo: imgFinancial(financial),
                 class: 'MEXARREND'
+            };
+
+        case 'DRIP':
+            return {
+                financiera: 'DripCapital',
+                monto: properties.n12_1_monto_autorizado.value,
+                plazo: properties.n12_3_plazo_autorizado.value + " meses",
+                tasa: properties.n12_2_tasa_autorizada.value + "% mensual",
+                logo: imgFinancial(financial),
+                class: 'DRIP'
             };
     }
 }
