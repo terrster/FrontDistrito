@@ -26,7 +26,7 @@ video{
 }
 
 #dashboard-container{
-    transition: visibility 0s, opacity 0.5s linear;
+    transition: visibility 0.5s ease-in-out, opacity 0.5s ease-in-out;
     visibility: visible;
     opacity: 1;
 }
