@@ -17,7 +17,7 @@ const Dashboard = () => {
   let today = new Date();
   let months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
   
-  let date = today.getDate() + '/' + months[(today.getMonth()+1)-1] + '/' + today.getFullYear();
+  let date = today.getDate() + ' de ' + months[(today.getMonth()+1)-1] + ' de ' + today.getFullYear();
 
   const [Colocado] = useState(new Audio(ColocadoSound));
   const [General] = useState(new Audio(GeneralSound));
@@ -148,7 +148,7 @@ const Dashboard = () => {
 
       setTimeout(() => {
         setSection(section => !section);
-      }, 3000)
+      }, 10000)
       
       setTimeout(() => {
         document.getElementById("dashboard-container").style.visibility = 'visible';
