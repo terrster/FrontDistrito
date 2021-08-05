@@ -8,15 +8,16 @@ import { ToastContainer, toast } from "react-toastify";
 import LOGO from '../../assets/img/home/LOGO_DP_WHITE.png';
 import VIDEO from '../../assets/video-dashboard/back.mp4';
 
+var calculated = false;
+
 const Dashboard = () => {
+
+  const [section, setSection] = useState(true);
 
   let today = new Date();
   let months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
   
   let date = today.getDate() + '/' + months[(today.getMonth()+1)-1] + '/' + today.getFullYear();
-
-
-
 
   const [Colocado] = useState(new Audio(ColocadoSound));
   const [General] = useState(new Audio(GeneralSound));
@@ -96,11 +97,13 @@ const Dashboard = () => {
 
   const contador = () => {
     const counters = document.querySelectorAll('.counter');
+    // const speed = 500;
     counters.forEach(counter => {
       const updateCount = () => {
         const target = counter.getAttribute('data-target');
         const targetValue = parseInt(hubspotInfo[target]);
-        const count = +counter.innerText;
+        const count = counter.innerText === '--' ? 0 : +counter.innerText;
+        // const inc = targetValue / speed;
 
         if (targetValue > 0) {
           if (count < targetValue) {
@@ -120,13 +123,14 @@ const Dashboard = () => {
               counter.innerText = hubspotInfo.ColocadoFormatted + " M";
             }
             else {
-              counter.innerText = new Intl.NumberFormat().format(targetValue).toString().replace('.', ',');
+              counter.innerText = hubspotInfo[target];
             }
           }
         }
       };
       updateCount();
     });
+    calculated = true;
   }
 
   useEffect(() => {
@@ -135,23 +139,27 @@ const Dashboard = () => {
     }
   }, [hubspotInfo]);
 
+  useEffect(() => {
+    if (!show){
+      setTimeout(() => {
+        document.getElementById("dashboard-container").style.visibility = 'hidden';
+        document.getElementById("dashboard-container").style.opacity = '0';
+      }, 9000)
+
+      setTimeout(() => {
+        setSection(section => !section);
+      }, 10000)
+      
+      setTimeout(() => {
+        document.getElementById("dashboard-container").style.visibility = 'visible';
+        document.getElementById("dashboard-container").style.opacity = '1';
+      }, 10500)
+    }
+  }, [section, show]);
+
   return(
     <>
       <div id="dashboard" className="dashboard">
-        {/* <div className="area" >
-          <ul className="circles">
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-          </ul>
-        </div> */}
         <video src={VIDEO} autoPlay muted loop>
         </video>
 
@@ -171,62 +179,72 @@ const Dashboard = () => {
 
 
         <Container className="dashboard-container container-xl-fluid">
-          <Row className="d-flex align-items-center">
-            <Col md={6}>
-              <div className="text-center">
-                <label className="dashboard-label label-solicitudes">Solicitudes</label>
-                <div className="dashboard-data">
-                  <span className="counter" data-target="Solicitudes">0</span>
-                </div>
-              </div>
-            </Col>
+          <div id="dashboard-container" >
+            {
+              section &&
+              <Row className="d-flex align-items-center">
+                <Col md={6}>
+                  <div className="text-center">
+                    <label className="dashboard-label label-solicitudes">Solicitudes</label>
+                    <div className="dashboard-data">
+                      <span className="counter" data-target="Solicitudes">0</span>
+                    </div>
+                  </div>
+                </Col>
 
-            <Col md={6}>
-              <div className="text-center">
-                <label className="dashboard-label label-pymes">Pymes Apoyadas</label>
-                <div className="dashboard-data">
-                  <span className="counter" data-target="Pymes">0</span>
-                </div>
-              </div>
-            </Col>
+                <Col md={6}>
+                  <div className="text-center">
+                    <label className="dashboard-label label-pymes">Pymes Apoyadas</label>
+                    <div className="dashboard-data">
+                      <span className="counter" data-target="Pymes">0</span>
+                    </div>
+                  </div>
+                </Col>
 
-            <Col sm={12}>
-              <div className="text-center">
-                <label className="dashboard-label label-monto">Monto colocado</label>
-                <div className="dashboard-data">
-                  <span className="counter" data-target="Colocado">0</span>
-                </div>
-              </div>
-            </Col>
+                <Col md={6}>
+                  <div className="text-center">
+                    <label className="dashboard-label label-brokers">Brokers Activos</label>
+                    <div className="dashboard-data">
+                      <span className="counter" data-target="Brokers">0</span>
+                    </div>
+                  </div>
+                </Col>
 
-            <Col md={6}>
-              <div className="text-center">
-                <label className="dashboard-label label-brokers">Brokers Activos</label>
-                <div className="dashboard-data">
-                  <span className="counter" data-target="Brokers">0</span>
-                </div>
-              </div>
-            </Col>
+                <Col md={6}>
+                  <div className="text-center">
+                    <label className="dashboard-label label-financieros"> Aliados financieros</label>
+                    <div className="dashboard-data">
+                      <span className="counter" data-target="Alianzas">0</span>
+                    </div>
+                  </div>
+                </Col>
+              </Row>
+            }
 
-            <Col md={6}>
-              <div className="text-center">
-                <label className="dashboard-label label-financieros"> Aliados financieros</label>
-                <div className="dashboard-data">
-                  <span className="counter" data-target="Alianzas">0</span>
-                </div>
-              </div>
-            </Col>
-          </Row>
-
-          
-
+            {
+              !section &&
+              <Row className="d-flex align-items-center mb-125">
+                <Col sm={12} className="mb-10">
+                  <div className="text-center">
+                    <label className="dashboard-label label-monto">Monto colocado</label>
+                    <div className="dashboard-data">
+                      <span className="counter" data-target="Colocado">0</span>
+                    </div>
+                  </div>
+                </Col>
+              </Row>
+            }
+          </div>
           <img src={LOGO} className="dashboard-logo" />
 
-          <div className="dashboard-label">
+          <div className="dashboard-label-date">
             {date}
           </div>
-
         </Container>
+
+        
+
+        
       </div>
 
       <style>{"\
