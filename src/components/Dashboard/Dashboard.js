@@ -154,6 +154,8 @@ const Dashboard = () => {
         document.getElementById("dashboard-container").style.visibility = 'visible';
         document.getElementById("dashboard-container").style.opacity = '1';
       }, 10500)
+
+      contador();
     }
   }, [section, show]);
 
