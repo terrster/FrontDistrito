@@ -27,7 +27,7 @@ import visoorWEB from '../../assets/img/financialPartners/Visoor-WEB.jpg';
 import visoorMovil from '../../assets/img/financialPartners/Visoor-Movil.jpg';
 
 import PagaloopWEB from '../../assets/img/financialPartners/Pagaloop-WEB.jpg';
-import PagaloopMovil from '../../assets/img/financialPartners/Pagaloop-WEB.jpg';
+import PagaloopMovil from '../../assets/img/financialPartners/Pagaloop-Movil.jpg';
 
 const getVersionImage = () => {
 	const currentSize = document.getElementsByTagName('body')[0].clientWidth;
