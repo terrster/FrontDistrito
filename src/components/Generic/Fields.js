@@ -146,6 +146,23 @@ export const renderSelectField = ({
 
 //Reduccion de Codigo
 
+export const renderFieldTextAreaFull = ({
+  input,
+  label,
+  val,
+}) => (
+  <div>
+    <div className="input-container">
+      <textarea 
+      className="form-control custom-form-input text-dp mt-24"
+      {...input}
+      placeholder={label}
+      defaultValue={val}>
+      </textarea>
+    </div>
+  </div>
+);
+
 export const renderFieldFull = ({
   input,
   label,

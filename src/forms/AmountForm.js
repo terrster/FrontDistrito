@@ -11,7 +11,7 @@ import Title from '../components/Generic/Title';
 import InputLabel from '../components/Generic/InputLabel';
 import PersonType from '../components/Appliance/PersonType';
 import { validateAmount } from '../components/Validate/ValidateAmount';
-import { renderField, renderSelectField } from '../components/Generic/Fields';
+import { renderField, renderSelectField, renderFieldTextAreaFull } from '../components/Generic/Fields';
 
 const onlyNumbers = (nextValue, previousValue) => /^[+]?([0-9]+(?:[\,.][0-9]*)?|\,.[0-9]+)$/.test(nextValue) || nextValue.length === 0? nextValue : previousValue;
 /* ^[0-9]+([,.][0-9]+)?$ */
@@ -101,16 +101,6 @@ let AmountForm = props => {
 				<option value="48">48 meses</option>
 			</Field>
 
-			<InputLabel label="¿Para qué lo necesitas?" class="mt-18" />
-			<Field component={renderSelectField} type="text" name="whyNeed" cls="text-dp">
-				<option value="">Elige...</option>
-				{Object.keys(reason).map((value, i) => (
-					<option value={value} key={i}>
-						{reason[value]}
-					</option>
-				))}
-			</Field>
-
 			<InputLabel label="Ventas anuales" class="mt-18" />
 			<Field
         		normalize={onlyNumbers}
@@ -132,6 +122,23 @@ let AmountForm = props => {
 					</option>
 				))}
 			</Field>
+
+			<InputLabel label="¿Para qué lo necesitas?" class="mt-18" />
+			<Field component={renderSelectField} type="text" name="whyNeed" cls="text-dp">
+				<option value="">Elige...</option>
+				{Object.keys(reason).map((value, i) => (
+					<option value={value} key={i}>
+						{reason[value]}
+					</option>
+				))}
+			</Field>
+
+			<Field
+				component={renderFieldTextAreaFull}
+				name="whyNeedDetails"
+				label="Platicanos más a detalle para qué lo necesitas"
+			/>
+
 			<div className="text-center" style={{ marginBottom: '50px' }}>
 				{
 					!disabled ? (

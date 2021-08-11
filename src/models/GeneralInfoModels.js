@@ -7,7 +7,7 @@ let civilStatusOptions = {
 
 let realtiveOptions = {
 	"FAMILY" : { value : "Familiar"},
-	"FRIEND" : { value : "Amigo"},
+	// "FRIEND" : { value : "Amigo"},
 	"CLIENT" : { value: "Cliente" },
 	"PROVIDER" : { value: "Proveedor"} 
 
