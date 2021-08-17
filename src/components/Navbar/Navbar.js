@@ -43,8 +43,8 @@ const NavBar = props => {
 	return (
 		<div id="navbar-dp" className="pos-f-t">
 		 <Navbar collapseOnSelect className="nav-bar" expand="lg" bg="light" expanded={isOpen}>
-		 	<Navbar.Brand href="/"><img src={logo} alt="Distrito Pyme Logo" className="nav-logo"/></Navbar.Brand>
-			 {(location.pathname != '/brokers' && !/^((\/registroexitoso)(\/[a-z]+))/gi.test(location.pathname)) &&
+		 	<Navbar.Brand href = {location.pathname != '/registrate/visoor' && location.pathname != '/registrate/pagaloop' && location.pathname != '/registrate/impulsomx' ?  "/" : "#"}><img src={logo} alt="Distrito Pyme Logo" className="nav-logo"/></Navbar.Brand>
+			 {(location.pathname != '/brokers' &&  location.pathname != '/registrate/visoor' && !/^((\/registroexitoso)(\/[a-z]+))/gi.test(location.pathname)) && location.pathname != '/registrate/pagaloop' && location.pathname != '/registrate/impulsomx' &&
 				<>
 					<Navbar.Toggle aria-controls="responsive-navbar-nav" onClick={() => setIsOpen(!isOpen)}/>
 					{isAuthenticated() === false &&

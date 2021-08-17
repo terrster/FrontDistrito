@@ -33,6 +33,26 @@ const Footer = props => {
             <div>
                 <a href="https://distritopyme.com.mx/" target='_blank' rel="noopener noreferrer" className="metropolisReg black-link fw300 fz18">Blog</a>
             </div>
+
+            <div>
+                <a href="/brokers" rel="noopener noreferrer" className="metropolisReg black-link fw300 fz18">Quiero ser Broker</a>
+            </div>
+
+            <div>
+                <a href="/solicitudBrokers" rel="noopener noreferrer" className="metropolisReg black-link fw300 fz18">Soy Broker</a>
+            </div>
+
+            <div>
+                <a href="/nuestros-aliados" rel="noopener noreferrer" className="metropolisReg black-link fw300 fz18">Aliados</a>
+            </div>
+
+            <div>
+                <a href="/login" rel="noopener noreferrer" className="metropolisReg black-link fw300 fz18">Iniciar Sesión</a>
+            </div>
+
+            <div>
+                <a href="/registrate" rel="noopener noreferrer" className="metropolisReg black-link fw300 fz18">Solicita tu Crédito</a>
+            </div>
         </div>
         <div className="col-7 col-lg-3" >
             <div className="metropolisMed fw500 fz24">Soporte</div>
