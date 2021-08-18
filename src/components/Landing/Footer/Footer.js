@@ -35,23 +35,23 @@ const Footer = props => {
             </div>
 
             <div>
-                <a href="/brokers" rel="noopener noreferrer" className="metropolisReg black-link fw300 fz18">Quiero ser Broker</a>
+                <Link  to="/brokers" rel="noopener noreferrer" className="metropolisReg black-link fw300 fz18">Quiero ser Broker</Link>
             </div>
 
             <div>
-                <a href="/solicitudBrokers" rel="noopener noreferrer" className="metropolisReg black-link fw300 fz18">Soy Broker</a>
+                <Link  to="/solicitudBrokers" rel="noopener noreferrer" className="metropolisReg black-link fw300 fz18">Soy Broker</Link>
             </div>
 
             <div>
-                <a href="/nuestros-aliados" rel="noopener noreferrer" className="metropolisReg black-link fw300 fz18">Aliados</a>
+                <Link  to="/nuestros-aliados" rel="noopener noreferrer" className="metropolisReg black-link fw300 fz18">Aliados</Link>
             </div>
 
             <div>
-                <a href="/login" rel="noopener noreferrer" className="metropolisReg black-link fw300 fz18">Iniciar Sesión</a>
+                <Link  to="/login" rel="noopener noreferrer" className="metropolisReg black-link fw300 fz18">Iniciar Sesión</Link>
             </div>
 
             <div>
-                <a href="/registrate" rel="noopener noreferrer" className="metropolisReg black-link fw300 fz18">Solicita tu Crédito</a>
+                <Link  to="/registrate" rel="noopener noreferrer" className="metropolisReg black-link fw300 fz18">Solicita tu Crédito</Link>
             </div>
         </div>
         <div className="col-7 col-lg-3" >
