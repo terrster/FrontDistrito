@@ -39,6 +39,7 @@ const NavBar = props => {
 	const close = () => setIsOpen(false);
 	let classDefault = "hvr-underline-from-left  text-center fz16 blackNav nav-btn heigth-45 solicita-butto metropolisReg";
 	let classDefaultLink = "text-center coolvetica fz16 gray50 heigth-45 nav-btn d-flex";
+	const [showWhatsAppBtn] = useState(location.pathname === '/registrate/impulsomx' || location.pathname === '/registrate/pagaloop' ? true : false);
 
 	return (
 		<div id="navbar-dp" className="pos-f-t">
@@ -90,14 +91,20 @@ const NavBar = props => {
 								window.location.reload()
 							}}>Cerrar sesión</Button></Nav.Link>
 						</Nav>
-						{/* <div className="nav-bar-icon-whatsapp" style={{ zIndex: "10001" }}>
-							<a href="https://api.whatsapp.com/send?phone=525526954055&text=Hola%2c%20%c2%bfpodr%c3%adan%20ayudarme%3f&source=&data=" target="_blank" rel="noopener noreferrer"><i><img src={Whatsapp} alt="Whatsapp Distrito Pyme" className="nav-bar-icon-whatsapp"/></i></a>
-						</div> */}
 					</Navbar.Collapse>
 					}
 				</>
 			}
+			
 		 </Navbar>
+		 
+		 {
+				showWhatsAppBtn &&
+
+				<div className="nav-bar-icon-whatsapp" style={{ zIndex: "10001" }}>
+							<a href="https://api.whatsapp.com/send?phone=525526954055&text=Hola%2c%20%c2%bfpodr%c3%adan%20ayudarme%3f&source=&data=" target="_blank" rel="noopener noreferrer"><i><img src={Whatsapp} alt="Whatsapp Distrito Pyme" className="nav-bar-icon-whatsapp"/></i></a>
+				</div>
+			}
 		</div>
 	)
 }

@@ -79,6 +79,8 @@ const Signup = props => {
   const [partner, setPartner] = useState(false);
 	const toast = useSelector(state => state.app.toast);
 	const [errorEmail, setErrorEmail] = useState("");
+  const [ownerId] = useState(props.match.params.ownerId ? props.match.params.ownerId : '');
+  const [initialValues, setInitialValues] = useState({});
 
   const dispatch = useDispatch();
 
@@ -87,6 +89,14 @@ const Signup = props => {
   useEffect(() => {
     window.scrollTo(0, 0)
   }, []);
+
+   useEffect(() => {
+    if(ownerId != ''){
+      setInitialValues({
+        brokercode: ownerId
+      });
+    }
+  },[ownerId]);
 
   useEffect(() => {
     if(props.match.params.financialPartner !== undefined){
@@ -168,7 +178,7 @@ const Signup = props => {
           </>
         )}
         <div className="container mt-30">
-          <SignupForm onSubmit={e => onFormSubmit(e)} errorEmail={errorEmail} setErrorEmail={setErrorEmail}/>
+          <SignupForm onSubmit={e => onFormSubmit(e)} errorEmail={errorEmail} setErrorEmail={setErrorEmail} initialValues={initialValues} ownerId={ownerId}/>
         </div>
       </>
     );

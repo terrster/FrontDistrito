@@ -8,14 +8,17 @@ import ReCAPTCHA from "react-google-recaptcha";
 import scroll from "../utils/scroll";
 
 const renderField = ({
+  name,
   input,
   label,
   type,
   maxLength,
   minLength,
   meta: { touched, error, warning },
-  name,
-  errorEmail
+  errorEmail,
+  errorBroker,
+  readOnly,
+  style
 }) => (
   <div>
     {label !== "Teléfono" ? (
@@ -27,6 +30,8 @@ const renderField = ({
           type={type}
           minLength={minLength}
           maxLength={maxLength}
+          readOnly={readOnly}
+          style={style}
         />
       </div>
     ) : (
@@ -42,6 +47,7 @@ const renderField = ({
       </div>
     )}
 	{name === "email" && <span> <small className="error" id={input.name + "-error"}>{errorEmail}</small> </span>}
+  {type === "text" && errorBroker != '' && <span> <small className="error" id={input.name + "-error"}>{errorBroker}</small> </span>}
     {touched &&
       ((error && (
         <span>
@@ -52,6 +58,7 @@ const renderField = ({
   </div>
 );
 
+
 const passwordTooltip = (
   <Tooltip className="tooltip-password">
     Crea tu contraseña para regresar más tarde
@@ -59,7 +66,7 @@ const passwordTooltip = (
 );
 
 let SignupForm = (props) => {
-  const { handleSubmit, submitting, errorEmail, setErrorEmail, valid } = props;
+  const { handleSubmit, submitting, errorEmail, setErrorEmail, valid, ownerId } = props;
 
   const [button, setButton] = useState(true);
   const [disabled, setDisabled] = useState(true);
@@ -180,6 +187,23 @@ let SignupForm = (props) => {
             normalize={validatePassword}
           />
         </OverlayTrigger>
+          {
+            ownerId && 
+          <div>
+            <label className="label-style mt-24">
+              Código brokers
+            </label>
+            <Field
+              component={renderField}
+              type="text"
+              name="brokercode"
+              label="Código brokers"
+              readOnly={true}
+              style={{marginTop: '0px'}}
+            />
+          </div>
+          }
+          
         <div className="recaptcha-container">
           <ReCAPTCHA
             sitekey="6Ld2huQZAAAAANpPc8zQKPnS948P7vzt2T7t-GCF"

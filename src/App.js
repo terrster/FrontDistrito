@@ -141,7 +141,7 @@ class App extends Component {
                   exact
                   component={RecoverPassword}
                 />
-                <Route path="/registrate/:financialPartner?" exact component={Signup} />
+                <Route path="/registrate/:financialPartner?/:ownerId?" exact component={Signup} />
                 <Route path="/solicitudBrokers/:ownerId?" exact component={SignupBrokers} />
                 <Route path="/registroexitoso/:partner?" exact component={RegistroExitoso} />
                 <Route path="/login/:redirect?" exact component={Login} />
