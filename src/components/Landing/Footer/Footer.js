@@ -48,10 +48,12 @@ const Footer = props => {
 
             <div>
                 <Link  to="/login" rel="noopener noreferrer" className="metropolisReg black-link fw300 fz18">Iniciar Sesión</Link>
+                {/* <a href="/login" rel="noopener noreferrer" className="metropolisReg black-link fw300 fz18">Iniciar Sesión</a> */}
             </div>
 
             <div>
                 <Link  to="/registrate" rel="noopener noreferrer" className="metropolisReg black-link fw300 fz18">Solicita tu Crédito</Link>
+                {/* <a href="/registrate" rel="noopener noreferrer" className="metropolisReg black-link fw300 fz18">Solicita tu Crédito</a> */}
             </div>
         </div>
         <div className="col-7 col-lg-3" >
