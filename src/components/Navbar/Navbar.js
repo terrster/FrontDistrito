@@ -39,7 +39,7 @@ const NavBar = props => {
 	const close = () => setIsOpen(false);
 	let classDefault = "hvr-underline-from-left  text-center fz16 blackNav nav-btn heigth-45 solicita-butto metropolisReg";
 	let classDefaultLink = "text-center coolvetica fz16 gray50 heigth-45 nav-btn d-flex";
-	const [showWhatsAppBtn] = useState(location.pathname === '/registrate/impulsomx' || location.pathname === '/registrate/pagaloop' ? true : false);
+	const [showWhatsAppBtn] = useState(location.pathname === '/registrate/impulsomx' || location.pathname === '/registrate/ImpulsoMx' || location.pathname === '/registrate/pagaloop' || location.pathname === '/registrate/PagaLoop' ? true : false);
 
 	return (
 		<div id="navbar-dp" className="pos-f-t">
