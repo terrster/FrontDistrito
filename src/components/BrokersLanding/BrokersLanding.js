@@ -68,7 +68,7 @@ const BrokersLanding = () =>{
     }
 }, [socket]);
 
- 
+ window.scrollTo(0, 0)
   return(
     <>
       <BannerBrokers />
