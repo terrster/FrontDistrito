@@ -15,6 +15,12 @@ const NavBar = props => {
 	let finishAppliance = false;
 	let appliance = null;
 
+	const partners = [
+		'pagaloop',
+		'impulsomx',
+		'visoor'
+	];
+
 	useLayoutEffect(() => {
 		if (isAuthenticated()){
 			user = JSON.parse(sessionStorage.getItem("user"));
@@ -39,13 +45,15 @@ const NavBar = props => {
 	const close = () => setIsOpen(false);
 	let classDefault = "hvr-underline-from-left  text-center fz16 blackNav nav-btn heigth-45 solicita-butto metropolisReg";
 	let classDefaultLink = "text-center coolvetica fz16 gray50 heigth-45 nav-btn d-flex";
-	const [showWhatsAppBtn] = useState(location.pathname === '/registrate/impulsomx' || location.pathname === '/registrate/ImpulsoMx' || location.pathname === '/registrate/pagaloop' || location.pathname === '/registrate/PagaLoop' ? true : false);
+	const [showWhatsAppBtn] = useState(partners.filter(partner => partner !== 'visoor').includes(location.pathname.toLowerCase().split("/")[2]))
+
+	//console.log(location.pathname.split("/")[2].toLowerCase());
 
 	return (
 		<div id="navbar-dp" className="pos-f-t">
 		 <Navbar collapseOnSelect className="nav-bar" expand="lg" bg="light" expanded={isOpen}>
-		 	<Navbar.Brand href = {location.pathname != '/registrate/visoor' && location.pathname != '/registrate/Visoor' && location.pathname != '/registrate/pagaloop' && location.pathname != '/registrate/PagaLoop' && location.pathname != '/registrate/impulsomx' && location.pathname != '/registrate/ImpulsoMx' ?  "/" : "#"}><img src={logo} alt="Distrito Pyme Logo" className="nav-logo"/></Navbar.Brand>
-			 {(location.pathname != '/brokers' &&  location.pathname != '/registrate/visoor'  && location.pathname != '/registrate/Visoor'  && !/^((\/registroexitoso)(\/[a-z]+))/gi.test(location.pathname)) && location.pathname != '/registrate/pagaloop' && location.pathname != '/registrate/PagaLoop' && location.pathname != '/registrate/impulsomx' && location.pathname != '/registrate/ImpulsoMx'&&
+		 	<Navbar.Brand href = {partners.includes(location.pathname.toLowerCase().split("/")[2]) && location.pathname.split("/").length > 3 ?  "#" : "/"}><img src={logo} alt="Distrito Pyme Logo" className="nav-logo"/></Navbar.Brand>
+			 {(location.pathname != '/brokers' && !/^((\/registroexitoso)(\/[a-z]+))/gi.test(location.pathname)) && !partners.includes(location.pathname.toLowerCase().split("/")[2]) &&
 				<>
 					<Navbar.Toggle aria-controls="responsive-navbar-nav" onClick={() => setIsOpen(!isOpen)}/>
 					{isAuthenticated() === false &&
