@@ -4,6 +4,7 @@ import Carousel from './Carousel';
 import Allies from './Allies';
 
 const OurAllies = () => {
+    window.scrollTo(0, 0)
     return(
         <div className="text-center">
             <Title title="Nuestros Aliados" className="title-dp fz42 fw500 mb-1"/>
