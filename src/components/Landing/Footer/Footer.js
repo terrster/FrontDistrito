@@ -33,27 +33,9 @@ const Footer = props => {
             <div>
                 <a href="https://distritopyme.com.mx/" target='_blank' rel="noopener noreferrer" className="metropolisReg black-link fw300 fz18">Blog</a>
             </div>
-
-            <div>
-                <Link  to="/brokers" rel="noopener noreferrer" className="metropolisReg black-link fw300 fz18">Quiero ser Broker</Link>
-            </div>
-
-            <div>
-                <Link  to="/solicitudBrokers" rel="noopener noreferrer" className="metropolisReg black-link fw300 fz18">Soy Broker</Link>
-            </div>
-
-            <div>
-                <Link  to="/nuestros-aliados" rel="noopener noreferrer" className="metropolisReg black-link fw300 fz18">Aliados</Link>
-            </div>
-
             <div>
                 <Link  to="/login" rel="noopener noreferrer" className="metropolisReg black-link fw300 fz18">Iniciar Sesión</Link>
                 {/* <a href="/login" rel="noopener noreferrer" className="metropolisReg black-link fw300 fz18">Iniciar Sesión</a> */}
-            </div>
-
-            <div>
-                <Link  to="/registrate" rel="noopener noreferrer" className="metropolisReg black-link fw300 fz18">Solicita tu Crédito</Link>
-                {/* <a href="/registrate" rel="noopener noreferrer" className="metropolisReg black-link fw300 fz18">Solicita tu Crédito</a> */}
             </div>
         </div>
         <div className="col-7 col-lg-3" >

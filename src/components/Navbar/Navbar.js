@@ -110,7 +110,7 @@ const NavBar = props => {
 				showWhatsAppBtn &&
 
 				<div className="nav-bar-icon-whatsapp" style={{ zIndex: "10001" }}>
-							<a href="https://api.whatsapp.com/send?phone=525526954055&text=Hola%2c%20%c2%bfpodr%c3%adan%20ayudarme%3f&source=&data=" target="_blank" rel="noopener noreferrer"><i><img src={Whatsapp} alt="Whatsapp Distrito Pyme" className="nav-bar-icon-whatsapp"/></i></a>
+							<a href="https://api.whatsapp.com/send?phone=525539480196&text=Hola%2c%20%c2%bfpodr%c3%adan%20ayudarme%3f&source=&data=" target="_blank" rel="noopener noreferrer"><i><img src={Whatsapp} alt="Whatsapp Distrito Pyme" className="nav-bar-icon-whatsapp"/></i></a>
 				</div>
 			}
 		</div>
