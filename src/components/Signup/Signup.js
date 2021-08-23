@@ -111,6 +111,11 @@ const Signup = props => {
   if(partner){
     let partnerFields = Object.fromEntries(Object.entries(partner).filter(([key]) => key !== 'image' && key !== 'text'));
     data = {...data, ...partnerFields };
+
+     if(ownerId){
+      data.brokercode = ownerId;
+    }
+    
   }
   else{
     data.channel = 'Online';
