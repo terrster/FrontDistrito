@@ -21,8 +21,8 @@
     position: relative;
     display: block;
     margin: 0 auto;
-    width: auto;
-    max-width: 45%;
+    width: 230px;
+    max-width: 5px;
     z-index: 2;
 }
 

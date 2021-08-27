@@ -176,27 +176,26 @@
  
  .brokers-button-final{
    font-family: 'coolvetica_rg';
-   width: 160px;
+   width: 300px !important;
    position: absolute;
    left: 50%;
    right: 50%;
    top: 50%;
    transform: translate(-50%, -50%);
    -webkit-transform: translate(-50%, -50%);
-   height: 40px;
+   height: 56px;
    border-color: none !important;
    border-radius: 28px;
    box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.6);
    border: solid 1px rgba(255, 255, 255, 0.1);
    background-color: #ffffff;
    color: var(--primary-color);
-   font-size: 1rem !important;
-   letter-spacing: 1px;
+   font-size: 1.5rem !important;
  }
  
  @media (min-width: 768px) {
    .brokers-button-final{
-     width: 230px;
+     width: 300px;
      height: 56px;
      font-size: 1.5rem !important;
    }

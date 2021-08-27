@@ -29,7 +29,7 @@ const Solicitud = () => {
     const user = JSON.parse(sessionStorage.getItem("user"));
     // const user = {
     //     _id: '5ec8365e67de6c3fd0d807c7',
-    //     hubspotDealId: '5694040731'//2951617913 //2947900743 //3444093998
+    //     hubspotDealId: '5383474277'//2951617913 //2947900743 //3444093998
     // }
     const [properties, setProperties] = useState(null);
     const [estatus, setEstatus] = useState(null);
@@ -159,7 +159,7 @@ const Solicitud = () => {
         if(estatus != null){
             dispatch( updateLoader(false) );
             showEstatus(estatus);//etapa del deal
-            // showEstatus('e831b8e3-4a3a-429e-932e-6fb7fa40d011');//forzar visualización de etapa
+            // showEstatus('768759');//forzar visualización de etapa
         }
     },[estatus]);
 

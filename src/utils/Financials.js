@@ -27,6 +27,7 @@ import Mexarrend from '../assets/img/alianzas/mexarrend.png';
 import Albo from '../assets/img/alianzas/albo.png';
 import Drip from '../assets/img/alianzas/drip.png';
 import Sqn from '../assets/img/alianzas/sqn.png';
+import Quant from '../assets/img/alianzas/quant.png';
 
 export const filterFinancials = (financials) => {
     
@@ -125,6 +126,9 @@ export const imgFinancial = (financial) => {
         case 'SQN':
         return Sqn;
 
+        case 'QUANT':
+        return Quant;
+
         case 'ALL':
         return [
             ASPIRIA,
@@ -154,7 +158,8 @@ export const imgFinancial = (financial) => {
             Mexarrend,
             Albo,
             Drip,
-            Sqn
+            Sqn,
+            Quant
         ];
     }
 }
@@ -426,6 +431,15 @@ export const dataFinancial = (financial, properties) => {//Propuestas
                 tasa: '1.5% mensual',
                 logo: imgFinancial(financial),
                 class: 'DRIP'
+            };
+        case 'QUANT':
+            return {
+                financiera: 'QuantCapital',
+                monto: properties.monto_preaut.value,
+                plazo: 'Línea activa de 24 a 30 meses con disposiciones de hasta 120 días',
+                tasa: '26% anual',
+                logo: imgFinancial(financial),
+                class: 'QUANT'
             };
     }
 }
@@ -699,6 +713,16 @@ export const dataFinancialFormalization = (properties) => {
                 tasa: properties.n12_2_tasa_autorizada.value + "% mensual",
                 logo: imgFinancial(financial),
                 class: 'DRIP'
+            };
+
+        case 'QUANT':
+            return {
+                financiera: 'QuantCapital',
+                monto: properties.n12_1_monto_autorizado.value,
+                plazo: properties.n12_3_plazo_autorizado.value + " meses",
+                tasa: properties.n12_2_tasa_autorizada.value + "% mensual",
+                logo: imgFinancial(financial),
+                class: 'QUANT'
             };
     }
 }
