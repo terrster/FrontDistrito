@@ -28,6 +28,7 @@ import Albo from '../assets/img/alianzas/albo.png';
 import Drip from '../assets/img/alianzas/drip.png';
 import Sqn from '../assets/img/alianzas/sqn.png';
 import Quant from '../assets/img/alianzas/quant.png';
+import Creditas from '../assets/img/alianzas/creditas.png';
 
 export const filterFinancials = (financials) => {
     
@@ -129,6 +130,12 @@ export const imgFinancial = (financial) => {
         case 'QUANT':
         return Quant;
 
+        case 'CREDITAS HOME':
+        return Creditas;
+
+        case 'AUTO EQUITY':
+        return Creditas;
+
         case 'ALL':
         return [
             ASPIRIA,
@@ -159,7 +166,8 @@ export const imgFinancial = (financial) => {
             Albo,
             Drip,
             Sqn,
-            Quant
+            Quant,
+            Creditas
         ];
     }
 }
@@ -440,6 +448,24 @@ export const dataFinancial = (financial, properties) => {//Propuestas
                 tasa: '26% anual',
                 logo: imgFinancial(financial),
                 class: 'QUANT'
+            };
+        case 'CREDITAS HOME':
+            return {
+                financiera: 'Creditas Home',
+                monto: properties.monto_preaut.value,
+                plazo: 'Hasta 180 meses, comisión por apertura 1%',
+                tasa: '22% anual',
+                logo: imgFinancial(financial),
+                class: 'CREDITAS HOME'
+            };
+        case 'AUTO EQUITY':
+            return {
+                financiera: 'Creditas Auto',
+                monto: properties.monto_preaut.value,
+                plazo: '60 meses, comisión por apertura 2.7%',
+                tasa: '23% anual',
+                logo: imgFinancial(financial),
+                class: 'AUTO EQUITY'
             };
     }
 }
@@ -723,6 +749,24 @@ export const dataFinancialFormalization = (properties) => {
                 tasa: properties.n12_2_tasa_autorizada.value + "% mensual",
                 logo: imgFinancial(financial),
                 class: 'QUANT'
+            };
+        case 'CREDITAS HOME':
+             return {
+                 financiera: 'Creditas Home',
+                 monto: properties.n12_1_monto_autorizado.value,
+                 plazo: properties.n12_3_plazo_autorizado.value + " meses",
+                 tasa: properties.n12_2_tasa_autorizada.value + "% mensual",
+                 logo: imgFinancial(financial),
+                 class: 'CREDITAS HOME'
+             };
+         case 'AUTO EQUITY':
+            return {
+                 financiera: 'Creditas Auto',
+                 monto: properties.n12_1_monto_autorizado.value,
+                 plazo: properties.n12_3_plazo_autorizado.value + " meses",
+                 tasa: properties.n12_2_tasa_autorizada.value + "% mensual",
+                 logo: imgFinancial(financial),
+                 class: 'AUTO EQUITY'
             };
     }
 }

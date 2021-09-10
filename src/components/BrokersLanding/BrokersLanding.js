@@ -10,8 +10,9 @@ import '../../css/brokers-landing.css';
 import { useHistory } from 'react-router-dom';
 import io from 'socket.io-client';
 import Title from '../Generic/Title';
+import ReactPlayer from 'react-player';
 
-const BrokersLanding = () =>{
+const BrokersLanding = () => {
 
   document.addEventListener("scroll", () => {
     let floatButton = document.getElementById("float-button-dp");
@@ -23,7 +24,7 @@ const BrokersLanding = () =>{
       if (scrolled > cardsBrokers.offsetTop - 500 && scrolled < comunityBrokers.offsetTop + 100) {
         floatButton.style.display = 'block';
       }
-      else{
+      else {
         floatButton.style.display = 'none';
       }
     }
@@ -42,11 +43,11 @@ const BrokersLanding = () =>{
   });
   const connectSocket = useCallback(() => {//process.env.REACT_APP_BACKEND, https://apidev.distritopyme.com/
     const socket = io.connect(process.env.REACT_APP_BACKEND, {
-        transports: ['websocket'],
-        autoConnect: true,
-        forceNew: true,
-        query: {
-          'origin': 'hubspotInfo'
+      transports: ['websocket'],
+      autoConnect: true,
+      forceNew: true,
+      query: {
+        'origin': 'hubspotInfo'
       }
     });
     setSocket(socket);
@@ -57,33 +58,37 @@ const BrokersLanding = () =>{
   }, []);
 
   useEffect(() => {
-    if(socket){
+    if (socket) {
 
-        socket.on('hubspotInfo', (callback) => {
-          callback.data.ColocadoFormatted = callback.data.Colocado;
-          callback.data.Colocado = callback.data.ColocadoFormatted.replace(/[$,.]/g, "");
-          setHubspotInfo(callback.data);
-        });
+      socket.on('hubspotInfo', (callback) => {
+        callback.data.ColocadoFormatted = callback.data.Colocado;
+        callback.data.Colocado = callback.data.ColocadoFormatted.replace(/[$,.]/g, "");
+        setHubspotInfo(callback.data);
+      });
 
     }
-}, [socket]);
+  }, [socket]);
 
- window.scrollTo(0, 0)
-  return(
+  window.scrollTo(0, 0)
+  return (
     <>
       <BannerBrokers />
       <div className="brokers-container container-fluid">
         <Info />
-        <Cards/>
+        <Cards />
         <Allies />
-        <Comunity hubspotInfo={hubspotInfo}/>
+        <Comunity hubspotInfo={hubspotInfo} />
         {/* <Testimonio /> */}
-        <Title title="8 De Cada 10 Solicitudes Recibe Una Opción De Crédito" className="title-dp fw500 fz32 text-center pb-5" />
+        <Title title="8 De Cada 10 Solicitudes Recibe Una Opción De Crédito" className="title-dp fw500 fz32 text-center pb-3" />
+        <div style={{ maxWidth: '1000px' }} className="ml-auto mr-auto pb-5">
+          <ReactPlayer width="100%" height="400px" style={{ maxWidth: '1000' }} url="https://www.youtube.com/watch?v=yhs3J5ZTvZU" />
+        </div>
+      
       </div>
       <BannerFinal />
-      
+
       <div id="float-button-dp" className="float-button float-button-dp" onClick={() => { history.push("/brokers-registro") }}>Conviértete en Broker</div>
-      
+
       <style>{"\
           #clgo{\
               display: none !important;\

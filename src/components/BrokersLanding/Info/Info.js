@@ -9,10 +9,12 @@ const Info = () => {
       <Col xl={7} lg={7} md={7} className="mb-3">
         <Title title="Brokers Digitales Distrito Pyme" className="title-dp fw500 mb-1 fz42 title-bd" />
         <div className="metropolisReg fz21 blackBlue text-justify">
-					Nuestro programa de Brokers Digitales, te permite adquirir una
+          <br/>
+          Nuestro programa de Brokers Digitales, te permite adquirir una
           membresía exclusiva de nuestra plataforma y las
           herramientas necesarias que te ayudarán a colocar más crédito,
           todo en menos de 15 minutos.
+          
           <br/>
           <br/>
           Una solicitud a través de Distrito Pyme es como llenar más de 25
