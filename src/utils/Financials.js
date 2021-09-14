@@ -29,6 +29,9 @@ import Drip from '../assets/img/alianzas/drip.png';
 import Sqn from '../assets/img/alianzas/sqn.png';
 import Quant from '../assets/img/alianzas/quant.png';
 import Creditas from '../assets/img/alianzas/creditas.png';
+import LenMi from '../assets/img/alianzas/lenmi.png';
+import Resuelve from '../assets/img/alianzas/resuelve.png';
+
 
 export const filterFinancials = (financials) => {
     
@@ -133,8 +136,14 @@ export const imgFinancial = (financial) => {
         case 'CREDITAS HOME':
         return Creditas;
 
-        case 'AUTO EQUITY':
+        case 'CREDITAS AUTO':
         return Creditas;
+
+        case 'RESUELVE':
+        return Resuelve;
+
+        case 'LENMI':
+        return LenMi;
 
         case 'ALL':
         return [
@@ -151,7 +160,7 @@ export const imgFinancial = (financial) => {
             MUNDI,
             FACTOREXPRES,
             // MICRO, //Es un producto dentro de Impulso
-            AVCAPITAL,
+            // AVCAPITAL,// Javier lo elimino
             HayCash,
             Pagaloop,
             iBan,
@@ -167,7 +176,10 @@ export const imgFinancial = (financial) => {
             Drip,
             Sqn,
             Quant,
-            Creditas
+            Creditas,
+            Resuelve,
+            LenMi
+
         ];
     }
 }
@@ -458,14 +470,14 @@ export const dataFinancial = (financial, properties) => {//Propuestas
                 logo: imgFinancial(financial),
                 class: 'CREDITAS HOME'
             };
-        case 'AUTO EQUITY':
+        case 'CREDITAS AUTO':
             return {
                 financiera: 'Creditas Auto',
                 monto: properties.monto_preaut.value,
                 plazo: '60 meses, comisión por apertura 2.7%',
                 tasa: '23% anual',
                 logo: imgFinancial(financial),
-                class: 'AUTO EQUITY'
+                class: 'CREDITAS AUTO'
             };
     }
 }
@@ -759,14 +771,14 @@ export const dataFinancialFormalization = (properties) => {
                  logo: imgFinancial(financial),
                  class: 'CREDITAS HOME'
              };
-         case 'AUTO EQUITY':
+         case 'CREDITAS AUTO':
             return {
                  financiera: 'Creditas Auto',
                  monto: properties.n12_1_monto_autorizado.value,
                  plazo: properties.n12_3_plazo_autorizado.value + " meses",
                  tasa: properties.n12_2_tasa_autorizada.value + "% mensual",
                  logo: imgFinancial(financial),
-                 class: 'AUTO EQUITY'
+                 class: 'CREDITAS AUTO'
             };
     }
 }
