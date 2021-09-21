@@ -16,7 +16,7 @@ const Footer = props => {
         <div className="col-xs-12 col-lg-3 text-center text-lg-left mb-1 mb-lg-0" >
             <img src={logo} alt="Distrito Pyme" className="nav-logo mb-1 mb-lg-0"/>
                 <div className="metropolisReg fw300 fz16 gray600"  >
-                    Distrito Pyme&copy; Av. Javier Barrios Sierra 540, Santa Fe, Ciudad de México 01210, México.
+                    Distrito Pyme&copy; Las Arboledas, Tlalnepantla, Estado de México, 54026, México, 55 8661 9486.
                 </div>
         </div>
         <div className="col-5 col-lg-3">
