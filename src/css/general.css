@@ -295,6 +295,8 @@
 
 /* PADDINGS */
 
+.plr-10{ padding-top: 1px;}
+
 .plr-20{ padding-left: 20px; padding-right: 20px;}
 
 .pt-120{ padding-top: 120px;}

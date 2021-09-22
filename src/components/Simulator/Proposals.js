@@ -91,7 +91,7 @@ const Proposals = (props) => {
 					</div>
 					:
 					<div className="container-buttons">
-						<Link className="btn-blue-general mt-45 fz24 link-blue-general" to="/registrate" style={{width: '250px'}}>Solicitar ahora</Link>
+						<Link className="btn-blue-general mt-45 fz24 link-blue-general" to="/registrate" id="simulatorButton" style={{width: '250px'}}>Solicitar ahora</Link>
 						<Button className="btn-blue-general mt-45 fz24 link-blue-general" onClick={props.setNewSimulation} style={{width: '250px'}}>Nueva simulación</Button>
 					</div>
 				}

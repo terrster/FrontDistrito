@@ -12,7 +12,7 @@ const BannerFinal = () => {
     <>
       <div className="brokers-footer">
         <img className="d-block w-100" src={BANNER_FINAL} alt="WEB" />
-        <Button className="brokers-button-final fz20 bluePrimary" onClick={() => { history.push("/brokers-registro") }}>
+        <Button id="footerButton" className="brokers-button-final fz20 bluePrimary" onClick={() => { history.push("/brokers-registro") }}>
         Conviértete en Broker
         </Button>
       </div>
