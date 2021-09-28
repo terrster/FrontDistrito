@@ -59,7 +59,7 @@ const Cards = () => {
                   <p>Al adquirir tu membresía tendrás acceso total a la tecnología
                   de Distrito Pyme, herramientas, CRM, programa de incentivos,
                   convenciones y asignación automática de leads.</p>
-                  <p>Inversión única de <b>$2,900 MXN IVA incluido</b> y la podrás pagar
+                  <p>Inversión única de <b>$3,900 MXN IVA incluido</b> y la podrás pagar
                   a 3 ó 6 MSI.</p>
               </Card.Text>
             </Card.Body>
