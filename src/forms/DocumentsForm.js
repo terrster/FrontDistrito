@@ -59,7 +59,7 @@ const DocumentsForm = (props) => {
           },
           {
             title: "Estados de cuenta bancarios",
-            subtitle: "(Documento completo, mínimo 6 meses)",
+            subtitle: "(Documento completo, mínimo 6 meses, ideal 12 meses)",
             name: "bankStatements",
             refs: bankStatements,
           },
@@ -94,7 +94,7 @@ const DocumentsForm = (props) => {
           },
           {
             title: "Estados de cuenta bancarios",
-            subtitle: "(Documento completo con todas las hojas que contenga, mínimo 6 meses)",
+            subtitle: "(Documento completo con todas las hojas que contenga, mínimo 6 meses, ideal 12 meses)",
             name: "bankStatements",
             refs: bankStatements,
           },
@@ -136,7 +136,7 @@ const DocumentsForm = (props) => {
           },
           {
             title: "Estados de cuenta bancarios",
-            subtitle: "(Documento completo con todas las hojas que contenga, mínimo 6 meses)",
+            subtitle: "(Documento completo con todas las hojas que contenga, mínimo 6 meses, ideal 12 meses)",
             name: "bankStatements",
             refs: bankStatements,
           },
