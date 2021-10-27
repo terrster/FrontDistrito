@@ -31,6 +31,8 @@ import Quant from '../assets/img/alianzas/quant.png';
 import Creditas from '../assets/img/alianzas/creditas.png';
 import LenMi from '../assets/img/alianzas/lenmi.png';
 import Resuelve from '../assets/img/alianzas/resuelve.png';
+import SBFinancial from '../assets/img/alianzas/sb.png';
+import Clara from '../assets/img/alianzas/clara.png';
 
 
 export const filterFinancials = (financials) => {
@@ -145,6 +147,13 @@ export const imgFinancial = (financial) => {
         case 'LENMI':
         return LenMi;
 
+        case 'SB FINANCIAL':
+        return SBFinancial;
+
+        case 'CLARA':
+        return Clara;
+
+
         case 'ALL':
         return [
             ASPIRIA,
@@ -178,7 +187,9 @@ export const imgFinancial = (financial) => {
             Quant,
             Creditas,
             Resuelve,
-            LenMi
+            LenMi,
+            SBFinancial,
+            Clara
 
         ];
     }
@@ -479,6 +490,25 @@ export const dataFinancial = (financial, properties) => {//Propuestas
                 logo: imgFinancial(financial),
                 class: 'CREDITAS AUTO'
             };
+        case 'SB FINANCIAL':
+            return {
+                financiera: 'SB Financial',
+                monto: properties.monto_preaut.value,
+                plazo: '12, 24, 36 y 48 meses',
+                tasa: '27% anual, comisión por apertura 3%',
+                logo: imgFinancial(financial),   
+                class: 'SB FINANCIAL'
+            };
+        case 'CLARA':
+            return {
+                financiera: 'Clara',
+                monto: properties.monto_preaut.value,
+                plazo: 'Revolvente a pagos mensuales, sin comisión por apertura',
+                tasa: '0% mensual',
+                logo: imgFinancial(financial),
+                class: 'CLARA'
+            };
+
     }
 }
 
@@ -779,6 +809,25 @@ export const dataFinancialFormalization = (properties) => {
                  tasa: properties.n12_2_tasa_autorizada.value + "% mensual",
                  logo: imgFinancial(financial),
                  class: 'CREDITAS AUTO'
+            };
+        case 'SB FINANCIAL':
+            return {
+                 financiera: 'SB Financial',
+                 monto: properties.n12_1_monto_autorizado.value,
+                 plazo: properties.n12_3_plazo_autorizado.value + " meses",
+                 tasa: properties.n12_2_tasa_autorizada.value + "% mensual",
+                 logo: imgFinancial(financial),
+                 class: 'SB Financial'
+                };
+
+        case 'CLARA':
+            return {
+                 financiera: 'Clara',
+                 monto: properties.n12_1_monto_autorizado.value,
+                 plazo: properties.n12_3_plazo_autorizado.value + " meses",
+                 tasa: properties.n12_2_tasa_autorizada.value + "% mensual",
+                 logo: imgFinancial(financial),
+                 class: 'CLARA'
             };
     }
 }
