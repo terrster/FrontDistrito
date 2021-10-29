@@ -78,25 +78,36 @@ const Brokers = () => {
                 </Carousel.Item>
             </Carousel>
 
-            <Title title="Alta de Brokers" className="title-dp fz42 fw500 mb-1 text-center" />
+            <Title title="Conviértete en Broker Digital DP" className="title-dp fz42 fw500 mb-1 text-center" />
 
             <Container>
                 <div className="metropolisReg fz12 blackBlue text-justify">
-                Nuestro plan de <b>Brokers Digital</b>, te permite adquirir una membresía exclusiva de <b>distritopyme.com</b> y las herramientas 
-                necesarias para ayudarte a colocar más rápido
-                y ofrecerle a tus clientes las mejores opciones de crédito.
+                Nuestro programa de Brokers Digitales, te permite adquirir una membresía exclusiva de nuestra plataforma y las herramientas necesarias que te ayudarán a colocar más créditos y aumentar tus ingresos; todo en menos de 15 minutos.
+
                 <br/>
+                <br/>
+
+                <Title title="Herramientas" className="subtitle-dp fz22 mb-1" />
+                • ID exclusivo que te identifica como broker <br />
+                • Acceso a nuestro CRM <br />
+                • Capacitación continua <br />
+                • Plan de marketing y desarrollo de tu propia marca <br />
+                • Tarjeta de presentación digital <br />
+                • Y más <br />
+
                 <br/>
                 <Title title="¿Qué necesitas?" className="subtitle-dp fz22 mb-1" />
-                • Gusto por las ventas. <br />
-                • Conocimiento del sector pyme. <br />
-                • Contar con cartera de prospectos. <br />
+                • Gusto por las ventas <br />
+                • Conocimiento del sector pyme <br />
+                • Contar con cartera de prospectos <br />
                 </div>
-
-                <Title title="Al registrarte recibirás toda la información en tu correo y nuestro equipo de Atención a Brokers Digitales 
-                te contactará para que comiences ¡YA!" 
-                className="subtitle-dp fz14 mt-3 mb-3" />
-
+                <br/>
+        
+                <div className="metropolisReg fz12 blackBlue text-justify">
+                Al registrarte recibirás toda la información en tu correo y nuestro equipo de Atención a Brokers Digitales te contactará para que comiences ¡YA!
+                </div>
+                <br/>
+                
                 <BrokersForms initialValues={initialValues} handleSubmit={handleSubmit}/>
 
                 {
