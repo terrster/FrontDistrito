@@ -413,6 +413,19 @@ let GeneralInfoForm = ({
             )
           )}
         </Field>
+     
+        <Field
+          component={renderField}
+          label="CURP"
+          name="curp"
+          cls="mb-3 mt-24"
+          normalize={upper}
+          maxLength={18}
+          minLength={18}
+        />
+
+        
+
         <InputLabel label="Fecha de nacimiento" class="mt-18" />
         <Row className="d-flex justify-content-center">
           <Col>
