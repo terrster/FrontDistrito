@@ -20,6 +20,10 @@ import web15 from '../../assets/img/alianzas/banners/WEB-15.jpg';
 import web16 from '../../assets/img/alianzas/banners/WEB-16.jpg';
 import web17 from '../../assets/img/alianzas/banners/WEB-17.jpg';
 import web18 from '../../assets/img/alianzas/banners/WEB-18.jpg';
+import web19 from '../../assets/img/alianzas/banners/WEB-19.jpg';
+import web20 from '../../assets/img/alianzas/banners/WEB-20.jpg';
+import web21 from '../../assets/img/alianzas/banners/WEB-21.jpg';
+
 
 import movil from '../../assets/img/alianzas/banners/movil.jpg';
 import movil1 from '../../assets/img/alianzas/banners/movil-01.jpg';
@@ -40,6 +44,9 @@ import movil15 from '../../assets/img/alianzas/banners/movil-15.jpg';
 import movil16 from '../../assets/img/alianzas/banners/movil-16.jpg';
 import movil17 from '../../assets/img/alianzas/banners/movil-17.jpg';
 import movil18 from '../../assets/img/alianzas/banners/movil-18.jpg';
+import movil19 from '../../assets/img/alianzas/banners/movil-19.jpg';
+import movil20 from '../../assets/img/alianzas/banners/movil-20.jpg';
+import movil21 from '../../assets/img/alianzas/banners/movil-21.jpg';
 
 const images = [
 	[web, movil],
@@ -60,7 +67,10 @@ const images = [
     [web15, movil15],
     [web16, movil16],
     [web17, movil17],
-    [web18, movil18]
+    [web18, movil18],
+    [web19, movil19],
+    [web20, movil20],
+    [web21, movil21]
 ];
 
 const getVersionImage = () => {

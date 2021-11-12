@@ -33,6 +33,9 @@ import LenMi from '../assets/img/alianzas/lenmi.png';
 import Resuelve from '../assets/img/alianzas/resuelve.png';
 import SBFinancial from '../assets/img/alianzas/sb.png';
 import Clara from '../assets/img/alianzas/clara.png';
+import Afirme from '../assets/img/alianzas/afirme.png';
+import Banorte from '../assets/img/alianzas/banorte.png';
+import Konfio from '../assets/img/alianzas/konfio.png';
 
 
 export const filterFinancials = (financials) => {
@@ -153,6 +156,15 @@ export const imgFinancial = (financial) => {
         case 'CLARA':
         return Clara;
 
+        case 'AFIRME':
+        return Afirme;
+
+        case 'BANORTE':
+        return Banorte;
+
+        case 'KONFIO':
+        return Konfio;
+
 
         case 'ALL':
         return [
@@ -189,7 +201,10 @@ export const imgFinancial = (financial) => {
             Resuelve,
             LenMi,
             SBFinancial,
-            Clara
+            Clara,
+            Afirme,
+            Banorte,
+            Konfio
 
         ];
     }
@@ -508,6 +523,34 @@ export const dataFinancial = (financial, properties) => {//Propuestas
                 logo: imgFinancial(financial),
                 class: 'CLARA'
             };
+        case 'AFIRME':
+            return {
+                financiera: 'Afirme',
+                monto: properties.monto_preaut.value,
+                plazo: 'De 12 a 84 meses, 2% comisión por apertura',
+                tasa: '1.4% mensual',
+                 logo: imgFinancial(financial),
+                 class: 'AFIRME'
+             };
+         case 'BANORTE':
+            return {
+                financiera: 'Banorte',
+                monto: properties.monto_preaut.value,
+                plazo: 'De 3 a 60 meses, 5% comisión por apertura',
+                tasa: '2.5% mensual',
+                logo: imgFinancial(financial),
+                class: 'BANORTE'
+            };
+
+        case 'KONFIO':
+            return {
+                financiera: 'Konfio',
+                monto: properties.monto_preaut.value,
+                plazo: 'De 3 a 60 meses, 3% comisión por apertura',
+                tasa: '2.5 % mensual',
+                logo: imgFinancial(financial),
+                class: 'KONFIO'
+             };
 
     }
 }
@@ -818,7 +861,7 @@ export const dataFinancialFormalization = (properties) => {
                  tasa: properties.n12_2_tasa_autorizada.value + "% mensual",
                  logo: imgFinancial(financial),
                  class: 'SB Financial'
-                };
+            };
 
         case 'CLARA':
             return {
@@ -828,6 +871,35 @@ export const dataFinancialFormalization = (properties) => {
                  tasa: properties.n12_2_tasa_autorizada.value + "% mensual",
                  logo: imgFinancial(financial),
                  class: 'CLARA'
+            };
+
+        case 'AFIRME':
+            return {
+                financiera: 'Afirme',
+                monto: properties.n12_1_monto_autorizado.value,
+                plazo: properties.n12_3_plazo_autorizado.value + " meses",
+                tasa: properties.n12_2_tasa_autorizada.value + "% mensual",
+                logo: imgFinancial(financial),
+                class: 'AFIRME'
+            };
+        
+        case 'BANORTE':
+            return {
+                financiera: 'Banorte',
+                monto: properties.n12_1_monto_autorizado.value,
+                plazo: properties.n12_3_plazo_autorizado.value + " meses",
+                tasa: properties.n12_2_tasa_autorizada.value + "% mensual",
+                logo: imgFinancial(financial),
+                class: 'BANORTE'
+            };
+        case 'KONFIO':
+            return {
+                financiera: 'Konfio',
+                monto: properties.n12_1_monto_autorizado.value,
+                plazo: properties.n12_3_plazo_autorizado.value + " meses",
+                tasa: properties.n12_2_tasa_autorizada.value + "% mensual",
+                logo: imgFinancial(financial),
+                class: 'KONFIO'
             };
     }
 }
