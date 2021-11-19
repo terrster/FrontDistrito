@@ -23,6 +23,7 @@ import web18 from '../../assets/img/alianzas/banners/WEB-18.jpg';
 import web19 from '../../assets/img/alianzas/banners/WEB-19.jpg';
 import web20 from '../../assets/img/alianzas/banners/WEB-20.jpg';
 import web21 from '../../assets/img/alianzas/banners/WEB-21.jpg';
+import web22 from '../../assets/img/alianzas/banners/WEB-22.jpg';
 
 
 import movil from '../../assets/img/alianzas/banners/movil.jpg';
@@ -47,6 +48,7 @@ import movil18 from '../../assets/img/alianzas/banners/movil-18.jpg';
 import movil19 from '../../assets/img/alianzas/banners/movil-19.jpg';
 import movil20 from '../../assets/img/alianzas/banners/movil-20.jpg';
 import movil21 from '../../assets/img/alianzas/banners/movil-21.jpg';
+import movil22 from '../../assets/img/alianzas/banners/movil-22.jpg';
 
 const images = [
 	[web, movil],
@@ -70,7 +72,8 @@ const images = [
     [web18, movil18],
     [web19, movil19],
     [web20, movil20],
-    [web21, movil21]
+    [web21, movil21],
+    [web22, movil22]
 ];
 
 const getVersionImage = () => {

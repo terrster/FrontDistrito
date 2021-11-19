@@ -36,6 +36,7 @@ import Clara from '../assets/img/alianzas/clara.png';
 import Afirme from '../assets/img/alianzas/afirme.png';
 import Banorte from '../assets/img/alianzas/banorte.png';
 import Konfio from '../assets/img/alianzas/konfio.png';
+import Billpocket from '../assets/img/alianzas/billpocket.png';
 
 
 export const filterFinancials = (financials) => {
@@ -165,6 +166,9 @@ export const imgFinancial = (financial) => {
         case 'KONFIO':
         return Konfio;
 
+        case 'BILLPOCKET':
+        return Billpocket;
+
 
         case 'ALL':
         return [
@@ -204,7 +208,8 @@ export const imgFinancial = (financial) => {
             Clara,
             Afirme,
             Banorte,
-            Konfio
+            Konfio,
+            Billpocket
 
         ];
     }
