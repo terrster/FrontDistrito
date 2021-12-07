@@ -267,6 +267,7 @@ let GeneralInfoForm = ({
     const lastnameError = document.getElementById("lastname-error");
     const secondLastnameError = document.getElementById("secondLastname-error");
     const civilStatusError = document.getElementById("civilStatus-error");
+    const curpError = document.getElementById("curp-error");
     const dayError = document.getElementById("day-error");
     const monthError = document.getElementById("month-error");
     const yearError = document.getElementById("year-error");
@@ -297,6 +298,7 @@ let GeneralInfoForm = ({
       lastnameError,
       secondLastnameError,
       civilStatusError,
+      curpError,
       dayError,
       monthError,
       yearError,
@@ -420,8 +422,6 @@ let GeneralInfoForm = ({
           name="curp"
           cls="mb-3 mt-24"
           normalize={upper}
-          maxLength={18}
-          minLength={18}
         />
 
         

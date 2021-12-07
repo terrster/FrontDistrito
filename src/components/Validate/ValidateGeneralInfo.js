@@ -27,6 +27,17 @@ export const validateGeneralInfo = (values) => {
     errors.civilStatus = "Estado civil...";
   }
 
+  if (!values.curp) {
+    errors.curp = "Ingresa tu CURP";
+  } else if (
+    !/^[A-Z]{4}(\d{6})([A-Z|\d]{8})$/.test(values.curp) ||
+    values.curp.length > 18 ||
+    values.curp.length < 18
+  ) {
+    errors.curp = "Ingresa un CURP válido";
+  }
+
+
   if (!values.day) {
     errors.day = "Selecciona el día";
   }
