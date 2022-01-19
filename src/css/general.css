@@ -468,6 +468,11 @@
 	color: #023e95;
 }
 
+.title-dp-coral{
+	font-family: 'coolvetica_rg';
+	color: #F24C5A;
+}
+
 .subtitle-dp{
 	font-family: 'Metropolis-Regular';
 	color: #3D3D3D;
@@ -481,6 +486,11 @@
 .text-dp-white{
 	font-family: 'Metropolis-Regular';
 	color: #FFFFFF;
+}
+
+.text-dp-grey{
+	font-family: 'Metropolis-Regular';
+	color: #575756;
 }
 
 .text-form-dp { color: #333333 !important; }

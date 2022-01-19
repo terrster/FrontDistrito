@@ -6,15 +6,19 @@
    border: none;
  }
 
+ .left-content {
+   border:none;
+ }
+
  .card-credit .title-cards-dp{
    font-size: 1.25rem !important;
-   margin-top: 1.40rem;
+   margin-top: 1rem;
  }
 
  @media (min-width: 576px){
     .card-credit .title-cards-dp{
-    font-size: 1.40rem !important;
-    margin-top: 1.40rem;
+    font-size: 1rem !important;
+    margin-top: 1rem;
   }
   .card-credit {
     height: 27rem;
@@ -31,7 +35,7 @@
  
  @media (min-width: 992px) {
    .card-credit .title-cards-dp{
-    font-size: 1.60rem !important;
+    font-size: 1.2rem !important;
   }
    .card-credit {
     height: 26rem;
@@ -52,7 +56,7 @@
 
 .bancos-list li, .dp-list li {
   list-style-type: none;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 .bancos-list li:before {
@@ -61,7 +65,7 @@
   display: inline-block;
   height: 20px;
   width: 20px;
-  background-image: url(../assets/img/home/prueba.png);
+  background-image: url(../assets/img/home/cara_triste.png);
   background-size: contain;
   background-repeat: no-repeat;
   background-position: left center;
@@ -75,13 +79,14 @@
   display: inline-block;
   height: 20px;
   width: 20px;
+  background-image: url(../assets/img/home/cara_feliz.png);
   background-size: contain;
   background-repeat: no-repeat;
   background-position: left center;
   margin-top: 2px;
   margin-left: -25px;
 }
-
+/*
 .dp-opciones:before{
     background-image: url(../assets/img/home/ICONO1.png);
 }
@@ -93,17 +98,21 @@
 .dp-linea:before{
   background-image: url(../assets/img/home/ICONO3.png);
 }
-
+*/
 .dp-facil:before{
-  background-image: url(../assets/img/home/ICONO4.png);
+  background-image: url(../assets/img/home/cara_feliz.png);
 }
 
 .fondo-card{
-  background-color: #F5F5F5;
+  background-color: #e0dede;
+}
+
+.fondo-card-white{
+  background-color: #ffffff;
 }
 
 .fondo-card-dp{
-   background-image: linear-gradient(#0074FF, #242A5A);
+   background: linear-gradient(to right,#023473, #05f2f2);
 }
 
 #header {
