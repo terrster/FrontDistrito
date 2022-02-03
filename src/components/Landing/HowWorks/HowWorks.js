@@ -1,77 +1,153 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Title from '../../Generic/Title';
 import { Row, Col, Card } from 'react-bootstrap';
 
-import '../../../css/HowWorks.css';
 
+import { Link, NavLink } from 'react-router-dom';
+import { Button, Carousel } from 'react-bootstrap';
+
+
+import '../../../css/howWorks.css';
+import firstImage from '../../../assets/img/carousel-howWorks/rif-web.png';
+import secondImage from '../../../assets/img/carousel-howWorks/fisica-web.png';
+import thirdImage from '../../../assets/img/carousel-howWorks/moral-web.png';
+import firstImageMobie from '../../../assets/img/carousel-howWorks/rif-mob.png';
+import secondImageMobie from '../../../assets/img/carousel-howWorks/fisica-mob.png';
+import thirdImageMobie from '../../../assets/img/carousel-howWorks/moral-mob.png';
+// images[numImage][NormalImage, Mobile Image]
+
+const images = [
+	[firstImage, firstImageMobie],
+	[secondImage, secondImageMobie],
+	[thirdImage, thirdImageMobie],
+];
+
+const getVersionImage = () => {
+	const currentSize = document.getElementsByTagName('body')[0].clientWidth;
+	return currentSize < 775 ? 1 : 0;
+};
 
 const HowWorks = props => {
+	const [versionImage, setVersionImage] = useState(getVersionImage());
+	const [indexImage, setIndexImage] = useState(0);
+	const [currentImage, setCurrentImage] = useState(
+		images[indexImage][versionImage]
+	);
+
+	const handleSelect = (selectedIndex, e) => {
+		setIndexImage(selectedIndex);
+	};
+
+	window.addEventListener('resize', () => setVersionImage(getVersionImage()));
+
+	useEffect(() => {
+		setCurrentImage(images[indexImage][versionImage]);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [versionImage, indexImage]);
+
+	const styleWEB = 'header-button fz24 bluePrimary btn-web';
+	const styleWEBM = 'header-button fz24 bluePrimary btn-web-mov';
+
+
 	return (
-		<div id="howWorks" className="pt-4 text-center ml-auto mr-auto mb-3">
-			<Title title="Requisitos básicos" className="title-dp fz42 fw300" />
+		<div id="howWorks" style={{ width: '100%' }}>
+			<Card.Header id="header"  className="title-dp-blue fz56  fw300 text-left line-height"><span className='title-dp'> solo </span> necesitas </Card.Header>
+			<Carousel
+        		activeIndex={indexImage}
+				onSelect={handleSelect}
+				controls={false} 
+				indicators={false}
+			>
+				<Carousel.Item>
+					<img
+						className="d-block w-100"
+						src={images[0][versionImage]}
+						alt="First slide"
+					/>
+					<Carousel.Caption>
+						<div className="container">
+							<Link
+								to={
+									sessionStorage.getItem('applianceId') !== null
+										? '/credito/solicitud/' +
+										  sessionStorage.getItem('applianceId')
+										: sessionStorage.getItem('token') !== null
+										? 'home'
+										: '/registrate'
+								}
+							>
+								<div className="metropolisReg mt-420 mr-20">
+									<Button className="personas-button fz20 bluePrimary">
+									solicítalo ahora
+									</Button>
+								</div>
+							</Link>
+						</div>
+					</Carousel.Caption>
+				</Carousel.Item>
 
-			<Title title="Para hacer aún más rápido tu proceso y autorización de crédito, ten a la mano tu RFC con el que facturas y clave CIEC*
-       <br/>*Opcional" className="subtitle-dp fz15 text-center mb-30 mt-3" />
+				<Carousel.Item>
+					<img
+						className="d-block w-100"
+						src={images[1][versionImage]}
+						alt="Second slide"
+					/>
+					<Carousel.Caption>
+						<div className="container">
+							<Link
+								to={
+									sessionStorage.getItem('applianceId') !== null
+										? '/credito/solicitud/' +
+										  sessionStorage.getItem('applianceId')
+										: sessionStorage.getItem('token') !== null
+										? 'home'
+										: '/registrate'
+								}
+							>
+								<div className="metropolisReg mt-420 mr-20">
+									<Button className="personas-button fz20 bluePrimary">
+									solicítalo ahora
+									</Button>
+								</div>
+							</Link>
+						</div>
+					</Carousel.Caption>
+				</Carousel.Item>
 
-			<Row className="d-inline-flex justify-content-center">
-				<Col xl={4} md={5} sm={7} xs={11} className="mt-4 d-flex justify-content-center">
-					<Card id="card-home">
-						<Card.Header  id="header-SAT"></Card.Header>
-						<Card.Body>
-							<Card.Title className="title-cards-dp  white  fz18 text-center">Sin alta en el SAT</Card.Title>
-							<Card.Text className="text-dp fz12  white  text-left mt-5">
-								<ul className="dp-list-req">
-									<li>Identificación Oficial</li>
-									<li className="mt-1">Comprobante de domicilio</li>
-									<li className="mt-1">Estados de cuenta bancarios</li>
-									<li className="mt-1">Mínimo 6 meses con tu negocio</li>
-									<li className="mt-1">Ventas mínimas de $15 mil pesos al mes</li>
-								</ul>
-							</Card.Text>
-						</Card.Body>
-					</Card>
-				</Col>
 
-				<Col xl={4} md={5} sm={7} xs={11} className="mt-4 d-flex justify-content-center">
-					<Card id="card-home">
-						<Card.Header id="header-FISICA"></Card.Header>
-						<Card.Body>
-							<Card.Title className="title-cards-dp white fz18 text-center fisica-title">Personas Físicas con Actividad Empresarial y RIF</Card.Title>
-							<Card.Text className="text-dp fz12 fw200  white text-left" style={{marginTop: '25px'}}>
-								<ul className="dp-list-req">
-									<li>Identificación Oficial</li>
-									<li className="mt-1">RFC</li>
-									<li className="mt-1">Comprobante de domicilio</li>
-									<li className="mt-1">Estados de cuentas bancarios</li>
-									<li className="mt-1">Mínimo 12 meses con tu negocio</li>
-									<li className="mt-1">Ventas mínimas de $25 mil al mes</li>
-								</ul>
-							</Card.Text>
-						</Card.Body>
-					</Card>
-				</Col>
+				   
+			<Carousel.Item>
+					<img
+						className="d-block w-100"
+						src={images[2][versionImage]}
+						alt="Third slide"
+					/>
+					<Carousel.Caption>
+						<div className="container">
+							<Link
+								to={
+									sessionStorage.getItem('applianceId') !== null
+										? '/credito/solicitud/' +
+										  sessionStorage.getItem('applianceId')
+										: sessionStorage.getItem('token') !== null
+										? 'home'
+										: '/registrate'
+								}
+							>
+								<div className="metropolisReg mt-420 mr-20">
+									<Button className="personas-button fz20 bluePrimary">
+									solicítalo ahora
+									</Button>
+								</div>
+							</Link>
+						</div>
+					</Carousel.Caption>
+				</Carousel.Item>
 
-				<Col xl={4} md={5} sm={7} xs={11} className="mt-4 d-flex justify-content-center">
-					<Card id="card-home">
-						<Card.Header id="header-MORAL"></Card.Header>
-						<Card.Body>
-							<Card.Title className="title-cards-dp fz18 white text-center">Persona Moral</Card.Title>
-							<Card.Text className="text-dp fz12  white text-left mt-5">
-								<ul className="dp-list-req">
-									<li>Identificación Oficial principal accionista y rep. legal</li>
-									<li className="mt-1">RFC</li>
-									<li className="mt-1">Comprobante de domicilio del negocio y personal</li>
-									<li className="mt-1">Estados de cuentas bancarios</li>
-									<li className="mt-1">Acta constitutiva</li>
-									<li className="mt-1">Mínimo 12 meses con tu negocio</li>
-									<li className="mt-1">Ventas mínimas de $50 mil al mes</li>
-								</ul>
-							</Card.Text>
-						</Card.Body>
-					</Card>
-				</Col>
-			</Row>
+
+			</Carousel>
 		</div>
+		
 	)
 }
 

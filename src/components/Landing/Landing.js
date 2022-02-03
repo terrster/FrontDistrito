@@ -10,6 +10,7 @@ import Axios from "../../utils/axios";
 import Slider from '../BrokersLanding/Aliados/Allies';
 import Comunity from '../BrokersLanding/Comunity/Comunity';
 import CreditOption from "./CreditOption/CreditOption";
+import Products from "./Products/Products";
 
 const Landing = () => {
 
@@ -65,6 +66,7 @@ const Landing = () => {
             <LandSimulator />
             <div className="container-fluid">     
                 <CreditOption />
+                <Products/>
                 <HowWorks />
                 <Video />
                 <Slider />
