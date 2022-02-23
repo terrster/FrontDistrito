@@ -2,39 +2,39 @@ import React, { useState, useEffect } from 'react';
 import { Carousel } from 'react-bootstrap';
 import '../../../css/products.css';
 
-import web from '../../../assets/img/carousel-products/arrendamiento.png';
-import web1 from '../../../assets/img/carousel-products/creditohipotecario.png';
-import web2 from '../../../assets/img/carousel-products/creditonomina.png';
-import web3 from '../../../assets/img/carousel-products/creditosimple.png';
-import web4 from '../../../assets/img/carousel-products/cuentasdigitales.png';
-import web5 from '../../../assets/img/carousel-products/factoraje.png';
-import web6 from '../../../assets/img/carousel-products/reparaciondeburo.png';
-import web7 from '../../../assets/img/carousel-products/revolvente.png';
-import web8 from '../../../assets/img/carousel-products/TDCempresarial.png';
-import web9 from '../../../assets/img/carousel-products/TPV.png';
+import web from '../../../assets/img/carousel-products/productos_1.jpg';
+import web1 from '../../../assets/img/carousel-products/productos_2.jpg';
+import web2 from '../../../assets/img/carousel-products/productos_3.jpg';
+import web3 from '../../../assets/img/carousel-products/productos_4.jpg';
+// import web4 from '../../../assets/img/carousel-products/cuentasdigitales.png';
+// import web5 from '../../../assets/img/carousel-products/factoraje.png';
+// import web6 from '../../../assets/img/carousel-products/reparaciondeburo.png';
+// import web7 from '../../../assets/img/carousel-products/revolvente.png';
+// import web8 from '../../../assets/img/carousel-products/TDCempresarial.png';
+// import web9 from '../../../assets/img/carousel-products/TPV.png';
 
-import movil from '../../../assets/img/carousel-products/arrendamiento.png';
-import movil1 from '../../../assets/img/carousel-products/creditohipotecario.png';
-import movil2 from '../../../assets/img/carousel-products/creditonomina.png';
-import movil3 from '../../../assets/img/carousel-products/creditosimple.png';
-import movil4 from '../../../assets/img/carousel-products/cuentasdigitales.png';
-import movil5 from '../../../assets/img/carousel-products/factoraje.png';
-import movil6 from '../../../assets/img/carousel-products/reparaciondeburo.png';
-import movil7 from '../../../assets/img/carousel-products/revolvente.png';
-import movil8 from '../../../assets/img/carousel-products/TDCempresarial.png';
-import movil9 from '../../../assets/img/carousel-products/TPV.png';
+// import movil from '../../../assets/img/carousel-products/arrendamiento.png';
+// import movil1 from '../../../assets/img/carousel-products/creditohipotecario.png';
+// import movil2 from '../../../assets/img/carousel-products/creditonomina.png';
+// import movil3 from '../../../assets/img/carousel-products/creditosimple.png';
+// import movil4 from '../../../assets/img/carousel-products/cuentasdigitales.png';
+// import movil5 from '../../../assets/img/carousel-products/factoraje.png';
+// import movil6 from '../../../assets/img/carousel-products/reparaciondeburo.png';
+// import movil7 from '../../../assets/img/carousel-products/revolvente.png';
+// import movil8 from '../../../assets/img/carousel-products/TDCempresarial.png';
+// import movil9 from '../../../assets/img/carousel-products/TPV.png';
 
 const images = [
-	[web, movil],
-    [web1, movil1],
-    [web2, movil2],
-    [web3, movil3],
-    [web4, movil4],
-    [web5, movil5],
-    [web6, movil6],
-    [web7, movil7],
-    [web8, movil8],
-    [web9, movil9]
+	[web,],
+    [web1,],
+    [web2,],
+    [web3,],
+    // [web4, movil4],
+    // [web5, movil5],
+    // [web6, movil6],
+    // [web7, movil7],
+    // [web8, movil8],
+    // [web9, movil9]
   
 ];
 
