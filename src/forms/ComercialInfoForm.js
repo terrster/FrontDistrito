@@ -223,6 +223,9 @@ let ComercialInfoForm = (props) => {
       ? nextValue
       : previousValue;
   const upper = (value) => value && value.toUpperCase();
+  const onlyLirycs = (nextValue, previousValue) =>
+    /^([a-zñáéíóúü\s]{0,60})$/i.test(nextValue) ? nextValue : previousValue;
+
   return (
     <div>
       <form
