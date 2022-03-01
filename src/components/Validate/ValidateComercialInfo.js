@@ -44,7 +44,7 @@ export const validateComercialInfo = (values) => {
   }
 
   if (!values.rfc) {
-    errors.rfc = "Ingresa el RFC de tu negocio";
+    errors.rfc = "Ingresa el RFC";
   } else {
     if (type === "PF") {
       const day = values.rfc.substring(8, 10);
