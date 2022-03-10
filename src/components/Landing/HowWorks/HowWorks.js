@@ -7,7 +7,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { Button, Carousel } from 'react-bootstrap';
 
 
-import '../../../css/howWorks.css';
+import '../../../css/HowWorks.css';
 import firstImage from '../../../assets/img/carousel-howWorks/rif-web.png';
 import secondImage from '../../../assets/img/carousel-howWorks/fisica-web.png';
 import thirdImage from '../../../assets/img/carousel-howWorks/moral-web.png';
