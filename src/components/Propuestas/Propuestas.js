@@ -62,7 +62,7 @@ const Propuestas = () => {
                                             <Row>
                                                 <Col xs={8}>
                                                     Banco/Financiera: {financial.financiera}<br></br>
-                                                    Monto Autorizado: { financial.monto < 10000 ? 'Pendiente' : '$' + new Intl.NumberFormat().format(financial.monto).toString().replace('.', ',')}<br></br>
+                                                    Monto Estimado: { financial.monto < 10000 ? 'Pendiente' : '$' + new Intl.NumberFormat().format(financial.monto).toString().replace('.', ',')}<br></br>
                                                     Plazo: {financial.plazo}<br></br>
                                                     Tasa: {financial.tasa}<br></br>
                                                 </Col>
