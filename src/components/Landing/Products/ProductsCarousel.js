@@ -70,7 +70,7 @@ const AlliesCarousel = () => {
     }, [versionImage]);
 
     return(
-        <Carousel className="mb-10 pb-40" activeIndex={indexImage} onSelect={handleSelect}>
+        <Carousel className="mb-10 pb-40 pt-40" activeIndex={indexImage} onSelect={handleSelect}>
             {
                 alliesImages.map((image, index) => {
                     return  <Carousel.Item>

@@ -313,6 +313,10 @@
 
 .plr-20{ padding-left: 20px; padding-right: 20px;}
 
+.plr-60 {padding-left: 60px; padding-right: 60px;}
+
+.pt-40 {padding-top: 40px;}
+
 .pt-120{ padding-top: 120px;}
 
 .ptb-120{ padding-top: 120px; padding-bottom: 120px; }
@@ -320,6 +324,8 @@
 .ptb-60 { padding-top: 60px; padding-bottom: 60px;}
 
 .pb-120 {padding-bottom: 120px;}
+
+.pb-70 {padding-bottom: 70px;}
 
 .pb-40 {padding-bottom: 40px;}
 

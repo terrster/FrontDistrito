@@ -52,11 +52,11 @@ const HowWorks = props => {
 	return (
 		<div id="howWorks" style={{ width: '100%' }}>
 			<Card.Header id="header"  className="title-dp-blue fz56  fw300 text-left line-height"><span className='title-dp'> solo </span> necesitas </Card.Header>
-			<Carousel
+			<Carousel className="pb-70 plr-60"
         		activeIndex={indexImage}
 				onSelect={handleSelect}
-				controls={false} 
-				indicators={false}
+				controls={true} 
+				indicators={true}
 			>
 				<Carousel.Item>
 					<img
