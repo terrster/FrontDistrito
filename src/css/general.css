@@ -121,6 +121,12 @@
 
 .divContainer{ display: block;}
 
+.bannerAllies {
+
+	width: 100% !important;
+	padding-top: 50px;
+}
+
 /* MARGIN TOP */
 
 .mt-420{margin-top: 420px;}
@@ -308,6 +314,8 @@
 .w-160{ width: 160px;}
 
 /* PADDINGS */
+
+.plr-0 {padding-left: 0px; padding-right: 0px;}
 
 .plr-10{ padding-top: 1px;}
 

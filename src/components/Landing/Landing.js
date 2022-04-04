@@ -11,6 +11,7 @@ import Slider from '../BrokersLanding/Aliados/Allies';
 import Comunity from '../BrokersLanding/Comunity/Comunity';
 import CreditOption from "./CreditOption/CreditOption";
 import Products from "./Products/Products";
+import AlliesLanding from "./AlliesLanding/AlliesLanding";
 
 const Landing = () => {
 
@@ -69,7 +70,9 @@ const Landing = () => {
                 <Products/>
                 <HowWorks />
                 <Video />
-                <Slider />
+            </div>
+                <AlliesLanding />
+            <div className="container-fluid">  
                 {/* <AboutUs />       */}
                 <Comunity hubspotInfo={hubspotInfo} origen={'landing'}/>
                 <Contact /> 
