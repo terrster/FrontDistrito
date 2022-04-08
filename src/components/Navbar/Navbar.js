@@ -18,7 +18,9 @@ const NavBar = props => {
 	const partners = [
 		'pagaloop',
 		'impulsomx',
-		'visoor'
+		'visoor',
+		'konsultor',
+		'dg-impulsando'
 	];
 
 	useLayoutEffect(() => {
