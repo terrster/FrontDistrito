@@ -25,3 +25,13 @@
 .footer-link:visited{
 	color: #000000;
 }
+
+
+.footer-subtitles{
+		font-style: linear-gradient(to right, #0095FF, #6DFFFF); ;
+		writing-mode: vertical-lr;
+		transform: rotate(180deg);
+		font-size: 1.5rem;
+		font-weight: 500;
+		
+}

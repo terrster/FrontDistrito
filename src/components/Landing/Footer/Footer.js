@@ -20,7 +20,7 @@ const Footer = props => {
                 </div>
         </div>
         <div className="col-5 col-lg-3">
-            <div className="metropolisMed fw500 fz24">Menú</div>
+            <div className="metropolisMed footer-subtitle">menú</div>
             <div>
                 <a href="/#simulador" className="metropolisReg black-link fw300 fz18">Simulador</a>
             </div>

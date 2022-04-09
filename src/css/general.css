@@ -210,6 +210,9 @@
 .ml-39{margin-left: 39px;}
 
 
+.justify-right{
+	justify-content: right;
+}
 
 
 /* MARGIN LEFT */
@@ -217,6 +220,8 @@
 .mr-20{margin-right: -65%;}
 
 /* FONT SIZE */
+.fz60 {font-size: 4rem !important;}
+
 .fz56 {font-size: 3.5rem !important;}
 
 .fz50 { font-size: 3.125rem !important; }
@@ -536,7 +541,6 @@
 .line-height{
 	line-height: 2rem;
 }
-
 
 .text-form-dp { color: #333333 !important; }
 
