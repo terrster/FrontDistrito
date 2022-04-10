@@ -97,7 +97,7 @@ const financialPartner = (partner) => {
         ],
         prefix: process.env.REACT_APP_CONFIGURATION === 'localhost' || process.env.REACT_APP_CONFIGURATION === 'development' ? 'DG-ImpulsandoDev - ' : 'DG-Impulsando - ',
         channel: 'DG-Impulsando',
-        brokercode: '36408310'//Luis Fer - DP
+        brokercode: '153537413'//Israel De Agustín DG-impulsando
       }
 
 

@@ -47,8 +47,9 @@ const NavBar = props => {
 	const close = () => setIsOpen(false);
 	let classDefault = "hvr-underline-from-left  text-center fz16 blackNav nav-btn heigth-45 solicita-butto metropolisReg";
 	let classDefaultLink = "text-center coolvetica fz16 gray50 heigth-45 nav-btn d-flex";
-	const [showWhatsAppBtn] = useState(partners.filter(partner => partner !== 'visoor').includes(location.pathname.toLowerCase().split("/")[2]))
-
+	const [showWhatsAppBtn] = useState(partners.filter(partner => partner == 'impulsomx').includes(location.pathname.toLowerCase().split("/")[2]))
+	// const [showWhatsAppBtn] = useState(partners.filter(partner => partner !== 'visoor').includes(location.pathname.toLowerCase().split("/")[2]))
+	
 	//console.log(location.pathname.split("/")[2].toLowerCase());
 
 	return (
