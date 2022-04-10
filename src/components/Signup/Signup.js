@@ -85,7 +85,7 @@ const financialPartner = (partner) => {
         ],
         prefix: process.env.REACT_APP_CONFIGURATION === 'localhost' || process.env.REACT_APP_CONFIGURATION === 'development' ? 'KonsultorDev - ' : 'Konsultor - ',
         channel: 'Konsultor',
-        brokercode: '36408310'//Luis Fer - DP
+        brokercode: ''//
       }
 
       case 'DG-IMPULSANDO':
