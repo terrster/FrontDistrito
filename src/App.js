@@ -152,7 +152,7 @@ class App extends Component {
                 <Route path="/solicitud_enviada_brokers" exact component={ThankyouPage} />
                 <Route path="/contador" exact component={Counter}/>
                 <Route path="/alianza" exact component={Allies}/>
-                <Route path="/RFC" exact component={ RFCcomponent } />
+                <Route path="/ciec" exact component={ RFCcomponent } />
                 <PrivateRoute exact path="/home" component={Home} />
                 <PrivateRoute exact path="/solicitud" component={Appliance} />
                 <PrivateRoute
