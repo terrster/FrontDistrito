@@ -69,6 +69,7 @@ import store from "./redux/store";
 
 // UTILS
 import isAuthenticated from "./utils/isAuthenticated";
+import { RFCcomponent } from "./components/RFC/RFC.component";
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
@@ -151,6 +152,7 @@ class App extends Component {
                 <Route path="/solicitud_enviada_brokers" exact component={ThankyouPage} />
                 <Route path="/contador" exact component={Counter}/>
                 <Route path="/alianza" exact component={Allies}/>
+                <Route path="/RFC" exact component={ RFCcomponent } />
                 <PrivateRoute exact path="/home" component={Home} />
                 <PrivateRoute exact path="/solicitud" component={Appliance} />
                 <PrivateRoute
@@ -189,7 +191,6 @@ class App extends Component {
 
                 <Route path="/brokers" exact component = {BrokersLanding}/>
                 <Route path="/dashboard" exact component={Dashboard} />
-
                 
                 <Route path="/aliado_financiero" exact component = {AlliePartner}/>
                 <Route path="/solicitud_enviada_aliado" exact component={ThankyouPageAllie} />
