@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import '../../../css/footer.css';
 import logo from '../../../assets/img/redes_sociales/logo.png';
 import face from '../../../assets/img/redes_sociales/Facebook.png';
-import mail from '../../../assets/img/redes_sociales/Mail.png';
+import mail from '../../../assets/img/redes_sociales/mail.png';
 // import twitter from '../../../assets/img/redes_sociales/Twitter.png';
 import linked from '../../../assets/img/redes_sociales/Linkedin.png';
 import instagram from '../../../assets/img/redes_sociales/Instagram.png';

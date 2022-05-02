@@ -17,9 +17,9 @@ import thirdImageMobie from '../../../assets/img/carousel-howWorks/moral-mob.png
 // images[numImage][NormalImage, Mobile Image]
 
 const images = [
+	[thirdImage, thirdImageMobie],
 	[firstImage, firstImageMobie],
 	[secondImage, secondImageMobie],
-	[thirdImage, thirdImageMobie],
 ];
 
 const getVersionImage = () => {
@@ -45,108 +45,74 @@ const HowWorks = props => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [versionImage, indexImage]);
 
-	const styleWEB = 'header-button fz24 bluePrimary btn-web';
-	const styleWEBM = 'header-button fz24 bluePrimary btn-web-mov';
+	const styleWEB = 'personas-button fz16 bluePrimary';
+	const styleWEBM = 'personas-button fz16';
 
 
 	return (
-		<div className= "full-size" id="howWorks" >
-			<Card.Header id="header"  className="title-dp-blue fz56  fw300 text-left line-height"><span className='title-dp'> solo </span> necesitas </Card.Header>
-			<Carousel className="pb-70 plr-60"
-        		activeIndex={indexImage}
-				onSelect={handleSelect}
-				controls={false} 
-				indicators={true}
-			>
-				<Carousel.Item>
-					<img
-						className="d-block w-100"
-						src={images[0][versionImage]}
-						alt="First slide"
-					/>
-					<Carousel.Caption>
-						<div className="container">
-							<Link
-								to={
+		<Card id="howWorks" border='0' className="text-center">
+		<Card.Header id="header"  className="title-dp-blue fz56  fw300 text-left line-height"><span className='title-dp'> solo </span> necesitas </Card.Header>
+				{
+					versionImage === 0 ? (
+						<Carousel className=""
+						activeIndex={indexImage}
+						onSelect={handleSelect}
+						controls={false} 
+						indicators={versionImage === 0 ? true : false}
+						>
+						{
+							images.map((image, index) => (
+								<Carousel.Item key={index}>
+									<img className="d-block w-100" src={image[versionImage]} alt="Slide" />
+									{
+										versionImage === 0 && (
+											<Carousel.Caption>
+										<div className="personas-button-container">
+										<Link to={
+												sessionStorage.getItem('applianceId') !== null
+													? '/credito/solicitud/' +
+													  sessionStorage.getItem('applianceId')
+													: sessionStorage.getItem('token') !== null
+													? 'home'
+													: '/registrate'
+											}>
+											<Button variant="primary" className="personas-button-web  fz16 bluePrimary">
+											solicítalo ahora
+											</Button>
+										</Link>
+										</div>
+									</Carousel.Caption>
+										)
+									}
+								</Carousel.Item>
+							))
+						}
+						</Carousel>
+					): (
+						images.map((image, index) => (
+							<Card border='0' className='mb-2' style={{backgroundColor: '#F6F6F4'}}>
+								<Card.Img className="d-block w-100" src={image[versionImage]} alt="Slide" />
+								<Card.Body className="text-center">
+							<div>
+							<Link to={
 									sessionStorage.getItem('applianceId') !== null
 										? '/credito/solicitud/' +
 										  sessionStorage.getItem('applianceId')
 										: sessionStorage.getItem('token') !== null
 										? 'home'
 										: '/registrate'
-								}
-							>
-								<div className="metropolisReg mt-420 mr-20">
-									<Button className="personas-button fz16 bluePrimary">
-									solicítalo ahora
-									</Button>
-								</div>
+								}>
+								<Button variant="primary" className="personas-button fz16 bluePrimary">
+								solicítalo ahora
+								</Button>
 							</Link>
-						</div>
-					</Carousel.Caption>
-				</Carousel.Item>
-
-				<Carousel.Item>
-					<img
-						className="d-block w-100"
-						src={images[1][versionImage]}
-						alt="Second slide"
-					/>
-					<Carousel.Caption>
-						<div className="container">
-							<Link
-								to={
-									sessionStorage.getItem('applianceId') !== null
-										? '/credito/solicitud/' +
-										  sessionStorage.getItem('applianceId')
-										: sessionStorage.getItem('token') !== null
-										? 'home'
-										: '/registrate'
-								}
-							>
-								<div className="metropolisReg mt-420 mr-20">
-									<Button className="personas-button fz16 bluePrimary">
-									solicítalo ahora
-									</Button>
-								</div>
-							</Link>
-						</div>
-					</Carousel.Caption>
-				</Carousel.Item>
-
-
-				   
-			<Carousel.Item>
-					<img
-						className="d-block w-100"
-						src={images[2][versionImage]}
-						alt="Third slide"
-					/>
-					<Carousel.Caption>
-						<div className="container">
-							<Link
-								to={
-									sessionStorage.getItem('applianceId') !== null
-										? '/credito/solicitud/' +
-										  sessionStorage.getItem('applianceId')
-										: sessionStorage.getItem('token') !== null
-										? 'home'
-										: '/registrate'
-								}
-							>
-								<div className="metropolisReg mt-420 mr-20">
-									<Button className="personas-button fz216 bluePrimary">
-									solicítalo ahora
-									</Button>
-								</div>
-							</Link>
-						</div>
-					</Carousel.Caption>
-				</Carousel.Item>
-
-
-			</Carousel>
-		</div>
+							</div>
+							</Card.Body>
+							</Card>
+						)
+					))
+				}
+		</Card>
 		
 	)
 }

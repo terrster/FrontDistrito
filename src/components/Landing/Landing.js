@@ -68,7 +68,9 @@ const Landing = () => {
             <div className="container-fluid">     
                 <CreditOption />
                 <Products/>
-                <HowWorks />
+                <div className='full-size'>
+                    <HowWorks />
+                </div>
                 <Video />
             </div>
                 <AlliesLanding />

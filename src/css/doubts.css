@@ -30,6 +30,18 @@ h1{
 	font-size: 4.5rem;
 }
 
+@media (max-width: 600px) {
+	.text-contacto{
+		margin-left: 0;
+	}
+	.chica-left{
+		margin-right: 0;
+	}
+	h1{
+		font-size: 3.5rem;
+	}
+}
+
 
 
 .contact-button{
