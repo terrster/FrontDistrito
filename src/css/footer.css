@@ -13,7 +13,10 @@
 }
 
 .footer-link{
-	color: #000000;
+	font-family: 'Metropolis-Regular';
+	color: #575756;
+	font-size: 1.125rem;
+	font-weight: 300;
 }
 
 .footer-link:hover{
@@ -26,7 +29,7 @@
 	color: #000000;
 }
 
-
+/* 
 .footer-subtitles{
 		font-style: linear-gradient(to right, #0095FF, #6DFFFF); ;
 		writing-mode: vertical-lr;
@@ -34,4 +37,26 @@
 		font-size: 1.5rem;
 		font-weight: 500;
 		
-}
+} */
+
+
+  
+  .horizontal {
+	writing-mode: horizontal-tb;
+	padding-left: 20%;
+	padding-top: 5%;
+  }
+  
+  .vertical {
+	font-size: 2.5rem;
+	font-weight: 900;
+	font-family: 'Metropolis-Medium';
+	writing-mode: vertical-rl;
+	position: absolute;
+	padding-bottom: 5%;
+	transform: rotate(180deg);
+	background: linear-gradient(to BOTTOM, #017ad1, #6DFFFF );
+    -webkit-background-clip: text;
+  	-webkit-text-fill-color: transparent;
+  }
+	

@@ -203,7 +203,9 @@
 
 .mb-3{margin-bottom: 3px;}
 
-
+.mb-comunity{
+	margin-bottom:12%;
+}
 
 /* MARGIN LEFT */
 
@@ -214,8 +216,15 @@
 	justify-content: right;
 }
 
-
 /* MARGIN LEFT */
+
+.ml-comunity{
+	margin-left: 15%;
+}
+
+.ml-15 {
+	margin-left: 18%;
+}
 
 .mr-20{margin-right: -65%;}
 
@@ -531,7 +540,12 @@
 	color: #FFFFFF;
 }
 
-.text-dp-grey{
+.text-dp-white-bold{
+	font-family: 'Metropolis-Bold';
+	color: #FFFFFF;
+}
+
+.text-dp-gray{
 	font-family: 'Metropolis-Regular';
 	color: #575756;
 }
@@ -697,3 +711,4 @@
 	max-width: 100% !important;
 	min-width: 100% !important;
 }
+

@@ -50,12 +50,12 @@ const HowWorks = props => {
 
 
 	return (
-		<div id="howWorks" style={{ width: '100%' }}>
+		<div className= "full-size" id="howWorks" >
 			<Card.Header id="header"  className="title-dp-blue fz56  fw300 text-left line-height"><span className='title-dp'> solo </span> necesitas </Card.Header>
 			<Carousel className="pb-70 plr-60"
         		activeIndex={indexImage}
 				onSelect={handleSelect}
-				controls={true} 
+				controls={false} 
 				indicators={true}
 			>
 				<Carousel.Item>
@@ -77,7 +77,7 @@ const HowWorks = props => {
 								}
 							>
 								<div className="metropolisReg mt-420 mr-20">
-									<Button className="personas-button fz20 bluePrimary">
+									<Button className="personas-button fz16 bluePrimary">
 									solicítalo ahora
 									</Button>
 								</div>
@@ -105,7 +105,7 @@ const HowWorks = props => {
 								}
 							>
 								<div className="metropolisReg mt-420 mr-20">
-									<Button className="personas-button fz20 bluePrimary">
+									<Button className="personas-button fz16 bluePrimary">
 									solicítalo ahora
 									</Button>
 								</div>
@@ -135,7 +135,7 @@ const HowWorks = props => {
 								}
 							>
 								<div className="metropolisReg mt-420 mr-20">
-									<Button className="personas-button fz20 bluePrimary">
+									<Button className="personas-button fz216 bluePrimary">
 									solicítalo ahora
 									</Button>
 								</div>

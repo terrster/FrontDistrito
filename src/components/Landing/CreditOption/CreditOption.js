@@ -39,7 +39,7 @@ const CreditOption = () => {
               <Card.Header id="header" className="title-cards-dp">bancos y financieras</Card.Header>
               <Card.Body>
                 <Card.Title></Card.Title>
-                <Card.Text className="text-dp-grey fz12  text-left">
+                <Card.Text className="text-dp-gray fz12  text-left">
                   <ul className="bancos-list">
                     <li>tienes que ir de sucursal en sucursal o de página en página para ver quien te presta</li>
                     <li>trámites largos y complicados</li>

@@ -69,7 +69,7 @@ const NavBar = props => {
 								{location.pathname != '/brokers' && location.pathname != '/solicitud_enviada_brokers' && location.pathname != '/alianza' && 
 									<>
 										<Nav.Link  onClick={close} as={NavLink} to="/login" id="ymb-dp-nav-register" className="text-center fz16 blackNav nav-btn heigth-45 solicita-butto metropolisReg">inicia sesión</Nav.Link>
-										<Nav.Link  onClick={close} as={NavLink} to="/registrate" id="ymb-dp-nav-login" className="text-center fz16 nav-btn nav-btn-rad primary heigth-95 w-360 ml-auto mr-auto solicita-button metropolisReg" style={{textDecoration: "none"}}>comenzar solicitud</Nav.Link>
+										<Nav.Link  onClick={close} as={NavLink} to="/registrate" id="ymb-dp-nav-login" className="text-center fz16 nav-btn nav-btn-rad primary heigth-95 w-360 ml-auto mr-auto metropolisReg" style={{textDecoration: "none"}}>comenzar solicitud</Nav.Link>
 									</>
 								}
 							</Nav>
