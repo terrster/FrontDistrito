@@ -68,7 +68,7 @@ const Landing = () => {
             <div className="container-fluid">     
                 <CreditOption />
                 <Products/>
-                <div className='full-size'>
+                <div className='container-fluid'>
                     <HowWorks />
                 </div>
                 <Video />
