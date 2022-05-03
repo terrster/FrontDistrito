@@ -29,6 +29,14 @@ import visoorMovil from '../../assets/img/financialPartners/Visoor-Movil.jpg';
 import PagaloopWEB from '../../assets/img/financialPartners/Pagaloop-WEB.jpg';
 import PagaloopMovil from '../../assets/img/financialPartners/Pagaloop-Movil.jpg';
 
+import KonsultorWEB from '../../assets/img/financialPartners/KonsultorWEB.jpg';
+import KonsultorMobile from '../../assets/img/financialPartners/KonsultorMobile.jpg';
+
+import DGimpulsandoWEB from '../../assets/img/financialPartners/DGimpulsandoWEB.jpg';
+import DGimpulsandoMobile from '../../assets/img/financialPartners/DGimpulsandoMobile.jpg';
+
+
+
 const getVersionImage = () => {
 	const currentSize = document.getElementsByTagName('body')[0].clientWidth;
 	return currentSize < 775 ? 1 : 0;
@@ -69,6 +77,31 @@ const financialPartner = (partner) => {
         channel: 'Pagaloop',
         brokercode: '36408310'//Luis Fer - DP
       }
+
+    case 'KONSULTOR':
+      return {
+        image: [KonsultorWEB, KonsultorMobile],
+        text: [
+          'Solicita un crédito para tu empresa o negocio a través de nuestro aliado Distrito Pyme.',
+          'Podrás recibir las mejores opciones de crédito en menos de 15 min con un proceso fácil, rápido y sin papeleos.'
+        ],
+        prefix: process.env.REACT_APP_CONFIGURATION === 'localhost' || process.env.REACT_APP_CONFIGURATION === 'development' ? 'KonsultorDev - ' : 'Konsultor - ',
+        channel: 'Konsultor',
+        brokercode: ''//
+      }
+
+    case 'DG-IMPULSANDO':
+      return {
+        image: [DGimpulsandoWEB, DGimpulsandoMobile],
+        text: [
+          'Solicita un crédito para tu empresa o negocio a través de nuestro aliado Distrito Pyme.',
+          'Podrás recibir las mejores opciones de crédito en menos de 15 min con un proceso fácil, rápido y sin papeleos.'
+        ],
+        prefix: process.env.REACT_APP_CONFIGURATION === 'localhost' || process.env.REACT_APP_CONFIGURATION === 'development' ? 'DG-ImpulsandoDev - ' : 'DG-Impulsando - ',
+        channel: 'DG-Impulsando',
+        brokercode: '153537413'//Israel De Agustín DG-impulsando
+      }
+
 
    
     default:
