@@ -69,6 +69,8 @@ const financialPartner = (partner) => {
         channel: 'Pagaloop',
         brokercode: '36408310'//Luis Fer - DP
       }
+
+   
     default:
       return false;
   }
