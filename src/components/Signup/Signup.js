@@ -35,6 +35,8 @@ import KonsultorMobile from '../../assets/img/financialPartners/KonsultorMobile.
 import DGimpulsandoWEB from '../../assets/img/financialPartners/DGimpulsandoWEB.jpg';
 import DGimpulsandoMobile from '../../assets/img/financialPartners/DGimpulsandoMobile.jpg';
 
+
+
 const getVersionImage = () => {
 	const currentSize = document.getElementsByTagName('body')[0].clientWidth;
 	return currentSize < 775 ? 1 : 0;
@@ -76,7 +78,7 @@ const financialPartner = (partner) => {
         brokercode: '36408310'//Luis Fer - DP
       }
 
-      case 'KONSULTOR':
+    case 'KONSULTOR':
       return {
         image: [KonsultorWEB, KonsultorMobile],
         text: [
@@ -88,7 +90,7 @@ const financialPartner = (partner) => {
         brokercode: ''//
       }
 
-      case 'DG-IMPULSANDO':
+    case 'DG-IMPULSANDO':
       return {
         image: [DGimpulsandoWEB, DGimpulsandoMobile],
         text: [
@@ -101,6 +103,7 @@ const financialPartner = (partner) => {
       }
 
 
+   
     default:
       return false;
   }
