@@ -29,11 +29,11 @@ const StablishTerm = () => {
  
 	return(
 		<div className="mr-auto ml-auto white-box mb-5 center-buttons">
-			<Title className="title-dp ls-11 lh-15 fz32 mb-24" title="¿En cuánto tiempo quieres pagarlo?" />
+			<Title className="title-dp ls-11 lh-15 fz32 mb-24" title="¿en cuánto tiempo quieres pagarlo?" />
 			<div className="fz29 text-dp fw500 lh-15 ls-11">
-				Quiero pagarlo en 
+				quiero pagarlo en 
 				<select className="simulator-select metropolisReg" value={term} onChange={selectTerm} style={{height:'40px', fontSize:'1rem', cursor:'pointer'}}>
-					<option value="0" style={{cursor: 'pointer'}} defaultValue>Elige...</option>
+					<option value="0" style={{cursor: 'pointer'}} defaultValue>elige...</option>
 					<option value="3" style={{cursor: 'pointer'}}>3 meses</option>
 					<option value="6" style={{cursor: 'pointer'}}>6 meses</option>
 					<option value="12" style={{cursor: 'pointer'}}>12 meses</option>
@@ -42,7 +42,7 @@ const StablishTerm = () => {
 					<option value="48" style={{cursor: 'pointer'}}>48 meses</option>
 				</select>
 			</div>
-			<Button className="btn-blue-general mt-45 fz24" disabled={(term !== 0) ? false : true} style={{width: '250px'}} onClick={changeStep}>Siguiente</Button>
+			<Button className="simulator-button  ml-auto mr-auto mt-30" disabled={(term !== 0) ? false : true} style={{width: '250px'}} onClick={changeStep}>siguiente</Button>
 		</div>
 	)
 }

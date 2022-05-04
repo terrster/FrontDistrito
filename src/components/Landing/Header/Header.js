@@ -58,20 +58,21 @@ const Header = props => {
 						alt="First slide"
 					/>
 					<Carousel.Caption>
-						<div className="text-center ml-auto mr-auto">
-							<div className="vertical-center mr-auto ml-auto container" style={{ letterSpacing: 0.8 }}>
+						<div className="container">
+							<div className="vertical-center carousel-text" style={{ letterSpacing: 0.8 }}>
 								<h3 className="d-block d-md-none coolvetica fz29 white mb-34 header-title">
-									La mejor plataforma para solicitar crédito para tu negocio
+									la mejor plataforma para solicitar crédito pyme e hipotecario
 								</h3>
 								<h3 className="d-none d-md-block coolvetica fz48 white mb-34 header-title">
-									La mejor plataforma para solicitar crédito para tu negocio
+								    la mejor plataforma<br/> para solicitar crédito pyme<br/> e hipotecario
 								</h3>
 								<div
 									className="metropolisReg white fz24 lh133"
-									style={{ letterSpacing: 0.8 }}
+									//style={{ letterSpacing: 0.8 }}
 								>
-									<p>Todas las opciones de crédito en una sola solicitud</p>
-									<p className="metropolisMed ">¡En menos de 15 minutos!</p>
+									una solicitud<br/>
+									las mejores opciones<br/>
+									menos de 15 minutos.
 								</div>
 
 
@@ -94,9 +95,9 @@ const Header = props => {
 										: '/registrate'
 								}
 							>
-								<div className="coolvetica mt-72 text-center">
-									<Button className="header-button fz24 bluePrimary">
-                                        Solicitar ahora
+								<div className="mt-72 text-center">
+									<Button className="header-button fz20 bluePrimary">
+                                        comenzar solicitud
 									</Button>
 								</div>
 							</Link>

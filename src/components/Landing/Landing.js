@@ -10,6 +10,8 @@ import Axios from "../../utils/axios";
 import Slider from '../BrokersLanding/Aliados/Allies';
 import Comunity from '../BrokersLanding/Comunity/Comunity';
 import CreditOption from "./CreditOption/CreditOption";
+import Products from "./Products/Products";
+import AlliesLanding from "./AlliesLanding/AlliesLanding";
 
 const Landing = () => {
 
@@ -60,14 +62,19 @@ const Landing = () => {
 
 
     return (
-        <div className="">
+        <div className="casa">
             <Header title={"¿Necesitas financiamiento?"} text={"Recibe las mejores ofertas de crédito "} highlighted={"¡En menos de 24 horas!"} buttonText={"Solicitar ahora"} />
             <LandSimulator />
             <div className="container-fluid">     
                 <CreditOption />
-                <HowWorks />
+                <Products/>
+                <div className='container-fluid'>
+                    <HowWorks />
+                </div>
                 <Video />
-                <Slider />
+            </div>
+                <AlliesLanding />
+            <div className="container-fluid" style={{padding: '0'}}>  
                 {/* <AboutUs />       */}
                 <Comunity hubspotInfo={hubspotInfo} origen={'landing'}/>
                 <Contact /> 

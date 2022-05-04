@@ -11,6 +11,7 @@ import { useHistory } from 'react-router-dom';
 import io from 'socket.io-client';
 import Title from '../Generic/Title';
 import ReactPlayer from 'react-player';
+import AlliesLanding from "../Landing/AlliesLanding/AlliesLanding";
 
 const BrokersLanding = () => {
 
@@ -74,12 +75,14 @@ const BrokersLanding = () => {
     <>
       <BannerBrokers />
       <div className="brokers-container container-fluid">
-        <Info />
+        <div style={{ backgroundColor:'var(--black04)', margin:'0',}}>
+          <Info/>
+        </div>
         <Cards />
-        <Allies />
+        <AlliesLanding />
         <Comunity hubspotInfo={hubspotInfo} />
         {/* <Testimonio /> */}
-        <Title title="8 De Cada 10 Solicitudes Recibe Una Opción De Crédito" className="title-dp fw500 fz32 text-center pb-3" />
+        <Title title="8 De Cada 10 solicitudes recibe una opción de crédito" className="title-dp fw500 fz32 text-center pb-3" />
         <div style={{ maxWidth: '1000px' }} className="ml-auto mr-auto pb-5">
           <ReactPlayer width="100%" height="400px" style={{ maxWidth: '1000' }} url="https://www.youtube.com/watch?v=yhs3J5ZTvZU" />
         </div>
@@ -87,7 +90,7 @@ const BrokersLanding = () => {
       </div>
       <BannerFinal />
 
-      <div id="float-button-dp" className="float-button float-button-dp" onClick={() => { history.push("/brokers-registro") }}>Conviértete en Broker</div>
+      <div id="float-button-dp" className="float-button float-button-dp" onClick={() => { history.push("/brokers-registro") }}>conviértete en broker</div>
 
       <style>{"\
           #clgo{\

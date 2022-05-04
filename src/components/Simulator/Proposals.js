@@ -86,13 +86,13 @@ const Proposals = (props) => {
 				{
 					(sessionStorage.getItem('token') && sessionStorage.getItem('token') !== '') ?
 					<div className="container-buttons">
-						<Link className="btn-blue-general mt-45 fz24 link-blue-general" to="/home" style={{width: '250px'}}>Solicitar ahora</Link>
-						<Button className="btn-blue-general mt-45 fz24 link-blue-general" onClick={props.setNewSimulation} style={{width: '250px'}}>Nueva simulación</Button>
+						<Link className="btn-blue-general mt-45 fz24 link-blue-general" to="/home" style={{width: '250px'}}>solicitar ahora</Link>
+						<Button className="btn-blue-general mt-45 fz24 link-blue-general" onClick={props.setNewSimulation} style={{width: '250px'}}>nueva simulación</Button>
 					</div>
 					:
 					<div className="container-buttons">
-						<Link className="btn-blue-general mt-45 fz24 link-blue-general" to="/registrate" id="simulatorButton" style={{width: '250px'}}>Solicitar ahora</Link>
-						<Button className="btn-blue-general mt-45 fz24 link-blue-general" onClick={props.setNewSimulation} style={{width: '250px'}}>Nueva simulación</Button>
+						<Link className="btn-blue-general mt-45 fz24 link-blue-general" to="/registrate" id="simulatorButton" style={{width: '250px'}}>solicitar ahora</Link>
+						<Button className="btn-blue-general mt-45 fz24 link-blue-general" onClick={props.setNewSimulation} style={{width: '250px'}}>nueva simulación</Button>
 					</div>
 				}
 			</div>

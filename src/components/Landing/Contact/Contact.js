@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import { updateLoader } from "../../../redux/actions/loaderActions";
 import Loader from "../../Loader/Loader";
 import "../../../css/doubts.css";
-import titoLupa from '../../../assets/img/tito-lupa@2x.png'
+import chicaContacto from '../../../assets/img/chicaContacto.png'
 
 const Contact = () => {
 	const dispatch = useDispatch();
@@ -67,14 +67,15 @@ const Contact = () => {
 	return (
 	<>
 		<Loader />
-			<div className="text-center mt-3">
-				<Title className="title-dp fw500 fz38" title="¡Contáctanos!"/>
+			<div className="mt-3">
+				
 				<div className="mr-auto ml-auto mt-2" style={{maxWidth : '1200px'}}>
-					<Row className="justify-content-center">
-						<Col lg={2}>
-							<img className="d-lg-block d-none" src={titoLupa} width="150px" alt="Tito lupa" style={{marginTop : '10px'}} />
+					<Row className="">
+						<Col lg={4}>
+							<img className="d-lg-block d-none chica-left" src={chicaContacto} width="450px" alt="Tito lupa" style={{marginBottom : '0%'}} />
 						</Col>
-						<Col lg={7} className="d-flex justify-content-center">
+						<Col lg={6} className="d-flex text-contacto">
+						
 							<ContactForm initialValues={initialValues} handleSubmit={handleSubmit} error={error} success={success}/>
 						</Col>
 					</Row>

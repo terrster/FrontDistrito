@@ -9,15 +9,28 @@
 	background-repeat: no-repeat;
 }
 
+/*revisar desde aqui*/
+
 .vertical-center {
 	margin-left: auto !important;
 	margin-right: auto !important;
   }
 
+.carousel-text {
+	
+
+}
+
 .header-title{
 	text-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
 	line-height: 0.86;
 	letter-spacing: 1.9px;
+	font-weight: bold;
+}
+
+.container {
+	margin-left: auto !important;
+	margin-right: auto !important;
 }
 
 .carousel-caption{
@@ -39,8 +52,9 @@
 	border-radius: 28px;
 	box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.6);
 	border: solid 1px rgba(255, 255, 255, 0.1);
-	background-color: #ffffff;
-	color: var(--primary-color);
+	background-color: #023473;
+	font-weight: bold;
+	font-family: 'Metropolis-Regular';
 }
 
 .header-button:hover{

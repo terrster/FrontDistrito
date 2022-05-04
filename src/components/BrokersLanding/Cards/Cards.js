@@ -20,10 +20,10 @@ const Cards = () => {
             <Card style={{ height: '24rem' }} className="tarjet-info">
               <Icons img={REGISTRATE} alt="registrate" width="100px" />
             <Card.Body>
-              <Card.Title>Regístrate</Card.Title>
+              <Card.Title>regístrate</Card.Title>
               <Card.Text >
                 <div className="metropolisReg fz12 blackBlue text-center">
-                Completa tu registro y uno de nuestros asesores
+                completa tu registro y uno de nuestros asesores
                 se pondrá en contacto contigo para ofrecerte mayor información.
                 </div>
               </Card.Text>
@@ -35,16 +35,16 @@ const Cards = () => {
             <Card style={{ height: '24rem' }} className="tarjet-info">
               <Icons img={FIRMA} alt="Firma" width="100px" />
             <Card.Body>
-              <Card.Title>Firma tu contrato</Card.Title>
+              <Card.Title>firma tu contrato</Card.Title>
               <Card.Text className="metropolisReg fz12 blackBlue text-center">
-                Nuestro proceso de firma es 100% Digital.
+                nuestro proceso de firma es 100% Digital.
 
                 Necesitarás: <br />
                 • INE <br />
-                • Comprobante de domicilio <br />
-                • Constancia de Situación Fiscal <br />
-                • Estado de cuenta bancario <br />
-                • Acta Constitutiva (en caso de ser personal moral)
+                • comprobante de domicilio <br />
+                • constancia de situación Fiscal <br />
+                • estado de cuenta bancario <br />
+                • acta Constitutiva (en caso de ser personal moral)
               </Card.Text>
             </Card.Body>
           </Card>
@@ -54,12 +54,12 @@ const Cards = () => {
           <Card  style={{ height: '24rem'}} className="tarjet-info">
               <Icons img={MEMBRESIA} alt="Membresia" width="100px" />
             <Card.Body>
-              <Card.Title>Adquiere tu membresía</Card.Title>
+              <Card.Title>adquiere tu membresía</Card.Title>
               <Card.Text className="metropolisReg fz12 blackBlue text-center">    
-                  <p>Al adquirir tu membresía tendrás acceso total a la tecnología
-                  de Distrito Pyme, herramientas, CRM, programa de incentivos,
+                  <p>al adquirir tu membresía tendrás acceso total a la tecnología
+                  de distrito pyme, herramientas, CRM, programa de incentivos,
                   convenciones y asignación automática de leads.</p>
-                  <p>Inversión única de <b>$3,900 MXN IVA incluido</b> y la podrás pagar
+                  <p>inversión única de <b>$3,900 MXN IVA incluido</b> y la podrás pagar
                   a 3 ó 6 MSI.</p>
               </Card.Text>
             </Card.Body>
@@ -70,12 +70,12 @@ const Cards = () => {
             <Card style={{ height: '24rem' }} className="tarjet-info">
               <Icons img={HERRAMIENTAS} alt="Herramientas" width="100px" />
             <Card.Body>
-              <Card.Title>Recibe tus herramientas</Card.Title>
+              <Card.Title>recibe tus herramientas</Card.Title>
               <Card.Text className="metropolisReg fz12 blackBlue text-center">
-                • ID exclusivo que te identifica como broker <br />
-                • Acceso a CRM <br />
-                • Plan de marketing y desarrollo de tu propia marca<br />
-                • Tarjeta de presentación digital<br />
+                • id exclusivo que te identifica como broker <br />
+                • acceso a CRM <br />
+                • plan de marketing y desarrollo de tu propia marca<br />
+                • tarjeta de presentación digital<br />
                 • Y más
               </Card.Text>
             </Card.Body>
