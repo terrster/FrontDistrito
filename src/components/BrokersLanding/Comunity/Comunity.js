@@ -91,34 +91,77 @@ const Comunity = ({hubspotInfo, origen}) =>{
                   
                     <Row className="mt-3 w-100">
                       <Row className="rowcontenttop">
-                      <Col xs={12} md={6} className='d-flex justify-content-center'>
-                        <label className="title-cards-dp">dinero prestado</label>
-                        <div className="titulos coolvetica">
-                          <span className="counter" data-target="Colocado">--</span>
-                        </div>
-                      </Col>
-                      <Col xs={12} md={6} className='d-flex justify-content-center'>
-                        <label className="title-cards-dp">{origen === 'landing' ? 'brokers digitales' : 'Brokers activos'}</label>
-                        <div className="titulos coolvetica">
-                          <span className="counter" data-target="Brokers">--</span>
-                        </div>
-                      </Col>
+                        {
+                          versionImage === 0 ? (
+                            <>
+                              <Col xs={12} md={12} className='d-flex align-items-center flex-column'>
+                                  <label className="title-cards-dp">dinero prestado</label>
+                                  <div className="titulos coolvetica">
+                                    <span className="counter" data-target="Colocado">--</span>
+                                  </div>
+                              </Col>
+                            </>
+                          ):(
+                            <>
+                            <Col xs={12} md={6} className='d-flex align-items-center flex-column'>
+                                  <label className="title-cards-dp">dinero prestado</label>
+                                  <div className="titulos coolvetica">
+                                    <span className="counter" data-target="Colocado">--</span>
+                                  </div>
+                            </Col>
+                            <Col xs={12} md={6} className='d-flex align-items-center flex-column'>
+                            <label className="title-cards-dp">{origen === 'landing' ? 'brokers digitales' : 'Brokers activos'}</label>
+                            <div className="titulos coolvetica">
+                              <span className="counter" data-target="Brokers">--</span>
+                            </div>
+                            </Col>
+                            </>
+                          )
+                        }
                       </Row>
                       <Row className="mt-4 rowcontentbott">
+                            {
+                              versionImage === 0 ? (
+                                <>
+                                  <Col xs={12} md={4} className='d-flex align-items-center flex-column'>
+                            <label className="title-cards-dp">{origen === 'landing' ? 'brokers digitales' : 'Brokers activos'}</label>
+                            <div className="titulos coolvetica">
+                              <span className="counter" data-target="Brokers">--</span>
+                            </div>
+                            </Col>
 
-                      <Col xs={12} md={6} className='d-flex justify-content-center'>
+                      <Col xs={12} md={4} className='d-flex align-items-center flex-column'>
                         <label className="title-cards-dp">solicitudes</label>
                         <div className="titulos coolvetica">
                           <span className="counter" data-target="Solicitudes">--</span>
                         </div>
                       </Col>
 
-                      <Col xs={12} md={6} className='d-flex justify-content-center'>
+                      <Col xs={12} md={4} className='d-flex align-items-center flex-column'>
                         <label className="title-cards-dp"> aliados financieros</label>
                         <div className="titulos coolvetica">
                           <span className="counter" data-target="Alianzas">--</span>
                         </div>
                       </Col>
+                                </>
+                              ):(
+                                <>
+                      <Col xs={12} md={6} className='d-flex align-items-center flex-column'>
+                        <label className="title-cards-dp">solicitudes</label>
+                        <div className="titulos coolvetica">
+                          <span className="counter" data-target="Solicitudes">--</span>
+                        </div>
+                      </Col>
+
+                      <Col xs={12} md={6} className='d-flex align-items-center flex-column'>
+                        <label className="title-cards-dp"> aliados financieros</label>
+                        <div className="titulos coolvetica">
+                          <span className="counter" data-target="Alianzas">--</span>
+                        </div>
+                      </Col>
+                                </>
+                              )
+                            }
                       </Row>
                     </Row>
                   </div>

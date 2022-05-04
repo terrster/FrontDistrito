@@ -7,17 +7,17 @@ const Info = () => {
    <div className="container pt-5">
     <Row className="d-flex align-items-center justify-items-center">
       <Col xl={7} lg={7} md={7} className="mb-3">
-        <Title title="Brokers Digitales Distrito Pyme" className="title-dp fw500 mb-1 fz42 title-bd" />
+        <Title title="brokers digitales distrito pyme" className="title-dp fw500 mb-1 fz42 title-bd" />
         <div className="metropolisReg fz21 blackBlue text-justify">
           <br/>
-          Nuestro programa de Brokers Digitales, te permite adquirir una
+          nuestro programa de brokers digitales, te permite adquirir una
           membresía exclusiva de nuestra plataforma y las
           herramientas necesarias que te ayudarán a colocar más crédito,
           todo en menos de 15 minutos.
           
           <br/>
           <br/>
-          Una solicitud a través de Distrito Pyme es como llenar más de 25
+          una solicitud a través de distrito pyme es como llenar más de 25
           solicitudes de crédito de las mejores instituciones financieras
           para que ahorres tiempo e incrementes tus ingresos.
 				</div>

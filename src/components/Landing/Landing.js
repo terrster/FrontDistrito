@@ -62,7 +62,7 @@ const Landing = () => {
 
 
     return (
-        <div className="">
+        <div className="casa">
             <Header title={"¿Necesitas financiamiento?"} text={"Recibe las mejores ofertas de crédito "} highlighted={"¡En menos de 24 horas!"} buttonText={"Solicitar ahora"} />
             <LandSimulator />
             <div className="container-fluid">     
@@ -74,7 +74,7 @@ const Landing = () => {
                 <Video />
             </div>
                 <AlliesLanding />
-            <div className="container-fluid">  
+            <div className="container-fluid" style={{padding: '0'}}>  
                 {/* <AboutUs />       */}
                 <Comunity hubspotInfo={hubspotInfo} origen={'landing'}/>
                 <Contact /> 

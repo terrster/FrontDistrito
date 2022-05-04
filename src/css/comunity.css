@@ -1,7 +1,5 @@
 .backgroundComunity {
-    background-position-x: calc(50%);
-    background-position-y: calc(40%);
-    background-size: 140%;
+    background-size: 100%;
     background-repeat: no-repeat;
     font-size: 1.5rem;
 }
@@ -10,21 +8,23 @@
     width: 100%;
     min-height: 100vh;
     position: relative;
+    overflow: hidden;
 }
 
 .rowcontenttop{
-    width: 70%;
+    width: 100%;
     min-height: 40vh;
+    transform: translate(4%, 80%);
     position: absolute;
-    left: 17.5%;
-    top: 32%;
+    -webkit-transform: translate(4%, 80%);
+    font-size: 3rem;
+
 }
 .rowcontentbott{
-    width: 70%;
+    width: 100%;
     min-height: 40vh;
     position: absolute;
-    left: 17.5%;
-    bottom: 8%;
+    bottom: -15%;
 }
 
 @media (min-width: 1900px) {
@@ -35,6 +35,7 @@
 
 @media screen and (max-width: 720px) {
     .backgroundComunity {
+        background-position-x: center;
         background-position-y: calc(0%);
         background-size: 150%;
         font-size: 1rem;
@@ -45,8 +46,12 @@
     .rowcontenttop{
         width: 100%;
         min-height: auto;
-        top: 38%;
-        left: 8%;
+        transform: translate(0%, 0%);
+        -webkit-transform: translate(0%, 0%);
+        font-size: 1rem;
+        position: absolute;
+        left: 4.6%;
+        bottom: 40%;
     }
     .rowcontenttop .col-12{
         height: 10vh;
@@ -56,7 +61,7 @@
         width: 100%;
         min-height: auto;
         bottom: 20%;
-        left: 8%;
+        left: 4.6%;
     }
     .rowcontentbott .col-12{
         height: 10vh;

@@ -27,7 +27,7 @@ const Banner = () => {
       <div className="brokers-header">
         <img className="d-block w-100" src={images[versionImage]} alt="WEB"/>
         <Button id="headerButton" className="brokers-header-button header-button fz24 bluePrimary" onClick={() => { history.push("/brokers-registro") }}>
-          Conviértete en Broker
+          conviértete en broker
         </Button>
       </div>
   </>
