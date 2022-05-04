@@ -121,3 +121,10 @@
     right: 12rem;
   }
 }
+
+@media screen and (max-width: 900px) {
+  .personas-button-web{
+    bottom: 1rem;
+    right: -1rem;
+  }
+}

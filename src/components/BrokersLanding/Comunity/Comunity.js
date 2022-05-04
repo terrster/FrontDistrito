@@ -10,7 +10,7 @@ const images = [banner_web, banner_mobile];
 
 const getVersionImage = () => {
   const currentSize = document.getElementsByTagName('body')[0].clientWidth;
-  return currentSize < 775 ? 1 : 0;
+  return currentSize < 720 ? 1 : 0;
 };
 
 
@@ -79,40 +79,42 @@ const Comunity = ({hubspotInfo, origen}) =>{
   }, [hubspotInfo]);
 
   return (
-    <div style={{ width: '100%' }}>
+    <div className='imgcontainer'>
 			
         <Card.Header id="header"  className="title-dp-blue fz48  fw300 text-left line-height"><span className='title-dp'> sé parte de nuestra </span> comunidad </Card.Header>
         
-        <div className='backgroundComunity' style={{ backgroundImage: `url(${images[versionImage]})`, width: null, height: '100%', flex: 1 }}>
+        <div className='backgroundComunity' style={{ backgroundImage: `url(${images[versionImage]})`, width: null, minHeight: '100vh', flex: 1 }}>
 					
             
                 <div id="comunityBrokers" className="mt-5">
                   <div id="counterContainer">
                   
                     <Row className="mt-3 w-100">
-                      <Col md={9} className="mb-comunity ml-comunity">
-                        <label className="title-cards-dp fz24">dinero prestado</label>
+                      <Row className="rowcontenttop">
+                      <Col xs={12} md={6} className='d-flex justify-content-center'>
+                        <label className="title-cards-dp">dinero prestado</label>
                         <div className="titulos coolvetica">
                           <span className="counter" data-target="Colocado">--</span>
                         </div>
                       </Col>
-                      <Row className="mt-4 w-100">
-                      <Col md={3} className="mb-4 ml-15">
-                        <label className="title-cards-dp fz24">{origen === 'landing' ? 'brokers digitales' : 'Brokers activos'}</label>
+                      <Col xs={12} md={6} className='d-flex justify-content-center'>
+                        <label className="title-cards-dp">{origen === 'landing' ? 'brokers digitales' : 'Brokers activos'}</label>
                         <div className="titulos coolvetica">
                           <span className="counter" data-target="Brokers">--</span>
                         </div>
                       </Col>
+                      </Row>
+                      <Row className="mt-4 rowcontentbott">
 
-                      <Col md={3}>
-                        <label className="title-cards-dp fz24">solicitudes</label>
+                      <Col xs={12} md={6} className='d-flex justify-content-center'>
+                        <label className="title-cards-dp">solicitudes</label>
                         <div className="titulos coolvetica">
                           <span className="counter" data-target="Solicitudes">--</span>
                         </div>
                       </Col>
 
-                      <Col md={3}>
-                        <label className="title-cards-dp fz24"> aliados financieros</label>
+                      <Col xs={12} md={6} className='d-flex justify-content-center'>
+                        <label className="title-cards-dp"> aliados financieros</label>
                         <div className="titulos coolvetica">
                           <span className="counter" data-target="Alianzas">--</span>
                         </div>
