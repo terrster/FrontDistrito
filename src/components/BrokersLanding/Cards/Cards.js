@@ -22,7 +22,7 @@ const Cards = () => {
             <Card.Body>
               <Card.Title>regístrate</Card.Title>
               <Card.Text >
-                <div className="metropolisReg fz12 blackBlue text-center">
+                <div className="metropolisReg text-center">
                 completa tu registro y uno de nuestros asesores
                 se pondrá en contacto contigo para ofrecerte mayor información.
                 </div>
@@ -36,7 +36,7 @@ const Cards = () => {
               <Icons img={FIRMA} alt="Firma" width="100px" />
             <Card.Body>
               <Card.Title>firma tu contrato</Card.Title>
-              <Card.Text className="metropolisReg fz12 blackBlue text-center">
+              <Card.Text className="metropolisReg text-center">
                 nuestro proceso de firma es 100% Digital.
 
                 Necesitarás: <br />
@@ -55,7 +55,7 @@ const Cards = () => {
               <Icons img={MEMBRESIA} alt="Membresia" width="100px" />
             <Card.Body>
               <Card.Title>adquiere tu membresía</Card.Title>
-              <Card.Text className="metropolisReg fz12 blackBlue text-center">    
+              <Card.Text className="metropolisReg text-center">    
                   <p>al adquirir tu membresía tendrás acceso total a la tecnología
                   de distrito pyme, herramientas, CRM, programa de incentivos,
                   convenciones y asignación automática de leads.</p>
@@ -71,7 +71,7 @@ const Cards = () => {
               <Icons img={HERRAMIENTAS} alt="Herramientas" width="100px" />
             <Card.Body>
               <Card.Title>recibe tus herramientas</Card.Title>
-              <Card.Text className="metropolisReg fz12 blackBlue text-center">
+              <Card.Text className="metropolisReg text-center">
                 • id exclusivo que te identifica como broker <br />
                 • acceso a CRM <br />
                 • plan de marketing y desarrollo de tu propia marca<br />
@@ -86,12 +86,12 @@ const Cards = () => {
             <Card style={{ height: '24rem' }} className="tarjet-info">
               <Icons img={GANAR_DINERO} alt="Ganar_dinero" width="100px" />
             <Card.Body>
-              <Card.Title>Comienza a ganar dinero</Card.Title>
-              <Card.Text className="metropolisReg fz12 blackBlue text-center">
-                <p>Ahora estás listo para ofrecer a tus clientes las mejores opciones
+              <Card.Title>comienza a ganar dinero</Card.Title>
+              <Card.Text className="metropolisReg text-center">
+                <p>ahora estás listo para ofrecer a tus clientes las mejores opciones
                 de crédito.</p>
 
-                <p className="font-weight-bold">¡Todo en menos de 15 min!</p>
+                <p className="font-weight-bold">¡todo en menos de 15 min!</p>
               </Card.Text>
             </Card.Body>
           </Card>

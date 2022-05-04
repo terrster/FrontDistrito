@@ -81,7 +81,7 @@ const Comunity = ({hubspotInfo, origen}) =>{
   return (
     <div className='imgcontainer'>
 			
-        <Card.Header id="header"  className="title-dp-blue fz48  fw300 text-left line-height"><span className='title-dp'> sé parte de nuestra </span> comunidad </Card.Header>
+        <Card.Header id="header"  className="title-dp-blue fz48  fw300 text-left line-height mt-3"><span className='title-dp'> sé parte de nuestra </span> comunidad </Card.Header>
         
         <div className='backgroundComunity' style={{ backgroundImage: `url(${images[versionImage]})`, width: null, minHeight: '100vh', flex: 1 }}>
 					
@@ -94,8 +94,8 @@ const Comunity = ({hubspotInfo, origen}) =>{
                         {
                           versionImage === 0 ? (
                             <>
-                              <Col xs={12} md={12} className='d-flex align-items-center flex-column'>
-                                  <label className="title-cards-dp">dinero prestado</label>
+                              <Col xs={12} md={12} className='d-flex align-items-center flex-column title-dp-blue'>
+                                  <label className="title-dp">dinero prestado</label>
                                   <div className="titulos coolvetica">
                                     <span className="counter" data-target="Colocado">--</span>
                                   </div>
@@ -104,13 +104,13 @@ const Comunity = ({hubspotInfo, origen}) =>{
                           ):(
                             <>
                             <Col xs={12} md={6} className='d-flex align-items-center flex-column'>
-                                  <label className="title-cards-dp">dinero prestado</label>
+                                  <label className="title-dp">dinero prestado</label>
                                   <div className="titulos coolvetica">
                                     <span className="counter" data-target="Colocado">--</span>
                                   </div>
                             </Col>
                             <Col xs={12} md={6} className='d-flex align-items-center flex-column'>
-                            <label className="title-cards-dp">{origen === 'landing' ? 'brokers digitales' : 'Brokers activos'}</label>
+                            <label className="title-dp">{origen === 'landing' ? 'brokers digitales' : 'Brokers activos'}</label>
                             <div className="titulos coolvetica">
                               <span className="counter" data-target="Brokers">--</span>
                             </div>
@@ -124,21 +124,21 @@ const Comunity = ({hubspotInfo, origen}) =>{
                               versionImage === 0 ? (
                                 <>
                                   <Col xs={12} md={4} className='d-flex align-items-center flex-column'>
-                            <label className="title-cards-dp">{origen === 'landing' ? 'brokers digitales' : 'Brokers activos'}</label>
+                            <label className="title-dp">{origen === 'landing' ? 'brokers digitales' : 'Brokers activos'}</label>
                             <div className="titulos coolvetica">
                               <span className="counter" data-target="Brokers">--</span>
                             </div>
                             </Col>
 
                       <Col xs={12} md={4} className='d-flex align-items-center flex-column'>
-                        <label className="title-cards-dp">solicitudes</label>
+                        <label className="title-dp">solicitudes</label>
                         <div className="titulos coolvetica">
                           <span className="counter" data-target="Solicitudes">--</span>
                         </div>
                       </Col>
 
                       <Col xs={12} md={4} className='d-flex align-items-center flex-column'>
-                        <label className="title-cards-dp"> aliados financieros</label>
+                        <label className="title-dp"> aliados financieros</label>
                         <div className="titulos coolvetica">
                           <span className="counter" data-target="Alianzas">--</span>
                         </div>
@@ -147,14 +147,14 @@ const Comunity = ({hubspotInfo, origen}) =>{
                               ):(
                                 <>
                       <Col xs={12} md={6} className='d-flex align-items-center flex-column'>
-                        <label className="title-cards-dp">solicitudes</label>
+                        <label className="title-dp">solicitudes</label>
                         <div className="titulos coolvetica">
                           <span className="counter" data-target="Solicitudes">--</span>
                         </div>
                       </Col>
 
                       <Col xs={12} md={6} className='d-flex align-items-center flex-column'>
-                        <label className="title-cards-dp"> aliados financieros</label>
+                        <label className="title-dp"> aliados financieros</label>
                         <div className="titulos coolvetica">
                           <span className="counter" data-target="Alianzas">--</span>
                         </div>

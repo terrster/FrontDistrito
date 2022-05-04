@@ -1,5 +1,6 @@
 .backgroundComunity {
     background-size: 100%;
+    transform: translate(0%, -15%);
     background-repeat: no-repeat;
     font-size: 1.5rem;
 }
@@ -24,7 +25,7 @@
     width: 100%;
     min-height: 40vh;
     position: absolute;
-    bottom: -15%;
+    bottom: -20%;
 }
 
 @media (min-width: 1900px) {
@@ -38,7 +39,8 @@
         background-position-x: center;
         background-position-y: calc(0%);
         background-size: 150%;
-        font-size: 1rem;
+        font-size: 1.2rem;
+        transform: translate(0%, -5%);
     }
     .imgcontainer{
         max-height: 50vh;
@@ -48,22 +50,22 @@
         min-height: auto;
         transform: translate(0%, 0%);
         -webkit-transform: translate(0%, 0%);
-        font-size: 1rem;
+        font-size: 1.2rem;
         position: absolute;
         left: 4.6%;
-        bottom: 40%;
+        top: 10%;
     }
     .rowcontenttop .col-12{
-        height: 10vh;
+        height: 15vh;
     }
 
     .rowcontentbott{
         width: 100%;
         min-height: auto;
-        bottom: 20%;
+        bottom: 29%;
         left: 4.6%;
     }
     .rowcontentbott .col-12{
-        height: 10vh;
+        height: 15vh;
     }
 }
