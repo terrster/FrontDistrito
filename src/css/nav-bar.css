@@ -80,6 +80,7 @@
 	background: #F24C5A;
 	width: 200px;
 	font-weight: bold;
+	font-family: 'Metropolis-Regular';
   }
   
   .nav-btn.primary:hover {

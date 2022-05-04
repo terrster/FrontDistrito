@@ -76,7 +76,7 @@ const HowWorks = props => {
 													? 'home'
 													: '/registrate'
 											}>
-											<Button variant="primary" className="personas-button-web  fz16 bluePrimary">
+											<Button variant="primary" className="personas-button-web fz16 bluePrimary">
 											solicítalo ahora
 											</Button>
 										</Link>

@@ -95,7 +95,7 @@ const Header = props => {
 										: '/registrate'
 								}
 							>
-								<div className="metropolisReg mt-72 text-center">
+								<div className="mt-72 text-center">
 									<Button className="header-button fz20 bluePrimary">
                                         comenzar solicitud
 									</Button>
