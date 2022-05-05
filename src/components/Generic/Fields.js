@@ -1,5 +1,6 @@
 import React from "react";
 import { Field, ErrorMessage } from 'formik';
+import {Buffer} from 'buffer';
 
 export const renderField = ({
   input,
@@ -203,7 +204,7 @@ export const renderFieldFull = ({
             {...input}
             id={label}
             placeholder={label}
-            type={type}
+            type='password'
             maxLength="8"
             minLength="8"
             disabled={disabled ? disabled : false}
