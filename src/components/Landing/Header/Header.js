@@ -96,7 +96,7 @@ const Header = props => {
 								}
 							>
 								<div className="mt-72 text-center">
-									<Button className="header-button fz20 bluePrimary">
+									<Button className="header-button fz18 bluePrimary">
                                         comenzar solicitud
 									</Button>
 								</div>
