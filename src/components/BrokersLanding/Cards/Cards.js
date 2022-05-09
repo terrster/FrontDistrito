@@ -9,8 +9,21 @@ import MEMBRESIA from '../../../assets/img/brokers-landing/iconos/membresia.png'
 import HERRAMIENTAS from '../../../assets/img/brokers-landing/iconos/recibe_herramientas.png';
 import GANAR_DINERO from '../../../assets/img/brokers-landing/iconos/gana_dinero.png';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
+import { faCircle } from '@fortawesome/free-solid-svg-icons';
+import { faPager } from '@fortawesome/free-solid-svg-icons';
+import { faSignature } from '@fortawesome/free-solid-svg-icons';
+import { faIdCard } from '@fortawesome/free-solid-svg-icons';
+import { faBook } from '@fortawesome/free-solid-svg-icons';
+import { faChartLine } from '@fortawesome/free-solid-svg-icons';
+import { faFileInvoice } from '@fortawesome/free-solid-svg-icons';
+
+  
+
 const Cards = () => {
 
+  const element = (icon) => <FontAwesomeIcon icon={icon} size='6x' transform="shrink-6" mask={faCircle}/>
   return(
     <div id="cardsBrokers" className="pt-5 text-center">
       <Title title="¿Cómo convertirme en Broker Digital?" className="title-dp fw500 mb-1 fz42"/>
@@ -18,7 +31,9 @@ const Cards = () => {
       <Row className="justify-content-center">
           <Col xl={4} md={5} sm={7} className="mb-4">
             <Card style={{ height: '24rem' }} className="tarjet-info">
-              <Icons img={REGISTRATE} alt="registrate" width="100px" />
+            <div className="icon-image mb-2 mr-auto ml-auto mt-4">
+                    {element(faFileInvoice)}
+            </div>
             <Card.Body>
               <Card.Title>regístrate</Card.Title>
               <Card.Text >
@@ -33,7 +48,9 @@ const Cards = () => {
 
           <Col xl={4} md={5} sm={7} className="mb-4">
             <Card style={{ height: '24rem' }} className="tarjet-info">
-              <Icons img={FIRMA} alt="Firma" width="100px" />
+            <div className="icon-image mb-2 mr-auto ml-auto mt-4">
+                    {element(faSignature)}
+            </div>
             <Card.Body>
               <Card.Title>firma tu contrato</Card.Title>
               <Card.Text className="metropolisReg text-center">
@@ -52,7 +69,9 @@ const Cards = () => {
 
           <Col xl={4} md={5} sm={7} className="mb-4">
           <Card  style={{ height: '24rem'}} className="tarjet-info">
-              <Icons img={MEMBRESIA} alt="Membresia" width="100px" />
+          <div className="icon-image mb-2 mr-auto ml-auto mt-4">
+                    {element(faIdCard)}
+            </div>
             <Card.Body>
               <Card.Title>adquiere tu membresía</Card.Title>
               <Card.Text className="metropolisReg text-center">    
@@ -68,7 +87,9 @@ const Cards = () => {
 
         <Col xl={4} md={5} sm={7} className="mb-4">
             <Card style={{ height: '24rem' }} className="tarjet-info">
-              <Icons img={HERRAMIENTAS} alt="Herramientas" width="100px" />
+            <div className="icon-image mb-2 mr-auto ml-auto mt-4">
+                    {element(faBook)}
+            </div>
             <Card.Body>
               <Card.Title>recibe tus herramientas</Card.Title>
               <Card.Text className="metropolisReg text-center">
@@ -84,7 +105,9 @@ const Cards = () => {
 
           <Col xl={4} md={5} sm={7} className="mb-4">
             <Card style={{ height: '24rem' }} className="tarjet-info">
-              <Icons img={GANAR_DINERO} alt="Ganar_dinero" width="100px" />
+            <div className="icon-image mb-2 mr-auto ml-auto mt-4">
+                    {element(faChartLine)}
+            </div>
             <Card.Body>
               <Card.Title>comienza a ganar dinero</Card.Title>
               <Card.Text className="metropolisReg text-center">

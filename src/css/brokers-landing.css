@@ -252,4 +252,8 @@ filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#023E95", en
      font-size: 16px;
    }
  }
+
+ .fa-border-radius{
+    border-radius: 10% 25%;
+ }
  
