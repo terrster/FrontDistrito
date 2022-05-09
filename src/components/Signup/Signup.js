@@ -29,8 +29,8 @@ import visoorMovil from '../../assets/img/financialPartners/Visoor-Movil.jpg';
 import PagaloopWEB from '../../assets/img/financialPartners/Pagaloop-WEB.jpg';
 import PagaloopMovil from '../../assets/img/financialPartners/Pagaloop-Movil.jpg';
 
-import KonsultorWEB from '../../assets/img/financialPartners/KonsultorWEB.jpg';
-import KonsultorMobile from '../../assets/img/financialPartners/KonsultorMobile.jpg';
+import OficinaNoreste from '../../assets/img/carousel/carrusel-01.jpg';
+import OficinaNoresteMobile from '../../assets/img/carousel/mobile-carrusel-01.jpg';
 
 import DGimpulsandoWEB from '../../assets/img/financialPartners/DGimpulsandoWEB.jpg';
 import DGimpulsandoMobile from '../../assets/img/financialPartners/DGimpulsandoMobile.jpg';
@@ -76,9 +76,9 @@ const financialPartner = (partner) => {
         brokercode: '36408310'//Luis Fer - DP
       }
 
-      case 'KONSULTOR':
+      case 'OFICINA-NORESTE':
       return {
-        image: [KonsultorWEB, KonsultorMobile],
+        image: [],
         text: [
           'Solicita un crédito para tu empresa o negocio a través de nuestro aliado Distrito Pyme.',
           'Podrás recibir las mejores opciones de crédito en menos de 15 min con un proceso fácil, rápido y sin papeleos.'
@@ -177,7 +177,7 @@ const Signup = props => {
     return (
       <>
         <Loader />
-        {!partner ? (
+        {!partner || partner.channel === 'Konsultor'? (
           <div className="container mt-30">
             <Title
               className="fz56 text-center blue-primary title-dp fw500"
