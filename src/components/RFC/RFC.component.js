@@ -25,46 +25,31 @@ const RFCcomponent = (props) => {
     const idClient = user.idClient;
     const data = dataForm;
     const {rfc, ciec } = data;
-    console.log("data")
-    try {
-      const res = await axios.get(`api/deal/${id}`);
-    console.log(res);
-    }catch(error){
-      console.log(error);
-    }
-
+    console.log("data", rfc, ciec);
     
-    // if (rfc === RFC || rfcPerson) {
       
-    //   if (idClient.appliance.length > 0) {
-    //     const appliance = idClient.appliance[idClient.appliance.length - 1];
-    //     if (appliance.hasOwnProperty("idComercialInfo")) {
-    //         const comercial = appliance.idComercialInfo;
-    //     const id = comercial._id;
-    //     try {
-    //       const res = await axios.put(`api/info-comercial/${id}`, {ciec}, {
-    //         headers: {
-    //             token: sessionStorage.getItem("token"),
-    //             },
-    //       });
-    //       sessionStorage.setItem("user", JSON.stringify(res.data.user));
-    //       console.log('rfc updated');
-    //     } catch (error) {
-    //       console.log("Error de servicio", error);
-    //     }
-    //     }else{
-    //         try {
-    //             const res = await axios.post(`api/info-comercial/${id}`, {ciec});
-    //             sessionStorage.setItem("user", JSON.stringify(res.data.user));
-    //             console.log('rfc created');
-    //           } catch (error) {
-    //             console.log("Error de servicio", error);
-    //           }
-    //     }
-    // }
-    // }else{
-    //   setOpen(true);
-    // }
+      if (idClient.appliance.length > 0) {
+        const appliance = idClient.appliance[idClient.appliance.length - 1];
+        if (appliance.hasOwnProperty("idComercialInfo")) {
+            const comercial = appliance.idComercialInfo;
+        const id = comercial._id;
+        console.log("id", id);
+        try {
+          const res = await axios.put(`api/ciec/${id}`, data);
+          console.log('rfc updated', res);
+        } catch (error) {
+          console.log("Error de servicio", error);
+        }
+        }else{
+            try {
+                const res = await axios.post(`api/ciec/${id}`, data);
+                console.log('rfc created', res);
+              } catch (error) {
+                console.log("Error de servicio", error);
+              }
+        }
+    }
+  
 
     
     dispatch(updateLoader(false));
@@ -75,7 +60,7 @@ const RFCcomponent = (props) => {
       const getData = async () => {
         dispatch(updateLoader(true));
         const user = JSON.parse(sessionStorage.getItem("user"));
-        const { idClient } = user;
+        const { idClient, hubspotDealId } = user;
         // Si ya tienen una solicitud, se actualiza
         if (idClient.appliance.length > 0) {
           const appliance = idClient.appliance[idClient.appliance.length - 1];
@@ -85,6 +70,7 @@ const RFCcomponent = (props) => {
             try {
               const res = await axios.get(`api/info-comercial/${id}`);
               setRFC(res.data.comercial.rfc);
+              console.log('rfc', res.data.comercial.rfc);
               }catch(error){
                 console.log("Error de servicio", error);
               }
