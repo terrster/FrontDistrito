@@ -11,6 +11,7 @@ export const renderField = ({
   minLength,
   df,
   cls,
+  disabled,
   meta: { touched, error, warning },
 }) => {
   return (
@@ -24,6 +25,7 @@ export const renderField = ({
             placeholder={label}
             type={type}
             maxLength="10"
+            disabled={disabled}
           />
         ) : label === "RFC" &&
           (sessionStorage.type === "RIF" || sessionStorage.type === "PFAE") ? (
@@ -34,6 +36,7 @@ export const renderField = ({
             placeholder={label}
             type={type}
             maxLength="13"
+            disabled={disabled}
           />
         ) : label === "RFC de tu empresa o negocio" &&
           sessionStorage.type === "PM" ? (
@@ -44,6 +47,7 @@ export const renderField = ({
             placeholder={label}
             type={type}
             maxLength="12"
+            disabled={disabled}
           />
         ) : label === "Teléfono" ? (
           <input
