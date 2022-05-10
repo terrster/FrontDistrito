@@ -98,13 +98,14 @@
   justify-content: center!important;
   align-items: center!important;
   flex-direction: column!important;
-  padding: 49px 0;
+  padding: 2.5rem 1.8rem;
   margin-bottom: 3rem;
   background-color: white!important;
-  width: 80%!important;
-  max-width: 996px!important;
+  /* width: 80%!important; */
+  max-width: 100% !important;
   border-radius: 4px!important;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1);
+  text-align: center!important;
 }
 .medium-bottom{
   width: 25%!important;

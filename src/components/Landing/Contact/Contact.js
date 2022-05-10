@@ -69,7 +69,7 @@ const Contact = () => {
 		<Loader />
 			<div className="mt-3">
 				
-				<div className="mr-auto ml-auto mt-2" style={{maxWidth : '1200px'}}>
+				<div className="mr-auto ml-auto mt-2" style={{maxWidth : '100vw'}}>
 					<Row className="">
 						<Col lg={4}>
 							<img className="d-lg-block d-none chica-left" src={chicaContacto} width="450px" alt="Tito lupa" style={{marginBottom : '0%'}} />

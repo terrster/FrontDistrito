@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState, useEffect} from 'react';
 import Title from '../../Generic/Title';
 import { Container } from 'react-bootstrap';
 import Marquee from 'react-marquee-slider';
@@ -10,19 +10,16 @@ import banner_mobile from '../../../assets/img/banner-allies/banner_mobile.jpg';
 
 const images = [banner_web, banner_mobile];
 
-const getVersionImage = () => {
-  const currentSize = document.getElementsByTagName('body')[0].clientWidth;
-  return currentSize < 775 ? 1 : 0;
-};
 
-
-const AlliesLanding = () => {
+const AlliesLanding = (props) => {
 
   const history = useHistory();
 
-  const [versionImage, setVersionImage] = useState(getVersionImage());
+  const [versionImage, setVersionImage] = useState(0);
 
-  window.addEventListener('resize', () => setVersionImage(getVersionImage()));
+  useEffect(() => {
+		setVersionImage(props.estado)
+	}, [props.estado]);
 
   const allies = imgFinancial('ALL');
 

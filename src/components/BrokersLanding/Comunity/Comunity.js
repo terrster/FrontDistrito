@@ -8,19 +8,16 @@ import banner_mobile from '../../../assets/img/comunity/banner_mobile.png';
 
 const images = [banner_web, banner_mobile];
 
-const getVersionImage = () => {
-  const currentSize = document.getElementsByTagName('body')[0].clientWidth;
-  return currentSize < 720 ? 1 : 0;
-};
-
 
 var calculated = false;
 
-const Comunity = ({hubspotInfo, origen}) =>{
+const Comunity = ({hubspotInfo, origen, estado}) =>{
 
-  const [versionImage, setVersionImage] = useState(getVersionImage());
+  const [versionImage, setVersionImage] = useState(0);
 
-  window.addEventListener('resize', () => setVersionImage(getVersionImage()));
+  useEffect(() => {
+		setVersionImage(estado)
+	}, [estado]);
 
   document.addEventListener("scroll", () => {
     let counterContainer = document.getElementById('counterContainer');

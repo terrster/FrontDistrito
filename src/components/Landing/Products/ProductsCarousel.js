@@ -37,24 +37,15 @@ import web9 from '../../../assets/img/carousel-products/productos_4.jpg';
     [web9, movil9],
  ];
 
-
-
-const getVersionImage = () => {
-	const currentSize = document.getElementsByTagName('body')[0].clientWidth;
-	return currentSize < 775 ? 1 : 0;
-};
-
-const AlliesCarousel = () => {
+const AlliesCarousel = (props) => {
     
     const [alliesImages, setAlliesImages] = useState(images);
-    const [versionImage, setVersionImage] = useState(getVersionImage());
+    const [versionImage, setVersionImage] = useState(0);
 	const [indexImage, setIndexImage] = useState(0);
 
 	const handleSelect = (selectedIndex, e) => {
 		setIndexImage(selectedIndex);
 	};
-
-	window.addEventListener('resize', () => setVersionImage(getVersionImage()));
 
     useEffect(() => {
         if(versionImage === 0){//Web
@@ -68,6 +59,10 @@ const AlliesCarousel = () => {
             // setAlliesImages(images);//Si quieres el resto
         }
     }, [versionImage]);
+
+    useEffect(() => {
+        setVersionImage(props.estado.estado);
+    } , [props.estado.estado]);
 
     return(
         <Carousel className="mb-10 pb-40 pt-40" activeIndex={indexImage} onSelect={handleSelect}>

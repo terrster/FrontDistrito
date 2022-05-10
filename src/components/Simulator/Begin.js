@@ -13,6 +13,7 @@ import {
 	updateStep
 } from '../../redux/actions/simulatorActions';
 
+
 const Begin = props => {
 
 	const dispatch = useDispatch();
@@ -47,8 +48,16 @@ const Begin = props => {
 		}
 	};
 
+	const webstyle = {
+		width: '80%',
+		marginTop: '2rem'
+	}
+	const mobilestyle = {
+		width: '100%',
+		marginTop: '1.5rem'
+	}
 	return (
-		<div className="center-buttons">
+		<div className="center-buttons align-self-center" style={props.estado.estado === 0 ? webstyle : mobilestyle}>
 			<Title
 				className="title-dp ls-11 lh-15 fz32 mb-24"
 				title="¿cuánto dinero necesitas?"
@@ -70,10 +79,9 @@ const Begin = props => {
 			
 			<Button
 				className="simulator-button  ml-auto mr-auto mt-30"
-				style={{ cursor: error ? "not-allowed" : "pointer"}}
+				style={{ cursor: error ? "not-allowed" : "pointer", width: '100%' }}
 				disabled={disabled}
 				onClick={changeStep}
-				style={{width: '250px'}}
 			>
 				siguiente
 			</Button>
