@@ -36,6 +36,8 @@ const RFCcomponent = (props) => {
         console.log("id", id);
         try {
           const res = await axios.put(`api/ciec/${id}`, data);
+          const res1 = await axios.get(`api/ciec/${id}`, data);
+          console.log("res", res1);
           console.log('rfc updated', res);
         } catch (error) {
           console.log("Error de servicio", error);
@@ -56,34 +58,30 @@ const RFCcomponent = (props) => {
     }
 
     useEffect(() => {
+      const user = JSON.parse(sessionStorage.getItem("user"));
+      const id = user.hubspotDealId;
+    } , [])
+
+    useEffect(() => {
   
       const getData = async () => {
         dispatch(updateLoader(true));
         const user = JSON.parse(sessionStorage.getItem("user"));
+        console.log ('user', user);
         const { idClient, hubspotDealId } = user;
         // Si ya tienen una solicitud, se actualiza
         if (idClient.appliance.length > 0) {
           const appliance = idClient.appliance[idClient.appliance.length - 1];
           if (appliance.hasOwnProperty("idComercialInfo")) {
             const comercial = appliance.idComercialInfo;
+            console.log("comercial", comercial);
             const id = comercial._id;
-            try {
-              const res = await axios.get(`api/info-comercial/${id}`);
-              setRFC(res.data.comercial.rfc);
-              console.log('rfc', res.data.comercial.rfc);
-              }catch(error){
-                console.log("Error de servicio", error);
-              }
           }
           if (appliance.hasOwnProperty("idGeneralInfo")) {
             const general = appliance.idGeneralInfo;
             const id = general._id;
-            try {
-              const res = await axios.get(`api/info-general/${id}`);
-              setRfcPerson(res.data.general.rfc);
-            } catch (error) {
-              console.log("Error de servicio", error);
-            }} else{
+            console.log("general", general);
+            } else{
               setRfcPerson("");
             }
         dispatch(updateLoader(false));
