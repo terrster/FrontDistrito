@@ -17,6 +17,7 @@ const RFCcomponent = (props) => {
   const [RFC , setRFC] = useState("");
   const [rfcPerson, setRfcPerson] = useState("");
   const [open, setOpen] = useState(false);
+  const [mensaje , setMensaje] = useState("");
 
   const onFormSubmit = async (dataForm) => {
     dispatch(updateLoader(true));
@@ -26,8 +27,8 @@ const RFCcomponent = (props) => {
     const data = dataForm;
     const {rfc, ciec } = data;
     console.log("data", rfc, ciec);
-    
-      
+
+    if (rfc === RFC || rfcPerson){
       if (idClient.appliance.length > 0) {
         const appliance = idClient.appliance[idClient.appliance.length - 1];
         if (appliance.hasOwnProperty("idComercialInfo")) {
@@ -36,22 +37,23 @@ const RFCcomponent = (props) => {
         console.log("id", id);
         try {
           const res = await axios.put(`api/ciec/${id}`, data);
-          const res1 = await axios.get(`api/ciec/${id}`, data);
-          console.log("res", res1);
-          console.log('rfc updated', res);
+          sessionStorage.setItem("user", JSON.stringify(res.data.user));
         } catch (error) {
           console.log("Error de servicio", error);
         }
         }else{
             try {
                 const res = await axios.post(`api/ciec/${id}`, data);
-                console.log('rfc created', res);
+                sessionStorage.setItem("user", JSON.stringify(res.data.user));
               } catch (error) {
                 console.log("Error de servicio", error);
               }
         }
+      }
+    } else {
+      setOpen(true);
+      setMensaje("El RFC no coincide con ninguno de los registros");
     }
-  
 
     
     dispatch(updateLoader(false));
@@ -67,7 +69,6 @@ const RFCcomponent = (props) => {
       const getData = async () => {
         dispatch(updateLoader(true));
         const user = JSON.parse(sessionStorage.getItem("user"));
-        console.log ('user', user);
         const { idClient, hubspotDealId } = user;
         // Si ya tienen una solicitud, se actualiza
         if (idClient.appliance.length > 0) {
@@ -75,12 +76,13 @@ const RFCcomponent = (props) => {
           if (appliance.hasOwnProperty("idComercialInfo")) {
             const comercial = appliance.idComercialInfo;
             console.log("comercial", comercial);
+            setRFC(comercial.rfc);
             const id = comercial._id;
           }
           if (appliance.hasOwnProperty("idGeneralInfo")) {
             const general = appliance.idGeneralInfo;
             const id = general._id;
-            console.log("general", general);
+            setRfcPerson(general.rfc);
             } else{
               setRfcPerson("");
             }
@@ -105,7 +107,7 @@ const RFCcomponent = (props) => {
 					<Row className="d-flex justify-content-center">
 						<Col lg={6} sm={12} md={12} className="text-center">
 							<div className="metropolisReg fz29 blueDark fw400">
-								El RFC no coincide con el que se encuentra en la base de datos
+								{mensaje}
 							</div> 
 						</Col>
 					</Row>
