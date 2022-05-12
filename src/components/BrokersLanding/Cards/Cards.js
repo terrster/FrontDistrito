@@ -13,18 +13,18 @@ const Cards = () => {
 
   return(
     <div id="cardsBrokers" className="pt-5 text-center">
-      <Title title="¿Cómo convertirme en Broker Digital?" className="title-dp fw500 mb-1 fz42"/>
+     <Card.Header id="header"  className="title-dp-blue fz42  fw300 text-left line-height"><span className='title-dp'> ¿cómo convertirme en</span> broker digital? </Card.Header>
     <div className="justify-content-center container container-xl pt-4">
       <Row className="justify-content-center">
           <Col xl={4} md={5} sm={7} className="mb-4">
-            <Card style={{ height: '24rem' }} className="tarjet-info">
+            <Card style={{ height: '24rem' }} className="tarjet-info card">
               <Icons img={REGISTRATE} alt="registrate" width="100px" />
             <Card.Body>
               <Card.Title>regístrate</Card.Title>
               <Card.Text >
                 <div className="metropolisReg text-center">
                 completa tu registro y uno de nuestros asesores
-                se pondrá en contacto contigo para ofrecerte mayor información.
+                se pondrá en contacto contigo para para resolver todas tus dudas.
                 </div>
               </Card.Text>
             </Card.Body>
@@ -59,8 +59,8 @@ const Cards = () => {
                   <p>al adquirir tu membresía tendrás acceso total a la tecnología
                   de distrito pyme, herramientas, CRM, programa de incentivos,
                   convenciones y asignación automática de leads.</p>
-                  <p>inversión única de <b>$3,900 MXN IVA incluido</b> y la podrás pagar
-                  a 3 ó 6 MSI.</p>
+                  <p>obtén tu membresía azul por $3,900 pesos pago único.</p>
+                  <p>puedes pagarlo a 3 o 6 MSI</p>
               </Card.Text>
             </Card.Body>
           </Card>
@@ -72,10 +72,12 @@ const Cards = () => {
             <Card.Body>
               <Card.Title>recibe tus herramientas</Card.Title>
               <Card.Text className="metropolisReg text-center">
-                • id exclusivo que te identifica como broker <br />
-                • acceso a CRM <br />
-                • plan de marketing y desarrollo de tu propia marca<br />
+                • id exclusivo que te identifca como broker <br />
+                • acceso único a CRM<br />
+                • plan de capacitación semanal<br />
                 • tarjeta de presentación digital<br />
+                • herramientas de mkt y ventas <br />
+                • acceso a biblioteca virtual <br />
                 • Y más
               </Card.Text>
             </Card.Body>
@@ -89,7 +91,7 @@ const Cards = () => {
               <Card.Title>comienza a ganar dinero</Card.Title>
               <Card.Text className="metropolisReg text-center">
                 <p>ahora estás listo para ofrecer a tus clientes las mejores opciones
-                de crédito.</p>
+                de crédito, pyme e hipotecario.</p>
 
                 <p className="font-weight-bold">¡todo en menos de 15 min!</p>
               </Card.Text>

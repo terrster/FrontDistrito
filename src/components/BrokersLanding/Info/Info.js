@@ -1,5 +1,5 @@
 import React from 'react';
-import {Col,Row}  from 'react-bootstrap';
+import {Col,Row, Card}  from 'react-bootstrap';
 import Title from '../../Generic/Title';
 
 const Info = () => {
@@ -7,19 +7,22 @@ const Info = () => {
    <div className="container pt-5">
     <Row className="d-flex align-items-center justify-items-center">
       <Col xl={7} lg={7} md={7} className="mb-3">
-        <Title title="brokers digitales distrito pyme" className="title-dp fw500 mb-1 fz42 title-bd" />
+      <Card.Header id="header"  className="title-dp-blue fz42  fw300 text-left line-height"><span className='title-dp'> broker </span> digital distrito pyme </Card.Header>
         <div className="metropolisReg fz21 blackBlue text-justify">
           <br/>
-          nuestro programa de brokers digitales, te permite adquirir una
-          membresía exclusiva de nuestra plataforma y las
-          herramientas necesarias que te ayudarán a colocar más crédito,
-          todo en menos de 15 minutos.
-          
+          si tienes experiencia en el sector pyme y/o hipotecario, 
+          el programa de brokers digitales distrito pyme es tu mejor 
+          opción para incrementar tus ingresos. 
+          <br></br>
           <br/>
+          adquiere nuestra membresía azul por un pago único de $3,900 pesos 
+          y recibe todas las herramientas necesarias que te ayudarán a colocar
+          más créditos, todo en menos de 15 minutos.
+          <br></br>
           <br/>
-          una solicitud a través de distrito pyme es como llenar más de 25
-          solicitudes de crédito de las mejores instituciones financieras
-          para que ahorres tiempo e incrementes tus ingresos.
+          una sola solicitud como broker digital a través de distrito pyme es 
+          como llenar más de 30 solicitudes de crédito de las mejores instituciones 
+          financieras ayudándote así, a ahorrar tiempo e incrementes tus ingresos.
 				</div>
       </Col>
 

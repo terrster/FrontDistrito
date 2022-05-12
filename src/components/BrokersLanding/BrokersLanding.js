@@ -12,6 +12,7 @@ import io from 'socket.io-client';
 import Title from '../Generic/Title';
 import ReactPlayer from 'react-player';
 import AlliesLanding from "../Landing/AlliesLanding/AlliesLanding";
+import { Card } from 'react-bootstrap';
 
 const BrokersLanding = () => {
 
@@ -82,7 +83,7 @@ const BrokersLanding = () => {
         <AlliesLanding />
         <Comunity hubspotInfo={hubspotInfo} />
         {/* <Testimonio /> */}
-        <Title title="8 De Cada 10 solicitudes recibe una opción de crédito" className="title-dp fw500 fz32 text-center pb-3" />
+        <Card.Header id="header"  className="title-dp-blue fz42  fw300 text-left line-height"><span className='title-dp'> 8 de cada 10 </span> digitales distrito pyme </Card.Header>
         <div style={{ maxWidth: '1000px' }} className="ml-auto mr-auto pb-5">
           <ReactPlayer width="100%" height="400px" style={{ maxWidth: '1000' }} url="https://www.youtube.com/watch?v=yhs3J5ZTvZU" />
         </div>
