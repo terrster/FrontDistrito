@@ -3,11 +3,11 @@
    -moz-transition: all 0.3s ease-in-out;
    transition: all 0.3s ease-in-out;
    border: 0;
-   background: hsla(216, 97%, 30%, 1);
-   background: linear-gradient(20deg, hsla(216, 97%, 30%, 1) 0%, hsla(180, 96%, 48%, 1) 100%);
-   background: -moz-linear-gradient(20deg, hsla(216, 97%, 30%, 1) 0%, hsla(180, 96%, 48%, 1) 100%);
-   background: -webkit-linear-gradient(20deg, hsla(216, 97%, 30%, 1) 0%, hsla(180, 96%, 48%, 1) 100%);
-   filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#023E95", endColorstr="#05F2F2", GradientType=1 );
+   background: hsla(222, 54%, 28%, 1);
+   background: linear-gradient(20deg, hsla(222, 54%, 28%, 1) 10%, hsla(193, 84%, 53%, 1) 100%);
+   background: -moz-linear-gradient(20deg, hsla(222, 54%, 28%, 1) 10%, hsla(193, 84%, 53%, 1) 100%);
+   background: -webkit-linear-gradient(20deg, hsla(222, 54%, 28%, 1) 10%, hsla(193, 84%, 53%, 1) 100%);
+   filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#213970", endColorstr="#24C2EC", GradientType=1 );
    color: #F5F5F5;
    font-size: .8rem;
    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
@@ -20,6 +20,7 @@
   transform: translateY(-10px);
   box-shadow: #bbc7c7 10px 10px 10px;
  }
+
 
 
  .tarjet-info2{
@@ -185,17 +186,17 @@
    text-align: center;
  }
  
- .brokers-container .title-dp{
-   font-size: 1.8rem !important;
+ .brokers-container .title{
+   font-size: 3rem !important;
+   color: #EF4E5B;
+ }
+ .brokers-container .title-dp-blue{
+   color: #213970;
  }
  
- @media (min-width: 768px) {
+ @media (max-width: 800px) {
    .title-bd{
      text-align: left;
-   }
- 
-   .brokers-container .title-dp{
-     font-size: 2.62rem !important;
    }
  }
  

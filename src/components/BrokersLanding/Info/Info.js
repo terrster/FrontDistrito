@@ -7,7 +7,7 @@ const Info = () => {
    <div className="container pt-5">
     <Row className="d-flex align-items-center justify-items-center">
       <Col xl={7} lg={7} md={7} className="mb-3">
-      <Card.Header id="header"  className="title-dp-blue fz42  fw300 text-left line-height"><span className='title-dp'> broker </span> digital distrito pyme </Card.Header>
+      <Card.Header id="header"  className="title-dp-blue fz42 text-left line-height"><span className='title'> broker </span> digital distrito pyme </Card.Header>
         <div className="metropolisReg fz21 blackBlue text-justify">
           <br/>
           si tienes experiencia en el sector pyme y/o hipotecario, 

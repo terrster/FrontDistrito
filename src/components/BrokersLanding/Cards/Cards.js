@@ -3,17 +3,17 @@ import Title from '../../Generic/Title';
 import { Card, Row, Col } from 'react-bootstrap';
 import Icons from '../../Landing/Icons/Icons';
 
-import REGISTRATE from '../../../assets/img/brokers-landing/iconos/registrate.png';
-import FIRMA from '../../../assets/img/brokers-landing/iconos/firma.png';
-import MEMBRESIA from '../../../assets/img/brokers-landing/iconos/membresia.png';
-import HERRAMIENTAS from '../../../assets/img/brokers-landing/iconos/recibe_herramientas.png';
-import GANAR_DINERO from '../../../assets/img/brokers-landing/iconos/gana_dinero.png';
+import REGISTRATE from '../../../assets/img/brokers-landing/iconos/Ícono_Registro B.svg';
+import FIRMA from '../../../assets/img/brokers-landing/iconos/Ícono_Firma B.svg';
+import MEMBRESIA from '../../../assets/img/brokers-landing/iconos/Ícono_Membresía B-01.svg';
+import HERRAMIENTAS from '../../../assets/img/brokers-landing/iconos/Ícono_Herramientas B.svg';
+import GANAR_DINERO from '../../../assets/img/brokers-landing/iconos/Ícono_Dinero B.svg';
 
 const Cards = () => {
 
   return(
     <div id="cardsBrokers" className="pt-5 text-center">
-     <Card.Header id="header"  className="title-dp-blue fz42  fw300 text-left line-height"><span className='title-dp'> ¿cómo convertirme en</span> broker digital? </Card.Header>
+     <Card.Header id="header"  className="title-dp-blue fz42  fw300 text-left line-height"><span className='title'> ¿cómo convertirme en</span> broker digital? </Card.Header>
     <div className="justify-content-center container container-xl pt-4">
       <Row className="justify-content-center">
           <Col xl={4} md={5} sm={7} className="mb-4">
@@ -32,7 +32,7 @@ const Cards = () => {
         </Col>
 
           <Col xl={4} md={5} sm={7} className="mb-4">
-            <Card style={{ height: '24rem' }} className="tarjet-info2">
+            <Card style={{ height: '24rem' }} className="tarjet-info">
               <Icons img={FIRMA} alt="Firma" width="100px" />
             <Card.Body>
               <Card.Title>firma tu contrato</Card.Title>
@@ -67,7 +67,7 @@ const Cards = () => {
         </Col>
 
         <Col xl={4} md={5} sm={7} className="mb-4">
-            <Card style={{ height: '24rem' }} className="tarjet-info2">
+            <Card style={{ height: '24rem' }} className="tarjet-info">
               <Icons img={HERRAMIENTAS} alt="Herramientas" width="100px" />
             <Card.Body>
               <Card.Title>recibe tus herramientas</Card.Title>
