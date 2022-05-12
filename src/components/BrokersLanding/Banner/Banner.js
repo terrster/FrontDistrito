@@ -3,8 +3,8 @@ import {Button} from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 
 
-import BANNER_WEB from '../../../assets/img/brokers-landing/BANNER_web.png';
-import BANNER_MOVIL from '../../../assets/img/brokers-landing/BANNER_movil.png';
+import BANNER_WEB from '../../../assets/img/brokers-landing/BANNER_web.webp';
+import BANNER_MOVIL from '../../../assets/img/brokers-landing/BANNER_movil.webp';
 
 const images = [BANNER_WEB, BANNER_MOVIL];
 

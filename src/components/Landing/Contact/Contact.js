@@ -9,7 +9,7 @@ import Loader from "../../Loader/Loader";
 import "../../../css/doubts.css";
 import chicaContacto from '../../../assets/img/chicaContacto.png'
 
-const Contact = () => {
+const Contact = (props) => {
 	const dispatch = useDispatch();
 	const [success, setSuccess] = useState({
 		show: false,
@@ -67,17 +67,26 @@ const Contact = () => {
 	return (
 	<>
 		<Loader />
-			<div className="mt-3">
+			<div className="mt-1" style={{width : '100%'}}>
 				
-				<div className="mr-auto ml-auto mt-2" style={{maxWidth : '100vw'}}>
-					<Row className="">
-						<Col lg={4}>
-							<img className="d-lg-block d-none chica-left" src={chicaContacto} width="450px" alt="Tito lupa" style={{marginBottom : '0%'}} />
-						</Col>
-						<Col lg={6} className="d-flex text-contacto">
-						
-							<ContactForm initialValues={initialValues} handleSubmit={handleSubmit} error={error} success={success}/>
-						</Col>
+				<div className="mr-auto ml-auto">
+					<Row style={{margin:'0'}}>
+						{
+							props.estado === 0 ?
+								<>
+									<Col style={{marginLeft:'5%'}} >
+										<img src={chicaContacto} width="450px" alt="Tito lupa" style={{marginBottom : '0%'}} />
+									</Col>
+									<Col style={{marginLeft:'-5%'}}>
+									<ContactForm initialValues={initialValues} handleSubmit={handleSubmit} error={error} success={success}/>
+									</Col>
+								</>:
+								<>
+									<Col>
+									<ContactForm initialValues={initialValues} handleSubmit={handleSubmit} error={error} success={success}/>
+									</Col>
+								</>
+						}
 					</Row>
 				</div>
 			</div>

@@ -48,7 +48,7 @@ const HowWorks = props => {
 	};
 	const styleWEBM = {
 		backgroundColor: '#FFFFFF',
-		border: '.1rem solid #E3E3DD'
+		border: '0'
 	};
 
 
