@@ -12,7 +12,6 @@ import Comunity from '../BrokersLanding/Comunity/Comunity';
 import CreditOption from "./CreditOption/CreditOption";
 import Products from "./Products/Products";
 import AlliesLanding from "./AlliesLanding/AlliesLanding";
-
 const getSize = () => {
 	const currentSize = document.getElementsByTagName('body')[0].clientWidth;
 	return currentSize < 775 ? 1 : 0;
@@ -77,7 +76,7 @@ const Landing = () => {
 
     return (
         <div className="casa">
-            <Header title={"¿Necesitas financiamiento?"} text={"Recibe las mejores ofertas de crédito "} highlighted={"¡En menos de 24 horas!"} buttonText={"Solicitar ahora"} />
+            <Header estado={version} buttonText={"Solicitar ahora"} />
             <LandSimulator estado={version}/>
             <div className="container-fluid">     
                 <CreditOption estado={version}/>
@@ -91,7 +90,7 @@ const Landing = () => {
             <div className="container-fluid" style={{padding: '0'}}>  
                 {/* <AboutUs />       */}
                 <Comunity hubspotInfo={hubspotInfo} origen={'landing'} estado={version}/>
-                <Contact /> 
+                <Contact estado= {version}/> 
             </div>
         </div>
     );

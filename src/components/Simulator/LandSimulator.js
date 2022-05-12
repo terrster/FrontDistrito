@@ -25,7 +25,7 @@ const LandSimulator = (props) => {
 		dispatch(newSimulation());
 	}
 	return (
-		<div id="simulador" className={`${step < 2 ? 'bg-gray' : 'bg-gray'} pt-4 pb-2 mb-3 ml-auto mr-auto plr-20 d-flex flex-column`} style={{maxWidth : '100%'}}>
+		<div id="simulador" className={`${step < 2 ? 'bg-gray' : 'bg-gray'} ${props.estado === 0? 'pt-4 pb-2 mb-3' : 'pt-0 mt-0'} ml-auto mr-auto plr-20 d-flex flex-column`} style={{maxWidth : '100%'}}>
 			{ (step <= 2) 
 				? <Card.Header id="header"  className="title-dp-blue fz48  fw300 line-height align-self-start"><span className='title-dp'> cotiza  </span>tu crédito </Card.Header>
 				: <div>

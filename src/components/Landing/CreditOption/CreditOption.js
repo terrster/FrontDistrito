@@ -2,7 +2,7 @@ import React from 'react';
 import Title from '../../Generic/Title';
 import { Row, Col, Card, Button } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
-import LOGODP from '../../../assets/img/home/dp_blanco.png';
+import LOGODP from '../../../assets/img/home/logodp.svg';
 import '../../../css/creditoption.css';
 
 
@@ -52,7 +52,7 @@ const CreditOption = (props) => {
 
           <Col xl={4} lg={4} md={5} sm={12} className="d-flex justify-content-center">
             <Card className="fondo-card-dp card-credit" style={{border: 'none'}}>
-              <Card.Header id="header" style={{ height: '5rem' }}><img src={LOGODP} alt="LOGODP" width="150px" className="mt-4" /></Card.Header>
+              <Card.Header id="header" style={{ height: '5rem' }}><img src={LOGODP} alt="LOGODP" width="120rem" className="mt-4" /></Card.Header>
               <Card.Body>
                 <Card.Title></Card.Title>
                 <Card.Text className="text-dp fz12 white text-left ">
