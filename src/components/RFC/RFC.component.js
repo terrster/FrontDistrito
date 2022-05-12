@@ -1,42 +1,123 @@
-import React, { useState } from 'react'
-import {Buffer} from 'buffer';
-import '../../css/rfc.css'
-import logito from '../../assets/img/logo_dp/logodp-01.png'
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import axios from "../../utils/axios";
+import { Modal } from 'react-responsive-modal';
+import { Row, Button, Col } from 'react-bootstrap';
 
+// Components
+import { updateLoader } from "../../redux/actions/loaderActions";
+import CiecForm from "../../forms/rfcForm";
 
-export const RFCcomponent = () => {
+const RFCcomponent = (props) => {
+  const dispatch = useDispatch();
+  // Redux state
 
-    const toInputUppercase = e => {
-        e.target.value = ("" + e.target.value).toUpperCase();
-    };
-    const [RFC, setRFC] = useState("");
-    const [CIEC, setCIEC] = useState("");
+  const [initialValues, setInitialValues] = useState({});
+  const [state, setState] = useState("");
+  const [RFC , setRFC] = useState("");
+  const [rfcPerson, setRfcPerson] = useState("");
+  const [open, setOpen] = useState(false);
+  const [mensaje , setMensaje] = useState("");
 
-    const code64 = (RFC, CIEC,e) => {
-        e.preventDefault();
-        let RFC64 = Buffer.from(RFC).toString('base64');
-        let CIEC64 = Buffer.from(CIEC).toString('base64');
-        console.log(RFC64);
-        console.log(CIEC64);
-        return { RFC64, CIEC64 };
+  const onFormSubmit = async (dataForm) => {
+    dispatch(updateLoader(true));
+    const user = JSON.parse(sessionStorage.getItem("user"));
+    const id = user._id;
+    const idClient = user.idClient;
+    const data = dataForm;
+    const {rfc, ciec } = data;
+    console.log("data", rfc, ciec);
+
+    if (rfc === RFC || rfcPerson){
+      if (idClient.appliance.length > 0) {
+        const appliance = idClient.appliance[idClient.appliance.length - 1];
+        if (appliance.hasOwnProperty("idComercialInfo")) {
+            const comercial = appliance.idComercialInfo;
+        const id = comercial._id;
+        console.log("id", id);
+        try {
+          const res = await axios.put(`api/ciec/${id}`, data);
+          sessionStorage.setItem("user", JSON.stringify(res.data.user));
+        } catch (error) {
+          console.log("Error de servicio", error);
+        }
+        }else{
+            try {
+                const res = await axios.post(`api/ciec/${id}`, data);
+                sessionStorage.setItem("user", JSON.stringify(res.data.user));
+              } catch (error) {
+                console.log("Error de servicio", error);
+              }
+        }
+      }
+    } else {
+      setOpen(true);
+      setMensaje("El RFC no coincide con ninguno de los registros");
     }
 
+    
+    dispatch(updateLoader(false));
+    }
+
+    useEffect(() => {
+      const user = JSON.parse(sessionStorage.getItem("user"));
+      const id = user.hubspotDealId;
+    } , [])
+
+    useEffect(() => {
+  
+      const getData = async () => {
+        dispatch(updateLoader(true));
+        const user = JSON.parse(sessionStorage.getItem("user"));
+        const { idClient, hubspotDealId } = user;
+        // Si ya tienen una solicitud, se actualiza
+        if (idClient.appliance.length > 0) {
+          const appliance = idClient.appliance[idClient.appliance.length - 1];
+          if (appliance.hasOwnProperty("idComercialInfo")) {
+            const comercial = appliance.idComercialInfo;
+            console.log("comercial", comercial);
+            setRFC(comercial.rfc);
+            const id = comercial._id;
+          }
+          if (appliance.hasOwnProperty("idGeneralInfo")) {
+            const general = appliance.idGeneralInfo;
+            const id = general._id;
+            setRfcPerson(general.rfc);
+            } else{
+              setRfcPerson("");
+            }
+        dispatch(updateLoader(false));
+      };
+    }
+    getData();
+    }, []);
+
   return (
+    <div>
         <div className='text-center outer'>   
-            <div className="login-form">
-                <form>
-                    <img className="mb-4 img-fluid" src={logito} alt='LogoPyme' ></img>
-                    <div className="m-2">
-                        <input type="text" className="form-control" id="RFC" maxLength={13} value={RFC} onChange={e => setRFC(e.target.value)}
-                        onInput={toInputUppercase} placeholder='RFC de la empresa o negocio' />
-                    </div>
-                    <div className="m-2">
-                        <input type="password" className="form-control" id="CIEC" value={CIEC} onChange={e => setCIEC(e.target.value)} maxLength={8} placeholder='CIEC'/>
-                    </div>
-                    <p className="mt-1 mb-1 text-muted"><small>Al seleccionar "enviar", usted acepta nuestros <a href='https://distritopyme.com/terminos-y-condiciones'>términos de uso</a> y <a href='https://distritopyme.com/privacidad'>aviso de privacidad.</a></small></p>
-                    <button type="submit" className="w-100 btn btn-lg btn-blue-general" onClick={(e) => code64(RFC,CIEC, e)} >enviar</button>
-                </form>
-            </div>
+            <CiecForm 
+            onSubmit={onFormSubmit}
+            initialValues={initialValues}
+            setState={setState}
+            state={state}>
+
+            </CiecForm>
         </div>
+				<Modal onClose={() => setOpen(false)} open={open} style={{ padding: '30px 40px!important', width: 'auto!important' }}>
+					<Row className="d-flex justify-content-center">
+						<Col lg={6} sm={12} md={12} className="text-center">
+							<div className="metropolisReg fz29 blueDark fw400">
+								{mensaje}
+							</div> 
+						</Col>
+					</Row>
+					<div className="text-center mt-30">
+						<Button className="btn-blue-general ml-auto mr-auto" style={{width: '250px'}} onClick={() => setOpen(false)}>
+							Aceptar
+						</Button>
+					</div>
+				</Modal>
+    </div>
   )
 }
+export default RFCcomponent;
