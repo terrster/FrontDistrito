@@ -17,12 +17,12 @@ const Cards = () => {
     <div className="justify-content-center container container-xl pt-4">
       <Row className="justify-content-center">
           <Col xl={4} md={5} sm={7} className="mb-4">
-            <Card style={{ height: '24rem' }} className="tarjet-info card">
+            <Card style={{ height: '24rem' }} className="tarjet-info">
               <Icons img={REGISTRATE} alt="registrate" width="100px" />
             <Card.Body>
               <Card.Title>regístrate</Card.Title>
               <Card.Text >
-                <div className="metropolisReg text-center">
+                <div className="metropolisReg text-center ">
                 completa tu registro y uno de nuestros asesores
                 se pondrá en contacto contigo para para resolver todas tus dudas.
                 </div>
@@ -32,11 +32,11 @@ const Cards = () => {
         </Col>
 
           <Col xl={4} md={5} sm={7} className="mb-4">
-            <Card style={{ height: '24rem' }} className="tarjet-info">
+            <Card style={{ height: '24rem' }} className="tarjet-info2">
               <Icons img={FIRMA} alt="Firma" width="100px" />
             <Card.Body>
               <Card.Title>firma tu contrato</Card.Title>
-              <Card.Text className="metropolisReg text-center">
+              <Card.Text className="metropolisReg text-center fz12">
                 nuestro proceso de firma es 100% Digital.
 
                 Necesitarás: <br />
@@ -67,11 +67,11 @@ const Cards = () => {
         </Col>
 
         <Col xl={4} md={5} sm={7} className="mb-4">
-            <Card style={{ height: '24rem' }} className="tarjet-info">
+            <Card style={{ height: '24rem' }} className="tarjet-info2">
               <Icons img={HERRAMIENTAS} alt="Herramientas" width="100px" />
             <Card.Body>
               <Card.Title>recibe tus herramientas</Card.Title>
-              <Card.Text className="metropolisReg text-center">
+              <Card.Text className="metropolisReg text-center fz12">
                 • id exclusivo que te identifca como broker <br />
                 • acceso único a CRM<br />
                 • plan de capacitación semanal<br />
