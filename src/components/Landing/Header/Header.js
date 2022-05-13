@@ -16,8 +16,15 @@ const getSize = () => {
 	return currentSize < 775 ? 1 : 0;
 };
 
+const getHeight = () => {
+	const currentSize = document.getElementsByTagName('body')[0].clientHeight;
+	console.log(currentSize);
+	return currentSize < 600 ? 1 : 0;
+}
+
 const Header = props => {
 	const [versionImage, setVersionImage] = useState(props.estado);
+	const [height, setHeight] = useState(getHeight());
 	const [indexImage, setIndexImage] = useState(0);
 
 	const handleSelect = (selectedIndex, e) => {
@@ -26,12 +33,13 @@ const Header = props => {
 
 	useEffect(() => {
         setVersionImage(props.estado);
+		setHeight(getHeight());
     } , [props.estado]);
 
 
 	const styleWEB = {
 		height: '85vh',
-		maxHeight: '100vh',
+		maxHeight: '85vh',
 		width: '100vw',
 		overflow: 'hidden',
 		margin: '0 auto',
@@ -40,7 +48,7 @@ const Header = props => {
 	};
 	const styleWEBM = {
 		height: '60vh',
-		maxHeight: '80vh',
+		maxHeight: '60vh',
 		width: '100vw',
 		overflow: 'hidden',
 		margin: '0 auto',
@@ -64,7 +72,7 @@ const Header = props => {
 		left:'10%'
 	}
 
-
+	console.log(height);
 	// const goToForm = () => {
 	// 	window.location = "https://share.hsforms.com/1NexTiVEwSeSyCS2kvQT-WA2y96v";
 	// }
@@ -79,7 +87,7 @@ const Header = props => {
 					</span>
 				</div>
 				{
-					versionImage === 0?
+					versionImage === 0 && height === 0?
 					<div>
 					<span className='header-text' style={{ position:'absolute', top:'53%', left:'10%' }}>
 						una solicitud <br/>

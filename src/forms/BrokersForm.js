@@ -70,42 +70,42 @@ const BrokersForms = (props) => {
 
           <Row>
             <Col lg={12}>
-            <FieldText name="name" placeholder="Nombre completo" normalize="onlyLirycs" className="forceFullWidth" />
+            <FieldText name="name" placeholder="nombre completo" normalize="onlyLirycs" className="forceFullWidth" />
             </Col>
 
             <Col lg={4}>
-            <FieldText name="email" placeholder="Correo" normalize="onlyEmailWithoutSpace" className="forceFullWidth" />
+            <FieldText name="email" placeholder="correo" normalize="onlyEmailWithoutSpace" className="forceFullWidth" />
             </Col>
 
             <Col lg={4}>
-              <FieldText name="mobilephone" placeholder="WhatsApp" normalize="onlyNumbers" maxLength={10} minLength={10} className="forceFullWidth" />
+              <FieldText name="mobilephone" placeholder="whatsApp" normalize="onlyNumbers" maxLength={10} minLength={10} className="forceFullWidth" />
             </Col>
 
             <Col lg={4}>
-              <FieldText name="zip" placeholder="Código postal" normalize="onlyNumbers" maxLength={5} className="forceFullWidth" />
+              <FieldText name="zip" placeholder="código postal" normalize="onlyNumbers" maxLength={5} className="forceFullWidth" />
             </Col>
           </Row>
 
           <Row>
             <Col lg={12}>
-            <FieldTextArea name="message" placeholder="¿Por qué te gustaría ser Broker Digital?" className="forceFullWidth" />
+            <FieldTextArea name="message" placeholder="¿por qué te gustaría ser broker digital?" className="forceFullWidth" />
             </Col>
           </Row>
 
           <Row>
             <div>
               <div className="metropolisReg fz12 blackBlue text-left">
-                <b>Distrito Pyme</b> se compromete a proteger y respetar tu privacidad, y solo usaremos tu información
+                <b>distrito pyme</b> se compromete a proteger y respetar tu privacidad, y solo usaremos tu información
                 personal para administrar tu cuenta y proporcionar los servicios que nos solicitaste.
-                Consulta nuestro <Link to="/privacidad" target="_blank">Aviso de privacidad</Link>
+                consulta nuestro <Link to="/privacidad" target="_blank">aviso de privacidad</Link>
               </div>
 
             <Col lg={5} className="mt-2">
-              <FieldCheck name="trm" label="Entiendo*" className="metropolisReg fz12 blackBlue"/>
+              <FieldCheck name="trm" label="entiendo*" className="metropolisReg fz12 blackBlue"/>
             </Col>
 
               <div className="metropolisReg fz12 blackBlue text-left mt-3">
-                Al hacer clic en Enviar, aceptas que <b>Distrito Pyme</b> almacene y procese la información personal suministrada arriba para contactarte.
+                al hacer clic en enviar, aceptas que <b>distrito pyme</b> almacene y procese la información personal suministrada arriba para contactarte.
               </div>
             </div>
           </Row>
@@ -126,7 +126,7 @@ const BrokersForms = (props) => {
                 className="mt-50 btn-blue-general" 
                 style={{ width: '300px' }}
                 >
-                  Enviar
+                  enviar
                 </Button>
               ) : (
                 <Button
@@ -138,7 +138,7 @@ const BrokersForms = (props) => {
                     goToError()
                   }}
                 >
-                  Enviar
+                  enviar
                 </Button>
               )
             }

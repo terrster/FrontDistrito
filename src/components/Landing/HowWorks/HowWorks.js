@@ -10,7 +10,7 @@ import { Button, Carousel } from 'react-bootstrap';
 import '../../../css/HowWorks.css';
 import firstImage from '../../../assets/img/carousel-howWorks/rif-web.png';
 import secondImage from '../../../assets/img/carousel-howWorks/fisica-web.png';
-import thirdImage from '../../../assets/img/carousel-howWorks/moral-web.png';
+import thirdImage from '../../../assets/img/carousel-howWorks/requisitos_moral3-03.jpg';
 import firstImageMobie from '../../../assets/img/carousel-howWorks/rif-mob.png';
 import secondImageMobie from '../../../assets/img/carousel-howWorks/fisica-mob.png';
 import thirdImageMobie from '../../../assets/img/carousel-howWorks/moral-mob.png';

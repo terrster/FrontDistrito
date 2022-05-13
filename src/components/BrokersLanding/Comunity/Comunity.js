@@ -121,7 +121,7 @@ const Comunity = ({hubspotInfo, origen, estado}) =>{
                               versionImage === 0 ? (
                                 <>
                                   <Col xs={12} md={4} className='d-flex align-items-center flex-column'>
-                            <label className="title-dp">{origen === 'landing' ? 'brokers digitales' : 'Brokers activos'}</label>
+                            <label className="title-dp">{origen === 'landing' ? 'brokers digitales' : 'brokers activos'}</label>
                             <div className="titulos coolvetica">
                               <span className="counter" data-target="Brokers">--</span>
                             </div>
