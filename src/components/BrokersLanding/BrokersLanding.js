@@ -96,7 +96,7 @@ const BrokersLanding = () => {
         <AlliesLanding estado={version}/>
         <Comunity hubspotInfo={hubspotInfo} estado={version}/>
         {/* <Testimonio /> */}
-        <Card.Header id="header"  className="title-dp-blue fz42 text-left line-height"><span className='title'> 8 de cada 10 </span> digitales distrito pyme </Card.Header>
+        <Card.Header id="header"  className="title-dp-blue fz42 text-left line-height"><span className='title'> 8 de cada 10 </span> solicitudes recibe una opción de crédito </Card.Header>
         <div style={{ maxWidth: '1000px' }} className="ml-auto mr-auto pb-5">
           <ReactPlayer width="100%" height="400px" style={{ maxWidth: '1000' }} url="https://www.youtube.com/watch?v=yhs3J5ZTvZU" />
         </div>

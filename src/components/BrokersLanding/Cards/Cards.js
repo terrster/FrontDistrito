@@ -24,7 +24,7 @@ const Cards = () => {
               <Card.Text >
                 <div className="metropolisReg text-center ">
                 completa tu registro y uno de nuestros asesores
-                se pondrá en contacto contigo para para resolver todas tus dudas.
+                se pondrá en contacto contigo para resolver todas tus dudas.
                 </div>
               </Card.Text>
             </Card.Body>
@@ -37,14 +37,14 @@ const Cards = () => {
             <Card.Body>
               <Card.Title>firma tu contrato</Card.Title>
               <Card.Text className="metropolisReg text-center fz12">
-                nuestro proceso de firma es 100% Digital.
+                nuestro proceso de firma es 100% digital.
 
-                Necesitarás: <br />
+                necesitarás: <br />
                 • INE <br />
                 • comprobante de domicilio <br />
-                • constancia de situación Fiscal <br />
+                • constancia de situación fiscal <br />
                 • estado de cuenta bancario <br />
-                • acta Constitutiva (en caso de ser personal moral)
+                • acta constitutiva (en caso de ser personal moral)
               </Card.Text>
             </Card.Body>
           </Card>
@@ -73,12 +73,12 @@ const Cards = () => {
               <Card.Title>recibe tus herramientas</Card.Title>
               <Card.Text className="metropolisReg text-center fz12">
                 • id exclusivo que te identifca como broker <br />
-                • acceso único a CRM<br />
+                • acceso único a nuestro CRM<br />
                 • plan de capacitación semanal<br />
                 • tarjeta de presentación digital<br />
                 • herramientas de mkt y ventas <br />
                 • acceso a biblioteca virtual <br />
-                • Y más
+                • y más
               </Card.Text>
             </Card.Body>
           </Card>
