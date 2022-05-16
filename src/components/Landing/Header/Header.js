@@ -11,15 +11,33 @@ import secondImageMobie from '../../../assets/img/carousel/BROKERMOVIL.jpg';
 import { text } from '@fortawesome/fontawesome-svg-core';
 // images[numImage][NormalImage, Mobile Image]
 const images = [firstImage, firstImageMobie,];
-const getSize = () => {
-	const currentSize = document.getElementsByTagName('body')[0].clientWidth;
-	return currentSize < 775 ? 1 : 0;
-};
+// const getSize = () => {
+// 	let isMobile = window.matchMedia("only screen and (max-width: 760px)").matches;
+// 	let isTablet = window.matchMedia("only screen and (max-width: 1024px)").matches;
+// 	let isDesktop = window.matchMedia("only screen and (min-width: 1025px)").matches;
+
+// 	if (isMobile) {
+// 		return 1;
+// 	} else if (isTablet) {
+// 		return 2;
+// 	} else if (isDesktop) {
+// 		return 0;
+// 	}
+
+// };
 
 const getHeight = () => {
-	const currentSize = document.getElementsByTagName('body')[0].clientHeight;
-	console.log(currentSize);
-	return currentSize < 600 ? 1 : 0;
+	let isMobile = window.matchMedia("only screen and (max-width: 760px)").matches;
+	let isTablet = window.matchMedia("only screen and (max-width: 1024px)").matches;
+	let isDesktop = window.matchMedia("only screen and (min-width: 1025px)").matches;
+
+	if (isMobile) {
+		return 1;
+	} else if (isTablet) {
+		return 2;
+	} else if (isDesktop) {
+		return 0;
+	}
 }
 
 const Header = props => {
@@ -57,6 +75,13 @@ const Header = props => {
 
 	}
 
+	const styleWEBT ={
+		height: '40vh',
+		maxHeight: '40vh',
+		width: '100vw',
+		overflow: 'hidden',
+	}
+
 	const styleMOBILE = {
 		position:'absolute' ,
 		top:'50%', 
@@ -71,15 +96,17 @@ const Header = props => {
 		width:'40%', 
 		left:'10%'
 	}
-
+	
 	console.log(height);
+
+	
 	// const goToForm = () => {
 	// 	window.location = "https://share.hsforms.com/1NexTiVEwSeSyCS2kvQT-WA2y96v";
 	// }
 
 	return (
 		<>
-		<div className="brokers-header position-relative" style={ versionImage === 0? styleWEB : styleWEBM }>
+		<div className="brokers-header position-relative" style={ height === 0? styleWEB : height ===1? styleWEBM : styleWEBT }>
 			<div className="container-fluid d-flex flex-column">
 				<div>
 					<span className="header-title" style={versionImage === 0? styleweb : styleMOBILE}>
