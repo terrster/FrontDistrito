@@ -3,19 +3,24 @@ import { useSelector, useDispatch } from "react-redux";
 import axios from "../../utils/axios";
 import { Modal } from 'react-responsive-modal';
 import { Row, Button, Col } from 'react-bootstrap';
+import registerImage from '../../assets/img/enviado_chava-01.webp'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
+import { useHistory } from "react-router-dom";
 
 // Components
 import { updateLoader } from "../../redux/actions/loaderActions";
 import CiecForm from "../../forms/rfcForm";
 
 const RFCcomponent = (props) => {
+  const history = useHistory();
   const dispatch = useDispatch();
-  // Redux state
 
   const [initialValues, setInitialValues] = useState({});
   const [state, setState] = useState("");
   const [open, setOpen] = useState(false);
   const [mensaje , setMensaje] = useState("");
+  
 
   const onFormSubmit = async (dataForm) => {
     dispatch(updateLoader(true));
@@ -23,19 +28,30 @@ const RFCcomponent = (props) => {
     const {rfc, ciec } = data;
     try{
       const res = await axios.get(`api/ciec/${rfc}`);
-      const { idUser} = res.data.client;
+      console.log(res.data);
       if(res.data.code === 200){
+        const { idUser} = res.data.client;
         if(res.data.rfc.rfc || res.data.rfcPerson.rfcPerson === rfc){
           const id = res.data.rfc._id || res.data.rfcPerson._id;
           try {
                   const res = await axios.put(`api/ciec/${id}`, {...data, idUser});
                   if(res.data.code === 200){
-                    sessionStorage.setItem("user", JSON.stringify(res.data.user));
-                    setMensaje("Cambios guardados correctamente");
+                    setState("success");
+                    setMensaje({
+                      img: <img src={registerImage} alt="registerimage" style={{ width: '250px' }}/>,
+                      title: "¡Felicidades!",
+                      message: "El RFC se ha registrado correctamente",
+                      type: "success"
+                    });
                     setOpen(true);
                     dispatch(updateLoader(false));
                   } else{
-                    setMensaje("Error al guardar los cambios");
+                    setMensaje({
+                      img: <FontAwesomeIcon icon={faExclamationTriangle} size='3x' style={{color:'#D41919'}} />,
+                      title: "¡Error!",
+                      message: "El RFC no se ha podido registrar",
+                      type: "error"
+                    });
                     setOpen(true);
                     dispatch(updateLoader(false));
                   }
@@ -45,80 +61,28 @@ const RFCcomponent = (props) => {
         } else {
           setState("error");
           setOpen(true);
-          setMensaje("El RFC no existe en la base de datos");
+          setMensaje({
+            img: <FontAwesomeIcon icon={faExclamationTriangle} size='3x' style={{color:'#D41919'}} />,
+            title: "¡Error!",
+            message: "El RFC no se ha podido registrar",
+            type: "error"
+          });
         }
       }
       else{
         setOpen(true);
-        setMensaje("Error RFC no encontrado en la base de datos");
+        setMensaje({
+          img: <FontAwesomeIcon icon={faExclamationTriangle} size='3x' style={{color:'#D41919'}} />,
+          title: "¡Error!",
+          message: "El RFC no existe en la base de datos",
+          type: "error"
+        });
       }
     }catch(err){
       console.log("err", err);
     }
 
-    // if (rfc === RFC || rfcPerson){
-    //   if (idClient.appliance.length > 0) {
-    //     const appliance = idClient.appliance[idClient.appliance.length - 1];
-    //     if (appliance.hasOwnProperty("idComercialInfo")) {
-    //         const comercial = appliance.idComercialInfo;
-    //     const id = comercial._id;
-    //     console.log("id", id);
-    //     try {
-    //       const res = await axios.put(`api/ciec/${id}`, data);
-    //       sessionStorage.setItem("user", JSON.stringify(res.data.user));
-    //     } catch (error) {
-    //       console.log("Error de servicio", error);
-    //     }
-    //     }else{
-    //         try {
-    //             const res = await axios.post(`api/ciec/${id}`, data);
-    //             sessionStorage.setItem("user", JSON.stringify(res.data.user));
-    //           } catch (error) {
-    //             console.log("Error de servicio", error);
-    //           }
-    //     }
-    //   }
-    // } else {
-    //   setOpen(true);
-    //   setMensaje("El RFC no coincide con ninguno de los registros");
-    // }
-
-    
-    dispatch(updateLoader(false));
     }
-
-    // useEffect(() => {
-    //   const user = JSON.parse(sessionStorage.getItem("user"));
-    //   const id = user.hubspotDealId;
-    // } , [])
-
-    // useEffect(() => {
-  
-    //   const getData = async () => {
-    //     dispatch(updateLoader(true));
-    //     const user = JSON.parse(sessionStorage.getItem("user"));
-    //     const { idClient, hubspotDealId } = user;
-    //     // Si ya tienen una solicitud, se actualiza
-    //     if (idClient.appliance.length > 0) {
-    //       const appliance = idClient.appliance[idClient.appliance.length - 1];
-    //       if (appliance.hasOwnProperty("idComercialInfo")) {
-    //         const comercial = appliance.idComercialInfo;
-    //         setRFC(comercial.rfc);
-    //         const id = comercial._id;
-    //       }
-    //       if (appliance.hasOwnProperty("idGeneralInfo")) {
-    //         const general = appliance.idGeneralInfo;
-    //         const id = general._id;
-    //         setRfcPerson(general.rfc);
-    //         } else{
-    //           setRfcPerson("");
-    //         }
-    //     dispatch(updateLoader(false));
-    //   };
-    // }
-    // getData();
-    // }, []);
-
   return (
     <div>
         <div className='text-center outer'>   
@@ -130,17 +94,31 @@ const RFCcomponent = (props) => {
 
             </CiecForm>
         </div>
-				<Modal onClose={() => setOpen(false)} open={open} style={{ padding: '30px 40px!important', width: 'auto!important' }}>
+				<Modal onClose={() => setOpen(false)} open={open} center={true} classNames={{modal:'modalcustum'}} >
 					<Row className="d-flex justify-content-center">
 						<Col lg={6} sm={12} md={12} className="text-center">
 							<div className="metropolisReg fz29 blueDark fw400">
-								{mensaje}
+								<>
+                  {mensaje.img}
+                </>
+			          <div className="title-dp fz42 mb-18 fw500"  style={mensaje.type === 'error'? {color:'#D41919'}:{} }>
+                  {mensaje.title}
+                </div>
+			          <p className="text-dp">{mensaje.message}</p>
 							</div> 
 						</Col>
 					</Row>
 					<div className="text-center mt-30">
-						<Button className="btn-blue-general ml-auto mr-auto" style={{width: '250px'}} onClick={() => setOpen(false)}>
-							Aceptar
+						<Button className="btn-blue-general ml-auto mr-auto" style={{width: '250px'}} onClick={() => {
+              if (state === "success") {
+                history.push("/");
+              } else {
+                setOpen(false);
+              }
+            }}>
+							{
+                state === "success" ? "Aceptar" : "Cerrar"
+              }
 						</Button>
 					</div>
 				</Modal>
