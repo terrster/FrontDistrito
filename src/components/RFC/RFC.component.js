@@ -14,83 +14,110 @@ const RFCcomponent = (props) => {
 
   const [initialValues, setInitialValues] = useState({});
   const [state, setState] = useState("");
-  const [RFC , setRFC] = useState("");
-  const [rfcPerson, setRfcPerson] = useState("");
   const [open, setOpen] = useState(false);
   const [mensaje , setMensaje] = useState("");
 
   const onFormSubmit = async (dataForm) => {
     dispatch(updateLoader(true));
-    const user = JSON.parse(sessionStorage.getItem("user"));
-    const id = user._id;
-    const idClient = user.idClient;
     const data = dataForm;
     const {rfc, ciec } = data;
-    console.log("data", rfc, ciec);
-
-    if (rfc === RFC || rfcPerson){
-      if (idClient.appliance.length > 0) {
-        const appliance = idClient.appliance[idClient.appliance.length - 1];
-        if (appliance.hasOwnProperty("idComercialInfo")) {
-            const comercial = appliance.idComercialInfo;
-        const id = comercial._id;
-        console.log("id", id);
-        try {
-          const res = await axios.put(`api/ciec/${id}`, data);
-          sessionStorage.setItem("user", JSON.stringify(res.data.user));
-        } catch (error) {
-          console.log("Error de servicio", error);
-        }
-        }else{
-            try {
-                const res = await axios.post(`api/ciec/${id}`, data);
-                sessionStorage.setItem("user", JSON.stringify(res.data.user));
-              } catch (error) {
-                console.log("Error de servicio", error);
-              }
+    try{
+      const res = await axios.get(`api/ciec/${rfc}`);
+      const { idUser} = res.data.client;
+      if(res.data.code === 200){
+        if(res.data.rfc.rfc || res.data.rfcPerson.rfcPerson === rfc){
+          const id = res.data.rfc._id || res.data.rfcPerson._id;
+          try {
+                  const res = await axios.put(`api/ciec/${id}`, {...data, idUser});
+                  if(res.data.code === 200){
+                    sessionStorage.setItem("user", JSON.stringify(res.data.user));
+                    setMensaje("Cambios guardados correctamente");
+                    setOpen(true);
+                    dispatch(updateLoader(false));
+                  } else{
+                    setMensaje("Error al guardar los cambios");
+                    setOpen(true);
+                    dispatch(updateLoader(false));
+                  }
+                } catch (error) {
+                  console.log("Error de servicio", error);
+                }
+        } else {
+          setState("error");
+          setOpen(true);
+          setMensaje("El RFC no existe en la base de datos");
         }
       }
-    } else {
-      setOpen(true);
-      setMensaje("El RFC no coincide con ninguno de los registros");
+      else{
+        setOpen(true);
+        setMensaje("Error RFC no encontrado en la base de datos");
+      }
+    }catch(err){
+      console.log("err", err);
     }
+
+    // if (rfc === RFC || rfcPerson){
+    //   if (idClient.appliance.length > 0) {
+    //     const appliance = idClient.appliance[idClient.appliance.length - 1];
+    //     if (appliance.hasOwnProperty("idComercialInfo")) {
+    //         const comercial = appliance.idComercialInfo;
+    //     const id = comercial._id;
+    //     console.log("id", id);
+    //     try {
+    //       const res = await axios.put(`api/ciec/${id}`, data);
+    //       sessionStorage.setItem("user", JSON.stringify(res.data.user));
+    //     } catch (error) {
+    //       console.log("Error de servicio", error);
+    //     }
+    //     }else{
+    //         try {
+    //             const res = await axios.post(`api/ciec/${id}`, data);
+    //             sessionStorage.setItem("user", JSON.stringify(res.data.user));
+    //           } catch (error) {
+    //             console.log("Error de servicio", error);
+    //           }
+    //     }
+    //   }
+    // } else {
+    //   setOpen(true);
+    //   setMensaje("El RFC no coincide con ninguno de los registros");
+    // }
 
     
     dispatch(updateLoader(false));
     }
 
-    useEffect(() => {
-      const user = JSON.parse(sessionStorage.getItem("user"));
-      const id = user.hubspotDealId;
-    } , [])
+    // useEffect(() => {
+    //   const user = JSON.parse(sessionStorage.getItem("user"));
+    //   const id = user.hubspotDealId;
+    // } , [])
 
-    useEffect(() => {
+    // useEffect(() => {
   
-      const getData = async () => {
-        dispatch(updateLoader(true));
-        const user = JSON.parse(sessionStorage.getItem("user"));
-        const { idClient, hubspotDealId } = user;
-        // Si ya tienen una solicitud, se actualiza
-        if (idClient.appliance.length > 0) {
-          const appliance = idClient.appliance[idClient.appliance.length - 1];
-          if (appliance.hasOwnProperty("idComercialInfo")) {
-            const comercial = appliance.idComercialInfo;
-            console.log("comercial", comercial);
-            setRFC(comercial.rfc);
-            const id = comercial._id;
-          }
-          if (appliance.hasOwnProperty("idGeneralInfo")) {
-            const general = appliance.idGeneralInfo;
-            const id = general._id;
-            setRfcPerson(general.rfc);
-            } else{
-              setRfcPerson("");
-            }
-        dispatch(updateLoader(false));
-      };
-    }
-    getData();
-    }, []);
+    //   const getData = async () => {
+    //     dispatch(updateLoader(true));
+    //     const user = JSON.parse(sessionStorage.getItem("user"));
+    //     const { idClient, hubspotDealId } = user;
+    //     // Si ya tienen una solicitud, se actualiza
+    //     if (idClient.appliance.length > 0) {
+    //       const appliance = idClient.appliance[idClient.appliance.length - 1];
+    //       if (appliance.hasOwnProperty("idComercialInfo")) {
+    //         const comercial = appliance.idComercialInfo;
+    //         setRFC(comercial.rfc);
+    //         const id = comercial._id;
+    //       }
+    //       if (appliance.hasOwnProperty("idGeneralInfo")) {
+    //         const general = appliance.idGeneralInfo;
+    //         const id = general._id;
+    //         setRfcPerson(general.rfc);
+    //         } else{
+    //           setRfcPerson("");
+    //         }
+    //     dispatch(updateLoader(false));
+    //   };
+    // }
+    // getData();
+    // }, []);
 
   return (
     <div>

@@ -135,11 +135,7 @@ class App extends Component {
                   exact
                   component={Questions}
                 />
-                <PrivateRoute
-                  exact
-                  path="/ciec"
-                  component={ RFCcomponent }
-                />
+                <PrivateRoute exact path="/ciec"  component={ RFCcomponent }/>
                 <Route path="/terminos-y-condiciones" exact component={Terms} />
                 <Route path="/privacidad" exact component={Privacy} />
                 <Route path="/reset-password" exact component={ResetPassword} />
