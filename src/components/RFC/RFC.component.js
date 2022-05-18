@@ -6,6 +6,7 @@ import { Row, Button, Col } from 'react-bootstrap';
 import registerImage from '../../assets/img/enviado_chava-01.webp'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
+import Loader from '../Loader/Loader';
 import { useHistory } from "react-router-dom";
 
 // Components
@@ -58,6 +59,7 @@ const RFCcomponent = (props) => {
                 } catch (error) {
                   console.log("Error de servicio", error);
                 }
+                dispatch(updateLoader(false));
         } else {
           setState("error");
           setOpen(true);
@@ -67,6 +69,7 @@ const RFCcomponent = (props) => {
             message: "El RFC no se ha podido registrar",
             type: "error"
           });
+          dispatch(updateLoader(false));
         }
       }
       else{
@@ -77,11 +80,12 @@ const RFCcomponent = (props) => {
           message: "El RFC no existe en la base de datos",
           type: "error"
         });
+        dispatch(updateLoader(false));
       }
     }catch(err){
       console.log("err", err);
     }
-
+    dispatch(updateLoader(false));
     }
   return (
     <div>
@@ -94,6 +98,7 @@ const RFCcomponent = (props) => {
 
             </CiecForm>
         </div>
+        <Loader />
 				<Modal onClose={() => setOpen(false)} open={open} center={true} classNames={{modal:'modalcustum'}} >
 					<Row className="d-flex justify-content-center">
 						<Col lg={6} sm={12} md={12} className="text-center">

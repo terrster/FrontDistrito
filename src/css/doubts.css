@@ -1,6 +1,6 @@
 .input-doubt{
 	width: 100%;
-	max-width: 570px;
+	/* max-width: 570px; */
 	border-radius: 5px;
 	border: 1px solid var(--black24);
 	height: 50px;

@@ -5,6 +5,25 @@
     font-size: 1.5rem;
 }
 
+.tablet {
+    background-size: cover;
+    transform: translate(0%, -15%);
+    background-position: center;
+    background-repeat: no-repeat;
+    font-size: 1.5rem;
+}
+@media (max-width: 850px) {
+    .tablet {
+        background-size: 170%;
+        background-position: calc(51%) calc(37%);
+
+        /* transform: translate(0%, -15%);
+        background-position: center;
+        background-repeat: no-repeat;
+        font-size: 1.5rem; */
+    }
+}
+
 .imgcontainer{
     width: 100%;
     min-height: 100vh;

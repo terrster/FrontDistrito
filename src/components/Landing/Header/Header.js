@@ -34,9 +34,17 @@ const getHeight = () => {
 	if (isMobile) {
 		return 1;
 	} else if (isTablet) {
-		return 2;
+		if (window.innerWidth < 950 && window.innerHeight < 767) {
+			return 1;
+		} else {
+			return 2;
+		}
 	} else if (isDesktop) {
-		return 0;
+		if (window.innerWidth > 1080) {
+			return 0;
+		} else {
+			return 2;
+		}
 	}
 }
 
@@ -50,15 +58,28 @@ const Header = props => {
 	};
 
 	useEffect(() => {
-        setVersionImage(props.estado);
+        // setVersionImage(props.estado);
+		switch (height) {
+			case 0:
+				setVersionImage(0);
+				break;
+			case 1:
+				props.estado === 0 ? setVersionImage(0) : setVersionImage(1);
+				break;
+			case 2:
+				setVersionImage(0);
+				break;
+			default:
+				setVersionImage(0);
+				break;
+		}
 		setHeight(getHeight());
-    } , [props.estado]);
+    } , [height, props.estado]);
 
 
 	const styleWEB = {
 		height: '85vh',
 		maxHeight: '85vh',
-		width: '100vw',
 		overflow: 'hidden',
 		margin: '0 auto',
 		padding: '0',
@@ -67,7 +88,6 @@ const Header = props => {
 	const styleWEBM = {
 		height: '60vh',
 		maxHeight: '60vh',
-		width: '100vw',
 		overflow: 'hidden',
 		margin: '0 auto',
 		padding: '0',
@@ -96,8 +116,6 @@ const Header = props => {
 		width:'40%', 
 		left:'10%'
 	}
-	
-	console.log(height);
 
 	
 	// const goToForm = () => {
@@ -114,7 +132,7 @@ const Header = props => {
 					</span>
 				</div>
 				{
-					versionImage === 0 && height === 0?
+					height === 0?
 					<div>
 					<span className='header-text' style={{ position:'absolute', top:'53%', left:'10%' }}>
 						una solicitud <br/>
@@ -150,7 +168,7 @@ const Header = props => {
 										}
 									>
 										
-											<Button className="header-button fz18 bluePrimary" style={{position:'absolute', bottom:'12%', left:'17%'}}>
+											<Button className="header-button fz18 bluePrimary" style={{position:'absolute', bottom:'10%', left:'50%', transform:'translate(-50%,-5%)'}}>
 												comenzar solicitud
 											</Button>
 										
