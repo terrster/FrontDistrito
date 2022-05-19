@@ -14,6 +14,9 @@ import ReactPlayer from 'react-player';
 import AlliesLanding from "../Landing/AlliesLanding/AlliesLanding";
 import { Card } from 'react-bootstrap';
 
+
+// EDIT TEST
+
 const getSize = () => {
 	const currentSize = document.getElementsByTagName('body')[0].clientWidth;
 	return currentSize < 775 ? 1 : 0;
