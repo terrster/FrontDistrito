@@ -20,7 +20,8 @@ const NavBar = props => {
 		'impulsomx',
 		'visoor',
 		'oficinanoreste',
-		'dg-impulsando'
+		'dg-impulsando',
+		'se1'
 	];
 
 	useLayoutEffect(() => {
