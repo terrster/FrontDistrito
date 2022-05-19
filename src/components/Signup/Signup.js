@@ -106,8 +106,8 @@ const financialPartner = (partner) => {
           'Solicita un crédito para tu empresa o negocio a través de nuestro aliado Distrito Pyme.',
           'Podrás recibir las mejores opciones de crédito en menos de 15 min con un proceso fácil, rápido y sin papeleos.'
         ],
-        prefix: process.env.REACT_APP_CONFIGURATION === 'localhost' || process.env.REACT_APP_CONFIGURATION === 'development' ? 'Sureste1Dev - ' : 'Sureste1 - ',
-        channel: 'se1',
+        prefix: process.env.REACT_APP_CONFIGURATION === 'localhost' || process.env.REACT_APP_CONFIGURATION === 'development' ? 'SE1Dev - ' : 'SE1 - ',
+        channel: 'SE1',
         brokercode: '180238861'//
       }
 
@@ -188,7 +188,7 @@ const Signup = props => {
     return (
       <>
         <Loader />
-        {!partner || partner.channel === 'Oficinanoreste' || partner.channel === 'se1'? (
+        {!partner || partner.channel === 'Oficinanoreste' || partner.channel === 'SE1'? (
           <div className="container mt-30">
             <Title
               className="fz56 text-center blue-primary title-dp fw500"
