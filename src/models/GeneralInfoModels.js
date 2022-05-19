@@ -20,10 +20,18 @@ let carYear = {
 
 }
 
+let bankAccount = {
+	'1': {value: "Sí, ahí recibo mis ventas"},
+	'2': {value: "Sí, pero no la uso mucho"},
+	'0': {value: "No tengo"}
+
+}
+
 let generalInfoOptions = {
 	civilStatusOptions,
 	realtiveOptions,
-	carYear
+	carYear,
+	bankAccount
 }
 
 

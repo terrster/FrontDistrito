@@ -78,7 +78,6 @@ const Header = props => {
 
 
 	const styleWEB = {
-		height: '85vh',
 		maxHeight: '85vh',
 		overflow: 'hidden',
 		margin: '0 auto',
@@ -86,8 +85,8 @@ const Header = props => {
 		border: '0',
 	};
 	const styleWEBM = {
-		height: '85vh',
-		maxHeight: '85vh',
+
+		maxHeight: '80vh',
 		overflow: 'hidden',
 		margin: '0 auto',
 		padding: '0',
@@ -96,8 +95,8 @@ const Header = props => {
 	}
 
 	const styleWEBT ={
-		height: '40vh',
-		maxHeight: '40vh',
+		height: 'auto',
+		maxHeight: '80vh',
 		width: '100vw',
 		overflow: 'hidden',
 	}

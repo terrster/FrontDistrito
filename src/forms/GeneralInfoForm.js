@@ -513,18 +513,16 @@ let GeneralInfoForm = ({
               name="bankAccount" 
               cls="mt-3 mb-3"
               onChange={(event, newValue, previousValue) =>
-                setInitialValues({ ...initialValues, civilStatus: newValue })
+                setInitialValues({ ...initialValues, bankAccount: newValue })
               }>
                 <option className="metropolisReg" value="">
                   ¿Tienes cuenta bancaria?
                 </option>
-                {bankAccount.map((option, index) => {
-                  return (
-                    <option value={option.value} key={index}>
-                      {option.text}
-                    </option>
-                  );
-                })}
+                {Object.keys(generalInfoOptions.bankAccount).map((key, index) => (
+                <option value={key} key={index}>
+                  {generalInfoOptions.bankAccount[key].value}
+                </option>
+              ))}
               </Field>
             </Col>
           </Row>
