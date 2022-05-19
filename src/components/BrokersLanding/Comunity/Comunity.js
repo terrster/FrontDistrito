@@ -101,7 +101,7 @@ const Comunity = ({hubspotInfo, origen, estado}) =>{
   return (
     <div className='imgcontainer' id="comunityBrokers">
 			
-        <Card.Header id="header"  className={`title-dp-blue fz48  fw300 text-left line-height mt-3`}><span className={`${origen === 'landing'? 'title-dp' : 'title'}`}> sé parte de nuestra </span> comunidad </Card.Header>
+        <Card.Header id="header"  className={`title-dp-blue fz48  fw300 text-left mt-3`} style={{lineHeight:'2.4rem'}}><span className={`${origen === 'landing'? 'title-dp' : 'title'}`}> sé parte de nuestra </span> comunidad </Card.Header>
         
         <div className={height === 2 ? 'tablet' : 'backgroundComunity'} style={{ backgroundImage: `url(${images[versionImage]})`, width: null, minHeight: '100vh', flex: 1 }}>
 					

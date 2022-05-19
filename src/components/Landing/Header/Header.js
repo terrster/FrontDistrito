@@ -86,8 +86,8 @@ const Header = props => {
 		border: '0',
 	};
 	const styleWEBM = {
-		height: '60vh',
-		maxHeight: '60vh',
+		height: '85vh',
+		maxHeight: '85vh',
 		overflow: 'hidden',
 		margin: '0 auto',
 		padding: '0',
@@ -134,7 +134,7 @@ const Header = props => {
 				{
 					height === 0?
 					<div>
-					<span className='header-text' style={{ position:'absolute', top:'53%', left:'10%' }}>
+					<span className='header-text' style={{ position:'absolute', top:'49%', left:'10%' }}>
 						una solicitud <br/>
 						las mejores opciones <br/>
 						menos de 15 minutos

@@ -76,7 +76,7 @@
    -webkit-transform: translate(-50%, -50%);
    background-color: #F24C5A;
    font-family: 'Metropolis-Regular';
-   font-weight: bold;
+   font-weight: normal;
  }
  
  .video-brokers{
@@ -211,7 +211,6 @@
  
  .brokers-button-final{
    font-family: 'Metropolis-Regular';
-   font-weight: bold;
    width: 20rem !important;
    position: absolute;
    left: 50%;

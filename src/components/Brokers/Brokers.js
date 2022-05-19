@@ -97,7 +97,9 @@ const Brokers = () => {
                 • tarjeta de presentación digital <br />
                 • herramientas de marketing y ventas <br />
                 • acceso a biblioteca virtual <br />
-                • y más <br />
+                • y más 
+                <br />
+                 <br />
                 <div className="title-dp fz42 fw500 mb-1" style={{color:'#213970'}}>
                 <span> ¿qué necesitas ? </span> 
                 </div>

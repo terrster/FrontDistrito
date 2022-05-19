@@ -509,7 +509,12 @@ let GeneralInfoForm = ({
           user.idClient.type !== "PM" &&
           <Row>
             <Col lg={12} md={12} sm={12}>
-              <Field component={renderSelectField} name="bankAccount" cls="mt-3 mb-3">
+              <Field component={renderSelectField} 
+              name="bankAccount" 
+              cls="mt-3 mb-3"
+              onChange={(event, newValue, previousValue) =>
+                setInitialValues({ ...initialValues, civilStatus: newValue })
+              }>
                 <option className="metropolisReg" value="">
                   ¿Tienes cuenta bancaria?
                 </option>

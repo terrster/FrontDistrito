@@ -57,7 +57,7 @@
     .backgroundComunity {
         background-position-x: center;
         background-position-y: calc(0%);
-        background-size: 150%;
+        background-size: 140%;
         font-size: 1.2rem;
         transform: translate(0%, -5%);
     }
