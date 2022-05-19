@@ -104,12 +104,25 @@
 	cursor: pointer;
 }
 
+.personas-button:hover{
+  transition: all 0.3s ease-in-out;
+	box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.6);
+	background-color: #023473;
+	color: #ffffff !important;
+	cursor: pointer;
+}
+
 @media (max-width: 800px) {
   .personas-button-web{
     width: 20vw;
     height: 6vh;
     bottom: 2%;
     right: 1%;
+  }
+
+  .personas-button{
+    width: 70%;
+    height: 6vh;
   }
 }
 

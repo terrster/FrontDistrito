@@ -13,20 +13,17 @@ const CreditOption = (props) => {
   
   return (
     <>
-      <div id="creditOption" className={`${props.estado === 0 ? 'pt-4 mb-21 pb-120 background' : 'mt-5 mb-3'} text-center ml-auto mr-auto  `}>
+      <div id="creditOption" className={`${props.estado === 0 ? 'pt-4 mb-21 pb-120 background' : 'mt-5 mb-3'} text-center ml-auto mr-auto`}>
 
-        <Row className="d-inline-flex justify-content-center">
+        <Row className="d-inline-flex justify-content-center w-100">
          <Col xl={3} lg={3} md={5} sm={12} className="d-flex justify-content-center">
             <Card className="fondo-card-white left-content">
               <Card.Header id="header"  className="title-dp fz32  fw300 text-left line-height"><span className='title-dp-coral'>8 </span>de cada 10 solicitudes recibe una opción de crédito</Card.Header>
               <Card.Body>
                 <Card.Title></Card.Title>
-                <Card.Text className={`${props.estado === 0 ? 'text-left' : 'text-center'} text-dp fz14 `}>
+                <Card.Text className={`text-left text-dp fz14 `}>
                   <p className="bancos-list">
-                  existe una infinidad de opciones de
-                  crédito, pero solo una plataforma
-                  con todas esas opciones en una 
-                  sola solicitud
+                  existe una infinidad de opciones de crédito, pero solo distrito pyme te ofrece las mejores opciones de las mejores instituciones haciendo una sola solicitud
                   </p>
                 </Card.Text>
               </Card.Body>

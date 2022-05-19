@@ -9,6 +9,20 @@ import Loader from "../../Loader/Loader";
 import "../../../css/doubts.css";
 import chicaContacto from '../../../assets/img/chicaContacto.png'
 
+const getHeight = () => {
+	let isMobile = window.matchMedia("only screen and (max-width: 760px)").matches;
+	let isTablet = window.matchMedia("only screen and (max-width: 1024px)").matches;
+	let isDesktop = window.matchMedia("only screen and (min-width: 1025px)").matches;
+
+	if (isMobile) {
+		return 1;
+	} else if (isTablet) {
+			return 2;
+	} else if (isDesktop) {
+			return 0;
+	}
+}
+
 const Contact = (props) => {
 	const dispatch = useDispatch();
 	const [success, setSuccess] = useState({
@@ -21,9 +35,19 @@ const Contact = (props) => {
 		msg: ''
 	});
 
+	const [height, setHeight] = useState(getHeight());
+
 	useEffect(() => {
 		window.scrollTo(0, 0);
+		setHeight(getHeight());
 	}, []);
+
+	useEffect(() => {
+        window.addEventListener('resize', () => setHeight(getHeight()));
+        return () => {
+            window.removeEventListener('resize', () => setHeight(getHeight()));
+        }
+    }  , []);
 
 	const initialValues = {
 		name: '',
@@ -72,7 +96,7 @@ const Contact = (props) => {
 				<div className="mr-auto ml-auto">
 					<Row style={{margin:'0'}}>
 						{
-							props.estado === 0 ?
+							height === 0 ?
 								<>
 									<Col style={{marginLeft:'5%'}} >
 										<img src={chicaContacto} width="450px" alt="Tito lupa" style={{marginBottom : '0%'}} />

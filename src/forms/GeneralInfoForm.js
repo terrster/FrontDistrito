@@ -422,6 +422,9 @@ let GeneralInfoForm = ({
           name="curp"
           cls="mb-3 mt-24"
           normalize={upper}
+          onChange={(event, newValue, previousValue) =>
+            setInitialValues({ ...initialValues, curp: newValue })
+          }
         />
 
         

@@ -37,7 +37,7 @@
 	font-size: 1.75rem;
 }
 
-@media (min-width: 900px) and (max-width: 1800px) {
+@media (min-width: 1800px) and (max-width: 1800px) {
 	.header-title{
 		font-size: 3rem;
 	}
@@ -45,9 +45,17 @@
 		font-size: 1.25rem;
 	}
 }
+@media (min-width: 900px) and (max-width: 1800px) {
+	.header-title{
+		font-size: 2.5rem;
+	}
+	.header-text{
+		font-size: 1.25rem;
+	}
+}
 @media (min-width: 100px) and (max-width: 900px) {
 	.header-title{
-		font-size: 2.2rem;
+		font-size: 2.3rem;
 	}
 }
 

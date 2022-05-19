@@ -10,12 +10,35 @@ const images = [banner_web, banner_mobile];
 
 
 var calculated = false;
+const getHeight = () => {
+	let isMobile = window.matchMedia("only screen and (max-width: 760px)").matches;
+	let isTablet = window.matchMedia("only screen and (max-width: 1024px)").matches;
+	let isDesktop = window.matchMedia("only screen and (min-width: 1025px)").matches;
+
+	if (isMobile) {
+		return 1;
+	} else if (isTablet) {
+		if (window.innerWidth < 950 && window.innerHeight < 767) {
+			return 1;
+		} else {
+			return 2;
+		}
+	} else if (isDesktop) {
+		if (window.innerWidth > 1080) {
+			return 0;
+		} else {
+			return 2;
+		}
+	}
+}
 
 const Comunity = ({hubspotInfo, origen, estado}) =>{
 
   const [versionImage, setVersionImage] = useState(0);
+  const [height, setHeight] = useState(getHeight());
 
   useEffect(() => {
+    setHeight(getHeight());
 		setVersionImage(estado)
 	}, [estado]);
 
@@ -80,7 +103,7 @@ const Comunity = ({hubspotInfo, origen, estado}) =>{
 			
         <Card.Header id="header"  className={`title-dp-blue fz48  fw300 text-left line-height mt-3`}><span className={`${origen === 'landing'? 'title-dp' : 'title'}`}> sé parte de nuestra </span> comunidad </Card.Header>
         
-        <div className='backgroundComunity' style={{ backgroundImage: `url(${images[versionImage]})`, width: null, minHeight: '100vh', flex: 1 }}>
+        <div className={height === 2 ? 'tablet' : 'backgroundComunity'} style={{ backgroundImage: `url(${images[versionImage]})`, width: null, minHeight: '100vh', flex: 1 }}>
 					
             
                 <div id="comunityBrokers" className="mt-5">
