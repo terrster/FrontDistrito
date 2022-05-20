@@ -10,8 +10,16 @@ import Axios from "../../utils/axios";
 import Slider from '../BrokersLanding/Aliados/Allies';
 import Comunity from '../BrokersLanding/Comunity/Comunity';
 import CreditOption from "./CreditOption/CreditOption";
+import Products from "./Products/Products";
+import AlliesLanding from "./AlliesLanding/AlliesLanding";
+const getSize = () => {
+	const currentSize = document.getElementsByTagName('body')[0].clientWidth;
+	return currentSize < 775 ? 1 : 0;
+};
 
 const Landing = () => {
+
+    const [version, setVersion] = useState(getSize());
 
     useEffect(() => {
         const addVisit = async () => {
@@ -58,19 +66,31 @@ const Landing = () => {
         }
     }, [socket]);
 
+    useEffect(() => {
+        window.addEventListener('resize', () => setVersion(getSize()));
+        return () => {
+            window.removeEventListener('resize', () => setVersion(getSize()));
+        }
+    }  , []);
+
 
     return (
-        <div className="">
-            <Header title={"¿Necesitas financiamiento?"} text={"Recibe las mejores ofertas de crédito "} highlighted={"¡En menos de 24 horas!"} buttonText={"Solicitar ahora"} />
-            <LandSimulator />
+        <div className="casa">
+            <Header estado={version} buttonText={"Solicitar ahora"} />
+            <LandSimulator estado={version}/>
             <div className="container-fluid">     
-                <CreditOption />
-                <HowWorks />
+                <CreditOption estado={version}/>
+                <Products estado={version}/>
+                <div className='container-fluid'>
+                    <HowWorks estado={version} />
+                </div>
                 <Video />
-                <Slider />
+            </div>
+                <AlliesLanding estado={version}/>
+            <div className="container-fluid" style={{padding: '0'}}>  
                 {/* <AboutUs />       */}
-                <Comunity hubspotInfo={hubspotInfo} origen={'landing'}/>
-                <Contact /> 
+                <Comunity hubspotInfo={hubspotInfo} origen={'landing'} estado={version}/>
+                <Contact estado= {version}/> 
             </div>
         </div>
     );

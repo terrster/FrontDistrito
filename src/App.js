@@ -69,6 +69,7 @@ import store from "./redux/store";
 
 // UTILS
 import isAuthenticated from "./utils/isAuthenticated";
+// import  RFCcomponent  from "./components/RFC/RFC.component";
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
@@ -105,7 +106,7 @@ class App extends Component {
           style={{ height: "100vh" }}
         >
           <Provider store={store}>
-            <NavBar url={this.props.navegationurl} />
+            <NavBar url={this.props.navegationurl}/>
             <div className="flex-grow-1" style={{ height: "auto" }}>
               <Switch>
                 <PrivateRoute
@@ -134,6 +135,7 @@ class App extends Component {
                   exact
                   component={Questions}
                 />
+                {/* <PrivateRoute exact path="/ciec"  component={ RFCcomponent }/> */}
                 <Route path="/terminos-y-condiciones" exact component={Terms} />
                 <Route path="/privacidad" exact component={Privacy} />
                 <Route path="/reset-password" exact component={ResetPassword} />
@@ -189,7 +191,6 @@ class App extends Component {
 
                 <Route path="/brokers" exact component = {BrokersLanding}/>
                 <Route path="/dashboard" exact component={Dashboard} />
-
                 
                 <Route path="/aliado_financiero" exact component = {AlliePartner}/>
                 <Route path="/solicitud_enviada_aliado" exact component={ThankyouPageAllie} />

@@ -3,8 +3,8 @@ import Title from '../Generic/Title';
 import { Carousel, Container, Alert } from 'react-bootstrap'
 import BrokersForms from "../../forms/BrokersForm";
 import axios from '../../utils/axios';
-import BANNER_WEB from '../../assets/img/brokers/broker_banner-2.jpg';
-import BANNER_MOVIL from '../../assets/img/brokers/WEBMOVIL_2.jpg';
+import BANNER_WEB from '../../assets/img/brokers/banner_web.jpg';
+import BANNER_MOVIL from '../../assets/img/brokers/banner_móvil.jpg';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import { updateLoader } from "../../redux/actions/loaderActions";
@@ -72,39 +72,45 @@ const Brokers = () => {
         <>
             <Loader/>
 
-            <Carousel className="mb-2" controls={false} indicators={false}>
-                <Carousel.Item>
-                    <img className="d-block w-100" src={images[versionImage]} alt="brokersbanner" />
-                </Carousel.Item>
-            </Carousel>
+            <div style={{maxHeight:'85vh', height:'100vh', overflow:'hidden'}}>
 
-            <Title title="Conviértete en Broker Digital DP" className="title-dp fz42 fw500 mb-1 text-center" />
+                    <img className="d-block w-100" src={images[versionImage]} alt="brokersbanner" />
+            </div>
+                
+            <div className="title-dp fz42 fw500 mb-1 text-center mt-2" style={{color:'#213970'}}>
+                <span style={{color:'#EF4E5B'}}> conviértete </span> en broker digital dp
+            </div>
 
             <Container>
-                <div className="metropolisReg fz12 blackBlue text-justify">
-                Nuestro programa de Brokers Digitales, te permite adquirir una membresía exclusiva de nuestra plataforma y las herramientas necesarias que te ayudarán a colocar más créditos y aumentar tus ingresos; todo en menos de 15 minutos.
+                <div className="metropolisReg fz21 text-justify blackBlue">
+                adquiere tu <span style={{fontSize:'1.5rem', color:'#213970'}} className='title-dp'>membresía azul</span> por un <span style={{fontSize:'1.5rem', color:'#213970'}} className='title-dp'>pago único de $3,900 pesos</span> y recibe las mejores herramientas que te ayudarán a colocar más créditos, ser más rápido y generar más ingresos.
 
                 <br/>
                 <br/>
 
-                <Title title="Herramientas" className="subtitle-dp fz22 mb-1" />
-                • ID exclusivo que te identifica como broker <br />
-                • Acceso a nuestro CRM <br />
-                • Capacitación continua <br />
-                • Plan de marketing y desarrollo de tu propia marca <br />
-                • Tarjeta de presentación digital <br />
-                • Y más <br />
-
-                <br/>
-                <Title title="¿Qué necesitas?" className="subtitle-dp fz22 mb-1" />
-                • Gusto por las ventas <br />
-                • Conocimiento del sector pyme <br />
-                • Contar con cartera de prospectos <br />
+                <div className="title-dp fz42 mt-1 fw500" style={{color:'#213970'}}>
+                <span> herramientas </span> 
+                </div>
+                • id exclusivo que te identifica como broker <br />
+                • acceso único a nuestro CRM <br />
+                • plan de capacitación semana <br />
+                • tarjeta de presentación digital <br />
+                • herramientas de marketing y ventas <br />
+                • acceso a biblioteca virtual <br />
+                • y más 
+                <br />
+                 <br />
+                <div className="title-dp fz42 fw500 mb-1" style={{color:'#213970'}}>
+                <span> ¿qué necesitas ? </span> 
+                </div>
+                • gusto por las ventas <br />
+                • conocimiento del sector pyme y/o hipotecario <br />
+                • contar con cartera de prospectos <br />
                 </div>
                 <br/>
         
-                <div className="metropolisReg fz12 blackBlue text-justify">
-                Al registrarte recibirás toda la información en tu correo y nuestro equipo de Atención a Brokers Digitales te contactará para que comiences ¡YA!
+                <div className="metropolisReg fz21 text-justify blackBlue">
+                al registrarte recibirás toda la información en tu correo y nuestro equipo de atención a brokers digitales te contactará para que comiences ¡YA!
                 </div>
                 <br/>
                 

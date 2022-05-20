@@ -11,8 +11,19 @@ import { useHistory } from 'react-router-dom';
 import io from 'socket.io-client';
 import Title from '../Generic/Title';
 import ReactPlayer from 'react-player';
+import AlliesLanding from "../Landing/AlliesLanding/AlliesLanding";
+import { Card } from 'react-bootstrap';
+
+
+// EDIT TEST
+
+const getSize = () => {
+	const currentSize = document.getElementsByTagName('body')[0].clientWidth;
+	return currentSize < 775 ? 1 : 0;
+};
 
 const BrokersLanding = () => {
+  const [version, setVersion] = useState(getSize());
 
   document.addEventListener("scroll", () => {
     let floatButton = document.getElementById("float-button-dp");
@@ -70,16 +81,25 @@ const BrokersLanding = () => {
   }, [socket]);
 
   window.scrollTo(0, 0)
+
+  useEffect(() => {
+    window.addEventListener('resize', () => setVersion(getSize()));
+    return () => {
+        window.removeEventListener('resize', () => setVersion(getSize()));
+    }
+}  , []);
   return (
     <>
       <BannerBrokers />
       <div className="brokers-container container-fluid">
-        <Info />
+        <div style={{ backgroundColor:'var(--black04)', margin:'0',}}>
+          <Info/>
+        </div>
         <Cards />
-        <Allies />
-        <Comunity hubspotInfo={hubspotInfo} />
+        <AlliesLanding estado={version}/>
+        <Comunity hubspotInfo={hubspotInfo} estado={version}/>
         {/* <Testimonio /> */}
-        <Title title="8 De Cada 10 Solicitudes Recibe Una Opción De Crédito" className="title-dp fw500 fz32 text-center pb-3" />
+        <Card.Header id="header"  className="title-dp-blue fz42 text-left line-height"><span className='title'> 8 de cada 10 </span> solicitudes recibe una opción de crédito </Card.Header>
         <div style={{ maxWidth: '1000px' }} className="ml-auto mr-auto pb-5">
           <ReactPlayer width="100%" height="400px" style={{ maxWidth: '1000' }} url="https://www.youtube.com/watch?v=yhs3J5ZTvZU" />
         </div>
@@ -87,7 +107,7 @@ const BrokersLanding = () => {
       </div>
       <BannerFinal />
 
-      <div id="float-button-dp" className="float-button float-button-dp" onClick={() => { history.push("/brokers-registro") }}>Conviértete en Broker</div>
+      <div id="float-button-dp" className="float-button float-button-dp" onClick={() => { history.push("/brokers-registro") }}>conviértete en broker</div>
 
       <style>{"\
           #clgo{\

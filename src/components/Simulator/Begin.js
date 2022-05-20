@@ -3,6 +3,8 @@ import Title from '../Generic/Title';
 import { Button } from 'react-bootstrap';
 import CurrencyInput from 'react-currency-input';
 import { useDispatch, useSelector } from 'react-redux';
+import '../../css/land-simulator.css'
+
 
 // REDUX ACTIONS
 import {
@@ -10,6 +12,7 @@ import {
 	updateCont,
 	updateStep
 } from '../../redux/actions/simulatorActions';
+
 
 const Begin = props => {
 
@@ -45,14 +48,22 @@ const Begin = props => {
 		}
 	};
 
+	const webstyle = {
+		width: '80%',
+		marginTop: '2rem'
+	}
+	const mobilestyle = {
+		width: '100%',
+		marginTop: '1.5rem'
+	}
 	return (
-		<div className="center-buttons">
+		<div className="center-buttons align-self-center" style={props.estado.estado === 0 ? webstyle : mobilestyle}>
 			<Title
 				className="title-dp ls-11 lh-15 fz32 mb-24"
-				title="¿Cuánto dinero necesitas?"
+				title="¿cuánto dinero necesitas?"
 			/>
 			<div className="fz29 text-dp fw500 lh-15 ls-11">
-				Necesito{' '}
+				necesito{' '}
 				<CurrencyInput
 					className="simulator-input"
 					value={amount}
@@ -63,17 +74,16 @@ const Begin = props => {
 				/>{' '}
 				para mi negocio
 			</div>
-			{ error && <strong><span style={{color:'var(--primary-color)', fontSize: '0.8em'}} >Debe ingresar una cantidad mayor a 25000</span></strong>
+			{ error && <strong><span style={{color:'var(--primary-color)', fontSize: '0.8em'}} >debe ingresar una cantidad mayor a 25000</span></strong>
 			}
 			
 			<Button
-				className="btn-blue-general mt-45 fz24"
-				style={{ cursor: error ? "not-allowed" : "pointer"}}
+				className="simulator-button  ml-auto mr-auto mt-30"
+				style={{ cursor: error ? "not-allowed" : "pointer", width: '100%' }}
 				disabled={disabled}
 				onClick={changeStep}
-				style={{width: '250px'}}
 			>
-				Siguiente
+				siguiente
 			</Button>
 		</div>
 	);

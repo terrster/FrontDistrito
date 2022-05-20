@@ -13,6 +13,10 @@
 	--blackNav : #3d3d3d;
 }
 
+.casa{
+	padding: 0;
+}
+
 .react-responsive-modal-modal{
 	top: 30%;
 }
@@ -121,7 +125,15 @@
 
 .divContainer{ display: block;}
 
+.bannerAllies {
+
+	width: 100% !important;
+	padding-top: 50px;
+}
+
 /* MARGIN TOP */
+
+.mt-420{margin-top: 420px;}
 
 .mt-158{margin-top: 158px;}
 
@@ -151,7 +163,11 @@
 
 .mt-11{ margin-top: 11px;}
 
+.mt-10{margin-top: 10px;}
+
 .mt-5{ margin-top: 5px;}
+
+.mt-1{margin-top: -300%;}
 
 /* MARGIN BOTTOM */
 
@@ -191,12 +207,34 @@
 
 .mb-3{margin-bottom: 3px;}
 
+.mb-comunity{
+	margin-bottom:12%;
+}
 
 /* MARGIN LEFT */
 
 .ml-39{margin-left: 39px;}
 
+
+.justify-right{
+	justify-content: right;
+}
+
+/* MARGIN LEFT */
+
+.ml-comunity{
+	margin-left: 15%;
+}
+
+.ml-15 {
+	margin-left: 18%;
+}
+
+.mr-20{margin-right: -65%;}
+
 /* FONT SIZE */
+.fz60 {font-size: 4rem !important;}
+
 .fz56 {font-size: 3.5rem !important;}
 
 .fz50 { font-size: 3.125rem !important; }
@@ -295,9 +333,15 @@
 
 /* PADDINGS */
 
+.plr-0 {padding-left: 0px; padding-right: 0px;}
+
 .plr-10{ padding-top: 1px;}
 
 .plr-20{ padding-left: 20px; padding-right: 20px;}
+
+.plr-60 {padding-left: 60px; padding-right: 60px;}
+
+.pt-40 {padding-top: 40px;}
 
 .pt-120{ padding-top: 120px;}
 
@@ -305,6 +349,13 @@
 
 .ptb-60 { padding-top: 60px; padding-bottom: 60px;}
 
+.pb-120 {padding-bottom: 120px;}
+
+.pb-70 {padding-bottom: 70px;}
+
+.pb-40 {padding-bottom: 40px;}
+
+.pb-20 {padding-bottom: 20px;}
 /*	OPACITY	*/
 
 .opacity-50{ opacity: 0.5 }
@@ -468,6 +519,16 @@
 	color: #023e95;
 }
 
+.title-dp-coral{
+	font-family: 'coolvetica_rg';
+	color: #F24C5A;
+}
+
+.title-dp-blue{
+	font-family: 'coolvetica_rg';
+	color: #0468BF;
+}
+
 .subtitle-dp{
 	font-family: 'Metropolis-Regular';
 	color: #3D3D3D;
@@ -481,6 +542,22 @@
 .text-dp-white{
 	font-family: 'Metropolis-Regular';
 	color: #FFFFFF;
+}
+
+.text-dp-white-bold{
+	font-family: 'Metropolis-Bold';
+	color: #FFFFFF;
+}
+
+.text-dp-gray{
+	font-family: 'Metropolis-Regular';
+	color: #575756;
+}
+
+
+
+.line-height{
+	line-height: 2rem;
 }
 
 .text-form-dp { color: #333333 !important; }
@@ -638,3 +715,4 @@
 	max-width: 100% !important;
 	min-width: 100% !important;
 }
+

@@ -77,7 +77,6 @@
 	border-bottom: 2px solid var(--dark-blue) !important;
 	width: 100%;
 	max-width: 280px;
-	margin-left: 10px;
 	height: 50px;
 }
 
@@ -112,3 +111,32 @@
 	top: 23px;
 	cursor: pointer;
 }
+
+.subtitle-text{
+	margin-right: 65%;
+}
+
+.simulator-button{
+	
+	font-family: 'Metropolis-Regular' !important;
+	color: #fff !important;
+	-webkit-box-pack: center !important;
+	-ms-flex-pack: center !important;
+	justify-content: center !important;
+	background: #F24C5A !important;
+	width: 200px !important;
+	font-weight: bold !important;
+	border-radius: 25px !important;
+	border:none !important;
+
+
+}
+
+ 
+.simulator-button:hover {
+	-webkit-box-pack: center !important;
+	-ms-flex-pack: center !important;
+	justify-content: center !important;
+	background: #023473!important;
+	color: #fff !important;
+  }

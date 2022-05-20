@@ -1,90 +1,144 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, version } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { Button, Carousel } from 'react-bootstrap';
 
 import "../../../css/header.css";
-import firstImage from '../../../assets/img/carousel/carrusel-02.jpg';
+import '../../../css/general.css';
+import firstImage from '../../../assets/img/carousel/homedp_bannerprincipal_sintexto_WEB(1).jpg';
 import secondImage from '../../../assets/img/carousel/BROKER.png';
-import firstImageMobie from '../../../assets/img/carousel/mobile-carrusel-02.jpg';
+import firstImageMobie from '../../../assets/img/carousel/homedp_bannerprincipal_sintexto_MOBILE.webp';
 import secondImageMobie from '../../../assets/img/carousel/BROKERMOVIL.jpg';
+import { text } from '@fortawesome/fontawesome-svg-core';
 // images[numImage][NormalImage, Mobile Image]
-const images = [
-	[firstImage, firstImageMobie],
-	[secondImage, secondImageMobie],
-];
+const images = [firstImage, firstImageMobie,];
+// const getSize = () => {
+// 	let isMobile = window.matchMedia("only screen and (max-width: 760px)").matches;
+// 	let isTablet = window.matchMedia("only screen and (max-width: 1024px)").matches;
+// 	let isDesktop = window.matchMedia("only screen and (min-width: 1025px)").matches;
 
-const getVersionImage = () => {
-	const currentSize = document.getElementsByTagName('body')[0].clientWidth;
-	return currentSize < 775 ? 1 : 0;
-};
+// 	if (isMobile) {
+// 		return 1;
+// 	} else if (isTablet) {
+// 		return 2;
+// 	} else if (isDesktop) {
+// 		return 0;
+// 	}
+
+// };
+
+const getHeight = () => {
+	let isMobile = window.matchMedia("only screen and (max-width: 760px)").matches;
+	let isTablet = window.matchMedia("only screen and (max-width: 1024px)").matches;
+	let isDesktop = window.matchMedia("only screen and (min-width: 1025px)").matches;
+
+	if (isMobile) {
+		return 1;
+	} else if (isTablet) {
+		if (window.innerWidth < 950 && window.innerHeight < 767) {
+			return 1;
+		} else {
+			return 2;
+		}
+	} else if (isDesktop) {
+		if (window.innerWidth > 1080) {
+			return 0;
+		} else {
+			return 2;
+		}
+	}
+}
 
 const Header = props => {
-	const [versionImage, setVersionImage] = useState(getVersionImage());
+	const [versionImage, setVersionImage] = useState(props.estado);
+	const [height, setHeight] = useState(getHeight());
 	const [indexImage, setIndexImage] = useState(0);
-	const [currentImage, setCurrentImage] = useState(
-		images[indexImage][versionImage]
-	);
 
 	const handleSelect = (selectedIndex, e) => {
 		setIndexImage(selectedIndex);
 	};
 
-	window.addEventListener('resize', () => setVersionImage(getVersionImage()));
-
 	useEffect(() => {
-		setCurrentImage(images[indexImage][versionImage]);
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [versionImage, indexImage]);
+        // setVersionImage(props.estado);
+		switch (height) {
+			case 0:
+				setVersionImage(0);
+				break;
+			case 1:
+				props.estado === 0 ? setVersionImage(0) : setVersionImage(1);
+				break;
+			case 2:
+				setVersionImage(0);
+				break;
+			default:
+				setVersionImage(0);
+				break;
+		}
+		setHeight(getHeight());
+    } , [height, props.estado]);
 
-	const styleWEB = 'header-button fz24 bluePrimary btn-web';
-	const styleWEBM = 'header-button fz24 bluePrimary btn-web-mov';
 
+	const styleWEB = {
+		maxHeight: '85vh',
+		overflow: 'hidden',
+		margin: '0 auto',
+		padding: '0',
+		border: '0',
+	};
+	const styleWEBM = {
+
+		maxHeight: '80vh',
+		overflow: 'hidden',
+		margin: '0 auto',
+		padding: '0',
+		border: '0',
+
+	}
+
+	const styleWEBT ={
+		height: 'auto',
+		maxHeight: '80vh',
+		width: '100vw',
+		overflow: 'hidden',
+	}
+
+	const styleMOBILE = {
+		position:'absolute' ,
+		top:'50%', 
+		width:'90%', 
+		left:'5%',
+		textAlign:'center',
+		fontSize:'2rem'
+	}
+	const styleweb = {
+		position:'absolute' ,
+		top:'14%', 
+		width:'40%', 
+		left:'10%'
+	}
+
+	
 	// const goToForm = () => {
 	// 	window.location = "https://share.hsforms.com/1NexTiVEwSeSyCS2kvQT-WA2y96v";
 	// }
 
 	return (
-		<div style={{ width: '100%' }}>
-			<Carousel
-        		activeIndex={indexImage}
-				onSelect={handleSelect}
-				controls={false} 
-				indicators={false}
-			>
-				<Carousel.Item>
-					<img
-						className="d-block w-100"
-						src={images[0][versionImage]}
-						alt="First slide"
-					/>
-					<Carousel.Caption>
-						<div className="text-center ml-auto mr-auto">
-							<div className="vertical-center mr-auto ml-auto container" style={{ letterSpacing: 0.8 }}>
-								<h3 className="d-block d-md-none coolvetica fz29 white mb-34 header-title">
-									La mejor plataforma para solicitar crédito para tu negocio
-								</h3>
-								<h3 className="d-none d-md-block coolvetica fz48 white mb-34 header-title">
-									La mejor plataforma para solicitar crédito para tu negocio
-								</h3>
-								<div
-									className="metropolisReg white fz24 lh133"
-									style={{ letterSpacing: 0.8 }}
-								>
-									<p>Todas las opciones de crédito en una sola solicitud</p>
-									<p className="metropolisMed ">¡En menos de 15 minutos!</p>
-								</div>
-
-
-								{/* <div className="d-none d-md-block">
-									<div className="coolvetica fz48 white mb-34 header-title">
-										Todas las opciones de crédito en una sola solicitud
-									</div>
-									<div className="metropolisReg white fz24 lh133 mt-72">
-										¡Recíbelas en menos de 15 minutos!
-									</div>
-								</div> */}
-							</div>
-							<Link
+		<>
+		<div className="brokers-header position-relative" style={ height === 0? styleWEB : height ===1? styleWEBM : styleWEBT }>
+			<div className="container-fluid d-flex flex-column">
+				<div>
+					<span className="header-title" style={versionImage === 0? styleweb : styleMOBILE}>
+						la mejor plataforma para solicitar crédito pyme e hipotecario
+					</span>
+				</div>
+				{
+					height === 0?
+					<div>
+					<span className='header-text' style={{ position:'absolute', top:'49%', left:'10%' }}>
+						una solicitud <br/>
+						las mejores opciones <br/>
+						menos de 15 minutos
+					</span>
+					<Link
 								to={
 									sessionStorage.getItem('applianceId') !== null
 										? '/credito/solicitud/' +
@@ -94,66 +148,37 @@ const Header = props => {
 										: '/registrate'
 								}
 							>
-								<div className="coolvetica mt-72 text-center">
-									<Button className="header-button fz24 bluePrimary">
-                                        Solicitar ahora
+								
+									<Button className="header-button fz18 bluePrimary" style={{position:'absolute', bottom:'12%', left:'10%'}}>
+                                        comenzar solicitud
 									</Button>
-								</div>
+								
 							</Link>
-						</div>
-					</Carousel.Caption>
-				</Carousel.Item>
-				{/* <Carousel.Item>
-					<img
-						className="d-block w-100"
-						src={images[1][versionImage]}
-						alt="Second slide"
-					/> */}
-					{/* <Carousel.Caption>
-						<Button className={versionImage == 0 ? styleWEB : styleWEBM} onClick={() => goToForm()}>
-							Regístrate
-						</Button>
-					</Carousel.Caption> */}
-					{/* <Carousel.Caption>
-						<div className="coolvetica">
-						<NavLink to="/brokers">
-							<Button className={versionImage == 0 ? styleWEB : styleWEBM}>
-								Conoce Más
-							</Button>
-						</NavLink>
-						</div>
-					</Carousel.Caption> */}
-					{/* <Carousel.Caption>
-						<h3 className="coolvetica fz48 white mb-34 header-title">
-                            ¿Necesitas financiamiento?
-						</h3>
-						<div
-							className="metropolisReg white fz24 lh133"
-							style={{ letterSpacing: '0.8' }}
-						>
-							<p>Recibe las mejores ofertas de crédito</p>
-							<p className="metropolisMed ">¡En menos de 24 horas!</p>
-							<Link
-								to={
-									sessionStorage.getItem('applianceId') !== null
-										? '/credito/solicitud/' +
-										  sessionStorage.getItem('applianceId')
-										: sessionStorage.getItem('token') !== null
-										? 'home'
-										: '/registrate'
-								}
-							>
-								<div className="coolvetica mt-72 text-center">
-									<Button className="header-button fz24 bluePrimary">
-                                        Solicitar ahora
-									</Button>
-								</div>
-							</Link>
-						</div>
-					</Carousel.Caption> */}
-				{/* </Carousel.Item> */}
-			</Carousel>
+					</div> : 
+					<>
+						<Link
+										to={
+											sessionStorage.getItem('applianceId') !== null
+												? '/credito/solicitud/' +
+												sessionStorage.getItem('applianceId')
+												: sessionStorage.getItem('token') !== null
+												? 'home'
+												: '/registrate'
+										}
+									>
+										
+											<Button className="header-button fz18 bluePrimary" style={{position:'absolute', bottom:'10%', left:'50%', transform:'translate(-50%,-5%)'}}>
+												comenzar solicitud
+											</Button>
+										
+						</Link>
+					</>
+				}
+			</div>
+			<img src={images[versionImage]} alt="brokers" style={{width:'100%', padding:'0'}}/>
+
 		</div>
+  		</>
 	);
 };
 

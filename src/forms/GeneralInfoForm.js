@@ -422,6 +422,9 @@ let GeneralInfoForm = ({
           name="curp"
           cls="mb-3 mt-24"
           normalize={upper}
+          onChange={(event, newValue, previousValue) =>
+            setInitialValues({ ...initialValues, curp: newValue })
+          }
         />
 
         
@@ -506,17 +509,20 @@ let GeneralInfoForm = ({
           user.idClient.type !== "PM" &&
           <Row>
             <Col lg={12} md={12} sm={12}>
-              <Field component={renderSelectField} name="bankAccount" cls="mt-3 mb-3">
+              <Field component={renderSelectField} 
+              name="bankAccount" 
+              cls="mt-3 mb-3"
+              onChange={(event, newValue, previousValue) =>
+                setInitialValues({ ...initialValues, bankAccount: newValue })
+              }>
                 <option className="metropolisReg" value="">
                   ¿Tienes cuenta bancaria?
                 </option>
-                {bankAccount.map((option, index) => {
-                  return (
-                    <option value={option.value} key={index}>
-                      {option.text}
-                    </option>
-                  );
-                })}
+                {Object.keys(generalInfoOptions.bankAccount).map((key, index) => (
+                <option value={key} key={index}>
+                  {generalInfoOptions.bankAccount[key].value}
+                </option>
+              ))}
               </Field>
             </Col>
           </Row>

@@ -7,9 +7,23 @@ import { useDispatch } from "react-redux";
 import { updateLoader } from "../../../redux/actions/loaderActions";
 import Loader from "../../Loader/Loader";
 import "../../../css/doubts.css";
-import titoLupa from '../../../assets/img/tito-lupa@2x.png'
+import chicaContacto from '../../../assets/img/chicaContacto.png'
 
-const Contact = () => {
+const getHeight = () => {
+	let isMobile = window.matchMedia("only screen and (max-width: 760px)").matches;
+	let isTablet = window.matchMedia("only screen and (max-width: 1024px)").matches;
+	let isDesktop = window.matchMedia("only screen and (min-width: 1025px)").matches;
+
+	if (isMobile) {
+		return 1;
+	} else if (isTablet) {
+			return 2;
+	} else if (isDesktop) {
+			return 0;
+	}
+}
+
+const Contact = (props) => {
 	const dispatch = useDispatch();
 	const [success, setSuccess] = useState({
 		show: false,
@@ -21,9 +35,19 @@ const Contact = () => {
 		msg: ''
 	});
 
+	const [height, setHeight] = useState(getHeight());
+
 	useEffect(() => {
 		window.scrollTo(0, 0);
+		setHeight(getHeight());
 	}, []);
+
+	useEffect(() => {
+        window.addEventListener('resize', () => setHeight(getHeight()));
+        return () => {
+            window.removeEventListener('resize', () => setHeight(getHeight()));
+        }
+    }  , []);
 
 	const initialValues = {
 		name: '',
@@ -67,16 +91,26 @@ const Contact = () => {
 	return (
 	<>
 		<Loader />
-			<div className="text-center mt-3">
-				<Title className="title-dp fw500 fz38" title="¡Contáctanos!"/>
-				<div className="mr-auto ml-auto mt-2" style={{maxWidth : '1200px'}}>
-					<Row className="justify-content-center">
-						<Col lg={2}>
-							<img className="d-lg-block d-none" src={titoLupa} width="150px" alt="Tito lupa" style={{marginTop : '10px'}} />
-						</Col>
-						<Col lg={7} className="d-flex justify-content-center">
-							<ContactForm initialValues={initialValues} handleSubmit={handleSubmit} error={error} success={success}/>
-						</Col>
+			<div className="mt-1" style={{width : '100%'}}>
+				
+				<div className="mr-auto ml-auto">
+					<Row style={{margin:'0'}}>
+						{
+							height === 0 ?
+								<>
+									<Col style={{marginLeft:'5%'}} >
+										<img src={chicaContacto} width="450px" alt="Tito lupa" style={{marginBottom : '0%'}} />
+									</Col>
+									<Col style={{marginLeft:'-5%'}}>
+									<ContactForm initialValues={initialValues} handleSubmit={handleSubmit} error={error} success={success}/>
+									</Col>
+								</>:
+								<>
+									<Col>
+									<ContactForm initialValues={initialValues} handleSubmit={handleSubmit} error={error} success={success}/>
+									</Col>
+								</>
+						}
 					</Row>
 				</div>
 			</div>
