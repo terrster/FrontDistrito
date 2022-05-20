@@ -29,11 +29,8 @@ import visoorMovil from '../../assets/img/financialPartners/Visoor-Movil.jpg';
 import PagaloopWEB from '../../assets/img/financialPartners/Pagaloop-WEB.jpg';
 import PagaloopMovil from '../../assets/img/financialPartners/Pagaloop-Movil.jpg';
 
-<<<<<<< HEAD
-=======
 import OficinaNoreste from '../../assets/img/carousel/carrusel-01.jpg';
 import OficinaNoresteMobile from '../../assets/img/carousel/mobile-carrusel-01.jpg';
->>>>>>> 6dbb8cc995fc64d882ba82f7eb3bd510be983a18
 
 import DGimpulsandoWEB from '../../assets/img/financialPartners/DGimpulsandoWEB.jpg';
 import DGimpulsandoMobile from '../../assets/img/financialPartners/DGimpulsandoMobile.jpg';
@@ -79,18 +76,6 @@ const financialPartner = (partner) => {
         brokercode: '36408310'//Luis Fer - DP
       }
 
-<<<<<<< HEAD
-       case 'OFICINANORESTE':
-       return {
-         image:[],
-         text: [
-           'Solicita un crédito para tu empresa o negocio a través de nuestro aliado Distrito Pyme.',
-           'Podrás recibir las mejores opciones de crédito en menos de 15 min con un proceso fácil, rápido y sin papeleos.'
-         ],
-         prefix: process.env.REACT_APP_CONFIGURATION === 'localhost' || process.env.REACT_APP_CONFIGURATION === 'development' ? 'OficinanoresteDev - ' : 'Oficinanoreste - ',
-         channel: 'Oficinanoreste',
-         brokercode: '163808949'//
-=======
       case 'OFICINANORESTE':
       return {
         image: [],
@@ -101,7 +86,6 @@ const financialPartner = (partner) => {
         prefix: process.env.REACT_APP_CONFIGURATION === 'localhost' || process.env.REACT_APP_CONFIGURATION === 'development' ? 'OficinanoresteDev - ' : 'Oficinanoreste - ',
         channel: 'Oficinanoreste',
         brokercode: '163808949'//
->>>>>>> 6dbb8cc995fc64d882ba82f7eb3bd510be983a18
       }
 
       case 'DG-IMPULSANDO':
@@ -204,11 +188,7 @@ const Signup = props => {
     return (
       <>
         <Loader />
-<<<<<<< HEAD
-        {!partner || partner.channel === 'Oficinanoreste' ? (
-=======
         {!partner || partner.channel === 'Oficinanoreste' || partner.channel === 'SE1'? (
->>>>>>> 6dbb8cc995fc64d882ba82f7eb3bd510be983a18
           <div className="container mt-30">
             <Title
               className="fz56 text-center blue-primary title-dp fw500"

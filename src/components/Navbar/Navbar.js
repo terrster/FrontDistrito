@@ -20,13 +20,9 @@ const NavBar = props => {
 		'impulsomx',
 		'visoor',
 		'oficinanoreste',
-<<<<<<< HEAD
-		'dg-impulsando'
-=======
 		'dg-impulsando',
 		'se1'
->>>>>>> 6dbb8cc995fc64d882ba82f7eb3bd510be983a18
-	];
+];
 
 	useLayoutEffect(() => {
 		if (isAuthenticated()){
