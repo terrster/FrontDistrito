@@ -7,7 +7,7 @@ import {
   renderField,
   renderFieldFull,
 } from "../components/Generic/Fields";
-import '../css/rfc.css'
+import '../css/ciec.css'
 import { text } from "@fortawesome/fontawesome-svg-core";
 
 
@@ -21,23 +21,6 @@ let CiecForm = (props) => {
     const [rfc, setRfc] = useState("");
     const [rfcState, setRfcState] = useState("");
     const [inicio , setInicio] = useState(false);
-
-  useEffect(() => {
-    const getData = async () => {
-        const user = JSON.parse(sessionStorage.getItem("user"));
-        const id = user._id;
-        const idClient = user.idClient;
-        if (idClient.appliance.length > 0) {
-            const appliance = idClient.appliance[idClient.appliance.length - 1];
-            if (appliance.hasOwnProperty("idComercialInfo")) {
-                const comercial = appliance.idComercialInfo;
-                const id = comercial._id;
-                    comercial.rfc =! null || '' || undefined ? setInicio(true) : setInicio(false);
-            }
-        }
-    }
-    getData();
-} , []);
 
   const upper = (value) => value && value.toUpperCase();
     
