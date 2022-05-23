@@ -59,7 +59,7 @@ const Begin = props => {
 	return (
 		<div className="center-buttons align-self-center" style={props.estado.estado === 0 ? webstyle : mobilestyle}>
 			<Title
-				className="title-dp ls-11 lh-15 fz32 mb-24 lg1"
+				className="title-dp ls-11 lh-15 fz32 mb-24"
 				title="¿cuánto dinero necesitas?"
 			/>
 			<div className="fz29 text-dp fw500 lh-15 ls-11">

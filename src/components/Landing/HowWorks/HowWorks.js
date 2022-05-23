@@ -54,7 +54,7 @@ const HowWorks = props => {
 
 	return (
 		<Card id="howWorks" border='0' className="text-center">
-		<Card.Header id="header"  className="title-dp-blue fz56  fw300 text-left" style={{ lineHeight:'2.3rem' }}><span className='title-dp'> solo </span> necesitas </Card.Header>
+		<Card.Header id="header"  className="title-dp-blue fz56  fw300 text-left line-height"><span className='title-dp'> solo </span> necesitas </Card.Header>
 				{
 					versionImage === 0 ? (
 						<Carousel className=""

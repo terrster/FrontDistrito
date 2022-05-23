@@ -16,7 +16,7 @@ const CreditOption = (props) => {
       <div id="creditOption" className={`${props.estado === 0 ? 'pt-4 mb-21 pb-120 background' : 'mt-5 mb-3'} text-center ml-auto mr-auto`}>
 
         <Row className="d-inline-flex justify-content-center w-100">
-         <Col xl={3} lg={3} md={5} sm={12} className="d-flex justify-content-center mt-3">
+         <Col xl={3} lg={3} md={5} sm={12} className="d-flex justify-content-center">
             <Card className="fondo-card-white left-content">
               <Card.Header id="header"  className="title-dp fz32  fw300 text-left line-height"><span className='title-dp-coral'>8 </span>de cada 10 solicitudes recibe una opción de crédito</Card.Header>
               <Card.Body>
@@ -30,7 +30,7 @@ const CreditOption = (props) => {
             </Card>
           </Col>
 
-          <Col xl={4} lg={4} md={5} sm={12}  className="d-flex justify-content-center mt-3">
+          <Col xl={4} lg={4} md={5} sm={12}  className="d-flex justify-content-center">
             <Card className="fondo-card card-credit">
               <Card.Header id="header" className="title-cards-dp">bancos y financieras</Card.Header>
               <Card.Body>
@@ -47,7 +47,7 @@ const CreditOption = (props) => {
             </Card>
           </Col>
 
-          <Col xl={4} lg={4} md={5} sm={12} className="d-flex justify-content-center mt-3">
+          <Col xl={4} lg={4} md={5} sm={12} className="d-flex justify-content-center">
             <Card className="fondo-card-dp card-credit" style={{border: 'none'}}>
               <Card.Header id="header" style={{ height: '5rem' }}><img src={LOGODP} alt="LOGODP" width="120rem" className="mt-4" /></Card.Header>
               <Card.Body>
