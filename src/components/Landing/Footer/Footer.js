@@ -22,10 +22,8 @@ const Footer = props => {
 
        
 
-        <div className="col-4 col-lg-3 mt-3">
-
+        <div className="col-6 col-lg-3 mt-3">
         <div className="box vertical">menú</div>
-            
           <div className='box horizontal'>
             <div>
                 <a href="/#simulador" className="footer-link">simulador</a>
@@ -46,7 +44,7 @@ const Footer = props => {
             </div>
         </div>
 
-        <div className="col-7 col-lg-3 mt-3" >
+        <div className="col-6 col-lg-3 mt-3" >
             <div className="box vertical">soporte</div>
           <div className='box horizontal'>
             <div className="footer-link"><a href="/preguntas-frecuentes" className="footer-link" target="blank">preguntas frecuentes</a></div>
