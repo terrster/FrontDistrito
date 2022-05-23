@@ -36,7 +36,6 @@ const CIECcomponent = (props) => {
           const id = res.data.rfc._id || res.data.rfcPerson._id;
           try {
                   const res = await axios.put(`api/ciec/${id}`, {...data, idUser});
-                  console.log(res);
                   if(res.data.code === 200){
                     setState("success");
                     setMensaje({

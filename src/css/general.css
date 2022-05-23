@@ -2,7 +2,7 @@
 
 
 :root {
-	--primary-color : #023e95;
+	--primary-color : #023473;
 	--secondary-blue : #003c99;
 	--dark-blue : #090841;
 	--black : #0000;
@@ -271,6 +271,10 @@
 
 .fz10 {font-size: 0.625rem !important;}
 
+.lg1{
+	line-height: 1;
+}
+
 
 /* FONT TYPE */
 
@@ -391,8 +395,8 @@
 	font-family: 'coolvetica_rg' !important;
 	font-size: 17px !important;
 	color: #ffffff !important;
-	background-color: #023E95 !important;
-	border-color: #023e95 !important;
+	background-color: #023473 !important;
+	border-color: #023473 !important;
 	border-radius: 25px !important;
 	/* width: 100% !important;	 */
 	height: 45px !important;
@@ -437,7 +441,7 @@
 .btn-blue-general:hover:not(:disabled),
 .btn-blue-documents:hover:not(:disabled),
 .btn-blue-status:hover:not(:disabled){
-	opacity: 0.95;
+	opacity: 0.90;
 }
 
 .btn-gray-general{
@@ -496,7 +500,9 @@
 	font-stretch: normal;
 	line-height: normal;
 	letter-spacing: 0px;
-	color: #000000;
+	color: #F24C5A;
+	font-family: 'coolvetica_rg' !important;
+	text-transform: lowercase;
 }
 
 .black-link{
@@ -516,7 +522,8 @@
 
 .title-dp{
 	font-family: 'coolvetica_rg';
-	color: #023e95;
+	color: #023473;
+	text-transform: lowercase;
 }
 
 .title-dp-coral{
@@ -537,6 +544,7 @@
 .text-dp{
 	font-family: 'Metropolis-Regular';
 	color: #3D3D3D;
+	text-transform: lowercase;
 }
 
 .text-dp-white{

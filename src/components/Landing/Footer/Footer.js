@@ -13,15 +13,6 @@ import youtube from '../../../assets/img/redes_sociales/Youtube.png';
 const Footer = props => {
     return(
     <div id="footer-dp" className="row d-flex justify-content-center">
-        <div className="col-xs-12 col-lg-3 text-center text-lg-left mb-1 mb-lg-0" >
-            <img src={logo} alt="Distrito Pyme" className="nav-logo mb-1 mb-lg-0"/>
-                <div className="text-dp-gray fw300 fz16 mt-16"  >
-                    distrito pyme&copy; las arboledas, tlalnepantla, estado de méxico, 54026, méxico, 55 8661 9486.
-                </div>
-        </div>
-
-       
-
         <div className="col-4 col-lg-3">
 
         <div className="box vertical">menú</div>
@@ -67,6 +58,12 @@ const Footer = props => {
             <a href="mailto:contacto@distritopyme.com"><img src={mail} alt="Mail Distrito Pyme" className="footer-icon" /></a>
             {/* <a href="https://api.whatsapp.com/send?phone=525526954055&text=Hola%2c%20%c2%bfpodr%c3%adan%20ayudarme%3f&source=&data=" target="blank"><img src={Whatsapp} alt="Whatsapp Distrito Pyme" className="footer-icon" /> </a> */}
             
+        </div>
+        <div className="col-xs-12 col-lg-3 text-center text-lg-left mb-1 mb-lg-0" >
+            <img src={logo} alt="Distrito Pyme" className="nav-logo mb-1 mb-lg-0"/>
+                <div className="text-dp-gray fw300 fz16 mt-16"  >
+                    distrito pyme&copy; las arboledas, tlalnepantla, estado de méxico, 54026, méxico, 55 8661 9486.
+                </div>
         </div>
     </div>
     );
