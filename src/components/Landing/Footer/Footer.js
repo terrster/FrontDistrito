@@ -13,16 +13,16 @@ import youtube from '../../../assets/img/redes_sociales/Youtube.png';
 const Footer = props => {
     return(
     <div id="footer-dp" className="row d-flex justify-content-center">
-        <div className="col-xs-12 col-lg-3 text-center text-lg-left mb-1 mb-lg-0" >
+        <div className="col-xs-12 col-lg-3 text-center text-lg-left mb-3 mb-lg-0" >
             <img src={logo} alt="Distrito Pyme" className="nav-logo mb-1 mb-lg-0"/>
-                <div className="text-dp-gray fw300 fz16 mt-16"  >
+                <div className="text-dp-gray fw300 fz18 mt-16"  >
                     distrito pyme&copy; las arboledas, tlalnepantla, estado de méxico, 54026, méxico, 55 8661 9486.
                 </div>
         </div>
 
        
 
-        <div className="col-4 col-lg-3">
+        <div className="col-4 col-lg-3 mt-3">
 
         <div className="box vertical">menú</div>
             
@@ -46,7 +46,7 @@ const Footer = props => {
             </div>
         </div>
 
-        <div className="col-7 col-lg-3" >
+        <div className="col-7 col-lg-3 mt-3" >
             <div className="box vertical">soporte</div>
           <div className='box horizontal'>
             <div className="footer-link"><a href="/preguntas-frecuentes" className="footer-link" target="blank">preguntas frecuentes</a></div>
@@ -56,7 +56,7 @@ const Footer = props => {
             <div className="footer-link"><Link className="footer-link" to="/aliado_financiero">quiero ser Aliado Financiero</Link></div>
           </div>
         </div>
-        <div className="col-12 col-lg-3">
+        <div className="col-12 col-lg-3 mt-3 text-center">
           
             <div className="text-dp-gray fw300 fz18">(55) 8661-9486</div>
             <a href="https://www.facebook.com/distritopyme" target="blank"><img src={face} alt="Facebook Distrito Pyme" className="footer-icon" /></a>

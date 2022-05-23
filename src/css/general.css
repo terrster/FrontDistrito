@@ -716,3 +716,9 @@
 	min-width: 100% !important;
 }
 
+.lg1{
+	line-height: 1;
+}
+.lg2{
+	line-height: 2.3rem;
+}
