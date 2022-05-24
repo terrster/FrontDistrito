@@ -245,7 +245,7 @@ let SignupForm = (props) => {
                 goToError()
               }}
 						>
-							Continuar
+							continuar
 						</Button>
 					)
 				}

@@ -94,7 +94,7 @@ class Appliance extends Component {
 									title="¡Solicitud enviada con éxito!"
 								/>
 								<div className="mt-24 brandonLight fz20 text-dp">
-									En menos de 15 minutos comenzarás a recibir en tu correo 
+									en menos de 15 minutos comenzarás a recibir en tu correo 
 									<br /> 
 									las mejores opciones de crédito para tu empresa o negocio.
 								</div>
@@ -104,7 +104,7 @@ class Appliance extends Component {
 										onClick={() => this.props.history.push('/home')}
 										style={{ width: '250px' }}
 									>
-										Ir a mi cuenta
+										ir a mi cuenta
 									</Button>
 								</div>
 							</div>
@@ -127,7 +127,7 @@ class Appliance extends Component {
 				{this.props.match.params.idAppliance ? (
 					this.getAppliance()
 				) : (
-					<div>No se pudo obtener el ID de solicitud</div>
+					<div>no se pudo obtener el ID de solicitud</div>
 				)}
 
 				{this.state.appliance !== undefined &&
@@ -144,7 +144,7 @@ class Appliance extends Component {
 											value={true}
 											onClick={this.handleShow}
 										>
-											Enviar solicitud
+											enviar solicitud
 										</Button>
 									)}
 									<Modal

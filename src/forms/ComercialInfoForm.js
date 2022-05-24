@@ -435,7 +435,7 @@ let ComercialInfoForm = (props) => {
               <Col lg={12} md={12} sm={12}>
                 <SubtitleForm
                   subtitle="Clave CIEC (Opcional)"
-                  className="text-form-dp  mt-30"
+                  className="mt-30"
                 />
                 <div
                   onClick={() => {
@@ -454,9 +454,7 @@ let ComercialInfoForm = (props) => {
                 </div>
                 <Field component={renderFieldFull} label="CIEC" name="ciec" />
                 <div className="fz18 gray50 text-dp mb-30 mt-2">
-                  No es obligatorio pero podrá agilizar tu solicitud de crédito
-                  a la mitad del tiempo. Se ingresará por única ocasión para
-                  descargar la información necesaria.
+                No es un dato obligatorio pero puede agilizar tu solicitud a la mitad del tiempo y ofrecerte mejores condiciones de crédito. Se ingresa por única ocasión para descargar la información necesaria mediante procesos automatizados
                 </div>
               </Col>
               <PopUp />

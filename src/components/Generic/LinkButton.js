@@ -8,7 +8,7 @@ const LinkButton = props => {
 			<Link to={`/${props.link}`}>
 				<div className="mt-45">
 					<Button className="btn-blue-general fz21" style={{ width: '250px' }}>
-						Completar
+						completar
 					</Button>
 				</div>
 			</Link>

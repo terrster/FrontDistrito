@@ -67,7 +67,7 @@ let AmountForm = props => {
 
 	return (
 		<div>
-			<p className="text-dp fz20 fw500 mt-2 mb-1 text-center">Selecciona tu tipo de negocio, si tienes duda presiona <img src={helpImg} width="20px" heigth="30px" /> para saber más.</p>
+			<p className="text-dp fz20 fw500 mt-2 mb-1 text-center">selecciona tu tipo de negocio, si tienes duda presiona <img src={helpImg} width="20px" heigth="30px" /> para saber más.</p>
 			<PersonType onSelectPerson={selectedPerson}/>
 			<Field component={renderField} type="text" name="personType" label="secret"></Field>
 			<form
@@ -78,7 +78,7 @@ let AmountForm = props => {
 				<div className="text-center">
 					<Title title="Elige tu monto" className="title-dp fz42" />	
 				</div>
-				<div className="text-center"><label className="text-dp fz20 fw500 ml-auto mt-2 mb-1">Cuéntanos un poco más sobre el monto que necesitas</label></div>
+				<div className="text-center"><label className="text-dp fz20 fw500 ml-auto mt-2 mb-1">cuéntanos un poco más sobre el monto que necesitas</label></div>
 			<InputLabel label="¿Cuánto necesitas?" class="mt-18" />
 			<Field
         		normalize={onlyNumbers}
@@ -156,7 +156,7 @@ let AmountForm = props => {
 							onClick={() => goToError()}
 							style={{ width: '250px' }}
 						>
-							Continuar
+							continuar
 						</Button>
 					)
 				}

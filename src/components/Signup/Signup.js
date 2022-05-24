@@ -191,11 +191,11 @@ const Signup = props => {
         {!partner || partner.channel === 'Oficinanoreste' || partner.channel === 'SE1'? (
           <div className="container mt-30">
             <Title
-              className="fz56 text-center blue-primary title-dp fw500"
+              className="fz56 text-center title-dp fw500"
               title="¡Bienvenido a Distrito Pyme!"
             />
             <div className="mt-30 text-dp fw300 fz20 text-center mb-30">
-              <p className="gray50">Te ayudamos a crecer tu negocio <label className="blue-primary">&nbsp;#ComunidadDeCrédito&nbsp;</label></p>
+              <p className="gray50">te ayudamos a crecer tu negocio <label className="blue-primary">&nbsp;#comunidaddecrédito&nbsp;</label></p>
             </div>
             <div className="mt-50">
 							<StepSignup/>
