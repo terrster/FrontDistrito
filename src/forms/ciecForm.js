@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Field, reduxForm } from "redux-form";
 import logito from '../assets/img/logo_dp/logodp-01.png'
 import { Button } from "react-bootstrap";
+import { validateCiec } from "../components/Validate/validateCiec";
 import {
   renderField,
   renderFieldFull,
@@ -50,6 +51,7 @@ let CiecForm = (props) => {
 
 CiecForm = reduxForm({
         form: "ciecForm",
+        validate: validateCiec,
         enableReinitialize: true,
     })(CiecForm);
 

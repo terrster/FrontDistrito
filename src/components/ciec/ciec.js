@@ -12,6 +12,7 @@ import { useHistory } from "react-router-dom";
 // Components
 import { updateLoader } from "../../redux/actions/loaderActions";
 import CiecForm from "../../forms/ciecForm";
+import { type } from "jquery";
 
 const CIECcomponent = (props) => {
   const history = useHistory();
@@ -21,6 +22,10 @@ const CIECcomponent = (props) => {
   const [state, setState] = useState("");
   const [open, setOpen] = useState(false);
   const [mensaje , setMensaje] = useState("");
+
+const goToError = () => {
+  const rfcError = document.getElementById("rfc-error");
+}
   
 
   const onFormSubmit = async (dataForm) => {
