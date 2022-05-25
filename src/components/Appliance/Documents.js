@@ -180,8 +180,8 @@ const Documents = (props) => {
                 className="title-dp fz42"
                 />
                 <div className="metropolisReg fz16 mt-3 mailto-content">
-                Procura que la calidad sea óptima y legible en formato: <br></br>
-                PNG, JPG, PDF y/o FOTOS.(Peso máximo de 10MB por archivo). <br></br>
+                procura que la calidad sea óptima y legible en formato: <br></br>
+                PNG, JPG, PDF y/o FOTOS.(peso máximo de 10MB por archivo). <br></br>
                 también puedes enviarnos tu documentación a{" "}
                 <a href="mailto:documentos@distritopyme.com">
                     documentos@distritopyme.com
