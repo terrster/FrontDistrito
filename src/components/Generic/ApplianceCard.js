@@ -4,9 +4,9 @@ import { Col, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 const cardsElem = {
-	generalData : { title: 'Datos personales', first: 'Tipo de persona', second: 'Nombre', third : 'Correo electrónico', fourth : 'Teléfono', five: 'Editar', 'nameSection': 'informacion-general'},
-	comercialInfo : { title: 'Datos del negocio', first: 'Nombre comercial', second: 'Giro', third : 'Actividad específica', fourth : 'RFC', five: 'Editar', 'nameSection': 'datos-comerciales' },
-	documents : {title: 'Documentos', first: 'Identificación oficial', second: 'Comprobante de domicilio', third : 'Estados de cuenta', fourth : 'Fotos u otros', five: 'Editar', 'nameSection': 'documentos'}
+	generalData : { title: 'Datos personales', first: 'Tipo de persona', second: 'Nombre', third : 'Correo electrónico', fourth : 'Teléfono', five: 'editar', 'nameSection': 'informacion-general'},
+	comercialInfo : { title: 'Datos del negocio', first: 'Nombre comercial', second: 'Giro', third : 'Actividad específica', fourth : 'RFC', five: 'editar', 'nameSection': 'datos-comerciales' },
+	documents : {title: 'Documentos', first: 'Identificación oficial', second: 'Comprobante de domicilio', third : 'Estados de cuenta', fourth : 'Fotos u otros', five: 'editar', 'nameSection': 'documentos'}
 }
 
 const types = {
@@ -55,7 +55,7 @@ const ApplianceCard = props => {
 						{(props.fourth) ? `${props.fourth}` : 'No especificado'}
 					</Col>
 					<Col sm={12} className="info-label metropolisReg text-truncate text-right">
-							<Link to={(idClient.appliance.length > 0 || idClient.type == null) ? `/${cardsElem[props.keyData].nameSection}/${props.applianceId}` : `/elige-monto/${user._id}`} className="h5" style={{color: '#000000', cursor: 'pointer'}}>
+							<Link to={(idClient.appliance.length > 0 || idClient.type == null) ? `/${cardsElem[props.keyData].nameSection}/${props.applianceId}` : `/elige-monto/${user._id}`} className="h5 hoverc" style={{ cursor: 'pointer'}}>
 								{cardsElem[props.keyData].five}
 							</Link>
 					</Col>

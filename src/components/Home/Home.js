@@ -7,7 +7,7 @@ import ApplianceCard from "../Generic/ApplianceCard";
 import CustomLoader from '../Generic/CustomLoader';
 import comercialOptions from "../../models/ComercialInfoModels";
 import { Row, Col } from "react-bootstrap";
-import titoAccount from "../../assets/img/POSES TITO-14-01.png";
+import titoAccount from "../../assets/img/mi-cuenta.png";
 // import axios from '../../utils/axios';
 import { updateLoader } from '../../redux/actions/loaderActions';
 import Steps from "../Appliance/Steps";

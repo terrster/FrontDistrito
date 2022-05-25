@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import Title from '../Generic/Title';
 import '../../css/signup.css';
-import registerImage from '../../assets/img/registroexitoso-01.png';
+import registerImage from '../../assets/img/enviado_chava-01.webp';
 import Loader from "../Loader/Loader";
 import { updateLoader } from '../../redux/actions/loaderActions';
 import { useHistory } from 'react-router-dom';

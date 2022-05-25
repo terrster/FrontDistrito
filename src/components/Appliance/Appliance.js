@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import React, { Component } from "react";
 import LinkButton from "../Generic/LinkButton";
 import { Button, Modal } from "react-bootstrap";
-import solicitudEnviada from "../../assets/img/tito_solicitud_enviada.png";
+import solicitudEnviada from "../../assets/img/enviado_chava-01.webp";
 import CustomLoader from "../Generic/CustomLoader";
 import tito from "../../assets/img/tito-credit.png";
 import axios from '../../utils/axios';

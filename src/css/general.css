@@ -391,7 +391,7 @@
 	font-family: 'coolvetica_rg' !important;
 	font-size: 17px !important;
 	color: #ffffff !important;
-	background-color: #023E95 !important;
+	background-color: #023473 !important;
 	border-color: #023e95 !important;
 	border-radius: 25px !important;
 	/* width: 100% !important;	 */
@@ -725,3 +725,15 @@
 .lg2{
 	line-height: 2.3rem;
 }
+
+.hoverc{
+	color: #023473;
+	font-family: 'coolvetica_rg';
+}
+
+.hoverc:hover{
+	cursor: pointer;
+	color: #F24C5A;
+	transition: ease-in-out;
+}
+
