@@ -109,7 +109,7 @@ const goToError = () => {
         <Loader />
 				<Modal onClose={() => setOpen(false)} open={open} center={true} classNames={{modal:'modalcustum'}} >
 					<Row className="d-flex justify-content-center">
-						<Col lg={6} sm={12} md={12} className="text-center">
+						<Col className="text-center">
 							<div className="fz29 fw400">
 								<>
                   {mensaje.img}

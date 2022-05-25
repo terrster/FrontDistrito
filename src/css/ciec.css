@@ -36,4 +36,5 @@
   .modalcustum{
     top: 0;
     border-radius: .3rem;
+    max-width: 40vw;
   }
