@@ -336,16 +336,16 @@ const DocumentsForm = (props) => {
                 <Button
                     type="submit"
                     className="reduce-font mt-50 btn-blue-general"
-                    style={{ width: '250px' }}
+                    
                 >
-                    Guardar
+                    guardar
                 </Button>
                 )}
                 {props.values.status && (
                 <Button
                     type="submit"
                     className="reduce-font mt-50 btn-blue-general btn-blue-send-documents ml-2"
-                    style={{ width: '265px' }}
+                    
                 >
                     Guardar y Enviar Solicitud
                 </Button>

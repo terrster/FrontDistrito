@@ -867,11 +867,11 @@ let GeneralInfoForm = ({
               onClick={() => goToError()}
               style={{ width: '250px' }}
             >
-              Continuar
+              continuar
             </Button>
           ) : (
             <Button type="submit" className="mt-50 btn-blue-general" style={{ width: '250px' }}>
-              Continuar
+              continuar
             </Button>
           )}
         </div>

@@ -384,7 +384,7 @@
 
 /* BUTTONS */
 
-.btn-blue-general,
+/* .btn-blue-general, */
 .btn-blue-documents,
 .btn-blue-send-documents,
 .btn-blue-status{
@@ -405,7 +405,19 @@
 }
 
 .btn-blue-general{
-	max-width: 200px !important;
+	font-weight: bold !important;
+	min-width: 200px !important;
+	max-width: 500px !important;
+	font-family: 'Metropolis-Regular' !important;
+	font-size: 1rem !important;
+	color: #ffffff !important;
+	background-color: #023473 !important;
+	border-color: #023e95 !important;
+	border-radius: 25px !important;
+	/* width: 100% !important;	 */
+	height: 45px !important;
+	text-align: center !important;
+	letter-spacing: 2px;
 }
 
 .btn-blue-brokers{
@@ -431,7 +443,8 @@
 }
 
 .btn-blue-send-documents{
-	max-width: 270px !important;
+	max-width: 500px !important;
+	font-size: .9rem !important;
 }
 
 .btn-blue-general:hover:not(:disabled),
@@ -443,11 +456,12 @@
 .btn-gray-general{
 	font-family: 'coolvetica_rg' !important;
 	font-size: 17px !important;
+	font-weight: normal !important;
 	color: #ffffff !important;
 	background-color: gray !important;
 	border-color: gray !important;
 	border-radius: 25px !important;
-	width: 100% !important;	
+	width: 40% !important;	
 	height: 45px !important;
 	text-align: center !important;
 	letter-spacing: 2px;

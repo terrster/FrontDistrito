@@ -7,9 +7,9 @@ import { Col, Row } from 'react-bootstrap';
 import TypeCard from '../Generic/TypeCard';
 
 // Images
-import pf from '../../assets/img/type_person/Iconospersonas1.webp';
-import pfae from '../../assets/img/type_person/Iconospersonas2.webp';
-import pm from '../../assets/img/type_person/Iconospersonas3.webp';
+import pf from '../../assets/img/type_person/Iconospersonas1_azul.webp';
+import pfae from '../../assets/img/type_person/Iconospersonas2_azul.webp';
+import pm from '../../assets/img/type_person/Iconospersonas3_azul.webp';
 import rif from '../../assets/img/type_person/RIF.png';
 
 import { updateLoader } from '../../redux/actions/loaderActions';

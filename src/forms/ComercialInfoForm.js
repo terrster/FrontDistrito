@@ -513,7 +513,7 @@ let ComercialInfoForm = (props) => {
           )}
           {!refDocuments && !disabled && (
             <Button type="submit" className={"mt-50 btn-blue-general"} style={{ width: '250px' }}>
-              Continuar
+              continuar
             </Button>
           )}
           {disabled && (
@@ -523,7 +523,7 @@ let ComercialInfoForm = (props) => {
               onClick={() => goToError()}
               style={{ width: '250px' }}
             >
-              Continuar
+              continuar
             </Button>
           )}
         </div>

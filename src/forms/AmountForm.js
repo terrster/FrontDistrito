@@ -147,7 +147,7 @@ let AmountForm = props => {
 							className={"mt-50 btn-blue-general"}
 							style={{ width: '250px' }}
 						>
-							Continuar
+							continuar
 						</Button>
 					) : (
 						<Button 
