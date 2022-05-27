@@ -37,7 +37,9 @@ import Afirme from '../assets/img/alianzas/afirme.png';
 import Banorte from '../assets/img/alianzas/banorte.png';
 import Konfio from '../assets/img/alianzas/konfio.png';
 import Billpocket from '../assets/img/alianzas/billpocket.png';
-
+import GBM from '../assets/img/alianzas/logogbm.svg';
+import Tivos from '../assets/img/alianzas/tivos-01.svg';
+import Capitalx from '../assets/img/alianzas/cx.svg';
 
 export const filterFinancials = (financials) => {
     
@@ -169,6 +171,15 @@ export const imgFinancial = (financial) => {
         case 'BILLPOCKET':
         return Billpocket;
 
+        case 'GBM':
+        return GBM;
+
+        case 'TIVOS':
+        return Tivos;
+
+        case 'CAPITALX':
+        return Capitalx;
+
 
         case 'ALL':
         return [
@@ -209,7 +220,10 @@ export const imgFinancial = (financial) => {
             Afirme,
             Banorte,
             Konfio,
-            Billpocket
+            Billpocket,
+            GBM,
+            Tivos,
+            Capitalx
 
         ];
     }
