@@ -1,6 +1,6 @@
 import React from "react";
 import { Row, Col } from "react-bootstrap";
-import tito from '../../assets/img/estatus_solicitud/WhatsApp Image 2022-05-26 at 2.03.08 PM.jpeg';
+import tito from '../../assets/img/estatus_solicitud/status-solicitud_01.png';
 
 const Error = () => {
     return(

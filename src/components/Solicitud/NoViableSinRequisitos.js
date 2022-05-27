@@ -1,6 +1,6 @@
 import React from "react";
 import { Row, Col, Button } from "react-bootstrap";
-import tito from '../../assets/img/estatus_solicitud/status-solicitud_03.png';
+import tito from '../../assets/img/estatus_solicitud/status-solicitud_01.png';
 // import { useHistory } from 'react-router-dom';
 
 const NoViableSinRequisitos = () => {
