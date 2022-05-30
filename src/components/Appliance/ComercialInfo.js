@@ -59,7 +59,11 @@ const ComercialInfo = (props) => {
         }
       } else {
         try {
-          const res = await axios.post(`api/info-comercial/${id}`, data);
+          const res = await axios.post(`api/info-comercial/${id}`, data,{
+            headers:{
+              token: sessionStorage.getItem('token')
+            }
+          });
           sessionStorage.setItem("user", JSON.stringify(res.data.user));
           if (!refDocuments) {
             history.push(`/informacion-general/${user._id}`);
