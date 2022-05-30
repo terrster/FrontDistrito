@@ -1,7 +1,7 @@
 import React from "react";
 import { Row, Col, Button } from "react-bootstrap";
 import { useHistory } from 'react-router-dom';
-import tito from '../../assets/img/estatus_solicitud/POSES_TITO-07.png';
+import tito from '../../assets/img/estatus_solicitud/status-solicitud_03.png';
 
 const ValidacionDocumentos = ({properties}) => {
     const history = useHistory();

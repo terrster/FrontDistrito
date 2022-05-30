@@ -8,15 +8,19 @@
     padding: 0rem 1rem !important;
 }
 .Toastify__toast-body{
-    background-image: url(../assets/img/toast.png) !important;
+    background-image: url(../assets/img/dp_circuloblanco.svg) !important;
     background-repeat: no-repeat !important;
-    /*background-position: 0 25px;*/
-    background-size: auto 50px !important;
+    background-position: 5px 5px;
+    background-size: auto 40px !important;
     font-size: 0.9rem !important;
     padding: 0 0 0 60px;
-    min-height:50px;
+    min-height:40px;
 }
 .Toastify__toast{
     border-radius: 5px !important;
     padding: 0.5rem 0.5rem 0.75rem 0.5rem;
+}
+
+.Toastify__toast--success{
+    background-color: #f24c5a  !important;
 }

@@ -13,7 +13,7 @@
 }
 
 .step-text-complete:hover {
-	color: #343a40 !important;
+	color: #F24C5A !important;
 } 
 
 .progress-marker.custom{
@@ -43,7 +43,7 @@
 }
 
 .imagen{
-	background-image: url("../assets/img/CHECK_01.png");
+	background-image: url("../assets/img/stepper-01.svg");
 	background-size: contain;
 	background-repeat: no-repeat;
 	position:absolute;
@@ -53,7 +53,7 @@
 }
 
 .imagen2{
-	background-image: url("../assets/img/CHECK_01.png");
+	background-image: url("../assets/img/stepper-01.svg");
 	background-size: contain;
 	background-repeat: no-repeat;
 	position:absolute;
@@ -62,7 +62,7 @@
 	left: -10px;
 }
 .imagen3{
-	background-image: url("../assets/img/CHECK_01.png");
+	background-image: url("../assets/img/stepper-01.svg");
 	background-size: contain;
 	background-repeat: no-repeat;
 	position:absolute;
@@ -71,7 +71,7 @@
 	left: -10px;
 }
 .imagen4{
-	background-image: url("../assets/img/CHECK_01.png");
+	background-image: url("../assets/img/stepper-01.svg");
 	background-size: contain;
 	background-repeat: no-repeat;
 	position:absolute;
@@ -80,7 +80,7 @@
 	left: -10px;
 }
 .imagen5{
-	background-image: url("../assets/img/CHECK_01.png");
+	background-image: url("../assets/img/stepper-01.svg");
 	background-size: contain;
 	background-repeat: no-repeat;
 	position:absolute;
@@ -90,7 +90,7 @@
 }
 @media screen and (max-width: 991px){
 	.imagen,.imagen2,.imagen3,.imagen4,.imagen5{
-		background-image: url("../assets/img/CHECK_01.png");
+		background-image: url("../assets/img/stepper-01.svg");
 		background-size: contain;
 		background-repeat: no-repeat;
 		position:absolute;

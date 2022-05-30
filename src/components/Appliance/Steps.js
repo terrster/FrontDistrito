@@ -67,7 +67,7 @@ const Steps = (props) => {
               className="metropolisMed fw500"
               style={{ color: "#9094A3" }}
             >
-              Registro
+              registro
             </h5>
           </span>
         </li>
@@ -99,10 +99,10 @@ const Steps = (props) => {
               first !== null &&
               first !== "" ? (
                 <Link to={`/elige-monto/${id}`} className="form-link step-text-complete">
-                  Elige tu monto
+                  elige tu monto
                 </Link>
               ) : (
-                <label className="form-link step-text">Elige tu monto</label>
+                <label className="form-link step-text">elige tu monto</label>
               )}
             </h5>
           </span>
@@ -138,10 +138,10 @@ const Steps = (props) => {
                   to={`/datos-comerciales/${id}`}
                   className="form-link step-text-complete"
                 >
-                  Datos del negocio
+                  datos del negocio
                 </Link>
               ) : (
-                <label className="form-link step-text">Datos del negocio</label>
+                <label className="form-link step-text">datos del negocio</label>
               )}
             </h5>
           </span>
@@ -177,10 +177,10 @@ const Steps = (props) => {
                   to={`/informacion-general/${id}`}
                   className="form-link step-text-complete"
                 >
-                  Datos personales
+                  datos personales
                 </Link>
               ) : (
-                <label className="form-link step-text">Datos personales</label>
+                <label className="form-link step-text">datos personales</label>
               )}
             </h5>
           </span>
@@ -213,10 +213,10 @@ const Steps = (props) => {
               fourth !== null &&
               fourth !== "" ? (
                 <Link to={`/documentos/${id}`} className="form-link step-text-complete">
-                  Documentos
+                  documentos
                 </Link>
               ) : (
-                <label className="form-link step-text">Documentos</label>
+                <label className="form-link step-text">documentos</label>
               )}
             </h5>
           </span>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col, Button } from "react-bootstrap";
-import tito from '../../assets/img/estatus_solicitud/POSES_TITO-01.png';
+import tito from '../../assets/img/estatus_solicitud/status-solicitud_01.png';
 import { useHistory } from 'react-router-dom';
 
 const Curso = () => {

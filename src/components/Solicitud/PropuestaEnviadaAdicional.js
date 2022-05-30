@@ -1,6 +1,6 @@
 import React, { useLayoutEffect, useState,useEffect } from "react";
 import { Row, Col, Button } from "react-bootstrap";
-import tito from '../../assets/img/estatus_solicitud/POSES_TITO-06.png';
+import tito from '../../assets/img/estatus_solicitud/status-solicitud_01.png';
 import SolicitudBox from '../Generic/SolicitudBox';
 import { missingDocs } from '../../utils/missingDocs';
 import { useHistory } from 'react-router-dom';

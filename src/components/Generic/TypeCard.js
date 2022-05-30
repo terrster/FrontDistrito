@@ -21,7 +21,7 @@ function TypeCardModal(props) {
       centered
     >
       <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter text-center">
+        <Modal.Title id="contained-modal-title-vcenter" className='title-dp fz22'>
           {props.title}
         </Modal.Title>
       </Modal.Header>
@@ -40,10 +40,10 @@ function TypeCardModal(props) {
 const TypeCard = props => {
 	const [modalShow, setModalShow] = useState(false);
 	let descriptions = {
-		PF: "Tienes un negocio que aún no está dado de alta en el SAT",
-		RIF: "Tu negocio se encuentra dado de alta en Hacienda para realizar una actividad comercial o prestas algún servicio que no requiere título profesional y utilizas el beneficio de incorporación fiscal",
-		PFAE: "Tu negocio se encuentra dado de alta en Hacienda para realizar actividades comerciales, industriales etc. de manera formal",
-		PM: "Creaste una empresa con un socio o más a través de una acta constitutiva"
+		PF: "tienes un negocio que aún no está dado de alta en el SAT",
+		RIF: "tu negocio se encuentra dado de alta en hacienda para realizar una actividad comercial o prestas algún servicio que no requiere título profesional y utilizas el beneficio de incorporación fiscal",
+		PFAE: "tu negocio se encuentra dado de alta en hacienda para realizar actividades comerciales, industriales etc. de manera formal",
+		PM: "creaste una empresa con un socio o más a través de una acta constitutiva"
 	}
 	let ids = {
 		PF: "ymb-dp-type-pf",
@@ -56,8 +56,8 @@ const TypeCard = props => {
 			<div value={`${props.value}`} className="wht-bg text-center">
 				<img value={`${props.value}`} className="card-image" src={props.img} alt="Información tipo de cliente" style={{marginLeft:'-1rem'}} onClick={props.updateUser}/>
 			</div>
-			<img src={helpImg} className="type-card-help" style={{ cursor: 'pointer' }} onClick={() => setModalShow(true)} />
-			<div className={`type-card ${props.class}`} onClick={() => props.refs.current.click()} style={{ cursor: 'pointer' }}>
+			<img src={helpImg} className="type-card-help" style={{ cursor: 'pointer' }} alt='helper' onClick={() => setModalShow(true)} />
+			<div className={`type-card ${props.class} `} onClick={() => props.refs.current.click()} style={{ cursor: 'pointer' }}>
 				<div className="text-dp type-card-text">
 					{props.text}
 				</div>

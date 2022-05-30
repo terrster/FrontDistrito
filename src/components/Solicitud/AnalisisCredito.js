@@ -1,6 +1,6 @@
 import React, { useLayoutEffect, useState } from "react";
 import { Row, Col } from "react-bootstrap";
-import tito from '../../assets/img/estatus_solicitud/POSES_TITO-08.png';
+import tito from '../../assets/img/estatus_solicitud/status-solicitud_03.png';
 import { filterFinancials, imgFinancial } from '../../utils/Financials';
 
 const AnalisisCredito = ({properties}) => {

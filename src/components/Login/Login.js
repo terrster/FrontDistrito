@@ -50,20 +50,20 @@ const Login = props => {
 					<Row className="d-flex justify-content-center">
 						<Col lg={6} sm={12} md={12} className="text-center">
 							<div className="metropolisReg fz29 blueDark fw400">
-								Correo y/o contraseña incorrectos
+								correo y/o contraseña incorrectos
 							</div> 
 						</Col>
 					</Row>
 					<div className="text-center mt-30">
 						<Button className="btn-blue-general ml-auto mr-auto" style={{width: '250px'}} onClick={() => setOpen(false)}>
-							Aceptar
+							aceptar
 						</Button>
 					</div>
 				</Modal>
 				<div className="container mt-30 mb-30 d-flex flex-column align-items-center justify-content-center" style={{height : '600px'}}>
 					<Title className="title-dp fz56 fw500" title="Inicia sesión" />
 					<div className="mt-30 subtitle-dp fw300 fz20 mb-30">
-						<label className="gray50">Ingresa tu correo y contraseña para comenzar</label>
+						<label className="gray50">ingresa tu correo y contraseña para comenzar</label>
 					</div>
 						<SigninForm onSubmit={(e) => onFormSubmit(e,Login)} />
 				</div>

@@ -7,7 +7,7 @@ import Title from "../Generic/Title";
 import LinkButton from "../Generic/LinkButton";
 import { updateLoader } from "../../redux/actions/loaderActions";
 import { updateAppliance } from "../../redux/actions/applianceActions";
-import tito from "../../assets/img/tito-credit.png";
+import tito from "../../assets/img/enviado_chava-01.webp";
 import Steps from "../Appliance/Steps";
 import like from "../../assets/img/tito@2x.png";
 import axios from "../../utils/axios";
@@ -92,7 +92,7 @@ const Credit = (props) => {
               title="Completa tu solicitud"
             />
             <label className="subtitle-dp fz20 fw500">
-              Completa el 100% de tu formulario y empieza a recibir las mejores
+              completa el 100% de tu formulario y empieza a recibir las mejores
               opciones de crédito en menos de 24 hrs.
             </label>
           </div>
@@ -145,7 +145,7 @@ const Credit = (props) => {
           title={`Hola ` + user.name}
         />
         <label className="subtitle-dp fz20 fw500">
-          Conoce el detalle de tu solicitud
+          conoce el detalle de tu solicitud
         </label>
         {getAppliance()}
       </div>

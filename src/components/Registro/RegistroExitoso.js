@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import Title from '../Generic/Title';
 import '../../css/signup.css';
-import registerImage from '../../assets/img/registroexitoso-01.png';
+import registerImage from '../../assets/img/enviado_chava-01.webp';
 import Loader from "../Loader/Loader";
 import { updateLoader } from '../../redux/actions/loaderActions';
 import { useHistory } from 'react-router-dom';
@@ -14,9 +14,9 @@ let RegistroExitoso = (props) => {
 	const [copy, setCopy] = useState(
 		<>
 			<Title className="title-dp fz42 mb-18 fw500" title="Registro Exitoso" />
-			<p className="text-dp text-center">Bienvenido a la #ComunidadDeCrédito más grande de México.</p>
-			<p className="text-dp">¡Es hora de iniciar tu solicitud!</p>
-			<p className="text-dp text-center mb-50">Te recomendamos tener a la mano INE, Comprobante de Domicilio y Estados de <br /> Cuenta bancarios para poder aprobar tu crédito en 15 minutos</p>
+			<p className="text-dp text-center">bienvenido a la #comunidaddecrédito más grande de México.</p>
+			<p className="text-dp">¡es hora de iniciar tu solicitud!</p>
+			<p className="text-dp text-center mb-50">te recomendamos tener a la mano INE, Comprobante de Domicilio y Estados de <br /> Cuenta bancarios para poder ofrecerte las mejores opciones de crédito en menos de 15 minutos</p>
 		</>
 	);
 
@@ -36,7 +36,7 @@ let RegistroExitoso = (props) => {
 					setCopy(
 						<>
 							<Title className="title-dp fz42 mb-18 fw500" title="¡Enhorabuena!" />
-							<p className="text-dp mb-5">Pronto el equipo de <strong>Resuelve Tu Deuda</strong> te contactará para comenzar a reparar tu Buró de Crédito.</p>
+							<p className="text-dp mb-5">pronto el equipo de <strong>resuelve tu Deuda</strong> te contactará para comenzar a reparar tu Buró de Crédito.</p>
 						</>
 					);
 				break;
@@ -45,9 +45,9 @@ let RegistroExitoso = (props) => {
 					setCopy(
 						<>
 							<Title className="title-dp fz42 mb-18 fw500" title="Registro Exitoso" />
-							<p className="text-dp text-center">Bienvenido a la #ComunidadDeCrédito más grande de México.</p>
-							<p className="text-dp">¡Es hora de iniciar tu solicitud!</p>
-							<p className="text-dp text-center mb-5">Te recomendamos tener a la mano INE, Comprobante de Domicilio y Estados de <br /> Cuenta bancarios para poder aprobar tu crédito en 15 minutos</p>
+							<p className="text-dp text-center">bienvenido a la #comunidaddeCrédito más grande de México.</p>
+							<p className="text-dp">¡es hora de iniciar tu solicitud!</p>
+							<p className="text-dp text-center mb-5">te recomendamos tener a la mano INE, Comprobante de Domicilio y Estados de <br /> Cuenta bancarios para poder ofrecerte las mejores opciones de crédito en menos de 15 minutos</p>
 						</>
 					);
 				break;

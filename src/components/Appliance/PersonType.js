@@ -7,9 +7,9 @@ import { Col, Row } from 'react-bootstrap';
 import TypeCard from '../Generic/TypeCard';
 
 // Images
-import pf from '../../assets/img/type_person/fisica.png';
-import pfae from '../../assets/img/type_person/actividad_empresarial.png';
-import pm from '../../assets/img/type_person/moral.png';
+import pf from '../../assets/img/type_person/Iconospersonas1_azul.webp';
+import pfae from '../../assets/img/type_person/Iconospersonas2_azul.webp';
+import pm from '../../assets/img/type_person/Iconospersonas3_azul.webp';
 import rif from '../../assets/img/type_person/RIF.png';
 
 import { updateLoader } from '../../redux/actions/loaderActions';
@@ -69,7 +69,7 @@ const PersonType = (props) => {
 			<div className="type-person-cards">				
 				
 						<TypeCard
-							text="Negocios sin alta en el SAT"
+							text="negocios sin alta en el SAT"
 							class={`firstBlue fw500 brandonReg ` + pfDisabledClass}
 							img={pf}
 							updateUser={() => updateClient("PF")}
@@ -77,17 +77,17 @@ const PersonType = (props) => {
 							refs={pfRef}
 						/>
                         
-                            <TypeCard
+                            {/* <TypeCard
                                 text="Régimen de Incorporación Fiscal"
                                 class={`secondBlue fw500 brandonReg ` + rifDisabledClass}
                                 updateUser={() => updateClient("RIF")}
                                 img={rif}
                                 value="RIF"
                                 refs={rifRef}
-                            />
+                            /> */}
                         
                             <TypeCard
-                                text="Persona física con Actividad Empresarial"
+                                text="persona física con actividad empresarial"
                                 class={`thirdBlue fw500 brandonReg ` + pfaeDisabledClass}
                                 updateUser={() => updateClient("PFAE")}
                                 img={pfae}
@@ -96,7 +96,7 @@ const PersonType = (props) => {
                             />
                         
                             <TypeCard
-                                text="Persona Moral"
+                                text="persona moral"
                                 class={`fourthBlue fw500 brandonReg ` + pmDisabledClass}
                                 img={pm}
                                 value="PM"

@@ -1,6 +1,6 @@
 .type-person-cards{
 	display: grid;
-	grid-template-columns: 1fr 1fr 1fr 1fr; 
+	grid-template-columns: 1fr 1fr 1fr; 
 	width: 100%;
 	left: 0;
 }
@@ -41,7 +41,7 @@
 }
 
 .firstBlue, .secondBlue, .thirdBlue, .fourthBlue {
-	background: #023e95;
+	background: #f24c5a;
 }
 
 .firstBlue > .text-dp, 
@@ -57,8 +57,8 @@
 
 .card-disabled{
 	background: #FFFFFF;
-	border: 1px #2A2E59 solid;
-	color: #2A2E59;
+	border: 1px #023e95 solid;
+	color: #023e95;
 }
 
 
@@ -66,7 +66,7 @@
 	/* margin-top: -33px; */
 	margin-top: 10px;
 	height: 66px;
-	background: rgba(255, 255, 255, 0.4);
+	/* background: rgba(255, 255, 255, 0.4); */
 	border-radius: 33px;
 	position: relative;
     top: 0px;

@@ -18,8 +18,8 @@ export const FieldDoc = ({
     return(
         <Field name={name}>{({field, form}) => (
 			<div className='fz18 metropolisReg mb-16'>
-				<div className="font-weight-bold">
-					{title} {subtitle && <span className="fz12 font-weight-normal">{subtitle}</span>}
+				<div>
+					<span className='subtitle form'>{title}</span> {subtitle && <span className="fz12" style={{color:'#023473'}}>{subtitle}</span>}
 				</div>
 				<input className="d-none" type="file" ref={refs} onChange={ (e)  => fileMethod('input', name, e) } value="" multiple/>
 				<FileDrop {...field} {...props} onDrop={ (e)  => fileMethod('drag', name, e)}>

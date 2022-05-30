@@ -359,7 +359,7 @@ let GeneralInfoForm = ({
       >
         <SubtitleForm
           subtitle="Sobre ti"
-          className="subtitle-dp text-form-dp"
+          // className=" text-form-dp"
         />
         <Row className="d-flex justify-content-center">
           <Col lg={4} md={4} sm={12}>
@@ -530,7 +530,7 @@ let GeneralInfoForm = ({
 
         <SubtitleForm
           subtitle="Domicilio particular"
-          className="subtitle-dp text-form-dp mb-10 mt-24"
+          className="mb-10 mt-24"
         />
         <Field
           component={renderFieldFull}
@@ -682,7 +682,7 @@ let GeneralInfoForm = ({
             />
           </Col>
         </Row>
-        <SubtitleForm subtitle="Referencias" className="text-form-dp mt-30" />
+        <SubtitleForm subtitle="Referencias" className="mt-30" />
         <label className="label-style">
           El número telefónico debe tener 10 dígitos
         </label>
@@ -779,7 +779,7 @@ let GeneralInfoForm = ({
 
         <SubtitleForm
           subtitle="¿Cuentas con alguno?"
-          className="text-form-dp mt-30 mb-18"
+          className="mt-30 mb-18"
         />
         <Row>
           <Col>
@@ -867,11 +867,11 @@ let GeneralInfoForm = ({
               onClick={() => goToError()}
               style={{ width: '250px' }}
             >
-              Continuar
+              continuar
             </Button>
           ) : (
             <Button type="submit" className="mt-50 btn-blue-general" style={{ width: '250px' }}>
-              Continuar
+              continuar
             </Button>
           )}
         </div>
