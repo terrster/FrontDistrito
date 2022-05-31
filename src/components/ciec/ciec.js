@@ -25,14 +25,16 @@ const CIECcomponent = (props) => {
 
 const goToError = () => {
   const rfcError = document.getElementById("rfc-error");
-  
+
 }
   
 
   const onFormSubmit = async (dataForm) => {
+    console.log(dataForm);
     dispatch(updateLoader(true));
     const data = dataForm;
     const {rfc, ciec } = data;
+    if(rfc && ciec){
     try{
       const res = await axios.get(`api/ciec/${rfc}`);
       console.log(res.data);
@@ -93,6 +95,14 @@ const goToError = () => {
       }
     }catch(err){
       console.log("err", err);
+    } } else {
+      setOpen(true);
+      setMensaje({
+          img: <FontAwesomeIcon icon={faExclamationTriangle} size='3x' style={{color:'#D41919'}} />,
+          title: "¡Error!",
+          message: "debe de llenar todos los campos",
+          type: "error"
+      });
     }
     dispatch(updateLoader(false));
     }
