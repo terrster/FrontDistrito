@@ -25,6 +25,7 @@ const CIECcomponent = (props) => {
 
 const goToError = () => {
   const rfcError = document.getElementById("rfc-error");
+  
 }
   
 
