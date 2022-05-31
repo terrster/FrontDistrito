@@ -136,6 +136,7 @@ class App extends Component {
                   component={Questions}
                 />
                 <PrivateRoute exact path="/ciec"  component={ CIECcomponent }/>
+                
                 <Route path="/terminos-y-condiciones" exact component={Terms} />
                 <Route path="/privacidad" exact component={Privacy} />
                 <Route path="/reset-password" exact component={ResetPassword} />
