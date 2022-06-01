@@ -69,7 +69,7 @@ import store from "./redux/store";
 
 // UTILS
 import isAuthenticated from "./utils/isAuthenticated";
-import  CIECcomponent  from "./components/ciec/ciec";
+
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
@@ -135,8 +135,7 @@ class App extends Component {
                   exact
                   component={Questions}
                 />
-                <PrivateRoute exact path="/ciec"  component={ CIECcomponent }/>
-                
+
                 <Route path="/terminos-y-condiciones" exact component={Terms} />
                 <Route path="/privacidad" exact component={Privacy} />
                 <Route path="/reset-password" exact component={ResetPassword} />
