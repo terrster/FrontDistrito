@@ -88,7 +88,7 @@ const BrokersForms = (props) => {
 
           <Row>
             <Col lg={12}>
-            <FieldTextArea name="message" placeholder="¿por qué te gustaría ser broker digital?" className="forceFullWidth" />
+            <FieldTextArea name="message" placeholder="cuéntanos un poco sobre tu experiencia como broker" className="forceFullWidth" />
             </Col>
           </Row>
 
