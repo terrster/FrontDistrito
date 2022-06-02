@@ -428,8 +428,7 @@ let GeneralInfoForm = ({
         />
 
         
-
-        <InputLabel label="Fecha de nacimiento" class="mt-18" />
+        <SubtitleForm subtitle="Fecha de nacimiento" className="mb-2" />
         <Row className="d-flex justify-content-center">
           <Col>
             <Field
