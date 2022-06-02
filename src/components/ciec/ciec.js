@@ -30,69 +30,14 @@ const goToError = () => {
   
 
   const onFormSubmit = async (dataForm) => {
-    console.log(dataForm);
     dispatch(updateLoader(true));
     const data = dataForm;
     const {rfc, ciec } = data;
     if(rfc && ciec){
     try{
-      const res = await axios.get(`api/ciec/${rfc}`);
-      console.log(res.data);
-      if(res.data.code === 200){
-        const { idUser} = res.data.client;
-        if(res.data.rfc.rfc || res.data.rfcPerson.rfcPerson === rfc){
-          const id = res.data.rfc._id || res.data.rfcPerson._id;
-          try {
-                  const res = await axios.put(`api/ciec/${id}`, {...data, idUser});
-                  console.log(res);
-                  if(res.data.code === 200){
-                    setState("success");
-                    setMensaje({
-                      img: <img src={registerImage} alt="registerimage" style={{ width: '250px' }}/>,
-                      title: "¡registro exitoso!",
-                      message: `la CIEC de ${rfc} se ha registrado correctamente`,
-                      type: "success"
-                    });
-                    setOpen(true);
-                    dispatch(updateLoader(false));
-                  } else{
-                    setMensaje({
-                      img: <FontAwesomeIcon icon={faExclamationTriangle} size='3x' style={{color:'#D41919'}} />,
-                      title: "¡Error!",
-                      message: "la CIEC no se ha podido registrar correctamente, favor de intentarlo más tarde",
-                      type: "error"
-                    });
-                    setOpen(true);
-                    setState("error");
-                    dispatch(updateLoader(false));
-                  }
-                } catch (error) {
-                  console.log("Error de servicio", error);
-                }
-                dispatch(updateLoader(false));
-        } else {
-          setState("error");
-          setOpen(true);
-          setMensaje({
-            img: <FontAwesomeIcon icon={faExclamationTriangle} size='3x' style={{color:'#D41919'}} />,
-            title: "¡Error!",
-            message: "la CIEC no se ha podido registrar, porfavor de intentarlo nuevamente",
-            type: "error"
-          });
-          dispatch(updateLoader(false));
-        }
-      }
-      else{
-        setOpen(true);
-        setState("error");
-        setMensaje({
-          img: <FontAwesomeIcon icon={faExclamationTriangle} size='3x' style={{color:'#D41919'}} />,
-          title: "¡Error!",
-          message: "el RFC no existe en la base de datos, por favor verifique su información",
-          type: "error"
-        });
-        dispatch(updateLoader(false));
-      }
+      const res = await axios.post(`ciec`, data);
+      console.log(res);
+      dispatch(updateLoader(false));
     }catch(err){
       console.log("err", err);
     } } else {
