@@ -241,9 +241,8 @@ let ComercialInfoForm = (props) => {
           name="comercialName"
           label="Nombre comercial"
         />
-        <SubtitleForm subtitle="Giro" className="mb-2" />
         <Field component={renderSelectField} name="gyre" cls="mb-3">
-          <option value="">Seleccionar</option>
+          <option value="">Selecciona el giro de tu negocio</option>
           {Object.keys(comercialOptions).map((value, key) => (
             <option value={`${value}`} key={key}>
               {comercialOptions[value].name}
@@ -475,19 +474,19 @@ let ComercialInfoForm = (props) => {
           name="facebook"
           cls="mb-3"
         />
-        <SubtitleForm subtitle="¿Cuentas con terminal punto de venta?" className="mb-2" />
+        <InputLabel label="¿Cuentas con terminal punto de venta?" class="mt-b2 text-msg-dp" />
         <Field component={renderSelectField} name="terminal" cls="mb-3">
           <option value="">Seleccionar</option>
           <option value="1">Sí</option>
           <option value="0">No</option>
         </Field>
-        <SubtitleForm subtitle="¿Vendes tu producto o servicio al extranjero?" className="mb-2" />
+        <InputLabel label="¿Vendes tu producto o servicio al extranjero?" class="mt-b2 text-msg-dp" />
         <Field component={renderSelectField} name="exportation" cls="mb-3">
           <option value="">Seleccionar</option>
           <option value="1">Sí</option>
           <option value="0">No</option>
         </Field>
-        <SubtitleForm subtitle="¿Puedes ofrecer una garantía?" className="mb-2" />
+        <InputLabel label="¿Puedes ofrecer una garantía?" class="mt-b2 text-msg-dp" />
         <Field component={renderSelectField} name="warranty" cls="mb-3">
           <option value="">Seleccionar</option>
           <option value="1">Sí, garantía inmobiliaria</option>
