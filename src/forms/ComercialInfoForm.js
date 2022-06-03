@@ -321,7 +321,7 @@ let ComercialInfoForm = (props) => {
         }
 
         {
-          type === "PM" || type === "PFAE" &&
+          (type === "PM" || type === "PFAE") &&
           <Field component={renderSelectField} name="empresarialCreditCard" cls="mb-3">
             <option className="metropolisReg" value="">
               ¿Cuentas con tarjeta de crédito empresarial?
