@@ -92,8 +92,8 @@ const Credit = (props) => {
               title="Completa tu solicitud"
             />
             <label className="subtitle-dp fz20 fw500">
-              completa el 100% de tu formulario y empieza a recibir las mejores
-              opciones de crédito en menos de 24 hrs.
+              completa el 100% de tu solicitud y empieza a recibir las mejores
+              opciones de crédito en menos de 15 min.
             </label>
           </div>
           <div className="mt-50">
