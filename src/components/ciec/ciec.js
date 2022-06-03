@@ -36,10 +36,35 @@ const goToError = () => {
     if(rfc && ciec){
     try{
       const res = await axios.post(`ciec`, data);
-      console.log(res);
-      dispatch(updateLoader(false));
+      if (res.status === 200) {
+        setOpen(true);
+        setMensaje({
+          img : registerImage,
+          title : "¡Registro exitoso!",
+          message: res.data.msg,
+        });
+        setState("success");
+        setTimeout(() => { history.push("/"); }, 3000); // Redireccionar a la pagina principal
+        dispatch(updateLoader(false));
+      } else {
+        setOpen(true);
+        setMensaje({
+          img: <FontAwesomeIcon icon={faExclamationTriangle} size='3x' style={{color:'#D41919'}} />,
+          title: "¡Error al registrarse!",
+          message: res.data.msg,
+        });
+        dispatch(updateLoader(false));
+        console.log("Error de servicio");
+      }
+      
     }catch(err){
-      console.log("err", err);
+      console.log(err)
+      setOpen(true);
+      setMensaje({
+        img: <FontAwesomeIcon icon={faExclamationTriangle} size='3x' style={{color:'#D41919'}} />,
+        title: "¡Error al registrarse!",
+        message: err.response.data.msg,
+      })
     } } else {
       setOpen(true);
       setMensaje({
