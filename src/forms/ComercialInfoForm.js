@@ -241,7 +241,7 @@ let ComercialInfoForm = (props) => {
           name="comercialName"
           label="Nombre comercial"
         />
-        <InputLabel label="Giro" class="mt-18" />
+        <SubtitleForm subtitle="Giro" className="mb-2" />
         <Field component={renderSelectField} name="gyre" cls="mb-3">
           <option value="">Seleccionar</option>
           {Object.keys(comercialOptions).map((value, key) => (
@@ -462,7 +462,7 @@ let ComercialInfoForm = (props) => {
           )}
         </Row>
 
-        <SubtitleForm subtitle="¿Cuentas con alguno?" className="mt-11 mb-3" />
+        <SubtitleForm subtitle="¿Cuentas con alguno?" className="mt-11 mb-2" />
         <Field
           component={renderField}
           label="Copia y pega el link de tu sitio web (opcional)"
@@ -475,25 +475,19 @@ let ComercialInfoForm = (props) => {
           name="facebook"
           cls="mb-3"
         />
-        <InputLabel
-          label="¿Cuentas con terminal punto de venta?"
-          class="mt-18"
-        />
+        <SubtitleForm subtitle="¿Cuentas con terminal punto de venta?" className="mb-2" />
         <Field component={renderSelectField} name="terminal" cls="mb-3">
           <option value="">Seleccionar</option>
           <option value="1">Sí</option>
           <option value="0">No</option>
         </Field>
-        <InputLabel
-          label="¿Vendes tu producto o servicio al extranjero?"
-          class="mt-18"
-        />
+        <SubtitleForm subtitle="¿Vendes tu producto o servicio al extranjero?" className="mb-2" />
         <Field component={renderSelectField} name="exportation" cls="mb-3">
           <option value="">Seleccionar</option>
           <option value="1">Sí</option>
           <option value="0">No</option>
         </Field>
-        <InputLabel label="¿Puedes ofrecer una garantía?" class="mt-18" />
+        <SubtitleForm subtitle="¿Puedes ofrecer una garantía?" className="mb-2" />
         <Field component={renderSelectField} name="warranty" cls="mb-3">
           <option value="">Seleccionar</option>
           <option value="1">Sí, garantía inmobiliaria</option>

@@ -428,8 +428,7 @@ let GeneralInfoForm = ({
         />
 
         
-
-        <InputLabel label="Fecha de nacimiento" class="mt-18" />
+        <SubtitleForm subtitle="Fecha de nacimiento" className="mb-2" />
         <Row className="d-flex justify-content-center">
           <Col>
             <Field
@@ -783,7 +782,7 @@ let GeneralInfoForm = ({
         />
         <Row>
           <Col>
-            <InputLabel label="Crédito hipotecario" class="mt-18" />
+            <InputLabel label="Crédito hipotecario" class="mt-18 text-msg-dp" />
             <Field
               component={renderSelectFieldFull}
               name="mortgageCredit"
@@ -799,7 +798,7 @@ let GeneralInfoForm = ({
           </Col>
 
           <Col>
-            <InputLabel label="Crédito automotriz" class="mt-18" />
+            <InputLabel label="Crédito automotriz" class="mt-18 text-msg-dp" />
             <Field
               component={renderSelectFieldFull}
               name="carCredit"
@@ -816,7 +815,7 @@ let GeneralInfoForm = ({
           </Col>
 
           <Col>
-            <InputLabel label="Tarjeta de crédito" class="mt-18" />
+            <InputLabel label="Tarjeta de crédito" class="mt-18 text-msg-dp" />
             <Field
               component={renderSelectFieldFull}
               name="creditCard"

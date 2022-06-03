@@ -92,16 +92,16 @@ const NavBar = props => {
 							} */}
 							{
 								showEstatus &&
-								<Link onClick={close} to="/estatus_solicitud" className={ (props.url === 'estatus_solicitud') ? classDefault+' nav_bar_active': classDefault}>Estatus de Solicitud</Link>
+								<Link onClick={close} to="/estatus_solicitud" className={ (props.url === 'estatus_solicitud') ? classDefault+' nav_bar_active': classDefault}>estatus de solicitud</Link>
 							}
 							{ 
 								showHome &&
-								<Link onClick={close} to="/home" className={ (props.url === 'home') ? classDefault+' nav_bar_active': classDefault}>Mi cuenta</Link>
+								<Link onClick={close} to="/home" className={ (props.url === 'home') ? classDefault+' nav_bar_active': classDefault}>mi cuenta</Link>
 							}
 							<Nav.Link onClick={close} href="/" className="text-center blackBlue heigth-45 metropolisReg"> <Button className="logout fz-12" onClick={() => {
 								sessionStorage.clear();
 								window.location.reload()
-							}}>Cerrar sesión</Button></Nav.Link>
+							}}>cerrar sesión</Button></Nav.Link>
 						</Nav>
 					</Navbar.Collapse>
 					}
