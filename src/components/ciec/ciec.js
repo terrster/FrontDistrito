@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import axios from "../../utils/axios";
 import { Modal } from 'react-responsive-modal';
 import { Row, Button, Col } from 'react-bootstrap';
-import registerImage from '../../assets/img/enviado_chava-01.webp'
+import registerImage from '../../assets/img/enviado_chava-01.webp';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
 import Loader from '../Loader/Loader';
@@ -93,7 +93,9 @@ const goToError = () => {
 						<Col lg={6} sm={12} md={12} className="text-center">
 							<div className="fz29 fw400">
 								<>
-                  {mensaje.img}
+                <div class="text-center">
+                  <img src={mensaje.img} class="rounded" alt="..." style={{maxWidth:'100%'}}/>
+                </div>
                 </>
 			          <div className="title-dp fz42 mb-18 fw500"  style={mensaje.type === 'error'? {color:'#D41919'}:{} }>
                   {mensaje.title}
