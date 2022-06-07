@@ -42,6 +42,7 @@ const goToError = () => {
           img : registerImage,
           title : "¡Registro exitoso!",
           message: res.data.msg,
+          type: "success",
         });
         setState("success");
         setTimeout(() => { history.push("/"); }, 3000); // Redireccionar a la pagina principal
@@ -52,6 +53,7 @@ const goToError = () => {
           img: <FontAwesomeIcon icon={faExclamationTriangle} size='3x' style={{color:'#D41919'}} />,
           title: "¡Error al registrarse!",
           message: res.data.msg,
+          type: "error",
         });
         dispatch(updateLoader(false));
         console.log("Error de servicio");
@@ -64,6 +66,7 @@ const goToError = () => {
         img: <FontAwesomeIcon icon={faExclamationTriangle} size='3x' style={{color:'#D41919'}} />,
         title: "¡Error al registrarse!",
         message: err.response.data.msg,
+        type: "error",
       })
     } } else {
       setOpen(true);
@@ -94,7 +97,9 @@ const goToError = () => {
 							<div className="fz29 fw400">
 								<>
                 <div class="text-center">
-                  <img src={mensaje.img} class="rounded" alt="..." style={{maxWidth:'100%'}}/>
+                  {
+                    state === "success" ? ( <img src={mensaje.img} class="rounded" alt="..." style={{maxWidth:'100%'}}/>) : ( <>{mensaje.img}</>)
+                  }
                 </div>
                 </>
 			          <div className="title-dp fz42 mb-18 fw500"  style={mensaje.type === 'error'? {color:'#D41919'}:{} }>
