@@ -117,6 +117,11 @@ let SignupFormBrokers = (props) => {
           label="Nombre(s)"
           maxLength={60}
           normalize={onlyLirycsWithOnlyOneSpaceBetween}
+          onChange={ (event, newValue, previousValue, name) => {
+            if(errorBroker !== ''){
+              setErrorBroker("");
+            }
+          }}
         />
 
         <Field
@@ -129,12 +134,19 @@ let SignupFormBrokers = (props) => {
             e.preventDefault(); 
             props.change('lastname', e.target.value.trim());
           }}
+          onChange={ (event, newValue, previousValue, name) => {
+            if(errorBroker !== ''){
+              setErrorBroker("");
+            }
+          }}
         />
         <Field
           component={renderField}
           type="text"
           onChange={ (event, newValue, previousValue, name) => {
             setErrorEmail("");
+            if(errorBroker !== ''){
+              setErrorBroker("");}
           }}
           name="email"
           label="Correo electrónico"
@@ -173,6 +185,11 @@ let SignupFormBrokers = (props) => {
             label="Teléfono"
             maxLength={10}
             normalize={onlyNumbers}
+            onChange={ (event, newValue, previousValue, name) => {
+              if(errorBroker !== ''){
+                setErrorBroker("");
+              }
+            }}
           />
         </div>
         <OverlayTrigger
@@ -200,6 +217,7 @@ let SignupFormBrokers = (props) => {
               name="brokercode"
               label="Código brokers"
               readOnly={true}
+              errorBroker={errorBroker}
               style={{marginTop: '0px'}}
             />
           </div>) :
