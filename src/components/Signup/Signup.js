@@ -35,6 +35,9 @@ import OficinaNoresteMobile from '../../assets/img/carousel/mobile-carrusel-01.j
 import DGimpulsandoWEB from '../../assets/img/financialPartners/DGimpulsandoWEB.jpg';
 import DGimpulsandoMobile from '../../assets/img/financialPartners/DGimpulsandoMobile.jpg';
 
+import Eurorep from '../../assets/img/financialPartners/eurorep_bannerweb.jpg';
+import EurorepM from '../../assets/img/financialPartners/eurorep_bannermobile.jpg';
+
 const getVersionImage = () => {
 	const currentSize = document.getElementsByTagName('body')[0].clientWidth;
 	return currentSize < 775 ? 1 : 0;
@@ -109,6 +112,17 @@ const financialPartner = (partner) => {
         prefix: process.env.REACT_APP_CONFIGURATION === 'localhost' || process.env.REACT_APP_CONFIGURATION === 'development' ? 'SE1Dev - ' : 'SE1 - ',
         channel: 'SE1',
         brokercode: '180238861'//
+      }
+      case 'EUROREP':
+      return {
+        image: [Eurorep, EurorepM],
+        text: [
+          // 'Solicita un crédito o arrendamiento para adquirir la maquinaria o equipo de nuestras marcas exclusivas',
+          // 'podrás recibir las mejores opciones de financiamiento en menos de 15 min con un proceso fácil, rápido y sin papeleos.'
+        ],
+        prefix: process.env.REACT_APP_CONFIGURATION === 'localhost' || process.env.REACT_APP_CONFIGURATION === 'development' ? 'EUROREPDEV - ' : 'EUROREP - ',
+        channel: 'EUROREP',
+        brokercode: ''//
       }
 
 
