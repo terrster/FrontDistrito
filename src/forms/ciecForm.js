@@ -27,9 +27,10 @@ let CiecForm = (props) => {
   const upper = (value) => value && value.toUpperCase();
     
     return(
-        <div className="login-form">
-                <form onSubmit={handleSubmit}>
+        <div className="form-ciec">
+                <form onSubmit={handleSubmit} autoComplete='off'>
                     <img className="mb-4 img-fluid" src={logito} alt='LogoPyme'style={{width:'50%'}} ></img>
+                    <input autocomplete="false" name="hidden" type="text" style={{display:'none'}}/>
                     <Field
                     component={renderField}
                     label={'RFC'}

@@ -122,7 +122,7 @@ const financialPartner = (partner) => {
         ],
         prefix: process.env.REACT_APP_CONFIGURATION === 'localhost' || process.env.REACT_APP_CONFIGURATION === 'development' ? 'EUROREPDEV - ' : 'EUROREP - ',
         channel: 'EUROREP',
-        brokercode: ''//
+        brokercode: '189986678'//
       }
 
 

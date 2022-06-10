@@ -27,6 +27,16 @@ export const renderField = ({
             maxLength="10"
             disabled={disabled}
           />
+        ) : label === "RFC" && sessionStorage.type === undefined ? (
+          <input
+            className="form-control custom-form-input text-dp mt-1 mb-0"
+            {...input}
+            value={value || input.value}
+            placeholder={label}
+            type={type}
+            maxLength="13"
+            disabled={disabled}
+          />
         ) : label === "RFC" &&
           (sessionStorage.type === "RIF" || sessionStorage.type === "PFAE") ? (
           <input

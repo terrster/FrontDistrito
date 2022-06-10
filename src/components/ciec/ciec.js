@@ -51,7 +51,7 @@ const goToError = () => {
         setOpen(true);
         setMensaje({
           img: <FontAwesomeIcon icon={faExclamationTriangle} size='3x' style={{color:'#D41919'}} />,
-          title: "¡Error al registrarse!",
+          title: "¡Error!",
           message: res.data.msg,
           type: "error",
         });
@@ -64,7 +64,7 @@ const goToError = () => {
       setOpen(true);
       setMensaje({
         img: <FontAwesomeIcon icon={faExclamationTriangle} size='3x' style={{color:'#D41919'}} />,
-        title: "¡Error al registrarse!",
+        title: "¡Error!",
         message: err.response.data.msg,
         type: "error",
       })
@@ -110,17 +110,22 @@ const goToError = () => {
 						</Col>
 					</Row>
 					<div className="text-center mt-30">
-						<Button className="btn-blue-general ml-auto mr-auto" style={{width: '250px'}} onClick={() => {
-              if (state === "success") {
-                history.push("/");
-              } else {
-                setOpen(false);
-              }
-            }}>
-							{
-                state === "success" ? "aceptar" : "cerrar"
-              }
-						</Button>
+            {
+              state === "success" ? (
+                <Button className="btn-blue-general ml-auto mr-auto" style={{width: '250px'}} onClick={() => {history.push("/");} }>aceptar</Button>
+              ) : (
+                <>
+                  <div class="container">
+                  <div class="row mt-3">
+                    <Button className="btn-blue-general ml-auto mr-auto" style={{width: '250px'}} onClick={() => {history.push("/registrate");} }>nueva solicitud</Button>
+                  </div>
+                  <div class="row mt-3">
+                    <Button className="btn-blue-general ml-auto mr-auto" style={{width: '250px'}} onClick={() => {setOpen(false)} }>cerrar</Button>
+                  </div>
+                  </div>
+                </>
+              )
+            }
 					</div>
 				</Modal>
     </div>
