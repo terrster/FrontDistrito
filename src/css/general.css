@@ -520,6 +520,21 @@
 	text-transform: lowercase;
 	color: #F24C5A;
 }
+.alternative{
+	font-size: 1em !important;
+	font-family: 'Metropolis-Regular'  !important;
+}
+.alternative2{
+	font-size: 1.3em !important;
+	font-weight: 500;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: normal;
+	letter-spacing: 0px;
+	font-family: 'coolvetica_rg'  !important;; 
+	text-transform: lowercase;
+	color: #023473;
+}
 
 .black-link{
 	color: #000000 !important;

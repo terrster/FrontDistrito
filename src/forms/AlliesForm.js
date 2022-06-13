@@ -126,7 +126,7 @@ const AlliesForm = (props) => {
 
 	return (
 		<Form className="pt-3 pl-5 pr-5 pb-3">
-            <Title title="Información General" className="title-dp fz25 fw300 mb-1 text-center"/>
+            <Title title="Información General" className="title-dp fz25 fw300 mb-2 text-center"/>
 
             <Row>
                 <Col lg={4}>
@@ -140,7 +140,7 @@ const AlliesForm = (props) => {
                 </Col>
             </Row>
 
-            <SubtitleFrom subtitle="Correos electrónicos donde llegarán los leads" className="fz20 mb-1"/>
+            <SubtitleFrom subtitle="Correos electrónicos donde llegarán los leads" className="fz20 mb-2 alternative"/>
 
             <Row>
                 <Col lg={4}>
@@ -157,9 +157,9 @@ const AlliesForm = (props) => {
                 </Col>
             </Row>
 
-            <Title title="Variables de Crédito" className="title-dp fz25 fw300 mb-1 text-center"/>
+            <Title title="Variables de Crédito" className="title-dp fz25 fw300 mb-2 text-center"/>
 
-            <div className="subtitle form fz20 mb-1">
+            <div className="subtitle form fz20 mb-2 alternative">
                 Tipo de crédito que ofreces <small>(elige uno o más)</small>
             </div>
 
@@ -197,7 +197,7 @@ const AlliesForm = (props) => {
                 </Col>
             </Row>
 
-            <div className="subtitle form fz20 mb-1">
+            <div className="subtitle form fz20 mb-2 alternative">
                 Régimen fiscal aceptado <small>(elige uno o más)</small>
             </div>
 
@@ -219,7 +219,7 @@ const AlliesForm = (props) => {
                 </Col>
             </Row>
 
-            <Title title="Datos financieros" className="title-dp fz25 fw300 mb-1 text-center"/>
+            <Title title="Datos financieros" className="title-dp fz25 fw300 mb-2 text-center"/>
 
             <Row>
                 <Col lg={4}>
@@ -251,7 +251,7 @@ const AlliesForm = (props) => {
                 </Col>
             </Row>
 
-            <SubtitleFrom id="antiquity-radio-group" subtitle="Antigüedad mínima aceptada" className="fz20 mb-1"/>
+            <SubtitleFrom id="antiquity-radio-group" subtitle="Antigüedad mínima aceptada" className="fz20 mb-2 alternative"/>
 
             
             <div role="group" aria-labelledby="antiquity-radio-group" className="form-group">
@@ -292,7 +292,7 @@ const AlliesForm = (props) => {
                 </Row>
             </div>
 
-            <SubtitleFrom id="flexibilityCreditBureau-radio-group" subtitle="Flexibilidad en Buró de Crédito" className="fz20 mb-1"/>
+            <SubtitleFrom id="flexibilityCreditBureau-radio-group" subtitle="Flexibilidad en Buró de Crédito" className="fz20 mb-2 alternative"/>
 
             <div role="group" aria-labelledby="flexibilityCreditBureau-radio-group" className="form-group">
                 <Row>
@@ -327,7 +327,7 @@ const AlliesForm = (props) => {
                 </Row>
             </div>
 
-            <Title title="Ubicación geografíca" className="title-dp fz25 fw300 mb-1 text-center"/>
+            <Title title="Ubicación geografíca" className="title-dp fz25 fw300 mb-2 text-center"/>
 
             <Row>
                 <Col lg={12}>
@@ -335,7 +335,7 @@ const AlliesForm = (props) => {
                 </Col>
             </Row>
 
-            <SubtitleFrom id="ciec-radio-group" subtitle="CIEC obligatoria para iniciar proceso de crédito" className="fz20 mb-1"/>
+            <SubtitleFrom id="ciec-radio-group" subtitle="CIEC obligatoria para iniciar proceso de crédito" className="fz20 mb-2 alternative"/>
 
             <div role="group" aria-labelledby="ciec-radio-group" className="form-group">
                 <Row>
@@ -357,7 +357,7 @@ const AlliesForm = (props) => {
                 </Row>
             </div>
 
-            <SubtitleFrom id="warranty-radio-group" subtitle="Garantías" className="fz20 mb-1"/>
+            <SubtitleFrom id="warranty-radio-group" subtitle="Garantías" className="fz20 mb-2 alternative"/>
 
             <div role="group" aria-labelledby="warranty-radio-group" className="form-group">
                 <Row>
@@ -391,7 +391,7 @@ const AlliesForm = (props) => {
                 </Row>
             </div>
 
-            {/* <SubtitleFrom subtitle="Apalancamiento aceptado" className="fz20 mb-1"/>
+            {/* <SubtitleFrom subtitle="Apalancamiento aceptado" className="fz20 mb-2 alternative"/>
 
             <Row>
                 <Col lg={12}>
@@ -399,7 +399,7 @@ const AlliesForm = (props) => {
                 </Col>
             </Row> */}
 
-            <div className="subtitle form fz20 mb-1">
+            <div className="subtitle form fz20 mb-2 alternative">
                 Uso del crédito otorgado <small>(elige todas la necesarias)</small>
             </div>
 
@@ -435,7 +435,8 @@ const AlliesForm = (props) => {
 
             <div key={`div-file-input-allies`}>
                 <FieldDoc
-                    title={"Adjunta tu logo (Archivo editable o PFD)"}
+                    title={"Adjunta tu logo"}
+                    subtitle={"(archivo editable o PDF)"}
                     className="forceFullWidth"
                     name='logo'
                     fileMethod={fileHandler}
@@ -444,6 +445,7 @@ const AlliesForm = (props) => {
                     files={props.initialValues['logo']}
                     deleteFile={deleteChip}
                     key={`file-input-allies`}
+                    alt= 'alternative2'
                 />
             </div>
             {
