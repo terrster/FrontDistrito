@@ -57,6 +57,7 @@ export function loginAction(data){
         try{
 			sessionStorage.setItem('user', JSON.stringify(data.user));
 			sessionStorage.setItem("token", data.token);
+			sessionStorage.setItem("broker", data.Brokertelefono);
 			dispatch( loginSuccess() );
 
         }

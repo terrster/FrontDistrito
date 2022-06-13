@@ -3,6 +3,7 @@ export const validateGeneralInfo = (values) => {
   const user = JSON.parse(sessionStorage.getItem("user"));
   const idClient = user.idClient;
   const type = idClient.type;
+  const broker = sessionStorage.getItem('broker');
 
   if (!values.name) {
     errors.name = "Ingresa tu nombre";
@@ -166,6 +167,10 @@ export const validateGeneralInfo = (values) => {
       values.phone.length < 10
     ) {
       errors.phone = "Ingresa un número de teléfono válido";
+    }
+
+    if (values.phone === broker && broker !== "") {
+      errors.phone = "EL numero no pude ser el del broker";
     }
 
     if (!values.zipCode) {

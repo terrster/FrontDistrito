@@ -1,6 +1,7 @@
 const RFCPF = /^([A-ZÑ\x26]{4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1]))(([-|\s])?([A-Z\d]{3}))?$/;
 const RFCPM = /^([A-ZÑ\x26]{3}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1]))(([-|\s])?([A-Z\d]{3}))?$/;
 const OTHER = /^[A-Z]{4}(\d{6})((\D|\d){3})?$/;
+const broker = sessionStorage.getItem('broker');
 
 function validDay(day, month) {
   let valid = true;
@@ -133,6 +134,9 @@ export const validateComercialInfo = (values) => {
     values.phone.length < 10
   ) {
     errors.phone = "Ingresa un teléfono válido";
+  }
+  if (values.phone === broker && broker !== "") {
+    errors.phone = "EL numero no pude ser el del broker";
   }
 
   if (!values.warranty) {
