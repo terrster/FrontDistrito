@@ -22,7 +22,8 @@ const NavBar = props => {
 		'oficinanoreste',
 		'dg-impulsando',
 		'se1',
-		'eurorep'
+		'eurorep',
+		'oficinabajio1'
 ];
 
 	useLayoutEffect(() => {
