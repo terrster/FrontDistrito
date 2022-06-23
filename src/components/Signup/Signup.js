@@ -35,8 +35,8 @@ import OficinaNoresteMobile from '../../assets/img/carousel/mobile-carrusel-01.j
 import DGimpulsandoWEB from '../../assets/img/financialPartners/DGimpulsandoWEB.jpg';
 import DGimpulsandoMobile from '../../assets/img/financialPartners/DGimpulsandoMobile.jpg';
 
-import Eurorep from '../../assets/img/financialPartners/eurorep_bannerweb.jpg';
-import EurorepM from '../../assets/img/financialPartners/eurorep_bannermobile.jpg';
+import Eurorep from '../../assets/img/financialPartners/eurorep_bannerweb.webp';
+import EurorepM from '../../assets/img/financialPartners/eurorep_bannermobile.webp';
 
 const getVersionImage = () => {
 	const currentSize = document.getElementsByTagName('body')[0].clientWidth;
