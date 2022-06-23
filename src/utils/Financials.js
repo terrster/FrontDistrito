@@ -40,6 +40,7 @@ import Billpocket from '../assets/img/alianzas/billpocket.png';
 import GBM from '../assets/img/alianzas/logogbm.svg';
 import Tivos from '../assets/img/alianzas/tivos-01.svg';
 import Capitalx from '../assets/img/alianzas/cx.svg';
+import Dbmenos from '../assets/img/alianzas/dbmenos.svg';
 
 export const filterFinancials = (financials) => {
     
@@ -180,6 +181,9 @@ export const imgFinancial = (financial) => {
         case 'CAPITALX':
         return Capitalx;
 
+        case 'DBMENOS':
+        return Dbmenos;
+
 
         case 'ALL':
         return [
@@ -223,8 +227,8 @@ export const imgFinancial = (financial) => {
             Billpocket,
             GBM,
             Tivos,
-            Capitalx
-
+            Capitalx,
+            Dbmenos,
         ];
     }
 }
