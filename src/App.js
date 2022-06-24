@@ -46,6 +46,7 @@ import Documents from "./components/Appliance/Documents";
 import OpenBanking from "./components/OpenBanking/OpenBanking";
 // import Loader from "./components/Loader/Loader";
 import Brokers from "./components/Brokers/Brokers";
+import CPBrokers from "./components/Brokers/cpBrokers";
 import ThankyouPage from "./components/Brokers/ThankyouPage";
 import Counter from "./components/Counter/Counter";
 import Solicitud from "./components/Solicitud/Solicitud";
@@ -151,6 +152,7 @@ class App extends Component {
                 <Route path="/registroexitoso/:partner?" exact component={RegistroExitoso} />
                 <Route path="/login/:redirect?" exact component={Login} />
                 <Route path="/brokers-registro" exact component={Brokers}/>
+                <Route path="/brokersCP" exact component={CPBrokers}/>
                 <Route path="/solicitud_enviada_brokers" exact component={ThankyouPage} />
                 <Route path="/contador" exact component={Counter}/>
                 <Route path="/alianza" exact component={Allies}/>
