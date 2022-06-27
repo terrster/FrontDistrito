@@ -4,11 +4,12 @@ import Title from '../../Generic/Title';
 
 const Info = () => {
  return(
-   <div className="container pt-5">
+  <>
+  <Card.Header id="header"  className="title-dp-blue fz42 text-left line-height pt-5"><span className='title'> broker </span> digital distrito pyme </Card.Header>
+   <div className="container">
     <Row className="d-flex align-items-center justify-items-center">
       <Col xl={7} lg={7} md={7} className="mb-3">
-      <Card.Header id="header"  className="title-dp-blue fz42 text-left line-height"><span className='title'> broker </span> digital distrito pyme </Card.Header>
-        <div className="metropolisReg fz21 blackBlue text-justify">
+        <div className="metropolisReg fz21 blackBlue text-justify" style={{paddingLeft:'1rem', paddingRight:'1.5rem'}}>
           <br/>
           si tienes experiencia en el sector pyme y/o hipotecario, 
           el programa de brokers digitales distrito pyme es tu mejor 
@@ -31,6 +32,7 @@ const Info = () => {
       </Col>
     </Row>
    </div>
+   </>
  );
 }
 

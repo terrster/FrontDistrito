@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import '../../../css/footer.css';
 import logo from '../../../assets/img/redes_sociales/logo.png';
 import face from '../../../assets/img/redes_sociales/Facebook.png';
@@ -11,6 +11,7 @@ import youtube from '../../../assets/img/redes_sociales/Youtube.png';
 //import Whatsapp from '../../../assets/img/redes_sociales/whatsapp.png';
 
 const Footer = props => {
+    const location = useLocation();
     return(
     <div id="footer-dp" className="row d-flex justify-content-center">
         <div className="col-xs-12 col-lg-3 text-center text-lg-left mb-3 mb-lg-0" >
@@ -20,8 +21,8 @@ const Footer = props => {
                 </div>
         </div>
 
-       
-
+        { location.pathname !== '/brokersCP' && 
+        <>
         <div className="col-6 col-lg-3 mt-3">
         <div className="box vertical">menú</div>
           <div className='box horizontal'>
@@ -54,6 +55,8 @@ const Footer = props => {
             <div className="footer-link"><Link className="footer-link" to="/aliado_financiero">quiero ser Aliado Financiero</Link></div>
           </div>
         </div>
+        </>
+        }
         <div className="col-12 col-lg-3 mt-3 text-center">
           
             <div className="text-dp-gray fw300 fz18">(55) 8661-9486</div>

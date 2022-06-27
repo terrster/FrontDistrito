@@ -119,7 +119,7 @@ const Brokers = () => {
         <>
             <Loader/>
 
-            <div style={{maxHeight:'85vh', height:'100vh', overflow:'hidden'}}>
+            <div style={{maxHeight: version === 0? '85vh' : '70vh', height:'100vh', overflow:'hidden'}}>
 
                     <img className="d-block w-100" src={images[version]} alt="brokersbanner" />
             </div>

@@ -93,8 +93,8 @@ const BrokersForms = (props) => {
           </Row>
 
           <Row>
-            <div>
-              <div className="metropolisReg fz12 blackBlue text-left">
+            <div style={{paddingLeft:'1rem', paddingRight:'1.5rem'}}>
+              <div className="metropolisReg fz12 blackBlue  text-justify">
                 <b>distrito pyme</b> se compromete a proteger y respetar tu privacidad, y solo usaremos tu información
                 personal para administrar tu cuenta y proporcionar los servicios que nos solicitaste.
                 consulta nuestro <Link to="/privacidad" target="_blank">aviso de privacidad</Link>
@@ -104,7 +104,7 @@ const BrokersForms = (props) => {
               <FieldCheck name="trm" label="entiendo*" className="metropolisReg fz12 blackBlue"/>
             </Col>
 
-              <div className="metropolisReg fz12 blackBlue text-left mt-3">
+              <div className="metropolisReg fz12 blackBlue  text-justify mt-3">
                 al hacer clic en enviar, aceptas que <b>distrito pyme</b> almacene y procese la información personal suministrada arriba para contactarte.
               </div>
             </div>

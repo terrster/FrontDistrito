@@ -12,7 +12,7 @@ import GANAR_DINERO from '../../../assets/img/brokers-landing/iconos/Ícono_Din
 const Cards = () => {
 
   return(
-    <div id="cardsBrokers" className="pt-5 text-center">
+    <div id="cardsBrokers" className="pt-3 text-center">
      <Card.Header id="header"  className="title-dp-blue fz42  fw300 text-left line-height"><span className='title'> ¿cómo convertirme en</span> broker digital? </Card.Header>
     <div className="justify-content-center container container-xl pt-4">
       <Row className="justify-content-center">
