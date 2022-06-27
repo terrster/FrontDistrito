@@ -138,6 +138,19 @@ const financialPartner = (partner) => {
       }
 
 
+      case 'ASUBIA':
+        return {
+          image: [],
+          text: [
+            'Solicita un crédito para tu empresa o negocio a través de nuestro aliado Distrito Pyme.',
+            'Podrás recibir las mejores opciones de crédito en menos de 15 min con un proceso fácil, rápido y sin papeleos.'
+          ],
+          prefix: process.env.REACT_APP_CONFIGURATION === 'localhost' || process.env.REACT_APP_CONFIGURATION === 'development' ? 'OficinanoresteDev - ' : 'Oficinanoreste - ',
+          channel: 'Asubia',
+          brokercode: '195842644'//
+        }
+
+
     default:
       return false;
   }
@@ -214,7 +227,7 @@ const Signup = props => {
     return (
       <>
         <Loader />
-        {!partner || partner.channel === 'Oficinanoreste' || partner.channel === 'SE1'|| partner.channel === 'Oficinabajio1'? (
+        {!partner || partner.channel === 'Oficinanoreste' || partner.channel === 'SE1'|| partner.channel === 'Oficinabajio1'|| partner.channel === 'Asubia'? (
           <div className="container mt-30">
             <Title
               className="fz56 text-center title-dp fw500"

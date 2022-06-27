@@ -23,7 +23,8 @@ const NavBar = props => {
 		'dg-impulsando',
 		'se1',
 		'eurorep',
-		'oficinabajio1'
+		'oficinabajio1',
+		'asubia'
 ];
 
 	useLayoutEffect(() => {
