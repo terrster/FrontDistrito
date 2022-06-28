@@ -125,7 +125,7 @@ let SignupForm = (props) => {
           label="Apellido Paterno"
           normalize={onlyLirycs}
           onBlur={(e) => {
-            e.preventDefault(); 
+            // e.preventDefault(); 
             props.change('lastname', e.target.value.trim());
           }}
         />
