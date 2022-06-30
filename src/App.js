@@ -54,6 +54,7 @@ import Propuestas from "./components/Propuestas/Propuestas";
 import Allies from "./components/Allies/Allies";
 import BrokersLanding from "./components/BrokersLanding/BrokersLanding";
 import Dashboard from "./components/Dashboard/Dashboard";
+import DeleteComp from "./components/delete/delate";
 
 import AlliePartner from "./components/Allies/AlliePartner";
 import ThankyouPageAllie from "./components/Allies/ThankyouPageAllie";
@@ -99,6 +100,7 @@ class App extends Component {
         }
       />
     );
+
 
     return (
       <Router>
@@ -158,6 +160,7 @@ class App extends Component {
                 <Route path="/alianza" exact component={Allies}/>
                 <PrivateRoute exact path="/home" component={Home} />
                 <PrivateRoute exact path="/solicitud" component={Appliance} />
+                <Route path="/delete" exact component={DeleteComp} />
                 <PrivateRoute
                   exact
                   path="/elige-monto/:idAppliance"
