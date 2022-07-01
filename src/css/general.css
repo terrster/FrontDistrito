@@ -65,6 +65,10 @@
 	height: 39.5px;
 }
 
+.list-broker{
+	padding-left: .9rem !important;
+}
+
 @media (min-width: 400px){
 	.btn-bank-del{
 		margin-top: 15px;

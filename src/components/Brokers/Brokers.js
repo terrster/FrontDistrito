@@ -11,6 +11,50 @@ import { updateLoader } from "../../redux/actions/loaderActions";
 import Loader from "../Loader/Loader";
 
 const images = [BANNER_WEB, BANNER_MOVIL];
+const herramientas = [
+    {
+        id: 1,
+        name: 'id exclusivo que te identifica como broker',
+    },
+    {
+        id: 2,
+        name: 'acceso único a nuestro CRM',
+    },
+    {
+        id: 3,
+        name: 'plan de capacitación semanal',
+    },
+    {
+        id: 4,
+        name: 'tarjeta de presentación digital',
+    },
+    {
+        id: 5,
+        name: 'herramientas de marketing y ventas',
+    },
+    {
+        id: 6,
+        name: 'acceso a biblioteca virtual',
+    },
+    {
+        id: 7,
+        name: 'y más',
+    }
+];
+const necesitas = [
+    {
+        id: 1,
+        name: 'gusto por las ventas',
+    },
+    {
+        id: 2,
+        name: 'conocimiento del sector pyme y/o hipotecario',
+    },
+    {
+        id: 3,
+        name: 'contar con cartera de prospectos',
+    },
+];
 
 const getVersionImage = () => {
     const currentSize = document.getElementsByTagName('body')[0].clientWidth;
@@ -82,30 +126,38 @@ const Brokers = () => {
             </div>
 
             <Container>
-                <div className="metropolisReg fz21 text-justify blackBlue">
+                <div className="metropolisReg fz21 blackBlue">
                 adquiere tu <span style={{fontSize:'1.5rem', color:'#213970'}} className='title-dp'>membresía azul</span> por un <span style={{fontSize:'1.5rem', color:'#213970'}} className='title-dp'>pago único de $3,900 pesos</span> y recibe las mejores herramientas que te ayudarán a colocar más créditos, ser más rápido y generar más ingresos.
 
-                <br/>
+                {/* <br/> */}
                 <br/>
 
                 <div className="title-dp fz42 mt-1 fw500" style={{color:'#213970'}}>
                 <span> herramientas </span> 
                 </div>
-                • id exclusivo que te identifica como broker <br />
-                • acceso único a nuestro CRM <br />
-                • plan de capacitación semana <br />
-                • tarjeta de presentación digital <br />
-                • herramientas de marketing y ventas <br />
-                • acceso a biblioteca virtual <br />
-                • y más 
-                <br />
-                 <br />
+                <ul className="list-broker">
+                    {herramientas.map((item, index) => {
+                        return(
+                            <li key={index} className="fz21 blackBlue">
+                                {item.name}
+                            </li>
+                        )
+                    }
+                    )}
+                </ul>
                 <div className="title-dp fz42 fw500 mb-1" style={{color:'#213970'}}>
                 <span> ¿qué necesitas ? </span> 
                 </div>
-                • gusto por las ventas <br />
-                • conocimiento del sector pyme y/o hipotecario <br />
-                • contar con cartera de prospectos <br />
+                <ul className="list-broker">
+                    {necesitas.map((item, index) => {
+                        return(
+                            <li key={index} className="fz21 blackBlue">
+                                {item.name}
+                            </li>
+                        )
+                    }
+                    )}
+                </ul>
                 </div>
                 <br/>
         
