@@ -38,6 +38,9 @@ import DGimpulsandoMobile from '../../assets/img/financialPartners/DGimpulsandoM
 import Eurorep from '../../assets/img/financialPartners/eurorep_bannerweb.webp';
 import EurorepM from '../../assets/img/financialPartners/eurorep_bannermobile.webp';
 
+import CrediyesWeb from '../../assets/img/financialPartners/crediyes_web.jpg';
+import CrediyessMobile from '../../assets/img/financialPartners/crediyes_mobile.jpg';
+
 const getVersionImage = () => {
 	const currentSize = document.getElementsByTagName('body')[0].clientWidth;
 	return currentSize < 775 ? 1 : 0;
@@ -148,6 +151,18 @@ const financialPartner = (partner) => {
           prefix: process.env.REACT_APP_CONFIGURATION === 'localhost' || process.env.REACT_APP_CONFIGURATION === 'development' ? 'OficinanoresteDev - ' : 'Oficinanoreste - ',
           channel: 'Asubia',
           brokercode: '195842644'//
+        }
+
+        case 'CREDIYES':
+        return {
+          image: [CrediyesWeb,CrediyessMobile],
+          text: [
+            'Solicita un crédito para tu empresa o negocio a través de nuestro aliado Distrito Pyme.',
+            'Podrás recibir las mejores opciones de crédito en menos de 15 min con un proceso fácil, rápido y sin papeleos.'
+          ],
+          prefix: process.env.REACT_APP_CONFIGURATION === 'localhost' || process.env.REACT_APP_CONFIGURATION === 'development' ? 'OficinanoresteDev - ' : 'Oficinanoreste - ',
+          channel: 'Crediyes',
+          brokercode: '199142035'//
         }
 
 
