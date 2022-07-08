@@ -2,17 +2,34 @@ import React, { useEffect, useState } from 'react';
 import Title from '../Generic/Title';
 import AlliesForm from '../../forms/AlliesForm';
 import { Carousel, ProgressBar, Alert, Button } from 'react-bootstrap';
-import AlianzaBanner from '../../assets/img/alianzas/form/alianzas_banner.jpg';
+import AlianzaBanner from '../../assets/img/alianzas/form/alianza_web.webp';
+import AlianzaMobil from '../../assets/img/alianzas/form/alianza_mobil.webp';
+import registerImage from '../../assets/img/alianzas/form/chava01.webp';
 import Loader from "../Loader/Loader";
 import { useDispatch } from "react-redux";
 import { updateLoader } from "../../redux/actions/loaderActions";
 import axios from '../../utils/axios';
-import registerImage from '../../assets/img/registroexitoso-01.png';
 import { useHistory } from 'react-router-dom';
 
+const getSize = () => {
+	const currentSize = document.getElementsByTagName('body')[0].clientWidth;
+	return currentSize < 775 ? 1 : 0;
+};
+
 const Allies = () => {
+
+    const img = [AlianzaBanner, AlianzaMobil];
+
+    const [version, setVersion] = useState(getSize());
     const dispatch = useDispatch();
     const history = useHistory();
+
+    useEffect(() => {
+        window.addEventListener('resize', () => setVersion(getSize()));
+        return () => {
+            window.removeEventListener('resize', () => setVersion(getSize()));
+        }
+    }  , []);
     
     const initialValues = {
 		nameMainContact: '',
@@ -144,11 +161,9 @@ const Allies = () => {
             {
                 !success &&
                 <>
-                    <Carousel id="alianza-carousel" className="mb-2" controls={false} indicators={false}>
-                        <Carousel.Item>
-                            <img className="d-block w-100"  src={AlianzaBanner} alt="alianzaBanner"/>
-                        </Carousel.Item>
-                    </Carousel>
+                    <div className="container-fluid alianza_div">
+                        <img src={img[version]} alt="alianza" width='1970' height='648' className="alianza-banner" />
+                    </div>
 
                     <Title title="Alta de Alianza" className="title-dp fz42 fw500 mb-1 text-center"/> 
 
@@ -169,11 +184,11 @@ const Allies = () => {
             {
                 success &&
                 <div className="container mt-30 registro-exitoso">
-                    <img src={registerImage} alt="registerimage" style={{ width: '250px' }}/>
-                    <Title className="title-dp fz42 mb-18 fw500 text-center" title="¡Estamos listos para compartirte los mejores expedientes!" />
-                    <p className="text-dp text-center">Gracias por confiar en Distrito Pyme. <br/>La #ComunidadDeCrédito más grande de México</p>
+                    <img src={registerImage} alt="registerimage" className='registerimageali' width='500' height='500'/>
+                    <div class="title-dp_clamp mb-18 fw500 text-center"><span style={{color:'#F24C5A'}}>¡estamos</span>  listos para compartirte los mejores expedientes!</div>
+                    <p className="text-dp text-center">gracias por confiar en distrito pyme. <br/>la #ComunidadDeCrédito más grande de México</p>
                     <div>
-                        <Button className={"btn-blue-documents mb-5 pl-5 pr-5"} style={{ width: '300px' }} onClick={() => history.push("/")}>Regresar al inicio</Button>
+                        <Button className={"btn-blue-documents mb-5 pl-5 pr-5"} style={{ width: '100%', maxWidth:'350px' }} onClick={() => history.push("/")}>regresar al inicio</Button>
                     </div>
                 </div>
             }

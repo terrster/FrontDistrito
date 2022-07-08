@@ -408,6 +408,43 @@
 	padding: 0px 15px 0px 15px !important;
 }
 
+.container-fluid .alianza-banner{
+	max-inline-size: 100%;
+  	block-size: auto;
+	object-fit: contain !important;
+	/* aspect-ratio: 16/9; */
+}
+
+.registerimageali{
+	max-inline-size: 100%;
+	max-width: 300px;
+  	block-size: auto;
+	object-fit: contain !important;
+	aspect-ratio: 1/1;
+}
+
+.title-dp_clamp{
+	font-family: 'coolvetica_rg';
+	color: #023473;
+	text-transform: lowercase;
+	font-size: clamp(16px, (1rem + 5vw), 50px);
+	line-height: 120%;
+	margin-top: clamp(16px, (1rem + 5vw), 10px);
+}
+
+.alianza_div{
+	padding: 0 !important;
+}
+
+@media (max-width: 775px) {
+	.container-fluid .alianza-banner{
+		max-inline-size: 100%;
+	  	block-size: auto;
+		object-fit: contain !important;
+		/* aspect-ratio: 16/9; */
+	}
+}
+
 .btn-blue-general{
 	font-weight: bold !important;
 	min-width: 200px !important;
