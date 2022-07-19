@@ -90,7 +90,7 @@ const Brokers = () => {
 
     const handleSubmit = async(values) => {
         dispatch(updateLoader(true));
-        const canal = 'Campaña Julio 2022';
+        const canal = 'pyme-brokers-campaña';
         const dataForm = { ...values, canal };
         
         let {data} = await axios.post('broker', dataForm);

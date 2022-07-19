@@ -89,8 +89,9 @@ const Brokers = () => {
 
     const handleSubmit = async(values) => {
         dispatch(updateLoader(true));
-        
-        let {data} = await axios.post('broker', values);
+        const canal = 'pyme-brokers';
+        const dataForm = { ...values, canal };
+        let {data} = await axios.post('broker', dataForm);
 
         if(data.code === 200){
             window.scrollTo(0, 0);
