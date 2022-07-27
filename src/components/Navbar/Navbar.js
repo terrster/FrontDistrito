@@ -73,7 +73,7 @@ const NavBar = props => {
 								{/* <Nav.Link  onClick={close} href="/#simulador" id="ymb-dp-nav-simulator" className="hvr-underline-from-left  text-center fz16 blackNav nav-btn heigth-45 solicita-butto metropolisReg">Simulador</Nav.Link> */}
 								{/* <Nav.Link  onClick={close} href="/#howWorks" id="ymb-dp-nav-howWorks" className="hvr-underline-from-left  text-center fz16 blackNav nav-btn heigth-45 solicita-butto metropolisReg">¿Cómo funciona?</Nav.Link> */}
 								{/* <Nav.Link  onClick={close} href="/#about" id="ymb-dp-nav-about" className="hvr-underline-from-left  text-center fz16 blackNav nav-btn heigth-45 solicita-butto metropolisReg">Nosotros</Nav.Link> */}
-								{/* <Nav.Link  onClick={close} href="https://distritopyme.com.mx/" id="ymb-dp-nav-howWorks" target="_blank" className="hvr-underline-from-left  text-center fz16 blackNav nav-btn heigth-45 solicita-butto metropolisReg">Blog</Nav.Link> */}
+								<Nav.Link  onClick={close} href="https://distritocasa.com/" id="ymb-dp-nav-howWorks" target="_blank" className="hvr-underline-from-left  text-center fz16 blackNav nav-btn heigth-45 solicita-butto metropolisReg">distrito casa</Nav.Link>
 								{location.pathname != '/brokers' && location.pathname != '/solicitud_enviada_brokers' && location.pathname != '/alianza' && 
 									<>
 										<Nav.Link  onClick={close} as={NavLink} to="/login" id="ymb-dp-nav-register" className="text-center fz16 blackNav nav-btn heigth-45 solicita-butto metropolisReg">inicia sesión</Nav.Link>
