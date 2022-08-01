@@ -177,23 +177,22 @@ const GeneralInfo = (props) => {
         try {
           const res = await axios.put(`api/info-general/${id}`, data);
           sessionStorage.setItem("user", JSON.stringify(res.data.user));
+              dispatch(updateLoader(false));
           let score = user.idClient.score
           switch (score) {
             case null || undefined:
-              window.location.href = `/buro/${user._id}`;
-              break;
+              return window.location.href = `/buro/${user._id}`;
+              
               case "": 
-              window.location.href = `/buro/${user._id}`;
-              break;
+              return window.location.href = `/buro/${user._id}`;
+              
               case "ERROR" || "ERROR 1" || "ERROR 2" || "ERROR 3":
-                window.location.href = `/buro/${user._id}`;
-                break;
+                return window.location.href = `/buro/${user._id}`;
+                
                 default:
-                  window.location.href = `/documentos/${user._id}`;
-                  break;
+                  return window.location.href = `/documentos/${user._id}`;
+                  
           }
-
-          window.location.href = `/documentos/${user._id}`;
         } catch (error) {
           console.log("Error de servicio", error);
         }
@@ -201,22 +200,22 @@ const GeneralInfo = (props) => {
         try {
           const res = await axios.post(`api/info-general/${id}`, data);
           sessionStorage.setItem("user", JSON.stringify(res.data.user));
+              dispatch(updateLoader(false));
           let score = user.idClient.score
           switch (score) {
             case null || undefined:
-              window.location.href = `/buro/${user._id}`;
-              break;
+              return window.location.href = `/buro/${user._id}`;
+              
               case "": 
-              window.location.href = `/buro/${user._id}`;
-              break;
+              return window.location.href = `/buro/${user._id}`;
+              
               case "ERROR" || "ERROR 1" || "ERROR 2" || "ERROR 3":
-                window.location.href = `/buro/${user._id}`;
-                break;
+                return window.location.href = `/buro/${user._id}`;
+                
                 default:
-                  window.location.href = `/documentos/${user._id}`;
-                  break;
+                  return window.location.href = `/documentos/${user._id}`;
+                  
           }
-          window.location.href = `/documentos/${user._id}`;
         } catch (error) {
           console.log("Error de servicio", error);
         }
