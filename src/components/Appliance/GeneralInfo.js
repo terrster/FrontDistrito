@@ -14,11 +14,12 @@ import axios from "../../utils/axios";
 import axiosBase from "axios";
 import Loader from "../Loader/Loader";
 import { ToastContainer } from "react-toastify";
-
+import { useHistory } from "react-router-dom";
 const GeneralInfo = (props) => {
   const dispatch = useDispatch();
   const toast = useSelector((state) => state.app.toast);
   const [initialValues, setInitialValues] = useState({});
+  const history = useHistory();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -34,101 +35,120 @@ const GeneralInfo = (props) => {
     dispatch(updateLoader(true));
     const getData = async () => {
       try {
-      const user = JSON.parse(sessionStorage.getItem("user"));
+        const user = JSON.parse(sessionStorage.getItem("user"));
 
-      const idClient = user.idClient;
-      if (idClient.appliance.length > 0) {
-        const appliance = idClient.appliance[0]; 
-        if (appliance.hasOwnProperty("idGeneralInfo")) {
-          const general = appliance.idGeneralInfo;
-          const date = general.birthDate.split("/");
-          const day = date[0];
-          const month = date[1];
-          const year = date[2];
-          const ref1 = general.contactWith[0];
-          const name1 = ref1.name;
-          const phone1 = ref1.phone;
-          const relative1 = ref1.relative;
-          const ref2 = general.contactWith[1];
-          const name2 = ref2.name;
-          const phone2 = ref2.phone;
-          const relative2 = ref2.relative;
-          const creditCard = general.creditCard ? "1" : "0";
-          const mortgageCredit = general.mortgageCredit ? "1" : "0";
-          const address = general.address;
-          const street = address.street;
-          const state = address.state;
-          const municipality = address.municipality;
-          const town = address.town;
-          const zipCode = address.zipCode;
-          const extNumber = address.extNumber;
-          const intNumber = address.intNumber;
-          let colonias = [];
-          try {
-            const coloniasRequest = await axiosBase.get(
-              `https://api.copomex.com/query/info_cp/${zipCode}?token=${process.env.REACT_APP_SEPOMEXTOKEN}`
-            );
-            if (Array.isArray(coloniasRequest.data)) {
-              coloniasRequest.data.map((datos) => {
-                colonias.push(datos.response.asentamiento);
-              });
-            } else if (coloniasRequest.error) {
-              colonias = null;
-            }
-          } catch (e) {
-              let origin = process.env.REACT_APP_CONFIGURATION === 'production' ? 'Prod' : process.env.REACT_APP_CONFIGURATION === 'development' ? 'Dev' : 'Local';
-              
-              if(origin === 'Prod'){
-                await axios.post('/private/api/sms_internal_notify', {
-                  msg: origin + ' - Ha ocurrido un error con la API de COPOMEX'
-                },{
-                  headers: {
-                    'tokensecret': 'D7Mqvg5aPcypn97dxdB/Kfe330wwu0IXx0pFQXIFmjs='
-                  }
+        const idClient = user.idClient;
+        if (idClient.appliance.length > 0) {
+          const appliance = idClient.appliance[0];
+          if (appliance.hasOwnProperty("idGeneralInfo")) {
+            const general = appliance.idGeneralInfo;
+            const date = general.birthDate.split("/");
+            const day = date[0];
+            const month = date[1];
+            const year = date[2];
+            const ref1 = general.contactWith[0];
+            const name1 = ref1.name;
+            const phone1 = ref1.phone;
+            const relative1 = ref1.relative;
+            const ref2 = general.contactWith[1];
+            const name2 = ref2.name;
+            const phone2 = ref2.phone;
+            const relative2 = ref2.relative;
+            const creditCard = general.creditCard ? "1" : "0";
+            const mortgageCredit = general.mortgageCredit ? "1" : "0";
+            const address = general.address;
+            const street = address.street;
+            const state = address.state;
+            const municipality = address.municipality;
+            const town = address.town;
+            const zipCode = address.zipCode;
+            const extNumber = address.extNumber;
+            const intNumber = address.intNumber;
+            let colonias = [];
+            try {
+              const coloniasRequest = await axiosBase.get(
+                `https://api.copomex.com/query/info_cp/${zipCode}?token=${process.env.REACT_APP_SEPOMEXTOKEN}`
+              );
+              if (Array.isArray(coloniasRequest.data)) {
+                coloniasRequest.data.map((datos) => {
+                  colonias.push(datos.response.asentamiento);
                 });
+              } else if (coloniasRequest.error) {
+                colonias = null;
               }
-            // console.log(e);
+            } catch (e) {
+              let origin =
+                process.env.REACT_APP_CONFIGURATION === "production"
+                  ? "Prod"
+                  : process.env.REACT_APP_CONFIGURATION === "development"
+                  ? "Dev"
+                  : "Local";
+
+              if (origin === "Prod") {
+                await axios.post(
+                  "/private/api/sms_internal_notify",
+                  {
+                    msg:
+                      origin + " - Ha ocurrido un error con la API de COPOMEX",
+                  },
+                  {
+                    headers: {
+                      tokensecret:
+                        "D7Mqvg5aPcypn97dxdB/Kfe330wwu0IXx0pFQXIFmjs=",
+                    },
+                  }
+                );
+              }
+              // console.log(e);
+            }
+            setInitialValues({
+              ...initialValues,
+              ...general,
+              day,
+              month,
+              year,
+              name1,
+              name2,
+              phone1,
+              phone2,
+              relative1,
+              relative2,
+              mortgageCredit,
+              creditCard,
+              street,
+              town,
+              zipCode,
+              extNumber,
+              intNumber,
+              colonias,
+              state,
+              municipality,
+            });
+          } else {
+            setInitialValues({
+              ...initialValues,
+              name: user.name,
+              lastname: user.lastname,
+              phone: user.phone,
+            });
           }
+        } else {
           setInitialValues({
             ...initialValues,
-            ...general,
-            day,
-            month,
-            year,
-            name1,
-            name2,
-            phone1,
-            phone2,
-            relative1,
-            relative2,
-            mortgageCredit,
-            creditCard,
-            street,
-            town,
-            zipCode,
-            extNumber,
-            intNumber,
-            colonias,
-            state,
-            municipality,
+            name: user.name,
+            lastname: user.lastname,
+            phone: user.phone,
           });
         }
-        else{
-          setInitialValues({...initialValues, name: user.name, lastname: user.lastname, phone: user.phone });
-        }
+      } catch (e) {
+        console.log(e);
       }
-      else{
-        setInitialValues({...initialValues, name: user.name, lastname: user.lastname, phone: user.phone });
-      }
+    };
+    try {
+      getData();
     } catch (e) {
       console.log(e);
     }
-    };
-    try {
-    getData();
-  } catch (e) {
-    console.log(e)
-  }
     dispatch(updateLoader(false));
   }, []);
 
@@ -157,18 +177,18 @@ const GeneralInfo = (props) => {
             zipCode,
             municipality,
             state,
-		  } = comercial.address;
-		  data = {
-			  ...data,
-			  extNumber,
-			  intNumber,
-			  registerDate,
-			  street,
-			  town,
-			  zipCode,
-			  municipality,
-			  state,
-		  }
+          } = comercial.address;
+          data = {
+            ...data,
+            extNumber,
+            intNumber,
+            registerDate,
+            street,
+            town,
+            zipCode,
+            municipality,
+            state,
+          };
         }
       }
       if (appliance.hasOwnProperty("idGeneralInfo")) {
@@ -177,22 +197,24 @@ const GeneralInfo = (props) => {
         try {
           const res = await axios.put(`api/info-general/${id}`, data);
           sessionStorage.setItem("user", JSON.stringify(res.data.user));
-              dispatch(updateLoader(false));
-          let score = user.idClient.score
+          let score = user.idClient.score;
+          console.log(score);
           switch (score) {
             case null || undefined:
-              return window.location.href = `/buro/${user._id}`;
-              
-              case "": 
-              return window.location.href = `/buro/${user._id}`;
-              
-              case "ERROR" || "ERROR 1" || "ERROR 2" || "ERROR 3":
-                return window.location.href = `/buro/${user._id}`;
-                
-                default:
-                  return window.location.href = `/documentos/${user._id}`;
-                  
+              history.push(`/buro/${user._id}`);
+              break;
+            case "":
+              history.push(`/buro/${user._id}`);
+              break;
+            case "ERROR" || "ERROR 1" || "ERROR 2" || "ERROR 3":
+              history.push(`/buro/${user._id}`);
+              break;
+            default:
+              history.push(`/documentos/${user._id}`);
+              break;
           }
+
+          // history.push(`/documentos/${user._id}`);
         } catch (error) {
           console.log("Error de servicio", error);
         }
@@ -200,22 +222,23 @@ const GeneralInfo = (props) => {
         try {
           const res = await axios.post(`api/info-general/${id}`, data);
           sessionStorage.setItem("user", JSON.stringify(res.data.user));
-              dispatch(updateLoader(false));
-          let score = user.idClient.score
+          let score = user.idClient.score;
+          console.log(score);
           switch (score) {
             case null || undefined:
-              return window.location.href = `/buro/${user._id}`;
-              
-              case "": 
-              return window.location.href = `/buro/${user._id}`;
-              
-              case "ERROR" || "ERROR 1" || "ERROR 2" || "ERROR 3":
-                return window.location.href = `/buro/${user._id}`;
-                
-                default:
-                  return window.location.href = `/documentos/${user._id}`;
-                  
+              history.push(`/buro/${user._id}`);
+              break;
+            case "":
+              history.push(`/buro/${user._id}`);
+              break;
+            case "ERROR" || "ERROR 1" || "ERROR 2" || "ERROR 3":
+              history.push(`/buro/${user._id}`);
+              break;
+            default:
+              history.push(`/documentos/${user._id}`);
+              break;
           }
+          // history.push(`/documentos/${user._id}`);
         } catch (error) {
           console.log("Error de servicio", error);
         }
