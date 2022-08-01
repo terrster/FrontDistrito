@@ -1,0 +1,64 @@
+.tijuanaImg{
+    max-height: 20rem
+  }
+  
+  .loaderP{
+    content: "";
+    width: 19rem;
+    height: 19rem;
+    border-radius: 100%;
+    margin-left: .4rem;
+    margin-top: .5rem;
+    /* background-color: aqua; */
+    z-index: -99;
+    animation: spinner 1s linear infinite;
+    box-shadow: 0px 1rem 0px #06C7F2;
+  }
+
+  .cardIMG{
+    justify-content: center;
+    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(13rem, 1/2fr));
+  }
+  .tijuanaImg,
+  .loaderP{
+    grid-area: 1/2;
+  }
+
+  @media (max-width: 319px) {
+    .tijuanaImg{
+      max-height: 10rem !important;
+    }
+    .loaderP{
+      width: 9rem;
+      height: 9rem;
+    }
+  }
+  @media (min-width: 320px) and (max-width: 479px) {
+    .tijuanaImg{
+      max-height: 13rem !important;
+    }
+    .loaderP{
+      width: 12rem;
+      height: 12rem;
+    }
+  }
+  @media (min-width: 480px) and (max-width: 767px) {
+    .tijuanaImg{
+      max-height: 17rem !important;
+    }
+    .loaderP{
+      width: 16rem;
+      height: 16rem;
+    }
+  }
+
+  @keyframes spinner {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }

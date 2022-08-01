@@ -55,6 +55,7 @@ import Allies from "./components/Allies/Allies";
 import BrokersLanding from "./components/BrokersLanding/BrokersLanding";
 import Dashboard from "./components/Dashboard/Dashboard";
 import DeleteComp from "./components/delete/delate";
+import WaitPage from "./components/waitPage/WaitPage";
 
 import AlliePartner from "./components/Allies/AlliePartner";
 import ThankyouPageAllie from "./components/Allies/ThankyouPageAllie";
@@ -165,6 +166,11 @@ class App extends Component {
                   exact
                   path="/elige-monto/:idAppliance"
                   component={Amount}
+                />
+                <PrivateRoute
+                  exact
+                  path="/buro/:idAppliance"
+                  component={WaitPage}
                 />
                 <PrivateRoute
                   exact
