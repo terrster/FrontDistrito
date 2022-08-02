@@ -225,11 +225,20 @@ const BuroError = ({ isLoading, buro }) => {
     e.preventDefault();
     isLoading(true);
     buro(null);
-    const data = { ...initialValues, update: true };
+    let dataFormError = { ...initialValues, update: true };
     const user = JSON.parse(sessionStorage.getItem("user"));
     const idClient = user._id;
+    if (user.idClient.appliance.length > 0) {
+      const appliance =
+        user.idClient.appliance[user.idClient.appliance.length - 1];
+      if (appliance.hasOwnProperty("idGeneralInfo")) {
+        let data = appliance.idGeneralInfo;
+        let address = data.address ? data.address : "";
+        dataFormError = { ...dataFormError, address };
+      }
+    }
     try {
-      const res = await axios.post(`api/buro/${idClient}`, data);
+      const res = await axios.post(`api/buro/${idClient}`, dataFormError);
       isLoading(false);
       buro(<BuroPositivo score={res.data.buro.valorScore} user={user} />);
     } catch (error) {
