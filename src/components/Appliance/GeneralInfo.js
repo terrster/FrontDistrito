@@ -177,7 +177,22 @@ const GeneralInfo = (props) => {
         try {
           const res = await axios.put(`api/info-general/${id}`, data);
           sessionStorage.setItem("user", JSON.stringify(res.data.user));
-          window.location.href = `/buro/${user._id}`;
+          let score = "score" in idClient ? idClient.score : "NO HAY PUNTUACIÓN";
+          
+          if (score === "ERROR" 
+          || score === "ERROR 1"
+          || score === "ERROR 2"
+          || score === "ERROR 3"
+          || score === "NO HAY PUNTUACIÓN"
+          || score === undefined
+          || score === null
+          || score === "") {
+            window.location.href = `/buro/${user._id}`;
+        } else {
+          window.location.href = `/documentos/${user._id}`;
+        }
+
+          
         } catch (error) {
           console.log("Error de servicio", error);
         }
@@ -185,7 +200,20 @@ const GeneralInfo = (props) => {
         try {
           const res = await axios.post(`api/info-general/${id}`, data);
           sessionStorage.setItem("user", JSON.stringify(res.data.user));
-          window.location.href = `/buro/${user._id}`;
+          let score = "score" in idClient ? idClient.score : "NO HAY PUNTUACIÓN";
+          
+          if (score === "ERROR" 
+          || score === "ERROR 1"
+          || score === "ERROR 2"
+          || score === "ERROR 3"
+          || score === "NO HAY PUNTUACIÓN"
+          || score === undefined
+          || score === null
+          || score === "") {
+            window.location.href = `/buro/${user._id}`;
+        } else {
+          window.location.href = `/documentos/${user._id}`;
+        }
         } catch (error) {
           console.log("Error de servicio", error);
         }

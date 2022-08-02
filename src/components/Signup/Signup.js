@@ -29,8 +29,8 @@ import visoorMovil from '../../assets/img/financialPartners/Visoor-Movil.jpg';
 import PagaloopWEB from '../../assets/img/financialPartners/Pagaloop-WEB.jpg';
 import PagaloopMovil from '../../assets/img/financialPartners/Pagaloop-Movil.jpg';
 
-import OficinaNoreste from '../../assets/img/carousel/carrusel-01.jpg';
-import OficinaNoresteMobile from '../../assets/img/carousel/mobile-carrusel-01.jpg';
+import OficinaNoreste from '../../assets/img/financialPartners/oficina_noreste_web.webp';
+import OficinaNoresteMobile from '../../assets/img/financialPartners/oficina_noreste_movil.webp';
 
 import DGimpulsandoWEB from '../../assets/img/financialPartners/DGimpulsandoWEB.jpg';
 import DGimpulsandoMobile from '../../assets/img/financialPartners/DGimpulsandoMobile.jpg';
@@ -84,7 +84,7 @@ const financialPartner = (partner) => {
 
       case 'OFICINANORESTE':
       return {
-        image: [],
+        image: [OficinaNoreste, OficinaNoresteMobile],
         text: [
           'Solicita un crédito para tu empresa o negocio a través de nuestro aliado Distrito Pyme.',
           'Podrás recibir las mejores opciones de crédito en menos de 15 min con un proceso fácil, rápido y sin papeleos.'
@@ -135,7 +135,7 @@ const financialPartner = (partner) => {
           'Solicita un crédito para tu empresa o negocio a través de nuestro aliado Distrito Pyme.',
           'Podrás recibir las mejores opciones de crédito en menos de 15 min con un proceso fácil, rápido y sin papeleos.'
         ],
-        prefix: process.env.REACT_APP_CONFIGURATION === 'localhost' || process.env.REACT_APP_CONFIGURATION === 'development' ? 'OficinanoresteDev - ' : 'Oficinanoreste - ',
+        prefix: process.env.REACT_APP_CONFIGURATION === 'localhost' || process.env.REACT_APP_CONFIGURATION === 'development' ? 'OficinaBajioDev - ' : 'OficinaBajio - ',
         channel: 'Oficinabajio1',
         brokercode: '194040244'//
       }
@@ -148,7 +148,7 @@ const financialPartner = (partner) => {
             'Solicita un crédito para tu empresa o negocio a través de nuestro aliado Distrito Pyme.',
             'Podrás recibir las mejores opciones de crédito en menos de 15 min con un proceso fácil, rápido y sin papeleos.'
           ],
-          prefix: process.env.REACT_APP_CONFIGURATION === 'localhost' || process.env.REACT_APP_CONFIGURATION === 'development' ? 'OficinanoresteDev - ' : 'Oficinanoreste - ',
+          prefix: process.env.REACT_APP_CONFIGURATION === 'localhost' || process.env.REACT_APP_CONFIGURATION === 'development' ? 'AsubiaDev - ' : 'Asubia - ',
           channel: 'Asubia',
           brokercode: '195842644'//
         }
@@ -160,7 +160,7 @@ const financialPartner = (partner) => {
             'Solicita un crédito para tu empresa o negocio a través de nuestro aliado Distrito Pyme.',
             'Podrás recibir las mejores opciones de crédito en menos de 15 min con un proceso fácil, rápido y sin papeleos.'
           ],
-          prefix: process.env.REACT_APP_CONFIGURATION === 'localhost' || process.env.REACT_APP_CONFIGURATION === 'development' ? 'OficinanoresteDev - ' : 'Oficinanoreste - ',
+          prefix: process.env.REACT_APP_CONFIGURATION === 'localhost' || process.env.REACT_APP_CONFIGURATION === 'development' ? 'CrediYesDev - ' : 'CrediYes - ',
           channel: 'Crediyes',
           brokercode: '199142035'//
         }
@@ -242,7 +242,7 @@ const Signup = props => {
     return (
       <>
         <Loader />
-        {!partner || partner.channel === 'Oficinanoreste' || partner.channel === 'SE1'|| partner.channel === 'Oficinabajio1'|| partner.channel === 'Asubia'? (
+        {!partner || partner.channel === 'SE1'|| partner.channel === 'Oficinabajio1'|| partner.channel === 'Asubia'? (
           <div className="container mt-30">
             <Title
               className="fz56 text-center title-dp fw500"

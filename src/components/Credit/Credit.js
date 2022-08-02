@@ -62,6 +62,20 @@ const Credit = (props) => {
     let idGeneralInfo = verify(appliance, "idGeneralInfo");
     let idComercialInfo = verify(appliance, "idComercialInfo");
     let idDocuments = verify(appliance, "idDocuments");
+    let score = idClient.score;
+    let scoreType = true;
+    if (score === "ERROR" 
+      || score === "ERROR 1"
+      || score === "ERROR 2"
+      || score === "ERROR 3"
+      || score === undefined
+      || score === null
+      || score === "") {
+        scoreType = false;
+    }
+    
+
+
     let statusDocuments = { status: false };
     if (idDocuments) {
       statusDocuments.status = idDocuments.status;
@@ -72,6 +86,10 @@ const Credit = (props) => {
       linkt = `datos-comerciales/${user._id}`;
     } else if (idGeneralInfo == null || !idGeneralInfo) {
       linkt = `informacion-general/${user._id}`;
+    } else if (scoreType === false && idGeneralInfo) {
+      linkt = `buro/${user._id}`;
+    } else if(scoreType && idGeneralInfo && (!idDocuments || !statusDocuments.status || !idDocuments == null)) {
+      linkt = `documentos/${user._id}`;
     } else if (
       !idDocuments ||
       !idDocuments == null ||
