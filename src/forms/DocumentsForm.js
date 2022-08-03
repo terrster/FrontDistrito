@@ -346,7 +346,7 @@ const DocumentsForm = (props) => {
                     type="submit"
                     className="mt-50 btn-blue-send-documents ml-2"
                 >
-                    Guardar y Enviar Solicitud
+                    guardar y enviar solicitud
                 </Button>
                 )}
             </div>

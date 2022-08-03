@@ -81,7 +81,7 @@ const BuroPositivo = ({ score, user }) => {
   switch (casos) {
     case "1":
       mensaje =
-        "hemos detectado que no cuentas con historial crediticio, pero no importa en distrito pyme contamos con las mejores opciones para iniciar con tu historial crediticio.";
+        "hemos detectado que no cuentas con historial crediticio, pero no importa, en distrito pyme contamos con las mejores opciones para iniciar tu historial crediticio.";
       break;
     case "2":
       mensaje =
@@ -97,7 +97,7 @@ const BuroPositivo = ({ score, user }) => {
       break;
     case "5":
       mensaje =
-        "!felicidades!, tu buró de crédito es el mejor, estás muy cerca de recibir las mejores opciones de crédito, ahora ayúdanos a subir tus documentos.";
+        "!felicidades!, tu buró de crédito es muy bueno, estás a punto de recibir las mejores opciones de crédito, ahora ayúdanos a subir tus documentos.";
       break;
     default:
       mensaje = "";
@@ -247,19 +247,20 @@ const BuroError = ({ isLoading, buro }) => {
           "user",
           JSON.stringify(error.response.data.user)
         );
-      } else {
-        isLoading(false);
-        return buro(<ErrorConsulta />);
-      }
+      } 
       isLoading(false);
-      sessionStorage.setItem("user", JSON.stringify(error.response.data.user));
 
       switch (error.response.status) {
         case 400:
+          sessionStorage.setItem("user", JSON.stringify(error.response.data.user));
           buro(<BuroError buro={buro} isLoading={isLoading} />);
           break;
         case 401:
-          buro(<BuroUltimo />);
+          sessionStorage.setItem("user", JSON.stringify(error.response.data.user));
+          buro(<BuroUltimo code={401}/>);
+          break;
+        case 429:
+          buro(<BuroUltimo code={429}/>);
           break;
         case 500:
           buro(<ErrorConsulta />);
@@ -295,12 +296,14 @@ const BuroError = ({ isLoading, buro }) => {
 //se consulto mas de 3 veces y no se encontro
 const BuroUltimo = ({code}) => {
   let mensaje = "";
+  let mensaje2 = "";
   switch (code) {
     case 401:
       mensaje = "desafortunadamente no hemos logrado consultar tu buró correctamente, pero no te preocupes, un asesor de dp se comunicara contigo a la brevedad."
       break;
     case 429:
-      mensaje = "desafortunadamente rebasaste los intentos permitidos por día, pero no te preocupes, puedes volver a intentarlo mañana."
+      mensaje = "desafortunadamente rebasaste los intentos permitidos por día para consultar tu buró, pero no te preocupes, puedes volver a intentarlo en 24 hrs."
+      mensaje2 = "mientras tanto aprovecha para verificar tu información y podamos avanzar con tu solicitud."
       break;
     default:
       mensaje = "desafortunadamente no hemos logrado consultar tu buró correctamente, pero no te preocupes, un asesor de dp se comunicara contigo a la brevedad."
@@ -321,6 +324,16 @@ const BuroUltimo = ({code}) => {
           >
             {mensaje}
           </label>
+          {
+            mensaje2 !== "" && (
+              <label
+            className="text-dp-gray-ligth fz20 ml-auto mt-1  mb-1"
+            style={{ maxWidth: "90%" }}
+          >
+            {mensaje2}
+          </label>
+            )
+          }
         </div>
         <Button
           variant="primary"

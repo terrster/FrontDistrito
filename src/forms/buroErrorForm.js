@@ -234,7 +234,7 @@ let ErrorBuro = ({
         />
         <Row>
           <Col>
-            <InputLabel label="Crédito hipotecario" class="mt-18 text-msg-dp" />
+            <InputLabel label="crédito hipotecario" class="mt-18 text-msg-dp" />
             <Field
               component={renderSelectFieldFull}
               name="mortgageCredit"
@@ -250,7 +250,7 @@ let ErrorBuro = ({
           </Col>
 
           <Col>
-            <InputLabel label="Crédito automotriz" class="mt-18 text-msg-dp" />
+            <InputLabel label="crédito automotriz" class="mt-18 text-msg-dp" />
             <Field
               component={renderSelectFieldFull}
               name="carCredit"
@@ -267,7 +267,7 @@ let ErrorBuro = ({
           </Col>
 
           <Col>
-            <InputLabel label="Tarjeta de crédito" class="mt-18 text-msg-dp" />
+            <InputLabel label="tarjeta de crédito" class="mt-18 text-msg-dp" />
             <Field
               component={renderSelectFieldFull}
               name="creditCard"
