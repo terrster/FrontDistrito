@@ -344,7 +344,7 @@ const DocumentsForm = (props) => {
                 {props.values.status && (
                 <Button
                     type="submit"
-                    className="mt-50 btn-blue-general btn-blue-send-documents ml-2"
+                    className="mt-50 btn-blue-send-documents ml-2"
                 >
                     Guardar y Enviar Solicitud
                 </Button>

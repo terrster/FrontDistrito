@@ -79,7 +79,7 @@
 	justify-content: center !important;
 	background: #F24C5A;
 	width: 200px;
-	font-weight: bold;
+	font-weight: normal !important;
 	font-family: 'Metropolis-Regular';
   }
   

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import '../../../css/footer.css';
 import logo from '../../../assets/img/redes_sociales/logo.png';
@@ -8,14 +8,31 @@ import mail from '../../../assets/img/redes_sociales/mail.png';
 import linked from '../../../assets/img/redes_sociales/Linkedin.png';
 import instagram from '../../../assets/img/redes_sociales/Instagram.png';
 import youtube from '../../../assets/img/redes_sociales/Youtube.png';
+import { indexOf } from 'lodash';
 //import Whatsapp from '../../../assets/img/redes_sociales/whatsapp.png';
 
+const getSize = () => {
+	const currentSize = document.getElementsByTagName('body')[0].clientWidth;
+	return currentSize < 775 ? 1 : 0;
+};
+
 const Footer = props => {
+    const [version, setVersion] = useState(getSize());
     const location = useLocation();
+    useEffect(() => {
+        window.addEventListener('resize', () => setVersion(getSize()));
+        return () => {
+            window.removeEventListener('resize', () => setVersion(getSize()));
+        }
+    }  , []);
+    const url = indexOf(location.pathname.split('/'), 'buro') > -1 ? 'buro' : 'other';
+    
     return(
     <div id="footer-dp" className="row d-flex justify-content-center">
         <div className="col-xs-12 col-lg-3 text-center text-lg-left mb-3 mb-lg-0" >
-            <img src={logo} alt="Distrito Pyme" className="nav-logo mb-1 mb-lg-0"/>
+            {
+                (version === 1 && url === "buro") ? null : <img src={logo} alt="Distrito Pyme" className="nav-logo mb-1 mb-lg-0"/>
+            }
                 <div className="text-dp-gray fw300 fz18 mt-16"  >
                     distrito pyme&copy; las arboledas, tlalnepantla, estado de méxico, 54026, méxico, 55 8661 9486.
                 </div>

@@ -81,23 +81,23 @@ const BuroPositivo = ({ score, user }) => {
   switch (casos) {
     case "1":
       mensaje =
-        "hemos detectado  que no cuentas con historial crediticio, pero no importa en distrito pyme contamos con las mejores opciones para iniciar con tu historial crediticio";
+        "hemos detectado que no cuentas con historial crediticio, pero no importa en distrito pyme contamos con las mejores opciones para iniciar con tu historial crediticio.";
       break;
     case "2":
       mensaje =
-        "lo sentimos hemos detectado que tu buró no es del todo positivo, sabemos que no son buenas noticias pero aún podemos ofrecerte opciones de crédito si cuentas con una garantia inmobiliaria";
+        "lo sentimos, hemos detectado que tu buró no es del todo positivo, sabemos que no son buenas noticias, pero aún podemos ofrecerte opciones de crédito si cuentas con una garantía inmobiliaria.";
       break;
     case "3":
       mensaje =
-        "hemos consultado tu buró correctamente, lo estamos analizando para poder ofrecerte las mejores propuestas de crédito. ahora ayudanos a subir tus documentos";
+        "hemos consultado tu buró correctamente, lo estamos analizando para poder ofrecerte las mejores propuestas de crédito, ahora ayúdanos a subir tus documentos.";
       break;
     case "4":
       mensaje =
-        "hemos consultado tu buró correctamente y cumple con los requisitos de la mayoria de nuestros aliados. ahora ayudanos a subir tus documentos para poder ofrecerte las mejores opciones de crédito";
+        "hemos consultado tu buró correctamente y cumple con los requisitos de la mayoría de nuestros aliados, ahora ayúdanos a subir tus documentos para poder ofrecerte las mejores opciones de crédito.";
       break;
     case "5":
       mensaje =
-        "!felicidades! tu buró de crédito es el mejor, estás muy cerca de recibir las mejores opciones de crédito, ahora ayúdanos a subir tus documentos";
+        "!felicidades!, tu buró de crédito es el mejor, estás muy cerca de recibir las mejores opciones de crédito, ahora ayúdanos a subir tus documentos.";
       break;
     default:
       mensaje = "";
@@ -107,9 +107,9 @@ const BuroPositivo = ({ score, user }) => {
     <div className="wait-page">
       <div className="text-center">
         <img src={ERRORImg} alt="errorr IMG" className="tijuanaImg" />
-        <div className="text-dp fz20 fw500 ml-auto mt-2 mb-1">
+        <div className="text-dp-gray-ligth fz20 ml-auto mt-2 mb-1">
           <label
-            className="text-dp fz20 fw500 ml-auto mt-2 mb-1"
+            className="text-dp-gray-ligth fz20 ml-auto mt-2 mb-1"
             style={{ maxWidth: "89%" }}
           >
             {mensaje}
@@ -131,25 +131,25 @@ const BuroPositivo = ({ score, user }) => {
               <Col xs={12} sm={12} md={6} lg={6}>
                 <Button
                   variant="primary"
-                  className="mt-3 btn-blue-general"
+                  className="mt-3 btn-blue-normal"
                   onClick={(e) => {
                     handleClick(1);
                   }}
                   disabled={!disabled}
                 >
-                  <span className="ml-2">continuar en otra ocacion</span>
+                  <span className="ml-2">continuar en otra ocasión</span>
                 </Button>
               </Col>
               <Col xs={12} sm={12} md={6} lg={6}>
                 <Button
                   variant="primary"
-                  className="mt-3 btn-blue-general"
+                  className="mt-3 btn-blue-normal"
                   onClick={(e) => {
                     handleClick(2);
                   }}
                   disabled={disabled}
                 >
-                  <span className="ml-2">subir documentacion</span>
+                  <span className="ml-2">subir documentación</span>
                 </Button>
               </Col>
             </Row>
@@ -158,13 +158,13 @@ const BuroPositivo = ({ score, user }) => {
         {casos !== "2" && (
           <Button
             variant="primary"
-            className="mt-3 btn-blue-general"
+            className="mt-3 btn-blue-normal"
             onClick={(e) => {
               handleClick(2);
             }}
             disabled={false}
           >
-            <span className="ml-2">subir documentacion</span>
+            <span className="ml-2">subir documentación</span>
           </Button>
         )}
       </div>
@@ -276,11 +276,10 @@ const BuroError = ({ isLoading, buro }) => {
         <img src={ERRORImg} alt="errorr IMG" className="tijuanaImg" />
         <div className="text-center">
           <label
-            className="text-dp fz20 fw500 ml-auto mt-2 mb-1"
+            className="text-dp-gray-ligth fz20 ml-auto mt-2 mb-1"
             style={{ maxWidth: "90%" }}
           >
-            ¡ups! lo sentimos no pudimos revisar tu buró, por favor revisa que
-            tu informacion sea la correcta{" "}
+            ¡ups!, lo sentimos, no pudimos revisar tu buró, por favor revisa que tu información sea la correcta{" "}
           </label>
         </div>
         <Loader />
@@ -293,8 +292,20 @@ const BuroError = ({ isLoading, buro }) => {
     </div>
   );
 };
-//respuesta 401 se consulto mas de 3 veces y no se encontro
-const BuroUltimo = () => {
+//se consulto mas de 3 veces y no se encontro
+const BuroUltimo = ({code}) => {
+  let mensaje = "";
+  switch (code) {
+    case 401:
+      mensaje = "desafortunadamente no hemos logrado consultar tu buró correctamente, pero no te preocupes, un asesor de dp se comunicara contigo a la brevedad."
+      break;
+    case 429:
+      mensaje = "desafortunadamente rebasaste los intentos permitidos por día, pero no te preocupes, puedes volver a intentarlo mañana."
+      break;
+    default:
+      mensaje = "desafortunadamente no hemos logrado consultar tu buró correctamente, pero no te preocupes, un asesor de dp se comunicara contigo a la brevedad."
+      break;
+  }
   return (
     <div className="text-center">
       <div className="text-center position-relative mt-2 containerC">
@@ -305,17 +316,15 @@ const BuroUltimo = () => {
       <div className="mt-3">
         <div className="text-center">
           <label
-            className="title-dpAlt fz20 fw500 ml-auto mt-2 mb-1"
+            className="text-dp-gray-ligth fz20 ml-auto mt-2 mb-1"
             style={{ maxWidth: "90%" }}
           >
-            desafortunadamente no hemos logrado consultar tu buró correctamente,
-            pero no te preocupes, un asesor de dp se comunicara contigo a la
-            brevedad.
+            {mensaje}
           </label>
         </div>
         <Button
           variant="primary"
-          className="mt-3 btn-blue-general"
+          className="mt-3 btn-blue-normal"
           onClick={(e) => {
             window.location.href = "/credito";
           }}
@@ -335,7 +344,7 @@ const ErrorConsulta = () => {
         <img src={imgUlti} alt="errorr IMG" className="tijuanaImg" />
         <div className="text-center">
           <label
-            className="text-dp fz20 fw500 ml-auto mt-2 mb-1"
+            className="text-dp-gray-ligth fz20 ml-auto mt-2 mb-1"
             style={{ maxWidth: "90%" }}
           >
             error en el servidor, por favor intenta de nuevo en unos minutos
@@ -343,7 +352,7 @@ const ErrorConsulta = () => {
         </div>
         <Button
           variant="primary"
-          className="mt-3 btn-blue-general"
+          className="mt-3 btn-blue-normal"
           onClick={(e) => {
             window.location.href = "/credito";
           }}
@@ -371,11 +380,18 @@ const WaitPage = () => {
     setIsLoading(true);
     const getData = async () => {
       const user = JSON.parse(sessionStorage.getItem("user"));
-      if (user.idClient.score === "ERROR 3") {
-        setIsLoading(false);
-        setStatus("ERROR 3");
-        return setBuro(<BuroUltimo />);
-      }
+      // if (user.idClient.score === "ERROR 3") {
+      //   setStatus("ERROR 3");
+      //   try{
+      //     let res = await axios.post(`api/buro/limit/${user._id}`);
+      //   } catch (error) {
+      //     setIsLoading(false);
+      //     console.log(error);
+      //     setBuro(<BuroUltimo />);
+      //     return;
+      //   }
+        
+      // }
       
       const idClient = user._id;
       // Si ya tienen una solicitud, se actualiza
@@ -400,16 +416,13 @@ const WaitPage = () => {
           );
         }
       } catch (error) {
+        console.log(error);
         if (error.response.data.user) {
           sessionStorage.setItem(
             "user",
             JSON.stringify(error.response.data.user)
           );
-        } else {
-          setStatus("ERROR");
-          setIsLoading(false);
-          return setBuro(<ErrorConsulta />);
-        }
+        } 
         switch (error.response.status) {
           case 400:
             setStatus("ERROR");
@@ -419,7 +432,12 @@ const WaitPage = () => {
           case 401:
             setStatus("ERROR");
             setIsLoading(false);
-            setBuro(<BuroUltimo />);
+            setBuro(<BuroUltimo code={401}/>);
+            break;
+          case 429:
+            setStatus("ERROR");
+            setIsLoading(false);
+            setBuro(<BuroUltimo code={429}/>);
             break;
           case 500:
             setStatus("ERROR");
@@ -442,7 +460,7 @@ const WaitPage = () => {
       {isLoading && (
         <div className="text-center">
           <div className="text-center">
-            <label className="text-dp fz20 fw500 ml-auto mt-2 mb-1">
+            <label className="text-dp-blue-2 fz20 fw500 ml-auto mt-2 mb-1">
               estamos procesando tu solicitud
             </label>
           </div>
@@ -454,13 +472,13 @@ const WaitPage = () => {
           </div>
           <div className="mt-3">
             <div className="text-center">
-              <label className="title-dpAlt fz20 fw500 ml-auto mt-2 mb-1">
+              <label className="text-dp-gray-ligth fz20 ml-auto mt-2 mb-1">
                 8 de cada 10 solicitudes reciben una autorización
               </label>
             </div>
           </div>
         </div>
-      )}
+       )} 
       {status && buro}
     </div>
   );
