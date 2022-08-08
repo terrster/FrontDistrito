@@ -45,7 +45,7 @@ function Pop_up({ isDocuments=false }) {
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={handleClose} block className="btn-blue-documents">
-              Entiendo los Beneficios
+              entiendo los beneficios
             </Button>
             {
 				    isDocuments &&
@@ -55,7 +55,7 @@ function Pop_up({ isDocuments=false }) {
                 history.push(`/informacion-comercial/${user._id}`);
 
               }} block className="btn-blue-secondary">
-					     Ir a colocar mi CIEC
+					     ir a colocar mi CIEC
       				</Button>
       			}
           </Modal.Footer>

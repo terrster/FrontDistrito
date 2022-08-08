@@ -125,7 +125,7 @@ const RecoverPasswordForm = (props) => {
             disabled={submitting}
             style={{width: '250px'}}
           >
-            Reestablecer
+            reestablecer
           </Button>
         </div>
       </form>

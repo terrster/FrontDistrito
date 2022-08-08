@@ -202,7 +202,7 @@ const OpenBankingForm = (props) => {
                     <p className="title-dp fz25 text-center">{timer} {timer > 1 ? "segundos" : "segundo"}</p>
                 </Modal.Body>
                 <Modal.Footer>
-                <Button className="btn-blue-general" style={{width: '150px'}} onClick={() => handleProvideToken()}>Enviar</Button>
+                <Button className="btn-blue-general" style={{width: '150px'}} onClick={() => handleProvideToken()}>enviar</Button>
                 </Modal.Footer>
             </Modal>
 

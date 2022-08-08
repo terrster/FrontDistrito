@@ -43,7 +43,7 @@ let CiecForm = (props) => {
                     <Field component={renderFieldFull} label="CIEC" name="ciec" />
                     <p className="mt-1 mb-1 text-muted"><small>Al seleccionar "enviar", usted acepta nuestros <a href='https://distritopyme.com/terminos-y-condiciones'>términos de uso</a> y <a href='https://distritopyme.com/privacidad'>aviso de privacidad.</a></small></p>
                     <Button type="submit" className={"mt-50 btn-blue-general"} style={{ width: '250px' }}>
-                    Continuar
+                    continuar
                     </Button>
                 </form>
         </div>

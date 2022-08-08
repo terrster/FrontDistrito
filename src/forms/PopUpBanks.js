@@ -18,7 +18,7 @@ function PopUpBanks() {
             </Modal.Body>
             <Modal.Footer>
             <Button onClick={handleClose} block className="btn-blue-documents">
-                Entiendo los Beneficios
+                entiendo los beneficios
             </Button>
             </Modal.Footer>
         </Modal>

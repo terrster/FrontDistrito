@@ -102,7 +102,7 @@ const HomeForm = (props) => {
                       className="mt-50 contact-button"
                      
                     >
-                      Enviar
+                      enviar
                     </Button>
                   ) : (
                     <Button

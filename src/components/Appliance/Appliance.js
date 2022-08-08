@@ -168,14 +168,14 @@ class Appliance extends Component {
 															this.finishAppliance(e)
 														}
 													>
-														Enviar
+														enviar
 													</Button>
 												</div>
 												<Button
 													className="btn-blue-general button-modal"
 													onClick={() => this.handleClose()}
 												>
-													Cancelar
+													cancelar
 												</Button>
 											</div>
 										</Modal.Body>

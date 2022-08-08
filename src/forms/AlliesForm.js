@@ -469,7 +469,7 @@ const AlliesForm = (props) => {
             }
 
 			<div className="text-center">
-				<Button type="submit" className="btn-blue-documents mt-30" onClick={() => goToError()} style={{ width: '100%', maxWidth:'350px'  }}>Dar de Alta Alianza</Button>
+				<Button type="submit" className="btn-blue-documents mt-30" onClick={() => goToError()} style={{ width: '100%', maxWidth:'350px'  }}>dar de alta alianza</Button>
 			</div>
 		</Form>
 	);

@@ -501,7 +501,7 @@ let ComercialInfoForm = (props) => {
               type="submit"
               className="mt-50 btn-blue-general btn-blue-send-documents"
             >
-              Guardar e ir a documentos
+              guardar e ir a documentos
             </Button>
           )}
           {!refDocuments && !disabled && (

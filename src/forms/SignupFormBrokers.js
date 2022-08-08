@@ -61,7 +61,7 @@ const renderField = ({
 
 const passwordTooltip = (
   <Tooltip className="tooltip-password">
-    Crea tu contraseña para regresar más tarde
+    crea tu contraseña para regresar más tarde
   </Tooltip>
 );
 
@@ -277,7 +277,7 @@ let SignupFormBrokers = (props) => {
               className={"mt-50 btn-blue-general"}
               style={{ width: '250px' }}
 						>
-							Continuar
+							continuar
 						</Button>
 					) : (
 						<Button 
@@ -286,7 +286,7 @@ let SignupFormBrokers = (props) => {
               style={{ width: '250px' }}
 							onClick={() => goToError()}
 						>
-							Continuar
+							continuar
 						</Button>
 					)
 				}

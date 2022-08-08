@@ -17,7 +17,7 @@ function DocumentsModal() {
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" className="btn-blue-documents" onClick={handleClose} style={{ width: '100%' }}>
-          Entiendo
+          entiendo
         </Button>
       </Modal.Footer>
     </Modal>

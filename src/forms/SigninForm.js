@@ -59,7 +59,7 @@ let SigninForm = props => {
 				<Field component={renderField} type="text" name="email" label="Correo electrónico" normalize={validateEmail}/>
 				<Field component={renderField} type="password" name="password" label="Contraseña" normalize={validatePassword}/>
 				<div className="mb-1 text-center">
-					<Link to="/reset-password" className="fw500 fz12 blue-primary">¿Olvidaste tu Contraseña?</Link>
+					<Link to="/reset-password" className="fw500 fz12 blue-primary">¿olvidaste tu contraseña?</Link>
 				</div>
 				<div className="text-center">
 					<Button type="submit" className={submitButtonClass} disabled={submitting} style={{ width: '250px' }}>continuar</Button>
