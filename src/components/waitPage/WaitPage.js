@@ -280,7 +280,7 @@ const BuroError = ({ isLoading, buro }) => {
             className="text-dp-gray-ligth fz20 ml-auto mt-2 mb-1"
             style={{ maxWidth: "90%" }}
           >
-            ¡ups!, lo sentimos, no pudimos revisar tu buró, por favor revisa que tu información sea la correcta{" "}
+            ¡ups! lo sentimos, no pudimos consultar tu buró, por favor revisa que tu información sea la correcta{" "}
           </label>
         </div>
         <Loader />
@@ -299,7 +299,7 @@ const BuroUltimo = ({code}) => {
   let mensaje2 = "";
   switch (code) {
     case 401:
-      mensaje = "desafortunadamente no hemos logrado consultar tu buró correctamente, pero no te preocupes, un asesor de dp se comunicara contigo a la brevedad."
+      mensaje = "desafortunadamente no hemos logrado consultar tu buró correctamente, pero no te preocupes, un asesor de dp se comunicará contigo a la brevedad."
       break;
     case 429:
       mensaje = "desafortunadamente rebasaste los intentos permitidos por día para consultar tu buró, pero no te preocupes, puedes volver a intentarlo en 24 hrs."
@@ -486,7 +486,7 @@ const WaitPage = () => {
           <div className="mt-3">
             <div className="text-center">
               <label className="text-dp-gray-ligth fz20 ml-auto mt-2 mb-1">
-                8 de cada 10 solicitudes reciben una autorización
+                8 de cada 10 solicitudes reciben una opcion de credito
               </label>
             </div>
           </div>
