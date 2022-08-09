@@ -423,6 +423,7 @@ const WaitPage = () => {
         setStatus("ERROR");
         setIsLoading(false);
         setBuro(<BuroError buro={buro} isLoading={isLoading} />);
+        return;
       }
       if (user.idClient.score !== null || undefined) {
         setStatus("OK");
@@ -431,6 +432,7 @@ const WaitPage = () => {
         setScore(score);
         setIsLoading(false);
         setBuro(<BuroPositivo user={user} score={score}/>);
+        return;
       }
       
       const idClient = user._id;
