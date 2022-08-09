@@ -74,6 +74,7 @@ const Credit = (props) => {
         scoreType = false;
     }
     if (scoreType === true) {
+      score = parseInt(score);
       if (score > 0 && score < 525) {
         let garantia = user.idClient.appliance[0].idComercialInfo.warranty;
         garantia === 1 ? (scoreType = true) : (scoreType = false);

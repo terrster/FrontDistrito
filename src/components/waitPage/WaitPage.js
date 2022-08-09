@@ -426,8 +426,11 @@ const WaitPage = () => {
       }
       if (user.idClient.score !== null || undefined) {
         setStatus("OK");
+        let score = user.idClient.score;
+        score = parseInt(score);
+        setScore(score);
         setIsLoading(false);
-        setBuro(<BuroPositivo user={user} score={user.idClient.score}/>);
+        setBuro(<BuroPositivo user={user} score={score}/>);
       }
       
       const idClient = user._id;

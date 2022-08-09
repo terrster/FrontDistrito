@@ -211,7 +211,9 @@ const GeneralInfo = (props) => {
           || score === null
           || score === "") {
             window.location.href = `/buro/${user._id}`;
-        } else if (score > 0 && score < 525) {
+        } 
+        score = parseInt(score);
+        if (score > 0 && score < 525) {
           garantia === "1" ? window.location.href = `/documentos/${user._id}` : window.location.href = `/buro/${user._id}`;
         } else {
           window.location.href = `/documentos/${user._id}`;
