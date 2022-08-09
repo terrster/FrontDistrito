@@ -416,18 +416,19 @@ const WaitPage = () => {
     setIsLoading(true);
     const getData = async () => {
       const user = JSON.parse(sessionStorage.getItem("user"));
-      // if (user.idClient.score === "ERROR 3") {
-      //   setStatus("ERROR 3");
-      //   try{
-      //     let res = await axios.post(`api/buro/limit/${user._id}`);
-      //   } catch (error) {
-      //     setIsLoading(false);
-      //     console.log(error);
-      //     setBuro(<BuroUltimo />);
-      //     return;
-      //   }
-        
-      // }
+      if (user.idClient.score === "ERROR"
+        || user.idClient.score === "ERROR 1"
+        || user.idClient.score === "ERROR 2"
+        || user.idClient.score === "ERROR 3") {
+        setStatus("ERROR");
+        setIsLoading(false);
+        setBuro(<BuroError buro={buro} isLoading={isLoading} />);
+      }
+      if (user.idClient.score !== null || undefined) {
+        setStatus("OK");
+        setIsLoading(false);
+        setBuro(<BuroPositivo user={user} score={user.idClient.score}/>);
+      }
       
       const idClient = user._id;
       // Si ya tienen una solicitud, se actualiza
