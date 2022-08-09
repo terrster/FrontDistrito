@@ -44,6 +44,7 @@ const buroNegativo = () => {
 };
 //respuesta 200 buro encontrado
 const BuroPositivo = ({ score, user }) => {
+  
   const handleClick = (e) => {
     const user = JSON.parse(sessionStorage.getItem("user"));
     switch (e) {
@@ -53,16 +54,37 @@ const BuroPositivo = ({ score, user }) => {
       case 2:
         window.location.href = `/documentos/${user._id}`;
         break;
+        case 3: 
+        handleSubmit(user);
+        break
       default:
         break;
     }
   };
 
   const [disabled, setDisabled] = useState(true);
+  const dispatch = useDispatch();
 
   const handleChange = () => {
     setDisabled(!disabled);
   };
+
+  const handleSubmit = async (user) => {
+    dispatch(updateLoader(true));
+    await axios
+      .post(`/api/buro/update/${user._id}`)
+      .then((res) => {
+        sessionStorage.setItem("user", JSON.stringify(res.data.user));
+        dispatch(updateLoader(false));
+        window.location.href = `/documentos/${user._id}`;
+      })
+      .catch((err) => {
+        dispatch(updateLoader(false));
+        console.log(err);
+      }
+      );
+
+  }
 
   let mensaje = "";
   let casos =
@@ -105,6 +127,7 @@ const BuroPositivo = ({ score, user }) => {
   }
   return (
     <div className="wait-page">
+      <Loader />
       <div className="text-center">
         <img src={ERRORImg} alt="errorr IMG" className="tijuanaImg" />
         <div className="text-dp-gray-ligth fz20 ml-auto mt-2 mb-1">
@@ -145,7 +168,7 @@ const BuroPositivo = ({ score, user }) => {
                   variant="primary"
                   className="mt-3 btn-blue-normal"
                   onClick={(e) => {
-                    handleClick(2);
+                    handleClick(3);
                   }}
                   disabled={disabled}
                 >
