@@ -211,12 +211,15 @@ const GeneralInfo = (props) => {
           || score === null
           || score === "") {
             window.location.href = `/buro/${user._id}`;
+            return;
         } 
         score = parseInt(score);
         if (score > 0 && score < 525) {
           garantia === "1" ? window.location.href = `/documentos/${user._id}` : window.location.href = `/buro/${user._id}`;
+          return;
         } else {
           window.location.href = `/documentos/${user._id}`;
+          return;
         }
         } catch (error) {
           console.log("Error de servicio", error);
