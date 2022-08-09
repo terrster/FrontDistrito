@@ -244,8 +244,8 @@ let ErrorBuro = ({
               }
             >
               <option value="">Selecciona...</option>
-              <option value={true}>Sí</option>
-              <option value={false}>No</option>
+              <option value="1">Sí</option>
+              <option value="0">No</option>
             </Field>
           </Col>
 
@@ -278,12 +278,12 @@ let ErrorBuro = ({
               }}
             >
               <option value="">Selecciona...</option>
-              <option value={true}>Sí</option>
-              <option value={false}>No</option>
+              <option value="1">Sí</option>
+              <option value="0">No</option>
             </Field>
           </Col>
         </Row>
-        {(creditCard === true || initialValues.creditCard === true) && (
+        {(creditCard === "1" || initialValues.creditCard === "1") && (
           <div>
             <Field
               component={renderFieldFull}
