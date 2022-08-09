@@ -283,7 +283,7 @@ let ErrorBuro = ({
             </Field>
           </Col>
         </Row>
-        {(creditCard === "1" || initialValues.creditCard === "1") && (
+        {(creditCard === true || initialValues.creditCard === true) && (
           <div>
             <Field
               component={renderFieldFull}
