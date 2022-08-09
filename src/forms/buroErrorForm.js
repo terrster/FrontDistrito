@@ -244,8 +244,8 @@ let ErrorBuro = ({
               }
             >
               <option value="">Selecciona...</option>
-              <option value="1">Sí</option>
-              <option value="0">No</option>
+              <option value={true}>Sí</option>
+              <option value={false}>No</option>
             </Field>
           </Col>
 
@@ -278,8 +278,8 @@ let ErrorBuro = ({
               }}
             >
               <option value="">Selecciona...</option>
-              <option value="1">Sí</option>
-              <option value="0">No</option>
+              <option value={true}>Sí</option>
+              <option value={false}>No</option>
             </Field>
           </Col>
         </Row>
