@@ -177,21 +177,28 @@ const GeneralInfo = (props) => {
         try {
           const res = await axios.put(`api/info-general/${id}`, data);
           sessionStorage.setItem("user", JSON.stringify(res.data.user));
-        //   let score = "score" in idClient ? idClient.score : "NO HAY PUNTUACIÓN";
-          
-        //   if (score === "ERROR" 
-        //   || score === "ERROR 1"
-        //   || score === "ERROR 2"
-        //   || score === "ERROR 3"
-        //   || score === "NO HAY PUNTUACIÓN"
-        //   || score === undefined
-        //   || score === null
-        //   || score === "") {
-        //     window.location.href = `/buro/${user._id}`;
-        // } else {
-        //   window.location.href = `/documentos/${user._id}`;
-        // }
-        window.location.href = `/documentos/${user._id}`;
+          let score = "score" in idClient ? idClient.score : "NO HAY PUNTUACIÓN";
+          let  garantia = idClient.appliance[0].idComercialInfo.warranty;
+          if (score === "ERROR" 
+          || score === "ERROR 1"
+          || score === "ERROR 2"
+          || score === "ERROR 3"
+          || score === "NO HAY PUNTUACIÓN"
+          || score === undefined
+          || score === null
+          || score === "") {
+            window.location.href = `/buro/${user._id}`;
+            return;
+        } 
+        score = parseInt(score);
+        if (score > 0 && score < 525) {
+          garantia === "1" ? window.location.href = `/documentos/${user._id}` : window.location.href = `/buro/${user._id}`;
+          return;
+        } else {
+          window.location.href = `/documentos/${user._id}`;
+          return;
+        }
+        // window.location.href = `/documentos/${user._id}`;
           
         } catch (error) {
           console.log("Error de servicio", error);
@@ -200,28 +207,28 @@ const GeneralInfo = (props) => {
         try {
           const res = await axios.post(`api/info-general/${id}`, data);
           sessionStorage.setItem("user", JSON.stringify(res.data.user));
-        //   let score = "score" in idClient ? idClient.score : "NO HAY PUNTUACIÓN";
-        //   let  garantia = idClient.appliance[0].idComercialInfo.warranty;
-        //   if (score === "ERROR" 
-        //   || score === "ERROR 1"
-        //   || score === "ERROR 2"
-        //   || score === "ERROR 3"
-        //   || score === "NO HAY PUNTUACIÓN"
-        //   || score === undefined
-        //   || score === null
-        //   || score === "") {
-        //     window.location.href = `/buro/${user._id}`;
-        //     return;
-        // } 
-        // score = parseInt(score);
-        // if (score > 0 && score < 525) {
-        //   garantia === "1" ? window.location.href = `/documentos/${user._id}` : window.location.href = `/buro/${user._id}`;
-        //   return;
-        // } else {
-        //   window.location.href = `/documentos/${user._id}`;
-        //   return;
-        // }
-        window.location.href = `/documentos/${user._id}`;
+          let score = "score" in idClient ? idClient.score : "NO HAY PUNTUACIÓN";
+          let  garantia = idClient.appliance[0].idComercialInfo.warranty;
+          if (score === "ERROR" 
+          || score === "ERROR 1"
+          || score === "ERROR 2"
+          || score === "ERROR 3"
+          || score === "NO HAY PUNTUACIÓN"
+          || score === undefined
+          || score === null
+          || score === "") {
+            window.location.href = `/buro/${user._id}`;
+            return;
+        } 
+        score = parseInt(score);
+        if (score > 0 && score < 525) {
+          garantia === "1" ? window.location.href = `/documentos/${user._id}` : window.location.href = `/buro/${user._id}`;
+          return;
+        } else {
+          window.location.href = `/documentos/${user._id}`;
+          return;
+        }
+        // window.location.href = `/documentos/${user._id}`;
         } catch (error) {
           console.log("Error de servicio", error);
         }
