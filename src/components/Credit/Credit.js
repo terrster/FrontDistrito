@@ -53,61 +53,9 @@ const Credit = (props) => {
       }
     }
   };
-  const getAppliance = () => {
-    let linkt = "";
-    const idClient = user.idClient;
-    let appliance = verifyAppliance(idClient.appliance);
-    let idAmount = verify(appliance, "idAmount");
-    let idGeneralInfo = verify(appliance, "idGeneralInfo");
-    let idComercialInfo = verify(appliance, "idComercialInfo");
-    let idDocuments = verify(appliance, "idDocuments");
-    let statusDocuments = { status: false };
-    if (idDocuments) {
-      statusDocuments.status = idDocuments.status;
-    }
-    if (idAmount == null || !idAmount) {
-      linkt = `elige-monto/${user._id}`;
-    } else if (idComercialInfo == null || !idComercialInfo) {
-      linkt = `datos-comerciales/${user._id}`;
-    } else if (idGeneralInfo == null || !idGeneralInfo) {
-      linkt = `informacion-general/${user._id}`;
-    } else if (
-      !idDocuments ||
-      !idDocuments == null ||
-      !statusDocuments.status
-    ) {
-      linkt = `documentos/${user._id}`;
-    } else {
-      updateAppliance();
-      linkt = `credito/solicitud/${appliance._id}`;
-    }
-    return (
-      <div className="position-relative">
-        <img src={tito} className="apply-caracter-img" alt="tito" />
-        <div className="step-box text-center">
-          <div>
-            <Title
-              className="title-dp fw600 fz42 mb-16"
-              title="Completa tu solicitud"
-            />
-            <label className="subtitle-dp fz20 fw500">
-              completa el 100% de tu solicitud y empieza a recibir las mejores
-              opciones de crédito en menos de 15 min.
-            </label>
-          </div>
-          <div className="mt-50">
-            <Steps />
-          </div>
-          {(!appliance.idDocuments ||
-            (appliance.idDocuments && !appliance.idDocuments.status)) && (
-            <LinkButton link={linkt} />
-          )}
-        </div>
-      </div>
-    );
-  };
 
-  /*
+
+  
   const getAppliance = () => {
     let linkt = "";
     const idClient = user.idClient;
@@ -186,7 +134,6 @@ const Credit = (props) => {
       </div>
     );
   };
-*/
   /*
   const getAppliances = (idClient) => {
     return <h1>No hay solicitudes</h1>
