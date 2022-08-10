@@ -41,6 +41,9 @@ import EurorepM from '../../assets/img/financialPartners/eurorep_bannermobile.we
 import CrediyesWeb from '../../assets/img/financialPartners/crediyes_web.jpg';
 import CrediyessMobile from '../../assets/img/financialPartners/crediyes_mobile.jpg';
 
+import HaloWeb from '../../assets/img/financialPartners/halo_web.jpg';
+import HaloMobile from '../../assets/img/financialPartners/halo_movil.jpg';
+
 const getVersionImage = () => {
 	const currentSize = document.getElementsByTagName('body')[0].clientWidth;
 	return currentSize < 775 ? 1 : 0;
@@ -163,6 +166,18 @@ const financialPartner = (partner) => {
           prefix: process.env.REACT_APP_CONFIGURATION === 'localhost' || process.env.REACT_APP_CONFIGURATION === 'development' ? 'CrediYesDev - ' : 'CrediYes - ',
           channel: 'Crediyes',
           brokercode: '199142035'//
+        }
+
+        case 'HALO':
+        return {
+          image: [HaloWeb,HaloMobile],
+          text: [
+            'Solicita un crédito para tu empresa o negocio a través de nuestro aliado Distrito Pyme.',
+            'Podrás recibir las mejores opciones de crédito en menos de 15 min con un proceso fácil, rápido y sin papeleos.'
+          ],
+          prefix: process.env.REACT_APP_CONFIGURATION === 'localhost' || process.env.REACT_APP_CONFIGURATION === 'development' ? 'HaloDev - ' : 'Halo - ',
+          channel: 'Halo',
+          brokercode: '206611329'//
         }
 
 
