@@ -119,7 +119,7 @@ const BuroPositivo = ({ score, user }) => {
       break;
     case "5":
       mensaje =
-        "!felicidades!, tu buró de crédito es muy bueno, estás a punto de recibir las mejores opciones de crédito, ahora ayúdanos a subir tus documentos.";
+        "!felicidades! tu buró de crédito es muy bueno, estás a punto de recibir las mejores opciones de crédito, ahora ayúdanos a subir tus documentos.";
       break;
     default:
       mensaje = "";
