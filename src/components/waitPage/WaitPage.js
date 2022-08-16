@@ -103,23 +103,23 @@ const BuroPositivo = ({ score, user }) => {
   switch (casos) {
     case "1":
       mensaje =
-        "hemos detectado que no cuentas con historial crediticio, pero no importa, en distrito pyme contamos con las mejores opciones para iniciar tu historial crediticio.";
+        "hemos detectado que no cuentas con historial crediticio, pero no importa, en distrito pyme contamos con las mejores opciones para iniciar tu historial crediticio."; //buro -9
       break;
     case "2":
       mensaje =
-        "lo sentimos, hemos detectado que tu buró no es del todo positivo, sabemos que no son buenas noticias, pero aún podemos ofrecerte opciones de crédito si cuentas con una garantía inmobiliaria.";
+        "lo sentimos, hemos detectado que tu buró no es del todo positivo, sabemos que no son buenas noticias, pero aún podemos ofrecerte opciones de crédito si cuentas con una garantía inmobiliaria."; //buro 425
       break;
     case "3":
       mensaje =
-        "hemos consultado tu buró correctamente, lo estamos analizando para poder ofrecerte las mejores propuestas de crédito, ahora ayúdanos a subir tus documentos.";
+        "hemos consultado tu buró correctamente, lo estamos analizando para poder ofrecerte las mejores propuestas de crédito, ahora ayúdanos a subir tus documentos."; //buro 525
       break;
     case "4":
       mensaje =
-        "hemos consultado tu buró correctamente y cumple con los requisitos de la mayoría de nuestros aliados, ahora ayúdanos a subir tus documentos para poder ofrecerte las mejores opciones de crédito.";
+        "hemos consultado tu buró correctamente y cumple con los requisitos de la mayoría de nuestros aliados, ahora ayúdanos a subir tus documentos para poder ofrecerte las mejores opciones de crédito."; // buro 626
       break;
     case "5":
       mensaje =
-        "!felicidades!, tu buró de crédito es muy bueno, estás a punto de recibir las mejores opciones de crédito, ahora ayúdanos a subir tus documentos.";
+        "!felicidades! tu buró de crédito es muy bueno, estás a punto de recibir las mejores opciones de crédito, ahora ayúdanos a subir tus documentos.";
       break;
     default:
       mensaje = "";
@@ -515,7 +515,7 @@ const WaitPage = () => {
           <div className="mt-3">
             <div className="text-center">
               <label className="text-dp-gray-ligth fz20 ml-auto mt-2 mb-1">
-                8 de cada 10 solicitudes reciben una opcion de credito
+                8 de cada 10 solicitudes reciben una opción de crédito
               </label>
             </div>
           </div>
