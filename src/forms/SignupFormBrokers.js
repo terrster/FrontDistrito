@@ -209,13 +209,13 @@ let SignupFormBrokers = (props) => {
           ownerId ? 
           (<div>
             <label className="label-style mt-24">
-              Código brokers
+              broker id
             </label>
             <Field
               component={renderField}
               type="text"
               name="brokercode"
-              label="Código brokers"
+              label="broker id"
               readOnly={true}
               errorBroker={errorBroker}
               style={{marginTop: '0px'}}
@@ -228,7 +228,7 @@ let SignupFormBrokers = (props) => {
                 component={renderField}
                 type="text"
                 name="brokercode"
-                label="Código brokers"
+                label="broker id"
                 onChange={ (event, newValue, previousValue, name) => {
                   setErrorBroker("");
                 }}
