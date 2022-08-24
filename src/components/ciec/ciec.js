@@ -81,7 +81,7 @@ const goToError = () => {
     }
   return (
     <div>
-        <div className='text-center outer'>   
+        <div className='text-center outer '>   
             <CiecForm 
             onSubmit={onFormSubmit}
             initialValues={initialValues}

@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState, useEffect, useRef, useMemo } from "react";
+import { useDispatch, useSelector  } from "react-redux";
 import { Field, reduxForm } from "redux-form";
 import comercialOptions from "../models/ComercialInfoModels";
 import employeesNumber from "../models/EmployeesNumber";
@@ -8,6 +8,7 @@ import empresarialCreditCard from "../models/EmpresarialCreditCard";
 import { Row, Col, Button } from "react-bootstrap";
 import InputLabel from "../components/Generic/InputLabel";
 import SubtitleForm from "../components/Generic/SubtitleForm";
+import { debounce } from "lodash";
 import { validateComercialInfo } from "../components/Validate/ValidateComercialInfo";
 import {
   renderField,
@@ -22,10 +23,10 @@ import { updateLoader } from "../redux/actions/loaderActions";
 // CIEC
 import PopUp from "./PopUp";
 // import PopUpBanks from "./PopUpBanks";
-import Info from "../assets/img/info-01.png";
+import Info from "../assets/img/type_person/help.png";
 // import Delete from "../assets/img/basura-01.png";
 import scroll from "../utils/scroll";
-// import axios from "../utils/axios";
+import axios from "../utils/axios";
 // import DeleteIcon from "@material-ui/icons/Delete";
 
 let ComercialInfoForm = (props) => {
@@ -35,6 +36,8 @@ let ComercialInfoForm = (props) => {
 
   const [colonias, setColonias] = useState([]);
   const [zipCodeError, setZipCodeError] = useState(false);
+  const [ciecValid, setCiecValid] = useState(false);
+  const [rfc, setRfc] = useState("");
   const [disabled, setDisabled] = useState(true);
   const [forceRender, setForceRender] = useState(true);
 
@@ -43,6 +46,49 @@ let ComercialInfoForm = (props) => {
     valid
   } = props;
   const ciecRef = useRef(null);
+
+  const ciecAxios = (event) => {
+    let ciec = event.target.value;
+    let newCiec = true;
+    console.log(rfc);
+    let rfcValue = rfc ? rfc : props.initialValues.rfc;
+    if (ciec.length === 8) {
+      console.log("rfc", rfcValue);
+      dispatch(updateLoader(true));
+        axios.post("/ciec", { ciec, newCiec, rfc: rfcValue }).then((response) => {
+          if (response.data.status === "success") {
+            console.log(response.data);
+            dispatch(updateLoader(false));
+          } else {
+            setCiecValid(true);
+            dispatch(updateLoader(false));
+            console.log(response.data.msg);
+          }
+        }).catch((error) => {
+          setCiecValid(true);
+          dispatch(updateLoader(false));
+          console.log(error);
+        }).finally(() => {
+          dispatch(updateLoader(false));
+        }
+        );
+
+    } else {
+      console.log("falso", ciec);
+      dispatch(updateLoader(false));
+    }
+  };
+
+  const debouncedChangeHandler = useMemo(
+    () => debounce(ciecAxios, 1000)
+  , []);
+  // Stop the invocation of the debounced function
+  // after unmounting
+  useEffect(() => {
+    return () => {
+      debouncedChangeHandler.cancel();
+    }
+  }, []);
 
   const handleChange = async (event, id) => {
     const zipCode = event.target.value;
@@ -93,6 +139,7 @@ let ComercialInfoForm = (props) => {
 
     const getData = async () => {
       dispatch(updateLoader(true));
+      setRfc(props.initialValues.rfc);
       const user = JSON.parse(sessionStorage.getItem("user"));
       const idClient = user.idClient;
       // Si ya tienen una solicitud, se actualiza
@@ -274,6 +321,7 @@ let ComercialInfoForm = (props) => {
           normalize={upper}
           maxLength={12}
           minLength={12}
+          onChange={(e) => {setRfc(e.target.value)}}
         />
 
         <Field component={renderSelectField} name="employeesNumber" cls="mb-3">
@@ -433,7 +481,7 @@ let ComercialInfoForm = (props) => {
             <>
               <Col lg={12} md={12} sm={12}>
                 <SubtitleForm
-                  subtitle="Clave CIEC (Opcional)"
+                  subtitle="Clave CIEC"
                   className="mt-30"
                 />
                 <div
@@ -451,9 +499,16 @@ let ComercialInfoForm = (props) => {
                     className="positionInfo"
                   />
                 </div>
-                <Field component={renderFieldFull} label="CIEC" name="ciec" />
-                <div className="fz18 gray50 text-dp mb-30 mt-2">
-                No es un dato obligatorio pero puede agilizar tu solicitud a la mitad del tiempo y ofrecerte mejores condiciones de crédito. Se ingresa por única ocasión para descargar la información necesaria mediante procesos automatizados
+                <Field component={renderFieldFull} label="CIEC" name="ciec" onChange={debouncedChangeHandler}/>
+                {ciecValid && (
+                  <span id="CIEC-error">
+                    <small className="error">
+                      La CIEC no es válida
+                      </small>
+                      </span>
+                      )}
+                <div className="fz18 gray50 text-dp mb-16 mt-2 text-justify">
+                la CIEC agiliza tu solicitud de crédito a la mitad del tiempo, además la probabilidad de aprobación es mucho más alta y las condiciones serán mejores.
                 </div>
               </Col>
               <PopUp />

@@ -35,6 +35,7 @@ export const renderField = ({
             placeholder={label}
             type={type}
             maxLength="13"
+            autoComplete="off"
             disabled={disabled}
           />
         ) : label === "RFC" &&
@@ -221,6 +222,7 @@ export const renderFieldFull = ({
             type='password'
             maxLength="8"
             minLength="8"
+            autoComplete="off"
             disabled={disabled ? disabled : false}
           />
         ) : label === "edad" ? (

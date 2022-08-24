@@ -1,4 +1,4 @@
-.form-ciec {
+/* .form-ciec {
     text-align: center !important;
     width: 100%;
     max-width: 400px;
@@ -9,25 +9,69 @@
     box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
     padding: 40px 55px 45px 55px;
     transition: all .3s;
-  }
+  } */
   
-  .outer {
+  /* .outer {
     display: flex;
     justify-content: center;
     flex-direction: column;
     text-align: left;
     min-height: 60vh;
     background: hsl(0, 0%, 100%);
-    font-family: 'Roboto', sans-serif;
     font-size: 1rem;
     align-items: center;
+  } */
+
+  .form-ciec {
+    border: 1px solid #fff;
+  background-color: #fff;
+    box-shadow: 9px 9px 16px rgba(189, 189, 189, 0.6),
+    -9px -9px 16px rgba(255, 255, 255, 0.5);
+ border-radius:8px;
+ max-width:460px;
+ min-width:320px;
+ padding:32px;
+ width:90%;
+ max-height: 90%;
   }
+
+  .outer {
+    -moz-box-align:center;
+    -moz-box-flex:1;
+    -moz-box-orient:vertical;
+    -ms-flex:1;
+    -ms-flex-align:center;
+    -ms-flex-direction:column;
+    -o-box-align:center;
+    -o-box-flex:1;
+    -o-box-orient:vertical;
+    -webkit-align-items:center;
+    -webkit-box-align:center;
+    -webkit-box-flex:1;
+    -webkit-box-orient:vertical;
+    -webkit-flex:1;
+    -webkit-flex-direction:column;
+    align-items:center;
+    box-flex:1;
+    display:-webkit-box;
+    display:-moz-box;
+    display:-webkit-flex;
+    display:-ms-flexbox;
+    display:box;
+    display:flex;
+    flex:1;
+    flex-direction:column;
+  }
+
   
-  .outer .form-control:focus {
+  
+  .outer .form-control::selection {
     border-color: #167bff;
-    box-shadow: none;
   }
-  
+  .outer .form-ciec .btn-blue-general{
+    box-shadow: 9px 9px 18px #022c62,
+    3px 3px 5px -3px #023c84;
+  }
   /* img{
     width: 50%;
     height: auto;
