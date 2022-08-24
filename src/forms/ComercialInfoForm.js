@@ -37,25 +37,25 @@ let ComercialInfoForm = (props) => {
   const [colonias, setColonias] = useState([]);
   const [zipCodeError, setZipCodeError] = useState(false);
   const [ciecValid, setCiecValid] = useState(false);
-  const [rfc, setRfc] = useState("");
+  const [rdc, setRfc] = useState("");
   const [disabled, setDisabled] = useState(true);
   const [forceRender, setForceRender] = useState(true);
+  const [values, setValues] = useState({});
 
   const {
     handleSubmit,
     valid
   } = props;
   const ciecRef = useRef(null);
-
+  
   const ciecAxios = (event) => {
     let ciec = event.target.value;
     let newCiec = true;
-    console.log(rfc);
-    let rfcValue = rfc ? rfc : props.initialValues.rfc;
+    console.log(rdc);
     if (ciec.length === 8) {
-      console.log("rfc", rfcValue);
+      console.log("rfc", rdc);
       dispatch(updateLoader(true));
-        axios.post("/ciec", { ciec, newCiec, rfc: rfcValue }).then((response) => {
+        axios.post("/ciec", { ciec, newCiec, rdc }).then((response) => {
           if (response.data.status === "success") {
             console.log(response.data);
             dispatch(updateLoader(false));
@@ -82,13 +82,34 @@ let ComercialInfoForm = (props) => {
   const debouncedChangeHandler = useMemo(
     () => debounce(ciecAxios, 1000)
   , []);
+  const nose = useMemo( () => {
+    let { initialValues } = props;
+    return initialValues;
+    } , []);
   // Stop the invocation of the debounced function
   // after unmounting
   useEffect(() => {
-    return () => {
-      debouncedChangeHandler.cancel();
-    }
-  }, []);
+    // console.log("values",props.initialValues);
+    // let rfca = props.initialValues.rfc;
+    // console.log("rfca",rfca);
+    // let cieca = props.initialValues.ciec;
+    // setValues({
+    //     ...values,
+    //     ciec: cieca,
+    //     rfc: rfca,
+    //   });
+    //   console.log("values",values);
+    let prueba = nose;
+    setValues({
+      ...values,
+      ...prueba,
+      nos: "hola"
+    });
+    console.log("prueba",values);
+    // return () => {
+    //   debouncedChangeHandler.cancel();
+    // }
+  }, [debouncedChangeHandler]);
 
   const handleChange = async (event, id) => {
     const zipCode = event.target.value;
@@ -136,10 +157,8 @@ let ComercialInfoForm = (props) => {
       execToast("second");
       dispatch(updateToast(toast, "second"));
     }
-
     const getData = async () => {
       dispatch(updateLoader(true));
-      setRfc(props.initialValues.rfc);
       const user = JSON.parse(sessionStorage.getItem("user"));
       const idClient = user.idClient;
       // Si ya tienen una solicitud, se actualiza
@@ -321,7 +340,9 @@ let ComercialInfoForm = (props) => {
           normalize={upper}
           maxLength={12}
           minLength={12}
-          onChange={(e) => {setRfc(e.target.value)}}
+          onChange={(event, newValue, previousValue) =>
+            setValues({ ...values, rfc: newValue })
+          }
         />
 
         <Field component={renderSelectField} name="employeesNumber" cls="mb-3">
