@@ -379,6 +379,10 @@
 	color: firebrick;
 }
 
+.valid{
+	color: rgb(34, 178, 77);
+}
+
 /* Tooltips */
 
 .tooltip-custom{

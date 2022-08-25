@@ -37,79 +37,17 @@ let ComercialInfoForm = (props) => {
   const [colonias, setColonias] = useState([]);
   const [zipCodeError, setZipCodeError] = useState(false);
   const [ciecValid, setCiecValid] = useState(false);
-  const [rdc, setRfc] = useState("");
+  const [cvalid, setCValid] = useState(false);
   const [disabled, setDisabled] = useState(true);
   const [forceRender, setForceRender] = useState(true);
-  const [values, setValues] = useState({});
+  const [appValues, setAppValues] = useState({});
 
   const {
     handleSubmit,
-    valid
+    valid,
+    initialValues,
   } = props;
   const ciecRef = useRef(null);
-  
-  const ciecAxios = (event) => {
-    let ciec = event.target.value;
-    let newCiec = true;
-    console.log(rdc);
-    if (ciec.length === 8) {
-      console.log("rfc", rdc);
-      dispatch(updateLoader(true));
-        axios.post("/ciec", { ciec, newCiec, rdc }).then((response) => {
-          if (response.data.status === "success") {
-            console.log(response.data);
-            dispatch(updateLoader(false));
-          } else {
-            setCiecValid(true);
-            dispatch(updateLoader(false));
-            console.log(response.data.msg);
-          }
-        }).catch((error) => {
-          setCiecValid(true);
-          dispatch(updateLoader(false));
-          console.log(error);
-        }).finally(() => {
-          dispatch(updateLoader(false));
-        }
-        );
-
-    } else {
-      console.log("falso", ciec);
-      dispatch(updateLoader(false));
-    }
-  };
-
-  const debouncedChangeHandler = useMemo(
-    () => debounce(ciecAxios, 1000)
-  , []);
-  const nose = useMemo( () => {
-    let { initialValues } = props;
-    return initialValues;
-    } , []);
-  // Stop the invocation of the debounced function
-  // after unmounting
-  useEffect(() => {
-    // console.log("values",props.initialValues);
-    // let rfca = props.initialValues.rfc;
-    // console.log("rfca",rfca);
-    // let cieca = props.initialValues.ciec;
-    // setValues({
-    //     ...values,
-    //     ciec: cieca,
-    //     rfc: rfca,
-    //   });
-    //   console.log("values",values);
-    let prueba = nose;
-    setValues({
-      ...values,
-      ...prueba,
-      nos: "hola"
-    });
-    console.log("prueba",values);
-    // return () => {
-    //   debouncedChangeHandler.cancel();
-    // }
-  }, [debouncedChangeHandler]);
 
   const handleChange = async (event, id) => {
     const zipCode = event.target.value;
@@ -151,6 +89,84 @@ let ComercialInfoForm = (props) => {
     }
     dispatch(updateLoader(false));
   };
+  const validPrueba = (value) => {
+    switch (value) {
+      case "":
+      case null:
+      case undefined:
+        return false;
+      default:
+        return true;
+    }
+  }
+  const rfcValido = (rfc, aceptarGenerico = true) => {
+    let _rfc_pattern_pm = "^(([A-ZÑ&]{3})([0-9]{2})([0][13578]|[1][02])(([0][1-9]|[12][\\d])|[3][01])([A-Z0-9]{3}))|" +
+             "(([A-ZÑ&]{3})([0-9]{2})([0][13456789]|[1][012])(([0][1-9]|[12][\\d])|[3][0])([A-Z0-9]{3}))|" +
+             "(([A-ZÑ&]{3})([02468][048]|[13579][26])[0][2]([0][1-9]|[12][\\d])([A-Z0-9]{3}))|" +
+             "(([A-ZÑ&]{3})([0-9]{2})[0][2]([0][1-9]|[1][0-9]|[2][0-8])([A-Z0-9]{3}))$";
+    let _rfc_pattern_pf = "^(([A-ZÑ&]{4})([0-9]{2})([0][13578]|[1][02])(([0][1-9]|[12][\\d])|[3][01])([A-Z0-9]{3}))|" +
+                  "(([A-ZÑ&]{4})([0-9]{2})([0][13456789]|[1][012])(([0][1-9]|[12][\\d])|[3][0])([A-Z0-9]{3}))|" +
+                  "(([A-ZÑ&]{4})([02468][048]|[13579][26])[0][2]([0][1-9]|[12][\\d])([A-Z0-9]{3}))|" +
+                  "(([A-ZÑ&]{4})([0-9]{2})[0][2]([0][1-9]|[1][0-9]|[2][0-8])([A-Z0-9]{3}))$";
+  let rfcTest =  rfc.match(_rfc_pattern_pm) || rfc.match(_rfc_pattern_pf);
+    if(rfcTest && rfc.length <= 13){
+        return true;
+    } else {
+        return false;
+    }
+}
+  const pruebaCiec = async (rfc, ciec) => {
+    let validRFC = validPrueba(rfc);
+    let validCIE = validPrueba(ciec);
+    if (validRFC && validCIE) {
+      let rfcx = rfcValido(rfc);
+      let xciec = ciec.length === 8;
+      if (rfcx && xciec) {
+        let newCiec = true;
+        dispatch(updateLoader(true));
+        axios.post("/ciec", { ciec, newCiec, rfc }).then((response) => {
+          if (response.data.status === "valid") {
+            setCiecValid(false);
+            setCValid(true);
+            dispatch(updateLoader(false));
+          } else {
+            setCiecValid(true);
+            dispatch(updateLoader(false));
+            console.log(response.data.msg);
+          }
+        }).catch((error) => {
+          setCiecValid(true);
+          dispatch(updateLoader(false));
+          console.log(error);
+        }).finally(() => {
+          dispatch(updateLoader(false));
+        }
+        );
+      } else {
+        setCiecValid(false);
+      }
+    } else {
+      setCiecValid(false);
+    }
+  }
+
+  const handleDebounce = (rfc, ciec) => {
+    debounce(pruebaCiec, 500)(rfc, ciec);
+  }
+
+  useEffect(() => {
+    let prueba = initialValues
+    setAppValues( state => ({
+      ...state,
+      ...prueba
+    }))
+  }, [initialValues]);
+
+  useEffect(() => {
+    let rfc = appValues.rfc;
+    let ciec = appValues.ciec;
+    handleDebounce(rfc, ciec);
+  }, [appValues]);
 
   useEffect(() => {
     if (!toast.second) {
@@ -340,8 +356,8 @@ let ComercialInfoForm = (props) => {
           normalize={upper}
           maxLength={12}
           minLength={12}
-          onChange={(event, newValue, previousValue) =>
-            setValues({ ...values, rfc: newValue })
+          onChange={(event, newValue, previousValue) =>{
+            setAppValues({ ...appValues, rfc: newValue })}
           }
         />
 
@@ -520,11 +536,21 @@ let ComercialInfoForm = (props) => {
                     className="positionInfo"
                   />
                 </div>
-                <Field component={renderFieldFull} label="CIEC" name="ciec" onChange={debouncedChangeHandler}/>
+                <Field component={renderFieldFull} label="CIEC" name="ciec" onChange={(event, newValue, previousValue) =>{
+                  setAppValues({ ...appValues, ciec: newValue })
+                  setCiecValid(true)
+                  }}/>
                 {ciecValid && (
                   <span id="CIEC-error">
                     <small className="error">
                       La CIEC no es válida
+                      </small>
+                      </span>
+                      )}
+                {cvalid && (
+                  <span id="CIEC-valid">
+                    <small className="valid">
+                      La CIEC es válida
                       </small>
                       </span>
                       )}
