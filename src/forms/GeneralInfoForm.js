@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Field, reduxForm } from "redux-form";
 import SubtitleForm from "../components/Generic/SubtitleForm";
 import { Row, Col, Button } from "react-bootstrap";
@@ -340,6 +340,9 @@ let GeneralInfoForm = ({
     setDisabled(true);
   }
 
+  let dias = helper.diasMes(initialValues.month, initialValues.year);
+
+
   const onlyLirycs = (nextValue, previousValue) =>
     /^([a-zñáéíóúü\s]{0,60})$/i.test(nextValue) ? nextValue : previousValue;
   const onlyNumbers = (nextValue, previousValue) =>
@@ -439,9 +442,9 @@ let GeneralInfoForm = ({
               }
             >
               <option value="">Día</option>
-              {Object.keys(helper.days).map((key, index) => (
+              {Object.keys(dias).map((key, index) => (
                 <option value={key} key={index}>
-                  {helper.days[key].value}
+                  {dias[key].value}
                 </option>
               ))}
             </Field>

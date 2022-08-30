@@ -103,19 +103,19 @@ const BuroPositivo = ({ score, user }) => {
   switch (casos) {
     case "1":
       mensaje =
-        "hemos detectado que no cuentas con historial crediticio, pero no importa, en distrito pyme contamos con las mejores opciones para iniciar tu historial crediticio."; //buro -9
+        "hemos detectado que no cuentas con historial crediticio, pero no importa, en distrito pyme contamos con las mejores opciones para iniciar tu historial crediticio.";
       break;
     case "2":
       mensaje =
-        "lo sentimos, hemos detectado que tu buró no es del todo positivo, sabemos que no son buenas noticias, pero aún podemos ofrecerte opciones de crédito si cuentas con una garantía inmobiliaria."; //buro 425
+        "lo sentimos, hemos detectado que tu buró no es del todo positivo, sabemos que no son buenas noticias, pero aún podemos ofrecerte opciones de crédito si cuentas con una garantía inmobiliaria.";
       break;
     case "3":
       mensaje =
-        "hemos consultado tu buró correctamente, lo estamos analizando para poder ofrecerte las mejores propuestas de crédito, ahora ayúdanos a subir tus documentos."; //buro 525
+        "hemos consultado tu buró correctamente, lo estamos analizando para poder ofrecerte las mejores propuestas de crédito, ahora ayúdanos a subir tus documentos.";
       break;
     case "4":
       mensaje =
-        "hemos consultado tu buró correctamente y cumple con los requisitos de la mayoría de nuestros aliados, ahora ayúdanos a subir tus documentos para poder ofrecerte las mejores opciones de crédito."; // buro 626
+        "hemos consultado tu buró correctamente y cumple con los requisitos de la mayoría de nuestros aliados, ahora ayúdanos a subir tus documentos para poder ofrecerte las mejores opciones de crédito.";
       break;
     case "5":
       mensaje =

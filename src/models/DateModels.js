@@ -31,6 +31,118 @@ let days = {
 	"30" : { value : "30"},
 	"31" : { value : "31"},
 }
+let dayst = {
+	"1" : { value : "1"},
+	"2" : { value : "2"},
+	"3" : { value : "3"},
+	"4" : { value : "4"},
+	"5" : { value : "5"},
+	"6" : { value : "6"},
+	"7" : { value : "7"},
+	"8" : { value : "8"},
+	"9" : { value : "9"},
+	"10" : { value : "10"},
+	"11" : { value : "11"},
+	"12" : { value : "12"},
+	"13" : { value : "13"},
+	"14" : { value : "14"},
+	"15" : { value : "15"},
+	"16" : { value : "16"},
+	"17" : { value : "17"},
+	"18" : { value : "18"},
+	"19" : { value : "19"},
+	"20" : { value : "20"},
+	"21" : { value : "21"},
+	"22" : { value : "22"},
+	"23" : { value : "23"},
+	"24" : { value : "24"},
+	"25" : { value : "25"},
+	"26" : { value : "26"},
+	"27" : { value : "27"},
+	"28" : { value : "28"},
+	"29" : { value : "29"},
+	"30" : { value : "30"},
+}
+let daysf = {
+	"1" : { value : "1"},
+	"2" : { value : "2"},
+	"3" : { value : "3"},
+	"4" : { value : "4"},
+	"5" : { value : "5"},
+	"6" : { value : "6"},
+	"7" : { value : "7"},
+	"8" : { value : "8"},
+	"9" : { value : "9"},
+	"10" : { value : "10"},
+	"11" : { value : "11"},
+	"12" : { value : "12"},
+	"13" : { value : "13"},
+	"14" : { value : "14"},
+	"15" : { value : "15"},
+	"16" : { value : "16"},
+	"17" : { value : "17"},
+	"18" : { value : "18"},
+	"19" : { value : "19"},
+	"20" : { value : "20"},
+	"21" : { value : "21"},
+	"22" : { value : "22"},
+	"23" : { value : "23"},
+	"24" : { value : "24"},
+	"25" : { value : "25"},
+	"26" : { value : "26"},
+	"27" : { value : "27"},
+	"28" : { value : "28"},
+}
+let daysM = {
+	"1" : { value : "1"},
+	"2" : { value : "2"},
+	"3" : { value : "3"},
+	"4" : { value : "4"},
+	"5" : { value : "5"},
+	"6" : { value : "6"},
+	"7" : { value : "7"},
+	"8" : { value : "8"},
+	"9" : { value : "9"},
+	"10" : { value : "10"},
+	"11" : { value : "11"},
+	"12" : { value : "12"},
+	"13" : { value : "13"},
+	"14" : { value : "14"},
+	"15" : { value : "15"},
+	"16" : { value : "16"},
+	"17" : { value : "17"},
+	"18" : { value : "18"},
+	"19" : { value : "19"},
+	"20" : { value : "20"},
+	"21" : { value : "21"},
+	"22" : { value : "22"},
+	"23" : { value : "23"},
+	"24" : { value : "24"},
+	"25" : { value : "25"},
+	"26" : { value : "26"},
+	"27" : { value : "27"},
+	"28" : { value : "28"},
+	"29" : { value : "29"},
+}
+
+let diasfebrero = (year) => {
+	if (year % 4 === 0) {
+		return daysM;
+	} else {
+		return daysf;
+	}
+}
+
+let diasMes = (month, year) => {
+	if (month === "2") {
+		return diasfebrero(year);
+	} else if (month === "4" || month === "6" || month === "9" || month === "11") {
+		return dayst;
+	} else {
+		return days;
+	}
+}
+
 
 let months = {
 	"1" : { value : "Enero"},
@@ -126,7 +238,9 @@ let years = {
 let helper = {
 	days,
 	months,
-	years
+	years,
+	daysM,
+	diasMes
 }
 
 export default helper
