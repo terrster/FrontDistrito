@@ -123,19 +123,21 @@ let ComercialInfoForm = (props) => {
       let xciec = ciec.length === 8;
       if (rfcx && xciec) {
         let newCiec = true;
+        const user = JSON.parse(sessionStorage.getItem("user"));
+        const id = user._id;
         dispatch(updateLoader(true));
-        axios.post("/ciec", { ciec, newCiec, rfc }).then((response) => {
+        axios.post("/ciec", { ciec, newCiec, rfc, id }).then((response) => {
           if (response.data.status === "valid") {
-            setCiecValid(false);
+            setCiecValid(true);
             setCValid(true);
             dispatch(updateLoader(false));
           } else {
-            setCiecValid(true);
+            setCiecValid(false);
             dispatch(updateLoader(false));
             console.log(response.data.msg);
           }
         }).catch((error) => {
-          setCiecValid(true);
+          setCiecValid(false);
           dispatch(updateLoader(false));
           console.log(error);
         }).finally(() => {
