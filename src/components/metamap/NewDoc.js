@@ -1,64 +1,22 @@
-import React, { useEffect, useState, useRef, forwardRef, useCallback } from "react";
-import { Card, Button, Row, Col } from "react-bootstrap";
-import { requisitos, garantias } from "./requisitos";
-import {
-  Add,
-  PostAdd,
-  LayersClearOutlined,
-  VideoCallRounded,
-} from "@material-ui/icons";
-import Title from "../Generic/Title";
-import Steps from "../Appliance/Steps";
+import React, { useEffect, useState } from "react";
+import { Button } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { updateLoader } from "../../redux/actions/loaderActions";
+import Loader from "../Loader/altLoader";
 import "./newdoc.css";
 import bannerweb from "../../assets/img/carousel/documentos_banner.png";
 import bannermovil from "../../assets/img/carousel/documentos_banner_mob.png";
-import check from "../../assets/img/underline_men/tick-05.svg";
-import prueba from "../../assets/img/underline_men/prueba.svg";
-import { useSelector, useDispatch } from "react-redux";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck, faCloudUploadAlt } from "@fortawesome/free-solid-svg-icons";
-import io from 'socket.io-client';
+import io from "socket.io-client";
+import { Grid } from "@material-ui/core";
+import TarjetaDoc from "./tarjetasDoc";
+import DocumentsModal from "../Appliance/DocumentsModal";
+import PopUp from "../../forms/PopUp";
+import Axios from '../../utils/axios';
+import { update } from "lodash";
 
-const NewDoc = ({ onSubmit }) => {
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-  const [tags, setTags] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [success, setSuccess] = useState(null);
-  const [typePerson, setTypePerson] = useState("");
-  const [ciec, setCiec] = useState("");
-  const [warranty, setWarranty] = useState([]);
-  const [requisitod, setRequisitos] = useState([]);
+const Banner = () => {
   const [banner, setBanner] = useState(bannerweb);
-  const [initialValues, setValues] = useState({
-    oficialID: [],
-    proofAddress: [],
-    bankStatements: [],
-    constitutiveAct: [],
-    otherActs: [],
-    financialStatements: [],
-    rfc: [],
-    // acomplishOpinion : [],
-    lastDeclarations: [],
-    facturacion: [],
-    others: [],
-    cventerprise: [],
-    proofAddressMainFounders: [],
-    collectionReportSaleTerminals: [],
-    localContractLease: [],
-    status: false,
-  });
-  const [socket, setSocket] = useState(null);
-  const [uid , setUid] = useState(null);
-  useEffect(() => {
-    const getUser = async () => {
-      const userX = JSON.parse(sessionStorage.getItem("user"));
-      console.log(userX);
-    };
-    getUser();
-  }, []);
-
   useEffect(() => {
     if (window.innerWidth < 768) {
       setBanner(bannermovil);
@@ -77,415 +35,326 @@ const NewDoc = ({ onSubmit }) => {
       window.removeEventListener("resize", getsize);
     };
   }, []);
+  return (
+    <div className="d-flex justify-content-center">
+      <img
+        src={banner}
+        alt="banner_docs"
+        style={{ width: "100%", maxInlineSize: "100%" }}
+      />
+    </div>
+  );
+};
+
+const NewDoc = () => {
+  const [socket, setSocket] = useState(null);
+  const [uid, setUid] = useState(null);
+  const [user, setUser] = useState(null);
+  const [typePerson, setTypePerson] = useState("");
+  const [warranty, setWarranty] = useState("");
+  const [initialValues, setValues] = useState({
+    oficialID: [],
+    proofAddress: [],
+    bankStatements: [],
+    constitutiveAct: [],
+    otherActs: [],
+    financialStatements: [],
+    rfc: [],
+    // acomplishOpinion : [],
+    lastDeclarations: [],
+    facturacion: [],
+    others: [],
+    cventerprise: [],
+    proofAddressMainFounders: [],
+    collectionReportSaleTerminals: [],
+    localContractLease: [],
+    guaranteeStatement: [],
+    guaranteeFixedAssets: [],
+    status: false,
+  });
+  const [status, setStatus] = useState(false);
+  const [ciec, setCiec] = useState(false);
+  const [show, setShow] = useState(true);
+  const [socketId, setSocketId] = useState(null);
+  const [idClient, setIdClient] = useState(null);
+  const [docID, setDocID] = useState(null);
+  const [loader, setLoader] = useState(null);
+  const history = useHistory();
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const user = JSON.parse(sessionStorage.getItem("user"));
-    if (user) {
-      setTypePerson(user.idClient.type);
-      setCiec(user.idClient.appliance[0].idComercialInfo.ciec);
-      setWarranty(
-        garantias[user.idClient.appliance[0].idComercialInfo.warranty]
+    const $user = JSON.parse(sessionStorage.getItem("user"));
+    if ($user) {
+      setUser($user);
+      setIdClient($user.idClient);
+      setTypePerson($user.idClient.type);
+      let $ciec = $user.idClient.appliance[0].idComercialInfo.ciec;
+      $ciec ? setCiec(true) : setCiec(false);
+      let $warranty = parseInt(
+        $user.idClient.appliance[0].idComercialInfo.warranty
       );
-      setRequisitos(requisitos[user.idClient.type]);
-      if (user.idClient.appliance[0].hasOwnProperty("idDocuments")) {
-        setValues(user.idClient.appliance[0].idDocuments);
-      }
+      $warranty === 4 ? setWarranty(null) : setWarranty($warranty);
     } else {
       window.location.href = "/login";
     }
   }, []);
 
   useEffect(() => {
-    warranty ? setTags([...requisitod, ...warranty]) : setTags([...requisitod]);
-  }, [requisitod, warranty]);
-
-  const nameAux = (value) => {
-    let nameDoc = "";
-    if (value.name == undefined) {
-      let aux = value.split("-");
-      for (let i = 6; i < aux.length; i++) {
-        nameDoc += aux[i];
-      }
-      if (nameDoc === "") {
-        for (let i = 5; i < aux.length; i++) {
-          nameDoc += aux[i];
-        }
-      }
-    } else {
-      let aux = value.name.replace(" ", "");
-      nameDoc = aux;
+    if(!user){
+      return;
     }
-    return nameDoc;
-  };
-
-  const addtags = (prev) => {
-    return prev.push({
-      "name":"prueba",
-      "description":"prueba",
-      "state":true,
-      "require":true,
-      "flow": "62fb09fa249da5001d41ce7e",
-      "step": "B",
-    });
-  };
-
-  const startSocket = useCallback(() => {//process.env.REACT_APP_BACKEND, https://apidev.distritopyme.com/
-    const user = JSON.parse(sessionStorage.getItem('user'));
-		const id = user._id;
-    const socket = io.connect(process.env.REACT_APP_BACKEND, {
-      transports: ["websocket"],
-      autoConnect: true,
-      forceNew: true,
-      query: {
-        'origin': 'metamap',
-        'idU': id,
-      }
-
-    });
-    setSocket(socket);
-    // return () => socket.disconnect();
-  }, []);
-
-  useEffect(() => {
-    startSocket();
-  }, []);
-
-  useEffect(() => {
-    if (socket) {
-      console.log("socket", socket);
-      console.log("uid", socket.id);
-      socket.on("connect", (msg) => {
-        console.log(msg);
-      });
-      socket.on("disconnect", () => {
-        console.log("desconectado");
-      });
-      socket.on("new-document", (data) => {
-        console.log(data);
-      });
-    }
-  }, []);
-
-  const Banner = () => {
-    return (
-      <div className="d-flex justify-content-center">
-        <img
-          src={banner}
-          alt="banner_docs"
-          style={{ width: "100%", maxInlineSize: "100%" }}
-        />
-      </div>
-    );
-  };
-
-  const Meta = forwardRef((props) => {
-    const [element, setElement] = useState(null);
-    let ref = useRef();
-    useEffect(() => {
-      setElement(ref.current);
-    }, [ref]);
-
-    // if (console.everything === undefined) {
-    //   console.everything = [];
-    //   function TS(){
-    //     return (new Date).toLocaleString("sv", { timeZone: 'UTC' }) + "Z"
-    //   }
-    //   window.onerror = function (error, url, line) {
-    //     console.everything.push({
-    //       type: "exception",
-    //       timeStamp: TS(),
-    //       value: { error, url, line }
-    //     })
-    //     return false;
-    //   }
-    //   window.onunhandledrejection = function (e) {
-    //     console.everything.push({
-    //       type: "promiseRejection",
-    //       timeStamp: TS(),
-    //       value: e.reason
-    //     })
-    //   }
-
-    //   function hookLogType(logType) {
-    //     const original= console[logType].bind(console)
-    //     return function(){
-    //       console.everything.push({
-    //         type: logType,
-    //         timeStamp: TS(),
-    //         value: Array.from(arguments)
-    //       })
-    //       original.apply(console, arguments)
-    //     }
-    //   }
-
-    //   ['log', 'error', 'warn', 'debug'].forEach(logType=>{
-    //     console[logType] = hookLogType(logType)
-    //   })
-    // }
-
-    const handleClick = () => {
-      element.addEventListener("metamap:userStartedSdk", (e) => {
-        console.log("started payload", e);
-      });
-
-      element.addEventListener("metamap:loaded", ({ detail }) => {
-        console.log("loaded payload", detail);
-      });
-      element.addEventListener(
-        "metamap:verification_completed",
-        ({ detail }) => {
-          console.log("loaded payload", detail);
-        }
-      );
-
-      element.addEventListener("metamap:userFinishedSdk", ({ detail }) => {
-        console.log("finished payload", detail);
-      });
-
-      element.addEventListener("metamap:exitedSdk", ({ detail }) => {
-        console.log("exited payload", detail);
-      });
-
-      return () => {
-        element.removeEventListener("metamap:userStartedSdk", ({ detail }) => {
-          console.log("started payload", detail);
-        });
-        element.removeEventListener("metamap:loaded", ({ detail }) => {
-          console.log("loaded payload", detail);
-        });
-        element.removeEventListener(
-          "metamap:verification_completed",
-          ({ detail }) => {
-            console.log("loaded payload", detail);
+    if (user.idClient.appliance[0].hasOwnProperty("idDocuments")) {
+      for (const key in user.idClient.appliance[0].idDocuments) {
+        if (
+          user.idClient.appliance[0].idDocuments.hasOwnProperty(key) &&
+          key !== "__v" &&
+          key !== "_id"
+        ) {
+          if (
+            user.idClient.appliance[0].idDocuments[key].length > 0 &&
+            user.idClient.appliance[0].idDocuments[key] !== undefined
+          ) {
+            initialValues[key] = user.idClient.appliance[0].idDocuments[key];
           }
-        );
-        element.removeEventListener("metamap:userFinishedSdk", ({ detail }) => {
-          console.log("finished payload", detail);
-        });
-
-        element.removeEventListener("metamap:exitedSdk", ({ detail }) => {
-          console.log("exited payload", detail);
-          alert("Exited SDK");
-        });
-      };
-    };
-
-    return (
-      <metamap-button
-        id={props.id}
-        clientid="62f15ad24621d7001caa5472"
-        flowId={props.flow}
-        color="#505DED" // to setup main color of buttons in your metamap
-        textcolor="#FFFFFF" // to setup text color of buttons in your metamap
-        // metadata='{"uid":"203212312312",
-        //         "canal":"Codepen"}'
-        metadata={JSON.stringify({
-          uid: socket.id,
-          canal: "Codepen",
-        })}
-        ref={ref} // reference to the DOM element
-        style={{ display: "none" }}
-        onClick={handleClick}
-        metamap={(metadata) => {
-          console.log(metadata);
-        }}
-        debbug={false}
-      />
-    );
-  });
-
-  const Tarjetas = ({ step, title, number }) => {
-    const [value, setValue] = useState("");
-    const ref = useRef();
-    const handleClick = (e) => {
-      let id = e.currentTarget.id.split("_")[1];
-      console.log(id);
-      document.getElementById("mati_button" + id).click();
-    };
-    useEffect(() => {
-      console.log("valor", value);
-    }, [value]);
-
-    const handleAddMore = (e) => {
-      // e.preventDefault();
-      // let file = e.target.files[0];
-      // let nameDoc = nameAux(file);
-      // let aux = initialValues[name];
-      // aux.push({ name: nameDoc, file: file });
-      // setValues({ ...initialValues, [name]: aux });
-      let id = e.currentTarget.id.split("_")[1];
-      console.log(id);
-      if (id === "oficialID") {
-        setTags(addtags);
-        console.log(tags);
-      } else {
-        handleClick(e);
+        } else if (key === "status") {
+          setStatus(user.idClient.appliance[0].idDocuments[key]);
+        }
       }
+      setStatus(user.idClient.appliance[0].idDocuments.status);
+      setDocID(user.idClient.appliance[0].idDocuments._id);
+    }
+  }, [user, initialValues]);
+
+  useEffect(() => {
+    let idU = user ? user.idClient._id : null;
+    const newSocket =
+      idU &&
+      io.connect(process.env.REACT_APP_BACKEND, {
+        transports: ["websocket"],
+        autoConnect: true,
+        forceNew: true,
+        query: {
+          idU: idU,
+        },
+      });
+    newSocket && setSocket(newSocket);
+    newSocket && setUid(idU);
+    newSocket &&
+      newSocket.on("connect", () => {
+        console.log("conectado");
+        setSocketId(newSocket.id);
+      });
+    return () => {
+      newSocket && newSocket.connect();
     };
+  }, [setSocket, user]);
+  
+  useEffect(() => {
+    const updateInitialValues = (name, value) => {
+      for(let i = 0; i < value.length; i++){
+        if(initialValues[name] !== undefined){
+          if(initialValues[name].length > 0){
+            if(initialValues[name].indexOf(value[i]) === -1){
+              initialValues[name].push(value[i]);
+            }
+          }else{
+            initialValues[name].push(value[i]);
+          }
+        } 
+      }
+      setValues({...initialValues});
 
-    return (
-      <Card
-        style={{ maxWidth: "90vw", border: "none" }}
-        className="h-100 shadow2 p-3 mb-5"
-      >
-        <Card.Header
-          style={{
-            backgroundColor: "initial",
-            paddingBottom: "0",
-            border: "none",
-          }}
-        >
-          {" "}
-          <Row className="justify-content-center">
-            <Col xs={3} sm={3}>
-              <div className="outline_number coolvetica">{number}</div>
-            </Col>
-            <Col>
-              <Row style={{ height: "100%", alignContent: "center" }}>
-                <span
-                  className="text_title_altblue"
-                  style={{ fontSize: "2rem" }}
-                >
-                  documentos
-                </span>
+    };
+    const updateUser = () => {
+      const $user = JSON.parse(sessionStorage.getItem("user"));
+      setUser($user);
+    };
+    socket?.on("updateUser", (data) => {
+      let {documentUpdate,userUpdate} = data;
+      for (const key in documentUpdate) {
+        if (documentUpdate.hasOwnProperty(key) && key !== "__v" && key !== "_id") {
+          updateInitialValues(key, documentUpdate[key]);
+        } else if (key === "status") {
+          setStatus(documentUpdate[key]);
+        }
+      }
+      sessionStorage.setItem("user", JSON.stringify(userUpdate));
+      updateUser();
+      dispatch(updateLoader(false));
+    });
+  }, [socket, dispatch, setValues, initialValues]);
 
-                <span
-                  className="text_title_blue"
-                  style={{ fontSize: "2.1rem" }}
-                >
-                  {title}
-                </span>
-              </Row>
-            </Col>
-          </Row>
-        </Card.Header>
-        <Card.Body
-          style={{
-            backgroundColor: "initial",
-            paddingTop: "0",
-            border: "none",
-          }}
-        >
-          {tags
-            .filter((requisito) => requisito.step === step)
-            .map((requisito, index) => (
-              <Row key={requisito.name} className="mb-3">
-                <Col xs="2" lg="2" className="text-center">
-                  {initialValues[requisito.name] &&
-                  initialValues[requisito.name].length > 0 ? (
-                    // <img
-                    //   src={RadioButtonUnchecked}
-                    //   alt="uncheck"
-                    //   style={{ width: "2rem", height: "2rem" }}
-                    // />
-                    // <PostAdd style={{ color: '#06c79c'}} className="circule_btn" onClick={handleClick} id={"upload_" + requisito.name}/>
-                    <FontAwesomeIcon
-                      icon={faCheck}
-                      style={{ color: "#06c8f4", fontSize: "1.2rem" }}
-                    />
-                  ) : (
-                    <PostAdd
-                      style={{ color: "#06c79c" }}
-                      className="circule_btn"
-                      onClick={handleClick}
-                      id={"upload_" + requisito.name}
-                    />
-                  )}
+  useEffect(() => {
+    console.log("initialValues", initialValues);
+  }, [initialValues]);
 
-                  <Meta
-                    id={"mati_button" + requisito.name}
-                    flow={requisito.flow}
-                  />
-                </Col>
-                <Col>
-                  <>
-                    <Row>
-                      <div
-                        className="metropolisLight fz12 text_title"
-                        onClick={handleClick}
-                        id={"button_" + requisito.name}
-                      >
-                        {requisito.description}
-                      </div>
-                    </Row>
-                    <Row>
-                      <>
-                        {initialValues[requisito.name] && (
-                          <>
-                            {initialValues[requisito.name].map((doc, index) => (
-                              <Row key={index} className="mb-1">
-                                <Col xs="2" lg="2" className="text-center">
-                                  {/* <img
-                              src={prueba}
-                              alt="uncheck"
-                              style={{ width: "2rem", height: "2rem", color:"#06c8f4" }}
-                            /> */}
-                                </Col>
-                                <Col>
-                                  <span className="metropolisLight fz10 text_disabled">
-                                    {nameAux(doc)}
-                                  </span>
-                                </Col>
-                              </Row>
-                            ))}
-                          </>
-                        )}
-                      </>
-                    </Row>
-                    <Row className="justify-content-center align-content-center">
-                      <Col xs="1" lg="1" className="text-center"></Col>
+  useEffect(() => {
+    socket?.on("doc_error", (data) => {
+      console.log(data);
+      alert(data);
+    });
+    return () => socket?.off("doc_error");
+  }, [socket, uid]);
 
-                      <Col>
-                        <div
-                          className="metropolisLight fz10 text_disabled circule_btn"
-                          id={"add_" + requisito.name}
-                          style={{ marginTop: "auto", marginBottom: "auto" }}
-                          onClick={handleAddMore}
-                        >
-                          {requisito.name === "oficialID"
-                            ? "+ agregar socio"
-                            : "+ agregar mas documentos"}
-                        </div>
-                      </Col>
-                      {/* <PostAdd style={{ color: '#06c79c'}} className="circule_btn" onClick={handleClick} id={"upload_" + requisito.name}/> */}
-                    </Row>
-                  </>
-                </Col>
-              </Row>
-            ))}
-        </Card.Body>
-      </Card>
-    );
+  const btnclass = (st) => {
+    if (st) {
+      return "w-100 btn_doc fz16 bluePrimary btn btn-primary";
+    } else {
+      return "w-100 btn_doc_disabled fz16 bluePrimary btn btn-primary";
+    }
   };
 
-  const Cards = () => {
-    return (
-      <>
-        <div className="container-md mt-3">
-          <Row xs={1} md={2} lg={warranty ? 3 : 2} xl={warranty ? 3 : 2}>
-            <Col className="col-sm">
-              <Tarjetas step="A" title="socios" number="1" />
-            </Col>
-            <Col className="col-sm">
-              <Tarjetas step="B" title="empresa" number="2" />
-            </Col>
-            {warranty && (
-              <Col className="col-sm">
-                <Tarjetas step="C" title="garantia" number="3" />
-              </Col>
-            )}
-          </Row>
-        </div>
-      </>
-    );
-  };
+  const updateStatus = async (status) => {
+    dispatch(updateLoader(true));
+    let data = {
+      status: status,
+      metadata: {
+        uid: user._id,
+        socketId: socketId,
+        docID: docID,
+      }
+    }
+    await Axios.post(`api/meta/update`, data).then((res) => {
+      // alert("Se ha actualizado el estatus");
+      console.log("se ha actualizado el estatus");
+    });
+    dispatch(updateLoader(false));
+  }
+
+  useEffect(() => {
+    if (typePerson && user) {
+      let minreq = minRequired(typePerson);
+      let $warranty = ["guaranteeStatement","guaranteeFixedAssets"];
+      let reqCiec = ciec ? [] : ["lastDeclarations"];
+      let reqWarranty = warranty === 1 ? [$warranty[0]] : warranty === 2 ? [$warranty[1]] : warranty === 3 ? $warranty : [];
+      let req = [...minreq, ...reqCiec, ...reqWarranty];
+      let $status = true;
+      for(let i = 0; i < req.length; i++){
+        if(initialValues.hasOwnProperty(req[i])){
+          if(initialValues[req[i]].length === 0){
+            $status = false;
+            break;
+          }
+        }
+      }
+      setStatus($status); 
+    }
+  }, [user, status, ciec, warranty, typePerson, initialValues, socketId]);
+
+  useEffect(() => {
+    if (user) {
+      if(status){
+        if(!user.idClient.appliance[0].idDocuments._id){
+          uid && socket && docID && updateStatus(true);
+        }
+      }
+    }
+  }, [status, user, uid, socket, docID]);
+
+  useEffect(() => {
+    console.log("user", user);
+  }, [user]);
+
+
+  const minRequired = (key) => {
+    switch(key){
+        case "PF":
+            return [
+                "oficialID",
+                "proofAddressMainFounders",
+                "bankStatements",
+                "others",
+            ];
+        case "PFAE":
+            return [
+                "oficialID",
+                "proofAddress",
+                "proofAddressMainFounders",
+                "bankStatements",
+                "others",
+            ];
+        case "PM":
+            return [
+                "oficialID",
+                "rfc",
+                "proofAddress",
+                "proofAddressMainFounders",
+                "bankStatements",
+                "constitutiveAct",
+                "others",
+            ];
+        default:
+            return [];
+            
+    }
+};
+  const handleUpload = async () => {
+    dispatch(updateLoader(true));
+    if(JSON.parse(sessionStorage.getItem("user")).idClient.appliance[0].idDocuments.status === true && idClient.appliance.length > 0 && status === true){
+      const appliance = idClient.appliance[idClient.appliance.length - 1];
+      // updateStatus(true);
+      const applianceRequest = await Axios.put(`api/appliance/${appliance._id}`, { status: true });
+      if(!applianceRequest.data.hasOwnProperty("error")){
+                  sessionStorage.setItem('user', JSON.stringify(applianceRequest.data.user));
+                  setUser(JSON.parse(sessionStorage.getItem("user")));
+      }
+      history.push('/credito/solicitud/'+appliance._id);
+  } 
+  else {
+      history.push('/credito');
+  }
+  dispatch(updateLoader(false));
+  }
 
   return (
     <>
+      <Loader />
       <Banner />
-      <div className="container-md">
-        <Cards />
-      </div>
+      <DocumentsModal />
+      {typePerson !== "PF" && !ciec && (
+        <PopUp
+          show={show}
+          setShow={(value) => setShow(value)}
+          isDocuments={true}
+        />
+      )}
+      <Grid container justify="center" align="center" className="mt-2">
+        {Array.from(Array(warranty ? 3 : 2)).map((_, index) => (
+          <Grid
+            item
+            xs={11}
+            md={warranty ? 3 : 5}
+            lg={warranty ? 3 : 5}
+            style={{ padding: "1rem" }}
+            key={index}
+          >
+              <TarjetaDoc
+              index={index}
+              typePerson={typePerson}
+              initialValues={initialValues}
+              setValues={setValues}
+              setStatus={setStatus}
+              socket={socket}
+              socketId={socketId}
+              uid={uid}
+              warranty={warranty}
+              user={user}
+              setUser={setUser}
+              ciec = {ciec}
+              setShow = {setShow}
+              setLoader = {setLoader}
+            />
+          </Grid>
+        ))}
+        <Grid item xs={11} md={5} lg={5} style={{ padding: "1rem" }}>
+          <Button
+            className={btnclass(status)}
+            onClick={handleUpload}
+          >
+            {status ? "enviar solicitud" : "faltan documentos por subir"}
+          </Button>
+        </Grid>
+      </Grid>
     </>
   );
 };

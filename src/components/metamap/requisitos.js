@@ -2,7 +2,7 @@ export const requisitos = {
     "PF": [
         {
             "name": "oficialID",
-            "description": " Identificación oficial y comprobante de domicilio particular",
+            "description": " identificación oficial y comprobante de domicilio particular",
             "required": true,
             "flow": "62f15ad24621d7001caa5471",
             "step": "A",
@@ -101,14 +101,14 @@ export const requisitos = {
 };
 export const garantias = {
     "1": [{
-        "name": "inmobiliaria",
+        "name": "guaranteeStatement",
         "description": "garantía inmobiliaria",
         "required": true,
         "flow": "62fe7fc0017992001cd8b11f",
         "step": "C",
     }],
     "2": [{
-        "name": "activo",
+        "name": "guaranteeFixedAssets",
         "description": "activo fijo como garantía",
         "required": true,
         "flow": "62fc6cb8d9d2ed001cbe392d",
@@ -116,14 +116,14 @@ export const garantias = {
     }],
     "3": [
         {
-            "name": "inmobiliaria",
+            "name": "guaranteeStatement",
             "description": "garantía inmobiliaria",
             "required": true,
             "flow": "62fe7fc0017992001cd8b11f",
             "step": "C",
         },
         {
-            "name": "activo",
+            "name": "guaranteeFixedAssets",
             "description": "activo fijo como garantía",
             "required": true,
             "flow": "62fc6cb8d9d2ed001cbe392d",

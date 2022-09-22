@@ -24,6 +24,23 @@
   .lds-ripple div:nth-child(2) {
     animation-delay: -0.5s;
   }
+
+  .loader-container-alt{
+    position: fixed;
+    height: 100%;
+    width: 100%;
+	  background: var(--black16);
+    z-index: 100;
+    backdrop-filter: blur(3px);
+}
+
+  .centDiv {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+  }
+  
   @keyframes lds-ripple {
     0% {
       top: 28px;

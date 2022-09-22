@@ -145,7 +145,7 @@ class App extends Component {
                 <Route path="/privacidad" exact component={Privacy} />
                 <Route path="/reset-password" exact component={ResetPassword} />
                 <Route path="/nuestros-aliados" exact component={OurAllies}/>
-                <Route path="/newdoc" exact component={NewDoc} />
+                {/* <Route path="/newdoc" exact component={NewDoc} /> */}
                 <Route
                   path="/recover-password/:hash"
                   exact
@@ -188,7 +188,7 @@ class App extends Component {
                 <PrivateRoute
                   exact
                   path="/documentos/:idAppliance"
-                  component={Documents}
+                  component={NewDoc}
                 />
                 <Route path="/open-banking" exact component={OpenBanking}/>
                 {/* <PrivateRoute
