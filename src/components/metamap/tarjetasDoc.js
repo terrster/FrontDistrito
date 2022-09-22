@@ -21,7 +21,7 @@ const handleClick = (e, more) => {
 const nameAux = (value) => {
   let nameDoc = "";
   if (value.name === undefined) {
-    let aux = value.split('-');
+    let aux = value.split("-");
     for (let i = 6; i < aux.length; i++) {
       nameDoc += aux[i];
     }
@@ -88,11 +88,11 @@ const Meta = (props) => {
 
   useEffect(() => {
     if (element !== null) {
-      element.addEventListener('metamap:exitedSdk', ({ detail }) => {
+      element.addEventListener("metamap:exitedSdk", ({ detail }) => {
         props.dispatch(updateLoader(false));
       });
       return () => {
-        element.removeEventListener('metamap:exitedSdk', ({ detail }) => {
+        element.removeEventListener("metamap:exitedSdk", ({ detail }) => {
           props.dispatch(updateLoader(false));
         });
       };
@@ -100,7 +100,12 @@ const Meta = (props) => {
   }, [element, props]);
 
   const handleCl = () => {
-    props.dispatch(updateLoader(true, "estamos procesando tus documentos y en breve te daremos una respuesta"));
+    props.dispatch(
+      updateLoader(
+        true,
+        "estamos procesando tus documentos y en breve te daremos una respuesta"
+      )
+    );
   };
 
   return (
@@ -126,7 +131,10 @@ const Meta = (props) => {
 const TagList = ({ tag, user, step, typePerson }) => {
   return tag.map((t, index) => {
     return (
-      <div key={t.name === undefined ? nameAux(t) + index : t.name + index} style={{ overflow: "hiden" }}>
+      <div
+        key={t.name === undefined ? nameAux(t) + index : t.name + index}
+        style={{ overflow: "hiden" }}
+      >
         {step === 0 && typePerson === "PM" && (
           <span className="metropolisLight fz10 " style={{ color: "#c6c6c6" }}>
             {`socio ${tag.indexOf(t) + 1}`}
@@ -147,7 +155,7 @@ const TagList = ({ tag, user, step, typePerson }) => {
   });
 };
 
-const PracticalSpan = (props ) => {
+const PracticalSpan = (props) => {
   const history = useHistory();
   console.log(props);
   const handleCiec = () => {
@@ -161,7 +169,7 @@ const PracticalSpan = (props ) => {
           padding: "0.2rem 0.5rem",
           textAlign: "right",
           cursor: "pointer",
-          display:"inline-block"
+          display: "inline-block",
         }}
         id={"more_" + props.name}
         onClick={handleClick}
@@ -176,7 +184,7 @@ const PracticalSpan = (props ) => {
             textAlign: "center",
             cursor: "pointer",
             padding: "0.2rem 0.5rem",
-            display:"block",
+            display: "block",
           }}
           id={"ciec_" + props.name}
           onClick={handleCiec}
@@ -304,7 +312,7 @@ const Requirement = ({
                 )}
               </>
             ) : (
-              <PracticalSpan name={req.name} userID={userID}/>
+              <PracticalSpan name={req.name} userID={userID} />
             )}
           </Grid>
         </Grid>
@@ -374,7 +382,7 @@ const HeaderCard = (props) => {
 
 const BodyCard = (props) => {
   const [step, setStep] = useState(props.step);
-  
+
   const $requirements = (props, more) => {
     let tags = props.tags;
     let reqPF = [
@@ -524,7 +532,7 @@ const TarjetaDoc = (props) => {
   const [title, setTitle] = useState("");
   const [tags, setTags] = useState(props.initialValues);
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
     switch (props.index) {
       case 0:
@@ -543,9 +551,11 @@ const TarjetaDoc = (props) => {
   }, [props.index, props.typePerson]);
 
   useEffect(() => {
-    props.socket?.on("updateUser", (data) => {
-      dispatch(updateLoader(false));
-    });
+    if (props.socket) {
+      props.socket.on("updateUser", (data) => {
+        dispatch(updateLoader(false));
+      });
+    }
     return () => props.socket?.off("updateUser");
   }, [dispatch, props.socket]);
 
@@ -555,22 +565,22 @@ const TarjetaDoc = (props) => {
   return (
     <>
       <Card style={{ border: "none" }} className="h-100 shadow2 mb-5">
-      <HeaderCard number={props.index + 1} title={title} />
-      <BodyCard
-        tags={tags}
-        step={props.index}
-        typePerson={props.typePerson}
-        warranty={props.warranty}
-        socketId={props.socketId}
-        user={props.user}
-        status={props.setStatus}
-        ciec={props.ciec}
-        setShow={props.setShow}
-        setUser={props.setUser}
-        setLoader={props.setLoader}
-        dispatch={dispatch}
-      />
-    </Card>
+        <HeaderCard number={props.index + 1} title={title} />
+        <BodyCard
+          tags={tags}
+          step={props.index}
+          typePerson={props.typePerson}
+          warranty={props.warranty}
+          socketId={props.socketId}
+          user={props.user}
+          status={props.setStatus}
+          ciec={props.ciec}
+          setShow={props.setShow}
+          setUser={props.setUser}
+          setLoader={props.setLoader}
+          dispatch={dispatch}
+        />
+      </Card>
     </>
   );
 };

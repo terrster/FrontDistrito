@@ -12,7 +12,7 @@ import { Grid } from "@material-ui/core";
 import TarjetaDoc from "./tarjetasDoc";
 import DocumentsModal from "../Appliance/DocumentsModal";
 import PopUp from "../../forms/PopUp";
-import Axios from '../../utils/axios';
+import Axios from "../../utils/axios";
 import { update } from "lodash";
 
 const Banner = () => {
@@ -100,7 +100,7 @@ const NewDoc = () => {
   }, []);
 
   useEffect(() => {
-    if(!user){
+    if (!user) {
       return;
     }
     if (user.idClient.appliance[0].hasOwnProperty("idDocuments")) {
@@ -148,51 +148,54 @@ const NewDoc = () => {
       newSocket && newSocket.connect();
     };
   }, [setSocket, user]);
-  
+
   useEffect(() => {
     const updateInitialValues = (name, value) => {
-      for(let i = 0; i < value.length; i++){
-        if(initialValues[name] !== undefined){
-          if(initialValues[name].length > 0){
-            if(initialValues[name].indexOf(value[i]) === -1){
+      for (let i = 0; i < value.length; i++) {
+        if (initialValues[name] !== undefined) {
+          if (initialValues[name].length > 0) {
+            if (initialValues[name].indexOf(value[i]) === -1) {
               initialValues[name].push(value[i]);
             }
-          }else{
+          } else {
             initialValues[name].push(value[i]);
           }
-        } 
+        }
       }
-      setValues({...initialValues});
-
+      setValues({ ...initialValues });
     };
     const updateUser = () => {
       const $user = JSON.parse(sessionStorage.getItem("user"));
       setUser($user);
     };
-    socket?.on("updateUser", (data) => {
-      let {documentUpdate,userUpdate} = data;
-      for (const key in documentUpdate) {
-        if (documentUpdate.hasOwnProperty(key) && key !== "__v" && key !== "_id") {
-          updateInitialValues(key, documentUpdate[key]);
-        } else if (key === "status") {
-          setStatus(documentUpdate[key]);
+    if (socket) {
+      socket.on("updateUser", (data) => {
+        let { documentUpdate, userUpdate } = data;
+        for (const key in documentUpdate) {
+          if (
+            documentUpdate.hasOwnProperty(key) &&
+            key !== "__v" &&
+            key !== "_id"
+          ) {
+            updateInitialValues(key, documentUpdate[key]);
+          } else if (key === "status") {
+            setStatus(documentUpdate[key]);
+          }
         }
-      }
-      sessionStorage.setItem("user", JSON.stringify(userUpdate));
-      updateUser();
-      dispatch(updateLoader(false));
-    });
+        sessionStorage.setItem("user", JSON.stringify(userUpdate));
+        updateUser();
+        dispatch(updateLoader(false));
+      });
+    }
   }, [socket, dispatch, setValues, initialValues]);
 
   useEffect(() => {
-    console.log("initialValues", initialValues);
-  }, [initialValues]);
-
-  useEffect(() => {
-    socket?.on("doc_error", (data) => {
-      console.log(data);
-      alert(data);
-    });
+    if (socket) {
+      socket.on("doc_error", (data) => {
+        console.log(data);
+        alert(data);
+      });
+    }
     return () => socket?.off("doc_error");
   }, [socket, uid]);
 
@@ -212,99 +215,110 @@ const NewDoc = () => {
         uid: user._id,
         socketId: socketId,
         docID: docID,
-      }
-    }
+      },
+    };
     await Axios.post(`api/meta/update`, data).then((res) => {
       // alert("Se ha actualizado el estatus");
       console.log("se ha actualizado el estatus");
     });
     dispatch(updateLoader(false));
-  }
+  };
 
   useEffect(() => {
     if (typePerson && user) {
       let minreq = minRequired(typePerson);
-      let $warranty = ["guaranteeStatement","guaranteeFixedAssets"];
+      let $warranty = ["guaranteeStatement", "guaranteeFixedAssets"];
       let reqCiec = ciec ? [] : ["lastDeclarations"];
-      let reqWarranty = warranty === 1 ? [$warranty[0]] : warranty === 2 ? [$warranty[1]] : warranty === 3 ? $warranty : [];
+      let reqWarranty =
+        warranty === 1
+          ? [$warranty[0]]
+          : warranty === 2
+          ? [$warranty[1]]
+          : warranty === 3
+          ? $warranty
+          : [];
       let req = [...minreq, ...reqCiec, ...reqWarranty];
       let $status = true;
-      for(let i = 0; i < req.length; i++){
-        if(initialValues.hasOwnProperty(req[i])){
-          if(initialValues[req[i]].length === 0){
+      for (let i = 0; i < req.length; i++) {
+        if (initialValues.hasOwnProperty(req[i])) {
+          if (initialValues[req[i]].length === 0) {
             $status = false;
             break;
           }
         }
       }
-      setStatus($status); 
+      setStatus($status);
     }
   }, [user, status, ciec, warranty, typePerson, initialValues, socketId]);
 
   useEffect(() => {
     if (user) {
-      if(status){
-        if(!user.idClient.appliance[0].idDocuments._id){
+      if (status) {
+        if (!user.idClient.appliance[0].idDocuments._id) {
           uid && socket && docID && updateStatus(true);
         }
       }
     }
   }, [status, user, uid, socket, docID]);
 
-  useEffect(() => {
-    console.log("user", user);
-  }, [user]);
-
-
   const minRequired = (key) => {
-    switch(key){
-        case "PF":
-            return [
-                "oficialID",
-                "proofAddressMainFounders",
-                "bankStatements",
-                "others",
-            ];
-        case "PFAE":
-            return [
-                "oficialID",
-                "proofAddress",
-                "proofAddressMainFounders",
-                "bankStatements",
-                "others",
-            ];
-        case "PM":
-            return [
-                "oficialID",
-                "rfc",
-                "proofAddress",
-                "proofAddressMainFounders",
-                "bankStatements",
-                "constitutiveAct",
-                "others",
-            ];
-        default:
-            return [];
-            
+    switch (key) {
+      case "PF":
+        return [
+          "oficialID",
+          "proofAddressMainFounders",
+          "bankStatements",
+          "others",
+        ];
+      case "PFAE":
+        return [
+          "oficialID",
+          "proofAddress",
+          "proofAddressMainFounders",
+          "bankStatements",
+          "others",
+        ];
+      case "PM":
+        return [
+          "oficialID",
+          "rfc",
+          "proofAddress",
+          "proofAddressMainFounders",
+          "bankStatements",
+          "constitutiveAct",
+          "others",
+        ];
+      default:
+        return [];
     }
-};
+  };
   const handleUpload = async () => {
     dispatch(updateLoader(true));
-    if(JSON.parse(sessionStorage.getItem("user")).idClient.appliance[0].idDocuments.status === true && idClient.appliance.length > 0 && status === true){
+    if (
+      JSON.parse(sessionStorage.getItem("user")).idClient.appliance[0]
+        .idDocuments.status === true &&
+      idClient.appliance.length > 0 &&
+      status === true
+    ) {
       const appliance = idClient.appliance[idClient.appliance.length - 1];
       // updateStatus(true);
-      const applianceRequest = await Axios.put(`api/appliance/${appliance._id}`, { status: true });
-      if(!applianceRequest.data.hasOwnProperty("error")){
-                  sessionStorage.setItem('user', JSON.stringify(applianceRequest.data.user));
-                  setUser(JSON.parse(sessionStorage.getItem("user")));
+      const applianceRequest = await Axios.put(
+        `api/appliance/${appliance._id}`,
+        { status: true }
+      );
+      if (!applianceRequest.data.hasOwnProperty("error")) {
+        sessionStorage.setItem(
+          "user",
+          JSON.stringify(applianceRequest.data.user)
+        );
+        setUser(JSON.parse(sessionStorage.getItem("user")));
       }
-      history.push('/credito/solicitud/'+appliance._id);
-  } 
-  else {
-      history.push('/credito');
-  }
-  dispatch(updateLoader(false));
-  }
+      history.push("/credito/solicitud/" + appliance._id);
+    } else {
+      history.push("/credito");
+    }
+    dispatch(updateLoader(false));
+  };
 
   return (
     <>
@@ -328,7 +342,7 @@ const NewDoc = () => {
             style={{ padding: "1rem" }}
             key={index}
           >
-              <TarjetaDoc
+            <TarjetaDoc
               index={index}
               typePerson={typePerson}
               initialValues={initialValues}
@@ -340,17 +354,14 @@ const NewDoc = () => {
               warranty={warranty}
               user={user}
               setUser={setUser}
-              ciec = {ciec}
-              setShow = {setShow}
-              setLoader = {setLoader}
+              ciec={ciec}
+              setShow={setShow}
+              setLoader={setLoader}
             />
           </Grid>
         ))}
         <Grid item xs={11} md={5} lg={5} style={{ padding: "1rem" }}>
-          <Button
-            className={btnclass(status)}
-            onClick={handleUpload}
-          >
+          <Button className={btnclass(status)} onClick={handleUpload}>
             {status ? "enviar solicitud" : "faltan documentos por subir"}
           </Button>
         </Grid>
