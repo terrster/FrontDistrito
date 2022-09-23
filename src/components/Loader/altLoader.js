@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import im1 from "../../assets/img/estatus_solicitud/status-solicitud_01.png";
 import "../../css/loader.css";
 
-const Loader = () => {
+const AltLoader = () => {
   const { isLoading, msg } = useSelector((state) => state.loader);
   if (isLoading) {
     return (
@@ -45,4 +45,4 @@ const Loader = () => {
   return null;
 };
 
-export default Loader;
+export default AltLoader;

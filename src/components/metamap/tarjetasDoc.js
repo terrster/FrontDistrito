@@ -6,7 +6,6 @@ import { Card } from "react-bootstrap";
 import { Grid, Chip } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 import { updateLoader } from "../../redux/actions/loaderActions";
-import Loader from "../Loader/Loader";
 import upload from "../../assets/img/underline_men/documentos_banner_upload.svg";
 
 const handleClick = (e, more) => {
