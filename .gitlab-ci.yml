@@ -14,6 +14,6 @@ deploy_staging:
     name: staging
     url: dplanding
   script:
-    - ssh ubuntu@52.32.204.102  "cd  /home/ubuntu/dev/distrito-front && git checkout dev && git reset --hard && git pull origin dev && npm install && sudo npm run build && exit"
+    - ssh ubuntu@52.32.204.102  "npm cache clean --force && npm install -g n && n lts && n prune && cd  /home/ubuntu/dev/distrito-front && git checkout dev && git reset --hard && git pull origin dev && npm install && sudo npm run build && exit"
   only:
     - dev
