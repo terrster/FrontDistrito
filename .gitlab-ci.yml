@@ -14,6 +14,6 @@ deploy_staging:
     name: staging
     url: dplanding
   script:
-    - ssh ubuntu@52.32.204.102  "N_PREFIX=$HOME/.local n stable && sudo rm -rf /usr/local/node && N_PREFIX=$HOME/.local n stable &&export PATH="$HOME/.local/bin:$PATH" && node -v && cd  /home/ubuntu/dev/distrito-front && git checkout dev && git reset --hard && git pull origin dev && npm install && sudo npm run build && exit"
+    - ssh ubuntu@52.32.204.102  "N_PREFIX=~/.local n stable && sudo rm -rf /usr/local/node && N_PREFIX=~/.local n stable &&export PATH="~/.local/bin:$PATH" && node -v && cd  /home/ubuntu/dev/distrito-front && git checkout dev && git reset --hard && git pull origin dev && npm install && sudo npm run build && exit"
   only:
     - dev
