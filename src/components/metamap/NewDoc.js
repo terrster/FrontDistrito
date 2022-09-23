@@ -3,7 +3,8 @@ import { Button } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { updateLoader } from "../../redux/actions/loaderActions";
-import Loader from "../Loader/altLoader";
+// import {AltLoader} from "../Loader/altLoader";
+import Loader from "../Loader/Loader";
 import "./newdoc.css";
 import bannerweb from "../../assets/img/carousel/documentos_banner.png";
 import bannermovil from "../../assets/img/carousel/documentos_banner_mob.png";
@@ -13,7 +14,6 @@ import TarjetaDoc from "./tarjetasDoc";
 import DocumentsModal from "../Appliance/DocumentsModal";
 import PopUp from "../../forms/PopUp";
 import Axios from "../../utils/axios";
-import { update } from "lodash";
 
 const Banner = () => {
   const [banner, setBanner] = useState(bannerweb);
