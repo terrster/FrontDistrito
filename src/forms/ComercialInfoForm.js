@@ -37,6 +37,7 @@ let ComercialInfoForm = (props) => {
   const [colonias, setColonias] = useState([]);
   const [zipCodeError, setZipCodeError] = useState(false);
   const [ciecValid, setCiecValid] = useState(false);
+  const [ciecMessage, setCiecMessage] = useState("");
   const [cvalid, setCValid] = useState(false);
   const [disabled, setDisabled] = useState(true);
   const [forceRender, setForceRender] = useState(true);
@@ -163,12 +164,6 @@ let ComercialInfoForm = (props) => {
       ...prueba
     }))
   }, [initialValues]);
-
-  useEffect(() => {
-    let rfc = appValues.rfc;
-    let ciec = appValues.ciec;
-    handleDebounce(rfc, ciec);
-  }, [appValues]);
 
   useEffect(() => {
     if (!toast.second) {
@@ -309,6 +304,23 @@ let ComercialInfoForm = (props) => {
   const upper = (value) => value && value.toUpperCase();
   const onlyLirycs = (nextValue, previousValue) =>
     /^([a-zñáéíóúü\s]{0,60})$/i.test(nextValue) ? nextValue : previousValue;
+
+  const checkCiec = (ciec) => {
+    const awaitInputs = new Promise((resolve, reject) => {
+      ciec.length === 8 ? resolve(true) : resolve(false);
+    });
+    awaitInputs.then((res) => {
+      if(res){
+        let rfc = appValues.rfc ? appValues.rfc : false;
+
+        if(!rfc){
+          setCiecMessage("ingresa un RFC valido para poder continuar");
+          return;
+        }
+
+      }
+    });
+  };
 
   return (
     <div>
@@ -538,21 +550,15 @@ let ComercialInfoForm = (props) => {
                     className="positionInfo"
                   />
                 </div>
-                <Field component={renderFieldFull} label="CIEC" name="ciec" onChange={(event, newValue, previousValue) =>{
+                <Field component={renderFieldFull} label="CIEC" disabled={ciecValid} name="ciec" onChange={(event, newValue, previousValue) =>{
+                  setCiecMessage("");
                   setAppValues({ ...appValues, ciec: newValue })
-                  setCiecValid(true)
+                  checkCiec(newValue);
                   }}/>
-                {ciecValid && (
-                  <span id="CIEC-error">
-                    <small className="error">
-                      La CIEC no es válida
-                      </small>
-                      </span>
-                      )}
-                {cvalid && (
-                  <span id="CIEC-valid">
-                    <small className="valid">
-                      La CIEC es válida
+                {ciecMessage && (
+                  <span id={ciecValid ? "CIEC-valid" : "CIEC-error"}>
+                    <small className={ciecValid ? "valid" : "error"}>
+                      {ciecMessage}
                       </small>
                       </span>
                       )}
