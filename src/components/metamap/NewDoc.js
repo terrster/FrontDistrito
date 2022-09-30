@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { updateLoader } from "../../redux/actions/loaderActions";
 // import {AltLoader} from "../Loader/altLoader";
 import Loader from "../Loader/Loader";
@@ -14,6 +14,8 @@ import TarjetaDoc from "./tarjetasDoc";
 import DocumentsModal from "../Appliance/DocumentsModal";
 import PopUp from "../../forms/PopUp";
 import Axios from "../../utils/axios";
+import { execToast } from "../../utils/ToastUtils";
+import { updateToast } from "../../redux/actions/appActions";
 
 const Banner = () => {
   const [banner, setBanner] = useState(bannerweb);
@@ -80,6 +82,7 @@ const NewDoc = () => {
   const [docID, setDocID] = useState(null);
   const [loader, setLoader] = useState(null);
   const history = useHistory();
+  const toast = useSelector((state) => state.app.toast);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -294,6 +297,10 @@ const NewDoc = () => {
   };
   const handleUpload = async () => {
     dispatch(updateLoader(true));
+    if (!toast.documents){
+      execToast("documents");
+      dispatch( updateToast(toast,"documents"));
+  }
     if (
       JSON.parse(sessionStorage.getItem("user")).idClient.appliance[0]
         .idDocuments.status === true &&

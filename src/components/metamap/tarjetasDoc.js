@@ -42,13 +42,11 @@ const IconMedia = ({ length, typePerson, step, icon, id, cls }) => {
     length = 0;
   }
   let iconCase =
-    step === 0 && typePerson === "PM"
-      ? length > 1
-        ? true
-        : false
-      : length > 0
-      ? true
-      : false;
+    // step === 0 && typePerson === "PM"
+    //   ? length > 1
+    //     ? true
+    //     : false
+       length > 0 ? true : false;
   switch (iconCase) {
     case true:
       return (
