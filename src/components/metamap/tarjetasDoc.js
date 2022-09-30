@@ -99,12 +99,14 @@ const Meta = (props) => {
   }, [element, props]);
 
   const handleCl = () => {
-    props.dispatch(
-      updateLoader(
-        true,
-        "estamos procesando tus documentos y en breve te daremos una respuesta"
-      )
-    );
+    setTimeout(() => {
+      props.dispatch(
+        updateLoader(
+          true,
+          "estamos procesando tus documentos y en breve te daremos una respuesta"
+        )
+      );
+    }, 1000);
   };
 
   return (
