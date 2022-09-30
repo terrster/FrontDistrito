@@ -197,7 +197,7 @@ export const imgFinancial = (financial) => {
             // DOCUFORMAS,
             PRETMEX,
             UNICLICK,
-            MUNDI,
+            // MUNDI,
             FACTOREXPRES,
             // MICRO, //Es un producto dentro de Impulso
             // AVCAPITAL,// Javier lo elimino
@@ -219,7 +219,7 @@ export const imgFinancial = (financial) => {
             Creditas,
             // Resuelve,
             LenMi,
-            SBFinancial,
+            // SBFinancial,
             Clara,
             Afirme,
             Banorte,
