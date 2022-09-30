@@ -38,16 +38,17 @@ let ComercialInfoForm = (props) => {
   const [zipCodeError, setZipCodeError] = useState(false);
   const [ciecValid, setCiecValid] = useState(false);
   const [ciecMessage, setCiecMessage] = useState("");
-  const [cvalid, setCValid] = useState(false);
   const [disabled, setDisabled] = useState(true);
   const [forceRender, setForceRender] = useState(true);
-  const [appValues, setAppValues] = useState({});
+  const [user , setUser] = useState(JSON.parse(sessionStorage.getItem("user")));
 
   const {
     handleSubmit,
     valid,
     initialValues,
   } = props;
+  const [rfcD, setRfcD] = useState(initialValues.rfc);
+  const [ciecD, setCiecD] = useState(initialValues.ciec);
   const ciecRef = useRef(null);
 
   const handleChange = async (event, id) => {
@@ -116,54 +117,6 @@ let ComercialInfoForm = (props) => {
         return false;
     }
 }
-  const pruebaCiec = async (rfc, ciec) => {
-    let validRFC = validPrueba(rfc);
-    let validCIE = validPrueba(ciec);
-    if (validRFC && validCIE) {
-      let rfcx = rfcValido(rfc);
-      let xciec = ciec.length === 8;
-      if (rfcx && xciec) {
-        let newCiec = true;
-        const user = JSON.parse(sessionStorage.getItem("user"));
-        const id = user._id;
-        dispatch(updateLoader(true));
-        axios.post("/ciec", { ciec, newCiec, rfc, id }).then((response) => {
-          if (response.data.status === "valid") {
-            setCiecValid(true);
-            setCValid(true);
-            dispatch(updateLoader(false));
-          } else {
-            setCiecValid(false);
-            dispatch(updateLoader(false));
-            console.log(response.data.msg);
-          }
-        }).catch((error) => {
-          setCiecValid(false);
-          dispatch(updateLoader(false));
-          console.log(error);
-        }).finally(() => {
-          dispatch(updateLoader(false));
-        }
-        );
-      } else {
-        setCiecValid(false);
-      }
-    } else {
-      setCiecValid(false);
-    }
-  }
-
-  const handleDebounce = (rfc, ciec) => {
-    debounce(pruebaCiec, 500)(rfc, ciec);
-  }
-
-  useEffect(() => {
-    let prueba = initialValues
-    setAppValues( state => ({
-      ...state,
-      ...prueba
-    }))
-  }, [initialValues]);
 
   useEffect(() => {
     if (!toast.second) {
@@ -179,6 +132,10 @@ let ComercialInfoForm = (props) => {
         const appliance = idClient.appliance[idClient.appliance.length - 1];
 
         if (appliance.hasOwnProperty("idComercialInfo")) {
+          if(!appliance.idComercialInfo.address){
+            dispatch(updateLoader(false));
+            return;
+          }
           const comercial = appliance.idComercialInfo;
           const address = comercial.address;
           const zipCode = address.zipCode;
@@ -226,8 +183,36 @@ let ComercialInfoForm = (props) => {
     }
   }, []);
 
-  const user = JSON.parse(sessionStorage.getItem("user"));
-  const { type } = user.idClient;
+  useEffect(() => {
+    if(user){
+      let idClient = user.idClient;
+      let appliance = idClient.appliance[0];
+      if(appliance.hasOwnProperty("idComercialInfo")){
+        let idComercialInfo = appliance.idComercialInfo;
+        if(idComercialInfo.hasOwnProperty("ciecstatus")){
+          setCiecValid(idComercialInfo.ciecstatus);
+        }
+      } else {
+        setCiecValid(false);
+      }
+    }
+  }, [ciecValid, user]);
+
+  useEffect(() => {
+    const { type } = user ? user.idClient : "";
+    if(ciecValid){
+      return;
+    }
+    
+      if(type === "PM" && rfcD.length === 12){
+        checkCiec(ciecD);
+      } else if(rfcD.length === 13){
+        checkCiec(ciecD);
+    }
+  }, [initialValues, user, ciecValid, rfcD, ciecD]);
+
+  
+  const { type } = user ? user.idClient : "";
 
   const goToError = () => {
     const comercialNameError = document.getElementById("comercialName-error");
@@ -306,18 +291,36 @@ let ComercialInfoForm = (props) => {
     /^([a-zñáéíóúü\s]{0,60})$/i.test(nextValue) ? nextValue : previousValue;
 
   const checkCiec = (ciec) => {
+    
     const awaitInputs = new Promise((resolve, reject) => {
       ciec.length === 8 ? resolve(true) : resolve(false);
     });
-    awaitInputs.then((res) => {
+    awaitInputs.then(async(res) => {
       if(res){
-        let rfc = appValues.rfc ? appValues.rfc : false;
+        let rfc = rfcD ? rfcD : false;
 
-        if(!rfc){
+        if(!rfcD){
           setCiecMessage("ingresa un RFC valido para poder continuar");
           return;
         }
-
+        dispatch(updateLoader(true));
+        let newCiec = true;
+        let id = user._id ? user._id : false;
+        await axios.post("/ciec", { ciec, newCiec, rfc, id }).then((res) => {
+          if(res.status === 200){
+            setCiecMessage("CIEC valida");
+            setCiecValid(true)
+            sessionStorage.setItem("user", JSON.stringify(res.data.user));
+            setUser(res.data.user);
+          } else {
+            setCiecMessage("CIEC no valida");
+          }
+          dispatch(updateLoader(false));
+        }).catch((err) => {
+          setCiecMessage("CIEC no valida");
+          dispatch(updateLoader(false));
+        });
+        
       }
     });
   };
@@ -371,7 +374,7 @@ let ComercialInfoForm = (props) => {
           maxLength={12}
           minLength={12}
           onChange={(event, newValue, previousValue) =>{
-            setAppValues({ ...appValues, rfc: newValue })}
+            setRfcD(newValue);}
           }
         />
 
@@ -550,10 +553,9 @@ let ComercialInfoForm = (props) => {
                     className="positionInfo"
                   />
                 </div>
-                <Field component={renderFieldFull} label="CIEC" disabled={ciecValid} name="ciec" onChange={(event, newValue, previousValue) =>{
+                <Field component={renderFieldFull} label="CIEC" name="ciec" onChange={(event, newValue, previousValue) =>{
                   setCiecMessage("");
-                  setAppValues({ ...appValues, ciec: newValue })
-                  checkCiec(newValue);
+                  setCiecD(newValue);
                   }}/>
                 {ciecMessage && (
                   <span id={ciecValid ? "CIEC-valid" : "CIEC-error"}>
