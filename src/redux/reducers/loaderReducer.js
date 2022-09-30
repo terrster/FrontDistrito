@@ -13,7 +13,8 @@ const loaderReducer = (state = initialState, action) => {
         case UPDATE_LOADER:
             return {
                 ...state,
-                isLoading: action.payload
+                isLoading: action.payload.loading,
+                msg: action.payload.msg
             }
         case UPDATE_LOADER_ALT:
             return {
