@@ -278,7 +278,6 @@ const NewDoc = () => {
           "oficialID",
           "proofAddressMainFounders",
           "bankStatements",
-          "others",
         ];
       case "PFAE":
         return [
@@ -286,7 +285,6 @@ const NewDoc = () => {
           "proofAddress",
           "proofAddressMainFounders",
           "bankStatements",
-          "others",
         ];
       case "PM":
         return [
@@ -296,7 +294,6 @@ const NewDoc = () => {
           "proofAddressMainFounders",
           "bankStatements",
           "constitutiveAct",
-          "others",
         ];
       default:
         return [];
@@ -329,6 +326,15 @@ const NewDoc = () => {
     } else {
       history.push("/credito");
     }
+    dispatch(updateLoader(false));
+  };
+
+  const handleBack = async () => {
+    dispatch(updateLoader(true, 
+      "estamos actualizando el estado de tus documentos"));
+    await Axios.get(`api/meta/data`).then((res) => {
+      console.log(res.data);
+    });
     dispatch(updateLoader(false));
   };
 
@@ -374,7 +380,7 @@ const NewDoc = () => {
           </Grid>
         ))}
         <Grid item xs={11} md={5} lg={5} style={{ padding: "1rem" }}>
-          <Button className={btnclass(status)} onClick={handleUpload}>
+          <Button className={btnclass(status)} onClick={handleBack}>
             {status ? "enviar solicitud" : "faltan documentos por subir"}
           </Button>
         </Grid>
