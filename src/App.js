@@ -156,6 +156,7 @@ class App extends Component {
                 <Route path="/login/:redirect?" exact component={Login} />
                 <Route path="/brokers-registro" exact component={Brokers}/>
                 <Route path="/brokersCP" exact component={CPBrokers}/>
+                <Route path="/brokers-registro/:camp?" exact component={CPBrokers}/>
                 <Route path="/solicitud_enviada_brokers" exact component={ThankyouPage} />
                 <Route path="/contador" exact component={Counter}/>
                 <Route path="/alianza" exact component={Allies}/>

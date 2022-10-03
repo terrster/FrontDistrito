@@ -14,6 +14,7 @@ import { useHistory } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import { updateLoader } from "../../redux/actions/loaderActions";
 import Loader from "../Loader/Loader";
+import { useLocation } from 'react-router-dom'
 
 const images = [BANNER_WEB, BANNER_MOVIL];
 
@@ -23,6 +24,7 @@ const getVersionImage = () => {
 };
 
 const Brokers = () => {
+    const location = useLocation();
     const [version, setVersion] = useState(getVersionImage());
     const [socket, setSocket] = useState(null);
     const [hubspotInfo, setHubspotInfo] = useState({
@@ -90,8 +92,11 @@ const Brokers = () => {
 
     const handleSubmit = async(values) => {
         dispatch(updateLoader(true));
-        const canal = 'pyme-brokers-campaña';
-        const dataForm = { ...values, canal };
+        let path = location.pathname.split('/');
+        let campaign = path[path.length - 1];
+        const canal = campaign ? campaign : 'pyme-brokers-campaña'
+        const prefix = campaign ? `${campaign + " -"}` : 'Campaña PYME - '
+        const dataForm = { ...values, canal, prefix };
         
         let {data} = await axios.post('broker', dataForm);
 

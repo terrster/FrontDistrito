@@ -195,6 +195,17 @@ const financialPartner = (partner) => {
           channel: 'TuEmpresa',
           
         }
+        case 'CREDIEXPO':
+        return {
+          image: [],
+          text: [
+            'Solicita un crédito para tu empresa o negocio a través de nuestro aliado Distrito Pyme.',
+            'Podrás recibir las mejores opciones de crédito en menos de 15 min con un proceso fácil, rápido y sin papeleos.'
+          ],
+          prefix: process.env.REACT_APP_CONFIGURATION === 'localhost' || process.env.REACT_APP_CONFIGURATION === 'development' ? 'CrediexpoDev - ' : 'Crediexpo - ',
+          channel: 'Crediexpo',
+          brokercode: '36408310'//Luis Fer - DP
+        }
 
 
     default:
@@ -273,7 +284,7 @@ const Signup = props => {
     return (
       <>
         <Loader />
-        {!partner || partner.channel === 'SE1'|| partner.channel === 'Oficinabajio1'|| partner.channel === 'Asubia'? (
+        {!partner || partner.channel === 'SE1'|| partner.channel === 'Oficinabajio1'|| partner.channel === 'Asubia' || partner.channel === 'Crediexpo'? (
           <div className="container mt-30">
             <Title
               className="fz56 text-center title-dp fw500"
