@@ -187,9 +187,9 @@ const PracticalSpan = (props) => {
           }}
           id={"ciec_" + props.name}
           onClick={handleCiec}
-          className="metropolisLight fz10 mt-2 ciecBtn"
+          className="metropolisLight fz10 mt-2"
         >
-          ¿no tienes tu CIEC? {""}
+          prefiero compartir CIEC {""}
         </span>
       )}
     </>

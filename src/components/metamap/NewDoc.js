@@ -3,6 +3,7 @@ import { Button } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { updateLoader } from "../../redux/actions/loaderActions";
+import { ToastContainer } from "react-toastify";
 // import {AltLoader} from "../Loader/altLoader";
 import Loader from "../Loader/Loader";
 import "./newdoc.css";
@@ -211,7 +212,7 @@ const NewDoc = () => {
   };
 
   const updateStatus = async (status) => {
-    dispatch(updateLoader(true));
+    dispatch(updateLoader(true, "estamos actualizando el estado de tus documentos"));
     let data = {
       status: status,
       metadata: {
@@ -221,10 +222,16 @@ const NewDoc = () => {
       },
     };
     await Axios.post(`api/meta/update`, data).then((res) => {
-      // alert("Se ha actualizado el estatus");
-      console.log("se ha actualizado el estatus");
+      if (res.data.user) {
+        sessionStorage.setItem("user", JSON.stringify(res.data.user));
+        setUser(res.data.user);
+        dispatch(updateLoader(false));
+      } else {
+        alert ("Error al actualizar el estado del documento");
+        dispatch(updateLoader(false));
+      }
     });
-    dispatch(updateLoader(false));
+    // dispatch(updateLoader(false));
   };
 
   useEffect(() => {
@@ -257,8 +264,8 @@ const NewDoc = () => {
   useEffect(() => {
     if (user) {
       if (status) {
-        if (!user.idClient.appliance[0].idDocuments._id) {
-          uid && socket && docID && updateStatus(true);
+        if (user.idClient.appliance[0].idDocuments._id && user.idClient.appliance[0].idDocuments.status === false) {
+          updateStatus(true);
         }
       }
     }
@@ -297,10 +304,7 @@ const NewDoc = () => {
   };
   const handleUpload = async () => {
     dispatch(updateLoader(true));
-    if (!toast.documents){
-      execToast("documents");
-      dispatch( updateToast(toast,"documents"));
-  }
+    
     if (
       JSON.parse(sessionStorage.getItem("user")).idClient.appliance[0]
         .idDocuments.status === true &&
@@ -308,7 +312,7 @@ const NewDoc = () => {
       status === true
     ) {
       const appliance = idClient.appliance[idClient.appliance.length - 1];
-      // updateStatus(true);
+      
       const applianceRequest = await Axios.put(
         `api/appliance/${appliance._id}`,
         { status: true }
@@ -321,6 +325,7 @@ const NewDoc = () => {
         setUser(JSON.parse(sessionStorage.getItem("user")));
       }
       history.push("/credito/solicitud/" + appliance._id);
+
     } else {
       history.push("/credito");
     }
@@ -329,6 +334,7 @@ const NewDoc = () => {
 
   return (
     <>
+      <ToastContainer />
       <Loader />
       <Banner />
       <DocumentsModal />
