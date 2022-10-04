@@ -156,7 +156,7 @@ const TagList = ({ tag, user, step, typePerson }) => {
 
 const PracticalSpan = (props) => {
   const history = useHistory();
-  console.log(props);
+  // console.log(props);
   const handleCiec = () => {
     history.push(`/informacion-comercial/${props.userID}`);
   };
