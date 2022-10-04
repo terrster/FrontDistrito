@@ -127,14 +127,15 @@ const Meta = (props) => {
   );
 };
 
-const TagList = ({ tag, user, step, typePerson }) => {
+const TagList = ({ tag, user, step, typePerson, req }) => {
+  console.log(req);
   return tag.map((t, index) => {
     return (
       <div
         key={t.name === undefined ? nameAux(t) + index : t.name + index}
         style={{ overflow: "hiden" }}
       >
-        {step === 0 && typePerson === "PM" && (
+        {step === 0 && req.name === "rfc" && typePerson === "PM" && (
           <span className="metropolisLight fz10 " style={{ color: "#c6c6c6" }}>
             {`socio ${tag.indexOf(t) + 1}`}
           </span>
@@ -296,6 +297,7 @@ const Requirement = ({
                 user={user}
                 step={req.step}
                 typePerson={typePerson}
+                req={req}
               />
             </Grid>
           )}
