@@ -8,7 +8,7 @@ import { ToastContainer } from "react-toastify";
 import Loader from "../Loader/Loader";
 import "./newdoc.css";
 import bannerweb from "../../assets/img/carousel/documentos_banner.png";
-import bannermovil from "../../assets/img/carousel/documentos_banner_mob.png";
+import bannermovil from "../../assets/img/carousel/documentos_mob.png";
 import io from "socket.io-client";
 import { Grid } from "@material-ui/core";
 import TarjetaDoc from "./tarjetasDoc";
