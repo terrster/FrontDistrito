@@ -380,7 +380,7 @@ const NewDoc = () => {
           </Grid>
         ))}
         <Grid item xs={11} md={5} lg={5} style={{ padding: "1rem" }}>
-          <Button className={btnclass(status)} onClick={handleBack}>
+          <Button className={btnclass(status)} onClick={handleUpload}>
             {status ? "enviar solicitud" : "faltan documentos por subir"}
           </Button>
         </Grid>
