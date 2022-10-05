@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState, useEffect, useRef, useMemo } from "react";
+import { useDispatch, useSelector  } from "react-redux";
 import { Field, reduxForm } from "redux-form";
 import comercialOptions from "../models/ComercialInfoModels";
 import employeesNumber from "../models/EmployeesNumber";
@@ -8,6 +8,7 @@ import empresarialCreditCard from "../models/EmpresarialCreditCard";
 import { Row, Col, Button } from "react-bootstrap";
 import InputLabel from "../components/Generic/InputLabel";
 import SubtitleForm from "../components/Generic/SubtitleForm";
+import { debounce } from "lodash";
 import { validateComercialInfo } from "../components/Validate/ValidateComercialInfo";
 import {
   renderField,
@@ -22,10 +23,10 @@ import { updateLoader } from "../redux/actions/loaderActions";
 // CIEC
 import PopUp from "./PopUp";
 // import PopUpBanks from "./PopUpBanks";
-import Info from "../assets/img/info-01.png";
+import Info from "../assets/img/type_person/help.png";
 // import Delete from "../assets/img/basura-01.png";
 import scroll from "../utils/scroll";
-// import axios from "../utils/axios";
+import axios from "../utils/axios";
 // import DeleteIcon from "@material-ui/icons/Delete";
 
 let ComercialInfoForm = (props) => {
@@ -35,13 +36,19 @@ let ComercialInfoForm = (props) => {
 
   const [colonias, setColonias] = useState([]);
   const [zipCodeError, setZipCodeError] = useState(false);
+  const [ciecValid, setCiecValid] = useState(false);
+  const [ciecMessage, setCiecMessage] = useState("");
   const [disabled, setDisabled] = useState(true);
   const [forceRender, setForceRender] = useState(true);
+  const [user , setUser] = useState(JSON.parse(sessionStorage.getItem("user")));
 
   const {
     handleSubmit,
-    valid
+    valid,
+    initialValues,
   } = props;
+  const [rfcD, setRfcD] = useState(initialValues.rfc);
+  const [ciecD, setCiecD] = useState(initialValues.ciec);
   const ciecRef = useRef(null);
 
   const handleChange = async (event, id) => {
@@ -84,13 +91,38 @@ let ComercialInfoForm = (props) => {
     }
     dispatch(updateLoader(false));
   };
+  const validPrueba = (value) => {
+    switch (value) {
+      case "":
+      case null:
+      case undefined:
+        return false;
+      default:
+        return true;
+    }
+  }
+  const rfcValido = (rfc, aceptarGenerico = true) => {
+    let _rfc_pattern_pm = "^(([A-ZÑ&]{3})([0-9]{2})([0][13578]|[1][02])(([0][1-9]|[12][\\d])|[3][01])([A-Z0-9]{3}))|" +
+             "(([A-ZÑ&]{3})([0-9]{2})([0][13456789]|[1][012])(([0][1-9]|[12][\\d])|[3][0])([A-Z0-9]{3}))|" +
+             "(([A-ZÑ&]{3})([02468][048]|[13579][26])[0][2]([0][1-9]|[12][\\d])([A-Z0-9]{3}))|" +
+             "(([A-ZÑ&]{3})([0-9]{2})[0][2]([0][1-9]|[1][0-9]|[2][0-8])([A-Z0-9]{3}))$";
+    let _rfc_pattern_pf = "^(([A-ZÑ&]{4})([0-9]{2})([0][13578]|[1][02])(([0][1-9]|[12][\\d])|[3][01])([A-Z0-9]{3}))|" +
+                  "(([A-ZÑ&]{4})([0-9]{2})([0][13456789]|[1][012])(([0][1-9]|[12][\\d])|[3][0])([A-Z0-9]{3}))|" +
+                  "(([A-ZÑ&]{4})([02468][048]|[13579][26])[0][2]([0][1-9]|[12][\\d])([A-Z0-9]{3}))|" +
+                  "(([A-ZÑ&]{4})([0-9]{2})[0][2]([0][1-9]|[1][0-9]|[2][0-8])([A-Z0-9]{3}))$";
+  let rfcTest =  rfc.match(_rfc_pattern_pm) || rfc.match(_rfc_pattern_pf);
+    if(rfcTest && rfc.length <= 13){
+        return true;
+    } else {
+        return false;
+    }
+}
 
   useEffect(() => {
     if (!toast.second) {
       execToast("second");
       dispatch(updateToast(toast, "second"));
     }
-
     const getData = async () => {
       dispatch(updateLoader(true));
       const user = JSON.parse(sessionStorage.getItem("user"));
@@ -100,6 +132,10 @@ let ComercialInfoForm = (props) => {
         const appliance = idClient.appliance[idClient.appliance.length - 1];
 
         if (appliance.hasOwnProperty("idComercialInfo")) {
+          if(!appliance.idComercialInfo.address){
+            dispatch(updateLoader(false));
+            return;
+          }
           const comercial = appliance.idComercialInfo;
           const address = comercial.address;
           const zipCode = address.zipCode;
@@ -147,8 +183,36 @@ let ComercialInfoForm = (props) => {
     }
   }, []);
 
-  const user = JSON.parse(sessionStorage.getItem("user"));
-  const { type } = user.idClient;
+  useEffect(() => {
+    if(user){
+      let idClient = user.idClient;
+      let appliance = idClient.appliance[0];
+      if(appliance.hasOwnProperty("idComercialInfo")){
+        let idComercialInfo = appliance.idComercialInfo;
+        if(idComercialInfo.hasOwnProperty("ciecstatus")){
+          setCiecValid(idComercialInfo.ciecstatus);
+        }
+      } else {
+        setCiecValid(false);
+      }
+    }
+  }, [ciecValid, user]);
+
+  useEffect(() => {
+    const { type } = user ? user.idClient : "";
+    if(ciecValid){
+      return;
+    }
+    
+      if(type === "PM" && rfcD.length === 12){
+        checkCiec(ciecD);
+      } else if(rfcD.length === 13){
+        checkCiec(ciecD);
+    }
+  }, [initialValues, user, ciecValid, rfcD, ciecD]);
+
+  
+  const { type } = user ? user.idClient : "";
 
   const goToError = () => {
     const comercialNameError = document.getElementById("comercialName-error");
@@ -226,6 +290,41 @@ let ComercialInfoForm = (props) => {
   const onlyLirycs = (nextValue, previousValue) =>
     /^([a-zñáéíóúü\s]{0,60})$/i.test(nextValue) ? nextValue : previousValue;
 
+  const checkCiec = (ciec) => {
+    
+    const awaitInputs = new Promise((resolve, reject) => {
+      ciec.length === 8 ? resolve(true) : resolve(false);
+    });
+    awaitInputs.then(async(res) => {
+      if(res){
+        let rfc = rfcD ? rfcD : false;
+
+        if(!rfcD){
+          setCiecMessage("ingresa un RFC valido para poder continuar");
+          return;
+        }
+        dispatch(updateLoader(true));
+        let newCiec = true;
+        let id = user._id ? user._id : false;
+        await axios.post("/ciec", { ciec, newCiec, rfc, id }).then((res) => {
+          if(res.status === 200){
+            setCiecMessage("CIEC valida");
+            setCiecValid(true)
+            sessionStorage.setItem("user", JSON.stringify(res.data.user));
+            setUser(res.data.user);
+          } else {
+            setCiecMessage("CIEC no valida");
+          }
+          dispatch(updateLoader(false));
+        }).catch((err) => {
+          setCiecMessage("CIEC no valida");
+          dispatch(updateLoader(false));
+        });
+        
+      }
+    });
+  };
+
   return (
     <div>
       <form
@@ -274,6 +373,9 @@ let ComercialInfoForm = (props) => {
           normalize={upper}
           maxLength={12}
           minLength={12}
+          onChange={(event, newValue, previousValue) =>{
+            setRfcD(newValue);}
+          }
         />
 
         <Field component={renderSelectField} name="employeesNumber" cls="mb-3">
@@ -433,7 +535,7 @@ let ComercialInfoForm = (props) => {
             <>
               <Col lg={12} md={12} sm={12}>
                 <SubtitleForm
-                  subtitle="Clave CIEC (Opcional)"
+                  subtitle="Clave CIEC"
                   className="mt-30"
                 />
                 <div
@@ -451,9 +553,19 @@ let ComercialInfoForm = (props) => {
                     className="positionInfo"
                   />
                 </div>
-                <Field component={renderFieldFull} label="CIEC" name="ciec" />
-                <div className="fz18 gray50 text-dp mb-30 mt-2">
-                No es un dato obligatorio pero puede agilizar tu solicitud a la mitad del tiempo y ofrecerte mejores condiciones de crédito. Se ingresa por única ocasión para descargar la información necesaria mediante procesos automatizados
+                <Field component={renderFieldFull} label="CIEC" name="ciec" onChange={(event, newValue, previousValue) =>{
+                  setCiecMessage("");
+                  setCiecD(newValue);
+                  }}/>
+                {ciecMessage && (
+                  <span id={ciecValid ? "CIEC-valid" : "CIEC-error"}>
+                    <small className={ciecValid ? "valid" : "error"}>
+                      {ciecMessage}
+                      </small>
+                      </span>
+                      )}
+                <div className="fz18 gray50 text-dp mb-16 mt-2 text-justify">
+                la CIEC agiliza tu solicitud de crédito a la mitad del tiempo, además la probabilidad de aprobación es mucho más alta y las condiciones serán mejores.
                 </div>
               </Col>
               <PopUp />

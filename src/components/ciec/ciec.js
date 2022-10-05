@@ -27,8 +27,21 @@ const goToError = () => {
   const rfcError = document.getElementById("rfc-error");
 
 }
-  
-
+  const dataR = (image,title, msg, type, redir) => {
+    setOpen(true);
+        setMensaje({
+          img : image,
+          title : title,
+          message: msg,
+          type: type,
+        });
+        setState(type);
+        if(redir){
+          setTimeout(() => { history.push("/"); }, 3000); // Redireccionar a la pagina principal
+        }
+        dispatch(updateLoader(false));
+      }
+  const errorLogo = <FontAwesomeIcon icon={faExclamationTriangle} size='3x' style={{color:'#D41919'}} />
   const onFormSubmit = async (dataForm) => {
     dispatch(updateLoader(true));
     const data = dataForm;
@@ -36,17 +49,9 @@ const goToError = () => {
     if(rfc && ciec){
     try{
       const res = await axios.post(`ciec`, data);
+      console.log(res);
       if (res.status === 200) {
-        setOpen(true);
-        setMensaje({
-          img : registerImage,
-          title : "¡Registro exitoso!",
-          message: res.data.msg,
-          type: "success",
-        });
-        setState("success");
-        setTimeout(() => { history.push("/"); }, 3000); // Redireccionar a la pagina principal
-        dispatch(updateLoader(false));
+        res.data.status === "invalid" ? dataR(errorLogo, "ERROR", res.data.msg, "error", false) : dataR(registerImage, "¡Registro exitoso!", res.data.msg, "success", true);
       } else {
         setOpen(true);
         setMensaje({
@@ -81,7 +86,7 @@ const goToError = () => {
     }
   return (
     <div>
-        <div className='text-center outer'>   
+        <div className='text-center outer '>   
             <CiecForm 
             onSubmit={onFormSubmit}
             initialValues={initialValues}
