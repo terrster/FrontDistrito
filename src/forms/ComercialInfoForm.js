@@ -47,9 +47,10 @@ let ComercialInfoForm = (props) => {
     valid,
     initialValues,
   } = props;
-  const [rfcD, setRfcD] = useState(initialValues.rfc);
-  const [ciecD, setCiecD] = useState(initialValues.ciec);
+  const [rfcD, setRfcD] = useState("");
+  const [ciecD, setCiecD] = useState("");
   const ciecRef = useRef(null);
+  const { type } = user ? user.idClient : "";
 
   const handleChange = async (event, id) => {
     const zipCode = event.target.value;
@@ -199,20 +200,71 @@ let ComercialInfoForm = (props) => {
   }, [ciecValid, user]);
 
   useEffect(() => {
-    const { type } = user ? user.idClient : "";
+    if (user) {
+      setRfcD(initialValues.rfc);
+      setCiecD(initialValues.ciec);
+    }
+  }, [user, initialValues]);
+
+  useEffect(() => {
+
     if(ciecValid){
       return;
     }
-    
-      if(type === "PM" && rfcD.length === 12){
-        checkCiec(ciecD);
-      } else if(rfcD.length === 13){
-        checkCiec(ciecD);
+
+    if(!rfcD){
+      return;
     }
-  }, [initialValues, user, ciecValid, rfcD, ciecD]);
+
+    if(!ciecD){
+      return;
+    }
+
+    const checkCiec = async (ciec) => {
+      if(ciecValid){
+        return;
+      }
+          let rfc = rfcD ? rfcD : false;
+  
+          if(!rfcD){
+            setCiecMessage("ingresa un RFC valido para poder continuar");
+            return;
+          }
+          dispatch(updateLoader(true, "estamos verificando tu CIEC"));
+          let newCiec = true;
+          let id = user._id ? user._id : false;
+          await axios.post("/ciec", { ciec, newCiec, rfc, id }).then((res) => {
+            if(res.status === 200){
+              setCiecMessage("CIEC valida");
+              setCiecValid(true)
+              sessionStorage.setItem("user", JSON.stringify(res.data.user));
+              setUser(res.data.user);
+            } else {
+              setCiecMessage("CIEC no valida");
+            }
+            dispatch(updateLoader(false));
+          }).catch((err) => {
+            setCiecMessage("CIEC no valida");
+            dispatch(updateLoader(false));
+          });
+    };
+    
+    switch (type) {
+      case "PM":
+        if (rfcD.length === 12 && ciecD.length === 8) {
+          checkCiec(ciecD);
+        }
+        break;
+        default:
+          if (rfcD.length === 13 && ciecD.length === 8) {
+            checkCiec(ciecD);
+          }
+          break;
+    }
+  }, [ciecValid, rfcD, ciecD, type, user, dispatch]);
 
   
-  const { type } = user ? user.idClient : "";
+  
 
   const goToError = () => {
     const comercialNameError = document.getElementById("comercialName-error");
@@ -289,41 +341,6 @@ let ComercialInfoForm = (props) => {
   const upper = (value) => value && value.toUpperCase();
   const onlyLirycs = (nextValue, previousValue) =>
     /^([a-zñáéíóúü\s]{0,60})$/i.test(nextValue) ? nextValue : previousValue;
-
-  const checkCiec = (ciec) => {
-    
-    const awaitInputs = new Promise((resolve, reject) => {
-      ciec.length === 8 ? resolve(true) : resolve(false);
-    });
-    awaitInputs.then(async(res) => {
-      if(res){
-        let rfc = rfcD ? rfcD : false;
-
-        if(!rfcD){
-          setCiecMessage("ingresa un RFC valido para poder continuar");
-          return;
-        }
-        dispatch(updateLoader(true));
-        let newCiec = true;
-        let id = user._id ? user._id : false;
-        await axios.post("/ciec", { ciec, newCiec, rfc, id }).then((res) => {
-          if(res.status === 200){
-            setCiecMessage("CIEC valida");
-            setCiecValid(true)
-            sessionStorage.setItem("user", JSON.stringify(res.data.user));
-            setUser(res.data.user);
-          } else {
-            setCiecMessage("CIEC no valida");
-          }
-          dispatch(updateLoader(false));
-        }).catch((err) => {
-          setCiecMessage("CIEC no valida");
-          dispatch(updateLoader(false));
-        });
-        
-      }
-    });
-  };
 
   return (
     <div>
