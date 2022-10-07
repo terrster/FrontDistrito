@@ -237,8 +237,16 @@ let ComercialInfoForm = (props) => {
             if(res.status === 200){
               setCiecMessage("CIEC valida");
               setCiecValid(true)
-              sessionStorage.setItem("user", JSON.stringify(res.data.user));
-              setUser(res.data.user);
+              sessionStorage.setItem(
+                "user",
+                JSON.stringify(res.data.user)
+              );
+              if(sessionStorage.getItem("user")){
+                setUser(JSON.parse(sessionStorage.getItem("user")));
+              } else {
+                alert("no se pudo guardar el usuario en el sessionStorage");
+              }
+              
             } else {
               setCiecMessage("CIEC no valida");
             }
