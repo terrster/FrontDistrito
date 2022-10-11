@@ -25,17 +25,18 @@ const ComercialInfo = (props) => {
   const [initialValues, setInitialValues] = useState({});
   const [municipality, setMunicipality] = useState("");
   const [state, setState] = useState("");
+  const [user, setUser] = useState({});
   const history = useHistory();
 
   const onFormSubmit = async (dataForm) => {
     dispatch(updateLoader(true));
-    const user = JSON.parse(sessionStorage.getItem("user"));
+    // const user = JSON.parse(sessionStorage.getItem("user"));
     const id = user._id;
     const idClient = user.idClient;
     const data = {
       ...dataForm,
       state,
-      municipality
+      municipality,
     };
     if (idClient.appliance.length > 0) {
       const appliance = idClient.appliance[idClient.appliance.length - 1];
@@ -76,6 +77,15 @@ const ComercialInfo = (props) => {
   };
 
   useEffect(() => {
+    const $user = JSON.parse(sessionStorage.getItem("user"));
+    setUser($user);
+  }, []);
+
+  useEffect(() => {
+    if (!user) {
+      return;
+    }
+
     if (!toast.second) {
       execToast("second");
       dispatch(updateToast(toast, "second"));
@@ -83,7 +93,10 @@ const ComercialInfo = (props) => {
 
     const getData = async () => {
       dispatch(updateLoader(true));
-      const user = JSON.parse(sessionStorage.getItem("user"));
+      // const user = JSON.parse(sessionStorage.getItem("user"));
+      if(!user || !user.idClient){
+        return;
+      }
       const { idClient } = user;
       // Si ya tienen una solicitud, se actualiza
       if (idClient.appliance.length > 0) {
@@ -106,7 +119,7 @@ const ComercialInfo = (props) => {
             } else if (coloniasRequest.error) {
               colonias = [];
             }
-            
+
             setInitialValues({ ...comercial, ...address, paymentsMoreThan30, terminal, exportation, colonias });
           } catch (error) {
               let origin = process.env.REACT_APP_CONFIGURATION === 'production' ? 'Prod' : process.env.REACT_APP_CONFIGURATION === 'development' ? 'Dev' : 'Local';
@@ -130,7 +143,69 @@ const ComercialInfo = (props) => {
     };
 
     getData();
-  }, []);
+    
+  }, [user, toast, dispatch]);
+
+  // useEffect(() => {
+  //   if (!toast.second) {
+  //     execToast("second");
+  //     dispatch(updateToast(toast, "second"));
+  //   }
+
+  //   if(!user){
+  //     return;
+  //   }
+
+  //   const getData = async () => {
+  //     dispatch(updateLoader(true));
+  //     // const user = JSON.parse(sessionStorage.getItem("user"));
+  //     const { idClient } = user;
+  //     // Si ya tienen una solicitud, se actualiza
+  //     if (idClient.appliance.length > 0) {
+  //       const appliance = idClient.appliance[idClient.appliance.length - 1];
+  //       if (appliance.hasOwnProperty("idComercialInfo")) {
+  //         const comercial = appliance.idComercialInfo;
+  //         const address = comercial.address;
+  //         const paymentsMoreThan30 = comercial.paymentsMoreThan30 ? "1" : "0";
+  //         const terminal = comercial.terminal ? "1" : "0";
+  //         const exportation = comercial.exportation ? "1" : "0";
+  //         let colonias = [];
+  //         try {
+  //           const coloniasRequest = await axiosBase.get(
+  //             `https://api.copomex.com/query/info_cp/${address.zipCode}?token=${process.env.REACT_APP_SEPOMEXTOKEN}`
+  //           );
+  //           if (Array.isArray(coloniasRequest.data)) {
+  //             coloniasRequest.data.map((datos) => {
+  //               colonias.push(datos.response.asentamiento);
+  //             });
+  //           } else if (coloniasRequest.error) {
+  //             colonias = [];
+  //           }
+
+  //           setInitialValues({ ...comercial, ...address, paymentsMoreThan30, terminal, exportation, colonias });
+  //         } catch (error) {
+  //             let origin = process.env.REACT_APP_CONFIGURATION === 'production' ? 'Prod' : process.env.REACT_APP_CONFIGURATION === 'development' ? 'Dev' : 'Local';
+
+  //             if(origin === 'Prod'){
+  //               await axios.post('/private/api/sms_internal_notify', {
+  //                 msg: origin + ' - Ha ocurrido un error con la API de COPOMEX'
+  //               },{
+  //                 headers: {
+  //                   'tokensecret': 'D7Mqvg5aPcypn97dxdB/Kfe330wwu0IXx0pFQXIFmjs='
+  //                 }
+  //               });
+  //             }
+  //             setInitialValues({ ...comercial, ...address, paymentsMoreThan30, terminal, exportation, colonias });
+  //         }
+  //       }
+  //     }
+  //     // const { email } = JSON.parse(sessionStorage.getItem("user"));
+
+  //     dispatch(updateLoader(false));
+  //   };
+
+  //   getData();
+  // }, [user]);
 
   return (
     <div className="container mt-3">
@@ -151,6 +226,8 @@ const ComercialInfo = (props) => {
         setMunicipality={setMunicipality}
         state={state}
         municipality={municipality}
+        setUser={setUser}
+        user = {user}
       ></ComercialInfoForm>
     </div>
   );

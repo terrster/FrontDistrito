@@ -40,17 +40,18 @@ let ComercialInfoForm = (props) => {
   const [ciecMessage, setCiecMessage] = useState("");
   const [disabled, setDisabled] = useState(true);
   const [forceRender, setForceRender] = useState(true);
-  const [user , setUser] = useState(JSON.parse(sessionStorage.getItem("user")));
+  const [type, setType] = useState("");
 
   const {
     handleSubmit,
     valid,
     initialValues,
+    setUser,
+    user,
   } = props;
   const [rfcD, setRfcD] = useState("");
   const [ciecD, setCiecD] = useState("");
   const ciecRef = useRef(null);
-  const { type } = user ? user.idClient : "";
 
   const handleChange = async (event, id) => {
     const zipCode = event.target.value;
@@ -126,7 +127,9 @@ let ComercialInfoForm = (props) => {
     }
     const getData = async () => {
       dispatch(updateLoader(true));
-      const user = JSON.parse(sessionStorage.getItem("user"));
+      if(!user || !user.idClient){
+        return;
+      }
       const idClient = user.idClient;
       // Si ya tienen una solicitud, se actualiza
       if (idClient.appliance.length > 0) {
@@ -185,6 +188,11 @@ let ComercialInfoForm = (props) => {
   }, []);
 
   useEffect(() => {
+
+    if(!user || !user.idClient){
+      return;
+    }
+    
     if(user){
       let idClient = user.idClient;
       let appliance = idClient.appliance[0];
