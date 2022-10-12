@@ -581,6 +581,7 @@ ComercialInfoForm = reduxForm({
   form: "comercialInfoForm", // a unique identifier for this form
   validate: validateComercialInfo, // <--- validation function given to redux-form
   onChange: (values, dispatch, props) => {
+    
     if (props.initialValues.ciecstatus) {
       if (props.initialValues.ciecstatus === true) {
         return;
@@ -594,7 +595,7 @@ ComercialInfoForm = reduxForm({
         return;
       }
     }
-    
+
     if (ciec && rfc && ciecstatus === false) {
       if (ciec.length !== 8 && rfc.length < 12) {
         return;
@@ -611,7 +612,6 @@ ComercialInfoForm = reduxForm({
       dispatch(updateLoader(true, "estamos verificando tu CIEC"));
 
       checkCiec(ciec, rfc, id).then((res) => {
-        dispatch(updateLoader(false));
         if (res.data.status === 200) {
           sessionStorage.setItem("user", JSON.stringify(res.data.user));
           values.ciecstatus = true;
@@ -619,6 +619,8 @@ ComercialInfoForm = reduxForm({
           values.ciecstatus = false;
         }
       });
+
+      dispatch(updateLoader(false));
     }
   },
   enableReinitialize: true,
