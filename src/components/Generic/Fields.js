@@ -189,9 +189,10 @@ export const renderFieldFull = ({
   readOnly,
   big,
   meta: { touched, error, warning },
+  hide,
 }) => (
   <div>
-    <div className="input-container">
+    <div className="input-container" style={hide ? ({display:"none"}) : null}>
       {type !== "checkbox" &&
         (val ? (
           <input
