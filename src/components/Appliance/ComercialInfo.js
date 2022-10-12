@@ -25,7 +25,6 @@ const ComercialInfo = (props) => {
   const [initialValues, setInitialValues] = useState({});
   const [municipality, setMunicipality] = useState("");
   const [state, setState] = useState("");
-  const [user, setUser] = useState({});
   const history = useHistory();
 
   const onFormSubmit = async (dataForm) => {
@@ -77,36 +76,20 @@ const ComercialInfo = (props) => {
   };
 
   useEffect(() => {
-    const $user = JSON.parse(sessionStorage.getItem("user"));
-    
-    setUser($user);
-  }, []);
-
-  useEffect(() => {
     if (!toast.second) {
       execToast("second");
       dispatch(updateToast(toast, "second"));
     }
 
-    if(!user || !user._id){
-      return;
-    }
-
     const getData = async () => {
       dispatch(updateLoader(true));
-      
+      const user = JSON.parse(sessionStorage.getItem("user"));
       const { idClient } = user;
       // Si ya tienen una solicitud, se actualiza
       if (idClient.appliance.length > 0) {
         const appliance = idClient.appliance[idClient.appliance.length - 1];
         if (appliance.hasOwnProperty("idComercialInfo")) {
           const comercial = appliance.idComercialInfo;
-          
-          if(!comercial.address){
-            setInitialValues({ ...comercial});
-            dispatch(updateLoader(false));
-            return;
-          }
           const address = comercial.address;
           const paymentsMoreThan30 = comercial.paymentsMoreThan30 ? "1" : "0";
           const terminal = comercial.terminal ? "1" : "0";
@@ -147,7 +130,7 @@ const ComercialInfo = (props) => {
     };
 
     getData();
-  }, [user]);
+  }, []);
 
   return (
     <div className="container mt-3">
