@@ -37,10 +37,13 @@ let ComercialInfoForm = (props) => {
   const [zipCodeError, setZipCodeError] = useState(false);
   const [disabled, setDisabled] = useState(true);
   const [forceRender, setForceRender] = useState(true);
+  const [rfc, setRfc] = useState("");
+  const [ciec, setCiec] = useState("");
 
   const {
     handleSubmit,
-    valid
+    valid,
+    cieicValidation
   } = props;
   const ciecRef = useRef(null);
 
@@ -147,8 +150,24 @@ let ComercialInfoForm = (props) => {
     }
   }, []);
 
+  
+
   const user = JSON.parse(sessionStorage.getItem("user"));
   const { type } = user.idClient;
+
+  useEffect(() => {
+    if(ciec.length !== 8) {
+      return;
+    }
+    if(type === "PM" && rfc.length !== 12) {
+      return;
+    }
+
+    if(type === "PFAE" && rfc.length !== 13) {
+      return;
+    }
+    cieicValidation(ciec, rfc);
+  }, [ciec, rfc]);
 
   const goToError = () => {
     const comercialNameError = document.getElementById("comercialName-error");
@@ -274,6 +293,9 @@ let ComercialInfoForm = (props) => {
           normalize={upper}
           maxLength={12}
           minLength={12}
+          onChange={(event, newValue, previousValue) =>
+            setRfc(newValue)
+          }
         />
 
         <Field component={renderSelectField} name="employeesNumber" cls="mb-3">
@@ -451,7 +473,9 @@ let ComercialInfoForm = (props) => {
                     className="positionInfo"
                   />
                 </div>
-                <Field component={renderFieldFull} label="CIEC" name="ciec" />
+                <Field component={renderFieldFull} label="CIEC" name="ciec"  onChange={(event, newValue, previousValue) =>
+            setCiec( newValue )
+          }/>
                 <div className="fz18 gray50 text-dp mb-30 mt-2">
                 No es un dato obligatorio pero puede agilizar tu solicitud a la mitad del tiempo y ofrecerte mejores condiciones de crédito. Se ingresa por única ocasión para descargar la información necesaria mediante procesos automatizados
                 </div>
@@ -495,7 +519,7 @@ let ComercialInfoForm = (props) => {
           <option value="4">No</option>
         </Field>
         <div className="text-center" style={{ marginBottom: "50px" }}>
-          {refDocuments && !disabled && (
+          {/* {refDocuments && !disabled && (
             <Button
               id="ymb-dp-comercial-submit"
               type="submit"
@@ -518,7 +542,10 @@ let ComercialInfoForm = (props) => {
             >
               continuar
             </Button>
-          )}
+          )} */}
+          <Button type="submit" className={"mt-50 btn-blue-general"} style={{ width: '250px' }}>
+              continuar
+            </Button>
         </div>
       </form>
     </div>

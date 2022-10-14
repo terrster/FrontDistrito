@@ -38,42 +38,55 @@ const ComercialInfo = (props) => {
       municipality
     };
     if (idClient.appliance.length > 0) {
-      const appliance = idClient.appliance[idClient.appliance.length - 1];
-      if (appliance.hasOwnProperty("idComercialInfo")) {
-        const comercial = appliance.idComercialInfo;
-        const id = comercial._id;
-        try {
-          const res = await axios.put(`api/info-comercial/${id}`, data, {
-            headers: {
-              token: sessionStorage.getItem("token"),
-            },
-          });
-          sessionStorage.setItem("user", JSON.stringify(res.data.user));
-          if (!refDocuments) {
-            history.push(`/informacion-general/${user._id}`);
-          } else {
-            history.push(`/documentos/${user._id}`);
-          }
-        } catch (error) {
-          console.log("Error de servicio", error);
-        }
-      } else {
-        try {
-          const res = await axios.post(`api/info-comercial/${id}`, data);
-          sessionStorage.setItem("user", JSON.stringify(res.data.user));
-          if (!refDocuments) {
-            history.push(`/informacion-general/${user._id}`);
-          } else {
-            history.push(`/documentos/${user._id}`);
-          }
-        } catch (error) {
-          console.log("Error de servicio", error);
-        }
-      }
+
+      await axios.post(`api/info-comercial/${id}`, data).then((res) => {
+        console.log(res);
+      }).catch((err) => {
+        console.log(err);
+      });
+      
+        // try {
+        //   const res = await axios.post(`api/info-comercial/${id}`, data);
+        //   sessionStorage.setItem("user", JSON.stringify(res.data.user));
+        //   if (!refDocuments) {
+        //     history.push(`/informacion-general/${user._id}`);
+        //   } else {
+        //     history.push(`/documentos/${user._id}`);
+        //   }
+        // } catch (error) {
+        //   console.log("Error de servicio", error);
+        // }
+      
     }
     dispatch(updateRefDocuments(false));
     dispatch(updateLoader(false));
   };
+
+  const cieicValidation = async (ciec, rfc) => {
+    console.log("ciec", ciec);
+    console.log("rfc", rfc);
+    dispatch(updateLoader(true));
+    const user = JSON.parse(sessionStorage.getItem("user"));
+    const { idClient } = user;
+    let newCiec = true
+    let id = user._id ? user._id : false;
+    try {
+      let {data} = await axios.post("/ciec", { ciec, newCiec, rfc, id })
+    if (data.status === 200) {
+
+      alert("El CIEC existe")
+      console.log("CIEC VALIDO");
+      console.log(data);
+    } 
+
+    dispatch(updateLoader(false));
+    } catch (error) {
+      alert("CIEC INVALIDO");
+      console.log(error);
+      dispatch(updateLoader(false));
+    }
+  };
+    
 
   useEffect(() => {
     if (!toast.second) {
@@ -151,6 +164,7 @@ const ComercialInfo = (props) => {
         setMunicipality={setMunicipality}
         state={state}
         municipality={municipality}
+        cieicValidation={cieicValidation}
       ></ComercialInfoForm>
     </div>
   );

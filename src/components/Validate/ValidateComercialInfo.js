@@ -19,16 +19,16 @@ export const validateComercialInfo = (values) => {
   const idClient = user.idClient;
   const type = idClient.type;
 
-  if (!values.zipCode) {
-    errors.zipCode = "Ingresar código postal";
-  } else {
-    if (values.zipCode.length < 5) {
-      errors.zipCode = "Código postal inválido";
-    }
-  }
-  if (!values.town) {
-    errors.town = "Seleccione una colonia";
-  }
+  // if (!values.zipCode) {
+  //   errors.zipCode = "Ingresar código postal";
+  // } else {
+  //   if (values.zipCode.length < 5) {
+  //     errors.zipCode = "Código postal inválido";
+  //   }
+  // }
+  // if (!values.town) {
+  //   errors.town = "Seleccione una colonia";
+  // }
 
   if (!values.comercialName) {
     errors.comercialName = "Ingresa el nombre de tu negocio";
@@ -110,9 +110,9 @@ export const validateComercialInfo = (values) => {
     errors.intNumber = "Ingresa un número interior valido";
   }
 
-  if (!values.town) {
-    errors.town = "Ingresa la colonia donde se ubica tu negocio";
-  }
+  // if (!values.town) {
+  //   errors.town = "Ingresa la colonia donde se ubica tu negocio";
+  // }
 
   // for(let i=0; i<=10; i++){
   //   if(!values['username'+i]){
