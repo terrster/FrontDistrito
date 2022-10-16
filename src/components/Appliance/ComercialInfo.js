@@ -39,23 +39,23 @@ const ComercialInfo = (props) => {
     };
     if (idClient.appliance.length > 0) {
 
-      await axios.post(`api/info-comercial/${id}`, data).then((res) => {
-        console.log(res);
-      }).catch((err) => {
-        console.log(err);
-      });
+      // await axios.post(`api/info-comercial/${id}`, data).then((res) => {
+      //   console.log(res);
+      // }).catch((err) => {
+      //   console.log(err);
+      // });
       
-        // try {
-        //   const res = await axios.post(`api/info-comercial/${id}`, data);
-        //   sessionStorage.setItem("user", JSON.stringify(res.data.user));
-        //   if (!refDocuments) {
-        //     history.push(`/informacion-general/${user._id}`);
-        //   } else {
-        //     history.push(`/documentos/${user._id}`);
-        //   }
-        // } catch (error) {
-        //   console.log("Error de servicio", error);
-        // }
+        try {
+          const res = await axios.post(`api/info-comercial/${id}`, data);
+          sessionStorage.setItem("user", JSON.stringify(res.data.user));
+          if (!refDocuments) {
+            history.push(`/informacion-general/${user._id}`);
+          } else {
+            history.push(`/documentos/${user._id}`);
+          }
+        } catch (error) {
+          console.log("Error de servicio", error);
+        }
       
     }
     dispatch(updateRefDocuments(false));
@@ -63,8 +63,6 @@ const ComercialInfo = (props) => {
   };
 
   const cieicValidation = async (ciec, rfc) => {
-    console.log("ciec", ciec);
-    console.log("rfc", rfc);
     dispatch(updateLoader(true));
     const user = JSON.parse(sessionStorage.getItem("user"));
     const { idClient } = user;
@@ -73,17 +71,18 @@ const ComercialInfo = (props) => {
     try {
       let {data} = await axios.post("/ciec", { ciec, newCiec, rfc, id })
     if (data.status === 200) {
-
-      alert("El CIEC existe")
-      console.log("CIEC VALIDO");
-      console.log(data);
-    } 
-
-    dispatch(updateLoader(false));
-    } catch (error) {
-      alert("CIEC INVALIDO");
-      console.log(error);
+      console.log("data", data);
+      dispatch(updateToast({ type: "success", message: data.message }));
       dispatch(updateLoader(false));
+      return { status: true, type : "success" };
+    } else {
+      dispatch(updateLoader(false));
+      return { status: false, type : "invalid" };
+    }
+    } catch (error) {
+      console.log("Error de servicio", error);
+      dispatch(updateLoader(false));
+      return { status: false, type : "error" };
     }
   };
     

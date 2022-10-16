@@ -217,6 +217,7 @@ const NewDoc = () => {
       status: status,
       metadata: {
         uid: user._id,
+        dealId: user.hubspotDealId,
         socketId: socketId,
         docID: docID,
       },
