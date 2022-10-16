@@ -19,16 +19,18 @@ export const validateComercialInfo = (values) => {
   const idClient = user.idClient;
   const type = idClient.type;
 
-  // if (!values.zipCode) {
-  //   errors.zipCode = "Ingresar código postal";
-  // } else {
-  //   if (values.zipCode.length < 5) {
-  //     errors.zipCode = "Código postal inválido";
-  //   }
-  // }
-  // if (!values.town) {
-  //   errors.town = "Seleccione una colonia";
-  // }
+  if (process.env.REACT_APP_CONFIGURATION === 'production') {
+    if (!values.zipCode) {
+    errors.zipCode = "Ingresar código postal";
+  } else {
+    if (values.zipCode.length < 5) {
+      errors.zipCode = "Código postal inválido";
+    }
+  }
+  if (!values.town) {
+    errors.town = "Seleccione una colonia";
+  }
+  }
 
   if (!values.comercialName) {
     errors.comercialName = "Ingresa el nombre de tu negocio";

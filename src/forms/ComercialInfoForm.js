@@ -156,11 +156,20 @@ let ComercialInfoForm = (props) => {
     const appliance = idClient.appliance[idClient.appliance.length - 1];
     if (appliance.hasOwnProperty("idComercialInfo")) {
       const comercial = appliance.idComercialInfo;
-      setCiecStatus(comercial.ciecStatus);
+      for(let key in comercial){
+        if(key === "ciecstatus"){
+          setCiecStatus(comercial[key]);
+          (comercial[key] === true) ? setMessage("CIEC valida ") : setMessage("la CIEC no es válida")
+        }
+      }
     } else {
       setCiecStatus(false);
     }
-  }, [user]);
+  }, []);
+
+  useEffect(() => {
+    console.log("ciecStatus", ciecStatus);
+  }, [ciecStatus]);
 
   useEffect(() => {
     if (ciecStatus) {
@@ -179,13 +188,14 @@ let ComercialInfoForm = (props) => {
     }
     cieicValidation(ciec, rfc).then((res) => {
       if (res) {
-        const cstatus = res.status;
-        if (cstatus === "success") {
+        
+        const cstatus = res.code;
+        if (cstatus === 200) {
           setCiecStatus(true);
           setMessage("CIEC válido");
         } else {
-          const ctype = res.type;
-          if (ctype === "invalid") {
+          const ctype = res.code;
+          if (ctype === 404 ) {
             setMessage("la CIEC no es válida");
           } else {
             setMessage("error al validar la CIEC");

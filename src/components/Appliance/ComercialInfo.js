@@ -70,19 +70,20 @@ const ComercialInfo = (props) => {
     let id = user._id ? user._id : false;
     try {
       let {data} = await axios.post("/ciec", { ciec, newCiec, rfc, id })
-    if (data.status === 200) {
-      console.log("data", data);
-      dispatch(updateToast({ type: "success", message: data.message }));
+      
+    if (data.code === 200) {
       dispatch(updateLoader(false));
-      return { status: true, type : "success" };
+      return { status: true, type : "success", code : 200 };
     } else {
       dispatch(updateLoader(false));
-      return { status: false, type : "invalid" };
+      return { status: false, type : "invalid", code: 400 };
     }
     } catch (error) {
       console.log("Error de servicio", error);
+      let code = error.response.status;
+      console.log("code", code);
       dispatch(updateLoader(false));
-      return { status: false, type : "error" };
+      return { status: false, type : "error", code };
     }
   };
     
