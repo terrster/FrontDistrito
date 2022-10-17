@@ -234,6 +234,7 @@ export const imgFinancial = (financial) => {
 }
 
 export const dataFinancial = (financial, properties) => {//Propuestas
+    console.log('properties', properties);
     switch(financial.toUpperCase()){
         case 'ASPIRIA':
             return {
@@ -574,6 +575,25 @@ export const dataFinancial = (financial, properties) => {//Propuestas
                 logo: imgFinancial(financial),
                 class: 'KONFIO'
              };
+
+             case 'CAPITAL X':
+                return {
+                    financiera: 'CAPITAL X',
+                    monto: properties.monto_preaut.value,
+                    plazo: 'Hasta 12 meses',
+                    tasa: '1.5% al 3% mensual',
+                    logo: imgFinancial("CAPITALX"),
+                    class: 'CAPITALX'
+                };
+             case 'LENMI':
+                return {
+                    financiera: 'LENMI',
+                    monto: properties.monto_preaut.value,
+                    plazo: '6 meses',
+                    tasa: '3.0% + IVA',
+                    logo: imgFinancial(financial),
+                    class: 'LENMI'
+                };
 
     }
 }
@@ -924,5 +944,24 @@ export const dataFinancialFormalization = (properties) => {
                 logo: imgFinancial(financial),
                 class: 'KONFIO'
             };
+        case 'CAPITAL X':
+            return {
+                financiera: 'CAPITAL X',
+                monto: properties.n12_1_monto_autorizado.value,
+                plazo: properties.n12_3_plazo_autorizado.value + " meses",
+                tasa: properties.n12_2_tasa_autorizada.value + "% mensual",
+                logo: imgFinancial("CAPITALX"),
+                class: 'CAPITALX'
+            };
+        case 'LENMI':
+            return {
+                financiera: 'LENMI',
+                monto: properties.n12_1_monto_autorizado.value,
+                plazo: properties.n12_3_plazo_autorizado.value + " meses",
+                tasa: properties.n12_2_tasa_autorizada.value + "% mensual",
+                logo: imgFinancial(financial),
+                class: 'LENMI'
+            };
+    
     }
 }

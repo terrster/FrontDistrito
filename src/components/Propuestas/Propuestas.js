@@ -9,6 +9,7 @@ const Propuestas = () => {
 
     const [properties, setProperties] = useState(null);
     const [proposals, setProposals] = useState(null);
+    const [prueba, setPrueba] = useState(null);
     const [error, setError] = useState(false);
 
     useLayoutEffect( () => {
@@ -23,9 +24,9 @@ const Propuestas = () => {
             }
         }
 
-        //setTimeout(() => {
+        // setTimeout(() => {
             getHubspotProperties();
-        //}, 2000);
+        // }, 2000);
     }, []);
 
     useEffect( () => {
@@ -43,6 +44,35 @@ const Propuestas = () => {
         }
     }, [properties]);
 
+    const Financial = ({proposal}) => {
+
+        if(properties === null){
+            return null;
+        }
+        const financial = dataFinancial(proposal, properties);
+ 
+        return <SolicitudBox styleParams={{ marginTop: '15px' }}>
+        {
+            <div className="text-dp p-1 fz12">
+                <Row>
+                    <Col xs={8}>
+                        Banco/Financiera: {financial.financiera}<br></br>
+                        Monto Estimado: { financial.monto < 10000 ? 'Pendiente' : '$' + new Intl.NumberFormat().format(financial.monto).toString().replace('.', ',')}<br></br>
+                        Plazo: {financial.plazo}<br></br>
+                        Tasa: {financial.tasa}<br></br>
+                    </Col>
+                    <Col xs={4}>
+                        <div className="float-right mr-2">
+                            <img src={financial.logo} alt={financial.financiera} style={{ width: '100px' }} className={`imgAlianza ${financial.class}`}/>
+                        </div>
+                    </Col>
+                </Row>
+            </div>
+        }
+    </SolicitudBox>
+    }
+
+
     return (
         <div className="container">
             <Row>
@@ -54,27 +84,7 @@ const Propuestas = () => {
                         {
                             proposals != null &&
                             proposals.map((proposal, i) => {
-                                const financial = dataFinancial(proposal, properties);
- 
-                                return <SolicitudBox key={i} styleParams={{ marginTop: '15px' }}>
-                                    {
-                                        <div className="text-dp p-1 fz12">
-                                            <Row>
-                                                <Col xs={8}>
-                                                    Banco/Financiera: {financial.financiera}<br></br>
-                                                    Monto Estimado: { financial.monto < 10000 ? 'Pendiente' : '$' + new Intl.NumberFormat().format(financial.monto).toString().replace('.', ',')}<br></br>
-                                                    Plazo: {financial.plazo}<br></br>
-                                                    Tasa: {financial.tasa}<br></br>
-                                                </Col>
-                                                <Col xs={4}>
-                                                    <div className="float-right mr-2">
-                                                        <img src={financial.logo} alt={financial.financiera} style={{ width: '100px' }} className={`imgAlianza ${financial.class}`}/>
-                                                    </div>
-                                                </Col>
-                                            </Row>
-                                        </div>
-                                    }
-                                </SolicitudBox>
+                                return <Financial key={i} proposal={proposal} />
                             })
                         }
                         {
