@@ -25,7 +25,7 @@ import PopUp from "./PopUp";
 import Info from "../assets/img/info-01.png";
 // import Delete from "../assets/img/basura-01.png";
 import scroll from "../utils/scroll";
-// import axios from "../utils/axios";
+import axios from "../utils/axios";
 // import DeleteIcon from "@material-ui/icons/Delete";
 
 let ComercialInfoForm = (props) => {
@@ -37,11 +37,12 @@ let ComercialInfoForm = (props) => {
   const [zipCodeError, setZipCodeError] = useState(false);
   const [disabled, setDisabled] = useState(true);
   const [forceRender, setForceRender] = useState(true);
+  const [rfc, setRfc] = useState("");
+  const [ciec, setCiec] = useState("");
+  const [ciecStatus, setCiecStatus] = useState(false);
+  const [message, setMessage] = useState("");
 
-  const {
-    handleSubmit,
-    valid
-  } = props;
+  const { handleSubmit, valid, cieicValidation } = props;
   const ciecRef = useRef(null);
 
   const handleChange = async (event, id) => {
@@ -125,7 +126,7 @@ let ComercialInfoForm = (props) => {
             props.setState(estado);
             props.setMunicipality(municipio);
             setZipCodeError(false);
-          } catch (error) {       
+          } catch (error) {
             props.setState("");
             props.setMunicipality("");
             setColonias([]);
@@ -150,16 +151,77 @@ let ComercialInfoForm = (props) => {
   const user = JSON.parse(sessionStorage.getItem("user"));
   const { type } = user.idClient;
 
+  useEffect(() => {
+    const idClient = user.idClient;
+    const appliance = idClient.appliance[idClient.appliance.length - 1];
+    if (appliance.hasOwnProperty("idComercialInfo")) {
+      const comercial = appliance.idComercialInfo;
+      for(let key in comercial){
+        if(key === "ciecstatus"){
+          setCiecStatus(comercial[key]);
+          (comercial[key] === true) ? setMessage("CIEC valida ") : setMessage("la CIEC no es válida")
+        }
+      }
+    } else {
+      setCiecStatus(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    console.log("ciecStatus", ciecStatus);
+  }, [ciecStatus]);
+
+  useEffect(() => {
+    if (ciecStatus) {
+      return;
+    }
+
+    if (ciec.length !== 8) {
+      return;
+    }
+    if (type === "PM" && rfc.length !== 12) {
+      return;
+    }
+
+    if (type === "PFAE" && rfc.length !== 13) {
+      return;
+    }
+    cieicValidation(ciec, rfc).then((res) => {
+      if (res) {
+        
+        const cstatus = res.code;
+        if (cstatus === 200) {
+          setCiecStatus(true);
+          setMessage("CIEC válido");
+        } else {
+          const ctype = res.code;
+          if (ctype === 404 ) {
+            setMessage("la CIEC no es válida");
+          } else {
+            setMessage("error al validar la CIEC");
+          }
+          setCiecStatus(false);
+        }
+      }
+    });
+  }, [ciec, rfc]);
+
   const goToError = () => {
     const comercialNameError = document.getElementById("comercialName-error");
     const gyreError = document.getElementById("gyre-error");
     const businessNameError = document.getElementById("businessName-error");
     const specificError = document.getElementById("specific-error");
     const rfcError = document.getElementById("rfc-error");
-    const employeesNumberError = document.getElementById("employeesNumber-error");
+    const employeesNumberError = document.getElementById(
+      "employeesNumber-error"
+    );
     const bankAccountError = document.getElementById("bankAccount-error");
-    const paymentsMoreThan30Error = document.getElementById("paymentsMoreThan30-error");
-    const empresarialCreditCardError = document.getElementById("empresarialCreditCard-error");
+    const paymentsMoreThan30Error = document.getElementById(
+      "paymentsMoreThan30-error"
+    );
+    const empresarialCreditCardError = document.getElementById(
+      "empresarialCreditCard-error"
+    );
     const streetError = document.getElementById("street-error");
     const extNumberError = document.getElementById("extNumber-error");
     const intNumberError = document.getElementById("intNumber-error");
@@ -216,7 +278,7 @@ let ComercialInfoForm = (props) => {
   }
 
   const LirycsNumbersDotComa = (nextValue, previousValue) =>
-   /^([a-z ñáéíóú0-9,.]{0,45})$/i.test(nextValue) ? nextValue : previousValue;
+    /^([a-z ñáéíóú0-9,.]{0,45})$/i.test(nextValue) ? nextValue : previousValue;
   const onlyNumbers = (nextValue, previousValue) =>
     /^[+]?([0-9]+(?:[,.][0-9]*)?|,.[0-9]+)$/.test(nextValue) ||
     nextValue.length === 0
@@ -225,6 +287,22 @@ let ComercialInfoForm = (props) => {
   const upper = (value) => value && value.toUpperCase();
   const onlyLirycs = (nextValue, previousValue) =>
     /^([a-zñáéíóúü\s]{0,60})$/i.test(nextValue) ? nextValue : previousValue;
+
+  const CheckConsulta = async () => {
+    const user = JSON.parse(sessionStorage.getItem("user"));
+    const id = user._id;
+    const data = {
+      name: "hola",
+    };
+    await axios
+      .post(`api/info-comercial/${id}`, data)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <div>
@@ -274,6 +352,7 @@ let ComercialInfoForm = (props) => {
           normalize={upper}
           maxLength={12}
           minLength={12}
+          onChange={(event, newValue, previousValue) => setRfc(newValue)}
         />
 
         <Field component={renderSelectField} name="employeesNumber" cls="mb-3">
@@ -289,8 +368,7 @@ let ComercialInfoForm = (props) => {
           })}
         </Field>
 
-        {
-          type === "PM" &&
+        {type === "PM" && (
           <Field component={renderSelectField} name="bankAccount" cls="mb-3">
             <option className="metropolisReg" value="">
               ¿Tienes cuenta bancaria?
@@ -303,11 +381,14 @@ let ComercialInfoForm = (props) => {
               );
             })}
           </Field>
-        }
+        )}
 
-        {
-          type !== "PF" &&
-          <Field component={renderSelectField} name="paymentsMoreThan30" cls="mb-3">
+        {type !== "PF" && (
+          <Field
+            component={renderSelectField}
+            name="paymentsMoreThan30"
+            cls="mb-3"
+          >
             <option className="metropolisReg" value="">
               ¿Alguno de tus clientes te pagan a más de 30 días?
             </option>
@@ -318,11 +399,14 @@ let ComercialInfoForm = (props) => {
               No
             </option>
           </Field>
-        }
+        )}
 
-        {
-          (type === "PM" || type === "PFAE") &&
-          <Field component={renderSelectField} name="empresarialCreditCard" cls="mb-3">
+        {(type === "PM" || type === "PFAE") && (
+          <Field
+            component={renderSelectField}
+            name="empresarialCreditCard"
+            cls="mb-3"
+          >
             <option className="metropolisReg" value="">
               ¿Cuentas con tarjeta de crédito empresarial?
             </option>
@@ -334,7 +418,7 @@ let ComercialInfoForm = (props) => {
               );
             })}
           </Field>
-        }
+        )}
 
         <label className="label-style">
           El número telefónico debe tener 10 dígitos
@@ -432,10 +516,7 @@ let ComercialInfoForm = (props) => {
           {type !== "PF" && (
             <>
               <Col lg={12} md={12} sm={12}>
-                <SubtitleForm
-                  subtitle="Clave CIEC (Opcional)"
-                  className="mt-30"
-                />
+                <SubtitleForm subtitle="Clave CIEC" className="mt-30" />
                 <div
                   onClick={() => {
                     dispatch(updateModalCiec(true));
@@ -451,9 +532,38 @@ let ComercialInfoForm = (props) => {
                     className="positionInfo"
                   />
                 </div>
-                <Field component={renderFieldFull} label="CIEC" name="ciec" />
+                <Field
+                  component={renderFieldFull}
+                  label="CIEC"
+                  name="ciec"
+                  onChange={(event, newValue, previousValue) => {
+                    setCiec(newValue)
+                    setMessage("")
+                  }
+                  }
+                />
+                <Field
+                  component={renderFieldFull}
+                  type="checkbox"
+                  label="ciec status"
+                  name="ciecstatus"
+                  hide={true}
+                />
+                {
+                  message &&  (
+                    <span id={ciecStatus ? "CIEC-valid" : "CIEC-error"}>
+                    <small className={ciecStatus ? "valid" : "error"}>
+                      {message}
+                      </small>
+                      </span>
+
+                  )
+                }
                 <div className="fz18 gray50 text-dp mb-30 mt-2">
-                No es un dato obligatorio pero puede agilizar tu solicitud a la mitad del tiempo y ofrecerte mejores condiciones de crédito. Se ingresa por única ocasión para descargar la información necesaria mediante procesos automatizados
+                  No es un dato obligatorio pero puede agilizar tu solicitud a
+                  la mitad del tiempo y ofrecerte mejores condiciones de
+                  crédito. Se ingresa por única ocasión para descargar la
+                  información necesaria mediante procesos automatizados
                 </div>
               </Col>
               <PopUp />
@@ -474,19 +584,28 @@ let ComercialInfoForm = (props) => {
           name="facebook"
           cls="mb-3"
         />
-        <InputLabel label="¿Cuentas con terminal punto de venta?" class="mt-b2 text-msg-dp" />
+        <InputLabel
+          label="¿Cuentas con terminal punto de venta?"
+          class="mt-b2 text-msg-dp"
+        />
         <Field component={renderSelectField} name="terminal" cls="mb-3">
           <option value="">Seleccionar</option>
           <option value="1">Sí</option>
           <option value="0">No</option>
         </Field>
-        <InputLabel label="¿Vendes tu producto o servicio al extranjero?" class="mt-b2 text-msg-dp" />
+        <InputLabel
+          label="¿Vendes tu producto o servicio al extranjero?"
+          class="mt-b2 text-msg-dp"
+        />
         <Field component={renderSelectField} name="exportation" cls="mb-3">
           <option value="">Seleccionar</option>
           <option value="1">Sí</option>
           <option value="0">No</option>
         </Field>
-        <InputLabel label="¿Puedes ofrecer una garantía?" class="mt-b2 text-msg-dp" />
+        <InputLabel
+          label="¿Puedes ofrecer una garantía?"
+          class="mt-b2 text-msg-dp"
+        />
         <Field component={renderSelectField} name="warranty" cls="mb-3">
           <option value="">Seleccionar</option>
           <option value="1">Sí, garantía inmobiliaria</option>
@@ -505,7 +624,11 @@ let ComercialInfoForm = (props) => {
             </Button>
           )}
           {!refDocuments && !disabled && (
-            <Button type="submit" className={"mt-50 btn-blue-general"} style={{ width: '250px' }}>
+            <Button
+              type="submit"
+              className={"mt-50 btn-blue-general"}
+              style={{ width: "250px" }}
+            >
               continuar
             </Button>
           )}
@@ -514,11 +637,14 @@ let ComercialInfoForm = (props) => {
               type="button"
               className="mt-50 btn-blue-general btn-gray-general"
               onClick={() => goToError()}
-              style={{ width: '250px' }}
+              style={{ width: "250px" }}
             >
               continuar
             </Button>
           )}
+          {/* <Button type="button" className={"mt-50 btn-blue-general"} style={{ width: '250px' }} onClick={CheckConsulta}>
+              continuar
+            </Button> */}
         </div>
       </form>
     </div>

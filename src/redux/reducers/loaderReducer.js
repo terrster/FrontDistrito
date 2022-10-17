@@ -1,9 +1,11 @@
 import {
-    UPDATE_LOADER
+    UPDATE_LOADER,
+    UPDATE_LOADER_ALT
 } from '../types/loaderTypes'
 
 const initialState = {
-    isLoading: false
+    isLoading: false,
+    msg: 'Estamos procesando tus documentos y en breve te daremos una respuesta'
 }
 
 const loaderReducer = (state = initialState, action) => {
@@ -11,7 +13,14 @@ const loaderReducer = (state = initialState, action) => {
         case UPDATE_LOADER:
             return {
                 ...state,
-                isLoading: action.payload
+                isLoading: action.payload.loading,
+                msg: action.payload.msg
+            }
+        case UPDATE_LOADER_ALT:
+            return {
+                ...state,
+                isLoading: action.payload.loading,
+                msg: action.payload.msg
             }
         default: 
             return state

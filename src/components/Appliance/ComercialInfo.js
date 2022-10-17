@@ -38,26 +38,13 @@ const ComercialInfo = (props) => {
       municipality
     };
     if (idClient.appliance.length > 0) {
-      const appliance = idClient.appliance[idClient.appliance.length - 1];
-      if (appliance.hasOwnProperty("idComercialInfo")) {
-        const comercial = appliance.idComercialInfo;
-        const id = comercial._id;
-        try {
-          const res = await axios.put(`api/info-comercial/${id}`, data, {
-            headers: {
-              token: sessionStorage.getItem("token"),
-            },
-          });
-          sessionStorage.setItem("user", JSON.stringify(res.data.user));
-          if (!refDocuments) {
-            history.push(`/informacion-general/${user._id}`);
-          } else {
-            history.push(`/documentos/${user._id}`);
-          }
-        } catch (error) {
-          console.log("Error de servicio", error);
-        }
-      } else {
+
+      // await axios.post(`api/info-comercial/${id}`, data).then((res) => {
+      //   console.log(res);
+      // }).catch((err) => {
+      //   console.log(err);
+      // });
+      
         try {
           const res = await axios.post(`api/info-comercial/${id}`, data);
           sessionStorage.setItem("user", JSON.stringify(res.data.user));
@@ -69,11 +56,37 @@ const ComercialInfo = (props) => {
         } catch (error) {
           console.log("Error de servicio", error);
         }
-      }
+      
     }
     dispatch(updateRefDocuments(false));
     dispatch(updateLoader(false));
   };
+
+  const cieicValidation = async (ciec, rfc) => {
+    dispatch(updateLoader(true));
+    const user = JSON.parse(sessionStorage.getItem("user"));
+    const { idClient } = user;
+    let newCiec = true
+    let id = user._id ? user._id : false;
+    try {
+      let {data} = await axios.post("/ciec", { ciec, newCiec, rfc, id })
+      
+    if (data.code === 200) {
+      dispatch(updateLoader(false));
+      return { status: true, type : "success", code : 200 };
+    } else {
+      dispatch(updateLoader(false));
+      return { status: false, type : "invalid", code: 400 };
+    }
+    } catch (error) {
+      console.log("Error de servicio", error);
+      let code = error.response.status;
+      console.log("code", code);
+      dispatch(updateLoader(false));
+      return { status: false, type : "error", code };
+    }
+  };
+    
 
   useEffect(() => {
     if (!toast.second) {
@@ -151,6 +164,7 @@ const ComercialInfo = (props) => {
         setMunicipality={setMunicipality}
         state={state}
         municipality={municipality}
+        cieicValidation={cieicValidation}
       ></ComercialInfoForm>
     </div>
   );

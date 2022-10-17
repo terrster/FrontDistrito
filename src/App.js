@@ -56,7 +56,7 @@ import BrokersLanding from "./components/BrokersLanding/BrokersLanding";
 import Dashboard from "./components/Dashboard/Dashboard";
 import DeleteComp from "./components/delete/delate";
 import WaitPage from "./components/waitPage/WaitPage";
-
+import NewDoc from "./components/metamap/NewDoc";
 import AlliePartner from "./components/Allies/AlliePartner";
 import ThankyouPageAllie from "./components/Allies/ThankyouPageAllie";
 
@@ -145,6 +145,7 @@ class App extends Component {
                 <Route path="/privacidad" exact component={Privacy} />
                 <Route path="/reset-password" exact component={ResetPassword} />
                 <Route path="/nuestros-aliados" exact component={OurAllies}/>
+                {/* <Route path="/newdoc" exact component={NewDoc} /> */}
                 <Route
                   path="/recover-password/:hash"
                   exact
@@ -188,7 +189,7 @@ class App extends Component {
                 <PrivateRoute
                   exact
                   path="/documentos/:idAppliance"
-                  component={Documents}
+                  component={NewDoc}
                 />
                 <Route path="/open-banking" exact component={OpenBanking}/>
                 {/* <PrivateRoute

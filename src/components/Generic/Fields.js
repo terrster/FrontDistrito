@@ -35,6 +35,7 @@ export const renderField = ({
             placeholder={label}
             type={type}
             maxLength="13"
+            autoComplete="off"
             disabled={disabled}
           />
         ) : label === "RFC" &&
@@ -188,9 +189,10 @@ export const renderFieldFull = ({
   readOnly,
   big,
   meta: { touched, error, warning },
+  hide,
 }) => (
   <div>
-    <div className="input-container">
+    <div className="input-container" style={hide ? ({display:"none"}) : null}>
       {type !== "checkbox" &&
         (val ? (
           <input
@@ -221,6 +223,7 @@ export const renderFieldFull = ({
             type='password'
             maxLength="8"
             minLength="8"
+            autoComplete="off"
             disabled={disabled ? disabled : false}
           />
         ) : label === "edad" ? (
