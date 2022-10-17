@@ -135,7 +135,7 @@ export const validateGeneralInfo = (values) => {
   } else if (!/^[0-9]{3}\d$/.test(values.last4)) {
     errors.last4 = "Ingresa un número válido";
   }
-
+  if (process.env.REACT_APP_CONFIGURATION === 'production') {
   if (!values.sameAddress) {
     if (!values.street) {
       errors.street = "Ingresa la calle de tu domicilio";
@@ -182,6 +182,7 @@ export const validateGeneralInfo = (values) => {
     ) {
       errors.zipCode = "Ingresa un código postal valido";
     }
+  }
   }
   if (!values.tyc) {
     errors.tyc = "Debes aceptar para avanzar";

@@ -302,6 +302,12 @@ const NewDoc = () => {
   };
   const handleUpload = async () => {
     dispatch(updateLoader(true));
+
+    if(JSON.parse(sessionStorage.getItem("user")).idClient.appliance[0].idDocuments === undefined || JSON.parse(sessionStorage.getItem("user")).idClient.appliance[0].idDocuments === null){
+      dispatch(updateLoader(false));
+      history.push("/credito");
+      return;
+    }
     
     if (
       JSON.parse(sessionStorage.getItem("user")).idClient.appliance[0]
