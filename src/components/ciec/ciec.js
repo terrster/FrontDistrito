@@ -48,7 +48,7 @@ const goToError = () => {
     const {rfc, ciec } = data;
     if(rfc && ciec){
     try{
-      const res = await axios.post(`ciec`, data);
+      const res = await axios.post(`/ciec`, data);
       console.log(res);
       if (res.status === 200) {
         res.data.status === "invalid" ? dataR(errorLogo, "ERROR", res.data.msg, "error", false) : dataR(registerImage, "¡Registro exitoso!", res.data.msg, "success", true);
