@@ -19,7 +19,7 @@ const NavBar = props => {
 		'pagaloop',
 		'impulsomx',
 		'visoor',
-		'oficinanoreste',
+		'montanofinanzas',
 		'dg-impulsando',
 		'se1',
 		'eurorep',
