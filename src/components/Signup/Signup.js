@@ -29,8 +29,8 @@ import visoorMovil from '../../assets/img/financialPartners/Visoor-Movil.jpg';
 import PagaloopWEB from '../../assets/img/financialPartners/Pagaloop-WEB.jpg';
 import PagaloopMovil from '../../assets/img/financialPartners/Pagaloop-Movil.jpg';
 
-import OficinaNoreste from '../../assets/img/financialPartners/montaño_WEB.jpg';
-import OficinaNoresteMobile from '../../assets/img/financialPartners/montaño_MOVIL.jpg';
+import MontanoFinanzas from '../../assets/img/financialPartners/montaño_WEB.jpg';
+import MontanoFinanzasMobile from '../../assets/img/financialPartners/montaño_MOVIL.jpg';
 
 import DGimpulsandoWEB from '../../assets/img/financialPartners/DGimpulsandoWEB.jpg';
 import DGimpulsandoMobile from '../../assets/img/financialPartners/DGimpulsandoMobile.jpg';
@@ -89,15 +89,15 @@ const financialPartner = (partner) => {
         brokercode: '36408310'//Luis Fer - DP
       }
 
-      case 'OFICINANORESTE':
+      case 'MONTANOFINANZAS':
       return {
-        image: [OficinaNoreste, OficinaNoresteMobile],
+        image: [MontanoFinanzas, MontanoFinanzasMobile],
         text: [
           'Solicita un crédito para tu empresa o negocio a través de nuestro aliado Distrito Pyme.',
           'Podrás recibir las mejores opciones de crédito en menos de 15 min con un proceso fácil, rápido y sin papeleos.'
         ],
-        prefix: process.env.REACT_APP_CONFIGURATION === 'localhost' || process.env.REACT_APP_CONFIGURATION === 'development' ? 'OficinanoresteDev - ' : 'Oficinanoreste - ',
-        channel: 'Oficinanoreste',
+        prefix: process.env.REACT_APP_CONFIGURATION === 'localhost' || process.env.REACT_APP_CONFIGURATION === 'development' ? 'MontanoFinanzasDev - ' : 'MontanoFinanzas - ',
+        channel: 'MontanoFinanzas',
         brokercode: '163808949'//
       }
 
