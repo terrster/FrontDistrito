@@ -29,8 +29,8 @@ import visoorMovil from '../../assets/img/financialPartners/Visoor-Movil.jpg';
 import PagaloopWEB from '../../assets/img/financialPartners/Pagaloop-WEB.jpg';
 import PagaloopMovil from '../../assets/img/financialPartners/Pagaloop-Movil.jpg';
 
-import OficinaNoreste from '../../assets/img/financialPartners/oficina_noreste_web.webp';
-import OficinaNoresteMobile from '../../assets/img/financialPartners/oficina_noreste_movil.webp';
+import OficinaNoreste from '../../assets/img/financialPartners/montaño_WEB.jpg';
+import OficinaNoresteMobile from '../../assets/img/financialPartners/montaño_MOVIL.jpg';
 
 import DGimpulsandoWEB from '../../assets/img/financialPartners/DGimpulsandoWEB.jpg';
 import DGimpulsandoMobile from '../../assets/img/financialPartners/DGimpulsandoMobile.jpg';

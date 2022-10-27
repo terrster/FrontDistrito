@@ -60,7 +60,7 @@ const Login = props => {
 						</Button>
 					</div>
 				</Modal>
-				<div className="container mt-30 mb-30 d-flex flex-column align-items-center justify-content-center" style={{height : '600px'}}>
+				<div className="container d-flex flex-column align-items-center" style={{maxHeight : '600px', padding:"1rem"}}>
 					<Title className="title-dp fz56 fw500" title="Inicia sesión" />
 					<div className="mt-30 subtitle-dp fw300 fz20 mb-30">
 						<label className="gray50">ingresa tu correo y contraseña para comenzar</label>
