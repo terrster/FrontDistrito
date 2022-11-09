@@ -277,7 +277,7 @@ const Signup = props => {
 
   if (sessionStorage.getItem("nameUser")) {
     setTimeout(() => {
-      window.location = "/home";
+      window.location = "/micuenta";
     }, 5000)
     //return (<RegistroExitoso />);
   }else {
