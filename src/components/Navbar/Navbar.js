@@ -102,7 +102,7 @@ const NavBar = props => {
 							}
 							{ 
 								showHome &&
-								<Link onClick={close} to="/home" className={ (props.url === 'home') ? classDefault+' nav_bar_active': classDefault}>mi cuenta</Link>
+								<Link onClick={close} to="/micuenta" className={ (props.url === 'micuenta') ? classDefault+' nav_bar_active': classDefault}>mi cuenta</Link>
 							}
 							<Nav.Link onClick={close} href="/" className="text-center blackBlue heigth-45 metropolisReg"> <Button className="logout fz-12" onClick={() => {
 								sessionStorage.clear();
