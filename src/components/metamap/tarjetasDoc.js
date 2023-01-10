@@ -396,7 +396,7 @@ const BodyCard = (props) => {
       },
       {
         name: "bankStatements",
-        flow: "62f197e88a9445001c6bc082",
+        flow: "635bfc4f15a32c001cf0214f",
         description: "estados de cuenta bancarios",
         step: 1,
       },
