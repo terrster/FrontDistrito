@@ -60,6 +60,8 @@ import NewDoc from "./components/metamap/NewDoc";
 import AlliePartner from "./components/Allies/AlliePartner";
 import ThankyouPageAllie from "./components/Allies/ThankyouPageAllie";
 import Owners from "./components/admin/owners";
+import LoginAdmin from "./components/admin/loginAdmin";
+import SettingsCards from "./components/admin/SettingsCards";
 
 // ROUTER & REDUX
 import {
@@ -158,6 +160,8 @@ class App extends Component {
                 <Route path="/login/:redirect?" exact component={Login} />
                 <Route path="/brokers-registro" exact component={Brokers}/>
                 <Route path="/owner" exact component={Owners}/>
+                <Route path="/admin/login" exact component={LoginAdmin}/>
+                <Route path="/admin/control" exact component={SettingsCards}/>
                 <Route path="/brokersCP" exact component={CPBrokers}/>
                 <Route path="/solicitud_enviada_brokers" exact component={ThankyouPage} />
                 <Route path="/contador" exact component={Counter}/>
