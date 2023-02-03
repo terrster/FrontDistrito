@@ -62,6 +62,8 @@ import ThankyouPageAllie from "./components/Allies/ThankyouPageAllie";
 import Owners from "./components/admin/owners";
 import LoginAdmin from "./components/admin/loginAdmin";
 import SettingsCards from "./components/admin/SettingsCards";
+import AdminLanding from "./components/admin/AdminLanding";
+import Consultas from "./components/admin/consultas";
 
 // ROUTER & REDUX
 import {
@@ -161,7 +163,9 @@ class App extends Component {
                 <Route path="/brokers-registro" exact component={Brokers}/>
                 <Route path="/owner" exact component={Owners}/>
                 <Route path="/admin/login" exact component={LoginAdmin}/>
+                <Route path="/admin/consultas" exact component={Consultas}/>
                 <Route path="/admin/control" exact component={SettingsCards}/>
+                <Route path="/admin" exact component={AdminLanding}/>
                 <Route path="/brokersCP" exact component={CPBrokers}/>
                 <Route path="/solicitud_enviada_brokers" exact component={ThankyouPage} />
                 <Route path="/contador" exact component={Counter}/>
