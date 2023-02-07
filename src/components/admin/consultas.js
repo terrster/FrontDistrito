@@ -20,64 +20,65 @@ import {
   TableRow,
   TableContainer,
   Paper,
+  Chip,
 } from "@material-ui/core";
+import { styled } from "@material-ui/core/styles";
 import Axios from "../../utils/axios";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 import { indexOf } from "lodash";
 import { get } from "jquery";
 
-const Consulta = ({ consulta, setOpen, ...rest }) => {
-  const [datos, setDatos] = React.useState(consulta);
+const StyledButton = styled(Button)({
+  background: "#023e8a",
+  border: 0,
+  borderRadius: "3rem",
+  boxShadow: "0 3px 5px 2px rgba(138, 105, 255, 0.3)",
+  color: "white",
+  height: "2rem",
+  padding: "0 30px",
+});
 
-  React.useEffect(() => {
-    setDatos(consulta);
-  }, [consulta]);
+
+const Consulta = ({ code, setOpen, ...rest }) => {
+  const [success, setSuccess] = React.useState(false);
+
   return (
-    <Card
-      elevation={5}
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        height: "100%",
-        padding: "1rem",
-      }}
-      {...rest}
-    >
-      <TableContainer component={Paper}>
-        <Table aria-label="simple table">
-          {Object.keys(datos).map((key, index) => {
-            return (
-              <TableRow key={index}>
-                <TableCell align="left">{key}</TableCell>
-                <TableCell align="left">{datos[key]}</TableCell>
-              </TableRow>
-            );
-          })}
-        </Table>
-      </TableContainer>
-      <Box sx={{ flexGrow: 1 }} />
-      {/* <Divider /> */}
-      <Box style={{ p: 2 }}>
-        <Grid container spacing={2} style={{ justifyContent: "center" }}>
-          {/* <Grid
-                item
-                sx={{
-                alignItems: "center",
-                display: "flex",
-                justifyContent: "center",
-                }}
-            >
-                <Typography
-                color="textSecondary"
-                display="inline"
-                sx={{ pl: 1 }}
-                variant="body2"
-                >
-                Updated 2hr ago
-                </Typography>
-            </Grid> */}
-        </Grid>
-      </Box>
-    </Card>
+    <Box style={{ p: 2 }}>
+      <CopyToClipboard text={code}>
+        <Button
+          variant="contained"
+          color="primary"
+          style={{
+            position: "absolute",
+            top: "1.5rem",
+            right: "3rem",
+            backgroundColor: success ? "green" : "primary.main",
+          }}
+          onClick={() => setSuccess(true)}
+        >
+          <Box color="white" mr={0.5} className="fas fa-copy" /> Copy
+        </Button>
+      </CopyToClipboard>
+      <SyntaxHighlighter
+        language="jsx"
+        style={atomDark}
+        showLineNumbers
+        customStyle={{
+          minWidth: "100%",
+          minHeight: "10rem",
+          maxHeight: "30rem",
+          // fontSize: "1rem",
+          // backgroundColor: "#fff",
+          padding: "1rem 1rem 1rem 0.25rem",
+          overflowY: "scroll",
+          margin: 0,
+        }}
+      >
+        {code}
+      </SyntaxHighlighter>
+    </Box>
   );
 };
 
@@ -87,54 +88,82 @@ const TableTop = ({ keys, setOpen, ...rest }) => {
       <TableRow id="tableHead">
         {keys.map((key, index) => {
           return (
-            <TableCell key={"tableHead" + index} align="left">
+            <TableCell key={"tableHead" + index} align="center">
               {key}
             </TableCell>
           );
         })}
-        <TableCell align="left">Acciones</TableCell>
+        
       </TableRow>
     </TableHead>
   );
 };
 
-const TableBottom = ({ consultas, setOpen, keys, ...rest }) => {
+const TableBottom = ({ consultas, setOpen, keys, displayData, ...rest }) => {
   let columns = keys;
+  let displayOrder = {};
+
+  keys.map((key, index) => {
+    displayOrder[key] = { index: index };
+  });
+
   function createCell(key, value, index) {
     let cell = null;
     if (typeof value === "object") {
-      value = JSON.stringify(value);
-      cell =
-        <Button
-          color="primary"
-          variant="contained"
-          onClick={() => {
-            setOpen(true);
-          }}
-        >
-          Ver
-        </Button>
+      cell = (
+        <TableCell key={key + index} align="center">
+          <StyledButton
+            color="primary"
+            variant="contained"
+            onClick={() => {
+              displayData(value);
+            }}
+            style={{ backgroundColor: "#023473" }}
+          >
+            Ver
+          </StyledButton>
+        </TableCell>
+      );
+    } else if (key === "status") {
+      cell = (
+        <TableCell key={key + index} align="center">
+          <Chip
+            label={value}
+            color={value === "success" ? "primary" : "secondary"}
+            style={{
+              minWidth: "5rem",
+            }}
+          />
+        </TableCell>
+      );
     } else {
-        cell = <TableCell align="left">{value}</TableCell>;
+      cell = <TableCell align="center">{value}</TableCell>;
     }
     return cell;
-    
   }
 
-  function emptyCell (index) {
-      let cell = <TableCell key={"emptyCell" + index} align="left"></TableCell>
-        return cell;
+  function emptyCell(index) {
+    let cell = <TableCell key={"emptyCell" + index} align="left"></TableCell>;
+    return cell;
   }
-
 
   function createRow(consulta) {
+    columns.map((key, index) => {
+      if (indexOf(Object.keys(consulta), key) === -1) {
+        consulta[key] = "";
+      }
+    });
+
+    let orden = Object.keys(consulta).sort((a, b) => {
+      return displayOrder[a].index - displayOrder[b].index;
+    });
     return (
       <TableRow key={consulta._id}>
-        {Object.keys(consulta).map((key, index) => {
+        {orden.map((key, index) => {
           return createCell(key, consulta[key], index);
         })}
-        <TableCell align="left">
-          <Button
+        {/* <TableCell align="left">
+          <StyledButton
             color="primary"
             variant="contained"
             onClick={() => {
@@ -142,8 +171,8 @@ const TableBottom = ({ consultas, setOpen, keys, ...rest }) => {
             }}
           >
             Ver
-          </Button>
-        </TableCell>
+          </StyledButton>
+        </TableCell> */}
       </TableRow>
     );
   }
@@ -156,11 +185,12 @@ const TableBottom = ({ consultas, setOpen, keys, ...rest }) => {
   );
 };
 
-const TableConsultas = ({ consultas, setOpen, ...rest }) => {
+const TableConsultas = ({ consultas, setOpen, displayData, ...rest }) => {
   const [keys, setKeys] = React.useState([]);
 
   useEffect(() => {
     let helper = [];
+    let displayOrder = 0;
     if (consultas.length > 0) {
       consultas.map((consulta, index) => {
         Object.keys(consulta).map((key, index) => {
@@ -172,11 +202,16 @@ const TableConsultas = ({ consultas, setOpen, ...rest }) => {
   }, [consultas]);
 
   return (
-    <TableContainer component={Paper}>
-      <Table aria-label="simple table">
-        <TableTop keys={keys} />
-        <TableBottom consultas={consultas} keys={keys} />
-        {/* <TableBody>
+    keys.length > 0 && (
+      <TableContainer component={Paper}>
+        <Table aria-label="simple table">
+          <TableTop keys={keys} />
+          <TableBottom
+            consultas={consultas}
+            keys={keys}
+            displayData={displayData}
+          />
+          {/* <TableBody>
           {consultas.map((consulta, index) => {
             return (
               <TableRow key={index}>
@@ -187,8 +222,9 @@ const TableConsultas = ({ consultas, setOpen, ...rest }) => {
             );
           })}
         </TableBody> */}
-      </Table>
-    </TableContainer>
+        </Table>
+      </TableContainer>
+    )
   );
 };
 
@@ -200,6 +236,7 @@ const Consultas = () => {
   const [consultas, setConsultas] = React.useState([]);
   const [consulta, setConsulta] = React.useState({});
   const [open, setOpen] = React.useState(false);
+  const [code, setCode] = React.useState(null);
 
   useEffect(() => {
     if (consultas.length > 0) {
@@ -227,13 +264,23 @@ const Consultas = () => {
     setOpen(false);
   };
 
+  const displayData = (data) => {
+    setCode(JSON.stringify(data, null, 2));
+    setOpen(true);
+  };
+
   return consultas.length > 0 ? (
     <Container maxWidth="lg">
       <Box sx={{ pt: 3 }}>
         <Loader />
-        {/* <Modal open={open} onClose={handleClose} center>
-        <Consulta consulta={consulta} setOpen={setOpen} />
-      </Modal> */}
+        <Modal
+          open={open}
+          onClose={handleClose}
+          center
+          classNames={{ modal: "codeModal" }}
+        >
+          <Consulta code={code} setOpen={setOpen} />
+        </Modal>
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <Typography gutterBottom variant="h4">
@@ -261,7 +308,11 @@ const Consultas = () => {
         <Box sx={{ pt: 3 }}>
           <Grid container spacing={3}>
             <Grid item xs={12}>
-              <TableConsultas consultas={consultas} setOpen={setOpen} />
+              <TableConsultas
+                consultas={consultas}
+                setOpen={setOpen}
+                displayData={displayData}
+              />
             </Grid>
           </Grid>
         </Box>
