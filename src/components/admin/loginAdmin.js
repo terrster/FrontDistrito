@@ -52,7 +52,7 @@ const LoginAdmin = () => {
   useEffect(() => {
     console.log(admin);
     if(admin.user !== null){
-        history.push("/admin/control");
+        history.push("/admin");
       // window.location.replace("/admin/control");
     }
   }, [admin]);

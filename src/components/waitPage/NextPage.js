@@ -106,7 +106,7 @@ const NextPageP = () => {
               
               {
                 success === true ? (
-                  "tu solicitud ha sido aprobada"
+                  "muchas gracias por tu solicitud, ahora puedes subir tus documentos para completar tu proceso"
                 ) : (
                   "estas a un paso de completar tu proceso en un momento te llegara un correo con la información necesaria para seguir con tu solicitud de crédito"
                 )
