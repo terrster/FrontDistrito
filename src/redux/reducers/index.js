@@ -17,6 +17,7 @@ import docsStatusReducer from './docs-status-reducer';
 import modalCiecReducer from './modalCiec-reducer';
 import modalBanksReducer from './modalBanksReducer';
 import adminReducer from './admin-reducer';
+import buroReducer from './buro-reducer';
 
 export default combineReducers({
     alert: alertReducer,
@@ -36,5 +37,6 @@ export default combineReducers({
     resetPasswordStatus: resetPasswordReducer,
     modalCiec: modalCiecReducer,
     modalBanks: modalBanksReducer,
-    admin: adminReducer
+    admin: adminReducer,
+    buro: buroReducer,
 });

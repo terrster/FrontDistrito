@@ -55,6 +55,7 @@ const NewDoc = () => {
   const [user, setUser] = useState(null);
   const [typePerson, setTypePerson] = useState("");
   const [warranty, setWarranty] = useState("");
+  const [buro, setBuro] = useState(null);
   const [initialValues, setValues] = useState({
     oficialID: [],
     proofAddress: [],
@@ -84,7 +85,18 @@ const NewDoc = () => {
   const [loader, setLoader] = useState(null);
   const history = useHistory();
   const toast = useSelector((state) => state.app.toast);
+  const buroRedux = useSelector((state) => state.buro);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (buroRedux) {
+      setBuro(buroRedux);
+    }
+  }, [buroRedux]);
+
+  useEffect(() => {
+    if(buro !== null){}
+  }, [buro]);
 
   useEffect(() => {
     const $user = JSON.parse(sessionStorage.getItem("user"));
