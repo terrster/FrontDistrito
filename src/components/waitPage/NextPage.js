@@ -8,7 +8,9 @@ import im1 from "../../assets/img/estatus_solicitud/status-solicitud_03.png";
 import im2 from "../../assets/img/estatus_solicitud/status-solicitud_02.png";
 
 const NextPageP = () => {
+  const history = useHistory();
   const [buro , setBuro] = useState(null);
+  const [success, setSuccess] = useState(false);
   const [consultas, setConsultas] = useState(0);
   const resBuro = JSON.parse(sessionStorage.getItem('buro'));
   const buroRedux = useSelector((state) => state.buro);
@@ -32,7 +34,8 @@ const NextPageP = () => {
       
       try{
         const response = await axios.post(`/api/buroMoral/${user._id}`, data);
-        console.log(response);
+        sessionStorage.setItem("user", JSON.stringify(response.data.user));
+        setSuccess(response.data.success);
       } catch (error) {
         console.log(error);
       }
@@ -40,6 +43,15 @@ const NextPageP = () => {
     consulta();
     
   }, [buroRedux])
+
+  const handleNext = () => {
+    const user = JSON.parse(sessionStorage.getItem("user"));
+    if(success === true){
+      history.push(`/credito`);
+    } else {
+      history.push(`/credito`);
+    }
+  };
 
   return (
     <>
@@ -70,6 +82,7 @@ const NextPageP = () => {
           </div>
           <Button
             className="header-button fz18 bluePrimary"
+            onClick={() => handleNext()}
           >
             continuar
           </Button>

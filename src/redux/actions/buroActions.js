@@ -3,12 +3,14 @@ import { UPADATE_BURO , UPDATE_BURO_SCORE, UPDATE_BURO_MORAL, UPDATE_BURO_MORAL_
 export function buroPrueba(){
     return (dispatch) => {
         let user = JSON.parse(sessionStorage.getItem('user'));
+        let buroData = user.idClient.appliance[0].idBuro ? user.idClient.appliance[0].idBuro : false;
+
                 if(user){
                     let { idClient } = user;
                     let buro = null;
                     let score = idClient.score ? idClient.score : false;
                     let type = idClient.type ? idClient.type : null;
-                    let buroMoral = type === 'PM' ? true : false;
+                    let buroMoral = type !== 'PM' ? false : buroData === false ? false : buroData.moralStatus;
 
                     if(score){
                         let error = score.split(' ')[0];

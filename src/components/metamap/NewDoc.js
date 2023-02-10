@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { buroPrueba } from "../../redux/actions/buroActions";
 import { updateLoader } from "../../redux/actions/loaderActions";
 import { ToastContainer } from "react-toastify";
 // import {AltLoader} from "../Loader/altLoader";
@@ -89,14 +90,32 @@ const NewDoc = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (buroRedux) {
-      setBuro(buroRedux);
-    }
-  }, [buroRedux]);
+    const $user = JSON.parse(sessionStorage.getItem("user"));
+    let garantia = $user.idClient.appliance[0].idComercialInfo.warranty;
+    let id = $user._id;
+    const type = $user.idClient.type;
+    console.log("buroRedux", buroRedux);
 
-  useEffect(() => {
-    if(buro !== null){}
-  }, [buro]);
+    if(buroRedux.score === null){
+      dispatch(buroPrueba());
+      return;
+    }
+      if(buroRedux.buro === false){
+        history.push(`/buro/${id}`);
+      }
+
+      if(garantia === 4 || garantia === 2){
+        if(buroRedux.score >= 0 && buroRedux.score <= 524){
+          history.push(`/buro/${id}`);
+        }
+      }
+      if(type === "PM" && buroRedux.score > 524){
+        if(buroRedux.BuroMoral === false){
+          history.push(`/auth/${id}`);
+        }
+      }
+
+  }, [buroRedux]);
 
   useEffect(() => {
     const $user = JSON.parse(sessionStorage.getItem("user"));

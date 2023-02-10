@@ -47,6 +47,16 @@ const buroNegativo = () => {
 //respuesta 200 buro encontrado
 const BuroPositivo = ({ score, user }) => {
 
+  const buroRedux = useSelector((state) => state.buro);
+
+  useEffect(() => {
+    console.log(buroRedux);
+    if(buroRedux.score === null){
+      dispatch(buroPrueba());
+      return;
+    }
+  }, []);
+
   const history = useHistory();
   const handleClick = (e) => {
     const user = JSON.parse(sessionStorage.getItem("user"));
@@ -58,7 +68,16 @@ const BuroPositivo = ({ score, user }) => {
         break;
       case 2:
         // window.location.href = `/documentos/${user._id}`;
-        type === "PM" ? history.push(`/auth/${user._id}`) : history.push(`/documentos/${user._id}`);
+        // type === "PM" ? history.push(`/auth/${user._id}`) : history.push(`/documentos/${user._id}`);
+        if(type === "PM" && buroRedux.score > 524){
+          if(buroRedux.BuroMoral === false){
+            history.push(`/auth/${user._id}`);
+          } else {
+            history.push(`/documentos/${user._id}`);
+          }
+        } else {
+          history.push(`/documentos/${user._id}`);
+        }
         break;
         case 3: 
         handleSubmit(user);
