@@ -469,7 +469,6 @@ const WaitPage = () => {
         // setStatus(response.data.success);
         sessionStorage.setItem("user", JSON.stringify(response.data.user));
         dispatch(buroPrueba());
-        setIsLoading(false);
         setStatus("OK");
         setScore(parseInt(buroRedux.score));
         // return setBuro(
@@ -477,6 +476,7 @@ const WaitPage = () => {
         // );
       }
       console.log(response);
+      setIsLoading(false);
     } catch (error) {
       
       console.log(error);
@@ -518,6 +518,7 @@ const WaitPage = () => {
           setBuro(<ErrorConsulta />);
           break;
       }
+      setIsLoading(false);
     }
   }
 
@@ -544,13 +545,11 @@ const WaitPage = () => {
     }
   }, [buroRedux]);
 
-  useEffect(() => {
-    if(buroRedux.score === false || buroRedux.score === undefined || buroRedux.score === null){
-      setIsLoading(true);
-    } else {
-      setIsLoading(false);
-    }
-  }, [buroRedux.score]);
+  // useEffect(() => {
+  //   if(buroRedux.score === false || buroRedux.score === undefined || buroRedux.score === null){
+  //     setIsLoading(true);
+  //   } 
+  // }, [buroRedux.score]);
 
 
 
