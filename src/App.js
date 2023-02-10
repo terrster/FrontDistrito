@@ -62,6 +62,7 @@ import ThankyouPageAllie from "./components/Allies/ThankyouPageAllie";
 import Owners from "./components/admin/owners";
 import LoginAdmin from "./components/admin/loginAdmin";
 import SettingsCards from "./components/admin/SettingsCards";
+import NextPageP from "./components/waitPage/NextPage";
 
 // ROUTER & REDUX
 import {
@@ -178,6 +179,11 @@ class App extends Component {
                   exact
                   path="/buro/:idAppliance"
                   component={WaitPage}
+                />
+                <PrivateRoute
+                  exact
+                  path="/auth/:idAppliance"
+                  component={NextPageP}
                 />
                 <PrivateRoute
                   exact
