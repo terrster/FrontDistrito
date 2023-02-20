@@ -450,7 +450,7 @@ const WaitPage = () => {
     dispatch(buroPrueba());
   }, [dispatch]);
 
-  async function getConsulta(user) {
+  function getConsulta(user) {
     if(consulta !== 0) {
       setIsLoading(false);
       return;
@@ -462,7 +462,7 @@ const WaitPage = () => {
     };
     setConsulta(consulta + 1);
     try {
-      const response = await axios.put(`/api/buro/consulta`, data);
+      const response = axios.put(`/api/buro/consulta`, data);
       if (response.status === 200) {
         
         // setScore(response.data.valorScore);
@@ -524,7 +524,7 @@ const WaitPage = () => {
 
 
   useEffect(() => {
-    console.log("buroRedux", buroRedux);
+    
     const user = JSON.parse(sessionStorage.getItem("user"));
     
     if(buroRedux.buro === true){
@@ -544,110 +544,6 @@ const WaitPage = () => {
       getConsulta(user);
     }
   }, [buroRedux]);
-
-  // useEffect(() => {
-  //   if(buroRedux.score === false || buroRedux.score === undefined || buroRedux.score === null){
-  //     setIsLoading(true);
-  //   } 
-  // }, [buroRedux.score]);
-
-
-
-  // useEffect(() => {
-  //   window.scrollTo(0, 0);
-    
-  //   setIsLoading(true);
-  //   const getData = async () => {
-      
-  //     const user = JSON.parse(sessionStorage.getItem("user"));
-  //     if(redux === null || redux.score === undefined){
-  //       return;
-  //     }
-  //     // if (user.idClient.score === "ERROR"
-  //     //   || user.idClient.score === "ERROR 1"
-  //     //   || user.idClient.score === "ERROR 2"
-  //     //   || user.idClient.score === "ERROR 3") {
-  //     //   setStatus("ERROR");
-  //     //   setIsLoading(false);
-  //     //   setBuro(<BuroError buro={setBuro} isLoading={setIsLoading} />);
-  //     //   return;
-  //     // }
-  //     // if ((user.idClient.score !== undefined || null) && user.idClient.score !== "false") {
-  //     //   setStatus("OK");
-  //     //   let score = redux.score;
-  //     //   score = parseInt(score);
-  //     //   setScore(score);
-  //     //   setIsLoading(false);
-  //     //   setBuro(<BuroPositivo user={user} score={score}/>);
-  //     //   return;
-  //     // }
-
-      
-  //     const idClient = user._id;
-  //     // Si ya tienen una solicitud, se actualiza
-  //     let data = {
-  //       id: idClient,
-  //       type: "prospector",
-  //     };
-      
-  //     if(consulta !== 0){
-  //       return;
-  //     }
-  //     setConsulta(1);
-  //     try {
-  //       const response = await axios.put(`/api/buro/consulta`, data);
-  //       if (response.status === 200) {
-          
-  //         setScore(response.data.valorScore);
-  //         setStatus(response.data.success);
-  //         sessionStorage.setItem("user", JSON.stringify(response.data.user));
-  //         dispatch(buroPrueba());
-  //         return setBuro(
-  //           <BuroPositivo score={buroRedux.score} user={user} />
-  //         );
-  //       }
-  //       console.log(response);
-  //     } catch (error) {
-        
-  //       console.log(error);
-  //       if (error.response.data.user) {
-  //         sessionStorage.setItem(
-  //           "user",
-  //           JSON.stringify(error.response.data.user)
-  //         );
-  //       } 
-  //       switch (error.response.status) {
-  //         case 400:
-  //           setStatus("ERROR");
-  //           setIsLoading(false);
-  //           setBuro(<BuroError buro={setBuro} isLoading={setIsLoading} />);
-  //           break;
-  //         case 401:
-  //           setStatus("ERROR");
-  //           setIsLoading(false);
-  //           setBuro(<BuroUltimo code={401}/>);
-  //           break;
-  //         case 429:
-  //           setStatus("ERROR");
-  //           setIsLoading(false);
-  //           setBuro(<BuroUltimo code={429}/>);
-  //           break;
-  //         case 500:
-  //           setStatus("ERROR");
-  //           setIsLoading(false);
-  //           setBuro(<ErrorConsulta />);
-  //           break;
-  //         default:
-  //           setStatus("ERROR");
-  //           setIsLoading(false);
-  //           setBuro(<ErrorConsulta />);
-  //           break;
-  //       }
-  //     }
-  //   };
-  //   getData();
-  //   setIsLoading(false);
-  // }, [redux, consulta, buroRedux, dispatch]);
 
   return (
     <div className="wait-page">
