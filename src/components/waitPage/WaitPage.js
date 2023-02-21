@@ -452,7 +452,7 @@ const WaitPage = () => {
 
   function getConsulta(user) {
     if(consulta !== 0) {
-      setIsLoading(false);
+      // setIsLoading(false);
       return;
       
     }
