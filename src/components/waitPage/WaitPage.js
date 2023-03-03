@@ -23,6 +23,8 @@ import "../../css/loaderimg.css";
 import Loader from "../Loader/Loader";
 import { updateLoader } from "../../redux/actions/loaderActions";
 import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { buroPrueba } from "../../redux/actions/buroActions";
 import { set } from "lodash";
 import ErrorBuro from "../../forms/buroErrorForm";
 import { ContactlessOutlined, CloudUploadOutlined } from "@material-ui/icons";
@@ -44,15 +46,37 @@ const buroNegativo = () => {
 };
 //respuesta 200 buro encontrado
 const BuroPositivo = ({ score, user }) => {
-  
+
+  const buroRedux = useSelector((state) => state.buro);
+
+  useEffect(() => {
+    if(buroRedux.score === null){
+      dispatch(buroPrueba());
+      return;
+    }
+  }, []);
+
+  const history = useHistory();
   const handleClick = (e) => {
     const user = JSON.parse(sessionStorage.getItem("user"));
+    let type = user.idClient.type;
     switch (e) {
       case 1:
-        window.location.href = "/credito";
+        // window.location.href = "/credito";
+        history.push("/credito");
         break;
       case 2:
-        window.location.href = `/documentos/${user._id}`;
+        // window.location.href = `/documentos/${user._id}`;
+        // type === "PM" ? history.push(`/auth/${user._id}`) : history.push(`/documentos/${user._id}`);
+        if(type === "PM" && buroRedux.score > 524){
+          if(buroRedux.BuroMoral === false){
+            history.push(`/auth/${user._id}`);
+          } else {
+            history.push(`/documentos/${user._id}`);
+          }
+        } else {
+          history.push(`/documentos/${user._id}`);
+        }
         break;
         case 3: 
         handleSubmit(user);
@@ -248,23 +272,28 @@ const BuroError = ({ isLoading, buro }) => {
     e.preventDefault();
     isLoading(true);
     buro(null);
-    let dataFormError = { ...initialValues, update: true };
+    
     const user = JSON.parse(sessionStorage.getItem("user"));
     const idClient = user._id;
-    if (user.idClient.appliance.length > 0) {
-      const appliance =
-        user.idClient.appliance[user.idClient.appliance.length - 1];
-      if (appliance.hasOwnProperty("idGeneralInfo")) {
-        let data = appliance.idGeneralInfo;
-        let address = data.address ? data.address : "";
-        dataFormError = { ...dataFormError, address };
-      }
-    }
+    let dataFormError = { ...initialValues, update: true, id: idClient };
+    // if (user.idClient.appliance.length > 0) {
+    //   const appliance =
+    //     user.idClient.appliance[user.idClient.appliance.length - 1];
+    //   if (appliance.hasOwnProperty("idGeneralInfo")) {
+    //     let data = appliance.idGeneralInfo;
+    //     let address = data.address ? data.address : "";
+    //     dataFormError = { ...dataFormError, address };
+    //   }
+    // }
     try {
-      const res = await axios.post(`api/buro/${idClient}`, dataFormError);
+      const res = await axios.put(`/api/buro/consulta`, dataFormError);
+      console.log(res.data)
       isLoading(false);
-      buro(<BuroPositivo score={res.data.buro.valorScore} user={user} />);
+      sessionStorage.setItem("user", JSON.stringify(res.data.user));
+      dispatch(buroPrueba());
+      buro(<BuroPositivo score={res.data.score} user={user} />);
     } catch (error) {
+      console.log(error)
       if (error.response.data.user) {
         sessionStorage.setItem(
           "user",
@@ -275,6 +304,7 @@ const BuroError = ({ isLoading, buro }) => {
 
       switch (error.response.status) {
         case 400:
+        case 412:
           sessionStorage.setItem("user", JSON.stringify(error.response.data.user));
           buro(<BuroError buro={buro} isLoading={isLoading} />);
           break;
@@ -405,97 +435,115 @@ const WaitPage = () => {
   const [versionImage, setVersionImage] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [buro, setBuro] = useState(null);
+  const [redux, setRedux] = useState(null);
   const [score, setScore] = useState(null);
   const [status, setStatus] = useState(null);
+  const [consulta, setConsulta] = useState(0);
+
+  const buroRedux = useSelector((state) => state.buro);
 
   const [initialValues, setInitialValues] = useState({});
   const dispatch = useDispatch();
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-    setIsLoading(true);
-    const getData = async () => {
-      const user = JSON.parse(sessionStorage.getItem("user"));
-      if (user.idClient.score === "ERROR"
-        || user.idClient.score === "ERROR 1"
-        || user.idClient.score === "ERROR 2"
-        || user.idClient.score === "ERROR 3") {
-        setStatus("ERROR");
+    dispatch(buroPrueba());
+  }, [dispatch]);
+
+  function getConsulta(user) {
+    if(consulta !== 0) {
+      // setIsLoading(false);
+      return;
+      
+    }
+    const idClient = user._id;
+    const data = {
+      id: idClient,
+    };
+    setConsulta(consulta + 1);
+    try {
+      const response = axios.put(`/api/buro/consulta`, data);
+      if (response.status === 200) {
+        
+        // setScore(response.data.valorScore);
+        // setStatus(response.data.success);
+        console.log(response);
         setIsLoading(false);
-        setBuro(<BuroError buro={setBuro} isLoading={setIsLoading} />);
-        return;
-      }
-      if ((user.idClient.score !== undefined || null) && user.idClient.score !== "false") {
+        sessionStorage.setItem("user", JSON.stringify(response.data.user));
+        dispatch(buroPrueba());
         setStatus("OK");
-        let score = user.idClient.score;
-        score = parseInt(score);
-        setScore(score);
-        setIsLoading(false);
-        setBuro(<BuroPositivo user={user} score={score}/>);
-        return;
+        setScore(parseInt(buroRedux.score));
+        return setBuro(
+          <BuroPositivo score={parseInt(buroRedux.score)} user={user} />
+        );
       }
       
-      const idClient = user._id;
-      // Si ya tienen una solicitud, se actualiza
-      let data = {};
-      if (user.idClient.appliance.length > 0) {
-        const appliance =
-          user.idClient.appliance[user.idClient.appliance.length - 1];
-        if (appliance.hasOwnProperty("idGeneralInfo")) {
-          data = appliance.idGeneralInfo;
-        }
+    } catch (error) {
+      
+      console.log(error);
+      if(error.response === undefined){
+        return setBuro(<ErrorConsulta/>)
       }
-
-      try {
-        const response = await axios.post(`/api/buro/${idClient}`, data);
-        if (response.status === 200) {
+      if (error.response.data.user) {
+        sessionStorage.setItem(
+          "user",
+          JSON.stringify(error.response.data.user)
+        );
+      } 
+      dispatch(buroPrueba());
+      switch (error.response.status) {
+        case 400:
+        case 412:
+          setStatus("ERROR");
           setIsLoading(false);
-          setScore(response.data.buro.valorScore);
-          setStatus(response.data.buro.status);
-          sessionStorage.setItem("user", JSON.stringify(response.data.user));
-          return setBuro(
-            <BuroPositivo score={response.data.buro.valorScore} user={user} />
-          );
-        }
-      } catch (error) {
-        console.log(error);
-        if (error.response.data.user) {
-          sessionStorage.setItem(
-            "user",
-            JSON.stringify(error.response.data.user)
-          );
-        } 
-        switch (error.response.status) {
-          case 400:
-            setStatus("ERROR");
-            setIsLoading(false);
-            setBuro(<BuroError buro={setBuro} isLoading={setIsLoading} />);
-            break;
-          case 401:
-            setStatus("ERROR");
-            setIsLoading(false);
-            setBuro(<BuroUltimo code={401}/>);
-            break;
-          case 429:
-            setStatus("ERROR");
-            setIsLoading(false);
-            setBuro(<BuroUltimo code={429}/>);
-            break;
-          case 500:
-            setStatus("ERROR");
-            setIsLoading(false);
-            setBuro(<ErrorConsulta />);
-            break;
-          default:
-            setStatus("ERROR");
-            setIsLoading(false);
-            setBuro(<ErrorConsulta />);
-            break;
-        }
+          setBuro(<BuroError buro={setBuro} isLoading={setIsLoading} />);
+          break;
+        case 401:
+          setStatus("ERROR");
+          setIsLoading(false);
+          setBuro(<BuroUltimo code={401}/>);
+          break;
+        case 429:
+          setStatus("ERROR");
+          setIsLoading(false);
+          setBuro(<BuroUltimo code={429}/>);
+          break;
+        case 500:
+          setStatus("ERROR");
+          setIsLoading(false);
+          setBuro(<ErrorConsulta />);
+          break;
+        default:
+          setStatus("ERROR");
+          setIsLoading(false);
+          setBuro(<ErrorConsulta />);
+          break;
       }
-    };
-    getData();
-  }, []);
+      setIsLoading(false);
+    }
+  }
+
+
+  useEffect(() => {
+    
+    const user = JSON.parse(sessionStorage.getItem("user"));
+    
+    if(buroRedux.buro === true){
+      
+      setStatus("OK");
+      setScore(parseInt(buroRedux.score));
+      setIsLoading(false);
+      setBuro(<BuroPositivo user={user} score={parseInt(buroRedux.score)}/>);
+    }
+    if(buroRedux.buro === 'ERROR'){
+      setStatus("ERROR");
+      setIsLoading(false);
+      setBuro(<BuroError buro={setBuro} isLoading={setIsLoading} />);
+    }
+    if(buroRedux.score === false){
+      
+      getConsulta(user);
+    }
+  }, [buroRedux]);
 
   return (
     <div className="wait-page">
