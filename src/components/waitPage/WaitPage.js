@@ -50,7 +50,6 @@ const BuroPositivo = ({ score, user }) => {
   const buroRedux = useSelector((state) => state.buro);
 
   useEffect(() => {
-    console.log(buroRedux);
     if(buroRedux.score === null){
       dispatch(buroPrueba());
       return;
@@ -467,16 +466,17 @@ const WaitPage = () => {
         
         // setScore(response.data.valorScore);
         // setStatus(response.data.success);
+        console.log(response);
+        setIsLoading(false);
         sessionStorage.setItem("user", JSON.stringify(response.data.user));
         dispatch(buroPrueba());
         setStatus("OK");
         setScore(parseInt(buroRedux.score));
-        // return setBuro(
-        //   <BuroPositivo score={parseInt(buroRedux.score)} user={user} />
-        // );
+        return setBuro(
+          <BuroPositivo score={parseInt(buroRedux.score)} user={user} />
+        );
       }
-      console.log(response);
-      setIsLoading(false);
+      
     } catch (error) {
       
       console.log(error);
