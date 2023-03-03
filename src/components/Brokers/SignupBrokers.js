@@ -29,6 +29,8 @@ const SignupBrokers = props => {
     }
   },[ownerId]);
 
+  console.log("ownerId", ownerId);
+
   const dispatch = useDispatch();
 
   let onFormSubmit = async (data) => {
@@ -65,6 +67,9 @@ const SignupBrokers = props => {
       <div className="container mt-30">
         <Loader />
 
+        {
+          ownerId !== '314512648' &&
+        <>
         <div className="fz56 text-center title-dp fw500">
           ¡Bienvenido Broker a Distrito Pyme!
         </div>
@@ -80,6 +85,8 @@ const SignupBrokers = props => {
         <div className="mt-30 text-dp fw300 fz20 text-center mb-30">
           <p className="gray50">Recuerda realizar el registro con la información del Principal Accionista y/o Representante Legal</p>
         </div>
+        </>
+        }
 
         <SignupFormBrokers onSubmit={e => onFormSubmit(e)} errorEmail={errorEmail} setErrorEmail={setErrorEmail} errorBroker={errorBroker} setErrorBroker={setErrorBroker} initialValues={initialValues} ownerId={ownerId}/>
       </div>
