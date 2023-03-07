@@ -449,7 +449,7 @@ const WaitPage = () => {
     dispatch(buroPrueba());
   }, [dispatch]);
 
-  function getConsulta(user) {
+  const getConsulta = async(user) => {
     if(consulta !== 0) {
       // setIsLoading(false);
       return;
@@ -460,8 +460,8 @@ const WaitPage = () => {
       id: idClient,
     };
     setConsulta(consulta + 1);
-    try {
-      const response = axios.put(`/api/buro/consulta`, data);
+      await axios.put(`/api/buro/consulta`, data).then((response) => {
+      console.log(response);
       if (response.status === 200) {
         
         // setScore(response.data.valorScore);
@@ -477,8 +477,7 @@ const WaitPage = () => {
         );
       }
       
-    } catch (error) {
-      
+    }).catch((error) => {
       console.log(error);
       if(error.response === undefined){
         return setBuro(<ErrorConsulta/>)
@@ -493,6 +492,7 @@ const WaitPage = () => {
       switch (error.response.status) {
         case 400:
         case 412:
+          console.log(error.response, "error 400");
           setStatus("ERROR");
           setIsLoading(false);
           setBuro(<BuroError buro={setBuro} isLoading={setIsLoading} />);
@@ -519,7 +519,8 @@ const WaitPage = () => {
           break;
       }
       setIsLoading(false);
-    }
+    });
+    
   }
 
 
