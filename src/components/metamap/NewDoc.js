@@ -109,11 +109,11 @@ const NewDoc = () => {
           history.push(`/buro/${id}`);
         }
       }
-      if(type === "PM" && buroRedux.score > 524){
-        if(buroRedux.BuroMoral === false){
-          history.push(`/auth/${id}`);
-        }
-      }
+      // if(type === "PM" && buroRedux.score > 524){
+      //   if(buroRedux.BuroMoral === false){
+      //     history.push(`/auth/${id}`);
+      //   }
+      // }
 
   }, [buroRedux]);
 
