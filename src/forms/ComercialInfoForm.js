@@ -368,21 +368,6 @@ let ComercialInfoForm = (props) => {
           })}
         </Field>
 
-        {type === "PM" && (
-          <Field component={renderSelectField} name="bankAccount" cls="mb-3">
-            <option className="metropolisReg" value="">
-              ¿Tienes cuenta bancaria?
-            </option>
-            {bankAccount.map((option, index) => {
-              return (
-                <option value={option.value} key={index}>
-                  {option.text}
-                </option>
-              );
-            })}
-          </Field>
-        )}
-
         {type !== "PF" && (
           <Field
             component={renderSelectField}
@@ -398,25 +383,6 @@ let ComercialInfoForm = (props) => {
             <option className="metropolisReg" value="0">
               No
             </option>
-          </Field>
-        )}
-
-        {(type === "PM" || type === "PFAE") && (
-          <Field
-            component={renderSelectField}
-            name="empresarialCreditCard"
-            cls="mb-3"
-          >
-            <option className="metropolisReg" value="">
-              ¿Cuentas con tarjeta de crédito empresarial?
-            </option>
-            {empresarialCreditCard.map((option, index) => {
-              return (
-                <option value={option.value} key={index}>
-                  {option.text}
-                </option>
-              );
-            })}
           </Field>
         )}
 
@@ -560,10 +526,7 @@ let ComercialInfoForm = (props) => {
                   )
                 }
                 <div className="fz18 gray50 text-dp mb-30 mt-2">
-                  No es un dato obligatorio pero puede agilizar tu solicitud a
-                  la mitad del tiempo y ofrecerte mejores condiciones de
-                  crédito. Se ingresa por única ocasión para descargar la
-                  información necesaria mediante procesos automatizados
+                nos ayuda a agilizar tu solicitud y ofrecerte mejores condiciones de crédito. Se ingresa por única ocasión para descargar la información necesaria mediante procesos automatizados.
                 </div>
               </Col>
               <PopUp />
@@ -589,15 +552,6 @@ let ComercialInfoForm = (props) => {
           class="mt-b2 text-msg-dp"
         />
         <Field component={renderSelectField} name="terminal" cls="mb-3">
-          <option value="">Seleccionar</option>
-          <option value="1">Sí</option>
-          <option value="0">No</option>
-        </Field>
-        <InputLabel
-          label="¿Vendes tu producto o servicio al extranjero?"
-          class="mt-b2 text-msg-dp"
-        />
-        <Field component={renderSelectField} name="exportation" cls="mb-3">
           <option value="">Seleccionar</option>
           <option value="1">Sí</option>
           <option value="0">No</option>
