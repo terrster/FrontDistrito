@@ -26,6 +26,9 @@ const Footer = props => {
         }
     }  , []);
     const url = indexOf(location.pathname.split('/'), 'buro') > -1 ? 'buro' : 'other';
+    const show = location.pathname === "/solicitudBrokers/314512648" ? false : true;
+
+    if(!show) return null;
     
     return(
     <div id="footer-dp" className="row d-flex justify-content-center">
