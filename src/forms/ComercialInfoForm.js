@@ -568,7 +568,7 @@ let ComercialInfoForm = (props) => {
           <option value="4">No</option>
         </Field>
         <div className="text-center" style={{ marginBottom: "50px" }}>
-          {refDocuments && !disabled && (
+          {refDocuments && !disabled && ciecStatus && (
             <Button
               id="ymb-dp-comercial-submit"
               type="submit"
@@ -577,7 +577,7 @@ let ComercialInfoForm = (props) => {
               guardar e ir a documentos
             </Button>
           )}
-          {!refDocuments && !disabled && (
+          {!refDocuments && !disabled && ciecStatus && (
             <Button
               type="submit"
               className={"mt-50 btn-blue-general"}
