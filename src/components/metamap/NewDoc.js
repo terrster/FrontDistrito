@@ -84,10 +84,23 @@ const NewDoc = () => {
   const [idClient, setIdClient] = useState(null);
   const [docID, setDocID] = useState(null);
   const [loader, setLoader] = useState(null);
+  const [unykoo, setUnykoo] = useState(null);
   const history = useHistory();
   const toast = useSelector((state) => state.app.toast);
   const buroRedux = useSelector((state) => state.buro);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    try {
+      Axios.get("/control/buro/unykoo").then((res) => {
+      setUnykoo(res.data.unykoo);
+    })
+    } catch (error) {
+      setUnykoo(false);
+      console.log(error);
+    }
+
+  }, []);
 
   useEffect(() => {
     const $user = JSON.parse(sessionStorage.getItem("user"));
@@ -100,6 +113,10 @@ const NewDoc = () => {
       dispatch(buroPrueba());
       return;
     }
+
+    if(unykoo !== null && unykoo === false){
+    
+
       if(buroRedux.buro === false){
         history.push(`/buro/${id}`);
       }
@@ -114,8 +131,9 @@ const NewDoc = () => {
       //     history.push(`/auth/${id}`);
       //   }
       // }
+    }
 
-  }, [buroRedux]);
+  }, [buroRedux, unykoo]);
 
   useEffect(() => {
     const $user = JSON.parse(sessionStorage.getItem("user"));

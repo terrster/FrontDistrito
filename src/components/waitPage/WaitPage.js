@@ -31,15 +31,37 @@ import { ContactlessOutlined, CloudUploadOutlined } from "@material-ui/icons";
 import { renderFieldFull } from "../Generic/Fields";
 
 //buro menos de 524 sin garantias
-const buroNegativo = () => {
+const BuroPendiente = () => {
+
+  const history = useHistory();
+  const handleClick = () => {
+    const user = JSON.parse(sessionStorage.getItem("user"));
+    history.push(`/documentos/${user._id}`);
+  };
   return (
     <div className="wait-page">
+      <Loader />
       <div className="text-center">
-        <div className="text-center">
-          <label className="text-dp fz20 fw500 ml-auto mt-2 mb-1">
-            lo sentimos pero tu buro da asco
+        <img src={ERRORImg} alt="errorr IMG" className="tijuanaImg" />
+        <div className="text-dp-gray-ligth fz20 ml-auto mt-2 mb-1">
+          <label
+            className="text-dp-gray-ligth fz20 ml-auto mt-2 mb-1"
+            style={{ maxWidth: "89%" }}
+          >
+            por el momento no podemos consultar tu buró de crédito, por favor ayudanos a subir tu documentación en lo que el equipo de distrito pyme se encarga de verificar tu información.
           </label>
         </div>
+
+          <Button
+            variant="primary"
+            className="mt-3 btn-blue-normal"
+            onClick={(e) => {
+              handleClick(2);
+            }}
+            disabled={false}
+          >
+            <span className="ml-2">subir documentación</span>
+          </Button>
       </div>
     </div>
   );
@@ -439,6 +461,7 @@ const WaitPage = () => {
   const [score, setScore] = useState(null);
   const [status, setStatus] = useState(null);
   const [consulta, setConsulta] = useState(0);
+  const [unykoo, setUnykoo] = useState(null);
 
   const buroRedux = useSelector((state) => state.buro);
 
@@ -446,15 +469,36 @@ const WaitPage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    try {
+      axios.get("/control/buro/unykoo").then((res) => {
+      setUnykoo(res.data.unykoo);
+    })
+    } catch (error) {
+      setUnykoo(false);
+      console.log(error);
+    }
+
+  }, []);
+
+  useEffect(() => {
     dispatch(buroPrueba());
   }, [dispatch]);
 
   const getConsulta = async(user) => {
+
     if(consulta !== 0) {
       // setIsLoading(false);
       return;
       
     }
+
+    if (unykoo === true) {
+      setStatus("OK");
+      setScore(1000);
+      setIsLoading(false);
+      return setBuro(<BuroPendiente user={user} score={1000} />);
+    }
+
     const idClient = user._id;
     const data = {
       id: idClient,
@@ -527,6 +571,7 @@ const WaitPage = () => {
   useEffect(() => {
     
     const user = JSON.parse(sessionStorage.getItem("user"));
+    if (unykoo !== null && unykoo === true) {
     
     if(buroRedux.buro === true){
       
@@ -541,10 +586,17 @@ const WaitPage = () => {
       setBuro(<BuroError buro={setBuro} isLoading={setIsLoading} />);
     }
     if(buroRedux.score === false){
-      
+      if(consulta === 0){
       getConsulta(user);
+      }
     }
-  }, [buroRedux]);
+    } else {
+      setStatus("OK");
+      setScore(1000);
+      setIsLoading(false);
+      setBuro(<BuroPendiente user={user} score={1000} />);
+    }
+  }, [buroRedux, unykoo, consulta]);
 
   return (
     <div className="wait-page">

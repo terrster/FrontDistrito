@@ -3,7 +3,8 @@ import {
   Box,
   Container,
   Grid,
-  Typography
+  Typography, 
+  Switch,
 } from "@material-ui/core";
 import {ProductCard} from "./data-card";
 import Modal from "react-responsive-modal";
@@ -20,6 +21,7 @@ const SettingsCards = () => {
   const [open, setOpen] = useState(false);
   const [data, setData] = useState([]);
   const [reload, setReload] = useState(false);
+  const [unykoo, setUnykoo] = useState(false);
 
   const { admin } = useSelector((state) => state);
 
@@ -64,9 +66,38 @@ const SettingsCards = () => {
     });
   }, [reload]);
 
+  useEffect(() => {
+    Axios.get("/control/buro/unykoo").then((res) => {
+      setUnykoo(res.data.unykoo);
+    }).catch((err) => {
+      console.log(err);
+    });
+  }, [reload]);
+
   const handleReload = () => {
     setReload(!reload);
   };
+
+  const handleUnykoo2 = () => {
+    console.log("unykoo");
+    setUnykoo(!unykoo);
+  };
+
+  const handleUnykoo = () => {
+    dispatch(updateLoader(true));
+    Axios.post("/control/unykoo", { update: !unykoo }).then((res) => {
+      console.log(res);
+      let data = res.data;
+      setUnykoo(data.unykoo);
+      alert("Se ha actualizado correctamente");
+      dispatch(updateLoader(false));
+    }).catch((err) => {
+      console.log(err);
+      alert("Ha ocurrido un error");
+      dispatch(updateLoader(false));
+    });
+  };
+
 
   return(
     <>
@@ -120,6 +151,39 @@ const SettingsCards = () => {
                   <ProductCard product={product} setOpen={handleChange} />
                 </Grid>
               ))}
+            </Grid>
+          </Box>
+          <Box sx={{ pt: 3 }}>
+            <Grid
+              container
+              spacing={3}
+            >
+              <Grid
+                item
+                lg={4}
+                md={6}
+                xs={12}
+              >
+                <div className="card">
+                  <div className="card-body">
+                    <div className="d-flex justify-content-between">
+                      <div className="d-flex align-items-center"> 
+                        <div className="ml-2">
+                          <h4 className="mb-0 font-weight-bold">descativar Buro</h4>
+                        </div>
+                      </div>
+                      <div className="d-flex align-items-center">
+                        <Switch
+                          checked={unykoo}
+                          onChange={handleUnykoo}
+                          name="checkedB"
+                          color="primary"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </Grid>
             </Grid>
           </Box>
         </Container>
