@@ -103,6 +103,9 @@ const NewDoc = () => {
   }, []);
 
   useEffect(() => {
+    if(unykoo === null){
+      return;
+    }
     const $user = JSON.parse(sessionStorage.getItem("user"));
     let garantia = $user.idClient.appliance[0].idComercialInfo.warranty;
     let id = $user._id;

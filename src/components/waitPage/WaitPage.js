@@ -569,6 +569,9 @@ const WaitPage = () => {
 
 
   useEffect(() => {
+    if (unykoo === null) {
+      return;
+    }
     
     const user = JSON.parse(sessionStorage.getItem("user"));
     if (unykoo !== null && unykoo === true) {
