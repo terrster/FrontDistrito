@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useFormik } from "formik";
 import {
   Box,
@@ -31,6 +31,7 @@ export const SettingsPassword = (props) => {
     password: "",
     confirm: "",
   });
+  const [valid, setValid] = useState(false);
   const handleClickShowPassword = () => {
     setValues({ ...values, showPassword: !values.showPassword });
   };
@@ -43,12 +44,11 @@ export const SettingsPassword = (props) => {
     initialValues: values,
     validationSchema: Yup.object({
       user: Yup.string().max(255).required("el usuario es obligatorio"),
-      password: Yup.string().max(255).required("la contraseña es obligatoria"),
+      password: Yup.string().min(8, "la contraseña debe tener al menos 8 caracteres").max(255).required("la contraseña es obligatoria"),
       confirm: Yup.string().oneOf([Yup.ref("password"), null], "las contraseñas deben ser iguales").required("favor de confirmar la contraseña"),
     }),
     onSubmit: () => {
       dispatch(updateLoader(true));
-      console.log(formik.values);
       Axios.post("/control/buro", formik.values).then((res) => {
         handleReload();
         alert("usuario actualizado");
@@ -60,7 +60,16 @@ export const SettingsPassword = (props) => {
     },
   });
 
+  const { errors, touched } = formik;
 
+  useEffect(() => {
+    if (errors.user || errors.password || errors.confirm) {
+      setValid(true);
+    } else {
+      setValid(false);
+    }
+  }, [errors]);
+  
   return (
     <Container maxWidth="sm">
       <form {...props}
@@ -139,7 +148,7 @@ export const SettingsPassword = (props) => {
               p: 2,
             }}
           >
-            <Button color="primary" variant="contained" type="submit">
+            <Button color="primary" variant="contained" type="submit" disabled={valid}>
               actualizar
             </Button>
           </Box>

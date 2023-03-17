@@ -5,6 +5,11 @@ import {
   Grid,
   Typography, 
   Switch,
+  Card,
+  CardContent,
+  CardHeader,
+  Divider,
+  Button,
 } from "@material-ui/core";
 import {ProductCard} from "./data-card";
 import Modal from "react-responsive-modal";
@@ -22,6 +27,7 @@ const SettingsCards = () => {
   const [data, setData] = useState([]);
   const [reload, setReload] = useState(false);
   const [unykoo, setUnykoo] = useState(false);
+  const [ciec, setCiec] = useState("");
 
   const { admin } = useSelector((state) => state);
 
@@ -74,13 +80,29 @@ const SettingsCards = () => {
     });
   }, [reload]);
 
+  useEffect(() => {
+    Axios.post("/control/ciec").then((res) => {
+      console.log(res);
+      setCiec(res.data.passwordBuro);
+    }).catch((err) => {
+      console.log(err);
+    });
+  }, [reload]);
+
+
+
   const handleReload = () => {
     setReload(!reload);
   };
 
-  const handleUnykoo2 = () => {
-    console.log("unykoo");
-    setUnykoo(!unykoo);
+  const handleCiec = () => {
+    console.log(ciec);
+    setDatos({
+      name: "ciec",
+      userBuro: "dpyme",
+      passwordBuro: ciec,
+    });
+    setOpen(true);
   };
 
   const handleUnykoo = () => {
@@ -154,6 +176,12 @@ const SettingsCards = () => {
             </Grid>
           </Box>
           <Box sx={{ pt: 3 }}>
+          <div
+                    className="title-dp fz42 fw500 mb-1 text-center mt-2"
+                    style={{ color: "#213970" }}
+                  >
+                    <span style={{ color: "#EF4E5B" }}> consulta </span> de buro y ciec
+                  </div>
             <Grid
               container
               spacing={3}
@@ -164,26 +192,75 @@ const SettingsCards = () => {
                 md={6}
                 xs={12}
               >
-                <div className="card">
-                  <div className="card-body">
-                    <div className="d-flex justify-content-between">
-                      <div className="d-flex align-items-center"> 
-                        <div className="ml-2">
-                          <h4 className="mb-0 font-weight-bold">descativar Buro</h4>
-                        </div>
-                      </div>
-                      <div className="d-flex align-items-center">
+                  <Card
+                  elevation={5}
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    height: "100%",
+                    padding: "1rem",
+                  }}>
+                    <CardHeader
+                      title="consulta de buro"
+                    />
+                    <Divider />
+                    <CardContent
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                      }}
+                    >
+                    <h4 className="mb-0 font-weight-bold">{unykoo ? "Desactivada" : "Activada"}</h4>
+
                         <Switch
-                          checked={unykoo}
+                          checked={!unykoo}
                           onChange={handleUnykoo}
                           name="checkedB"
                           color="primary"
                         />
-                      </div>
-                    </div>
-                  </div>
-                </div>
+
+                        
+                    </CardContent>
+                  </Card>
               </Grid>
+              <Grid
+                item
+                lg={4}
+                md={6}
+                xs={12}
+              >
+                  <Card
+                  elevation={5}
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    height: "100%",
+                    padding: "1rem",
+                  }}>
+                    <CardHeader
+                      title="contraseña ciec"
+                    />
+                    <Divider />
+                    <CardContent
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                      }}
+                    >
+                      <h4 className="mb-0 font-weight-bold">{ciec}</h4>
+                      <Button
+                        color="primary"
+                        variant="contained"
+                        onClick={() => handleCiec()}
+                      >
+                        Actualizar
+                      </Button>
+
+                    </CardContent>
+                  </Card>
+                </Grid>
             </Grid>
           </Box>
         </Container>
