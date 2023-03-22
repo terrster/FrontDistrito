@@ -21,6 +21,7 @@ import {
   TableContainer,
   Paper,
   Chip,
+  Input,
 } from "@material-ui/core";
 import { styled } from "@material-ui/core/styles";
 import Axios from "../../utils/axios";
@@ -29,6 +30,10 @@ import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { indexOf } from "lodash";
 import { get } from "jquery";
+import { Alert, Form } from "react-bootstrap";
+import { useFormik } from "formik";
+import {updateSnackbar} from "../../redux/actions/snackActions";
+import Snack from "../Loader/Snack";
 
 const StyledButton = styled(Button)({
   background: "#023e8a",
@@ -40,6 +45,10 @@ const StyledButton = styled(Button)({
   padding: "0 30px",
 });
 
+const getDatos = async (id) => {
+  const datos = await Axios.get(`/control/consultas/${id}`);
+  return datos;
+};
 
 const Consulta = ({ code, setOpen, ...rest }) => {
   const [success, setSuccess] = React.useState(false);
@@ -93,7 +102,6 @@ const TableTop = ({ keys, setOpen, ...rest }) => {
             </TableCell>
           );
         })}
-        
       </TableRow>
     </TableHead>
   );
@@ -173,6 +181,21 @@ const TableBottom = ({ consultas, setOpen, keys, displayData, ...rest }) => {
             Ver
           </StyledButton>
         </TableCell> */}
+
+        {/* <TableCell align="center">
+          <StyledButton
+            color="primary"
+            variant="contained"
+            onClick={() => {
+              getDatos(consulta._id).then((res) => {
+                console.log(res.data);
+              });
+            }}
+            style={{ backgroundColor: "#023473" }}
+          >
+            ver datos
+          </StyledButton>
+        </TableCell> */}
       </TableRow>
     );
   }
@@ -187,6 +210,16 @@ const TableBottom = ({ consultas, setOpen, keys, displayData, ...rest }) => {
 
 const TableConsultas = ({ consultas, setOpen, displayData, ...rest }) => {
   const [keys, setKeys] = React.useState([]);
+
+  useEffect(() => {
+    let helper = [];
+    consultas.map((consulta, index) => {
+      if(consulta._id !== undefined){
+        const { _id, ...rest } = consulta;
+        consultas[index] = rest;
+      }
+    });
+  }, [consultas]);
 
   useEffect(() => {
     let helper = [];
@@ -228,6 +261,86 @@ const TableConsultas = ({ consultas, setOpen, displayData, ...rest }) => {
   );
 };
 
+const FormularioConsulta = ({ setOpen, ...rest }) => {
+  const dispatch = useDispatch();
+
+  const addScore = async(values) => {
+    return await Axios.post("/control/addburo", values);
+  };
+
+  const Formik = useFormik({
+    initialValues: {
+      email: "",
+      score: "",
+    },
+    onSubmit: (values) => {
+      dispatch(updateLoader(true));
+      addScore(values).then((res) => {
+        dispatch(updateLoader(false));
+        if (res.status === 200) {
+          console.log(res.data);
+          dispatch(updateSnackbar(true, "score agregado"));
+        } else {
+          console.log(res);
+          Alert.error("error al agregar score");
+          dispatch(updateSnackbar(true, "error al agregar score"));
+        }
+      }).catch((err) => {
+        dispatch(updateLoader(false));
+        dispatch(updateSnackbar(true, "error al agregar score"));
+      }
+      );
+    },
+  });
+  return (
+    <>
+      <Loader />
+      <Box
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          pb: 3,
+        }}
+      >
+        <Snack />
+        <Typography color="textPrimary" gutterBottom variant="h4">
+          agregar score:
+        </Typography>
+      </Box>
+        <Form
+          onSubmit={Formik.handleSubmit}
+          style={{ display: "flex", justifyContent: "center", flexDirection: "column", width: "70%", margin: "auto" }}
+        >
+          <Input
+            name="email"
+            type="text"
+            placeholder="email"
+            required
+            onChange={Formik.handleChange}
+            value={Formik.values.email}
+            style={{ marginBottom: "1.5rem" }}
+          />
+          <Input
+            name="score"
+            type="number"
+            placeholder="score"
+            required
+            onChange={Formik.handleChange}
+            value={Formik.values.score}
+          />
+
+          <StyledButton
+            type="submit"
+            variant="contained"
+            style={{ backgroundColor: "#023473", padding: "1rem", marginTop: "1rem", width: "10rem", alignSelf: "center" }}
+          >
+            agregar
+          </StyledButton>
+        </Form>
+    </>
+  );
+};
+
 const Consultas = () => {
   const { admin } = useSelector((state) => state.admin);
   const history = useHistory();
@@ -236,6 +349,7 @@ const Consultas = () => {
   const [consultas, setConsultas] = React.useState([]);
   const [consulta, setConsulta] = React.useState({});
   const [open, setOpen] = React.useState(false);
+  const [openConsulta, setOpenConsulta] = React.useState(false);
   const [code, setCode] = React.useState(null);
 
   useEffect(() => {
@@ -269,6 +383,10 @@ const Consultas = () => {
     setOpen(true);
   };
 
+  const handleCloseConsulta = () => {
+    setOpenConsulta(false);
+  };
+
   return consultas.length > 0 ? (
     <Container maxWidth="lg">
       <Box sx={{ pt: 3 }}>
@@ -281,13 +399,21 @@ const Consultas = () => {
         >
           <Consulta code={code} setOpen={setOpen} />
         </Modal>
-        <Grid container spacing={3}>
+        <Modal
+          open={openConsulta}
+          onClose={handleCloseConsulta}
+          center
+          classNames={{ modal: "codeModal" }}
+        >
+          <FormularioConsulta setOpen={setOpenConsulta} />
+        </Modal>
+        <Grid container spacing={3} sx={{ justifyContent: "center" }}>
           <Grid item xs={12}>
             <Typography gutterBottom variant="h4">
               Consultas
             </Typography>
           </Grid>
-          <Grid item lg={4} sm={6} xl={4} xs={12}>
+          <Grid item lg={6} sm={6} xl={6} xs={12}>
             <Card>
               <CardContent>
                 <Box sx={{ display: "flex", justifyContent: "center", pb: 3 }}>
@@ -301,6 +427,26 @@ const Consultas = () => {
                   </Typography>
                 </Box>
                 <Divider />
+              </CardContent>
+            </Card>
+          </Grid>
+          <Grid item lg={6} sm={6} xl={6} xs={12}>
+            <Card>
+              <CardContent>
+                <Box sx={{ display: "flex", justifyContent: "center", pb: 3 }}>
+                  <Typography color="textPrimary" gutterBottom variant="h4">
+                    consultas pendientes:
+                  </Typography>
+
+                  <StyledButton
+                    color="primary"
+                    variant="contained"
+                    style={{ backgroundColor: "#023473" }}
+                    onClick={() => setOpenConsulta(true)}
+                  >
+                    agregar
+                  </StyledButton>
+                </Box>
               </CardContent>
             </Card>
           </Grid>

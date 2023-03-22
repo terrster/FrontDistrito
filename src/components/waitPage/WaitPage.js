@@ -507,6 +507,14 @@ const WaitPage = () => {
       await axios.put(`/api/buro/consulta`, data).then((response) => {
       console.log(response);
       if (response.status === 200) {
+        if(response.code !== undefined && response.code === 0) {
+          setStatus("OK");
+          setScore(1000);
+          setIsLoading(false);
+          return setBuro(
+          <BuroPendiente user={user} score={1000} />
+          );
+        }
         
         // setScore(response.data.valorScore);
         // setStatus(response.data.success);

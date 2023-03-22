@@ -18,6 +18,7 @@ import modalCiecReducer from './modalCiec-reducer';
 import modalBanksReducer from './modalBanksReducer';
 import adminReducer from './admin-reducer';
 import buroReducer from './buro-reducer';
+import snackReducer from './snackReducer';
 
 export default combineReducers({
     alert: alertReducer,
@@ -39,4 +40,5 @@ export default combineReducers({
     modalBanks: modalBanksReducer,
     admin: adminReducer,
     buro: buroReducer,
+    snack: snackReducer,
 });
