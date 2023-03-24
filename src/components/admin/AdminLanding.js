@@ -17,7 +17,7 @@ import {
 
 
 const AdminLanding = () => {
-    let  { admin } = useSelector((state) => state);
+    const [admin, setAdmin] = React.useState(null);
     const [open, setOpen] = React.useState(false);
     const history = useHistory();
     const dispatch = useDispatch();
@@ -32,6 +32,7 @@ const AdminLanding = () => {
         }
         if(admin === null || admin === undefined){
         dispatch(loginAdmin(user));
+        setAdmin(user);
         }
     }, [admin]);
 
@@ -71,7 +72,7 @@ const AdminLanding = () => {
                             gutterBottom
                             variant="h4"
                         >
-                            Bienvenido {admin.user.email}
+                            Bienvenido {admin.email}
                         </Typography>
                     </Grid>
                     <Grid item lg={4} sm={6} xl={4} xs={12}>
