@@ -34,7 +34,10 @@ const NavBar = props => {
 	useLayoutEffect(() => {
 		if (isAuthenticated()){
 			user = JSON.parse(sessionStorage.getItem("user"));
-			idClient = user.idClient;
+			
+			if(user.hasOwnProperty("idClient") && user.idClient !== null){
+				idClient = user.idClient;
+
 			if (idClient.hasOwnProperty("type")){
 				setShowEstatus(true);
 			}
@@ -45,6 +48,7 @@ const NavBar = props => {
 				if(user.idClient.appliance[0].hasOwnProperty("idGeneralInfo") && user.idClient.appliance[0].hasOwnProperty("idComercialInfo") && user.idClient.appliance[0].hasOwnProperty("idDocuments")){
 					setShowHome(true);
 				}
+			}
 			}
 
 		}

@@ -26,14 +26,23 @@ const Owners = () => {
   const [options, setOptions] = useState([]);
   const [brokerActivo, setBrokerActivo] = useState("");
 
+  const user = JSON.parse(sessionStorage.getItem("user"));
+
+  useEffect(() => {
+    if(user === null){
+      window.location.replace("/login");
+    }
+    if(user.access !== "ADMIN"){
+      window.location.replace("/login");
+    }
+  }, [user]);
+
   const inner = useRef(null);
   const ref = (node) => {
     node = findDOMNode(node);
     if (node) {
-      console.log(node);
       inner.current = node.querySelector('li');
     }
-    console.log(inner.current);
   };
 
   useEffect(() => {
@@ -71,10 +80,6 @@ const Owners = () => {
       setBrokerActivo(count);
     }
   }, [owners]);
-
-  useEffect(() => {
-    console.log(brokerActivo);
-  }, [brokerActivo]);
 
   const paperStyle = {
     padding: 20,

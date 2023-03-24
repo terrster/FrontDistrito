@@ -31,11 +31,16 @@ const SettingsCards = () => {
 
   const { admin } = useSelector((state) => state);
 
+  const user = JSON.parse(sessionStorage.getItem("user"));
+
   useEffect(() => {
-    if(admin.user === null){
+    if(user === null){
       window.location.replace("/login");
     }
-  }, [admin]);
+    if(user.access !== "ADMIN"){
+      window.location.replace("/login");
+    }
+  }, [user]);
 
   const onCloseModal = () => {
     setOpen(false);
