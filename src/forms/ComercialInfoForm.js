@@ -159,7 +159,7 @@ let ComercialInfoForm = (props) => {
       for(let key in comercial){
         if(key === "ciecstatus"){
           setCiecStatus(comercial[key]);
-          (comercial[key] === true) ? setMessage("CIEC valida ") : setMessage("la CIEC no es válida")
+          (comercial[key] === true) ? setMessage("CIEC válida ") : setMessage("la CIEC no es válida")
         }
       }
     } else {
@@ -192,7 +192,7 @@ let ComercialInfoForm = (props) => {
         const cstatus = res.code;
         if (cstatus === 200) {
           setCiecStatus(true);
-          setMessage("CIEC válido");
+          setMessage("CIEC válida");
         } else {
           const ctype = res.code;
           if (ctype === 404 ) {
