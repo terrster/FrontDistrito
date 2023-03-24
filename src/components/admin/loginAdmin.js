@@ -38,7 +38,6 @@ const LoginAdmin = () => {
       Axios.post("/admin/login", formik.values).then((res) => {
         console.log(res);
         if (res.data.code === 200) {
-          console.log(res.data.user);
           sessionStorage.setItem("token", res.data.token);
           sessionStorage.setItem("user", JSON.stringify(res.data.user));
             dispatch(loginAdmin(res.data.user));

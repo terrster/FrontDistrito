@@ -16,8 +16,10 @@ import {
 } from "@material-ui/core";
 import Axios from "../../utils/axios";
 import { findDOMNode } from 'react-dom';
+import { useHistory } from "react-router-dom";
 
 const Owners = () => {
+  const [admin, setAdmin] = useState(null);
   const [owners, setOwners] = useState([]);
   const [search, setSearch] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
@@ -26,16 +28,17 @@ const Owners = () => {
   const [options, setOptions] = useState([]);
   const [brokerActivo, setBrokerActivo] = useState("");
 
-  const user = JSON.parse(sessionStorage.getItem("user"));
+  const history = useHistory();
 
   useEffect(() => {
-    if(user === null){
-      window.location.replace("/login");
+    const user = JSON.parse(sessionStorage.getItem("user"));
+    if (user === null) {
+      setAdmin(user);
     }
-    if(user.access !== "ADMIN"){
-      window.location.replace("/login");
+    if (user.access !== "ADMIN") {
+      history.push("/login");
     }
-  }, [user]);
+  }, [admin]);
 
   const inner = useRef(null);
   const ref = (node) => {

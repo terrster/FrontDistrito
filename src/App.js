@@ -162,7 +162,7 @@ class App extends Component {
                 <Route path="/registroexitoso/:partner?" exact component={RegistroExitoso} />
                 <Route path="/login/:redirect?" exact component={Login} />
                 <Route path="/brokers-registro" exact component={Brokers}/>
-                <PrivateRoute path="/owner" exact component={Owners}/>
+                <PrivateRoute path="/admin/owners" exact component={Owners}/>
                 <Route path="/admin/login" exact component={LoginAdmin}/>
                 <PrivateRoute path="/admin/consultas" exact component={Consultas}/>
                 <PrivateRoute path="/admin/control" exact component={SettingsCards}/>
