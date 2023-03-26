@@ -16,8 +16,10 @@ import {
 } from "@material-ui/core";
 import Axios from "../../utils/axios";
 import { findDOMNode } from 'react-dom';
+import { useHistory } from "react-router-dom";
 
 const Owners = () => {
+  const [admin, setAdmin] = useState(null);
   const [owners, setOwners] = useState([]);
   const [search, setSearch] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
@@ -26,14 +28,24 @@ const Owners = () => {
   const [options, setOptions] = useState([]);
   const [brokerActivo, setBrokerActivo] = useState("");
 
+  const history = useHistory();
+
+  useEffect(() => {
+    const user = JSON.parse(sessionStorage.getItem("user"));
+    if (user === null) {
+      setAdmin(user);
+    }
+    if (user.access !== "ADMIN") {
+      history.push("/login");
+    }
+  }, [admin]);
+
   const inner = useRef(null);
   const ref = (node) => {
     node = findDOMNode(node);
     if (node) {
-      console.log(node);
       inner.current = node.querySelector('li');
     }
-    console.log(inner.current);
   };
 
   useEffect(() => {
@@ -71,10 +83,6 @@ const Owners = () => {
       setBrokerActivo(count);
     }
   }, [owners]);
-
-  useEffect(() => {
-    console.log(brokerActivo);
-  }, [brokerActivo]);
 
   const paperStyle = {
     padding: 20,

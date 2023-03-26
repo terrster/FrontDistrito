@@ -76,18 +76,6 @@ export const validateComercialInfo = (values) => {
     errors.employeesNumber = "Selecciona una opción";
   }
 
-  if (type === "PM") {
-    if(!values.bankAccount){
-      errors.bankAccount = "Selecciona una opción";
-    }
-  }
-
-  if (type === "PM" || type === "PFAE") {
-    if(!values.empresarialCreditCard){
-      errors.empresarialCreditCard = "Selecciona una opción";
-    }
-  }
-
   if (type !== "PF") {
     if(!values.paymentsMoreThan30){
       errors.paymentsMoreThan30 = "Selecciona una opción";

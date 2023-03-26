@@ -60,6 +60,11 @@ import NewDoc from "./components/metamap/NewDoc";
 import AlliePartner from "./components/Allies/AlliePartner";
 import ThankyouPageAllie from "./components/Allies/ThankyouPageAllie";
 import Owners from "./components/admin/owners";
+import LoginAdmin from "./components/admin/loginAdmin";
+import SettingsCards from "./components/admin/SettingsCards";
+import AdminLanding from "./components/admin/AdminLanding";
+import Consultas from "./components/admin/consultas";
+import NextPageP from "./components/waitPage/NextPage";
 
 // ROUTER & REDUX
 import {
@@ -157,7 +162,11 @@ class App extends Component {
                 <Route path="/registroexitoso/:partner?" exact component={RegistroExitoso} />
                 <Route path="/login/:redirect?" exact component={Login} />
                 <Route path="/brokers-registro" exact component={Brokers}/>
-                <Route path="/owner" exact component={Owners}/>
+                <PrivateRoute path="/admin/owners" exact component={Owners}/>
+                <Route path="/admin/login" exact component={LoginAdmin}/>
+                <PrivateRoute path="/admin/consultas" exact component={Consultas}/>
+                <PrivateRoute path="/admin/control" exact component={SettingsCards}/>
+                <PrivateRoute path="/admin" exact component={AdminLanding}/>
                 <Route path="/brokersCP" exact component={CPBrokers}/>
                 <Route path="/brokers-registro/:camp?" exact component={CPBrokers}/>
                 <Route path="/solicitud_enviada_brokers" exact component={ThankyouPage} />
@@ -175,6 +184,11 @@ class App extends Component {
                   exact
                   path="/buro/:idAppliance"
                   component={WaitPage}
+                />
+                <PrivateRoute
+                  exact
+                  path="/auth/:idAppliance"
+                  component={NextPageP}
                 />
                 <PrivateRoute
                   exact

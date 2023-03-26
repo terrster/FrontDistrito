@@ -159,7 +159,7 @@ let ComercialInfoForm = (props) => {
       for(let key in comercial){
         if(key === "ciecstatus"){
           setCiecStatus(comercial[key]);
-          (comercial[key] === true) ? setMessage("CIEC valida ") : setMessage("la CIEC no es válida")
+          (comercial[key] === true) ? setMessage("CIEC válida ") : setMessage("la CIEC no es válida")
         }
       }
     } else {
@@ -192,7 +192,7 @@ let ComercialInfoForm = (props) => {
         const cstatus = res.code;
         if (cstatus === 200) {
           setCiecStatus(true);
-          setMessage("CIEC válido");
+          setMessage("CIEC válida");
         } else {
           const ctype = res.code;
           if (ctype === 404 ) {
@@ -368,21 +368,6 @@ let ComercialInfoForm = (props) => {
           })}
         </Field>
 
-        {type === "PM" && (
-          <Field component={renderSelectField} name="bankAccount" cls="mb-3">
-            <option className="metropolisReg" value="">
-              ¿Tienes cuenta bancaria?
-            </option>
-            {bankAccount.map((option, index) => {
-              return (
-                <option value={option.value} key={index}>
-                  {option.text}
-                </option>
-              );
-            })}
-          </Field>
-        )}
-
         {type !== "PF" && (
           <Field
             component={renderSelectField}
@@ -398,25 +383,6 @@ let ComercialInfoForm = (props) => {
             <option className="metropolisReg" value="0">
               No
             </option>
-          </Field>
-        )}
-
-        {(type === "PM" || type === "PFAE") && (
-          <Field
-            component={renderSelectField}
-            name="empresarialCreditCard"
-            cls="mb-3"
-          >
-            <option className="metropolisReg" value="">
-              ¿Cuentas con tarjeta de crédito empresarial?
-            </option>
-            {empresarialCreditCard.map((option, index) => {
-              return (
-                <option value={option.value} key={index}>
-                  {option.text}
-                </option>
-              );
-            })}
           </Field>
         )}
 
@@ -560,10 +526,7 @@ let ComercialInfoForm = (props) => {
                   )
                 }
                 <div className="fz18 gray50 text-dp mb-30 mt-2">
-                  No es un dato obligatorio pero puede agilizar tu solicitud a
-                  la mitad del tiempo y ofrecerte mejores condiciones de
-                  crédito. Se ingresa por única ocasión para descargar la
-                  información necesaria mediante procesos automatizados
+                nos ayuda a agilizar tu solicitud y ofrecerte mejores condiciones de crédito. Se ingresa por única ocasión para descargar la información necesaria mediante procesos automatizados.
                 </div>
               </Col>
               <PopUp />
@@ -594,15 +557,6 @@ let ComercialInfoForm = (props) => {
           <option value="0">No</option>
         </Field>
         <InputLabel
-          label="¿Vendes tu producto o servicio al extranjero?"
-          class="mt-b2 text-msg-dp"
-        />
-        <Field component={renderSelectField} name="exportation" cls="mb-3">
-          <option value="">Seleccionar</option>
-          <option value="1">Sí</option>
-          <option value="0">No</option>
-        </Field>
-        <InputLabel
           label="¿Puedes ofrecer una garantía?"
           class="mt-b2 text-msg-dp"
         />
@@ -614,7 +568,7 @@ let ComercialInfoForm = (props) => {
           <option value="4">No</option>
         </Field>
         <div className="text-center" style={{ marginBottom: "50px" }}>
-          {refDocuments && !disabled && (
+          {refDocuments && !disabled && ciecStatus && (
             <Button
               id="ymb-dp-comercial-submit"
               type="submit"
@@ -623,7 +577,7 @@ let ComercialInfoForm = (props) => {
               guardar e ir a documentos
             </Button>
           )}
-          {!refDocuments && !disabled && (
+          {!refDocuments && !disabled && ciecStatus && (
             <Button
               type="submit"
               className={"mt-50 btn-blue-general"}

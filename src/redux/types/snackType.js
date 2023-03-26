@@ -1,0 +1,1 @@
+export const UPDATE_SNACK = "UPDATE_SNACK";

@@ -812,7 +812,7 @@ let GeneralInfoForm = ({
               <option value="">Selecciona...</option>
               <option value="YES">Sí</option>
               <option value="NO">No</option>
-              <option value="MORE4">Hace más de 4 años</option>
+              <option value="YES2">Cerrado en los ultimos 2 años</option>
             </Field>
           </Col>
 
