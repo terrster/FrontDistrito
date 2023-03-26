@@ -492,12 +492,12 @@ const WaitPage = () => {
       
     }
 
-    if (unykoo === true) {
-      setStatus("OK");
-      setScore(1000);
-      setIsLoading(false);
-      return setBuro(<BuroPendiente user={user} score={1000} />);
-    }
+    // if (unykoo === true) {
+    //   setStatus("OK");
+    //   setScore(1000);
+    //   setIsLoading(false);
+    //   return setBuro(<BuroPendiente user={user} score={1000} />);
+    // }
 
     const idClient = user._id;
     const data = {
@@ -582,7 +582,6 @@ const WaitPage = () => {
     }
     
     const user = JSON.parse(sessionStorage.getItem("user"));
-    if (unykoo !== null && unykoo === true) {
     
     if(buroRedux.buro === true){
       
@@ -601,12 +600,7 @@ const WaitPage = () => {
       getConsulta(user);
       }
     }
-    } else {
-      setStatus("OK");
-      setScore(1000);
-      setIsLoading(false);
-      setBuro(<BuroPendiente user={user} score={1000} />);
-    }
+    
   }, [buroRedux, unykoo, consulta]);
 
   return (
