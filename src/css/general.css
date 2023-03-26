@@ -848,3 +848,19 @@
 	transition: ease-in-out;
 }
 
+.customModal{
+	top: 0px !important;
+	border-radius: 1rem;
+}
+.codeModal{
+	top: 0px !important;
+	border-radius: 1rem;
+	max-width: 100% !important;
+	width: 80% !important;
+}
+
+.titleModal{
+	font-family: 'coolvetica_rg !important';
+	color: #023473;
+}
+
