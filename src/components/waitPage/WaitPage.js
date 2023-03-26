@@ -505,9 +505,11 @@ const WaitPage = () => {
     };
     setConsulta(consulta + 1);
       await axios.put(`/api/buro/consulta`, data).then((response) => {
-      console.log(response);
+
       if (response.status === 200) {
-        if(response.code !== undefined && response.code === 0) {
+
+        if(response.data.code !== undefined && response.data.code === 0) {
+          console.log("saltar buro");
           setStatus("OK");
           setScore(1000);
           setIsLoading(false);
@@ -515,10 +517,8 @@ const WaitPage = () => {
           <BuroPendiente user={user} score={1000} />
           );
         }
-        
         // setScore(response.data.valorScore);
         // setStatus(response.data.success);
-        console.log(response);
         setIsLoading(false);
         sessionStorage.setItem("user", JSON.stringify(response.data.user));
         dispatch(buroPrueba());
