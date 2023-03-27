@@ -41,6 +41,7 @@ let ComercialInfoForm = (props) => {
   const [ciec, setCiec] = useState("");
   const [ciecStatus, setCiecStatus] = useState(false);
   const [message, setMessage] = useState("");
+  const [person, setPerson] = useState("");
 
   const { handleSubmit, valid, cieicValidation } = props;
   const ciecRef = useRef(null);
@@ -85,6 +86,18 @@ let ComercialInfoForm = (props) => {
     }
     dispatch(updateLoader(false));
   };
+
+  useEffect(() => {
+    let user = JSON.parse(sessionStorage.getItem("user"));
+    let idClient = user.idClient;
+    setPerson(idClient.type);
+  }, []);
+
+  useEffect(() => {
+    if(person === "PF"){
+      setCiecStatus(true);
+    }
+  }, [person]);
 
   useEffect(() => {
     if (!toast.second) {
