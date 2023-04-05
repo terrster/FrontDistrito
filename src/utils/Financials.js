@@ -41,6 +41,7 @@ import GBM from '../assets/img/alianzas/logogbm.svg';
 import Tivos from '../assets/img/alianzas/tivos-01.svg';
 import Capitalx from '../assets/img/alianzas/cx.svg';
 import Dbmenos from '../assets/img/alianzas/dbmenos.svg';
+import Finsus from '../assets/img/alianzas/FINSUS-TEXTO.png';
 
 export const filterFinancials = (financials) => {
     
@@ -184,6 +185,9 @@ export const imgFinancial = (financial) => {
         case 'DBMENOS':
         return Dbmenos;
 
+        case 'FINSUS':
+        return Finsus;
+
 
         case 'ALL':
         return [
@@ -230,6 +234,17 @@ export const imgFinancial = (financial) => {
             Capitalx,
             Dbmenos,
         ];
+        case "CARRUSEL": 
+        return [
+            Finsus,
+            HayCash,
+            Lendera,
+            Billpocket,
+        ]
+
+        default:
+        return null;
+
     }
 }
 
