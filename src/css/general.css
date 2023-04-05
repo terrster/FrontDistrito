@@ -729,6 +729,11 @@
 	height: 45px !important;
 }
 
+.textAllies{
+	font-family: 'coolvetica_rg';
+	font-size: 2.2rem;
+}
+
 .recomendation-box{
 	padding: 30px;
 	width: 100%;
