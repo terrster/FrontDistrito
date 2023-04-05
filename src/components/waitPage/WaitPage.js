@@ -380,6 +380,10 @@ const BuroUltimo = ({code}) => {
       mensaje = "desafortunadamente rebasaste los intentos permitidos por día para consultar tu buró, pero no te preocupes, puedes volver a intentarlo en 24 hrs."
       mensaje2 = "mientras tanto aprovecha para verificar tu información y podamos avanzar con tu solicitud."
       break;
+    case 100:
+      mensaje = "desafortunadamente no hemos logrado consultar tu buró correctamente, pero no te preocupes, un asesor de dp se comunicara contigo a la brevedad."
+      mensaje2 = "mientras tanto aprovecha para verificar tu información y podamos avanzar con tu solicitud."
+      break;
     default:
       mensaje = "desafortunadamente no hemos logrado consultar tu buró correctamente, pero no te preocupes, un asesor de dp se comunicara contigo a la brevedad."
       break;
@@ -515,6 +519,15 @@ const WaitPage = () => {
           setIsLoading(false);
           return setBuro(
           <BuroPendiente user={user} score={1000} />
+          );
+        }
+
+        if (response.data.code !== undefined && response.data.code === 1) {
+          console.log("buro especial");
+          setStatus("NO");
+          setIsLoading(false);
+          return setBuro(
+            <BuroUltimo code={100} user={user} />
           );
         }
         // setScore(response.data.valorScore);

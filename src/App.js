@@ -65,6 +65,7 @@ import SettingsCards from "./components/admin/SettingsCards";
 import AdminLanding from "./components/admin/AdminLanding";
 import Consultas from "./components/admin/consultas";
 import NextPageP from "./components/waitPage/NextPage";
+import CiecWait from "./components/ciec/CiecWait";
 
 // ROUTER & REDUX
 import {
@@ -148,6 +149,7 @@ class App extends Component {
                 <Route path="/ciec"  exact component={ CIECcomponent }/>
                 
                 <Route path="/terminos-y-condiciones" exact component={Terms} />
+                <Route path="/ciec-wait" exact component={CiecWait} />
                 <Route path="/privacidad" exact component={Privacy} />
                 <Route path="/reset-password" exact component={ResetPassword} />
                 <Route path="/nuestros-aliados" exact component={OurAllies}/>
