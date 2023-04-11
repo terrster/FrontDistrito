@@ -29,7 +29,7 @@ const NavBar = props => {
 		'halo',
 		'tuempresa',
 		'crediexpo',
-		'314512648'
+		'322586238'
 ];
 
 	useLayoutEffect(() => {
