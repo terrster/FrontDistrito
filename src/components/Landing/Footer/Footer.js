@@ -26,7 +26,7 @@ const Footer = props => {
         }
     }  , []);
     const url = indexOf(location.pathname.split('/'), 'buro') > -1 ? 'buro' : 'other';
-    const show = location.pathname === "/solicitudBrokers/314512648" ? false : true;
+    const show = location.pathname === "/solicitudBrokers/322586238" ? false : true;
 
     if(!show) return null;
     

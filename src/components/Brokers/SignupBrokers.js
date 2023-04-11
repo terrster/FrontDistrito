@@ -68,7 +68,7 @@ const SignupBrokers = props => {
         <Loader />
 
         {
-          ownerId !== '314512648' &&
+          ownerId !== '322586238' &&
         <>
         <div className="fz56 text-center title-dp fw500">
           ¡Bienvenido Broker a Distrito Pyme!
