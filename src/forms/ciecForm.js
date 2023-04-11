@@ -14,17 +14,32 @@ import { Col } from "react-bootstrap";
 
 let CiecForm = (props) => {
   const dispatch = useDispatch();
-  const { handleSubmit, valid, popup, openModal, version } = props;
+  const { handleSubmit, valid, popup, openModal, version, ciec, CiecStatus } = props;
 
   const [rfc, setRfc] = useState("");
   const [rfcState, setRfcState] = useState("");
   const [inicio, setInicio] = useState(false);
+  const [ciecState, setCiecState] = useState(ciec);
+  const [validState, setValidState] = useState(" ");
+
+  useEffect(() => {
+    setCiecState(ciec);
+  }, [ciec]);
+
+  useEffect(() => {
+    if(ciecState === true){
+      setValidState("continuar sin CIEC");
+    } else {
+      setValidState("continuar con CIEC");
+    }
+  }, [ciecState]);
 
   const upper = (value) => value && value.toUpperCase();
 
   return (
     <div className="altForm">
       {popup && <Popup />}
+      {!ciecState && <Popup />}
       <form onSubmit={handleSubmit} autoComplete="off" id="ciecForm">
         <img
           className="mb-4 img-fluid"
@@ -47,16 +62,20 @@ let CiecForm = (props) => {
             name="rfc"
             cls="mb-3"
             normalize={upper}
-            maxLength={12}
-            minLength={12}
+            maxLength={!ciecState ? 8 : 13}
+            minLength={!ciecState ? 8 : 13}
             autoComplete="off"
           />
-          <Field
+          {
+            ciecState === true ? (
+              <Field
             component={renderFieldFull}
             label="CIEC"
             name="ciec"
             autoComplete="off"
           />
+            ) : null
+          }
         </div>
         <input
           type="text"
@@ -102,14 +121,26 @@ let CiecForm = (props) => {
           </Row>
           <p className="mt-3 text-muted" style={{ maxWidth: "80%" }}>
             <small>
-              al seleccionar "continuar", usted acepta nuestros{" "}
-              <a href="https://distritopyme.com/terminos-y-condiciones">
-                términos de uso
-              </a>{" "}
-              y{" "}
-              <a href="https://distritopyme.com/privacidad">
-                aviso de privacidad.
-              </a>
+              {
+                ciecState === true ? (
+                  "no"
+                ) : (
+                  ""
+                )
+              } cuento con CIEC, quiero{" "} 
+              <p
+                style={{ 
+                  color: "#007bff",
+                  display: "inline",
+                  cursor: "pointer",
+                  textDecoration: "underline", 
+                }}
+                onClick={() => {
+                  CiecStatus(!ciecState);
+                }}
+              >
+                {validState}
+              </p>
             </small>
           </p>
         </div>

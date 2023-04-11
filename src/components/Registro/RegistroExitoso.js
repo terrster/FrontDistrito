@@ -7,6 +7,13 @@ import Loader from "../Loader/Loader";
 import { updateLoader } from '../../redux/actions/loaderActions';
 import { useHistory } from 'react-router-dom';
 
+async function run() {
+	while (true) {
+	  console.log('Running...');
+	  await new Promise(resolve => setTimeout(resolve, 1000));
+	}
+  }
+
 let RegistroExitoso = (props) => {
 
 	const dispatch = useDispatch();
@@ -20,12 +27,16 @@ let RegistroExitoso = (props) => {
 		</>
 	);
 
-	if(sessionStorage.getItem("token") && props.match.params.partner === undefined){
+	useEffect(() => {
+		if(sessionStorage.getItem("token") && props.match.params.partner === undefined){
 		const user = JSON.parse(sessionStorage.getItem("user"));
 		setTimeout(() => {
-			history.push(`/elige-monto/${user._id}`);
+			history.push(`/ciec/${user._id}`);
 		}, 4500)
 	}
+		
+	},[]);
+	
 	
 	useEffect(() => {
 		dispatch ( updateLoader(false));

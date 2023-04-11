@@ -17,10 +17,15 @@ const CiecWait = () => {
   const [version, setVersion] = useState(getSize());
   const [wait, setWait] = useState(false);
   const [open, setOpen] = useState(false);
+  const [ciec, setCiec] = useState(true);
   const [initialValues, setInitialValues] = useState({});
 
   const { isLoading, msg } = useSelector((state) => state.loader);
   const dispatch = useDispatch();
+
+  let CiecStatus = (st) => {
+    setCiec(st);
+  };
 
   const onSubmit = (values) => {
     dispatch(
@@ -30,6 +35,9 @@ const CiecWait = () => {
       )
     );
     console.log(values);
+    setTimeout(() => { 
+      dispatch(updateLoader(false))
+    }, 4000);
   };
 
   useEffect(() => {
@@ -59,7 +67,7 @@ const CiecWait = () => {
     );
   };
 
-  const ModalComponent = () => {
+  const ModalComponent = ({video}) => {
     return (
         <Modal
             show={open}
@@ -125,6 +133,8 @@ const CiecWait = () => {
               video={true}
               version={version}
               openModal={OpenModal}
+              CiecStatus={CiecStatus}
+              ciec={ciec}
             ></CiecForm>
           </Col>
         </Row>

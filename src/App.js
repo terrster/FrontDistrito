@@ -149,7 +149,6 @@ class App extends Component {
                 <Route path="/ciec"  exact component={ CIECcomponent }/>
                 
                 <Route path="/terminos-y-condiciones" exact component={Terms} />
-                <Route path="/ciec-wait" exact component={CiecWait} />
                 <Route path="/privacidad" exact component={Privacy} />
                 <Route path="/reset-password" exact component={ResetPassword} />
                 <Route path="/nuestros-aliados" exact component={OurAllies}/>
@@ -196,6 +195,11 @@ class App extends Component {
                   exact
                   path="/informacion-general/:idAppliance"
                   component={GeneralInfo}
+                />
+                <PrivateRoute
+                  exact
+                  path="/ciec/:idAppliance"
+                  component={CiecWait}
                 />
                 <PrivateRoute exact path="/credito" component={Credit} />
                 <PrivateRoute exact path="/historial" component={Record} />

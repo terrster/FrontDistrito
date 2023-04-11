@@ -34,7 +34,8 @@ export const renderField = ({
             value={value || input.value}
             placeholder={label}
             type={type}
-            maxLength="13"
+            maxLength={maxLength}
+            minLength={minLength}
             autoComplete="off"
             disabled={disabled}
           />
