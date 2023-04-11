@@ -6,6 +6,8 @@ import Loader from "../Loader/Loader";
 import { updateLoader } from "../../redux/actions/loaderActions";
 import CiecForm from "../../forms/ciecForm";
 import ReactPlayer from "react-player";
+import Axios from "../../utils/axios";
+import Swal from "sweetalert2";
 import "../../css/ciec.css";
 
 const getSize = () => {
@@ -18,26 +20,129 @@ const CiecWait = () => {
   const [wait, setWait] = useState(false);
   const [open, setOpen] = useState(false);
   const [ciec, setCiec] = useState(true);
+  const [response, setResponse] = useState({});
   const [initialValues, setInitialValues] = useState({});
 
   const { isLoading, msg } = useSelector((state) => state.loader);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   let CiecStatus = (st) => {
-    setCiec(st);
+    if(st === true){
+      setCiec(st);
+      return
+    }
+    Swal.fire({
+      title: "¿estás seguro?",
+      text: "sin la CIEC las opciones de financiamiento se reducen considerablemente, pero buscaremos una opción de crédito personal, que puede ser por un monto pequeño, o que requerirá de una garantia inmobiliaria",
+      icon: "warning",
+      customClass: {
+        title: "title-dp fz42",
+        popup: "text-dp fz20",
+        confirmButton: "btn-blue-general btn-gray-general btn btn-primary",
+        cancelButton: "btn-blue-general btn btn-primary",
+      },
+      confirmButtonText: "Aceptar",
+      showCancelButton: true,
+      cancelButtonText: "Cancelar",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setCiec(st);
+      } else {
+        setCiec(!st);
+      }
+    }).catch((err) => {
+      console.log(err);
+      dispatch(updateLoader(false));
+    });
   };
 
-  const onSubmit = (values) => {
+  const defaultCase = "Error en el servidor"
+
+  const cases = {
+    200: {
+      title: "¡Listo!",
+      text: "tu solicitud ha sido enviada, en breve te daremos una respuesta",
+      icon: "success",
+    },
+    400: {
+      title: "¡Error!",
+      text: "No encontramos tu usuario, intenta más tarde",
+      icon: "error",
+    },
+    404: {
+      title: "¡Error!",
+      text: "el RFC o la CIEC no son válidos, por favor verifica tus datos",
+      icon: "error",
+    },
+    429: {
+      title: "¡Error!",
+      text: "lo lamentamos, pero ya rebasaste el límite de solicitudes diarias para este RFC, por lo mientras revisa tu información e intenta más tarde",
+      icon: "error",
+    }, 
+    500: {
+      title: "¡Error!",
+      text: "lo lamentamos, pero no pudimos procesar tu solicitud, por favor intenta más tarde",
+      icon: "error",
+    }
+  }
+
+  const onSubmit = async (values) => {
     dispatch(
       updateLoader(
         true,
         "Estamos procesando tus documentos y en breve te daremos una respuesta"
       )
     );
-    console.log(values);
-    setTimeout(() => { 
-      dispatch(updateLoader(false))
-    }, 4000);
+
+     let CiecStatus = ciec;
+     let user = JSON.parse(sessionStorage.getItem("user"));
+     let id = user._id;
+     values = { ...values, CiecStatus };
+     await Axios.post(`/api/ciec/${id}`, values)
+        .then((res) => {
+          if (res.status === 200) {
+            console.log(res);
+              
+              let message = cases[res.status] || defaultCase;
+              Swal.fire({
+                title: message.title,
+                text: message.text,
+                icon: message.icon,
+                customClass: {
+                  title: "title-dp fz42",
+                  popup: "text-dp fz20",
+                  confirmButton: "btn-blue-general btn btn-primary",
+                },
+                confirmButtonText: "Aceptar",
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  history.push("/ciec");
+                  dispatch(updateLoader(false));
+                }
+              }).catch((err) => {
+                console.log(err);
+                dispatch(updateLoader(false));
+              });
+          }
+        })
+        .catch((err) => {
+          console.log(err.response);
+          let msg = cases[err.response.status] || defaultCase;
+          Swal.fire({
+            title: msg.title,
+            text: msg.text,
+            icon: msg.icon,
+            customClass: {
+              title: "subtitle form fz42",
+              popup: "text-dp fz20",
+              confirmButton: "btn-blue-general btn btn-primary",
+            },
+            confirmButtonText: "Aceptar",
+          });
+
+          dispatch(updateLoader(false));
+        });
   };
 
   useEffect(() => {

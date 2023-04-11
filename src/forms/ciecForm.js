@@ -28,7 +28,7 @@ let CiecForm = (props) => {
 
   useEffect(() => {
     if(ciecState === true){
-      setValidState("continuar sin CIEC");
+      setValidState("buscar un crédito personal");
     } else {
       setValidState("continuar con CIEC");
     }
@@ -62,8 +62,8 @@ let CiecForm = (props) => {
             name="rfc"
             cls="mb-3"
             normalize={upper}
-            maxLength={!ciecState ? 8 : 13}
-            minLength={!ciecState ? 8 : 13}
+            maxLength={!ciecState ? 10 : 13}
+            minLength={!ciecState ? 10 : 13}
             autoComplete="off"
           />
           {
@@ -110,7 +110,7 @@ let CiecForm = (props) => {
             <Col lg={6} xs={6}>
               <Button
                 type="submit"
-                className={"mt-20 btn-blue-general"}
+                className={"mt-20 mb-5 btn-blue-general"}
                 style={{ width: "250px" }}
                 form="ciecForm"
                 // onClick={() => {console.log(valid)}}
@@ -123,11 +123,11 @@ let CiecForm = (props) => {
             <small>
               {
                 ciecState === true ? (
-                  "no"
+                  "mi negocio no esta dado de alta en el SAT y no tengo CIEC, "
                 ) : (
                   ""
                 )
-              } cuento con CIEC, quiero{" "} 
+              } 
               <p
                 style={{ 
                   color: "#007bff",

@@ -18,7 +18,9 @@ export const validateCiec = (values) => {
     } else {
         
         if (!rfcValido(values.rfc)) {
+            if(values.rfc.length > 10) {
             errors.rfc = "Ingresa un RFC válido";
+            }
         }
     }
     

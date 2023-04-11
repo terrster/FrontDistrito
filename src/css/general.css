@@ -581,7 +581,7 @@
 	letter-spacing: 0px;
 	font-family: 'coolvetica_rg';
 	text-transform: lowercase;
-	color: #F24C5A;
+	color: #F24C5A !important;
 }
 .alternative{
 	font-size: 1em !important;
@@ -616,7 +616,7 @@
 
 .title-dp{
 	font-family: 'coolvetica_rg';
-	color: #023473;
+	color: #023473 !important;
 	text-transform: lowercase;
 }
 
@@ -640,7 +640,7 @@
 }
 
 .text-dp{
-	font-family: 'Metropolis-Regular';
+	font-family: 'Metropolis-Regular' !important;
 	color: #3D3D3D;
 }
 
