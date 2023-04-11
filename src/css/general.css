@@ -729,6 +729,57 @@
 	height: 45px !important;
 }
 
+.textAllies{
+	font-family: 'coolvetica_rg';
+	font-size: 3rem;
+}
+
+.alliesBottom{
+	padding-bottom: 2rem !important;
+	padding-left: 0 !important;
+	padding-right: 0 !important;
+
+}
+
+@media(max-width: 767px){
+	.textAllies{
+		font-size: 3rem;
+	}
+	.alliesBottom{
+		padding-bottom: 1rem !important;
+		padding-left: 0 !important;
+		padding-right: 0 !important;
+	}
+}
+
+@media(min-width: 768px) and (max-width: 991px){
+	.textAllies{
+		font-size: 3rem;
+	}
+	.alliesBottom{
+		padding-bottom: 1rem !important;
+		padding-left: 0 !important;
+		padding-right: 0 !important;
+	}
+}
+
+@media(min-width: 992px) and (max-width: 1400px){
+	.textAllies{
+		font-size: 4rem;
+	}
+}
+
+@media(min-width: 1401px){
+	.textAllies{
+		font-size: 4.5rem;
+	}
+	.alliesBottom{
+		padding-bottom: 3rem !important;
+		padding-left: 0 !important;
+		padding-right: 0 !important;
+	}
+}
+
 .recomendation-box{
 	padding: 30px;
 	width: 100%;
