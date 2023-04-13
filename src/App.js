@@ -79,7 +79,10 @@ import store from "./redux/store";
 
 // UTILS
 import isAuthenticated from "./utils/isAuthenticated";
+import ciec from "./utils/haveCiec";
 import  CIECcomponent  from "./components/ciec/ciec";
+
+let user = JSON.parse(sessionStorage.getItem("user"))
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
@@ -101,7 +104,11 @@ class App extends Component {
         {...rest}
         render={(props) =>
           isAuthenticated() === true ? (
+            ciec() === true ? (
             <Component {...props} />
+            ) : (
+              <Redirect to={`/ciec/${user._id}`} />
+            )
           ) : (
             <Redirect to="/" />
           )
@@ -196,7 +203,7 @@ class App extends Component {
                   path="/informacion-general/:idAppliance"
                   component={GeneralInfo}
                 />
-                <PrivateRoute
+                <Route
                   exact
                   path="/ciec/:idAppliance"
                   component={CiecWait}

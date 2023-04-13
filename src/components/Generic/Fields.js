@@ -1,6 +1,6 @@
 import React from "react";
-import { Field, ErrorMessage } from 'formik';
-import {Buffer} from 'buffer';
+import { Field, ErrorMessage } from "formik";
+import { Buffer } from "buffer";
 
 export const renderField = ({
   input,
@@ -38,6 +38,14 @@ export const renderField = ({
             minLength={minLength}
             autoComplete="off"
             disabled={disabled}
+            style={ error ? {
+                backgroundImage:
+                "url(\"data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='%23F44335' viewBox='0 0 12 12'%3E%3Ccircle cx='6' cy='6' r='4.5'/%3E%3Cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3E%3Ccircle cx='6' cy='8.2' r='.6' fill='%23F44335' stroke='none'/%3E%3C/svg%3E\")",
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: `right .12rem center`,
+                backgroundSize: "1rem 1rem",
+              }
+              : null}
           />
         ) : label === "RFC" &&
           (sessionStorage.type === "RIF" || sessionStorage.type === "PFAE") ? (
@@ -163,19 +171,15 @@ export const renderSelectField = ({
 
 //Reduccion de Codigo
 
-export const renderFieldTextAreaFull = ({
-  input,
-  label,
-  val,
-}) => (
+export const renderFieldTextAreaFull = ({ input, label, val }) => (
   <div>
     <div className="input-container">
-      <textarea 
-      className="form-control custom-form-input text-dp mt-24"
-      {...input}
-      placeholder={label}
-      defaultValue={val}>
-      </textarea>
+      <textarea
+        className="form-control custom-form-input text-dp mt-24"
+        {...input}
+        placeholder={label}
+        defaultValue={val}
+      ></textarea>
     </div>
   </div>
 );
@@ -189,11 +193,12 @@ export const renderFieldFull = ({
   disabled,
   readOnly,
   big,
+  err,
   meta: { touched, error, warning },
   hide,
 }) => (
   <div>
-    <div className="input-container" style={hide ? ({display:"none"}) : null}>
+    <div className="input-container" style={hide ? { display: "none" } : null}>
       {type !== "checkbox" &&
         (val ? (
           <input
@@ -221,11 +226,19 @@ export const renderFieldFull = ({
             {...input}
             id={label}
             placeholder={label}
-            type='password'
+            type="password"
             maxLength="8"
             minLength="8"
             autoComplete="off"
             disabled={disabled ? disabled : false}
+            style={ err ? {
+              backgroundImage:
+              "url(\"data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='%23F44335' viewBox='0 0 12 12'%3E%3Ccircle cx='6' cy='6' r='4.5'/%3E%3Cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3E%3Ccircle cx='6' cy='8.2' r='.6' fill='%23F44335' stroke='none'/%3E%3C/svg%3E\")",
+              backgroundRepeat: "no-repeat",
+              backgroundPosition: `right .12rem center`,
+              backgroundSize: "1rem 1rem",
+            }
+            : null}
           />
         ) : label === "edad" ? (
           <input className="diplay-none" />
@@ -300,54 +313,71 @@ export const renderSelectFieldFull = ({
 );
 
 /*
-* FORMIK
-*/
+ * FORMIK
+ */
 
 const onlyLirycs = (e, form) =>
-/^([a-z ñáéíóú]{0,60})$/i.test(e.target.value) && e.target.value.length > 0 ? 
-form.setFieldValue(e.target.name, e.target.value) : 
-form.setFieldValue(e.target.name, e.target.value.substring(0, e.target.value.length - 1));
+  /^([a-z ñáéíóú]{0,60})$/i.test(e.target.value) && e.target.value.length > 0
+    ? form.setFieldValue(e.target.name, e.target.value)
+    : form.setFieldValue(
+        e.target.name,
+        e.target.value.substring(0, e.target.value.length - 1)
+      );
 
 const onlyEmailWithoutSpace = (e, form) =>
-/^$|^[^\s]*[\w-\.\@]+$/i.test(e.target.value) && e.target.value.length > 0 ? 
-form.setFieldValue(e.target.name, e.target.value) : 
-form.setFieldValue(e.target.name, e.target.value.substring(0, e.target.value.length - 1));
+  /^$|^[^\s]*[\w-\.\@]+$/i.test(e.target.value) && e.target.value.length > 0
+    ? form.setFieldValue(e.target.name, e.target.value)
+    : form.setFieldValue(
+        e.target.name,
+        e.target.value.substring(0, e.target.value.length - 1)
+      );
 
 const onlyNumbers = (e, form) =>
-/^\d+$/.test(e.target.value) && e.target.value.length > 0 ? 
-form.setFieldValue(e.target.name, e.target.value) : 
-form.setFieldValue(e.target.name, e.target.value.substring(0, e.target.value.length - 1));
+  /^\d+$/.test(e.target.value) && e.target.value.length > 0
+    ? form.setFieldValue(e.target.name, e.target.value)
+    : form.setFieldValue(
+        e.target.name,
+        e.target.value.substring(0, e.target.value.length - 1)
+      );
 
-const onlyNumbersDotComa = (e, form) => 
-/^[0-9]{1,2}([,.][0-9]{1,2})?$/.test(e.target.value) && e.target.value.length > 0 ? 
-form.setFieldValue(e.target.name, e.target.value) : 
-form.setFieldValue(e.target.name, e.target.value.substring(0, e.target.value.length - 1));
+const onlyNumbersDotComa = (e, form) =>
+  /^[0-9]{1,2}([,.][0-9]{1,2})?$/.test(e.target.value) &&
+  e.target.value.length > 0
+    ? form.setFieldValue(e.target.name, e.target.value)
+    : form.setFieldValue(
+        e.target.name,
+        e.target.value.substring(0, e.target.value.length - 1)
+      );
 
 const LirycsNumbersDotComa = (e, form) =>
-/^([a-z ñáéíóú0-9,.]{0,45})$/i.test(e.target.value) && e.target.value.length > 0 ? 
-form.setFieldValue(e.target.name, e.target.value) : 
-form.setFieldValue(e.target.name, e.target.value.substring(0, e.target.value.length - 1));
+  /^([a-z ñáéíóú0-9,.]{0,45})$/i.test(e.target.value) &&
+  e.target.value.length > 0
+    ? form.setFieldValue(e.target.name, e.target.value)
+    : form.setFieldValue(
+        e.target.name,
+        e.target.value.substring(0, e.target.value.length - 1)
+      );
 
 const normalizeFn = (fn, e, form) => {
-    switch(fn){
-        case "onlyLirycs":
-            onlyLirycs(e, form);
-        break;
-        case "onlyEmailWithoutSpace":
-            onlyEmailWithoutSpace(e, form);
-        break;
-        case "onlyNumbers":
-            onlyNumbers(e, form);
-        break;
-        case "onlyNumbersDotComa":
-            onlyNumbersDotComa(e, form);
-        break;
-        case "LirycsNumbersDotComa":
-            LirycsNumbersDotComa(e, form);
-        break;
-        default:
-        break;
-    }
+  switch (fn) {
+    case "onlyLirycs":
+      onlyLirycs(e, form);
+      break;
+    case "onlyEmailWithoutSpace":
+      onlyEmailWithoutSpace(e, form);
+      break;
+    case "onlyNumbers":
+      onlyNumbers(e, form);
+      break;
+    case "onlyNumbersDotComa":
+      onlyNumbersDotComa(e, form);
+      break;
+    case "LirycsNumbersDotComa":
+      LirycsNumbersDotComa(e, form);
+      break;
+    default:
+      break;
+  }
 };
 
 export const FieldText = ({
@@ -358,34 +388,39 @@ export const FieldText = ({
   maxLength,
   normalize,
   labelFooter,
-  props
+  props,
 }) => {
   return (
     <Field name={name}>
-      {({field, form: { setFieldValue }}) => (
+      {({ field, form: { setFieldValue } }) => (
         <div className="form-group">
-          {
-            label &&
-              <div className="fz16 metropolisReg mb-2 text-left">{label}</div>
-          }
+          {label && (
+            <div className="fz16 metropolisReg mb-2 text-left">{label}</div>
+          )}
           <input
             className={`form-control custom-form-input text-dp ${className}`}
             placeholder={placeholder}
             type="text"
             maxLength={maxLength}
-            onKeyUp={(e) => {normalizeFn(normalize, e, {setFieldValue})}}
+            onKeyUp={(e) => {
+              normalizeFn(normalize, e, { setFieldValue });
+            }}
             {...field}
             {...props}
           />
-          {
-            labelFooter &&
-              <div className="label-footer">{labelFooter}</div>
-          }
-          <ErrorMessage name={field.name} render={msg => <div id={`${field.name}-error`} className="error mt-1">{msg}</div>}/>
+          {labelFooter && <div className="label-footer">{labelFooter}</div>}
+          <ErrorMessage
+            name={field.name}
+            render={(msg) => (
+              <div id={`${field.name}-error`} className="error mt-1">
+                {msg}
+              </div>
+            )}
+          />
         </div>
       )}
     </Field>
-  )
+  );
 };
 
 export const FieldTextArea = ({
@@ -395,16 +430,15 @@ export const FieldTextArea = ({
   placeholder,
   maxLength,
   labelFooter,
-  props
+  props,
 }) => {
   return (
     <Field name={name}>
-      {({field}) => (
+      {({ field }) => (
         <div className="form-group">
-          {
-            label &&
-              <div className="fz16 metropolisReg mb-2 text-left">{label}</div>
-          }
+          {label && (
+            <div className="fz16 metropolisReg mb-2 text-left">{label}</div>
+          )}
           <textarea
             className={`form-control custom-form-input text-dp ${className}`}
             placeholder={placeholder}
@@ -412,17 +446,20 @@ export const FieldTextArea = ({
             maxLength={maxLength}
             {...field}
             {...props}
-          >
-          </textarea>
-          {
-            labelFooter &&
-              <div className="label-footer">{labelFooter}</div>
-          }
-          <ErrorMessage name={field.name} render={msg => <div id={`${field.name}-error`} className="error mt-1">{msg}</div>}/>
+          ></textarea>
+          {labelFooter && <div className="label-footer">{labelFooter}</div>}
+          <ErrorMessage
+            name={field.name}
+            render={(msg) => (
+              <div id={`${field.name}-error`} className="error mt-1">
+                {msg}
+              </div>
+            )}
+          />
         </div>
       )}
     </Field>
-  )
+  );
 };
 
 export const FieldPassword = ({
@@ -431,16 +468,15 @@ export const FieldPassword = ({
   placeholder,
   props,
   showPassword,
-  setShowPassword
+  setShowPassword,
 }) => {
   return (
     <Field name={name}>
-      {({field}) => (
+      {({ field }) => (
         <div className="form-group">
-          {
-            label &&
-              <div className="fz16 metropolisReg mb-2 text-left">{label}</div>
-          }
+          {label && (
+            <div className="fz16 metropolisReg mb-2 text-left">{label}</div>
+          )}
           <div className="input-group form-group center-flex">
             <input
               className="form-control custom-form-input text-dp center-flex-input"
@@ -449,13 +485,19 @@ export const FieldPassword = ({
               {...field}
               {...props}
             />
-            <span className={`${showPassword ? "eye-slash" : "eye"} icon-style`} onClick={() => setShowPassword(!showPassword)}/>
+            <span
+              className={`${showPassword ? "eye-slash" : "eye"} icon-style`}
+              onClick={() => setShowPassword(!showPassword)}
+            />
           </div>
-          <ErrorMessage name={field.name} render={msg => <div className="error mt-1">{msg}</div>}/>
+          <ErrorMessage
+            name={field.name}
+            render={(msg) => <div className="error mt-1">{msg}</div>}
+          />
         </div>
       )}
     </Field>
-  )
+  );
 };
 
 export const FieldSelect = ({
@@ -464,76 +506,72 @@ export const FieldSelect = ({
   onChange,
   props,
   children,
-  labelFooter
-}) => {
-return (
-      <Field name={name}>
-        {({field, form: { setFieldValue }}) => (
-          <div className="form-group">
-              {
-                label &&
-                  <div className="fz16 metropolisReg text-left">{label}</div>
-              }
-              <select {...field} className="form-control custom-form-input text-dp" {...props} 
-              onChange={ e => {
-                  setFieldValue(field.name, e.target.value);
-                  onChange && onChange(e)
-              }}>
-                  {children}
-              </select>
-              {
-                labelFooter &&
-                  <div className="label-footer">{labelFooter}</div>
-              }
-              <ErrorMessage name={field.name} render={msg => <div className="error mt-1">{msg}</div>} />
-          </div>
-        )}
-      </Field>
-)
-};
-
-export const FieldCheck = ({
-  name,
-  checked,
-  label,
-  props
+  labelFooter,
 }) => {
   return (
     <Field name={name}>
-      {({field}) => (
+      {({ field, form: { setFieldValue } }) => (
         <div className="form-group">
-          <div className="form-check">  
-              <input
-                id={field.name}
-                className="form-check-input text-dp"
-                type="checkbox"
-                defaultChecked={checked}
-                {...field}
-                {...props}
-              />
-            <label className="form-check-label fz16 metropolisReg" htmlFor={field.name}>
-              {label}
-            </label>
-          </div>
-          <ErrorMessage name={field.name} render={msg => <div className="error mt-1">{msg}</div>}/>
+          {label && <div className="fz16 metropolisReg text-left">{label}</div>}
+          <select
+            {...field}
+            className="form-control custom-form-input text-dp"
+            {...props}
+            onChange={(e) => {
+              setFieldValue(field.name, e.target.value);
+              onChange && onChange(e);
+            }}
+          >
+            {children}
+          </select>
+          {labelFooter && <div className="label-footer">{labelFooter}</div>}
+          <ErrorMessage
+            name={field.name}
+            render={(msg) => <div className="error mt-1">{msg}</div>}
+          />
         </div>
       )}
     </Field>
-  )
+  );
 };
 
-export const FieldRadio = ({
-  name,
-  checked,
-  value,
-  label,
-  props
-}) => {
+export const FieldCheck = ({ name, checked, label, props }) => {
   return (
     <Field name={name}>
-      {({field, form}) => (
+      {({ field }) => (
         <div className="form-group">
-          <div className="form-check">  
+          <div className="form-check">
+            <input
+              id={field.name}
+              className="form-check-input text-dp"
+              type="checkbox"
+              defaultChecked={checked}
+              {...field}
+              {...props}
+            />
+            <label
+              className="form-check-label fz16 metropolisReg"
+              htmlFor={field.name}
+            >
+              {label}
+            </label>
+          </div>
+          <ErrorMessage
+            name={field.name}
+            render={(msg) => <div className="error mt-1">{msg}</div>}
+          />
+        </div>
+      )}
+    </Field>
+  );
+};
+
+export const FieldRadio = ({ name, checked, value, label, props }) => {
+  return (
+    <Field name={name}>
+      {({ field, form }) => (
+        <div className="form-group">
+          <div className="form-check">
             <label className="form-check-label fz16 metropolisReg">
               <input
                 className="form-check-input"
@@ -541,7 +579,7 @@ export const FieldRadio = ({
                 defaultChecked={checked}
                 value={value}
                 onClick={() => {
-                  form.setFieldValue(field.name, value)
+                  form.setFieldValue(field.name, value);
                 }}
                 {...field}
                 {...props}
@@ -549,9 +587,12 @@ export const FieldRadio = ({
               {label}
             </label>
           </div>
-          <ErrorMessage name={field.name} render={msg => <div className="error mt-1">{msg}</div>}/>
+          <ErrorMessage
+            name={field.name}
+            render={(msg) => <div className="error mt-1">{msg}</div>}
+          />
         </div>
       )}
     </Field>
-  )
+  );
 };

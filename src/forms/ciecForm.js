@@ -7,27 +7,24 @@ import { validateCiec } from "../components/Validate/validateCiec";
 import { renderField, renderFieldFull } from "../components/Generic/Fields";
 import Popup from "./PopUp";
 import "../css/ciec.css";
-
-import { text } from "@fortawesome/fontawesome-svg-core";
 import { Row } from "react-bootstrap";
 import { Col } from "react-bootstrap";
 
 let CiecForm = (props) => {
   const dispatch = useDispatch();
-  const { handleSubmit, valid, popup, openModal, version, ciec, CiecStatus } = props;
+  const { handleSubmit, valid, popup, openModal, version, ciec, CiecStatus } =
+    props;
 
-  const [rfc, setRfc] = useState("");
-  const [rfcState, setRfcState] = useState("");
-  const [inicio, setInicio] = useState(false);
   const [ciecState, setCiecState] = useState(ciec);
   const [validState, setValidState] = useState(" ");
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     setCiecState(ciec);
   }, [ciec]);
 
   useEffect(() => {
-    if(ciecState === true){
+    if (ciecState === true) {
       setValidState("buscar un crédito personal");
     } else {
       setValidState("continuar con CIEC");
@@ -66,16 +63,22 @@ let CiecForm = (props) => {
             minLength={!ciecState ? 10 : 13}
             autoComplete="off"
           />
-          {
-            ciecState === true ? (
+          {ciecState === true ? (
+            <>
               <Field
-            component={renderFieldFull}
-            label="CIEC"
-            name="ciec"
-            autoComplete="off"
-          />
-            ) : null
-          }
+                component={renderFieldFull}
+                label="CIEC"
+                name="ciec"
+                autoComplete="off"
+                err={error}
+              />
+              { error &&
+              <span id={"CIEC-error"}>
+                <small className="error extend-error">{"hola bb"}</small>
+              </span>
+              }   
+            </>
+          ) : null}
         </div>
         <input
           type="text"
@@ -91,22 +94,22 @@ let CiecForm = (props) => {
         />
         <div className="mt-3 text-center d-flex justify-content-center align-items-center flex-column">
           <Row className="mt-3 flex-column">
-            {version ? version !== 0 && (
-              <Col lg={6} xs={6}>
-                <Button
-                  type="button"
-                  className={"mt-20 mb-3 btn-blue-general"}
-                  style={{ width: "250px" }}
-                  onClick={() => {
-                    openModal();
-                  }}
-                >
-                  saber más
-                </Button>
-              </Col>
-            ) : null
-          
-          }
+            {version
+              ? version !== 0 && (
+                  <Col lg={6} xs={6}>
+                    <Button
+                      type="button"
+                      className={"mt-20 mb-3 btn-blue-general"}
+                      style={{ width: "250px" }}
+                      onClick={() => {
+                        openModal();
+                      }}
+                    >
+                      saber más
+                    </Button>
+                  </Col>
+                )
+              : null}
             <Col lg={6} xs={6}>
               <Button
                 type="submit"
@@ -119,21 +122,17 @@ let CiecForm = (props) => {
               </Button>
             </Col>
           </Row>
-          <p className="mt-3 text-muted" style={{ maxWidth: "80%" }}>
+          <div className="mt-3 text-muted" style={{ maxWidth: "80%" }}>
             <small>
-              {
-                ciecState === true ? (
-                  "mi negocio no esta dado de alta en el SAT y no tengo CIEC, "
-                ) : (
-                  ""
-                )
-              } 
+              {ciecState === true
+                ? "mi negocio no esta dado de alta en el SAT y no tengo CIEC, "
+                : ""}
               <p
-                style={{ 
+                style={{
                   color: "#007bff",
                   display: "inline",
                   cursor: "pointer",
-                  textDecoration: "underline", 
+                  textDecoration: "underline",
                 }}
                 onClick={() => {
                   CiecStatus(!ciecState);
@@ -142,7 +141,7 @@ let CiecForm = (props) => {
                 {validState}
               </p>
             </small>
-          </p>
+          </div>
         </div>
       </form>
     </div>

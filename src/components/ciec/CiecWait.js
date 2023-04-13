@@ -103,7 +103,8 @@ const CiecWait = () => {
         .then((res) => {
           if (res.status === 200) {
             console.log(res);
-              
+              let user = res.data.user;
+              sessionStorage.setItem("user", JSON.stringify(user));
               let message = cases[res.status] || defaultCase;
               Swal.fire({
                 title: message.title,
@@ -117,8 +118,9 @@ const CiecWait = () => {
                 confirmButtonText: "Aceptar",
               }).then((result) => {
                 if (result.isConfirmed) {
-                  history.push("/ciec");
                   dispatch(updateLoader(false));
+                  history.push(`elige-monto/${user._id}`);
+                  
                 }
               }).catch((err) => {
                 console.log(err);
