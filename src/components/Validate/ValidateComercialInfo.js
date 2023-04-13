@@ -100,6 +100,20 @@ export const validateComercialInfo = (values) => {
     errors.intNumber = "Ingresa un número interior valido";
   }
 
+  if(values.ciec !== undefined || values.ciec !== null){
+    
+    if(typeof values.ciec !== 'string'){
+
+      errors.ciec = "Ingresa un CIEC valido";
+    } else if(values.ciec.length !== 8 || values.ciec.length === 0){
+      errors.ciec = "Ingresa un CIEC valido";
+    } 
+  }
+
+  if(!values.ciec){
+    errors.ciec = "Ingresa un CIEC valido";
+  }
+
   // if (!values.town) {
   //   errors.town = "Ingresa la colonia donde se ubica tu negocio";
   // }
