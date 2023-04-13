@@ -94,7 +94,13 @@ const Credit = (props) => {
     } else if (idComercialInfo == null || !idComercialInfo) {
       linkt = `datos-comerciales/${user._id}`;
     } else if (idGeneralInfo == null || !idGeneralInfo) {
-      linkt = `informacion-general/${user._id}`;
+      let comercialInfo = user.idClient.appliance[0].idComercialInfo;
+      let businessName = comercialInfo.businessName;
+      if(businessName === null || businessName === undefined || businessName === "") {
+        linkt = `datos-comerciales/${user._id}`;
+      } else {
+        linkt = `informacion-general/${user._id}`;
+      }
     } else if (scoreType === false && idGeneralInfo) {
       linkt = `buro/${user._id}`;
     } else if(scoreType && idGeneralInfo && (!idDocuments || !statusDocuments.status || !idDocuments == null)) {
