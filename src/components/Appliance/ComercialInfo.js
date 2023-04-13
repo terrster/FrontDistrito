@@ -25,6 +25,7 @@ const ComercialInfo = (props) => {
   const [initialValues, setInitialValues] = useState({});
   const [municipality, setMunicipality] = useState("");
   const [state, setState] = useState("");
+  const [confirm, setConfirm] = useState(false);
   const history = useHistory();
 
   const onFormSubmit = async (dataForm) => {
@@ -165,6 +166,7 @@ const ComercialInfo = (props) => {
         state={state}
         municipality={municipality}
         cieicValidation={cieicValidation}
+        setConfirm={setConfirm}
       ></ComercialInfoForm>
     </div>
   );

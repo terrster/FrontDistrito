@@ -181,10 +181,6 @@ let ComercialInfoForm = (props) => {
   }, []);
 
   useEffect(() => {
-    console.log("ciecStatus", ciecStatus);
-  }, [ciecStatus]);
-
-  useEffect(() => {
     if (ciecStatus) {
       return;
     }
@@ -289,6 +285,16 @@ let ComercialInfoForm = (props) => {
   if ((!disabled && !valid) || (!disabled && zipCodeError)) {
     setDisabled(true);
   }
+
+  useEffect(() => {
+    console.log(ciecStatus);
+    if(ciecStatus !== null || ciecStatus !== undefined){
+      if(ciecStatus){
+        setMessage("CIEC válida");
+        props.setConfirm(true);
+      }
+    }
+  }, [ciecStatus]);
 
   const LirycsNumbersDotComa = (nextValue, previousValue) =>
     /^([a-z ñáéíóú0-9,.]{0,45})$/i.test(nextValue) ? nextValue : previousValue;
@@ -590,7 +596,7 @@ let ComercialInfoForm = (props) => {
               guardar e ir a documentos
             </Button>
           )}
-          {!refDocuments && !disabled && ciecStatus && (
+          {!refDocuments && !disabled && (
             <Button
               type="submit"
               className={"mt-50 btn-blue-general"}
