@@ -155,6 +155,10 @@ export const validateComercialInfo = (values) => {
     errors.exportation = "Selecciona una opción";
   }
 
+  if (!values.ciecStatus) {
+    errors.ciecStatus = "ingresa una CIEC válida";
+  }
+
   if (type !== "PF") {
     if (!values.ciec) {
       errors.ciec = "";

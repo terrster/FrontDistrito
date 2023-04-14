@@ -95,8 +95,8 @@ const Credit = (props) => {
       linkt = `datos-comerciales/${user._id}`;
     } else if (idGeneralInfo == null || !idGeneralInfo) {
       let comercialInfo = user.idClient.appliance[0].idComercialInfo;
-      let businessName = comercialInfo.businessName;
-      if(businessName === null || businessName === undefined || businessName === "") {
+      let comercialName = comercialInfo.comercialName;
+      if(comercialName === null || comercialName === undefined || comercialName === "") {
         linkt = `datos-comerciales/${user._id}`;
       } else {
         linkt = `informacion-general/${user._id}`;
