@@ -302,9 +302,9 @@ let ComercialInfoForm = (props) => {
   if ((!disabled && !valid) || (!disabled && zipCodeError)) {
     setDisabled(true);
   }
-  
 
   useEffect(() => {
+    
     if (ciecStatus !== null || ciecStatus !== undefined) {
       if (ciecStatus === true) {
         setMessage("CIEC válida");
@@ -324,6 +324,8 @@ let ComercialInfoForm = (props) => {
       }
     }
   }, [ciecStatus]);
+
+
 
   const LirycsNumbersDotComa = (nextValue, previousValue) =>
     /^([a-z ñáéíóú0-9,.]{0,45})$/i.test(nextValue) ? nextValue : previousValue;
@@ -618,6 +620,8 @@ let ComercialInfoForm = (props) => {
           <option value="3">Sí, ambos</option>
           <option value="4">No</option>
         </Field>
+        {
+          ciecStatus === true && (
         <div className="text-center" style={{ marginBottom: "50px" }}>
           {refDocuments && !disabled && (
             <Button
@@ -650,7 +654,9 @@ let ComercialInfoForm = (props) => {
           {/* <Button type="button" className={"mt-50 btn-blue-general"} style={{ width: '250px' }} onClick={CheckConsulta}>
               continuar
             </Button> */}
-        </div>
+        </div> 
+        ) 
+        }
       </form>
     </div>
   );
