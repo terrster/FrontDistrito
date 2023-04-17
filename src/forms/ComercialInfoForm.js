@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Field, reduxForm } from "redux-form";
+import { FormGroup, FormControlLabel, Checkbox } from "@material-ui/core";
 import comercialOptions from "../models/ComercialInfoModels";
 import employeesNumber from "../models/EmployeesNumber";
 import bankAccount from "../models/BankAccount";
@@ -43,11 +44,23 @@ let ComercialInfoForm = (props) => {
   const [message, setMessage] = useState("");
   const [person, setPerson] = useState("");
 
-  const { handleSubmit, valid, cieicValidation } = props;
+  const { handleSubmit, valid, cieicValidation, initialValues, setInitialValues } = props;
   const ciecRef = useRef(null);
+
+  const handleInputChange = (event, newValue, previousValue) => {
+    if(event.target.name === "rfc"){
+      setRfc(newValue);
+    }
+    if(event.target.name === "ciec"){
+      setCiec(newValue);
+      setMessage("");
+    }
+    setInitialValues({ ...initialValues, [event.target.name]: newValue });
+  }
 
   const handleChange = async (event, id) => {
     const zipCode = event.target.value;
+    handleInputChange(event, zipCode);
 
     if (zipCode.length === 5) {
       try {
@@ -94,7 +107,7 @@ let ComercialInfoForm = (props) => {
   }, []);
 
   useEffect(() => {
-    if(person === "PF"){
+    if (person === "PF") {
       setCiecStatus(true);
     }
   }, [person]);
@@ -169,20 +182,18 @@ let ComercialInfoForm = (props) => {
     const appliance = idClient.appliance[idClient.appliance.length - 1];
     if (appliance.hasOwnProperty("idComercialInfo")) {
       const comercial = appliance.idComercialInfo;
-      for(let key in comercial){
-        if(key === "ciecstatus"){
+      for (let key in comercial) {
+        if (key === "ciecstatus") {
           setCiecStatus(comercial[key]);
-          (comercial[key] === true) ? setMessage("CIEC válida ") : setMessage("la CIEC no es válida")
+          comercial[key] === true
+            ? setMessage("CIEC válida ")
+            : setMessage("la CIEC no es válida");
         }
       }
     } else {
       setCiecStatus(false);
     }
   }, []);
-
-  useEffect(() => {
-    console.log("ciecStatus", ciecStatus);
-  }, [ciecStatus]);
 
   useEffect(() => {
     if (ciecStatus) {
@@ -201,14 +212,13 @@ let ComercialInfoForm = (props) => {
     }
     cieicValidation(ciec, rfc).then((res) => {
       if (res) {
-        
         const cstatus = res.code;
         if (cstatus === 200) {
           setCiecStatus(true);
           setMessage("CIEC válida");
         } else {
           const ctype = res.code;
-          if (ctype === 404 ) {
+          if (ctype === 404) {
             setMessage("la CIEC no es válida");
           } else {
             setMessage("error al validar la CIEC");
@@ -243,6 +253,7 @@ let ComercialInfoForm = (props) => {
     const stateError = document.getElementById("state-error");
     const municipalityError = document.getElementById("municipality-error");
     const ciecError = document.getElementById("ciec-error");
+    const ciecStatusError = document.getElementById("ciec-error");
     const phoneError = document.getElementById("phone-error");
     const webSiteError = document.getElementById("webSite-error");
     const facebookError = document.getElementById("facebook-error");
@@ -274,6 +285,7 @@ let ComercialInfoForm = (props) => {
       terminalError,
       exportationError,
       warrantyError,
+      ciecStatusError,
     ];
     for (let x = 0; x < errors.length; x++) {
       if (errors[x] != null) {
@@ -286,9 +298,34 @@ let ComercialInfoForm = (props) => {
   if (!zipCodeError && disabled && valid) {
     setDisabled(false);
   }
+
   if ((!disabled && !valid) || (!disabled && zipCodeError)) {
     setDisabled(true);
   }
+
+  useEffect(() => {
+    
+    if (ciecStatus !== null || ciecStatus !== undefined) {
+      if (ciecStatus === true) {
+        setMessage("CIEC válida");
+        props.setConfirm(true);
+        setInitialValues({
+          ...initialValues,
+          ciecStatus: ciecStatus,
+        });
+        setDisabled(false);
+      } else {
+        setMessage("la CIEC no es válida");
+        setInitialValues({
+          ...initialValues,
+          ciecStatus: ciecStatus,
+        });
+        setDisabled(true);
+      }
+    }
+  }, [ciecStatus]);
+
+
 
   const LirycsNumbersDotComa = (nextValue, previousValue) =>
     /^([a-z ñáéíóú0-9,.]{0,45})$/i.test(nextValue) ? nextValue : previousValue;
@@ -331,8 +368,9 @@ let ComercialInfoForm = (props) => {
           cls="mb-3"
           name="comercialName"
           label="Nombre comercial"
+          onChange={handleInputChange}
         />
-        <Field component={renderSelectField} name="gyre" cls="mb-3">
+        <Field component={renderSelectField} name="gyre" cls="mb-3" onChange={handleInputChange}>
           <option value="">Selecciona el giro de tu negocio</option>
           {Object.keys(comercialOptions).map((value, key) => (
             <option value={`${value}`} key={key}>
@@ -347,6 +385,7 @@ let ComercialInfoForm = (props) => {
             cls="mb-3"
             name="businessName"
             label="Razón social"
+            onChange={handleInputChange}
           />
         ) : (
           <div></div>
@@ -356,6 +395,7 @@ let ComercialInfoForm = (props) => {
           label="Actividad específica"
           name="specific"
           cls="mb-3"
+          onChange={handleInputChange}
         />
         <Field
           component={renderField}
@@ -365,10 +405,10 @@ let ComercialInfoForm = (props) => {
           normalize={upper}
           maxLength={12}
           minLength={12}
-          onChange={(event, newValue, previousValue) => setRfc(newValue)}
+          onChange={handleInputChange}
         />
 
-        <Field component={renderSelectField} name="employeesNumber" cls="mb-3">
+        <Field component={renderSelectField} name="employeesNumber" cls="mb-3" onChange={handleInputChange}>
           <option className="metropolisReg" value="">
             Número de empleados
           </option>
@@ -386,6 +426,7 @@ let ComercialInfoForm = (props) => {
             component={renderSelectField}
             name="paymentsMoreThan30"
             cls="mb-3"
+            onChange={handleInputChange}
           >
             <option className="metropolisReg" value="">
               ¿Alguno de tus clientes te pagan a más de 30 días?
@@ -408,6 +449,9 @@ let ComercialInfoForm = (props) => {
           normalize={onlyNumbers}
           name="phone"
           cls="mb-3"
+          maxLength={10}
+          minLength={10}
+          onChange={handleInputChange}
         />
         <SubtitleForm subtitle="Domicilio del negocio" className="mt-11 mb-3" />
         <Row className="d-flex justify-content-center">
@@ -418,6 +462,7 @@ let ComercialInfoForm = (props) => {
               name="street"
               cls="mb-3"
               normalize={LirycsNumbersDotComa}
+              onChange={handleInputChange}
             />
           </Col>
           <Col lg={6} md={6} sm={12}>
@@ -426,6 +471,7 @@ let ComercialInfoForm = (props) => {
               label="Ext"
               name="extNumber"
               cls="mb-3"
+              onChange={handleInputChange}
             />
           </Col>
 
@@ -435,6 +481,7 @@ let ComercialInfoForm = (props) => {
               label="Int"
               name="intNumber"
               cls="mb-3"
+              onChange={handleInputChange}
             />
           </Col>
 
@@ -454,7 +501,7 @@ let ComercialInfoForm = (props) => {
             )}
           </Col>
           <Col lg={6} md={6} sm={12}>
-            <Field component={renderSelectField} name="town" cls="mb-3">
+            <Field component={renderSelectField} name="town" cls="mb-3" onChange={handleInputChange}>
               <option className="metropolisReg" value="">
                 Selecciona tu colonia
               </option>
@@ -477,6 +524,7 @@ let ComercialInfoForm = (props) => {
               disabled={true}
               readOnly={true}
               cls="mb-3 mt-1 form-control custom-form-input mt-24 mb-0 input-readonly"
+              onChange={handleInputChange}
             />
           </Col>
 
@@ -489,6 +537,7 @@ let ComercialInfoForm = (props) => {
               disabled={true}
               readOnly={true}
               cls="mb-3 mt-1 form-control custom-form-input mt-24 mb-0 input-readonly"
+              onChange={handleInputChange}
             />
           </Col>
 
@@ -515,31 +564,20 @@ let ComercialInfoForm = (props) => {
                   component={renderFieldFull}
                   label="CIEC"
                   name="ciec"
-                  onChange={(event, newValue, previousValue) => {
-                    setCiec(newValue)
-                    setMessage("")
-                  }
-                  }
+                  onChange={handleInputChange}
                 />
-                <Field
-                  component={renderFieldFull}
-                  type="checkbox"
-                  label="ciec status"
-                  name="ciecstatus"
-                  hide={true}
-                />
-                {
-                  message &&  (
-                    <span id={ciecStatus ? "CIEC-valid" : "CIEC-error"}>
+                {message && (
+                  <span id={ciecStatus ? "CIEC-valid" : "CIEC-error"}>
                     <small className={ciecStatus ? "valid" : "error"}>
                       {message}
-                      </small>
-                      </span>
-
-                  )
-                }
+                    </small>
+                  </span>
+                )}
                 <div className="fz18 gray50 text-dp mb-30 mt-2">
-                nos ayuda a agilizar tu solicitud y ofrecerte mejores condiciones de crédito. Se ingresa por única ocasión para descargar la información necesaria mediante procesos automatizados.
+                  nos ayuda a agilizar tu solicitud y ofrecerte mejores
+                  condiciones de crédito. Se ingresa por única ocasión para
+                  descargar la información necesaria mediante procesos
+                  automatizados.
                 </div>
               </Col>
               <PopUp />
@@ -553,18 +591,20 @@ let ComercialInfoForm = (props) => {
           label="Copia y pega el link de tu sitio web (opcional)"
           name="webSite"
           cls="mb-3"
+          onChange={handleInputChange}
         />
         <Field
           component={renderField}
           label="Copia y pega el link de tu Facebook (opcional)"
           name="facebook"
           cls="mb-3"
+          onChange={handleInputChange}
         />
         <InputLabel
           label="¿Cuentas con terminal punto de venta?"
           class="mt-b2 text-msg-dp"
         />
-        <Field component={renderSelectField} name="terminal" cls="mb-3">
+        <Field component={renderSelectField} name="terminal" cls="mb-3" onChange={handleInputChange}>
           <option value="">Seleccionar</option>
           <option value="1">Sí</option>
           <option value="0">No</option>
@@ -573,15 +613,17 @@ let ComercialInfoForm = (props) => {
           label="¿Puedes ofrecer una garantía?"
           class="mt-b2 text-msg-dp"
         />
-        <Field component={renderSelectField} name="warranty" cls="mb-3">
+        <Field component={renderSelectField} name="warranty" cls="mb-3" onChange={handleInputChange}>
           <option value="">Seleccionar</option>
           <option value="1">Sí, garantía inmobiliaria</option>
           <option value="2">Sí, activo fijo</option>
           <option value="3">Sí, ambos</option>
           <option value="4">No</option>
         </Field>
+        {
+          ciecStatus === true && (
         <div className="text-center" style={{ marginBottom: "50px" }}>
-          {refDocuments && !disabled && ciecStatus && (
+          {refDocuments && !disabled && (
             <Button
               id="ymb-dp-comercial-submit"
               type="submit"
@@ -590,7 +632,7 @@ let ComercialInfoForm = (props) => {
               guardar e ir a documentos
             </Button>
           )}
-          {!refDocuments && !disabled && ciecStatus && (
+          {!refDocuments && !disabled && (
             <Button
               type="submit"
               className={"mt-50 btn-blue-general"}
@@ -612,7 +654,9 @@ let ComercialInfoForm = (props) => {
           {/* <Button type="button" className={"mt-50 btn-blue-general"} style={{ width: '250px' }} onClick={CheckConsulta}>
               continuar
             </Button> */}
-        </div>
+        </div> 
+        ) 
+        }
       </form>
     </div>
   );

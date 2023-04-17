@@ -160,12 +160,39 @@ const GeneralInfo = (props) => {
   }, []);
 
   const execPath = (type, user) => {
-    if(type === "PM" && buro.BuroMoralScore === null){
-      history.push(`/auth/${user._id}`)
+    if (type === "PM" && buro.BuroMoralScore === null) {
+      history.push(`/auth/${user._id}`);
     } else {
-      history.push(`/documentos/${user._id}`)
+      history.push(`/documentos/${user._id}`);
     }
-  }
+  };
+
+  const verifyAppliance = (array) => {
+    if (typeof array !== "object") return false;
+    return array.length === 0 ? false : array[array.length - 1];
+  };
+
+  const verify = (object, property) => {
+    return object.hasOwnProperty(property);
+  };
+
+
+  useEffect(() => {
+    let user = JSON.parse(sessionStorage.getItem("user"));
+    const idClient = user.idClient;
+    let appliance = verifyAppliance(idClient.appliance);
+    let idComercialInfo = verify(appliance, "idComercialInfo");
+
+    if (idComercialInfo) {
+      let comercial = appliance.idComercialInfo;
+      if(!comercial.ciecstatus){
+        history.push(`/informacion-comercial/${user._id}`);
+      }
+    } else {
+      history.push(`/informacion-comercial/${user._id}`);    
+    }
+
+  }, []);
 
   const onFormSubmit = async (dataForm) => {
     dispatch(updateLoader(true));
@@ -216,7 +243,11 @@ const GeneralInfo = (props) => {
           dispatch(buroPrueba());
           let score = buro.score;
           let garantia = idClient.appliance[0].idComercialInfo.warranty;
-          if (buro.buro === "ERROR" || buro.buro === "false" || buro.buro === false) {
+          if (
+            buro.buro === "ERROR" ||
+            buro.buro === "false" ||
+            buro.buro === false
+          ) {
             history.push(`/buro/${user._id}`);
             return;
           }
@@ -241,7 +272,11 @@ const GeneralInfo = (props) => {
           dispatch(updateLoader(false));
           let score = buro.score;
           let garantia = idClient.appliance[0].idComercialInfo.warranty;
-          if (buro.buro === "ERROR" || buro.buro === "false" || buro.buro === false) {
+          if (
+            buro.buro === "ERROR" ||
+            buro.buro === "false" ||
+            buro.buro === false
+          ) {
             history.push(`/buro/${user._id}`);
             return;
           }

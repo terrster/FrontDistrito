@@ -25,6 +25,7 @@ const ComercialInfo = (props) => {
   const [initialValues, setInitialValues] = useState({});
   const [municipality, setMunicipality] = useState("");
   const [state, setState] = useState("");
+  const [confirm, setConfirm] = useState(false);
   const history = useHistory();
 
   const onFormSubmit = async (dataForm) => {
@@ -73,9 +74,11 @@ const ComercialInfo = (props) => {
       
     if (data.code === 200) {
       dispatch(updateLoader(false));
+      setInitialValues({ ...initialValues, ciecStatus: true });
       return { status: true, type : "success", code : 200 };
     } else {
       dispatch(updateLoader(false));
+      setInitialValues({ ...initialValues, ciecStatus: false });
       return { status: false, type : "invalid", code: 400 };
     }
     } catch (error) {
@@ -83,6 +86,7 @@ const ComercialInfo = (props) => {
       let code = error.response.status;
       console.log("code", code);
       dispatch(updateLoader(false));
+      setInitialValues({ ...initialValues, ciecStatus: false });
       return { status: false, type : "error", code };
     }
   };
@@ -160,11 +164,13 @@ const ComercialInfo = (props) => {
       <ComercialInfoForm
         onSubmit={onFormSubmit}
         initialValues={initialValues}
+        setInitialValues={setInitialValues}
         setState={setState}
         setMunicipality={setMunicipality}
         state={state}
         municipality={municipality}
         cieicValidation={cieicValidation}
+        setConfirm={setConfirm}
       ></ComercialInfoForm>
     </div>
   );
