@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 import { Row, Col, Modal } from "react-bootstrap";
 import Loader from "../Loader/Loader";
 import { updateLoader } from "../../redux/actions/loaderActions";
@@ -42,7 +42,7 @@ const CiecWait = () => {
         confirmButton: "btn-blue-general btn-gray-general btn btn-primary",
         cancelButton: "btn-blue-general btn btn-primary",
       },
-      confirmButtonText: "Aceptar",
+      confirmButtonText: "aceptar",
       showCancelButton: true,
       cancelButtonText: "Cancelar",
     }).then((result) => {
@@ -103,8 +103,8 @@ const CiecWait = () => {
         .then((res) => {
           if (res.status === 200) {
             console.log(res);
-              let user = res.data.user;
-              sessionStorage.setItem("user", JSON.stringify(user));
+            const user = JSON.parse(sessionStorage.getItem("user"));
+              sessionStorage.setItem("user", JSON.stringify(res.data.user));
               let message = cases[res.status] || defaultCase;
               Swal.fire({
                 title: message.title,
@@ -115,11 +115,11 @@ const CiecWait = () => {
                   popup: "text-dp fz20",
                   confirmButton: "btn-blue-general btn btn-primary",
                 },
-                confirmButtonText: "Aceptar",
+                confirmButtonText: "aceptar",
               }).then((result) => {
                 if (result.isConfirmed) {
                   dispatch(updateLoader(false));
-                  history.push(`elige-monto/${user._id}`);
+                  history.push(`/elige-monto/${user._id}`);
                   
                 }
               }).catch((err) => {
@@ -140,7 +140,7 @@ const CiecWait = () => {
               popup: "text-dp fz20",
               confirmButton: "btn-blue-general btn btn-primary",
             },
-            confirmButtonText: "Aceptar",
+            confirmButtonText: "aceptar",
           });
 
           dispatch(updateLoader(false));
@@ -250,4 +250,41 @@ const CiecWait = () => {
   );
 };
 
-export default CiecWait;
+const mapStateToProps = (state, ownProps) => {
+	return {
+		history: ownProps.history,
+		modal: state.modal.name,
+		appliance: state.appliance.appliance,
+		applianceAmount: state.appliance.amount,
+		applianceData: state.appliance,
+		currentAmount: state.actionForm.amountForm
+	};
+};
+
+const mapDispatchToProps = dispatch => {
+	return {
+		updateLoader: isLoading => {
+			dispatch({ type: 'UPDATE_LOADER', data: { isLoading } });
+		},
+		updateModal: name => {
+			dispatch({ type: 'UPDATE_MODAL', data: { name } });
+		},
+		updateAppliance: appliance => {
+			dispatch({ type: 'UPDATE_APPLIANCE', data: { appliance } });
+		},
+		updateApplianceAmount: amount => {
+			dispatch({ type: 'UPDATE_AMOUNT_APPLIANCE', data: { amount } });
+		},
+		updateToast: key => {
+			dispatch({ type: 'UPDATE_TOAST', data: { key } });
+		},
+		changeTypeAmountForm: (form, type, datos) => {
+			dispatch({
+				type: 'UPDATE_DATA_AND_TYPE_FORM',
+				data: { form, type, datos }
+			});
+		}
+	};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CiecWait);

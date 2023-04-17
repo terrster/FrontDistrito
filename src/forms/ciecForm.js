@@ -60,7 +60,7 @@ let CiecForm = (props) => {
             cls="mb-3"
             normalize={upper}
             maxLength={!ciecState ? 10 : 13}
-            minLength={!ciecState ? 10 : 13}
+            minLength={!ciecState ? 10 : 12}
             autoComplete="off"
           />
           {ciecState === true ? (
