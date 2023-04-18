@@ -48,14 +48,14 @@ const AlliesLanding = (props) => {
             display: "flex",
           }}
         >
-          super{" "}
+          súper{" "}
           <span
             style={{
               color: "#023473",
               paddingLeft: "0.3rem",
             }}
           >
-            aliados
+            partners
           </span>
         </span>
       </div>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Row, Col } from "react-bootstrap";
 import bannerWeb from "../../assets/img/banner-allies/nuevaAliados.svg";
 import bannerMob1 from "../../assets/img/banner-allies/nuevoAliadosMob1.svg";
-import bannerMob2 from "../../assets/img/banner-allies/nuevoAliadosMob2.svg";
+import bannerMob2 from "../../assets/img/banner-allies/mobile_aliados.svg";
 import linea from "../../assets/img/banner-allies/line_aliados nombre.svg";
 
 const getSize = () => {
