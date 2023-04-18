@@ -28,7 +28,8 @@ const NavBar = props => {
 		'crediyes',
 		'halo',
 		'tuempresa',
-		'crediexpo'
+		'crediexpo',
+		'322586238'
 ];
 
 	useLayoutEffect(() => {
