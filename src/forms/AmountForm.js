@@ -67,9 +67,9 @@ let AmountForm = props => {
 
 	return (
 		<div>
-			<p className="text-dp fz20 fw500 mt-2 mb-1 text-center">selecciona tu tipo de negocio, si tienes duda presiona <img src={helpImg} width="20px" heigth="30px" /> para saber más.</p>
+			{/* <p className="text-dp fz20 fw500 mt-2 mb-1 text-center">selecciona tu tipo de negocio, si tienes duda presiona <img src={helpImg} width="20px" heigth="30px" /> para saber más.</p>
 			<PersonType onSelectPerson={selectedPerson}/>
-			<Field component={renderField} type="text" name="personType" label="secret"></Field>
+			<Field component={renderField} type="text" name="personType" label="secret"></Field> */}
 			<form
 				className="ml-auto mr-auto"
 				style={{ maxWidth: '690px' }}

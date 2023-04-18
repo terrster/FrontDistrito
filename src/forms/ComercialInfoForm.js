@@ -3,8 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Field, reduxForm } from "redux-form";
 import comercialOptions from "../models/ComercialInfoModels";
 import employeesNumber from "../models/EmployeesNumber";
-import bankAccount from "../models/BankAccount";
-import empresarialCreditCard from "../models/EmpresarialCreditCard";
 import { Row, Col, Button } from "react-bootstrap";
 import InputLabel from "../components/Generic/InputLabel";
 import SubtitleForm from "../components/Generic/SubtitleForm";
@@ -15,36 +13,21 @@ import {
   renderFieldFull,
 } from "../components/Generic/Fields";
 import { updateToast } from "../redux/actions/appActions";
-import { updateModalCiec } from "../redux/actions/modalCiecActions";
-// import { updateModalBanks } from "../redux/actions/modalBanksActions";
 import { execToast } from "../utils/ToastUtils";
 import { updateLoader } from "../redux/actions/loaderActions";
-// CIEC
-import PopUp from "./PopUp";
-// import PopUpBanks from "./PopUpBanks";
-import Info from "../assets/img/info-01.png";
-// import Delete from "../assets/img/basura-01.png";
 import scroll from "../utils/scroll";
-import axios from "../utils/axios";
-// import DeleteIcon from "@material-ui/icons/Delete";
 
 let ComercialInfoForm = (props) => {
   const dispatch = useDispatch();
   const toast = useSelector((state) => state.app.toast);
-  const { showModal, refDocuments } = useSelector((state) => state.modalCiec);
+  const { refDocuments } = useSelector((state) => state.modalCiec);
 
   const [colonias, setColonias] = useState([]);
   const [zipCodeError, setZipCodeError] = useState(false);
   const [disabled, setDisabled] = useState(true);
-  const [forceRender, setForceRender] = useState(true);
-  const [rfc, setRfc] = useState("");
-  const [ciec, setCiec] = useState("");
-  const [ciecStatus, setCiecStatus] = useState(false);
-  const [message, setMessage] = useState("");
   const [person, setPerson] = useState("");
 
-  const { handleSubmit, valid, cieicValidation } = props;
-  const ciecRef = useRef(null);
+  const { handleSubmit, valid, } = props;
 
   const handleChange = async (event, id) => {
     const zipCode = event.target.value;
@@ -92,12 +75,6 @@ let ComercialInfoForm = (props) => {
     let idClient = user.idClient;
     setPerson(idClient.type);
   }, []);
-
-  useEffect(() => {
-    if(person === "PF"){
-      setCiecStatus(true);
-    }
-  }, [person]);
 
   useEffect(() => {
     if (!toast.second) {
@@ -164,67 +141,11 @@ let ComercialInfoForm = (props) => {
   const user = JSON.parse(sessionStorage.getItem("user"));
   const { type } = user.idClient;
 
-  useEffect(() => {
-    const idClient = user.idClient;
-    const appliance = idClient.appliance[idClient.appliance.length - 1];
-    if (appliance.hasOwnProperty("idComercialInfo")) {
-      const comercial = appliance.idComercialInfo;
-      for(let key in comercial){
-        if(key === "ciecstatus"){
-          setCiecStatus(comercial[key]);
-          (comercial[key] === true) ? setMessage("CIEC válida ") : setMessage("la CIEC no es válida")
-        }
-      }
-    } else {
-      setCiecStatus(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    console.log("ciecStatus", ciecStatus);
-  }, [ciecStatus]);
-
-  useEffect(() => {
-    if (ciecStatus) {
-      return;
-    }
-
-    if (ciec.length !== 8) {
-      return;
-    }
-    if (type === "PM" && rfc.length !== 12) {
-      return;
-    }
-
-    if (type === "PFAE" && rfc.length !== 13) {
-      return;
-    }
-    cieicValidation(ciec, rfc).then((res) => {
-      if (res) {
-        
-        const cstatus = res.code;
-        if (cstatus === 200) {
-          setCiecStatus(true);
-          setMessage("CIEC válida");
-        } else {
-          const ctype = res.code;
-          if (ctype === 404 ) {
-            setMessage("la CIEC no es válida");
-          } else {
-            setMessage("error al validar la CIEC");
-          }
-          setCiecStatus(false);
-        }
-      }
-    });
-  }, [ciec, rfc]);
-
   const goToError = () => {
     const comercialNameError = document.getElementById("comercialName-error");
     const gyreError = document.getElementById("gyre-error");
     const businessNameError = document.getElementById("businessName-error");
     const specificError = document.getElementById("specific-error");
-    const rfcError = document.getElementById("rfc-error");
     const employeesNumberError = document.getElementById(
       "employeesNumber-error"
     );
@@ -242,7 +163,6 @@ let ComercialInfoForm = (props) => {
     const townError = document.getElementById("town-error");
     const stateError = document.getElementById("state-error");
     const municipalityError = document.getElementById("municipality-error");
-    const ciecError = document.getElementById("ciec-error");
     const phoneError = document.getElementById("phone-error");
     const webSiteError = document.getElementById("webSite-error");
     const facebookError = document.getElementById("facebook-error");
@@ -255,7 +175,6 @@ let ComercialInfoForm = (props) => {
       gyreError,
       businessNameError,
       specificError,
-      rfcError,
       employeesNumberError,
       bankAccountError,
       paymentsMoreThan30Error,
@@ -267,7 +186,6 @@ let ComercialInfoForm = (props) => {
       townError,
       stateError,
       municipalityError,
-      ciecError,
       phoneError,
       webSiteError,
       facebookError,
@@ -300,22 +218,6 @@ let ComercialInfoForm = (props) => {
   const upper = (value) => value && value.toUpperCase();
   const onlyLirycs = (nextValue, previousValue) =>
     /^([a-zñáéíóúü\s]{0,60})$/i.test(nextValue) ? nextValue : previousValue;
-
-  const CheckConsulta = async () => {
-    const user = JSON.parse(sessionStorage.getItem("user"));
-    const id = user._id;
-    const data = {
-      name: "hola",
-    };
-    await axios
-      .post(`api/info-comercial/${id}`, data)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
 
   return (
     <div>
@@ -356,16 +258,6 @@ let ComercialInfoForm = (props) => {
           label="Actividad específica"
           name="specific"
           cls="mb-3"
-        />
-        <Field
-          component={renderField}
-          label="RFC"
-          name="rfc"
-          cls="mb-3"
-          normalize={upper}
-          maxLength={12}
-          minLength={12}
-          onChange={(event, newValue, previousValue) => setRfc(newValue)}
         />
 
         <Field component={renderSelectField} name="employeesNumber" cls="mb-3">
@@ -491,60 +383,6 @@ let ComercialInfoForm = (props) => {
               cls="mb-3 mt-1 form-control custom-form-input mt-24 mb-0 input-readonly"
             />
           </Col>
-
-          {type !== "PF" && (
-            <>
-              <Col lg={12} md={12} sm={12}>
-                <SubtitleForm subtitle="Clave CIEC" className="mt-30" />
-                <div
-                  onClick={() => {
-                    dispatch(updateModalCiec(true));
-                  }}
-                  id="btnCiec"
-                  ref={ciecRef}
-                  style={{ cursor: "pointer", width: "0", height: "0" }}
-                >
-                  <img
-                    src={Info}
-                    alt="Datos CIEC info"
-                    title="Información de CIEC"
-                    className="positionInfo"
-                  />
-                </div>
-                <Field
-                  component={renderFieldFull}
-                  label="CIEC"
-                  name="ciec"
-                  onChange={(event, newValue, previousValue) => {
-                    setCiec(newValue)
-                    setMessage("")
-                  }
-                  }
-                />
-                <Field
-                  component={renderFieldFull}
-                  type="checkbox"
-                  label="ciec status"
-                  name="ciecstatus"
-                  hide={true}
-                />
-                {
-                  message &&  (
-                    <span id={ciecStatus ? "CIEC-valid" : "CIEC-error"}>
-                    <small className={ciecStatus ? "valid" : "error"}>
-                      {message}
-                      </small>
-                      </span>
-
-                  )
-                }
-                <div className="fz18 gray50 text-dp mb-30 mt-2">
-                nos ayuda a agilizar tu solicitud y ofrecerte mejores condiciones de crédito. Se ingresa por única ocasión para descargar la información necesaria mediante procesos automatizados.
-                </div>
-              </Col>
-              <PopUp />
-            </>
-          )}
         </Row>
 
         <SubtitleForm subtitle="¿Cuentas con alguno?" className="mt-11 mb-2" />
@@ -581,7 +419,7 @@ let ComercialInfoForm = (props) => {
           <option value="4">No</option>
         </Field>
         <div className="text-center" style={{ marginBottom: "50px" }}>
-          {refDocuments && !disabled && ciecStatus && (
+          {refDocuments && !disabled && (
             <Button
               id="ymb-dp-comercial-submit"
               type="submit"
@@ -590,7 +428,7 @@ let ComercialInfoForm = (props) => {
               guardar e ir a documentos
             </Button>
           )}
-          {!refDocuments && !disabled && ciecStatus && (
+          {!refDocuments && !disabled && (
             <Button
               type="submit"
               className={"mt-50 btn-blue-general"}

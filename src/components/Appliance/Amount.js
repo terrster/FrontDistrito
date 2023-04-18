@@ -55,6 +55,21 @@ const Amount = props => {
 				} catch (error) {
 					console.log("Error de servicio",error);
 				}
+			} else {
+				try {
+					const res = await axios.post(`api/amount/${id}`,data,{
+						headers:{
+							token: sessionStorage.getItem('token')
+						}
+					});
+					if (res.data.hasOwnProperty("user")){
+							sessionStorage.setItem('user', JSON.stringify(res.data.user));
+					}
+					window.location.href = `/informacion-comercial/${user._id}`;
+					
+				} catch (error) {
+					console.log("Error de servicio",error);
+				}	
 			}
 		} else {
 			try {
@@ -116,9 +131,9 @@ const Amount = props => {
 					modalName="amountError"
 					message="Error al enviar los datos. Favor de intentarlo de nuevo"
 				/>
-				<div className="text-center">
+				{/* <div className="text-center">
 					<Title title="Elige tu tipo de negocio" className="title-dp fz42" />	
-				</div>
+				</div> */}
 				<AmountForm
 					onSubmit={data => onFormSubmit(data)}
 					initialValues={initialValues}

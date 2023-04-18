@@ -62,7 +62,7 @@ const CiecWait = () => {
   const cases = {
     200: {
       title: "¡Listo!",
-      text: "tu solicitud ha sido enviada, en breve te daremos una respuesta",
+      text: "gracias por tu paciencia, ahora puedes continuar con tu solicitud",
       icon: "success",
     },
     400: {
@@ -91,7 +91,7 @@ const CiecWait = () => {
     dispatch(
       updateLoader(
         true,
-        "Estamos procesando tus documentos y en breve te daremos una respuesta"
+        "Estamos procesando tu información y en breve te daremos una respuesta"
       )
     );
 
