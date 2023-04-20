@@ -15,9 +15,9 @@ export const validateAmount = values => {
       errors.yearSales = "Ingresa tus ventas anuales";
     }
   
-    if (!values.term) {
-      errors.term = "Elige en cuánto tiempo quieres pagarlo";
-    }
+    // if (!values.term) {
+    //   errors.term = "Elige en cuánto tiempo quieres pagarlo";
+    // }
       if(!values.yearSales) {
           errors.yearSales = "Ingresa tus ventas anuales"
       } else if(!/^[+]?\d*$/.test(values.yearSales)){

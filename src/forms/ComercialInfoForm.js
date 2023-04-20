@@ -260,7 +260,7 @@ let ComercialInfoForm = (props) => {
           cls="mb-3"
         />
 
-        <Field component={renderSelectField} name="employeesNumber" cls="mb-3">
+        {/* <Field component={renderSelectField} name="employeesNumber" cls="mb-3">
           <option className="metropolisReg" value="">
             Número de empleados
           </option>
@@ -271,9 +271,9 @@ let ComercialInfoForm = (props) => {
               </option>
             );
           })}
-        </Field>
+        </Field> */}
 
-        {type !== "PF" && (
+        {/* {type !== "PF" && (
           <Field
             component={renderSelectField}
             name="paymentsMoreThan30"
@@ -289,7 +289,7 @@ let ComercialInfoForm = (props) => {
               No
             </option>
           </Field>
-        )}
+        )} */}
 
         <label className="label-style">
           El número telefónico debe tener 10 dígitos
@@ -385,8 +385,8 @@ let ComercialInfoForm = (props) => {
           </Col>
         </Row>
 
-        <SubtitleForm subtitle="¿Cuentas con alguno?" className="mt-11 mb-2" />
-        <Field
+        <SubtitleForm subtitle="¿Puedes ofrecer una garantía?" className="mt-24 mb-3" />
+        {/* <Field
           component={renderField}
           label="Copia y pega el link de tu sitio web (opcional)"
           name="webSite"
@@ -401,16 +401,16 @@ let ComercialInfoForm = (props) => {
         <InputLabel
           label="¿Cuentas con terminal punto de venta?"
           class="mt-b2 text-msg-dp"
-        />
-        <Field component={renderSelectField} name="terminal" cls="mb-3">
+        /> */}
+        {/* <Field component={renderSelectField} name="terminal" cls="mb-3">
           <option value="">Seleccionar</option>
           <option value="1">Sí</option>
           <option value="0">No</option>
-        </Field>
-        <InputLabel
+        </Field> */}
+        {/* <InputLabel
           label="¿Puedes ofrecer una garantía?"
           class="mt-b2 text-msg-dp"
-        />
+        /> */}
         <Field component={renderSelectField} name="warranty" cls="mb-3">
           <option value="">Seleccionar</option>
           <option value="1">Sí, garantía inmobiliaria</option>

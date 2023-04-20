@@ -430,7 +430,7 @@ let GeneralInfoForm = ({
           }
         />
 
-        <InputLabel label="Fecha de nacimiento" class="mt-b2 text-msg-dp" />
+        {/* <InputLabel label="Fecha de nacimiento" class="mt-b2 text-msg-dp" />
         <Row className="d-flex justify-content-center">
           <Col>
             <Field
@@ -483,7 +483,7 @@ let GeneralInfoForm = ({
               ))}
             </Field>
           </Col>
-        </Row>
+        </Row> */}
         <Row>
           <Col>
             <Field component={renderFieldFull} name="edad" label="edad" />
@@ -506,7 +506,7 @@ let GeneralInfoForm = ({
           </Row>
         )}
 
-        {
+        {/* {
           user.idClient.type !== "PM" &&
           <Row>
             <Col lg={12} md={12} sm={12}>
@@ -527,7 +527,7 @@ let GeneralInfoForm = ({
               </Field>
             </Col>
           </Row>
-        }
+        } */}
 
         <SubtitleForm
           subtitle="Domicilio particular"

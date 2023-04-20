@@ -90,7 +90,7 @@ let AmountForm = props => {
 				{...currencyMask}
 			/>
 
-			<InputLabel label="¿En cuánto tiempo quieres pagarlo?" class="mt-18" />
+			{/* <InputLabel label="¿En cuánto tiempo quieres pagarlo?" class="mt-18" />
 			<Field component={renderSelectField} name="term" cls="text-dp">
 				<option value="">Elige...</option>
 				<option value="3">3 meses</option>
@@ -99,7 +99,7 @@ let AmountForm = props => {
 				<option value="24">24 meses</option>
 				<option value="36">36 meses</option>
 				<option value="48">48 meses</option>
-			</Field>
+			</Field> */}
 
 			<InputLabel label="Ventas anuales" class="mt-18" />
 			<Field
