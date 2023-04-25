@@ -25,6 +25,7 @@ const Credit = (props) => {
   const history = useHistory();
   const appliance = useSelector((state) => state.appliance.appliance);
   const [user, setUser] = useState(JSON.parse(sessionStorage.getItem("user")));
+  const [fiscal, setFiscal] = useState(false);
   const [id, setId] = useState(user._id);
   const type = getType(user);
 
@@ -53,6 +54,30 @@ const Credit = (props) => {
       }
     }
   };
+
+  // useEffect(() => {
+  //   const idClient = user.idClient;
+  //   let appliance = verifyAppliance(idClient.appliance);
+  //   let idFiscal= verify(appliance, "idFiscal");
+  //   if (idFiscal) {
+  //     let fiscal = idClient.appliance[0].idFiscal;
+  //     if(!fiscal.ciecStatus) {
+  //       let idComercialInfo = verify(appliance, "idComercialInfo");
+  //       if (idComercialInfo) {
+  //         let comercial = idClient.appliance[0].idComercialInfo;
+  //         if(!comercial.ciecstatus) {
+  //           history.push(`ciec/${user._id}`);
+  //         }
+  //       } else {
+  //         history.push(`ciec/${user._id}`);
+  //       }
+  //     } else {
+  //       console.log("tiene ciec");
+  //     }
+  //   } else {
+  //     history.push(`ciec/${user._id}`);
+  //   }
+  // }, []);
 
 
   

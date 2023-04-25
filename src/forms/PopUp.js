@@ -17,6 +17,10 @@ function Pop_up({ isDocuments=false }) {
   const handleClose = () => dispatch(updateModalCiec(false));
 
   useEffect(() => {
+    if(!user){
+      setLoad(true);
+      return;
+    }
 
     const { appliance } = user.idClient;  
 	  let ciec = '';

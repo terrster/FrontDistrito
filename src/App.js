@@ -42,9 +42,7 @@ import Amount from "./components/Appliance/Amount";
 import Appliance from "./components/Appliance/Appliance";
 import Credit from "./components/Credit/Credit";
 import Record from "./components/Record/Record";
-import Documents from "./components/Appliance/Documents";
 import OpenBanking from "./components/OpenBanking/OpenBanking";
-// import Loader from "./components/Loader/Loader";
 import Brokers from "./components/Brokers/Brokers";
 import CPBrokers from "./components/Brokers/cpBrokers";
 import ThankyouPage from "./components/Brokers/ThankyouPage";
@@ -65,6 +63,8 @@ import SettingsCards from "./components/admin/SettingsCards";
 import AdminLanding from "./components/admin/AdminLanding";
 import Consultas from "./components/admin/consultas";
 import NextPageP from "./components/waitPage/NextPage";
+import CiecWait from "./components/ciec/CiecWait";
+import BuroExt from "./components/Appliance/BuroExt";
 
 // ROUTER & REDUX
 import {
@@ -78,35 +78,14 @@ import store from "./redux/store";
 
 // UTILS
 import isAuthenticated from "./utils/isAuthenticated";
+import ciec from "./utils/haveCiec";
 import  CIECcomponent  from "./components/ciec/ciec";
 
-const PrivateRoute = ({ component: Component, ...rest }) => (
-  <Route
-    {...rest}
-    render={(props) =>
-      isAuthenticated() === true ? (
-        <Component {...props} />
-      ) : (
-        <Redirect to="/" />
-      )
-    }
-  />
-);
+let user = JSON.parse(sessionStorage.getItem("user"));
 
 class App extends Component {
   render() {
-    const PrivateRoute = ({ component: Component, ...rest }) => (
-      <Route
-        {...rest}
-        render={(props) =>
-          isAuthenticated() === true ? (
-            <Component {...props} />
-          ) : (
-            <Redirect to="/" />
-          )
-        }
-      />
-    );
+    let PrivateRoute = Prueba();
 
 
     return (
@@ -151,6 +130,7 @@ class App extends Component {
                 <Route path="/privacidad" exact component={Privacy} />
                 <Route path="/reset-password" exact component={ResetPassword} />
                 <Route path="/nuestros-aliados" exact component={OurAllies}/>
+                <Route path="/buro-ext" exact component={BuroExt}/>
                 {/* <Route path="/newdoc" exact component={NewDoc} /> */}
                 <Route
                   path="/recover-password/:hash"
@@ -194,6 +174,11 @@ class App extends Component {
                   exact
                   path="/informacion-general/:idAppliance"
                   component={GeneralInfo}
+                />
+                <Route
+                  exact
+                  path="/ciec/:idAppliance"
+                  component={CiecWait}
                 />
                 <PrivateRoute exact path="/credito" component={Credit} />
                 <PrivateRoute exact path="/historial" component={Record} />
@@ -239,3 +224,16 @@ class App extends Component {
 }
 
 export default App;
+
+function Prueba() {
+  return ({ component: Component, ...rest }) => (
+    <Route
+      {...rest}
+      render={(props) => isAuthenticated() === true ? (
+          <Component {...props} />
+        ) : (
+        <Redirect to="/" />
+      )} />
+  );
+}
+

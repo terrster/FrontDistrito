@@ -1,17 +1,4 @@
-const RFCPF = /^([A-ZÑ\x26]{4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1]))(([-|\s])?([A-Z\d]{3}))?$/;
-const RFCPM = /^([A-ZÑ\x26]{3}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1]))(([-|\s])?([A-Z\d]{3}))?$/;
-const OTHER = /^[A-Z]{4}(\d{6})((\D|\d){3})?$/;
 const broker = sessionStorage.getItem('broker');
-
-function validDay(day, month) {
-  let valid = true;
-  const intMonth = parseInt(month);
-  const intDay = parseInt(day);
-  if (intMonth === 2 && intDay > 29) {
-    valid = false;
-  }
-  return valid;
-}
 
 export const validateComercialInfo = (values) => {
   let errors = {};
@@ -46,32 +33,6 @@ export const validateComercialInfo = (values) => {
     errors.specific = "Escribe la actividad específica de tu negocio";
   }
 
-  if (!values.rfc) {
-    errors.rfc = "Ingresa el RFC";
-  } else {
-    if (type === "PF") {
-      const day = values.rfc.substring(8, 10);
-      const month = values.rfc.substring(6, 8);
-      if (!validDay(day, month)) {
-        errors.rfc = "Ingresa un RFC válido";
-      } else if (!RFCPF.test(values.rfc)) {
-        errors.rfc = "Ingresa un RFC válido";
-      }
-    } else if (type === "PM") {
-      const day = values.rfc.substring(7, 9);
-      const month = values.rfc.substring(5, 7);
-      if (!validDay(day, month)) {
-        errors.rfc = "Ingresa un RFC válido";
-      } else if (!RFCPM.test(values.rfc)) {
-        errors.rfc = "Ingresa un RFC válido";
-      }
-    } else {
-      if (!OTHER.test(values.rfc)) {
-        errors.rfc = "Ingresa un RFC válido";
-      }
-    }
-  }
-
   if(!values.employeesNumber){
     errors.employeesNumber = "Selecciona una opción";
   }
@@ -98,20 +59,6 @@ export const validateComercialInfo = (values) => {
 
   if(values.intNumber !== '' && !/^[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*$/.test(values.intNumber)){
     errors.intNumber = "Ingresa un número interior valido";
-  }
-
-  if(values.ciec !== undefined || values.ciec !== null){
-    
-    if(typeof values.ciec !== 'string'){
-
-      errors.ciec = "Ingresa un CIEC valido";
-    } else if(values.ciec.length !== 8 || values.ciec.length === 0){
-      errors.ciec = "Ingresa un CIEC valido";
-    } 
-  }
-
-  if(!values.ciec){
-    errors.ciec = "Ingresa un CIEC valido";
   }
 
   // if (!values.town) {
@@ -153,18 +100,6 @@ export const validateComercialInfo = (values) => {
 
   if (!values.exportation) {
     errors.exportation = "Selecciona una opción";
-  }
-
-  if (!values.ciecStatus) {
-    errors.ciecStatus = "ingresa una CIEC válida";
-  }
-
-  if (type !== "PF") {
-    if (!values.ciec) {
-      errors.ciec = "";
-    } else if (!/^[a-zA-Z0-9]+$/.test(values.ciec) || values.ciec.length < 8) {
-      errors.ciec = "Ingresa una CIEC válida";
-    }
   }
 
   return errors;

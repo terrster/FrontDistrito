@@ -67,9 +67,9 @@ let AmountForm = props => {
 
 	return (
 		<div>
-			<p className="text-dp fz20 fw500 mt-2 mb-1 text-center">selecciona tu tipo de negocio, si tienes duda presiona <img src={helpImg} width="20px" heigth="30px" /> para saber más.</p>
+			{/* <p className="text-dp fz20 fw500 mt-2 mb-1 text-center">selecciona tu tipo de negocio, si tienes duda presiona <img src={helpImg} width="20px" heigth="30px" /> para saber más.</p>
 			<PersonType onSelectPerson={selectedPerson}/>
-			<Field component={renderField} type="text" name="personType" label="secret"></Field>
+			<Field component={renderField} type="text" name="personType" label="secret"></Field> */}
 			<form
 				className="ml-auto mr-auto"
 				style={{ maxWidth: '690px' }}
@@ -90,7 +90,7 @@ let AmountForm = props => {
 				{...currencyMask}
 			/>
 
-			<InputLabel label="¿En cuánto tiempo quieres pagarlo?" class="mt-18" />
+			{/* <InputLabel label="¿En cuánto tiempo quieres pagarlo?" class="mt-18" />
 			<Field component={renderSelectField} name="term" cls="text-dp">
 				<option value="">Elige...</option>
 				<option value="3">3 meses</option>
@@ -99,7 +99,7 @@ let AmountForm = props => {
 				<option value="24">24 meses</option>
 				<option value="36">36 meses</option>
 				<option value="48">48 meses</option>
-			</Field>
+			</Field> */}
 
 			<InputLabel label="Ventas anuales" class="mt-18" />
 			<Field

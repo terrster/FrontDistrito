@@ -1,8 +1,8 @@
 export const validateAmount = values => {
     let errors = {};
-    if(!values.personType){
-      errors.personType = "Elige un tipo de persona";
-    }
+    // if(!values.personType){
+    //   errors.personType = "Elige un tipo de persona";
+    // }
     if (!values.howMuch) {
       errors.howMuch = "Ingresa la cantidad que necesitas";
     } else if (values.howMuch < 25000) {
@@ -15,9 +15,9 @@ export const validateAmount = values => {
       errors.yearSales = "Ingresa tus ventas anuales";
     }
   
-    if (!values.term) {
-      errors.term = "Elige en cuánto tiempo quieres pagarlo";
-    }
+    // if (!values.term) {
+    //   errors.term = "Elige en cuánto tiempo quieres pagarlo";
+    // }
       if(!values.yearSales) {
           errors.yearSales = "Ingresa tus ventas anuales"
       } else if(!/^[+]?\d*$/.test(values.yearSales)){
