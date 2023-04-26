@@ -154,7 +154,7 @@ const BuroExt = (props) => {
       <Loader />
       <ToastContainer />
       <div className="text-center mb-2">
-        <Title title="Buro Externo" className="title-dp fz42" />
+        <Title title="Consulta de Buro de Crédito" className="title-dp fz42" />
       </div>
       <CustomModal
         modalName="comercialInfoError"

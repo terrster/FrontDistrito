@@ -39,28 +39,28 @@ export const validateGeneralInfo = (values) => {
   }
 
 
-  if (!values.day) {
-    errors.day = "Selecciona el día";
-  }
+  // if (!values.day) {
+  //   errors.day = "Selecciona el día";
+  // }
 
-  if (!values.month) {
-    errors.month = "Selecciona el mes";
-  }
+  // if (!values.month) {
+  //   errors.month = "Selecciona el mes";
+  // }
 
-  if (!values.year) {
-    errors.year = "Selecciona el año";
-  } else {
-    let day = values.day;
-    let month = values.month;
-    let year = values.year;
-    let fecha1 = new Date(year + "/" + month + "/" + day);
-    let fecha2 = new Date();
-    let resta = fecha2.getTime() - fecha1.getTime();
-    let edad = Math.round(resta / (1000 * 60 * 60 * 24)) / 365;
-    if (edad < 18) {
-      errors.edad = "Debes de ser mayor de 18 años";
-    }
-  }
+  // if (!values.year) {
+  //   errors.year = "Selecciona el año";
+  // } else {
+  //   let day = values.day;
+  //   let month = values.month;
+  //   let year = values.year;
+  //   let fecha1 = new Date(year + "/" + month + "/" + day);
+  //   let fecha2 = new Date();
+  //   let resta = fecha2.getTime() - fecha1.getTime();
+  //   let edad = Math.round(resta / (1000 * 60 * 60 * 24)) / 365;
+  //   if (edad < 18) {
+  //     errors.edad = "Debes de ser mayor de 18 años";
+  //   }
+  // }
 
   if (type === "PM") {
     if (!values.rfcPerson) {

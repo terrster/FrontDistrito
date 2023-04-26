@@ -176,22 +176,57 @@ const GeneralInfo = (props) => {
     return object.hasOwnProperty(property);
   };
 
+  function getAge(dateString) {
+    const today = new Date();
+    const birthDate = new Date(dateString);
+    const age = today.getFullYear() - birthDate.getFullYear();
+
+    return age;
+  }
+
+  function getDataRfc(rfc) {
+    let fecha = rfc.substring(4, 10);
+    let year = fecha.substring(0, 2);
+    let month = fecha.substring(2, 4);
+    let day = fecha.substring(4, 6);
+
+    let birthDate = `${day}/${month}/${year}`;
+    let age = getAge(birthDate);
+    setInitialValues({
+      ...initialValues,
+      day,
+      month,
+      year,
+      age,
+    });
+  }
 
   useEffect(() => {
     let user = JSON.parse(sessionStorage.getItem("user"));
     const idClient = user.idClient;
     let appliance = verifyAppliance(idClient.appliance);
     let idComercialInfo = verify(appliance, "idComercialInfo");
+    let idFiscal= verify(appliance, "idFiscal");
+    let rfcPerson = "";
 
-    if (idComercialInfo) {
-      let comercial = appliance.idComercialInfo;
-      if(!comercial.ciecstatus){
-        history.push(`/informacion-comercial/${user._id}`);
+    if (idFiscal) {
+      let fiscal = appliance.idFiscal;
+      if (fiscal.hasOwnProperty("rfcPerson")) {
+        rfcPerson = fiscal.rfcPerson;
+        getDataRfc(rfcPerson);
       }
-    } else {
-      history.push(`/informacion-comercial/${user._id}`);    
+      return;
     }
 
+    if (idComercialInfo) {
+      if (idClient.type !== "PM") {
+        let comercial = appliance.idComercialInfo;
+        if (comercial.hasOwnProperty("rfc")) {
+          rfcPerson = comercial.rfc;
+          getDataRfc(rfcPerson);
+        }
+      }
+    }
   }, []);
 
   const onFormSubmit = async (dataForm) => {

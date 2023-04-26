@@ -33,16 +33,6 @@ export const validateComercialInfo = (values) => {
     errors.specific = "Escribe la actividad específica de tu negocio";
   }
 
-  if(!values.employeesNumber){
-    errors.employeesNumber = "Selecciona una opción";
-  }
-
-  if (type !== "PF") {
-    if(!values.paymentsMoreThan30){
-      errors.paymentsMoreThan30 = "Selecciona una opción";
-    }
-  }
-
   if (!values.street) {
     errors.street = "Ingresa la calle de tu negocio";
   }
@@ -92,14 +82,6 @@ export const validateComercialInfo = (values) => {
 
   if (!values.warranty) {
     errors.warranty = "Selecciona una opción";
-  }
-
-  if (!values.terminal) {
-    errors.terminal = "Selecciona una opción";
-  }
-
-  if (!values.exportation) {
-    errors.exportation = "Selecciona una opción";
   }
 
   return errors;
