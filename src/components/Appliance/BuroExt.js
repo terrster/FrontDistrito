@@ -19,11 +19,44 @@ const BuroExt = (props) => {
 
   const [initialValues, setInitialValues] = useState({});
   const [municipality, setMunicipality] = useState("");
+  const [prevData, setPrevData] = useState({});
+  const [intentos, setIntentos] = useState(0);
   const [state, setState] = useState("");
   const history = useHistory();
 
   const onFormSubmit = async (dataForm) => {
     dispatch(updateLoader(true));
+
+    if(prevData !== {}){
+      let prueba = {}
+
+      const fullName = dataForm.name + " " + dataForm.lastname + " " + dataForm.secondLastname;
+      const fullNamePrev = prevData.name + " " + prevData.lastname + " " + prevData.secondLastname;
+
+      prevData.mortgageCredit === dataForm.mortgageCredit ? prueba.mortgageCredit = true : prueba.mortgageCredit = false;
+      prevData.carCredit === dataForm.carCredit ? prueba.carCredit = true : prueba.carCredit = false;
+      prevData.creditCard === dataForm.creditCard ? prueba.creditCard = true : prueba.creditCard = false;
+      prevData.last4 === dataForm.last4 ? prueba.last4 = true : prueba.last4 = false;
+      prevData.rfcPerson === dataForm.rfcPerson ? prueba.rfcPerson = true : prueba.rfcPerson = false;
+      fullNamePrev === fullName ? prueba.fullName = true : prueba.fullName = false;
+
+
+      if(prueba.mortgageCredit && prueba.carCredit && prueba.creditCard && prueba.last4 && prueba.rfcPerson && prueba.fullName){
+        Swal.fire({
+          title: "¡Error!",
+          text: "Los datos de verificación no pueden ser iguales a los anteriores",
+          icon: "error",
+          customClass: {
+            title: "title-dp fz42",
+            popup: "text-dp fz20",
+            confirmButton: "btn-blue-general btn-gray-general btn btn-primary",
+          },
+        });
+        dispatch(updateLoader(false));
+        return;
+
+    }
+    }
 
     const address = {
       town: dataForm.town,
@@ -45,8 +78,10 @@ const BuroExt = (props) => {
     console.log("data", data);
     try {
       const consulta = await axios.post("/buro_ext", data);
-      const { success, message, score } = consulta.data;
+      const { success, message, score, user } = consulta.data;
+      
       if (success) {
+        dispatch(updateLoader(false));
         Swal.fire({
           title: "¡Gracias!",
           text: "Hemos consultado exitosamente el buró de crédito, el score es de " + score,
@@ -54,21 +89,41 @@ const BuroExt = (props) => {
           customClass: {
             title: "title-dp fz42",
             popup: "text-dp fz20",
-            confirmButton: "btn-blue-general btn-gray-general btn btn-primary",
-            cancelButton: "btn-blue-general btn btn-primary",
+            confirmButton: "btn-blue-general btn btn-primary",
           },
           confirmButtonText: "aceptar",
-          showCancelButton: true,
-          cancelButtonText: "Cancelar",
         }).then((result) => {
           if (result.isConfirmed) {
+
             history.push("/");
           }
         });
       } else {
+        setPrevData(dataForm);
+        setIntentos(intentos + 1);
         Swal.fire({
           title: "¡Ups!",
           text: message,
+          icon: "error",
+          customClass: {
+            title: "title-dp fz42",
+            popup: "text-dp fz20",
+            confirmButton: "btn-blue-general btn btn-primary",
+          },
+          confirmButtonText: "aceptar",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            Swal.close();
+          }
+        });
+        dispatch(updateLoader(false));
+      }
+    } catch (error) {
+      console.log(error);
+      if(error.response.status === 429){
+        Swal.fire({
+          title: "¡Ups!",
+          text: "haz excedido el número de intentos, por favor intenta más tarde",
           icon: "error",
           customClass: {
             title: "title-dp fz42",
@@ -84,9 +139,26 @@ const BuroExt = (props) => {
             Swal.close();
           }
         });
+        dispatch(updateLoader(false));
+        return;
       }
-    } catch (error) {
-      console.log(error);
+      Swal.fire({
+        title: "¡Ups!",
+        text: "Ha ocurrido un error, intente más tarde",
+        icon: "error",
+        customClass: {
+          title: "title-dp fz42",
+          popup: "text-dp fz20",
+          confirmButton: "btn-blue-general btn-gray-general btn btn-primary",
+          cancelButton: "btn-blue-general btn btn-primary",
+        },
+        confirmButtonText: "aceptar",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.close();
+        }
+      }
+      );
     }
     dispatch(updateLoader(false));
   };

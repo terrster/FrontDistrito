@@ -5,6 +5,7 @@ import { Row, Col, Button } from "react-bootstrap";
 import generalInfoOptions from "../models/GeneralInfoModels";
 import InputLabel from "../components/Generic/InputLabel";
 import { useDispatch } from "react-redux";
+import ReCAPTCHA from "react-google-recaptcha";
 import { validateBuroExtForm } from "../components/Validate/validateBuroExtForm";
 import {
   renderFieldFull,
@@ -13,6 +14,7 @@ import {
   renderSelectField,
 } from "../components/Generic/Fields";
 import { updateLoader } from "../redux/actions/loaderActions";
+import { useEffect } from "react";
 
 let BuroExtForm = ({
   handleSubmit,
@@ -37,6 +39,8 @@ let BuroExtForm = ({
   const [creditCard, setCreditCard] = useState("");
   const [cpError, setCpError] = useState(false);
   const [colonias, setColonias] = useState([]);
+  const [captcha, setCaptcha] = useState(true);
+  const [show, setShow] = useState(false);
   const [state, setState] = useState("");
   const [municipality, setMunicipality] = useState("");
 
@@ -113,6 +117,16 @@ let BuroExtForm = ({
     }
     return errors;
   }
+
+  function onChangeCaptcha(value) {
+    setCaptcha(!value);
+  }
+
+  React.useEffect(() => {
+    if(captcha === false && disabled === false) {
+      setShow(true);
+    }
+  }, [captcha, disabled]);
 
   const goToError = () => {
     const errors = getErros();
@@ -483,8 +497,15 @@ let BuroExtForm = ({
           />
         </div>
 
+        <div className="recaptcha-container">
+            <ReCAPTCHA
+              sitekey="6Ld2huQZAAAAANpPc8zQKPnS948P7vzt2T7t-GCF"
+              onChange={onChangeCaptcha}
+            />
+          </div>
+
         <div className="text-center" style={{ marginBottom: "50px" }}>
-          {disabled ? (
+          {!show ? (
             <Button
               type="button"
               className="mt-50 btn-blue-general btn-gray-general"
