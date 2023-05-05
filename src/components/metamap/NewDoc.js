@@ -403,13 +403,13 @@ const NewDoc = () => {
       <Loader />
       <Banner />
       <DocumentsModal />
-      {typePerson !== "PF" && !ciec && (
+      {/* {typePerson !== "PF" && !ciec && (
         <PopUp
           show={show}
           setShow={(value) => setShow(value)}
           isDocuments={true}
         />
-      )}
+      )} */}
       <Grid container justify="center" align="center" className="mt-2">
         {Array.from(Array(warranty ? 3 : 2)).map((_, index) => (
           <Grid
