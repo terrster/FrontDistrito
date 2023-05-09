@@ -291,7 +291,7 @@ const NewDoc = () => {
     if (typePerson && user) {
       let minreq = minRequired(typePerson);
       let $warranty = ["guaranteeStatement", "guaranteeFixedAssets"];
-      let reqCiec = ciec ? [] : ["lastDeclarations"];
+      let reqCiec = ciec ? [] : [];
       let reqWarranty =
         warranty === 1
           ? [$warranty[0]]

@@ -12,12 +12,13 @@ import { Col } from "react-bootstrap";
 
 let CiecForm = (props) => {
   const dispatch = useDispatch();
-  const { handleSubmit, valid, popup, openModal, version, ciec, CiecStatus } =
+  const { handleSubmit, valid, popup, openModal, version, ciec, CiecStatus, initialValues, changeValue } =
     props;
 
   const [ciecState, setCiecState] = useState(ciec);
   const [validState, setValidState] = useState(" ");
   const [error, setError] = useState(false);
+  const [changeRFC, setChangeRFC] = useState(true);
 
   useEffect(() => {
     setCiecState(ciec);
@@ -34,6 +35,12 @@ let CiecForm = (props) => {
   const upper = (value) => value && value.toUpperCase();
 
   return (
+    
+      initialValues.rfc === undefined ? (
+        <div className="altForm">
+        </div>
+      ) : (
+    
     <div className="altForm">
       {popup && <Popup />}
       {!ciecState && <Popup />}
@@ -61,8 +68,24 @@ let CiecForm = (props) => {
             normalize={upper}
             maxLength={!ciecState ? 10 : 13}
             minLength={!ciecState ? 10 : 12}
-            autoComplete="off"
+            autoComplete="on"
+            value={initialValues.rfc ? initialValues.rfc : ""}
+            onChange={(event, newValue, previousValue) =>
+              changeValue(event, newValue, previousValue)
+            }
           />
+          {/* <div className="text-center">
+          <input
+              type="checkbox"
+              style={{ width: "15px", height: "15px", marginTop: "5px" }}
+              onChange={() => {
+                setChangeRFC(!changeRFC);
+              }}
+            />
+          <label className="text-muted ml-2">
+            <small>deseo modificar el RFC</small>
+          </label>
+          </div> */}
           {ciecState === true ? (
             <>
               <Field
@@ -81,7 +104,7 @@ let CiecForm = (props) => {
           ) : null}
         </div>
         <input
-          type="text"
+          type="password"
           autoComplete="on"
           value=""
           style={{
@@ -145,6 +168,7 @@ let CiecForm = (props) => {
         </div>
       </form>
     </div>
+      )
   );
 };
 

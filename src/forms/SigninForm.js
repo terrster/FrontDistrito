@@ -9,7 +9,11 @@ const validate = values => {
 	if (!values.email) {
     errors.email = 'Ingresa un correo'
   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = 'Ingresa un correo válido'
+	const regex = /^([a-z]{3,4})(\d{2})(\d{2})(\d{2})([0-9a-z]{3})$/i
+	const match = regex.test(values.email)
+	if(!match){
+		errors.email = 'Ingresa un correo válido o un RFC'
+	}
 	}
 	if(!values.password){
 		errors.password = "Ingresa una contraseña"
@@ -52,11 +56,12 @@ let SigninForm = props => {
  	const submitButtonClass = (submitting) ? "btn-blue-general mt-30 disabled" : "btn-blue-general mt-30";
 	const validateEmail = (nextValue, previousValue) => /^$|^[^\s]*[\w-\.\@]+$/i.test(nextValue) ? nextValue : previousValue;
 	const validatePassword = (nextValue, previousValue) => /^[^\s]*$/i.test(nextValue) ? nextValue : previousValue;
+	const upper = (value) => value && value.toUpperCase();
 
 	return (
 		<div className="container">
 			<form onSubmit={handleSubmit} className="mr-auto ml-auto" style={{maxWidth : '690px'}}>
-				<Field component={renderField} type="text" name="email" label="Correo electrónico" normalize={validateEmail}/>
+				<Field component={renderField} type="text" name="email" label="Correo electrónico" normalize={upper}/>
 				<Field component={renderField} type="password" name="password" label="Contraseña" normalize={validatePassword}/>
 				<div className="mb-1 text-center">
 					<Link to="/reset-password" className="fw500 fz12 blue-primary">¿olvidaste tu contraseña?</Link>

@@ -1,26 +1,15 @@
 import * as $ from "jquery";
+import { RFCValido, metaRFC } from "./validateRFC";
 const isValidEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,9}$/i;
 const isName = /^([a-z ñáéíóú]{2,60})$/i;
 const isNumber = /^\d*$/;
 export const validateSignup = values => {
   const errors = {};
 
-  if (!values.name) {
-    errors.name = "Ingresa tu nombre";
-  } else if (values.name.length < 2) {
-    errors.name = "El nombre es muy corto";
-  } 
-  else if (!isName.test(values.name)) {
-    errors.name = "El nombre sólo puede contener caracteres de la A a la Z";
-  }
-
-  if (!values.lastname) {
-    errors.lastname = "Ingresa tu apellido";
-  } else if (values.lastname.length < 2) {
-    errors.lastname = "El apellido es muy corto";
-  } else if (!isName.test(values.lastname)) {
-    errors.lastname =
-      "El apellido sólo puede contener caracteres de la A a la Z";
+  if (!values.rfc) {
+    errors.rfc = "Ingresa tu RFC";
+  } else if (!RFCValido(values.rfc)) {
+    errors.rfc = metaRFC(values.rfc).msg;
   }
 
   if (!values.email) {

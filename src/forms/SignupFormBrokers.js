@@ -78,6 +78,7 @@ let SignupFormBrokers = (props) => {
   const onlyNumbers = (nextValue, previousValue) => /^\d+$/.test(nextValue) || nextValue.length === 0 ? nextValue : previousValue;
   const validateEmail = (nextValue, previousValue) => /^$|^[^\s]*[\w-\.\@]+$/i.test(nextValue) ? nextValue : previousValue;
 	const validatePassword = (nextValue, previousValue) => /^[^\s]*$/i.test(nextValue) ? nextValue : previousValue;
+  const upper = (value) => value && value.toUpperCase();
 
   const goToError = () => {
 		const nameError = document.getElementById("name-error");
@@ -113,31 +114,11 @@ let SignupFormBrokers = (props) => {
         <Field
           component={renderField}
           type="text"
-          name="name"
-          label="Nombre(s)"
-          maxLength={60}
-          normalize={onlyLirycsWithOnlyOneSpaceBetween}
-          onChange={ (event, newValue, previousValue, name) => {
-            if(errorBroker !== ''){
-              setErrorBroker("");
-            }
-          }}
-        />
-
-        <Field
-          component={renderField}
-          type="text"
-          name="lastname"
-          label="Apellido Paterno"
-          normalize={onlyLirycs}
-          onBlur={(e) => {
-            e.preventDefault(); 
-            props.change('lastname', e.target.value.trim());
-          }}
-          onChange={ (event, newValue, previousValue, name) => {
-            if(errorBroker !== ''){
-              setErrorBroker("");
-            }
+          name="rfc"
+          label="RFC de tu negocio o empresa"
+          normalize={upper}
+          onChange={(event, newValue, previousValue, name) => {
+            newValue = newValue.toUpperCase();
           }}
         />
         <Field
