@@ -32,8 +32,16 @@ const CiecWait = () => {
     if (!user) {
       history.push("/");
     }
-    const rfc = JSON.parse(user).rfc;
+    let rfc = JSON.parse(user).rfc;
     const id = JSON.parse(user)._id;
+
+    if(!rfc) {
+      let comercio = JSON.parse(user).idClient.appliance[0].idComercialInfo;
+      rfc = comercio.rfc;
+      if(!rfc) {
+        rfc = "";
+      }
+    }
 
     setInitialValues({ rfc, id });
   }, []);
