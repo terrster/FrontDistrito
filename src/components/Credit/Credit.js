@@ -38,6 +38,43 @@ const Credit = (props) => {
 	return object.hasOwnProperty(property);
 }
 
+useEffect(() => {
+  const idClient = user.idClient;
+  let appliance = verifyAppliance(idClient.appliance);
+  let idFiscal = verify(appliance, "idFiscal");
+  let idComercialInfo = verify(appliance, "idComercialInfo");
+  let tipo = idFiscal ? "fiscal" : idComercialInfo ? "comercial" : null;
+  switch (tipo) {
+    case "fiscal":
+      if (idFiscal) {
+        let fiscalCiec = idClient.appliance[0].idFiscal.ciecStatus;
+        if (fiscalCiec) {
+          console.log("fiscal ciec");
+        } else {
+          history.push(`/ciec/${user._id}`)
+        }
+      } else {
+        history.push(`/ciec/${user._id}`)
+      }
+      break;
+    case "comercial":
+      if (idComercialInfo) {
+        let comercialCiec = idClient.appliance[0].idComercialInfo.ciecstatus;
+        if (comercialCiec) {
+          console.log("comercial ciec");
+        } else {
+          history.push(`/ciec/${user._id}`)
+        }
+      } else {
+        history.push(`/ciec/${user._id}`)
+      }
+      break;
+      default:
+        history.push(`/ciec/${user._id}`)
+        break;
+  }
+}, []);
+
   const updateAppliance = async () => {
     const idClient = user.idClient[0];
     if (idClient.appliance.length > 0) {
@@ -199,7 +236,7 @@ const Credit = (props) => {
       <div>
         <Title
           className="title-dp fw500 fz32 mb-16"
-          title={`Hola ` + user.name}
+          title={user.name ? "hola " + user.name : "hola"}
         />
         <label className="subtitle-dp fz20 fw500">
           conoce el detalle de tu solicitud

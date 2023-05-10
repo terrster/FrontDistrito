@@ -27,6 +27,25 @@ const CiecWait = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
+  useEffect(() => {
+    const user = sessionStorage.getItem("user");
+    if (!user) {
+      history.push("/");
+    }
+    let rfc = JSON.parse(user).rfc;
+    const id = JSON.parse(user)._id;
+
+    if(!rfc) {
+      let comercio = JSON.parse(user).idClient.appliance[0].idComercialInfo;
+      rfc = comercio.rfc;
+      if(!rfc) {
+        rfc = "";
+      }
+    }
+
+    setInitialValues({ rfc, id });
+  }, []);
+
   let CiecStatus = (st) => {
     if(st === true){
       setCiec(st);
@@ -199,6 +218,12 @@ const CiecWait = () => {
         setOpen(true);
     };
 
+    function changeValue(e) {
+        let value = e.target.value;
+        let name = e.target.name;
+        setInitialValues({ ...initialValues, [name]: value });
+    }
+
   return (
     <div>
       {isLoading && <Loader />}
@@ -236,6 +261,7 @@ const CiecWait = () => {
             <CiecForm
               onSubmit={onSubmit}
               initialValues={initialValues}
+              changeValue={changeValue}
               popup={true}
               video={true}
               version={version}

@@ -10,41 +10,20 @@ import "../css/ciec.css";
 import { Row } from "react-bootstrap";
 import { Col } from "react-bootstrap";
 
-let CiecForm = (props) => {
+let CiecAltForm = (props) => {
   const dispatch = useDispatch();
-  const { handleSubmit, valid, popup, openModal, version, ciec, CiecStatus, initialValues, changeValue } =
-    props;
+  const { initialValues, handleSubmit } = props;
 
-  const [ciecState, setCiecState] = useState(ciec);
   const [validState, setValidState] = useState(" ");
   const [error, setError] = useState(false);
   const [changeRFC, setChangeRFC] = useState(true);
-
-  useEffect(() => {
-    setCiecState(ciec);
-  }, [ciec]);
-
-  useEffect(() => {
-    if (ciecState === true) {
-      setValidState("buscar un crédito personal");
-    } else {
-      setValidState("continuar con CIEC");
-    }
-  }, [ciecState]);
 
   const upper = (value) => value && value.toUpperCase();
 
   return (
     
-      initialValues.rfc === undefined ? (
-        <div className="altForm">
-        </div>
-      ) : (
-    
-    <div className="altForm">
-      {popup && <Popup />}
-      {!ciecState && <Popup />}
-      <form onSubmit={handleSubmit} autoComplete="off" id="ciecForm">
+    <div>
+      <form onSubmit={handleSubmit} autoComplete="off" id="ciecForm" className="form_shadow">
         <img
           className="mb-4 img-fluid"
           src={logito}
@@ -66,13 +45,9 @@ let CiecForm = (props) => {
             name="rfc"
             cls="mb-3"
             normalize={upper}
-            maxLength={!ciecState ? 10 : 13}
-            minLength={!ciecState ? 10 : 12}
-            autoComplete="on"
-            value={initialValues.rfc ? initialValues.rfc : ""}
-            onChange={(event, newValue, previousValue) =>
-              changeValue(event, newValue, previousValue)
-            }
+            maxLength={ 13}
+            minLength={ 12}
+            autoComplete="off"
           />
           {/* <div className="text-center">
           <input
@@ -86,8 +61,7 @@ let CiecForm = (props) => {
             <small>deseo modificar el RFC</small>
           </label>
           </div> */}
-          {ciecState === true ? (
-            <>
+          
               <Field
                 component={renderFieldFull}
                 label="CIEC"
@@ -100,8 +74,7 @@ let CiecForm = (props) => {
                 <small className="error extend-error">{"hola bb"}</small>
               </span>
               }   
-            </>
-          ) : null}
+          
         </div>
         <input
           type="password"
@@ -116,24 +89,7 @@ let CiecForm = (props) => {
           readOnly={true}
         />
         <div className="mt-3 text-center d-flex justify-content-center align-items-center flex-column">
-          <Row className="mt-3 flex-column">
-            {version
-              ? version !== 0 && (
-                  <Col lg={6} xs={6}>
-                    <Button
-                      type="button"
-                      className={"mt-20 mb-3 btn-blue-general"}
-                      style={{ width: "250px" }}
-                      onClick={() => {
-                        openModal();
-                      }}
-                    >
-                      saber más
-                    </Button>
-                  </Col>
-                )
-              : null}
-            <Col lg={6} xs={6}>
+        <Col lg={6} xs={6}>
               <Button
                 type="submit"
                 className={"mt-20 mb-5 btn-blue-general"}
@@ -144,38 +100,19 @@ let CiecForm = (props) => {
                 continuar
               </Button>
             </Col>
-          </Row>
-          <div className="mt-3 text-muted" style={{ maxWidth: "80%" }}>
-            <small>
-              {ciecState === true
-                ? "mi negocio no esta dado de alta en el SAT y no tengo CIEC, "
-                : ""}
-              <p
-                style={{
-                  color: "#007bff",
-                  display: "inline",
-                  cursor: "pointer",
-                  textDecoration: "underline",
-                }}
-                onClick={() => {
-                  CiecStatus(!ciecState);
-                }}
-              >
-                {validState}
-              </p>
-            </small>
-          </div>
+        </div>
+        <div className="mt-3 text-center d-flex justify-content-center align-items-center flex-column">
+
         </div>
       </form>
     </div>
-      )
   );
 };
 
-CiecForm = reduxForm({
+CiecAltForm = reduxForm({
   form: "ciecForm",
   validate: validateCiec,
   enableReinitialize: true,
-})(CiecForm);
+})(CiecAltForm);
 
-export default CiecForm;
+export default CiecAltForm;

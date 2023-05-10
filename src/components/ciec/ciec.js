@@ -11,7 +11,7 @@ import { useHistory } from "react-router-dom";
 
 // Components
 import { updateLoader } from "../../redux/actions/loaderActions";
-import CiecForm from "../../forms/ciecForm";
+import CiecAltForm from "../../forms/ciecAltForm";
 import { type } from "jquery";
 
 const CIECcomponent = (props) => {
@@ -87,13 +87,13 @@ const goToError = () => {
   return (
     <div>
         <div className='text-center outer '>   
-            <CiecForm 
+            <CiecAltForm 
             onSubmit={onFormSubmit}
             initialValues={initialValues}
             setState={setState}
             state={state}>
 
-            </CiecForm>
+            </CiecAltForm>
         </div>
         <Loader />
 				<Modal onClose={() => setOpen(false)} open={open} center={true} classNames={{modal:'modalcustum'}} >

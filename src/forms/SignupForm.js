@@ -58,6 +58,20 @@ const renderField = ({
   </div>
 );
 
+function debounce (func, wait, immediate) {
+  let timeout;
+  return function() {
+    let context = this, args = arguments;
+    let later = function() {
+      timeout = null;
+      if (!immediate) func.apply(context, args);
+    }
+    let callNow = immediate && !timeout;
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+    if (callNow) func.apply(context,args);
+  }
+}
 
 const passwordTooltip = (
   <Tooltip className="tooltip-password">
@@ -70,6 +84,16 @@ let SignupForm = (props) => {
 
   const [button, setButton] = useState(true);
   const [disabled, setDisabled] = useState(true);
+  const [rfc, setRfc] = useState("");
+
+  React.useEffect(() => {
+
+    if (rfc.length > 9 ) {
+      debounce(() => {
+        console.log("rfc", rfc);
+      }, 3000)();
+    }
+  }, [rfc]);
 
   const onChange = value => {setButton(!value)};
   const onlyLirycs = (nextValue, previousValue) => /^$|^([^\s]*[A-Za-zñáéíóú]\s{0,1})*[^\s]*$/i.test(nextValue) ? nextValue : previousValue;
@@ -78,15 +102,15 @@ let SignupForm = (props) => {
   const onlyNumbers = (nextValue, previousValue) => /^\d+$/.test(nextValue) || nextValue.length === 0 ? nextValue : previousValue;
   const validateEmail = (nextValue, previousValue) => /^$|^[^\s]*[\w-\.\@]+$/i.test(nextValue) ? nextValue : previousValue;
 	const validatePassword = (nextValue, previousValue) => /^[^\s]*$/i.test(nextValue) ? nextValue : previousValue;
+  const upper = (value) => value && value.toUpperCase();
 
   const goToError = () => {
-		const nameError = document.getElementById("name-error");
-		const lastnameError = document.getElementById("lastname-error");
+		const rfcError = document.getElementById("rfc-error");
 		const emailError = document.getElementById("email-error");
 		const emailConfirmError = document.getElementById("email_confirm-error");
 		const phoneError = document.getElementById("phone-error");
 		const passwordError = document.getElementById("password-error");
-		const errors = [nameError, lastnameError, emailError, emailConfirmError, phoneError, passwordError];
+		const errors = [rfcError, emailError, emailConfirmError, phoneError, passwordError];
 		for (let x = 0; x < errors.length; x++) {
       if (errors[x] != null) {
         scroll(errors[x].id);
@@ -109,24 +133,15 @@ let SignupForm = (props) => {
         className="mr-auto ml-auto"
         style={{ maxWidth: "690px" }}
       >
-        <Field
-          component={renderField}
-          type="text"
-          name="name"
-          label="Nombre(s)"
-          maxLength={60}
-          normalize={onlyLirycsWithOnlyOneSpaceBetween}
-        />
 
         <Field
           component={renderField}
           type="text"
-          name="lastname"
-          label="Apellido Paterno"
-          normalize={onlyLirycs}
-          onBlur={(e) => {
-            // e.preventDefault(); 
-            props.change('lastname', e.target.value.trim());
+          name="rfc"
+          label="RFC de tu negocio o empresa"
+          normalize={upper}
+          onChange={(event, newValue, previousValue, name) => {
+            newValue = newValue.toUpperCase();
           }}
         />
         <Field
