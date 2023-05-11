@@ -424,7 +424,7 @@ const BodyCard = (props) => {
         description: "comprobante de domicilio de la empresa o negocio",
         step: 1,
       },
-      ...$ciec,
+      // ...$ciec,
       ...reqPF,
     ];
     let reqPM = [
