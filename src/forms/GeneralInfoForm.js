@@ -360,6 +360,9 @@ let GeneralInfoForm = ({
         style={{ maxWidth: "690px" }}
         onSubmit={handleSubmit}
       >
+        <div className="mt-1 text-dp fw300 fz14 text-center mb-1">
+          <p className="gray50">recuerda realizar el registro con la información del principal accionista y/o representante legal</p>
+        </div>
         <SubtitleForm
           subtitle="Sobre ti"
           // className=" text-form-dp"

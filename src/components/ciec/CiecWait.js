@@ -37,6 +37,10 @@ const CiecWait = () => {
 
     if(!rfc) {
       let comercio = JSON.parse(user).idClient.appliance[0].idComercialInfo;
+      if(!comercio) {
+        rfc = "";
+        
+      }
       rfc = comercio.rfc;
       if(!rfc) {
         rfc = "";
