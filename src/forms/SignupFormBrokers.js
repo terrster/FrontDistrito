@@ -115,7 +115,7 @@ let SignupFormBrokers = (props) => {
           component={renderField}
           type="text"
           name="rfc"
-          label="RFC de tu negocio o empresa"
+          label="RFC de tu empresa o negocio"
           normalize={upper}
           onChange={(event, newValue, previousValue, name) => {
             newValue = newValue.toUpperCase();

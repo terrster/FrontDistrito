@@ -82,9 +82,9 @@ const SignupBrokers = props => {
           <StepSignup/>
         </div>
 
-        <div className="mt-30 text-dp fw300 fz20 text-center mb-30">
+        {/* <div className="mt-30 text-dp fw300 fz20 text-center mb-30">
           <p className="gray50">Recuerda realizar el registro con la información del Principal Accionista y/o Representante Legal</p>
-        </div>
+        </div> */}
         </>
         }
 
