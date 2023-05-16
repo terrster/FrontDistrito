@@ -1,55 +1,53 @@
 @font-face {
-	font-family: 'coolvetica_rg';
-	src: url('./coolvetica_rg-webfont.woff2') format('woff2'),
-		url('./coolvetica_rg-webfont.woff') format('woff');
-	font-weight: normal;
-	font-style: normal;
-}
-
-@font-face {
-	font-family: 'Metropolis-Medium';
-	src: url('./Metropolis-Medium.woff') format("woff"),
-		url('./Metropolis-Medium.woff') format('woff');
-	font-style: normal;
-	font-style: normal;
-}
-
-@font-face {
-	font-family: 'Metropolis-Regular';
-	src: url('./Metropolis-Regular.woff') format("woff"),
-		url('./Metropolis-Regular.woff') format('woff');
-	font-style: normal;
-	font-style: normal;
-}
-
-@font-face {
-	font-family: 'Metropolis-Light';
-	src: url('./Metropolis-Light.woff') format("woff"),
-		url('./Metropolis-Light.woff') format('woff');
-	font-style: normal;
-	font-style: normal;
-}
-
-@font-face {
-	font-family: 'Metropolis-Bold';
-	src: url('./Metropolis-Bold.woff') format("woff"),
-		url('./Metropolis-Bold.woff') format('woff');
-	font-style: normal;
-	font-style: normal;
-}
-
-@font-face {
-	font-family: 'Metropolis-Black';
-	src: url('./Metropolis-Black.woff') format("woff"),
-		url('./Metropolis-Black.woff') format('woff');
-	font-style: normal;
-	font-style: normal;
-}
-
-@font-face {
 	font-family: 'lucida_grande';
 	src: url('./lucidagrande-webfont.woff2') format("woff"),
 		url('./lucidagrande-webfont.woff') format('woff');
 	font-weight: normal;
 	font-style: normal;
 }
+
+@font-face {
+	font-family:'Montserrat-bold';
+	src:url(https://cdn.finsus.mx/fonts/Montserrat/montserrat-bold-webfont.eot);
+	src:url(https://cdn.finsus.mx/fonts/Montserrat/montserrat-bold-webfont.eot?#iefix) format('embedded-opentype'),
+	url(https://cdn.finsus.mx/fonts/Montserrat/montserrat-bold-webfont.woff2) format('woff2'),
+	url(https://cdn.finsus.mx/fonts/Montserrat/montserrat-bold-webfont.woff) format('woff'),
+	url(https://cdn.finsus.mx/fonts/Montserrat/montserrat-bold-webfont.ttf) format('truetype'),
+	url(https://cdn.finsus.mx/fonts/Montserrat/montserrat-bold-webfont.svg#montserrat-bold-webfont) format('svg');
+	font-weight:700;
+	font-style:normal;
+	font-display:swap
+   }
+   @font-face {
+	font-family:'Montserrat-bolditalic';
+	src:url(https://cdn.finsus.mx/fonts/Montserrat/montserrat-bolditalic-webfont.eot);
+	src:url(https://cdn.finsus.mx/fonts/Montserrat/montserrat-bolditalic-webfont.eot?#iefix) format('embedded-opentype'),
+	url(https://cdn.finsus.mx/fonts/Montserrat/montserrat-bolditalic-webfont.woff2) format('woff2'),
+	url(https://cdn.finsus.mx/fonts/Montserrat/montserrat-bolditalic-webfont.woff) format('woff'),
+	url(https://cdn.finsus.mx/fonts/Montserrat/montserrat-bolditalic-webfont.ttf) format('truetype'),
+	url(https://cdn.finsus.mx/fonts/Montserrat/montserrat-bolditalic-webfont.svg#montserrat-bolditalic-webfont) format('svg');
+	font-weight:700;
+	font-style:italic;
+	font-display:swap
+   }
+   @font-face {
+	font-family:'Montserrat-light';
+	src:url(https://cdn.finsus.mx/fonts/Montserrat/montserrat-light-webfont.woff2) format('woff2');
+	font-weight:200;
+	font-style:normal;
+	font-display:swap
+   }
+   @font-face {
+	font-family:'Montserrat-medium';
+	src:url(https://cdn.finsus.mx/fonts/Montserrat/montserrat-medium-webfont.woff2) format('woff2');
+	font-weight:500;
+	font-style:normal;
+	font-display:swap
+   }
+   @font-face {
+	font-family:'Montserrat';
+	src:url(https://cdn.finsus.mx/fonts/Montserrat/montserrat-regular-webfont.woff2) format('woff2');
+	font-weight:400;
+	font-style:normal;
+	font-display:swap
+   }

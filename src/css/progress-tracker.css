@@ -106,10 +106,10 @@
 
 .progress-step.is-complete::after {
 	background: hsla(182, 96%, 46%, 1);
-	background: linear-gradient(0deg, #06c7f2 55%, #023473 100%);
-	background: -moz-linear-gradient(0deg, #06c7f2 55%, #023473 100%);
-	background: -webkit-linear-gradient(0deg, #06c7f2 55%, #023473 100%);
-	filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#05DDE4", endColorstr="#023473", GradientType=1 );
+	background: linear-gradient(0deg, #06c7f2 55%, #283460 100%);
+	background: -moz-linear-gradient(0deg, #06c7f2 55%, #283460 100%);
+	background: -webkit-linear-gradient(0deg, #06c7f2 55%, #283460 100%);
+	filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#05DDE4", endColorstr="#283460", GradientType=1 );
 }
 
 .progress-step:hover .progress-marker {

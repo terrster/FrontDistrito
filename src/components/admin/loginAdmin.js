@@ -77,7 +77,7 @@ const LoginAdmin = () => {
                 color="textPrimary"
                 variant="h4"
                 style={{
-                  fontFamily: "Metropolis-Regular",
+                  fontFamily: "Montserrat",
                   textAlign: "center",
                 }}
               >
@@ -88,7 +88,7 @@ const LoginAdmin = () => {
                 gutterBottom
                 variant="body2"
                 style={{
-                  fontFamily: "Metropolis-Regular",
+                  fontFamily: "Montserrat",
                   textAlign: "center",
                 }}
               >
@@ -137,10 +137,10 @@ const LoginAdmin = () => {
                 type="submit"
                 variant="contained"
                 style={{
-                  fontFamily: "Metropolis-Regular",
+                  fontFamily: "Montserrat",
                   borderRadius: "10px",
                   borderColor: "#213970",
-                  backgroundColor: "#F24C5A",
+                  backgroundColor: "#0095CE",
                 }}
               >
                 Iniciar sesión

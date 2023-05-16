@@ -31,7 +31,7 @@
   }
   
   .nav-btn:hover {
-	color: #023473 !important;
+	color: #283460 !important;
 	opacity: 0.95;
   }
 
@@ -77,17 +77,17 @@
 	-webkit-box-pack: center !important;
 	-ms-flex-pack: center !important;
 	justify-content: center !important;
-	background: #F24C5A;
+	background: #0095CE;
 	width: 200px;
 	font-weight: normal !important;
-	font-family: 'Metropolis-Regular';
+	font-family: 'Montserrat';
   }
   
   .nav-btn.primary:hover {
 	-webkit-box-pack: center !important;
 	-ms-flex-pack: center !important;
 	justify-content: center !important;
-	background: #023473!important;
+	background: #283460!important;
 	color: #fff !important;
   }
   
@@ -134,7 +134,8 @@
   
   /* logo */
   .nav-logo {
-	width: 115px;
+	width: 10rem;
+	padding: .5rem;
   }
   
   .nav_bar_active{

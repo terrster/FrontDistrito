@@ -127,6 +127,7 @@ const Header = props => {
 			<div className="container-fluid d-flex flex-column">
 				<div>
 					<span className="header-title" style={versionImage === 0? styleweb : styleMOBILE}>
+					la mejor plataforma para solicitar crédito pyme.
 						la mejor plataforma para solicitar crédito pyme
 					</span>
 				</div>

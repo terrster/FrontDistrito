@@ -9,7 +9,7 @@
 }
 
 .ciecBtn{
-    /* background-color: #F24C5A; */
+    /* background-color: #0095CE; */
     border-radius: 1rem;
     height: 1.5rem;
     display: flex;
@@ -33,13 +33,13 @@
 	border-radius: 28px;
 	box-shadow: -12px 12px 24px #d9d9d9, 12px 12px 24px #ffffff;
 	border: solid 1px rgba(255, 255, 255, 0.1);
-	background-color: #F24C5A;
+	background-color: #0095CE;
 	font-weight: bold;
 	/* position: absolute; */
 	/* bottom: 4rem; */
 	/* transform: translate(-50%, 0); */
 	transition: all 0.3s ease-in-out;
-	font-family: 'Metropolis-Regular';
+	font-family: 'Montserrat';
 }
 
 .btn_doc_disabled {
@@ -52,7 +52,7 @@
     background-color: #C6C6C6;
     font-weight: bold;
     transition: all 0.3s ease-in-out;
-    font-family: 'Metropolis-Regular';
+    font-family: 'Montserrat';
     opacity: 0.5;
 }
 
@@ -73,13 +73,13 @@
 	border-color: none !important;
 	border-radius: 28px;
 	box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.6);
-	background-color: #023473;
+	background-color: #283460;
 	color: #ffffff !important;
 	cursor: pointer;
 }
 
 .circule_btn:hover {
-    color:#F24C5A !important;
+    color:#0095CE !important;
     filter: drop-shadow(0px 1px 1px #d9d9d9);
     cursor: pointer;
    }
@@ -131,7 +131,7 @@ box-shadow: -12px 12px 24px #d9d9d9, 12px 12px 24px #ffffff;
 }
 
 .text_title{
-    color: #023473;
+    color: #283460;
     text-decoration: underline;
     cursor: default;
 }
@@ -143,7 +143,7 @@ box-shadow: -12px 12px 24px #d9d9d9, 12px 12px 24px #ffffff;
 }
 
 .text_title_alt:hover{
-    color: #023473;
+    color: #283460;
     text-decoration: underline;
     cursor: pointer;
 }
@@ -159,9 +159,9 @@ box-shadow: -12px 12px 24px #d9d9d9, 12px 12px 24px #ffffff;
         font-stretch: normal;
         line-height: normal;
         letter-spacing: 0px;
-        font-family: 'coolvetica_rg';
+        font-family: 'Montserrat';
         text-transform: lowercase;
-        color: #023473;
+        color: #283460;
 }
 .text_title_altblue{
         font-size: 1.5em;
@@ -170,7 +170,7 @@ box-shadow: -12px 12px 24px #d9d9d9, 12px 12px 24px #ffffff;
         font-stretch: normal;
         line-height: normal;
         letter-spacing: 0px;
-        font-family: 'coolvetica_rg';
+        font-family: 'Montserrat';
         text-transform: lowercase;
         color: #06c8f4;
 }

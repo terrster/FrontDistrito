@@ -155,7 +155,7 @@ const SettingsCards = () => {
                   gutterBottom
                   variant="body2"
                   style={{
-                    fontFamily: "Metropolis-Regular",
+                    fontFamily: "Montserrat",
                     textAlign: "center",
                   }}
                   className="mb-4"

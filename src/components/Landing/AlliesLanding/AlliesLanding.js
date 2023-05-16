@@ -44,14 +44,14 @@ const AlliesLanding = (props) => {
         <span
           className="textAllies"
           style={{
-            color: "#F24C5A",
+            color: "#0095CE",
             display: "flex",
           }}
         >
           súper{" "}
           <span
             style={{
-              color: "#023473",
+              color: "#283460",
               paddingLeft: "0.3rem",
             }}
           >

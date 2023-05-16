@@ -96,7 +96,7 @@ const Owners = () => {
   const TableCellStyle = withStyles({
     root: {
       //   borderBottom: "none",
-      fontFamily: "Metropolis-Regular",
+      fontFamily: "Montserrat",
       fontSize: "14px",
       color: "#000000",
       textAlign: "center",
@@ -155,7 +155,7 @@ const Owners = () => {
                   borderRadius: "1rem",
                   padding: "5px",
                   width: "100%",
-                  fontFamily: "Metropolis-Regular",
+                  fontFamily: "Montserrat",
                   fontSize: "14px",
                 }}
               >

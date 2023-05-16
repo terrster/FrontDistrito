@@ -56,13 +56,13 @@
 }
 
 .dashboard-label{
-    font-family: 'Metropolis-Light';
+    font-family: 'Montserrat';
     color : white;
     font-size: 2rem !important;
 }
 
 .dashboard-label-date{
-    font-family: 'Metropolis-Regular';
+    font-family: 'Montserrat';
     color : white;
     font-size: 1rem;
 }
@@ -89,7 +89,7 @@
 } */
 
 .dashboard-data{  
-    font-family: 'coolvetica_rg';
+    font-family: 'Montserrat';
     font-size: 4.9rem !important;
     color:#ffff;
 } 

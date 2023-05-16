@@ -74,8 +74,8 @@
    top: 80%;
    transform: translate(-50%, -50%);
    -webkit-transform: translate(-50%, -50%);
-   background-color: #F24C5A;
-   font-family: 'Metropolis-Regular';
+   background-color: #0095CE;
+   font-family: 'Montserrat';
    font-weight: normal;
  }
  
@@ -210,7 +210,7 @@
  }
  
  .brokers-button-final{
-   font-family: 'Metropolis-Regular';
+   font-family: 'Montserrat';
    width: 20rem !important;
    position: absolute;
    left: 50%;
@@ -241,7 +241,7 @@
    border-color: none !important;
    border-radius: 28px;
    box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.6);
-   background-color: #F24C5A;
+   background-color: #0095CE;
    cursor: pointer;
  }
  
@@ -254,7 +254,7 @@
  
  .float-button-dp{
    text-align: center;
-   font-family: 'coolvetica_rg';
+   font-family: 'Montserrat';
    cursor: pointer;
    border-radius: 28px;
    box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.6);

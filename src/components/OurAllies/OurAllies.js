@@ -110,7 +110,7 @@ const OurAllies = () => {
                   <span
                     className="textAllies"
                     style={{
-                      color: "#023473",
+                      color: "#283460",
                       paddingLeft: "0.3rem",
                     }}
                   >
@@ -175,7 +175,7 @@ const OurAllies = () => {
                   <span
                     className="textAllies"
                     style={{
-                      color: "#023473",
+                      color: "#283460",
                       paddingLeft: "0.3rem",
                     }}
                   >

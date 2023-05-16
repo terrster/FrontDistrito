@@ -126,7 +126,7 @@ const TableBottom = ({ consultas, setOpen, keys, displayData, ...rest }) => {
             onClick={() => {
               displayData(value);
             }}
-            style={{ backgroundColor: "#023473" }}
+            style={{ backgroundColor: "#283460" }}
           >
             Ver
           </StyledButton>
@@ -191,7 +191,7 @@ const TableBottom = ({ consultas, setOpen, keys, displayData, ...rest }) => {
                 console.log(res.data);
               });
             }}
-            style={{ backgroundColor: "#023473" }}
+            style={{ backgroundColor: "#283460" }}
           >
             ver datos
           </StyledButton>
@@ -332,7 +332,7 @@ const FormularioConsulta = ({ setOpen, ...rest }) => {
           <StyledButton
             type="submit"
             variant="contained"
-            style={{ backgroundColor: "#023473", padding: "1rem", marginTop: "1rem", width: "10rem", alignSelf: "center" }}
+            style={{ backgroundColor: "#283460", padding: "1rem", marginTop: "1rem", width: "10rem", alignSelf: "center" }}
           >
             agregar
           </StyledButton>
@@ -441,7 +441,7 @@ const Consultas = () => {
                   <StyledButton
                     color="primary"
                     variant="contained"
-                    style={{ backgroundColor: "#023473" }}
+                    style={{ backgroundColor: "#283460" }}
                     onClick={() => setOpenConsulta(true)}
                   >
                     agregar

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import '../../../css/footer.css';
-import logo from '../../../assets/img/redes_sociales/logo.png';
+import logo from '../../../assets/img/logo_dp/logo_Azul_finsus.svg';
 import face from '../../../assets/img/redes_sociales/Facebook.png';
 import mail from '../../../assets/img/redes_sociales/mail.png';
 // import twitter from '../../../assets/img/redes_sociales/Twitter.png';

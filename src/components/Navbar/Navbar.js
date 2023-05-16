@@ -2,7 +2,7 @@ import React, { useState, useLayoutEffect } from 'react';
 import { Navbar, Nav, Button } from 'react-bootstrap'
 import { Link, NavLink, useHistory, useLocation } from 'react-router-dom'
 import isAuthenticated from '../../utils/isAuthenticated'
-import logo  from '../../assets/img/logo-dp.png'
+import logo  from '../../assets/img/logo_dp/logo_Azul_finsus.svg'
 import '../../css/nav-bar.css'
 import Whatsapp from '../../assets/img/redes_sociales/whatsapp.png';
 const NavBar = props => {
@@ -75,13 +75,13 @@ const NavBar = props => {
 					{isAuthenticated() === false &&
 						<Navbar.Collapse>
 							<Nav className="ml-auto ">
-								<Nav.Link onClick={close} as={NavLink} to="/brokers" id="quieroSerBorker" className="text-center fz16 blackNav nav-btn heigth-45 solicita-butto metropolisReg">quiero ser broker</Nav.Link>
-								<Nav.Link onClick={close} as={NavLink} to="/solicitudBrokers" className="text-center fz16 blackNav nav-btn heigth-45 solicita-butto metropolisReg">soy broker</Nav.Link>
-								<Nav.Link onClick={close} as={NavLink} to="/nuestros-aliados" className="text-center fz16 blackNav nav-btn heigth-45 solicita-butto metropolisReg">aliados</Nav.Link>
+								{/* <Nav.Link onClick={close} as={NavLink} to="/brokers" id="quieroSerBorker" className="text-center fz16 blackNav nav-btn heigth-45 solicita-butto metropolisReg">quiero ser broker</Nav.Link> */}
+								{/* <Nav.Link onClick={close} as={NavLink} to="/solicitudBrokers" className="text-center fz16 blackNav nav-btn heigth-45 solicita-butto metropolisReg">soy broker</Nav.Link> */}
+								{/* <Nav.Link onClick={close} as={NavLink} to="/nuestros-aliados" className="text-center fz16 blackNav nav-btn heigth-45 solicita-butto metropolisReg">aliados</Nav.Link> */}
 								{/* <Nav.Link  onClick={close} href="/#simulador" id="ymb-dp-nav-simulator" className="hvr-underline-from-left  text-center fz16 blackNav nav-btn heigth-45 solicita-butto metropolisReg">Simulador</Nav.Link> */}
 								{/* <Nav.Link  onClick={close} href="/#howWorks" id="ymb-dp-nav-howWorks" className="hvr-underline-from-left  text-center fz16 blackNav nav-btn heigth-45 solicita-butto metropolisReg">¿Cómo funciona?</Nav.Link> */}
 								{/* <Nav.Link  onClick={close} href="/#about" id="ymb-dp-nav-about" className="hvr-underline-from-left  text-center fz16 blackNav nav-btn heigth-45 solicita-butto metropolisReg">Nosotros</Nav.Link> */}
-								<Nav.Link  onClick={close} href="https://distritocasa.com/" id="ymb-dp-nav-howWorks" target="_blank" className="hvr-underline-from-left  text-center fz16 blackNav nav-btn heigth-45 solicita-butto metropolisReg">distrito casa</Nav.Link>
+								{/* <Nav.Link  onClick={close} href="https://distritocasa.com/" id="ymb-dp-nav-howWorks" target="_blank" className="hvr-underline-from-left  text-center fz16 blackNav nav-btn heigth-45 solicita-butto metropolisReg">distrito casa</Nav.Link> */}
 								{location.pathname != '/brokers' && location.pathname != '/solicitud_enviada_brokers' && location.pathname != '/alianza' && 
 									<>
 										<Nav.Link  onClick={close} as={NavLink} to="/login" id="ymb-dp-nav-register" className="text-center fz16 blackNav nav-btn heigth-45 solicita-butto metropolisReg">inicia sesión</Nav.Link>

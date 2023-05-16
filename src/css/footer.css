@@ -13,7 +13,7 @@
 }
 
 .footer-link{
-	font-family: 'Metropolis-Regular';
+	font-family: 'Montserrat';
 	color: #575756;
 	font-size: 1.125rem;
 	font-weight: 300;
@@ -50,7 +50,7 @@
   .vertical {
 	font-size: 2.5rem;
 	font-weight: 900;
-	font-family: 'Metropolis-Medium';
+	font-family: 'Montserrat';
 	writing-mode: vertical-rl;
 	position: absolute;
 	padding-bottom: 5%;

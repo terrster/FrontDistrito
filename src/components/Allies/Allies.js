@@ -185,7 +185,7 @@ const Allies = () => {
                 success &&
                 <div className="container mt-30 registro-exitoso">
                     <img src={registerImage} alt="registerimage" className='registerimageali' width='500' height='500'/>
-                    <div class="title-dp_clamp mb-18 fw500 text-center"><span style={{color:'#F24C5A'}}>¡estamos</span>  listos para compartirte los mejores expedientes!</div>
+                    <div class="title-dp_clamp mb-18 fw500 text-center"><span style={{color:'#0095CE'}}>¡estamos</span>  listos para compartirte los mejores expedientes!</div>
                     <p className="text-dp text-center">gracias por confiar en distrito pyme. <br/>la #ComunidadDeCrédito más grande de México</p>
                     <div>
                         <Button className={"btn-blue-documents mb-5 pl-5 pr-5"} style={{ width: '100%', maxWidth:'350px' }} onClick={() => history.push("/")}>regresar al inicio</Button>

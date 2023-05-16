@@ -112,7 +112,7 @@ const Meta = (props) => {
       id={props.id}
       clientid="62f15ad24621d7001caa5472"
       flowId={props.flow}
-      color="#023473"
+      color="#283460"
       metadata={JSON.stringify({
         socketId: props.socketId,
         canal: "distrito_pyme",
