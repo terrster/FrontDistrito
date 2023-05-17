@@ -116,7 +116,7 @@ const Header = props => {
 		left:'10%'
 	}
 
-	
+	console.log('hola bienvenido a la mejor plataforma para solicitar crédito pyme.');
 	// const goToForm = () => {
 	// 	window.location = "https://share.hsforms.com/1NexTiVEwSeSyCS2kvQT-WA2y96v";
 	// }
@@ -128,7 +128,6 @@ const Header = props => {
 				<div>
 					<span className="header-title" style={versionImage === 0? styleweb : styleMOBILE}>
 					la mejor plataforma para solicitar crédito pyme.
-						la mejor plataforma para solicitar crédito pyme
 					</span>
 				</div>
 				{
